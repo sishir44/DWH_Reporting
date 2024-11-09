@@ -1,0 +1,20 @@
+﻿table{
+    width: 98%;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 2px 2px rgba(125, 125, 125, 0.5);
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+th {
+    font-size: larger;
+    border-collapse: collapse;
+}
+
+td {
+    border-collapse: collapse;
+}

@@ -1,0 +1,268 @@
+﻿.toast-center {
+    top: 50%;
+    left: 40%;
+}
+
+.tscroll table th:first-child, .tscroll table td:first-child {
+    position: sticky;
+    left: 0px;
+}
+
+.minHeight {
+    min-height: 500px !important;
+}
+
+/*table.dataTable thead th, table.dataTable thead td {
+            padding: 6px 18px 25px 18px;
+        }
+    */
+.dataTables_scrollHead {
+    top: 0 !important;
+}
+
+.card-header {
+    height: 37px;
+}
+
+.dataTables_filter label {
+    margin-bottom: 0 !important;
+    font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_scrollBody {
+    position: relative;
+    clear: both;
+    width: 700px;
+    min-height: 61vh !important;
+    margin-left: 0px;
+    zoom: 1;
+}
+
+.dataTables_info {
+    font-size: 11px;
+}
+
+#example_wrapper {
+    width: 1290px;
+}
+
+.tscroll table th:first-child,
+.tscroll table td:first-child {
+    position: sticky;
+    left: 0px;
+}
+
+
+.FixColumns {
+    /*width: 120px;*/
+    background-color: #404040;
+    color: white;
+}
+/*tbody > :nth-child(1) {
+
+        }*/
+tbody tr td:first-child {
+    background-color: #404040;
+    color: white;
+}
+
+.FixColumnsss {
+    position: sticky;
+    left: 0px;
+}
+/*.sorting_1 {
+            background-color: #404040;
+            color: white;
+        }*/
+.dataTables_filter {
+    float: right !important;
+}
+
+#example_wrapper {
+    width: 100%;
+    height: 78vh;
+}
+
+label.customlabel {
+    display: block;
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 38px;
+    border-radius: 5%;
+    padding: 5px 15px;
+}
+
+.bmd-label-floating {
+    display: block;
+}
+
+.dataTables_wrapper .dataTables_scrollBody {
+    position: relative;
+    clear: both;
+    width: 700px;
+    min-height: 61vh !important;
+    /*min-height: 540px !important;*/
+    margin-left: 0px;
+    /*border-bottom: 1px solid black;
+            border-top: 1px solid black;
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            background-color: #9D9C9D;*/
+    zoom: 1;
+}
+
+/*  table.dataTable thead th, table.dataTable thead td {
+            padding: 6px 18px 25px 18px;
+        }*/
+
+.dataTables_scrollHead {
+    top: 0 !important;
+}
+
+.card-header {
+    height: 37px;
+}
+
+.dataTables_filter label {
+    margin-bottom: 0 !important;
+    font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody {
+}
+
+.dataTables_info {
+    font-size: 11px;
+}
+
+.dataTables_scrollBody tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+}
+
+button {
+    font-size: 13px !important;
+    padding: 3px !important;
+    margin: 1px !important
+}
+
+td, th, .selectclass {
+    font-size: 10.5px;
+}
+
+tbody {
+    height: 10px;
+}
+/*.flexwidth {
+                width: 2000px !important;
+            }*/
+
+.tscroll table th:first-child,
+.tscroll table td:first-child {
+    position: sticky;
+    left: 0px;
+}
+
+.FixColumns {
+    /*width: 120px;*/
+    background-color: #404040;
+    color: white;
+}
+/*tbody > :nth-child(1) {
+
+        }*/
+tbody tr td:first-child {
+    background-color: #404040;
+    color: white;
+}
+
+.FixColumnsss {
+    position: sticky;
+    left: 0px;
+}
+/*.sorting_1 {
+            background-color: #404040;
+            color: white;
+        }*/
+.dataTables_filter {
+    float: right !important;
+}
+
+label.customlabel {
+    display: block;
+    border: 1px solid rgba(0,0,0,0.2);
+    height: 38px;
+    border-radius: 5%;
+    padding: 5px 15px;
+}
+
+.bmd-label-floating {
+    display: block;
+}
+
+/*table thead tr th {
+                white-space: nowrap;
+            }*/
+
+.buttonHeight {
+    font-size: 10px;
+}
+
+#example_wrapper {
+    width: 100%;
+}
+
+.content {
+    width: 99%;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 3px 10px;
+}
+
+@@media (max-width: 768px) {
+    .right-panel .top-left, .right-panel .top-right {
+        width: 100%;
+        float: none;
+        background: white;
+    }
+
+    #example_wrapper {
+        width: 100%;
+        height: 85vh;
+    }
+
+    .right-panel .menutoggle {
+        float: right;
+        max-width: 8% !important;
+        margin-right: -5% !important;
+    }
+
+    .open .right-panel {
+        margin-left: 0;
+    }
+
+    .user-area.dropdown span {
+        margin-left: 0 !important;
+    }
+
+    .card {
+        width: 100% !important;
+    }
+
+    .card-body div.row .btn {
+        margin-left: 8%;
+        margin-top: 5% !important;
+    }
+
+    .content {
+        padding: 10px 0px 0px 10px;
+        width: 570px !important;
+    }
+
+    #example_wrapper {
+        width: 100%;
+    }
+
+    table {
+        width: 100%;
+    }
+}

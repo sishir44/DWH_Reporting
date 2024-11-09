@@ -1,0 +1,23 @@
+﻿.table-new {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent
+}
+    .table-new td, .table-new th {
+        padding: .75rem;
+        vertical-align: top;
+        border-top: 1px solid #dee2e6
+    }
+
+    .table-new thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid #dee2e6
+    }
+
+    .table-new tbody + tbody {
+        border-top: 2px solid #dee2e6
+    }
+
+    .table-new .table-new {
+        background-color: #fff
+    }

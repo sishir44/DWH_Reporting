@@ -1,0 +1,2156 @@
+﻿
+@{
+    ViewBag.Title = "StoreNumber";
+}
+
+@{
+    // Retrieve the data from ViewData
+    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsFct_StoreNumberTotal = ViewData["Fct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+}
+
+@using DWH_Reporting.Models.GpReport;
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://mis.mobilyllc.com/MobilyGpStatus/Content/Css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+    <script src="https://mis.mobilyllc.com/MobilyGpStatus/Content/Js/jquery.table2excel.js"></script>
+    @*<script src="~/Content/Js/jquery.table2excel.js"></script>*@
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <title>MTD Reports</title>
+
+    <style>
+
+
+        .btn {
+            border-radius: 10px;
+            background-image: linear-gradient(#0046bf54, #0046bf);
+            color: white;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+            .btn.green {
+                background-color: green;
+            }
+
+        .GP_heading {
+            color: #0046bf;
+            text-align: center;
+            font-size: 26px;
+            margin-top: 10px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .date_time {
+            color: #0046bf;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 5px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .VP_data {
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #215967;
+            font-size: 12px;
+        }
+
+        tr.main_header {
+            background-color: #c0c0c0;
+            color: black;
+            vertical-align: middle !important;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        tr.grand_total {
+            font-size: 12.5px;
+            text-align: center;
+            color: white;
+            background-color: black;
+        }
+
+        .grand_total tr, th {
+            /*border: 1px solid;
+            border-color: white;*/
+        }
+
+        tr.TM_data {
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #92cddc;
+        }
+
+        tr.SD_data {
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #31869b;
+        }
+
+        .datacell_white {
+            font-size: 11.5px;
+            text-align: center;
+            color: black;
+            background-color: white;
+        }
+
+        .datacell_alternate {
+            font-size: 11.5px;
+            text-align: center;
+            color: black;
+            background-color: #daeef3;
+        }
+
+        tr.main_row th {
+            text-align: center;
+            font-size: 13px;
+            background-color: #c0c0c0;
+            color: black;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+
+
+        /*.table-bordered td {
+            border: 1px solid #000000;
+        }*/
+
+        .rounded {
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 30px;
+        }
+
+        .semi-square {
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        #mainselection select {
+            border: 0;
+            color: #EEE;
+            background: transparent;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            padding: 2px 10px;
+            *background: #58B14C;
+            -webkit-appearance: none;
+        }
+
+        #mainselection {
+            overflow: hidden;
+            color: white;
+            -moz-border-radius: 9px 9px 9px 9px;
+            -webkit-border-radius: 9px 9px 9px 9px;
+            border-radius: 9px 9px 9px 9px;
+            box-shadow: 1px 1px 11px #330033;
+        }
+
+        select#soflow, select#soflow-color {
+            -webkit-appearance: button;
+            -webkit-border-radius: 2px;
+            -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+            -webkit-padding-end: 20px;
+            -webkit-padding-start: 2px;
+            -webkit-user-select: none;
+            background-position: 97% center;
+            background-repeat: no-repeat;
+            /*border: 1px solid #AAA;*/
+            color: white;
+            font-size: inherit;
+            margin: 20px;
+            overflow: hidden;
+            padding: 5px 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        select#soflow-color {
+            color: #fff;
+            background-color: #779126;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            padding-left: 15px;
+        }
+
+        .table th {
+            padding: 0px !important;
+            text-align: center;
+        }
+
+        [data-toggle="toggle"] {
+            display: none;
+        }
+
+        .scrollable {
+            height: 100px;
+            overflow-y: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            width: auto;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0046bf;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #404040;
+            }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            transition: background-color .5s;
+        }
+
+        table.table-bordered.dataTable.no-footer.DTFC_Cloned {
+            background-color: #0a0128;
+            color: white;
+        }
+
+        .table-bordered thead td, .table-bordered thead th {
+            border-bottom-width: 0;
+        }
+
+        .DTFC_LeftBodyWrapper {
+            position: relative;
+            top: 0px;
+            overflow: hidden;
+        }
+
+        .dataTables_scrollBody {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+        }
+
+        /*.table thead tr th {
+            border: 1px solid #000000;
+        }*/
+
+        .table thead th {
+            vertical-align: middle;
+        }
+
+        td.sorting_1 {
+            background-color: black !important;
+            color: white;
+        }
+
+        .table th, .table td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .textleft {
+            text-align: left;
+        }
+
+        tr.spanned_header th {
+            text-align: center;
+            font-size: 13px;
+            /*color: white;*/
+            vertical-align: middle;
+        }
+
+        tr.main_header td {
+            text-align: center;
+            font-size: 13px;
+            background-color: #E88967;
+            color: black;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+
+        tr.grand_total th {
+            font-size: 13px;
+            text-align: center;
+            color: white;
+            background-color: black;
+        }
+
+        tr.main_data td {
+            font-size: 13px;
+            text-align: center;
+            background-color: white;
+            color: black;
+        }
+
+        tr.main_data:nth-child(odd) td {
+            background-color: #F4D2C4;
+        }
+
+        tr.total_data td {
+            font-size: 16px;
+            text-align: center;
+            background-color: white;
+            color: red;
+        }
+
+        tr.MUSM_data {
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #3357E1;
+        }
+    </style>
+
+</head>
+<body style="padding-top:0; background-color:#B2D6F2;">
+
+    <div>
+        <div id="div1" class="content" style="background-color:#B2D6F2;">
+            <div class="navbar navbar-inverse navbar-fixed-top">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <div class="p-3">
+                                <img src="~/Image/smLogoMobily.png" alt="logo" class="img-responsive" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="p-3">
+                                <div class="container">
+                                    <label class="d-block"><b>Mobily-Store Number Report</b></label>
+                                    <label class="d-block" style="margin-left:20px;"><b>1st To @ViewData["Day"] @ViewData["Mon"]  2024</b></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="p-1">
+                                <div class="container">
+
+                                    <table>
+                                        <thead>
+                                            <tr>
+
+                                                <th>
+                                                    <div class="p-1">
+                                                        <div class="container" style="background-color:#A8D0C8; border: 2px solid #000; width: 130px; height: 80px;">
+                                                            <label class="d-block" style="font-size: 16px; font-weight: bold;">Current MTD</label>
+                                                            <label class="d-block" style="font-size: 12px; font-weight: bold;">Today</label>
+                                                        </div>
+                                                    </div>
+                                                </th>
+
+                                                <th>
+                                                    <div class="col-md-2">
+                                                        <div class="p-1">
+                                                            <div class="container" style="background-color:#C9B7E4; border: 2px solid #000; width: 130px; height: 80px;">
+                                                                <label class="d-block" style="font-size: 16px; font-weight: bold; margin-left:20px;">11.3%</label>
+                                                                <label class="d-block" style="color:#8F0077; font-size: 12px; font-weight: bold;">Fiber Conversion</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </th>
+                                                <th>
+
+                                                    <div class="p-1">
+                                                        <div class="container" style="background-color:#A8D0C8; border: 2px solid #000; width: 90px; height: 80px;">
+                                                            <label class="d-block" style="font-size: 16px; font-weight: bold; margin-left:20px;">74</label>
+                                                            <label class="d-block" style="color:#0C5D0C; font-size: 12px; font-weight: bold;">Total Score</label>
+                                                        </div>
+                                                    </div>
+
+                                                </th>
+                                                <th>
+
+                                                    <div class="p-1">
+                                                        <div class="container" style="background-color:#C9B7E4; border: 2px solid #000; width: 130px; height: 80px;">
+                                                            <label class="d-block" style="font-size: 16px; font-weight: bold; margin-left:20px;">3.7%</label>
+                                                            <label class="d-block" style="color:#8F0077; font-size: 12px; font-weight: bold;">PPVGA Per Traffic</label>
+                                                        </div>
+                                                    </div>
+
+                                                </th>
+                                                <th>
+
+                                                    <div class="p-1">
+                                                        <div class="container" style="background-color:#A5CFF0; border: 2px solid #000; width: 88px; height: 80px;">
+                                                            <label class="d-block" style="font-weight: bold; ">Month</label>
+                                                            @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Get))
+                                                            {
+                                                                <div class="form-group">
+                                                                    @Html.DropDownList("selectedMonth", new SelectList(ViewBag.Months, "Value", "Text"), "Select", new { @class = "form-control", style = "background-color:#A5CFF0; font-size: 14px; font-weight: bold; color:#0C5D0C; border:black", onchange = "this.form.submit();" })
+                                                                </div>
+                                                            }
+                                                        </div>
+                                                    </div>
+
+
+                                                </th>
+                                                <th>
+                                                    <div class="p-1">
+                                                        <div class="container">
+                                                            <input type="button" id="btnexcel" onclick="test()" style="border-radius:10px; background-image: linear-gradient(#0046bf54, #0046bf);color:white" value="Export To Excel" name="export" />
+
+                                                        </div>
+                                                    </div>
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="myDiv">
+                <table id="tbl" style="white-space:nowrap;">
+
+                    @try
+                    {
+                        <thead>
+                            <tr class="numbered_header">
+                                <th style="background-color: #E88967; color:white; text-align:center;">1</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">2</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">3</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">4</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">5</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="hideButton" onclick="hideDivAndButton()" style="background-color: #E88967; color:white; border:none;">__[-]</button>
+                                    6
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">7</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="name-column">8</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="name-column">9</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">10</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">11</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">12</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">13</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">14</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="PPVGA-column">15</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="PPVGA-column">16</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="togglePPVGA" style="background-color: #E88967; color:white; border:none;">__________[-]</button>
+                                    17
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="FiberConversion-column">18</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleFiberConversion" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    19
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="APO-column">20</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="APO-column">21</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleAPO" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    22
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">23</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">24</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">25</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">26</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">27</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="OPS-column">28</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="OPS-column">29</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleOPS" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    30
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="Upgrade-column">31</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="Upgrade-column">32</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleUpgrade" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    33
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="TWC-column">34</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="TWC-column">35</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleTWC" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    36
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="AIACInternet-column">37</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="AIACInternet-column">38</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="AIACInternet-column">39</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="AIACInternet-column">40</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;" class="AIACInternet-column">41</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+
+                                    <button class="d-block" id="toggleAIACInternet" style="background-color: #E88967; color:white; border:none;">_____[-]</button>
+                                    42
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">43</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">44</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">45</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">46</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">47</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">48</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">49</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">50</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">51</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">52</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">53</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">54</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">55</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">56</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">57</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">58</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">59</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">60</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">61</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">62</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">63</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">64</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">65</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">66</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">67</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">68</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">69</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">70</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">71</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">72</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">73</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">74</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">75</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">76</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">77</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">78</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">79</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">80</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">81</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">82</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">83</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">84</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">85</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">86</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">87</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">88</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">89</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">90</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">91</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">92</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">93</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">94</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">95</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">96</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">97</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">98</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">99</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">100</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">101</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">102</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">103</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">104</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">105</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">106</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">107</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">108</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">109</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">110</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">111</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">112</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">113</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">114</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">115</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">116</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">117</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">118</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">119</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">120</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">121</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">122</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">123</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">124</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">125</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">126</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">127</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">128</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">129</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">130</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">131</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">132</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">133</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">134</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">135</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">136</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">137</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">138</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">139</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">140</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">141</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">142</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">143</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">144</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">145</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">146</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">147</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">148</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">149</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">150</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">151</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">152</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">153</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">154</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">155</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">156</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">157</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">158</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">159</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">160</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">161</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">162</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">163</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">164</th>
+
+
+
+                            </tr>
+
+                            <tr class="spanned_header">
+                                <th rowspan="2" style="background-color: #E88967;">VP</th>
+                                <th rowspan="2" style="background-color: #E88967;">Region</th>
+                                <th rowspan="2" style="background-color: #E88967;">SD</th>
+                                <th rowspan="2" style="background-color: #E88967;">Unique ID</th>
+                                <th rowspan="2" style="background-color: #E88967;">Dealer Code</th>
+                                <th rowspan="2" style="background-color: #E88967;">Tiers</th>
+                                <th id="ColSpan158" colspan="158">
+                                </th>
+                            </tr>
+                            <tr class="main_header">
+
+                                <td>Store                                        </td>
+                                <td class="name-column">HITStore                                     </td>
+                                <td class="name-column">Market                                       </td>
+                                <td>TM                                           </td>
+                                <td>RSMSRSM                                      </td>
+                                <td>Role                                         </td>
+                                <td>MonthlyAchievedHoursTrendingPercentage       </td>
+                                <td>GrossAddsTrendToGoal                         </td>
+                                <td class="PPVGA-column">GrossAddsGoals                               </td>
+                                <td class="PPVGA-column">GrossAddsNetOFF                              </td>
+                                <td>PPVGAPerTrafficPercentage                    </td>
+                                <td class="FiberConversion-column">TotalTraffic                                 </td>
+                                <td>FiberConversion                              </td>
+                                <td class="APO-column">BroadbandFiberNetOFF                         </td>
+                                <td class="APO-column">FiberGreenCheck                              </td>
+                                <td>APO                                          </td>
+                                <td>CSAT                                         </td>
+                                <td>ProtAdvHomeTechPercentage                    </td>
+                                <td>BreakEvenNumbers                             </td>
+                                <td>TrendingToBreakEven                          </td>
+                                <td>GPWithSpifTrending                           </td>
+                                <td class="OPS-column">GPTrendingPercentage                         </td>
+                                <td class="OPS-column">TotalGPGoals                                 </td>
+                                <td>OPSTrendingToGoalsPercentage                 </td>
+                                <td class="Upgrade-column">TotalOPSGoals                                </td>
+                                <td class="Upgrade-column">TotalOPS                                     </td>
+                                <td>UpgradeTrendingToGoalsPercentage             </td>
+                                <td class="TWC-column">MTDUpgradesGoals                             </td>
+                                <td class="TWC-column">MTDUpgradesNetOFF                            </td>
+                                <td>TWCDevicesTrendToGoalPercentage              </td>
+                                <td class="AIACInternet-column">TWCDevicesQtyGoals                           </td>
+                                <td class="AIACInternet-column">TWCDevicesQtyNetOFF                          </td>
+                                <td class="AIACInternet-column">AIABusinessConversion                        </td>
+                                <td class="AIACInternet-column">AIAConsumerConversion                        </td>
+                                <td class="AIACInternet-column">AIAGreenCheckConsumer                        </td>
+                                <td>AIACInternet                                 </td>
+                                <td>AIABInternet                                 </td>
+                                <td>TotalOPSTrending                             </td>
+                                <td>OPSPerTrafficPercentage                      </td>
+                                <td>CRUAchMTD                                    </td>
+                                <td>FNAchMTD                                     </td>
+                                <td>GPPerBox                                     </td>
+                                <td>TotalGPAchievedWithSpif                      </td>
+                                <td>GrossAdds                                    </td>
+                                <td>ChargeBack                                   </td>
+                                <td>GrossAddsTrend                               </td>
+                                <td>GrossAddsGP                                  </td>
+                                <td>GrossAddsGPTrending                          </td>
+                                <td>ARBusinessFNProgramAverageQ2Target           </td>
+                                <td>FNAchAverageQTD                              </td>
+                                <td>RemainingToAchieveFNAverageQ2Target          </td>
+                                <td>FNAchTrend                                   </td>
+                                <td>FNAchDollars                                 </td>
+                                <td>ARBusinessCRUProgramAverageQ2Target          </td>
+                                <td>CRUAchVoice                                  </td>
+                                <td>CRUAchDATA                                   </td>
+                                <td>CRUAchAverageQTD                             </td>
+                                <td>RemainingToAchieveCRUAverageQ2Target         </td>
+                                <td>CRUAchTrend                                  </td>
+                                <td>CRUAchVoiceDollars                           </td>
+                                <td>CRUAchDATADollars                            </td>
+                                <td>MTDUpgrades                                  </td>
+                                <td>ChargeBack1                                  </td>
+                                <td>MTDUpgradesTrending                          </td>
+                                <td>MTDUpgradesGP                                </td>
+                                <td>MTDUpgradesGPTrending                        </td>
+                                <td>NextUp                                       </td>
+                                <td>NextUpSpif                                   </td>
+                                <td>PremiumActivation                            </td>
+                                <td>PremiumActivationNetOFF                      </td>
+                                <td>ChargeBack2                                  </td>
+                                <td>PremiumActivationGP                          </td>
+                                <td>ExtraActivation                              </td>
+                                <td>ExtraActivationNetOFF                        </td>
+                                <td>ChargeBack3                                  </td>
+                                <td>ExtraActivationGP                            </td>
+                                <td>NonExtraNonPremiumActivation                 </td>
+                                <td>NonExtraNonPremiumActivationNetOFF           </td>
+                                <td>NonExtraNonPremiumActivationGP               </td>
+                                <td>PremiumUpgrade                               </td>
+                                <td>ChargeBack4                                  </td>
+                                <td>PremiumUpgradeNetOff                         </td>
+                                <td>PremiumUpgradeGP                             </td>
+                                <td>ExtraUpgrade                                 </td>
+                                <td>ChargeBack5                                  </td>
+                                <td>ExtraUpgradeNetOff                           </td>
+                                <td>ExtraUpgradeGP                               </td>
+                                <td>AIAGoals                                     </td>
+                                <td>ChargeBack6                                  </td>
+                                <td>AIAInternetNetOff                            </td>
+                                <td>AIAInternetGP                                </td>
+                                <td>BroadbandGoals                               </td>
+                                <td>BroadbandLessThen300MB                       </td>
+                                <td>NewFiber300MB                                </td>
+                                <td>NewFiber500MB                                </td>
+                                <td>NewFiber1G                                   </td>
+                                <td>TotalBroadbandNewFiber                       </td>
+                                <td>BroadbandNewFiberNetOFF                      </td>
+                                <td>ChargeBack7                                  </td>
+                                <td>FiberUpgrades                                </td>
+                                <td>FiberUpgradesNetOFF                          </td>
+                                <td>ChargeBack8                                  </td>
+                                <td>BroadbandFiber                               </td>
+                                <td>BroadbandFiberTrend                          </td>
+                                <td>BroadbandFiberTrendPercentage                </td>
+                                <td>BroadbandLessThen300MBQISpiff                </td>
+                                <td>NewFiber300MBQISpiff                         </td>
+                                <td>NewFiber500MBQISpiff                         </td>
+                                <td>NewFiber1GQISpiff                            </td>
+                                <td>FiberUpgradeGP                               </td>
+                                <td>BroadbandGP                                  </td>
+                                <td>BroadbandFiberGP                             </td>
+                                <td>BroadbandFiberGPTrending                     </td>
+                                <td>TurboFeature                                 </td>
+                                <td>TurboFeatureGP                               </td>
+                                <td>PremVideoGoals                               </td>
+                                <td>PremVideo                                    </td>
+                                <td>PremVideoNetOFF                              </td>
+                                <td>ChargeBack9                                  </td>
+                                <td>PremVideoTrend                               </td>
+                                <td>PremVideoTrendPercentage                     </td>
+                                <td>PremVideoGP                                  </td>
+                                <td>PremVideoSpiff                               </td>
+                                <td>PremVideoGPTrending                          </td>
+                                <td>EntertainmentGoals                           </td>
+                                <td>EntertainmentAch                             </td>
+                                <td>EntertainmentTrending                        </td>
+                                <td>EntertainmentTrendingToGoalsPercentage       </td>
+                                <td>TWCDevicesQty                                </td>
+                                <td>ChargeBack10                                 </td>
+                                <td>TWCDevicesQtyTrend                           </td>
+                                <td>TWCDevicesDollars                            </td>
+                                <td>ProjectedGeographicSpif                      </td>
+                                <td>PrepaidQty                                   </td>
+                                <td>PrepaidToGA                                  </td>
+                                <td>PrepaidNetOFF                                </td>
+                                <td>ChargeBack11                                 </td>
+                                <td>PrepaidGP                                    </td>
+                                <td>PrepaidWithAutopay                           </td>
+                                <td>AccessGP                                     </td>
+                                <td>AccessQty                                    </td>
+                                <td>AccessQtyTrending                            </td>
+                                <td>AccessRevenue                                </td>
+                                <td>FeaturesQty                                  </td>
+                                <td>FeaturesQtyNetOFF                            </td>
+                                <td>ChargeBack12                                 </td>
+                                <td>TotalProtectionPercentage                    </td>
+                                <td>ProtAdv1                                     </td>
+                                <td>ProtAdv4                                     </td>
+                                <td>FeaturesGP                                   </td>
+                                <td>WeeklyBudgetedHRS                            </td>
+                                <td>WeeklyEmployeeAveragePerStore                </td>
+                                <td>MonthlyBudgetedHRS                           </td>
+                                <td>TrainingHours                                </td>
+                                <td>MonthlyAchievedHRS                           </td>
+                                <td>MonthlyAchievedHoursTrending                 </td>
+                                <td>GACloseRt                                    </td>
+                                <td>HomeTechProtect                              </td>
+
+
+                            </tr>
+                        </thead>
+
+                        if (recordsFct_StoreNumber != null)
+                        {
+                            foreach (var record in recordsFct_StoreNumber)
+                            {
+                                <tr class="main_data">
+                                    <td>@record.VP   </td>
+                                    <td>@record.Region </td>
+                                    <td>@record.SD      </td>
+                                    <td>@record.UniqueID   </td>
+                                    <td>@record.DealerCode </td>
+                                    <td>@record.Tiers      </td>
+
+                                    <td>@record.Store                                          </td>
+                                    <td class="name-column">@record.HITStore                                       </td>
+                                    <td class="name-column">@record.Market                                         </td>
+                                    <td>@record.TM                                             </td>
+                                    <td>@record.RSMSRSM                                        </td>
+                                    <td>@record.Role                                           </td>
+                                    <td>@record.MonthlyAchievedHoursTrendingPercentage         </td>
+                                    <td>@record.GrossAddsTrendToGoal                           </td>
+                                    <td class="PPVGA-column">@record.GrossAddsGoals                                 </td>
+                                    <td class="PPVGA-column">@record.GrossAddsNetOFF                                </td>
+                                    <td>@record.PPVGAPerTrafficPercentage                      </td>
+                                    <td class="FiberConversion-column">@record.TotalTraffic                                   </td>
+                                    <td>@record.FiberConversion                                </td>
+                                    <td class="APO-column">@record.BroadbandFiberNetOFF                           </td>
+                                    <td class="APO-column">@record.FiberGreenCheck                                </td>
+                                    <td>@record.APO                                            </td>
+                                    <td>@record.CSAT                                           </td>
+                                    <td>@record.ProtAdvHomeTechPercentage                      </td>
+                                    <td>@record.BreakEvenNumbers                               </td>
+                                    <td>@record.TrendingToBreakEven                            </td>
+                                    <td>@record.GPWithSpifTrending                             </td>
+                                    <td>@record.GPTrendingPercentage                           </td>
+                                    <td>@record.TotalGPGoals                                   </td>
+                                    <td>@record.OPSTrendingToGoalsPercentage                   </td>
+                                    <td class="Upgrade-column">@record.TotalOPSGoals                                  </td>
+                                    <td class="Upgrade-column">@record.TotalOPS                                       </td>
+                                    <td>@record.UpgradeTrendingToGoalsPercentage               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesGoals                               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesNetOFF                              </td>
+                                    <td>@record.TWCDevicesTrendToGoalPercentage                </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyGoals                             </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyNetOFF                            </td>
+                                    <td class="AIACInternet-column">@record.AIABusinessConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAConsumerConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAGreenCheckConsumer                          </td>
+                                    <td>@record.AIACInternet                                   </td>
+                                    <td>@record.AIABInternet                                   </td>
+                                    <td>@record.TotalOPSTrending                               </td>
+                                    <td>@record.OPSPerTrafficPercentage                        </td>
+                                    <td>@record.CRUAchMTD                                      </td>
+                                    <td>@record.FNAchMTD                                       </td>
+                                    <td>@record.GPPerBox                                       </td>
+                                    <td>@record.TotalGPAchievedWithSpif                        </td>
+                                    <td>@record.GrossAdds                                      </td>
+                                    <td>@record.ChargeBack                                     </td>
+                                    <td>@record.GrossAddsTrend                                 </td>
+                                    <td>@record.GrossAddsGP                                    </td>
+                                    <td>@record.GrossAddsGPTrending                            </td>
+                                    <td>@record.ARBusinessFNProgramAverageQ2Target             </td>
+                                    <td>@record.FNAchAverageQTD                                </td>
+                                    <td>@record.RemainingToAchieveFNAverageQ2Target            </td>
+                                    <td>@record.FNAchTrend                                     </td>
+                                    <td>@record.FNAchDollars                                   </td>
+                                    <td>@record.ARBusinessCRUProgramAverageQ2Target            </td>
+                                    <td>@record.CRUAchVoice                                    </td>
+                                    <td>@record.CRUAchDATA                                     </td>
+                                    <td>@record.CRUAchAverageQTD                               </td>
+                                    <td>@record.RemainingToAchieveCRUAverageQ2Target           </td>
+                                    <td>@record.CRUAchTrend                                    </td>
+                                    <td>@record.CRUAchVoiceDollars                             </td>
+                                    <td>@record.CRUAchDATADollars                              </td>
+                                    <td>@record.MTDUpgrades                                    </td>
+                                    <td>@record.ChargeBack1                                    </td>
+                                    <td>@record.MTDUpgradesTrending                            </td>
+                                    <td>@record.MTDUpgradesGP                                  </td>
+                                    <td>@record.MTDUpgradesGPTrending                          </td>
+                                    <td>@record.NextUp                                         </td>
+                                    <td>@record.NextUpSpif                                     </td>
+                                    <td>@record.PremiumActivation                              </td>
+                                    <td>@record.PremiumActivationNetOFF                        </td>
+                                    <td>@record.ChargeBack2                                    </td>
+                                    <td>@record.PremiumActivationGP                            </td>
+                                    <td>@record.ExtraActivation                                </td>
+                                    <td>@record.ExtraActivationNetOFF                          </td>
+                                    <td>@record.ChargeBack3                                    </td>
+                                    <td>@record.ExtraActivationGP                              </td>
+                                    <td>@record.NonExtraNonPremiumActivation                   </td>
+                                    <td>@record.NonExtraNonPremiumActivationNetOFF             </td>
+                                    <td>@record.NonExtraNonPremiumActivationGP                 </td>
+                                    <td>@record.PremiumUpgrade                                 </td>
+                                    <td>@record.ChargeBack4                                    </td>
+                                    <td>@record.PremiumUpgradeNetOff                           </td>
+                                    <td>@record.PremiumUpgradeGP                               </td>
+                                    <td>@record.ExtraUpgrade                                   </td>
+                                    <td>@record.ChargeBack5                                    </td>
+                                    <td>@record.ExtraUpgradeNetOff                             </td>
+                                    <td>@record.ExtraUpgradeGP                                 </td>
+                                    <td>@record.AIAGoals                                       </td>
+                                    <td>@record.ChargeBack6                                    </td>
+                                    <td>@record.AIAInternetNetOff                              </td>
+                                    <td>@record.AIAInternetGP                                  </td>
+                                    <td>@record.BroadbandGoals                                 </td>
+                                    <td>@record.BroadbandLessThen300MB                         </td>
+                                    <td>@record.NewFiber300MB                                  </td>
+                                    <td>@record.NewFiber500MB                                  </td>
+                                    <td>@record.NewFiber1G                                     </td>
+                                    <td>@record.TotalBroadbandNewFiber                         </td>
+                                    <td>@record.BroadbandNewFiberNetOFF                        </td>
+                                    <td>@record.ChargeBack7                                    </td>
+                                    <td>@record.FiberUpgrades                                  </td>
+                                    <td>@record.FiberUpgradesNetOFF                            </td>
+                                    <td>@record.ChargeBack8                                    </td>
+                                    <td>@record.BroadbandFiber                                 </td>
+                                    <td>@record.BroadbandFiberTrend                            </td>
+                                    <td>@record.BroadbandFiberTrendPercentage                  </td>
+                                    <td>@record.BroadbandLessThen300MBQISpiff                  </td>
+                                    <td>@record.NewFiber300MBQISpiff                           </td>
+                                    <td>@record.NewFiber500MBQISpiff                           </td>
+                                    <td>@record.NewFiber1GQISpiff                              </td>
+                                    <td>@record.FiberUpgradeGP                                 </td>
+                                    <td>@record.BroadbandGP                                    </td>
+                                    <td>@record.BroadbandFiberGP                               </td>
+                                    <td>@record.BroadbandFiberGPTrending                       </td>
+                                    <td>@record.TurboFeature                                   </td>
+                                    <td>@record.TurboFeatureGP                                 </td>
+                                    <td>@record.PremVideoGoals                                 </td>
+                                    <td>@record.PremVideo                                      </td>
+                                    <td>@record.PremVideoNetOFF                                </td>
+                                    <td>@record.ChargeBack9                                    </td>
+                                    <td>@record.PremVideoTrend                                 </td>
+                                    <td>@record.PremVideoTrendPercentage                       </td>
+                                    <td>@record.PremVideoGP                                    </td>
+                                    <td>@record.PremVideoSpiff                                 </td>
+                                    <td>@record.PremVideoGPTrending                            </td>
+                                    <td>@record.EntertainmentGoals                             </td>
+                                    <td>@record.EntertainmentAch                               </td>
+                                    <td>@record.EntertainmentTrending                          </td>
+                                    <td>@record.EntertainmentTrendingToGoalsPercentage         </td>
+                                    <td>@record.TWCDevicesQty                                  </td>
+                                    <td>@record.ChargeBack10                                   </td>
+                                    <td>@record.TWCDevicesQtyTrend                             </td>
+                                    <td>@record.TWCDevicesDollars                              </td>
+                                    <td>@record.ProjectedGeographicSpif                        </td>
+                                    <td>@record.PrepaidQty                                     </td>
+                                    <td>@record.PrepaidToGA                                    </td>
+                                    <td>@record.PrepaidNetOFF                                  </td>
+                                    <td>@record.ChargeBack11                                   </td>
+                                    <td>@record.PrepaidGP                                      </td>
+                                    <td>@record.PrepaidWithAutopay                             </td>
+                                    <td>@record.AccessGP                                       </td>
+                                    <td>@record.AccessQty                                      </td>
+                                    <td>@record.AccessQtyTrending                              </td>
+                                    <td>@record.AccessRevenue                                  </td>
+                                    <td>@record.FeaturesQty                                    </td>
+                                    <td>@record.FeaturesQtyNetOFF                              </td>
+                                    <td>@record.ChargeBack12                                   </td>
+                                    <td>@record.TotalProtectionPercentage                      </td>
+                                    <td>@record.ProtAdv1                                       </td>
+                                    <td>@record.ProtAdv4                                       </td>
+                                    <td>@record.FeaturesGP                                     </td>
+                                    <td>@record.WeeklyBudgetedHRS                              </td>
+                                    <td>@record.WeeklyEmployeeAveragePerStore                  </td>
+                                    <td>@record.MonthlyBudgetedHRS                             </td>
+                                    <td>@record.TrainingHours                                  </td>
+                                    <td>@record.MonthlyAchievedHRS                             </td>
+                                    <td>@record.MonthlyAchievedHoursTrending                   </td>
+                                    <td>@record.GACloseRt                                      </td>
+                                    <td>@record.HomeTechProtect                                </td>
+
+                                </tr>
+
+                            }
+                        }
+
+                        if (recordsFct_StoreNumberTotal != null)
+                        {
+                            foreach (var record in recordsFct_StoreNumberTotal)
+                            {
+
+                                <tr class="total_data">
+
+                                    @*<td colspan="5"><b>Total</b></td>
+                                        <td>@record.Tiers      </td>*@
+                                    <td><b>Total</b>  </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td>@record.Store                                          </td>
+                                    <td class="name-column">@record.HITStore                                       </td>
+                                    <td class="name-column">@record.Market                                         </td>
+                                    <td>@record.TM                                             </td>
+                                    <td>@record.RSMSRSM                                        </td>
+                                    <td>@record.Role                                           </td>
+                                    <td>@record.MonthlyAchievedHoursTrendingPercentage         </td>
+                                    <td>@record.GrossAddsTrendToGoal                           </td>
+                                    <td class="PPVGA-column">@record.GrossAddsGoals                                 </td>
+                                    <td class="PPVGA-column">@record.GrossAddsNetOFF                                </td>
+                                    <td>@record.PPVGAPerTrafficPercentage                      </td>
+                                    <td class="FiberConversion-column">@record.TotalTraffic                                   </td>
+                                    <td>@record.FiberConversion                                </td>
+                                    <td class="APO-column">@record.BroadbandFiberNetOFF                           </td>
+                                    <td class="APO-column">@record.FiberGreenCheck                                </td>
+                                    <td>@record.APO                                            </td>
+                                    <td>@record.CSAT                                           </td>
+                                    <td>@record.ProtAdvHomeTechPercentage                      </td>
+                                    <td>@record.BreakEvenNumbers                               </td>
+                                    <td>@record.TrendingToBreakEven                            </td>
+                                    <td>@record.GPWithSpifTrending                             </td>
+                                    <td>@record.GPTrendingPercentage                           </td>
+                                    <td>@record.TotalGPGoals                                   </td>
+                                    <td>@record.OPSTrendingToGoalsPercentage                   </td>
+                                    <td class="Upgrade-column">@record.TotalOPSGoals                                  </td>
+                                    <td class="Upgrade-column">@record.TotalOPS                                       </td>
+                                    <td>@record.UpgradeTrendingToGoalsPercentage               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesGoals                               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesNetOFF                              </td>
+                                    <td>@record.TWCDevicesTrendToGoalPercentage                </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyGoals                             </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyNetOFF                            </td>
+                                    <td class="AIACInternet-column">@record.AIABusinessConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAConsumerConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAGreenCheckConsumer                          </td>
+                                    <td>@record.AIACInternet                                   </td>
+                                    <td>@record.AIABInternet                                   </td>
+                                    <td>@record.TotalOPSTrending                               </td>
+                                    <td>@record.OPSPerTrafficPercentage                        </td>
+                                    <td>@record.CRUAchMTD                                      </td>
+                                    <td>@record.FNAchMTD                                       </td>
+                                    <td>@record.GPPerBox                                       </td>
+                                    <td>@record.TotalGPAchievedWithSpif                        </td>
+                                    <td>@record.GrossAdds                                      </td>
+                                    <td>@record.ChargeBack                                     </td>
+                                    <td>@record.GrossAddsTrend                                 </td>
+                                    <td>@record.GrossAddsGP                                    </td>
+                                    <td>@record.GrossAddsGPTrending                            </td>
+                                    <td>@record.ARBusinessFNProgramAverageQ2Target             </td>
+                                    <td>@record.FNAchAverageQTD                                </td>
+                                    <td>@record.RemainingToAchieveFNAverageQ2Target            </td>
+                                    <td>@record.FNAchTrend                                     </td>
+                                    <td>@record.FNAchDollars                                   </td>
+                                    <td>@record.ARBusinessCRUProgramAverageQ2Target            </td>
+                                    <td>@record.CRUAchVoice                                    </td>
+                                    <td>@record.CRUAchDATA                                     </td>
+                                    <td>@record.CRUAchAverageQTD                               </td>
+                                    <td>@record.RemainingToAchieveCRUAverageQ2Target           </td>
+                                    <td>@record.CRUAchTrend                                    </td>
+                                    <td>@record.CRUAchVoiceDollars                             </td>
+                                    <td>@record.CRUAchDATADollars                              </td>
+                                    <td>@record.MTDUpgrades                                    </td>
+                                    <td>@record.ChargeBack1                                    </td>
+                                    <td>@record.MTDUpgradesTrending                            </td>
+                                    <td>@record.MTDUpgradesGP                                  </td>
+                                    <td>@record.MTDUpgradesGPTrending                          </td>
+                                    <td>@record.NextUp                                         </td>
+                                    <td>@record.NextUpSpif                                     </td>
+                                    <td>@record.PremiumActivation                              </td>
+                                    <td>@record.PremiumActivationNetOFF                        </td>
+                                    <td>@record.ChargeBack2                                    </td>
+                                    <td>@record.PremiumActivationGP                            </td>
+                                    <td>@record.ExtraActivation                                </td>
+                                    <td>@record.ExtraActivationNetOFF                          </td>
+                                    <td>@record.ChargeBack3                                    </td>
+                                    <td>@record.ExtraActivationGP                              </td>
+                                    <td>@record.NonExtraNonPremiumActivation                   </td>
+                                    <td>@record.NonExtraNonPremiumActivationNetOFF             </td>
+                                    <td>@record.NonExtraNonPremiumActivationGP                 </td>
+                                    <td>@record.PremiumUpgrade                                 </td>
+                                    <td>@record.ChargeBack4                                    </td>
+                                    <td>@record.PremiumUpgradeNetOff                           </td>
+                                    <td>@record.PremiumUpgradeGP                               </td>
+                                    <td>@record.ExtraUpgrade                                   </td>
+                                    <td>@record.ChargeBack5                                    </td>
+                                    <td>@record.ExtraUpgradeNetOff                             </td>
+                                    <td>@record.ExtraUpgradeGP                                 </td>
+                                    <td>@record.AIAGoals                                       </td>
+                                    <td>@record.ChargeBack6                                    </td>
+                                    <td>@record.AIAInternetNetOff                              </td>
+                                    <td>@record.AIAInternetGP                                  </td>
+                                    <td>@record.BroadbandGoals                                 </td>
+                                    <td>@record.BroadbandLessThen300MB                         </td>
+                                    <td>@record.NewFiber300MB                                  </td>
+                                    <td>@record.NewFiber500MB                                  </td>
+                                    <td>@record.NewFiber1G                                     </td>
+                                    <td>@record.TotalBroadbandNewFiber                         </td>
+                                    <td>@record.BroadbandNewFiberNetOFF                        </td>
+                                    <td>@record.ChargeBack7                                    </td>
+                                    <td>@record.FiberUpgrades                                  </td>
+                                    <td>@record.FiberUpgradesNetOFF                            </td>
+                                    <td>@record.ChargeBack8                                    </td>
+                                    <td>@record.BroadbandFiber                                 </td>
+                                    <td>@record.BroadbandFiberTrend                            </td>
+                                    <td>@record.BroadbandFiberTrendPercentage                  </td>
+                                    <td>@record.BroadbandLessThen300MBQISpiff                  </td>
+                                    <td>@record.NewFiber300MBQISpiff                           </td>
+                                    <td>@record.NewFiber500MBQISpiff                           </td>
+                                    <td>@record.NewFiber1GQISpiff                              </td>
+                                    <td>@record.FiberUpgradeGP                                 </td>
+                                    <td>@record.BroadbandGP                                    </td>
+                                    <td>@record.BroadbandFiberGP                               </td>
+                                    <td>@record.BroadbandFiberGPTrending                       </td>
+                                    <td>@record.TurboFeature                                   </td>
+                                    <td>@record.TurboFeatureGP                                 </td>
+                                    <td>@record.PremVideoGoals                                 </td>
+                                    <td>@record.PremVideo                                      </td>
+                                    <td>@record.PremVideoNetOFF                                </td>
+                                    <td>@record.ChargeBack9                                    </td>
+                                    <td>@record.PremVideoTrend                                 </td>
+                                    <td>@record.PremVideoTrendPercentage                       </td>
+                                    <td>@record.PremVideoGP                                    </td>
+                                    <td>@record.PremVideoSpiff                                 </td>
+                                    <td>@record.PremVideoGPTrending                            </td>
+                                    <td>@record.EntertainmentGoals                             </td>
+                                    <td>@record.EntertainmentAch                               </td>
+                                    <td>@record.EntertainmentTrending                          </td>
+                                    <td>@record.EntertainmentTrendingToGoalsPercentage         </td>
+                                    <td>@record.TWCDevicesQty                                  </td>
+                                    <td>@record.ChargeBack10                                   </td>
+                                    <td>@record.TWCDevicesQtyTrend                             </td>
+                                    <td>@record.TWCDevicesDollars                              </td>
+                                    <td>@record.ProjectedGeographicSpif                        </td>
+                                    <td>@record.PrepaidQty                                     </td>
+                                    <td>@record.PrepaidToGA                                    </td>
+                                    <td>@record.PrepaidNetOFF                                  </td>
+                                    <td>@record.ChargeBack11                                   </td>
+                                    <td>@record.PrepaidGP                                      </td>
+                                    <td>@record.PrepaidWithAutopay                             </td>
+                                    <td>@record.AccessGP                                       </td>
+                                    <td>@record.AccessQty                                      </td>
+                                    <td>@record.AccessQtyTrending                              </td>
+                                    <td>@record.AccessRevenue                                  </td>
+                                    <td>@record.FeaturesQty                                    </td>
+                                    <td>@record.FeaturesQtyNetOFF                              </td>
+                                    <td>@record.ChargeBack12                                   </td>
+                                    <td>@record.TotalProtectionPercentage                      </td>
+                                    <td>@record.ProtAdv1                                       </td>
+                                    <td>@record.ProtAdv4                                       </td>
+                                    <td>@record.FeaturesGP                                     </td>
+                                    <td>@record.WeeklyBudgetedHRS                              </td>
+                                    <td>@record.WeeklyEmployeeAveragePerStore                  </td>
+                                    <td>@record.MonthlyBudgetedHRS                             </td>
+                                    <td>@record.TrainingHours                                  </td>
+                                    <td>@record.MonthlyAchievedHRS                             </td>
+                                    <td>@record.MonthlyAchievedHoursTrending                   </td>
+                                    <td>@record.GACloseRt                                      </td>
+                                    <td>@record.HomeTechProtect                                </td>
+
+                                </tr>
+
+                            }
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        <tr>
+                            <td> Data is getting processed. Please try again in few minutes.</td>
+
+                            <td></td>
+
+                        </tr>
+                    }
+
+                </table>
+
+            </div>
+
+            <div id="myDiv2" style="display:none;">
+                <table id="tbl2" style="white-space:nowrap;">
+
+                    @try
+                    {
+                        <thead>
+                            <tr class="numbered_header">
+                                <th style="background-color: #E88967; color:white; text-align:center;">
+                                    <button class="d-block" id="hideButton2" onclick="hideDivAndButton2()" style="background-color: #E88967; color:white; border:none;">[+]</button>
+                                    4
+                                </th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">5</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">6</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">7</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">8</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">9</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">10</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">11</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">12</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">13</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">14</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">15</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">16</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">17</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">18</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">19</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">20</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">21</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">22</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">23</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">24</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">25</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">26</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">27</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">28</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">29</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">30</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">31</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">32</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">33</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">34</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">35</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">36</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">37</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">38</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">39</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">40</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">41</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">42</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">43</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">44</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">45</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">46</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">47</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">48</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">49</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">50</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">51</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">52</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">53</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">54</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">55</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">56</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">57</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">58</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">59</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">60</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">61</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">62</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">63</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">64</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">65</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">66</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">67</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">68</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">69</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">70</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">71</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">72</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">73</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">74</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">75</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">76</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">77</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">78</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">79</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">80</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">81</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">82</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">83</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">84</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">85</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">86</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">87</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">88</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">89</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">90</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">91</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">92</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">93</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">94</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">95</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">96</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">97</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">98</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">99</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">100</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">101</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">102</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">103</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">104</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">105</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">106</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">107</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">108</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">109</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">110</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">111</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">112</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">113</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">114</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">115</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">116</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">117</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">118</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">119</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">120</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">121</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">122</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">123</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">124</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">125</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">126</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">127</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">128</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">129</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">130</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">131</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">132</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">133</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">134</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">135</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">136</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">137</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">138</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">139</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">140</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">141</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">142</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">143</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">144</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">145</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">146</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">147</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">148</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">149</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">150</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">151</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">152</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">153</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">154</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">155</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">156</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">157</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">158</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">159</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">160</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">161</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">162</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">163</th>
+                                <th style="background-color: #E88967; color:white; text-align:center;">164</th>
+
+
+
+                            </tr>
+
+                            <tr class="spanned_header">
+                                <th rowspan="2" style="background-color: #E88967;">Unique ID</th>
+                                <th rowspan="2" style="background-color: #E88967;">Dealer Code</th>
+                                <th rowspan="2" style="background-color: #E88967;">Tiers</th>
+                                <th colspan="158">
+                                </th>
+                            <tr class="main_header">
+                                <td>Store                                        </td>
+                                <td>HITStore                                     </td>
+                                <td>Market                                       </td>
+                                <td>TM                                           </td>
+                                <td>RSMSRSM                                      </td>
+                                <td>Role                                         </td>
+                                <td>MonthlyAchievedHoursTrendingPercentage       </td>
+                                <td>GrossAddsTrendToGoal                         </td>
+                                <td>GrossAddsGoals                               </td>
+                                <td>GrossAddsNetOFF                              </td>
+                                <td>PPVGAPerTrafficPercentage                    </td>
+                                <td>TotalTraffic                                 </td>
+                                <td>FiberConversion                              </td>
+                                <td>BroadbandFiberNetOFF                         </td>
+                                <td>FiberGreenCheck                              </td>
+                                <td>APO                                          </td>
+                                <td>CSAT                                         </td>
+                                <td>ProtAdvHomeTechPercentage                    </td>
+                                <td>BreakEvenNumbers                             </td>
+                                <td>TrendingToBreakEven                          </td>
+                                <td>GPWithSpifTrending                           </td>
+                                <td>GPTrendingPercentage                         </td>
+                                <td>TotalGPGoals                                 </td>
+                                <td>OPSTrendingToGoalsPercentage                 </td>
+                                <td>TotalOPSGoals                                </td>
+                                <td>TotalOPS                                     </td>
+                                <td>UpgradeTrendingToGoalsPercentage             </td>
+                                <td>MTDUpgradesGoals                             </td>
+                                <td>MTDUpgradesNetOFF                            </td>
+                                <td>TWCDevicesTrendToGoalPercentage              </td>
+                                <td>TWCDevicesQtyGoals                           </td>
+                                <td>TWCDevicesQtyNetOFF                          </td>
+                                <td>AIABusinessConversion                        </td>
+                                <td>AIAConsumerConversion                        </td>
+                                <td>AIAGreenCheckConsumer                        </td>
+                                <td>AIACInternet                                 </td>
+                                <td>AIABInternet                                 </td>
+                                <td>TotalOPSTrending                             </td>
+                                <td>OPSPerTrafficPercentage                      </td>
+                                <td>CRUAchMTD                                    </td>
+                                <td>FNAchMTD                                     </td>
+                                <td>GPPerBox                                     </td>
+                                <td>TotalGPAchievedWithSpif                      </td>
+                                <td>GrossAdds                                    </td>
+                                <td>ChargeBack                                   </td>
+                                <td>GrossAddsTrend                               </td>
+                                <td>GrossAddsGP                                  </td>
+                                <td>GrossAddsGPTrending                          </td>
+                                <td>ARBusinessFNProgramAverageQ2Target           </td>
+                                <td>FNAchAverageQTD                              </td>
+                                <td>RemainingToAchieveFNAverageQ2Target          </td>
+                                <td>FNAchTrend                                   </td>
+                                <td>FNAchDollars                                 </td>
+                                <td>ARBusinessCRUProgramAverageQ2Target          </td>
+                                <td>CRUAchVoice                                  </td>
+                                <td>CRUAchDATA                                   </td>
+                                <td>CRUAchAverageQTD                             </td>
+                                <td>RemainingToAchieveCRUAverageQ2Target         </td>
+                                <td>CRUAchTrend                                  </td>
+                                <td>CRUAchVoiceDollars                           </td>
+                                <td>CRUAchDATADollars                            </td>
+                                <td>MTDUpgrades                                  </td>
+                                <td>ChargeBack1                                  </td>
+                                <td>MTDUpgradesTrending                          </td>
+                                <td>MTDUpgradesGP                                </td>
+                                <td>MTDUpgradesGPTrending                        </td>
+                                <td>NextUp                                       </td>
+                                <td>NextUpSpif                                   </td>
+                                <td>PremiumActivation                            </td>
+                                <td>PremiumActivationNetOFF                      </td>
+                                <td>ChargeBack2                                  </td>
+                                <td>PremiumActivationGP                          </td>
+                                <td>ExtraActivation                              </td>
+                                <td>ExtraActivationNetOFF                        </td>
+                                <td>ChargeBack3                                  </td>
+                                <td>ExtraActivationGP                            </td>
+                                <td>NonExtraNonPremiumActivation                 </td>
+                                <td>NonExtraNonPremiumActivationNetOFF           </td>
+                                <td>NonExtraNonPremiumActivationGP               </td>
+                                <td>PremiumUpgrade                               </td>
+                                <td>ChargeBack4                                  </td>
+                                <td>PremiumUpgradeNetOff                         </td>
+                                <td>PremiumUpgradeGP                             </td>
+                                <td>ExtraUpgrade                                 </td>
+                                <td>ChargeBack5                                  </td>
+                                <td>ExtraUpgradeNetOff                           </td>
+                                <td>ExtraUpgradeGP                               </td>
+                                <td>AIAGoals                                     </td>
+                                <td>ChargeBack6                                  </td>
+                                <td>AIAInternetNetOff                            </td>
+                                <td>AIAInternetGP                                </td>
+                                <td>BroadbandGoals                               </td>
+                                <td>BroadbandLessThen300MB                       </td>
+                                <td>NewFiber300MB                                </td>
+                                <td>NewFiber500MB                                </td>
+                                <td>NewFiber1G                                   </td>
+                                <td>TotalBroadbandNewFiber                       </td>
+                                <td>BroadbandNewFiberNetOFF                      </td>
+                                <td>ChargeBack7                                  </td>
+                                <td>FiberUpgrades                                </td>
+                                <td>FiberUpgradesNetOFF                          </td>
+                                <td>ChargeBack8                                  </td>
+                                <td>BroadbandFiber                               </td>
+                                <td>BroadbandFiberTrend                          </td>
+                                <td>BroadbandFiberTrendPercentage                </td>
+                                <td>BroadbandLessThen300MBQISpiff                </td>
+                                <td>NewFiber300MBQISpiff                         </td>
+                                <td>NewFiber500MBQISpiff                         </td>
+                                <td>NewFiber1GQISpiff                            </td>
+                                <td>FiberUpgradeGP                               </td>
+                                <td>BroadbandGP                                  </td>
+                                <td>BroadbandFiberGP                             </td>
+                                <td>BroadbandFiberGPTrending                     </td>
+                                <td>TurboFeature                                 </td>
+                                <td>TurboFeatureGP                               </td>
+                                <td>PremVideoGoals                               </td>
+                                <td>PremVideo                                    </td>
+                                <td>PremVideoNetOFF                              </td>
+                                <td>ChargeBack9                                  </td>
+                                <td>PremVideoTrend                               </td>
+                                <td>PremVideoTrendPercentage                     </td>
+                                <td>PremVideoGP                                  </td>
+                                <td>PremVideoSpiff                               </td>
+                                <td>PremVideoGPTrending                          </td>
+                                <td>EntertainmentGoals                           </td>
+                                <td>EntertainmentAch                             </td>
+                                <td>EntertainmentTrending                        </td>
+                                <td>EntertainmentTrendingToGoalsPercentage       </td>
+                                <td>TWCDevicesQty                                </td>
+                                <td>ChargeBack10                                 </td>
+                                <td>TWCDevicesQtyTrend                           </td>
+                                <td>TWCDevicesDollars                            </td>
+                                <td>ProjectedGeographicSpif                      </td>
+                                <td>PrepaidQty                                   </td>
+                                <td>PrepaidToGA                                  </td>
+                                <td>PrepaidNetOFF                                </td>
+                                <td>ChargeBack11                                 </td>
+                                <td>PrepaidGP                                    </td>
+                                <td>PrepaidWithAutopay                           </td>
+                                <td>AccessGP                                     </td>
+                                <td>AccessQty                                    </td>
+                                <td>AccessQtyTrending                            </td>
+                                <td>AccessRevenue                                </td>
+                                <td>FeaturesQty                                  </td>
+                                <td>FeaturesQtyNetOFF                            </td>
+                                <td>ChargeBack12                                 </td>
+                                <td>TotalProtectionPercentage                    </td>
+                                <td>ProtAdv1                                     </td>
+                                <td>ProtAdv4                                     </td>
+                                <td>FeaturesGP                                   </td>
+                                <td>WeeklyBudgetedHRS                            </td>
+                                <td>WeeklyEmployeeAveragePerStore                </td>
+                                <td>MonthlyBudgetedHRS                           </td>
+                                <td>TrainingHours                                </td>
+                                <td>MonthlyAchievedHRS                           </td>
+                                <td>MonthlyAchievedHoursTrending                 </td>
+                                <td>GACloseRt                                    </td>
+                                <td>HomeTechProtect                              </td>
+
+                            </tr>
+                        </thead>
+
+                        if (recordsFct_StoreNumber != null)
+                        {
+                            foreach (var record in recordsFct_StoreNumber)
+                            {
+                                <tr class="main_data">
+                                    <td>@record.UniqueID                                       </td>
+                                    <td>@record.DealerCode                                     </td>
+                                    <td>@record.Tiers                                          </td>
+
+                                    <td>@record.Store                                          </td>
+                                    <td>@record.HITStore                                       </td>
+                                    <td>@record.Market                                         </td>
+                                    <td>@record.TM                                             </td>
+                                    <td>@record.RSMSRSM                                        </td>
+                                    <td>@record.Role                                           </td>
+                                    <td>@record.MonthlyAchievedHoursTrendingPercentage         </td>
+                                    <td>@record.GrossAddsTrendToGoal                           </td>
+
+                                    <td class="name-column">@record.GrossAddsGoals                                 </td>
+                                    <td class="name-column">@record.GrossAddsNetOFF                                </td>
+                                    <td>@record.PPVGAPerTrafficPercentage                      </td>
+
+                                    <td>@record.TotalTraffic                                   </td>
+                                    <td>@record.FiberConversion                                </td>
+                                    <td>@record.BroadbandFiberNetOFF                           </td>
+                                    <td>@record.FiberGreenCheck                                </td>
+                                    <td>@record.APO                                            </td>
+                                    <td>@record.CSAT                                           </td>
+                                    <td>@record.ProtAdvHomeTechPercentage                      </td>
+                                    <td>@record.BreakEvenNumbers                               </td>
+                                    <td>@record.TrendingToBreakEven                            </td>
+                                    <td>@record.GPWithSpifTrending                             </td>
+                                    <td>@record.GPTrendingPercentage                           </td>
+                                    <td>@record.TotalGPGoals                                   </td>
+                                    <td>@record.OPSTrendingToGoalsPercentage                   </td>
+                                    <td>@record.TotalOPSGoals                                  </td>
+                                    <td>@record.TotalOPS                                       </td>
+                                    <td>@record.UpgradeTrendingToGoalsPercentage               </td>
+                                    <td>@record.MTDUpgradesGoals                               </td>
+                                    <td>@record.MTDUpgradesNetOFF                              </td>
+                                    <td>@record.TWCDevicesTrendToGoalPercentage                </td>
+                                    <td>@record.TWCDevicesQtyGoals                             </td>
+                                    <td>@record.TWCDevicesQtyNetOFF                            </td>
+                                    <td>@record.AIABusinessConversion                          </td>
+                                    <td>@record.AIAConsumerConversion                          </td>
+                                    <td>@record.AIAGreenCheckConsumer                          </td>
+                                    <td>@record.AIACInternet                                   </td>
+                                    <td>@record.AIABInternet                                   </td>
+                                    <td>@record.TotalOPSTrending                               </td>
+                                    <td>@record.OPSPerTrafficPercentage                        </td>
+                                    <td>@record.CRUAchMTD                                      </td>
+                                    <td>@record.FNAchMTD                                       </td>
+                                    <td>@record.GPPerBox                                       </td>
+                                    <td>@record.TotalGPAchievedWithSpif                        </td>
+                                    <td>@record.GrossAdds                                      </td>
+                                    <td>@record.ChargeBack                                     </td>
+                                    <td>@record.GrossAddsTrend                                 </td>
+                                    <td>@record.GrossAddsGP                                    </td>
+                                    <td>@record.GrossAddsGPTrending                            </td>
+                                    <td>@record.ARBusinessFNProgramAverageQ2Target             </td>
+                                    <td>@record.FNAchAverageQTD                                </td>
+                                    <td>@record.RemainingToAchieveFNAverageQ2Target            </td>
+                                    <td>@record.FNAchTrend                                     </td>
+                                    <td>@record.FNAchDollars                                   </td>
+                                    <td>@record.ARBusinessCRUProgramAverageQ2Target            </td>
+                                    <td>@record.CRUAchVoice                                    </td>
+                                    <td>@record.CRUAchDATA                                     </td>
+                                    <td>@record.CRUAchAverageQTD                               </td>
+                                    <td>@record.RemainingToAchieveCRUAverageQ2Target           </td>
+                                    <td>@record.CRUAchTrend                                    </td>
+                                    <td>@record.CRUAchVoiceDollars                             </td>
+                                    <td>@record.CRUAchDATADollars                              </td>
+                                    <td>@record.MTDUpgrades                                    </td>
+                                    <td>@record.ChargeBack1                                    </td>
+                                    <td>@record.MTDUpgradesTrending                            </td>
+                                    <td>@record.MTDUpgradesGP                                  </td>
+                                    <td>@record.MTDUpgradesGPTrending                          </td>
+                                    <td>@record.NextUp                                         </td>
+                                    <td>@record.NextUpSpif                                     </td>
+                                    <td>@record.PremiumActivation                              </td>
+                                    <td>@record.PremiumActivationNetOFF                        </td>
+                                    <td>@record.ChargeBack2                                    </td>
+                                    <td>@record.PremiumActivationGP                            </td>
+                                    <td>@record.ExtraActivation                                </td>
+                                    <td>@record.ExtraActivationNetOFF                          </td>
+                                    <td>@record.ChargeBack3                                    </td>
+                                    <td>@record.ExtraActivationGP                              </td>
+                                    <td>@record.NonExtraNonPremiumActivation                   </td>
+                                    <td>@record.NonExtraNonPremiumActivationNetOFF             </td>
+                                    <td>@record.NonExtraNonPremiumActivationGP                 </td>
+                                    <td>@record.PremiumUpgrade                                 </td>
+                                    <td>@record.ChargeBack4                                    </td>
+                                    <td>@record.PremiumUpgradeNetOff                           </td>
+                                    <td>@record.PremiumUpgradeGP                               </td>
+                                    <td>@record.ExtraUpgrade                                   </td>
+                                    <td>@record.ChargeBack5                                    </td>
+                                    <td>@record.ExtraUpgradeNetOff                             </td>
+                                    <td>@record.ExtraUpgradeGP                                 </td>
+                                    <td>@record.AIAGoals                                       </td>
+                                    <td>@record.ChargeBack6                                    </td>
+                                    <td>@record.AIAInternetNetOff                              </td>
+                                    <td>@record.AIAInternetGP                                  </td>
+                                    <td>@record.BroadbandGoals                                 </td>
+                                    <td>@record.BroadbandLessThen300MB                         </td>
+                                    <td>@record.NewFiber300MB                                  </td>
+                                    <td>@record.NewFiber500MB                                  </td>
+                                    <td>@record.NewFiber1G                                     </td>
+                                    <td>@record.TotalBroadbandNewFiber                         </td>
+                                    <td>@record.BroadbandNewFiberNetOFF                        </td>
+                                    <td>@record.ChargeBack7                                    </td>
+                                    <td>@record.FiberUpgrades                                  </td>
+                                    <td>@record.FiberUpgradesNetOFF                            </td>
+                                    <td>@record.ChargeBack8                                    </td>
+                                    <td>@record.BroadbandFiber                                 </td>
+                                    <td>@record.BroadbandFiberTrend                            </td>
+                                    <td>@record.BroadbandFiberTrendPercentage                  </td>
+                                    <td>@record.BroadbandLessThen300MBQISpiff                  </td>
+                                    <td>@record.NewFiber300MBQISpiff                           </td>
+                                    <td>@record.NewFiber500MBQISpiff                           </td>
+                                    <td>@record.NewFiber1GQISpiff                              </td>
+                                    <td>@record.FiberUpgradeGP                                 </td>
+                                    <td>@record.BroadbandGP                                    </td>
+                                    <td>@record.BroadbandFiberGP                               </td>
+                                    <td>@record.BroadbandFiberGPTrending                       </td>
+                                    <td>@record.TurboFeature                                   </td>
+                                    <td>@record.TurboFeatureGP                                 </td>
+                                    <td>@record.PremVideoGoals                                 </td>
+                                    <td>@record.PremVideo                                      </td>
+                                    <td>@record.PremVideoNetOFF                                </td>
+                                    <td>@record.ChargeBack9                                    </td>
+                                    <td>@record.PremVideoTrend                                 </td>
+                                    <td>@record.PremVideoTrendPercentage                       </td>
+                                    <td>@record.PremVideoGP                                    </td>
+                                    <td>@record.PremVideoSpiff                                 </td>
+                                    <td>@record.PremVideoGPTrending                            </td>
+                                    <td>@record.EntertainmentGoals                             </td>
+                                    <td>@record.EntertainmentAch                               </td>
+                                    <td>@record.EntertainmentTrending                          </td>
+                                    <td>@record.EntertainmentTrendingToGoalsPercentage         </td>
+                                    <td>@record.TWCDevicesQty                                  </td>
+                                    <td>@record.ChargeBack10                                   </td>
+                                    <td>@record.TWCDevicesQtyTrend                             </td>
+                                    <td>@record.TWCDevicesDollars                              </td>
+                                    <td>@record.ProjectedGeographicSpif                        </td>
+                                    <td>@record.PrepaidQty                                     </td>
+                                    <td>@record.PrepaidToGA                                    </td>
+                                    <td>@record.PrepaidNetOFF                                  </td>
+                                    <td>@record.ChargeBack11                                   </td>
+                                    <td>@record.PrepaidGP                                      </td>
+                                    <td>@record.PrepaidWithAutopay                             </td>
+                                    <td>@record.AccessGP                                       </td>
+                                    <td>@record.AccessQty                                      </td>
+                                    <td>@record.AccessQtyTrending                              </td>
+                                    <td>@record.AccessRevenue                                  </td>
+                                    <td>@record.FeaturesQty                                    </td>
+                                    <td>@record.FeaturesQtyNetOFF                              </td>
+                                    <td>@record.ChargeBack12                                   </td>
+                                    <td>@record.TotalProtectionPercentage                      </td>
+                                    <td>@record.ProtAdv1                                       </td>
+                                    <td>@record.ProtAdv4                                       </td>
+                                    <td>@record.FeaturesGP                                     </td>
+                                    <td>@record.WeeklyBudgetedHRS                              </td>
+                                    <td>@record.WeeklyEmployeeAveragePerStore                  </td>
+                                    <td>@record.MonthlyBudgetedHRS                             </td>
+                                    <td>@record.TrainingHours                                  </td>
+                                    <td>@record.MonthlyAchievedHRS                             </td>
+                                    <td>@record.MonthlyAchievedHoursTrending                   </td>
+                                    <td>@record.GACloseRt                                      </td>
+                                    <td>@record.HomeTechProtect                                </td>
+
+
+                                </tr>
+                            }
+
+                        }
+
+                        if (recordsFct_StoreNumberTotal != null)
+                        {
+                            foreach (var record in recordsFct_StoreNumberTotal)
+                            {
+
+                                <tr class="total_data">
+
+                                    <td><b>Total</b></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td>@record.Store                                          </td>
+                                    <td class="name-column">@record.HITStore                                       </td>
+                                    <td class="name-column">@record.Market                                         </td>
+                                    <td>@record.TM                                             </td>
+                                    <td>@record.RSMSRSM                                        </td>
+                                    <td>@record.Role                                           </td>
+                                    <td>@record.MonthlyAchievedHoursTrendingPercentage         </td>
+                                    <td>@record.GrossAddsTrendToGoal                           </td>
+                                    <td class="PPVGA-column">@record.GrossAddsGoals                                 </td>
+                                    <td class="PPVGA-column">@record.GrossAddsNetOFF                                </td>
+                                    <td>@record.PPVGAPerTrafficPercentage                      </td>
+                                    <td class="FiberConversion-column">@record.TotalTraffic                                   </td>
+                                    <td>@record.FiberConversion                                </td>
+                                    <td class="APO-column">@record.BroadbandFiberNetOFF                           </td>
+                                    <td class="APO-column">@record.FiberGreenCheck                                </td>
+                                    <td>@record.APO                                            </td>
+                                    <td>@record.CSAT                                           </td>
+                                    <td>@record.ProtAdvHomeTechPercentage                      </td>
+                                    <td>@record.BreakEvenNumbers                               </td>
+                                    <td>@record.TrendingToBreakEven                            </td>
+                                    <td>@record.GPWithSpifTrending                             </td>
+                                    <td>@record.GPTrendingPercentage                           </td>
+                                    <td>@record.TotalGPGoals                                   </td>
+                                    <td>@record.OPSTrendingToGoalsPercentage                   </td>
+                                    <td class="Upgrade-column">@record.TotalOPSGoals                                  </td>
+                                    <td class="Upgrade-column">@record.TotalOPS                                       </td>
+                                    <td>@record.UpgradeTrendingToGoalsPercentage               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesGoals                               </td>
+                                    <td class="TWC-column">@record.MTDUpgradesNetOFF                              </td>
+                                    <td>@record.TWCDevicesTrendToGoalPercentage                </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyGoals                             </td>
+                                    <td class="AIACInternet-column">@record.TWCDevicesQtyNetOFF                            </td>
+                                    <td class="AIACInternet-column">@record.AIABusinessConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAConsumerConversion                          </td>
+                                    <td class="AIACInternet-column">@record.AIAGreenCheckConsumer                          </td>
+                                    <td>@record.AIACInternet                                   </td>
+                                    <td>@record.AIABInternet                                   </td>
+                                    <td>@record.TotalOPSTrending                               </td>
+                                    <td>@record.OPSPerTrafficPercentage                        </td>
+                                    <td>@record.CRUAchMTD                                      </td>
+                                    <td>@record.FNAchMTD                                       </td>
+                                    <td>@record.GPPerBox                                       </td>
+                                    <td>@record.TotalGPAchievedWithSpif                        </td>
+                                    <td>@record.GrossAdds                                      </td>
+                                    <td>@record.ChargeBack                                     </td>
+                                    <td>@record.GrossAddsTrend                                 </td>
+                                    <td>@record.GrossAddsGP                                    </td>
+                                    <td>@record.GrossAddsGPTrending                            </td>
+                                    <td>@record.ARBusinessFNProgramAverageQ2Target             </td>
+                                    <td>@record.FNAchAverageQTD                                </td>
+                                    <td>@record.RemainingToAchieveFNAverageQ2Target            </td>
+                                    <td>@record.FNAchTrend                                     </td>
+                                    <td>@record.FNAchDollars                                   </td>
+                                    <td>@record.ARBusinessCRUProgramAverageQ2Target            </td>
+                                    <td>@record.CRUAchVoice                                    </td>
+                                    <td>@record.CRUAchDATA                                     </td>
+                                    <td>@record.CRUAchAverageQTD                               </td>
+                                    <td>@record.RemainingToAchieveCRUAverageQ2Target           </td>
+                                    <td>@record.CRUAchTrend                                    </td>
+                                    <td>@record.CRUAchVoiceDollars                             </td>
+                                    <td>@record.CRUAchDATADollars                              </td>
+                                    <td>@record.MTDUpgrades                                    </td>
+                                    <td>@record.ChargeBack1                                    </td>
+                                    <td>@record.MTDUpgradesTrending                            </td>
+                                    <td>@record.MTDUpgradesGP                                  </td>
+                                    <td>@record.MTDUpgradesGPTrending                          </td>
+                                    <td>@record.NextUp                                         </td>
+                                    <td>@record.NextUpSpif                                     </td>
+                                    <td>@record.PremiumActivation                              </td>
+                                    <td>@record.PremiumActivationNetOFF                        </td>
+                                    <td>@record.ChargeBack2                                    </td>
+                                    <td>@record.PremiumActivationGP                            </td>
+                                    <td>@record.ExtraActivation                                </td>
+                                    <td>@record.ExtraActivationNetOFF                          </td>
+                                    <td>@record.ChargeBack3                                    </td>
+                                    <td>@record.ExtraActivationGP                              </td>
+                                    <td>@record.NonExtraNonPremiumActivation                   </td>
+                                    <td>@record.NonExtraNonPremiumActivationNetOFF             </td>
+                                    <td>@record.NonExtraNonPremiumActivationGP                 </td>
+                                    <td>@record.PremiumUpgrade                                 </td>
+                                    <td>@record.ChargeBack4                                    </td>
+                                    <td>@record.PremiumUpgradeNetOff                           </td>
+                                    <td>@record.PremiumUpgradeGP                               </td>
+                                    <td>@record.ExtraUpgrade                                   </td>
+                                    <td>@record.ChargeBack5                                    </td>
+                                    <td>@record.ExtraUpgradeNetOff                             </td>
+                                    <td>@record.ExtraUpgradeGP                                 </td>
+                                    <td>@record.AIAGoals                                       </td>
+                                    <td>@record.ChargeBack6                                    </td>
+                                    <td>@record.AIAInternetNetOff                              </td>
+                                    <td>@record.AIAInternetGP                                  </td>
+                                    <td>@record.BroadbandGoals                                 </td>
+                                    <td>@record.BroadbandLessThen300MB                         </td>
+                                    <td>@record.NewFiber300MB                                  </td>
+                                    <td>@record.NewFiber500MB                                  </td>
+                                    <td>@record.NewFiber1G                                     </td>
+                                    <td>@record.TotalBroadbandNewFiber                         </td>
+                                    <td>@record.BroadbandNewFiberNetOFF                        </td>
+                                    <td>@record.ChargeBack7                                    </td>
+                                    <td>@record.FiberUpgrades                                  </td>
+                                    <td>@record.FiberUpgradesNetOFF                            </td>
+                                    <td>@record.ChargeBack8                                    </td>
+                                    <td>@record.BroadbandFiber                                 </td>
+                                    <td>@record.BroadbandFiberTrend                            </td>
+                                    <td>@record.BroadbandFiberTrendPercentage                  </td>
+                                    <td>@record.BroadbandLessThen300MBQISpiff                  </td>
+                                    <td>@record.NewFiber300MBQISpiff                           </td>
+                                    <td>@record.NewFiber500MBQISpiff                           </td>
+                                    <td>@record.NewFiber1GQISpiff                              </td>
+                                    <td>@record.FiberUpgradeGP                                 </td>
+                                    <td>@record.BroadbandGP                                    </td>
+                                    <td>@record.BroadbandFiberGP                               </td>
+                                    <td>@record.BroadbandFiberGPTrending                       </td>
+                                    <td>@record.TurboFeature                                   </td>
+                                    <td>@record.TurboFeatureGP                                 </td>
+                                    <td>@record.PremVideoGoals                                 </td>
+                                    <td>@record.PremVideo                                      </td>
+                                    <td>@record.PremVideoNetOFF                                </td>
+                                    <td>@record.ChargeBack9                                    </td>
+                                    <td>@record.PremVideoTrend                                 </td>
+                                    <td>@record.PremVideoTrendPercentage                       </td>
+                                    <td>@record.PremVideoGP                                    </td>
+                                    <td>@record.PremVideoSpiff                                 </td>
+                                    <td>@record.PremVideoGPTrending                            </td>
+                                    <td>@record.EntertainmentGoals                             </td>
+                                    <td>@record.EntertainmentAch                               </td>
+                                    <td>@record.EntertainmentTrending                          </td>
+                                    <td>@record.EntertainmentTrendingToGoalsPercentage         </td>
+                                    <td>@record.TWCDevicesQty                                  </td>
+                                    <td>@record.ChargeBack10                                   </td>
+                                    <td>@record.TWCDevicesQtyTrend                             </td>
+                                    <td>@record.TWCDevicesDollars                              </td>
+                                    <td>@record.ProjectedGeographicSpif                        </td>
+                                    <td>@record.PrepaidQty                                     </td>
+                                    <td>@record.PrepaidToGA                                    </td>
+                                    <td>@record.PrepaidNetOFF                                  </td>
+                                    <td>@record.ChargeBack11                                   </td>
+                                    <td>@record.PrepaidGP                                      </td>
+                                    <td>@record.PrepaidWithAutopay                             </td>
+                                    <td>@record.AccessGP                                       </td>
+                                    <td>@record.AccessQty                                      </td>
+                                    <td>@record.AccessQtyTrending                              </td>
+                                    <td>@record.AccessRevenue                                  </td>
+                                    <td>@record.FeaturesQty                                    </td>
+                                    <td>@record.FeaturesQtyNetOFF                              </td>
+                                    <td>@record.ChargeBack12                                   </td>
+                                    <td>@record.TotalProtectionPercentage                      </td>
+                                    <td>@record.ProtAdv1                                       </td>
+                                    <td>@record.ProtAdv4                                       </td>
+                                    <td>@record.FeaturesGP                                     </td>
+                                    <td>@record.WeeklyBudgetedHRS                              </td>
+                                    <td>@record.WeeklyEmployeeAveragePerStore                  </td>
+                                    <td>@record.MonthlyBudgetedHRS                             </td>
+                                    <td>@record.TrainingHours                                  </td>
+                                    <td>@record.MonthlyAchievedHRS                             </td>
+                                    <td>@record.MonthlyAchievedHoursTrending                   </td>
+                                    <td>@record.GACloseRt                                      </td>
+                                    <td>@record.HomeTechProtect                                </td>
+
+                                </tr>
+
+                            }
+
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        <tr>
+                            <td>Data is getting processed. Please try again in few minutes.</td>
+                            <td></td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+
+        </div>
+        <div id="div2" class="content" style="background-color:#B2D6F2;">
+            <iframe title="MISMobilyProject2" width="100%" height="750" src="https://app.powerbi.com/view?r=eyJrIjoiZjQ4YTNkNzUtMjRkMi00ODMwLWI1OTAtMjBiMTRiYjEyMzI1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
+        </div>
+
+
+
+
+    </div>
+    <footer>
+        <div style="padding-left:40%; background-color:#B2D6F2;">
+            <button id="prevBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Previous</button>
+            <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
+        </div>
+    </footer>
+</body>
+
+<script>
+    $(document).ready(function () {
+
+        var windowheight = $(window).height()
+
+        var height = (windowheight - 250) + "px"
+        updateDataTable(height);
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+
+
+    });
+
+    function test() {
+
+        $("td:hidden").remove();
+        var $clonedTable = $('#tbl').clone();
+        var $clonedTable2 = $('#tbl2').clone();
+
+        $clonedTable.find('[style*="display: none"]').remove();
+        $clonedTable2.find('[style*="display: none"]').remove();
+
+        $clonedTable.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+
+        $clonedTable2.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+    }
+    function updateDataTable(S_height) {
+
+        $('#tbl').DataTable(
+            {
+                scrollY: S_height,
+                scrollX: true,
+                scrollCollapse: true,
+                searching: false,
+                bInfo: false,
+                paging: false,
+                ordering: false,
+
+                fixedColumns: {
+                    leftColumns: 6,
+                }
+            }
+        );
+
+        $('#tbl2').DataTable(
+            {
+                scrollY: S_height,
+                scrollX: true,
+                scrollCollapse: true,
+                searching: false,
+                bInfo: false,
+                paging: false,
+                ordering: false,
+
+                fixedColumns: {
+                    leftColumns: 3,
+                }
+            }
+        );
+    }
+
+    function hideDivAndButton() {
+        var myDiv = document.getElementById('myDiv');
+        var hideButton = document.getElementById('hideButton');
+        var myDiv2 = document.getElementById('myDiv2');
+        var hideButton2 = document.getElementById('hideButton2');
+
+        // Hide the div
+        myDiv.style.display = 'none';
+        myDiv2.style.display = 'block';
+
+        // Hide the button
+        hideButton.style.display = 'none';
+        hideButton2.style.display = 'block';
+
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+    }
+    function hideDivAndButton2() {
+        var myDiv = document.getElementById('myDiv');
+        var hideButton = document.getElementById('hideButton');
+        var myDiv2 = document.getElementById('myDiv2');
+        var hideButton2 = document.getElementById('hideButton2');
+
+        // Hide the div
+        myDiv.style.display = 'block';
+        myDiv2.style.display = 'none';
+
+        // Hide the button
+        hideButton.style.display = 'block';
+        hideButton2.style.display = 'none';
+
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+    }
+
+    document.getElementById('togglePPVGA').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.PPVGA-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleFiberConversion').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.FiberConversion-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleAPO').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.APO-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleOPS').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.OPS-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleUpgrade').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.Upgrade-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleTWC').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.TWC-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+    document.getElementById('toggleAIACInternet').addEventListener('click', function () {
+        let nameColumns = document.querySelectorAll('.AIACInternet-column');
+        nameColumns.forEach(function (column) {
+            column.classList.toggle('d-none');
+        });
+    });
+
+</script>
+<script type="text/javascript">
+    function showDiv(divId, btnId) {
+
+        var divs = document.querySelectorAll('div[id^="zero"]');
+        for (var i = 0; i < divs.length; i++) {
+
+            if (divs[i].id !== divId) {
+                divs[i].style.display = "none";
+            }
+        }
+
+        // Show the clicked div
+        var div = document.getElementById(divId);
+        div.style.display = "block";
+
+        var abcDiv = document.getElementById("abc");
+        abcDiv.style.display = "none";
+
+        // Reset background color of all buttons
+        document.getElementById("btnG").classList.remove("green");
+        document.getElementById("btnO").classList.remove("green");
+        document.getElementById("btnN").classList.remove("green");
+
+        // Change the color of the clicked button to green
+        document.getElementById(btnId).classList.add("green");
+
+        // Change heading text to the value of the selected button
+        var heading = document.querySelector('.GP_heading');
+        var buttonValue = document.getElementById(btnId).value;
+        heading.innerText = buttonValue;
+    }
+
+
+</script>
+<script type="text/javascript">
+    function showDiv(divId) {
+
+        var divs = document.querySelectorAll('div[id^="zero"]');
+        for (var i = 0; i < divs.length; i++) {
+
+            if (divs[i].id !== divId) {
+                divs[i].style.display = "none";
+            }
+        }
+
+        // Show the clicked div
+        var div = document.getElementById(divId);
+        div.style.display = "block";
+
+        var abcDiv = document.getElementById("abc");
+        abcDiv.style.display = "none";
+    }
+
+
+</script>
+<script>
+    const divs = document.querySelectorAll(".content");
+    let currentDiv = 0;
+
+    function showDiv(index) {
+        divs.forEach((div, i) => {
+            div.style.display = i === index ? "block" : "none";
+        });
+    }
+
+    function showNextDiv() {
+        if (currentDiv < divs.length - 1) {
+            currentDiv++;
+            showDiv(currentDiv);
+        }
+    }
+
+    function showPrevDiv() {
+        if (currentDiv > 0) {
+            currentDiv--;
+            showDiv(currentDiv);
+        }
+    }
+
+    // Initialize by showing the first div
+    showDiv(currentDiv);
+
+    document.getElementById("nextBtn").addEventListener("click", showNextDiv);
+    document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
+</script>
+
+
+
+
