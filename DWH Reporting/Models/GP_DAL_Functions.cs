@@ -287,7 +287,27 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+        public static DataTable GetFct_StoreSummary(string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_Summary";
 
+                // Create SPParameters object and add the date parameter
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+
+                // Execute stored procedure with the parameters
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
         public static DataTable GetFct_StoreNumberTotal(string dateParam)
         {
             try

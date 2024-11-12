@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="~/assets/css/sidebar-style.css" />
 <link rel="stylesheet" href="~/assets/css/cs-skin-elastic.css">
 <link rel="stylesheet" href="~/assets/css/style.css">
+<link href="~/css/custom.min.css" rel="stylesheet" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
@@ -812,10 +814,10 @@
 
 
 <script>
-  
+
     $(document).ready(function () {
         loadDataTable();
-        
+
     });
 
     //$('#datefilter').change(function () {
@@ -824,7 +826,7 @@
     //    $('#reportdate').text(dateval);
     //});
     function loadDataTable() {
-       
+
         var table, count;
         table = $('#example').DataTable({
             "paging": false,
@@ -860,7 +862,7 @@
         table.clear();
         $("#imageloader2").hide();
         var datefilter = $('#datefilter').val() || "";
-        
+
         $.ajax({
             type: "Get",
             url: "TrendingCommissionData",
@@ -871,7 +873,7 @@
                 if (data != '') {
                     $.each(data, function (i, item) {
                         var rpdate = new Date(item.MaxDate).toLocaleDateString();
-                        
+
                         $('#reportdate').text(rpdate);
 
                         // Set the value of the date input with id #datefilter (for date picker)

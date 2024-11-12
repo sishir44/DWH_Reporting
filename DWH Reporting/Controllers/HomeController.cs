@@ -98,7 +98,7 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                ShowStoreNumber(selectedDate);
+                ShowStoreSummary(selectedDate);
 
                 return View();
 
@@ -112,26 +112,7 @@ namespace DWH_Reporting.Controllers
 
         private void ShowStoreNumber(string selectedDate)
         {
-            // Create a list of SelectListItem for months
-            var months = new List<SelectListItem>
-            {
-                new SelectListItem { Text = "JAN", Value = "1" },
-                new SelectListItem { Text = "FEB", Value = "2" },
-                new SelectListItem { Text = "MAR", Value = "3" },
-                new SelectListItem { Text = "APR", Value = "4" },
-                new SelectListItem { Text = "MAY", Value = "5" },
-                new SelectListItem { Text = "JUN", Value = "6" },
-                new SelectListItem { Text = "JUL", Value = "7" },
-                new SelectListItem { Text = "AUG", Value = "8" },
-                new SelectListItem { Text = "SEP", Value = "9" },
-                new SelectListItem { Text = "OCT", Value = "10" },
-                new SelectListItem { Text = "NOV", Value = "11" },
-                new SelectListItem { Text = "DEC", Value = "12" }
-            };
-
-            // Pass the list to the view via ViewBag
-            ViewBag.Months = months;
-
+         
             string dateParam = selectedDate;
 
             // Call your function with the date parameter
@@ -814,6 +795,286 @@ namespace DWH_Reporting.Controllers
 
             }
 
+        }
+
+        private void ShowStoreSummary(string selectedDate)
+        {
+
+            string dateParam = selectedDate;
+            //string dateParam = "2024-10-14";
+
+            // Call your function with the date parameter
+            DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam);
+
+            List<Fct_StoreSummaryAttributesModel> lisn2_lst = new List<Fct_StoreSummaryAttributesModel>();
+
+            foreach (DataRow row in GetFct_Summary.Rows)
+            {
+                Fct_StoreSummaryAttributesModel model = new Fct_StoreSummaryAttributesModel
+                {
+                    SD = row["SD"].ToString(),
+                    TM = row["TM"].ToString(),
+                    Market = row["Market"].ToString(),
+                    Store = row["Store"].ToString(),
+                    Tier = row["Tier"].ToString(),
+                    StoreContact = row["StoreContact"].ToString(),
+                    ReportDate = row["ReportDate"].ToString(),
+                    DealerCode = row["DealerCode"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
+                    GrossAdds = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsNetOff = row["GROSS ADDS Net OFF"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    PPVGAPerTraffic = row["PPVGA per Traffic%"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    BroadbandFiberNetOff = row["Broadband +_Fiber Net OFF"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv & HomeTech %"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GP Trending %"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPS Trending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["Upgrade Trending to Goals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    MTDUpgradesNetOff = row["MTD UPGRADES Net OFF"].ToString(),
+                    TWDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWDevicesQtyGoals = row["T,W,C Devices QTY Goals"].ToString(),
+                    TWDevicesQtyNetOff = row["T,W,C Devices QTY Net OFF"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA Consumer Conversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA Green Check Consumer"].ToString(),
+                    AIABInternet = row["AIA B Internet"].ToString(),
+                    AIACInternet = row["AIA C Internet"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per- Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU Ach MTD"].ToString(),
+                    FNAchMTD = row["FN Ach MTD"].ToString(),
+                    GrossAddsTrend = row["GROSS ADDS Trend"].ToString(),
+                    BroadbandGoals = row["Broadband Goals"].ToString(),
+                    BroadbandFiber = row["Broadband +_Fiber"].ToString(),
+                    BroadBandLessThan300MB = row["Broad Band less Then (300MB)"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    FiberUpgradesNetOff = row["Fiber Upgrades Net OFF"].ToString(),
+                    BroadbandFiberTrend = row["Broadband +_Fiber _Trend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband + Fiber Trend%"].ToString(),
+                    PremVideoGoals = row["Prem Video Goals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoNetOff = row["Prem Video Net OFF"].ToString(),
+                    PremVideoTrendPercentage = row["Prem Video Trend %"].ToString(),
+                    PremVideoTrend = row["Prem Video Trend"].ToString(),
+                    TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPS Trending"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS $GP"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
+                    BroadBandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    BroadbandLessThan300MBQISpiff = row["Broadband Less then (300Mb) QI Spiff"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber (300 MB) QI Spiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber (500 MB) QI Spiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber (1G) QI Spiff"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessRevenue = row["Access $ Revenue"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
+                    FNAch = row["FN Ach $"].ToString(),
+                    CRUVGACnt = row["CRU VGA Cnt"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice $"].ToString(),
+                    CRUAchData = row["CRU Ach DATA $"].ToString(),
+                    TWDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
+                    TWDevicesGP = row["T,W,C Devices GP"].ToString(),
+                    HomeTechProtect = row["HomeTech Protect"].ToString(),
+                    TotalProtectionPercentage = row["Total Protection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    //TimeStamp = row["TimeStamp"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString()
+
+                };
+
+                lisn2_lst.Add(model);
+            }
+
+            ViewBag.Date = GpReport.DateTimes;
+            ViewData["GetFct_Summary"] = lisn2_lst;
+
+
+            ViewBag.Date = GpReport.DateTimes;
+
+            //For Last TimeStamp
+
+            if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
+            {
+                // Use LINQ to find the latest TimeStamp
+                var latestTimeStamp = GetFct_Summary.AsEnumerable()
+                                                     .Max(row => row.Field<DateTime>("TimeStamp"));
+                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                // Output the result
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                                                                                           // Subtract one day from the TimeStamp
+
+                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                ViewBag.LatestTimeStamp = "No data available";
+            }
+
+            List<SelectListItem> sdList = new List<SelectListItem>();
+            List<SelectListItem> marketList = new List<SelectListItem>();
+            List<SelectListItem> tmList = new List<SelectListItem>();
+            List<SelectListItem> tiersList = new List<SelectListItem>();
+            List<SelectListItem> storesList = new List<SelectListItem>();
+            //List<SelectListItem> roleList = new List<SelectListItem>();
+
+            HashSet<string> sdNamesSet = new HashSet<string>(); // To store unique region names
+            HashSet<string> marketNamesSet = new HashSet<string>();
+            HashSet<string> tmNamesSet = new HashSet<string>();
+            HashSet<string> tiersNamesSet = new HashSet<string>();
+            HashSet<string> storesNamesSet = new HashSet<string>();
+            //HashSet<string> roleNamesSet = new HashSet<string>();
+
+            // Assuming your DataTable has a column named "SD" that holds the region names
+            foreach (DataRow row in GetFct_Summary.Rows)
+            {
+                string sdName = row["SD"].ToString(); // Assuming the SD column contains SD names
+                string marketName = row["Market"].ToString();
+                string tmName = row["TM"].ToString();
+                string tiersName = row["Tier"].ToString();
+                string storName = row["Store"].ToString();
+                //string roleName = row["Role"].ToString();
+
+                sdNamesSet.Add(sdName);
+                marketNamesSet.Add(marketName);
+                tmNamesSet.Add(tmName);
+                tiersNamesSet.Add(tiersName);
+                storesNamesSet.Add(storName);
+                //roleNamesSet.Add(roleName);
+
+                // Add to the list as SelectListItem
+                storesList.Add(new SelectListItem
+                {
+                    Value = storName,
+                    Text = storName
+                });
+
+                sdList.Add(new SelectListItem
+                {
+                    Value = sdName,
+                    Text = sdName
+                });
+
+                tiersList.Add(new SelectListItem
+                {
+                    Value = tiersName,
+                    Text = tiersName
+                });
+
+
+                marketList.Add(new SelectListItem
+                {
+                    Value = marketName,
+                    Text = marketName
+                });
+
+                tmList.Add(new SelectListItem
+                {
+                    Value = tmName,
+                    Text = tmName
+                });
+
+                //roleList.Add(new SelectListItem
+                //{
+                //    Value = roleName,
+                //    Text = roleName
+                //});
+
+            }
+
+            if (storesList != null && storesList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctStoresList = storesList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.StoresList = distinctStoresList;
+            }
+            else
+            {
+                ViewBag.StoresList = new List<SelectListItem>();
+            }
+
+            if (sdList != null && sdList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctSDList = sdList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.SDList = distinctSDList;
+            }
+            else
+            {
+                ViewBag.SDList = new List<SelectListItem>();
+            }
+            if (tiersList != null && tiersList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distincttiersList = tiersList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.tiersList = distincttiersList;
+            }
+            else
+            {
+                ViewBag.tiersList = new List<SelectListItem>();
+            }
+
+            if (marketList != null && marketList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctMarketList = marketList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.MarketList = distinctMarketList;
+            }
+            else
+            {
+                ViewBag.MarketList = new List<SelectListItem>();
+            }
+            if (tmList != null && tmList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctTMList = tmList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.TMList = distinctTMList;
+            }
+            else
+            {
+                ViewBag.TMList = new List<SelectListItem>();
+            }
+
+            //if (roleList != null && roleList.Count > 0)
+            //{
+            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+            //    var distinctRoleList = roleList.GroupBy(x => x.Value)
+            //                               .Select(g => g.First()) // Or group by x.Text if needed
+            //                               .ToList();
+            //    ViewBag.RoleList = distinctRoleList;
+            //}
+            //else
+            //{
+            //    ViewBag.RoleList = new List<SelectListItem>();
+            //}
         }
     }
 }

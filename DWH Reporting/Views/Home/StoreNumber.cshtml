@@ -1,12 +1,14 @@
 ﻿
 @{
     ViewBag.Title = "Store Number";
+    Layout = null;
 }
 
 @{
     // Retrieve the data from ViewDa
     var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
 
 }
 @using DWH_Reporting.Models.GpReport;
@@ -28,9 +30,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Include Quill's CSS and JS -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
     <title>MTD Reports</title>
 
     <style>
+        .modal-dialog {
+            max-width: 100%; /* Remove max-width constraint */
+            width: 100vw; /* Full viewport width */
+            margin: 0; /* Remove default margin */
+        }
+        .row.head {
+            width: 100%;
+        }
+        /* Full-width modal content */
+        .modal-content {
+            width: 100%;
+            height: 100%; /* Optional: full height if needed */
+            border-radius: 0; /* Optional: remove border radius for a more rectangular look */
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .2);
+            outline: 0;
+        }
+
 
         /* Loading screen styling */
         #loadingScreen {
@@ -336,12 +364,21 @@
         }
 
         tr.total_data td {
-            font-size: 14px;
+            font-size: 12px;
             text-align: center;
-            color: red;
-            background-color: lightgray;
+            color: white;
+            background-color: black;
             border: 1px solid white;
         }
+
+        tr.total_dataTM td {
+            font-size: 12px;
+            text-align: center;
+            color: white;
+            background-color: black;
+            border: 1px solid white;
+        }
+
 
         tr.MUSM_data {
             font-size: 13px;
@@ -367,7 +404,7 @@
                             @*<img src="~/Image/smLogoMobily.png" />*@
                         </div>
                         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <h3 style="margin-top:6px; font-size:20px;" class="title">|  MTD @ViewBag.Title</h3>
+                            <h3 style="margin-top:14px; font-size:22px;" class="title">|  MTD @ViewBag.Title</h3>
                         </div>
                     </div>
                 </div>
@@ -422,7 +459,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row sub-header" style="background-color: grey;">
+            <div class="row sub-header" style="background-color: grey;width: 100%; margin: 0 auto;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
                         <div id="TimeStamp">
@@ -479,43 +516,6 @@
                                style="background-color: orange; color:white; height: 35px;" />
                     </div>
 
-                    <!-- Search VP -->
-                    @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                            <input type="text" name="textSearchVP" id="textSearchVP" class="selectorinput form-control" placeholder="Search VP" />
-                            <select class="form-control selector" id="VP" multiple onchange="filterVPData()">
-                                @if (ViewBag.VPList != null && ViewBag.VPList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.VPList)
-                                    {
-                                        <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;" value="@item.Value">@item.Text</option>
-                                    }
-                                }
-                                else
-                                {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No VP available</option>
-                                }
-                            </select>
-
-                        </div>*@
-                    <!-- Search Region -->
-                    @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                            <input type="text" name="textSearchRegion" id="textSearchRegion" class="selectorinput form-control" placeholder="Search Region"  />
-
-                            <select class="form-control selector" id="Region" multiple onchange="filterRegionData()">
-
-                                @if (ViewBag.RegionList != null && ViewBag.RegionList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.RegionList)
-                                    {
-                                        <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;" value="@item.Value">@item.Text</option>
-                                    }
-                                }
-                                else
-                                {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Region available</option>
-                                }
-                            </select>
-                        </div>*@
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" />
@@ -524,7 +524,7 @@
                             {
                                 foreach (var item in ViewBag.TMList)
                                 {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 8px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -541,7 +541,7 @@
                             {
                                 foreach (var item in ViewBag.MarketList)
                                 {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 8px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -558,7 +558,7 @@
                             {
                                 foreach (var item in ViewBag.StoresList)
                                 {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 8px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -576,7 +576,7 @@
                             {
                                 foreach (var item in ViewBag.tiersList)
                                 {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 8px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -593,7 +593,7 @@
                             {
                                 foreach (var item in ViewBag.SDList)
                                 {
-                                    <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 8px;" value="@item.Text">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Text">@item.Text</option>
                                 }
                             }
                             else
@@ -625,13 +625,14 @@
                         <tr class="numbered_header">
                             @for (int i = 1; i <= 162; i++) // Loop from 1 to 164
                             {
-                                <th style="font-size:8px; background-color: gray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
+                                <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
                         </tr>
                         <tr class="spanned_header">
-                            @*<th rowspan="2" style="background-color: black; color:white;">VP</th>*@
-                            @*<th rowspan="2" style="background-color: black; color:white;">Region</th>*@
-                            <th rowspan="2" style="background-color: black; color:white;">TM</th>                                     </td>
+                            @*<th rowspan="2" style="background-color: black; color:white;">Self Note</th>
+                                <th rowspan="2" style="background-color: black; color:white;">View</th>*@
+
+                            <th rowspan="2" style="background-color: black; color:white;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Market</th>
                             <th rowspan="2" style="background-color: black; color:white;">Store</th>
                             <th rowspan="2" style="background-color: black; color:white;">Unique ID</th>
@@ -807,6 +808,8 @@
                         foreach (var record in recordsFct_StoreNumberTotal)
                         {
                             <tr class="total_data">
+                                @*<td></td>
+                                    <td></td>*@
 
                                 <td></td>
                                 <td>Grand Total</td>
@@ -975,14 +978,212 @@
                         }
 
                     }
+                    @{
+                        string currentMarket = null;
+
+                    }
 
                     @if (recordsFct_StoreNumber != null)
                     {
-                        foreach (var record in recordsFct_StoreNumber)
+                        // Sort records by Market
+                        var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.Market);
+
+                        foreach (var record in sortedRecords)
                         {
+                            // Check if the market has changed
+                            //if (currentMarket != null && currentMarket != record.Market)
+                            if (currentMarket != record.Market)
+                            {
+                                if (recordsFct_StoreNumberTotalTM != null)
+                                {
+                                    foreach (var record2 in recordsFct_StoreNumberTotalTM)
+                                    {
+                                        if (record2.Market == record.Market && record2.TM == record.TM)
+                                        {
+                                            <tr id="totTM" class="total_dataTM">
+                                                @*<td></td>
+                                                    <td></td>*@
+
+                                                <td colspan="2">TM Total</td>
+                                                <td style="display:none"></td>
+                                                <td>@record2.TM</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsTrendToGoal)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTrafficPercentage != null ? record2.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PPVGAPerTrafficPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalTraffic)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FiberConversion != null ? record2.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberConversion)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberNetOFF != null ? record2.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FiberGreenCheck != null ? record2.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberGreenCheck)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.APO)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CSAT)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ProtAdvHomeTechPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TrendingToBreakEven)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GPWithSpifTrending != null ? record2.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPWithSpifTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPTrendingPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalGPGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.OPSTrendingToGoalsPercentage != null ? record2.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.OPSTrendingToGoalsPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalOPSGoals != null ? record2.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalOPSGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalOPS != null ? record2.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalOPS)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGoals != null ? record2.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgradesGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesNetOFF != null ? record2.MTDUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgradesNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage))) %</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyGoals != null ? record2.TWCDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesQtyGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyNetOFF != null ? record2.TWCDevicesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesQtyNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIABusinessConversion != null ? record2.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIABusinessConversion)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIAConsumerConversion != null ? record2.AIAConsumerConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIAConsumerConversion)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIAGreenCheckConsumer != null ? record2.AIAGreenCheckConsumer.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIAGreenCheckConsumer)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIACInternet != null ? record2.AIACInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIACInternet)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIABInternet != null ? record2.AIABInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIABInternet)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalOPSTrending != null ? record2.TotalOPSTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalOPSTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.OPSPerTrafficPercentage != null ? record2.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.OPSPerTrafficPercentage)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchMTD != null ? record2.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchMTD)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FNAchMTD != null ? record2.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FNAchMTD)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPPerBox)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalGPAchievedWithSpif != null ? record2.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalGPAchievedWithSpif)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAdds != null ? record2.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAdds)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack != null ? record2.ChargeBack.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGP != null ? record2.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGPTrending != null ? record2.GrossAddsGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsGPTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ARBusinessFNProgramAverageQ2Target != null ? record2.ARBusinessFNProgramAverageQ2Target.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ARBusinessFNProgramAverageQ2Target)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FNAchAverageQTD != null ? record2.FNAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FNAchAverageQTD)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.RemainingToAchieveFNAverageQ2Target != null ? record2.RemainingToAchieveFNAverageQ2Target.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.RemainingToAchieveFNAverageQ2Target)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FNAchTrend != null ? record2.FNAchTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FNAchTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FNAchDollars != null ? record2.FNAchDollars.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FNAchDollars)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ARBusinessCRUProgramAverageQ2Target != null ? record2.ARBusinessCRUProgramAverageQ2Target.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ARBusinessCRUProgramAverageQ2Target)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchVoice != null ? record2.CRUAchVoice.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchVoice)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchDATA != null ? record2.CRUAchDATA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchDATA)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchAverageQTD != null ? record2.CRUAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchAverageQTD)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.RemainingToAchieveCRUAverageQ2Target != null ? record2.RemainingToAchieveCRUAverageQ2Target.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.RemainingToAchieveCRUAverageQ2Target)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchTrend != null ? record2.CRUAchTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchVoiceDollars != null ? record2.CRUAchVoiceDollars.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchVoiceDollars)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CRUAchDATADollars != null ? record2.CRUAchDATADollars.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CRUAchDATADollars)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgrades != null ? record2.MTDUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgrades)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack1 != null ? record2.ChargeBack1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack1)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesTrending != null ? record2.MTDUpgradesTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgradesTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGP != null ? record2.MTDUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgradesGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGPTrending != null ? record2.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MTDUpgradesGPTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NextUp != null ? record2.NextUp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NextUp)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NextUpSpif != null ? record2.NextUpSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NextUpSpif)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumActivation != null ? record2.PremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumActivation)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumActivationNetOFF != null ? record2.PremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumActivationNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack2 != null ? record2.ChargeBack2.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack2)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumActivationGP != null ? record2.PremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumActivationGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraActivation != null ? record2.ExtraActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraActivation)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraActivationNetOFF != null ? record2.ExtraActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraActivationNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack3 != null ? record2.ChargeBack3.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack3)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraActivationGP != null ? record2.ExtraActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraActivationGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NonExtraNonPremiumActivation != null ? record2.NonExtraNonPremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NonExtraNonPremiumActivation)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NonExtraNonPremiumActivationNetOFF != null ? record2.NonExtraNonPremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NonExtraNonPremiumActivationNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NonExtraNonPremiumActivationGP != null ? record2.NonExtraNonPremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NonExtraNonPremiumActivationGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumUpgrade != null ? record2.PremiumUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumUpgrade)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack4 != null ? record2.ChargeBack4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack4)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumUpgradeNetOff != null ? record2.PremiumUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumUpgradeNetOff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremiumUpgradeGP != null ? record2.PremiumUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremiumUpgradeGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraUpgrade != null ? record2.ExtraUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraUpgrade)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack5 != null ? record2.ChargeBack5.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack5)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraUpgradeNetOff != null ? record2.ExtraUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraUpgradeNetOff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ExtraUpgradeGP != null ? record2.ExtraUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ExtraUpgradeGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIAGoals != null ? record2.AIAGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIAGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack6 != null ? record2.ChargeBack6.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack6)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIAInternetNetOff != null ? record2.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIAInternetNetOff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIATrending != null ? record2.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIATrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AIAInternetGP != null ? record2.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AIAInternetGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MB != null ? record2.BroadbandLessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandLessThen300MB)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MB != null ? record2.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber300MB)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber500MB != null ? record2.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber500MB)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber1G != null ? record2.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber1G)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalBroadbandNewFiber != null ? record2.TotalBroadbandNewFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalBroadbandNewFiber)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack7 != null ? record2.ChargeBack7.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack7)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FiberUpgrades != null ? record2.FiberUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberUpgrades)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FiberUpgradesNetOFF != null ? record2.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberUpgradesNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack8 != null ? record2.ChargeBack8.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack8)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiber != null ? record2.BroadbandFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiber)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberTrendPercentage)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBQISpiff != null ? record2.BroadbandLessThen300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandLessThen300MBQISpiff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MBQISpiff != null ? record2.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber300MBQISpiff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber500MBQISpiff != null ? record2.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber500MBQISpiff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.NewFiber1GQISpiff != null ? record2.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.NewFiber1GQISpiff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FiberUpgradeGP != null ? record2.FiberUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberUpgradeGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGP != null ? record2.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGP != null ? record2.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGPTrending != null ? record2.BroadbandFiberGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberGPTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TurboFeature != null ? record2.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TurboFeature)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TurboFeatureGP != null ? record2.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TurboFeatureGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGoals != null ? record2.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideo != null ? record2.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideo)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoNetOFF != null ? record2.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack9 != null ? record2.ChargeBack9.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack9)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrend != null ? record2.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoTrendPercentage)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGP != null ? record2.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoSpiff != null ? record2.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoSpiff)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGPTrending != null ? record2.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PremVideoGPTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentGoals != null ? record2.EntertainmentGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.EntertainmentGoals)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentAch != null ? record2.EntertainmentAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.EntertainmentAch)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentTrending != null ? record2.EntertainmentTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.EntertainmentTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentTrendingToGoalsPercentage != null ? record2.EntertainmentTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.EntertainmentTrendingToGoalsPercentage)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQty != null ? record2.TWCDevicesQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesQty)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack10 != null ? record2.ChargeBack10.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack10)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyTrend != null ? record2.TWCDevicesQtyTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesQtyTrend)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesDollars != null ? record2.TWCDevicesDollars.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TWCDevicesDollars)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ProjectedGeographicSpif != null ? record2.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ProjectedGeographicSpif)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PrepaidQty != null ? record2.PrepaidQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PrepaidQty)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PrepaidToGA != null ? record2.PrepaidToGA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PrepaidToGA)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack11 != null ? record2.ChargeBack11.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack11)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PrepaidGP != null ? record2.PrepaidGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PrepaidGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AccessGP != null ? record2.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AccessGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AccessQty != null ? record2.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AccessQty)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AccessQtyTrending != null ? record2.AccessQtyTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AccessQtyTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.AccessRevenue != null ? record2.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.AccessRevenue)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQty != null ? record2.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FeaturesQty)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQtyNetOFF != null ? record2.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FeaturesQtyNetOFF)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack12 != null ? record2.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ChargeBack12)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TotalProtectionPercentage != null ? record2.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalProtectionPercentage)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv1 != null ? record2.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ProtAdv1)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv4 != null ? record2.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ProtAdv4)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.FeaturesGP != null ? record2.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FeaturesGP)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.WeeklyBudgetedHRS != null ? record2.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.WeeklyBudgetedHRS)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.WeeklyEmployeeAveragePerStore != null ? record2.WeeklyEmployeeAveragePerStore.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.WeeklyEmployeeAveragePerStore)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHRS != null ? record2.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MonthlyAchievedHRS)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrending != null ? record2.MonthlyAchievedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MonthlyAchievedHoursTrending)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GACloseRt)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.HomeTechProtect != null ? record2.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.HomeTechProtect)))</td>
+
+                                            </tr>
+
+                                        }
+                                    }
+
+                                }
+                            }
+
+                            // Update the current market
+                            currentMarket = record.Market;
+
                             <tr class="main_data" data-OPS="@record.TotalOPS" data-Traffic="@record.TotalTraffic" data-bhrs="@record.MonthlyBudgetedHRS" data-csat="@record.CSAT" data-sd="@record.SD" data-vp="@record.VP" data-reg="@record.Region" data-tir="@record.Tiers" data-store="@record.Store" data-mkt="@record.Market" data-tm="@record.TM" data-rsm="@record.RSMSRSM" data-role="@record.Role">
-                                @*<td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.VP   </td>*@
-                                @*<td style="background-color: black; color: white; font-weight:bold;">@record.Region </td>*@
+
+                                @*<td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="CommentView(this)" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal">Add</button></td>
+                                    <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview">View</button></td>*@
+
+
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.TM      </td>
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.Market   </td>
                                 <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
@@ -3608,12 +3809,9 @@
 
                                 </td>
                             </tr>
-
                         }
                     }
-
                 </table>
-
             </div>
         </div>
         <div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
@@ -3623,9 +3821,108 @@
             <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
 
         </div>
+        <!-- Modal Structure -->
+        <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-content">
+                            <div class="modal-header bg-success">
+                                <h4 class="modal-title text-white" id="staticBackdropLabel" style="width:70%">SelfNote</h4>
+                                <h4 class="modal-title text-white" id="staticBackdropLabel" style="width:50%">Add Comments</h4>
+                                <button type="button" onclick="LoadNoteandCommentData()" title="Refresh" class="btn rounded-circle mt-1"><i class="fa fa-repeat text-success"></i></button>
+                                <button type="button" title="Close" class="btn btn-close bg-transparent" data-dismiss="modal" aria-label="Close"><i class="fa fa-close fa-2x text-white"></i></button>
+                            </div>
+                            <div class="modal-body p-0">
+                                <div id="addcomment">
+
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-6"></div>
+                                            <div class="col-6">
+                                                <div class="row">
+                                                    <div class="form-group col mb-1 mt-1 pr-0">
+                                                        <select class="form-control form-control-sm" id="ddCommentDesignation"><option value="0" selected="">Select an Employee</option><option value="40169">TM - Debra Morales&nbsp;</option><option value="41234">AVP - Sam Colletta</option></select>
+                                                    </div>
+                                                    <div class="form-group col mb-1 mt-1 pl-1">
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="resetEmployeeDD()">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-md-6  mb-2">
+                                                <div class="card">
+                                                    <div class="loader" id="notesloader" style="display: none;">
+                                                        <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
+                                                    </div>
+                                                    <div class="nodata" id="nonotes" style="display: flex;">
+                                                        <h5 class="text-secondary"><b>No Notes</b></h5>
+                                                    </div>
+                                                    <div id="notedesc" class="card-body scrollable" style="height:400px"></div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 mb-2">
+                                                <div class="loader" id="commentsloader" style="display: none;">
+                                                    <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
+                                                </div>
+                                                <div class="nodata" id="nocomments" style="display: flex;">
+                                                    <h5 class="text-secondary"><b>No Comments</b></h5>
+                                                </div>
+                                                <div class="card">
+                                                    <div id="commentdesc" class="card-body scrollable" style="height:400px"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row mb-3">
+                                            <div class="col-6">
+                                                <div class="card-footer bg-white rounded">
+                                                    <div id="divnotes" class="row">
+                                                        @*<div class="col-md-11">
+                                                                <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="notes" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
+                                                            </div>*@
+                                                        <div class="col-md-1">
+                                                            <button onclick="addnote()" class="btn btn-success rounded-circle mt-2" title="Send"><i class="fa fa-send"></i>Add Note</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="card-footer bg-white rounded">
+                                                    <div id="divcomment" class="row">
+                                                        @*<div class="col-md-11 ml-0">
+                                                                <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="comments" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
+                                                            </div>*@
+                                                        <div class="col-md-1 ">
+                                                            <button onclick="addComment()" class="btn btn-success rounded-circle mt-2" title="Send"><i class="fa fa-send"></i>Add Comment</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer>
-        <div style="padding-left:40%; background-color:#B2D6F2;">
+        <div class="mt-4" style="padding-left:40%;background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
@@ -3724,6 +4021,7 @@
         document.body.innerHTML = originalContents;
     }
 </script>
+<!-- Next Prev btn -->
 <script>
     const divs = document.querySelectorAll(".content");
     let currentDiv = 0;
@@ -3889,6 +4187,9 @@
 
             // Always return true for the "Grand Total" row
             if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+            if (row.hasClass('total_dataTM')) {
                 return true;  // Always show the "Grand Total" row
             }
 
@@ -4137,6 +4438,7 @@
         var totalTraffic = 0;
         var totalOps = 0;
 
+
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-tm');
@@ -4145,9 +4447,14 @@
             var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
             var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+
+            }
             // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
                 row.style.display = '';  // Always show the "Grand Total" row
+
             } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
                 row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
                 totalCSAT += csatValue;  // Sum the CSAT value for visible rows
@@ -4157,6 +4464,7 @@
 
             } else {
                 row.style.display = 'none';  // Hide row if Tiers does not match
+
             }
         });
 
@@ -4234,6 +4542,7 @@
         //} else {
 
         //Fill TM and Others
+
         TMfilterTMOptions(selectedValues);
         TMfilterMarketOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
@@ -4342,7 +4651,6 @@
 
         // If any SD is selected, disable the TM dropdown but populate with matching options
         if (selectedValues.length > 0) {
-
             //TMSelect.disabled = true;
 
             // Populate the TM dropdown with only the TM from filtered rows
@@ -4606,6 +4914,11 @@
             var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
             var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+
+            }
+
             // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
                 row.style.display = '';  // Always show the "Grand Total" row
@@ -4632,6 +4945,10 @@
             // Check if the row contains the input
             var row = $('#tbl tbody tr').eq(dataIndex);
 
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
             // Always return true for the "Grand Total" row
             if (row.hasClass('total_data')) {
                 return true;  // Always show the "Grand Total" row
@@ -4962,6 +5279,9 @@
             var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
             var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
             // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
                 row.style.display = '';  // Always show the "Grand Total" row
@@ -4986,6 +5306,10 @@
 
             // Check if the row contains the input
             var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
 
             // Always return true for the "Grand Total" row
             if (row.hasClass('total_data')) {
@@ -5345,6 +5669,10 @@
             var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
             var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
+
             // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
                 row.style.display = '';  // Always show the "Grand Total" row
@@ -5369,6 +5697,10 @@
 
             // Check if the row contains the input
             var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
 
             // Always return true for the "Grand Total" row
             if (row.hasClass('total_data')) {
@@ -5738,6 +6070,10 @@
             var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
             var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
+
             // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
                 row.style.display = '';  // Always show the "Grand Total" row
@@ -5762,6 +6098,10 @@
 
             // Check if the row contains the input
             var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
 
             // Always return true for the "Grand Total" row
             if (row.hasClass('total_data')) {
@@ -6213,6 +6553,56 @@
     window.addEventListener('load', function () {
         document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
         document.getElementById('content').style.display = 'block'; // Show content
+    });
+</script>
+<!-- Optional JavaScript for dynamically loading employee details -->
+<script>
+    function CommentView(button) {
+        // Example of getting employee data; replace this with actual data fetching
+        const employeeDetails = `
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Position:</strong> Software Engineer</p>
+            <p><strong>Department:</strong> IT</p>
+            <p><strong>Email:</strong> john.doe@example.com</p>
+        `;
+
+        // Populate the modal with employee details
+        document.getElementById('employeeDetails').innerHTML = employeeDetails;
+    }
+</script>
+<!-- Script to Initialize Quill -->
+<script>
+    var quill = new Quill('#notedesc', {
+        theme: 'snow',  // Specify theme in configuration
+        placeholder: 'Type your note here...',
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                ['link', 'blockquote', 'code-block', 'image'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                [{ script: 'sub' }, { script: 'super' }],
+                [{ align: [] }],
+                ['clean']                                         // Remove formatting button
+            ]
+        }
+    });
+
+    //commentdesc
+    var quill = new Quill('#commentdesc', {
+        theme: 'snow',  // Specify theme in configuration
+        placeholder: 'Type your note here...',
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                ['link', 'blockquote', 'code-block', 'image'],
+                [{ list: 'ordered' }, { list: 'bullet' }],
+                [{ script: 'sub' }, { script: 'super' }],
+                [{ align: [] }],
+                ['clean']                                         // Remove formatting button
+            ]
+        }
     });
 </script>
 
