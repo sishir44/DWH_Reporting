@@ -1,33 +1,283 @@
-﻿
+﻿@{ 
+    Layout = null;
+}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lykmapipo/themify-icons@0.1.2/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pixeden-stroke-7-icon@1.2.3/pe-icon-7-stroke/dist/pe-icon-7-stroke.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.2.0/css/flag-icon.min.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+    <link href="https://site-assets.fontawesome.com/releases/v6.0.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/sidebar-style.css" />
+    <link rel="stylesheet" href="~/assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    <!-- font awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/custom.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <!-- Script -->
+    <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/assets/css/reportscss.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/fixedcolumns/3.2.0/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <link href="~/assets/css/RptTemplate.css" rel="stylesheet" />
 
     @Styles.Render("~/Content/Css")
     @Scripts.Render("~/bundles/modernizr")
 
+    <style>
+        .navbar {
+            background: #222222;
+        }
+
+        aside.left-panel {
+            background: #222222;
+            border-right: 3px solid #1c260e;
+        }
+
+        .right-panel {
+            background: transparent;
+        }
+
+        @@media (max-width: 768px) {
+            .right-panel .top-right {
+                background: transparent !important;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .right-panel .top-left {
+                background: linear-gradient(to bottom, #ffffff 0%, #758f5f 200%);
+            }
+        }
+
+        .right-panel header.header {
+            border-bottom: 4px solid #0079B1;
+            background: linear-gradient(to bottom, #ffffff 0%, #758f5f 200%);
+        }
+
+        .right-panel .navbar-header {
+            background: transparent;
+        }
+
+        .nav-link:focus, .nav-link:hover {
+            color: #000 !important;
+            border-bottom: 1px solid #0079B1;
+        }
+
+        .right-panel .menutoggle {
+            padding-top: 7px;
+        }
+
+        @@media (max-width: 768px) {
+            .right-panel .menutoggle {
+                margin-right: 0 !important;
+            }
+        }
+
+        .navbar-brand {
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .user-area .dropdown-toggle {
+            height: 48px;
+        }
+
+        .autocomplete-suggestions strong {
+            color: #0079B1;
+        }
+
+        .alert {
+            padding: 20px;
+            background-color: #8fb3bc;
+            color: black;
+        }
+
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .closebtn:hover {
+                color: black;
+            }
+
+        .notification {
+            background-color: darkgray;
+            color: white;
+            text-decoration: none;
+            /* padding: 15px 26px; */
+            position: relative;
+            display: inline-block;
+            border-radius: 2px;
+        }
+
+        .fa.fa-bell {
+            -webkit-text-stroke-width: 2px;
+            -webkit-text-stroke-color: #0079B1;
+        }
+
+        .user-menu.dropdown-menu.show {
+            border: 2px solid #606560;
+            border-radius: 13px;
+        }
+
+        .badge {
+            display: inline-block !important;
+            /*  padding: 1.0em .9em !important;  */
+        }
+
+        .notification .badge {
+            position: absolute;
+            top: -21px;
+            right: -14px;
+            /*padding: 5px 10px;*/
+            border-radius: 50%;
+            background-color: transparent;
+            color: red;
+            font-size: 20px;
+        }
+
+        .header-right .dropdown {
+            line-height: 55px;
+            margin-top: 0 !important;
+        }
+    </style>
+    <style>
+        th {
+            white-space: nowrap;
+            background-color: rgb(6 59 115) !important;
+            color: #fff !important;
+        }
+
+        td {
+            white-space: nowrap;
+        }
+
+        .editable-section-rows {
+            color: white;
+            background-color: #545353;
+        }
+
+        #imageloader2 {
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0px;
+            left: 0px;
+            background: url("http://mobilelinkusa.com/ct69/public/images/Loader.gif");
+            z-index: 1;
+            background-color: #ffffff5c;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+        }
+
+
+        .DTFC_LeftBodyLiner {
+            overflow-x: hidden !important;
+        }
+
+        input[type="search"] {
+            border: 1px solid #303335;
+            padding: 5px;
+        }
+
+        .dataTables_filter label {
+            margin-bottom: .5rem !important;
+        }
+
+        .modal-header {
+            background: #7f9e64;
+            color: #fff;
+        }
+
+        .close {
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        .modal.show .modal-dialog {
+            border: 2px solid #283a18;
+        }
+
+        button.dt-button.buttons-copy {
+            background: #007bff;
+            color: #fff;
+            border: 2px solid #007bff;
+        }
+
+        button.dt-button.buttons-excel {
+            background: #336a59;
+            color: #fff;
+            border: 2px solid #1d4622;
+        }
+
+        button.dt-button.buttons-csv {
+            background: #41957b;
+            color: #fff;
+            border: 2px solid #1d4622;
+        }
+
+        button.dt-button.buttons-pdf {
+            background: #222;
+            color: #fff;
+            border: 2px solid #222;
+        }
+
+        button.dt-button.buttons-print {
+            background: #dc3545;
+            color: #fff;
+            border: 2px solid #dc3545;
+        }
+
+        button.dt-button:hover, button.dt-button:focus, button.dt-button:active {
+            opacity: 0.7;
+            background: #336a59 !important;
+            color: #fff;
+            border: 2px solid #dc3545;
+        }
+    </style>
+
 </head>
 <body>
     @*<div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
 
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Uploader", "About", "Home")</li>
-                </ul>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Uploader", "About", "Home")</li>
+                    </ul>
 
+                </div>
             </div>
-        </div>
-    </div>*@
+        </div>*@
     <div>
         @RenderBody()
 
@@ -38,5 +288,46 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/Content/Js/table2excel.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/css/custom.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery-slimScroll/1.3.8/jquery.slimscroll.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+    <script src="~/Scripts/table2excel.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bar-rating/1.2.2/jquery.barrating.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+    <link href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.dataTables.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <script src="~/assets/js/init/fullcalendar-init.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="~/assets/js/geofencing.js"></script>
+    <script src="~/assets/js/FormFolderJS/ExecutiveLayout/ExecutiveLayout.js"></script>
+    <script src="~/assets/js/SearchTextbox/jquery.autocomplete.js"></script>
+    <script src="~/assets/js/SearchTextbox/jquery.mockjax.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="~/assets/js/SearchTextbox/devbridge-autocomplete.js"></script>
 </body>
 </html>

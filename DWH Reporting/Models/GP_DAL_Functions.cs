@@ -308,15 +308,14 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetTrendingCommissionData()
+        public static DataTable GetTrendingCommissionData(string date)
         {
             try
             {
                 DAL objDal = new DAL();
                 objDal.ProcName = "GetTrendingCommission";
-
                 SPParameters spParam = new SPParameters();
-
+                spParam.SetParam("@date", SqlDbType.NVarChar, date);
                 DataTable DT = objDal.Getdata(spParam);
                 return DT;
             }

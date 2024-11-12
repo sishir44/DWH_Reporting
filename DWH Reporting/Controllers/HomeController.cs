@@ -751,14 +751,14 @@ namespace DWH_Reporting.Controllers
                 throw;
             }
         }
-        public JsonResult TrendingCommissionData()
+        public JsonResult TrendingCommissionData(string date)
         {
 
             try
             {
 
 
-                DataTable dt = GP_DAL_Functions.GetTrendingCommissionData();
+                DataTable dt = GP_DAL_Functions.GetTrendingCommissionData(date);
                 List<GetTrendingCommission> com = new List<GetTrendingCommission>();
 
                 foreach (DataRow dr in dt.Rows)
@@ -790,6 +790,8 @@ namespace DWH_Reporting.Controllers
                     comd.AccessQty = dr["Access Qty"].ToString();
                     comd.ProtAdv1 = dr["ProtAdv 1"].ToString();
                     comd.ProtAdv4 = dr["ProtAdv 4"].ToString();
+                    comd.ReportDate = dr["ReportDate"].ToString();
+                    comd.MaxDate = dr["MaxDate"].ToString();
 
                     com.Add(comd);
 

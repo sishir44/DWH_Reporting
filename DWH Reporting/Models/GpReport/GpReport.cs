@@ -1680,6 +1680,8 @@ namespace DWH_Reporting.Models.GpReport
         public string AccessQty { get; set; }
         public string ProtAdv1 { get; set; }
         public string ProtAdv4 { get; set; }
+        public string ReportDate { get; set; }
+        public string MaxDate { get; set; }
 
 
     }
