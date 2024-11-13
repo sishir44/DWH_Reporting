@@ -565,7 +565,7 @@
                             }
                         }
                         <tr class="numbered_header">
-                            @for (int i = 1; i <= 76; i++) // Loop from 1 to 164
+                            @for (int i = 1; i <= 77; i++) // Loop from 1 to 164
                             {
                                 <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
@@ -592,6 +592,7 @@
                             <td>$GP - With<br> Spif Trending</td>
                             <td>Total $GP<br> Goals</td>
                             <td>OPS<br>Trending to<br> Goals % </td>
+                            <td>TOTAL<br> OPS Goals</td>
                             <td>TOTAL<br> OPS</td>
                             <td>Upgrade<br>Trending to<br>Goals %</td>
                             <td>MTD UPGRADES<br> Goals</td>
@@ -748,22 +749,14 @@
                         <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
                         <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))</td>
                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
-
-
-                        @*<td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>*@
-
-
-
-
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
                         @*<td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
-        <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
-        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
-        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
-        <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
-        <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
-        <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>*@
-
-
+                        <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>*@
                     </tr>
 
                         }
