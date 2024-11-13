@@ -3,8 +3,8 @@
 -----------------------*/
 
 .header {
-    border-bottom: 4px solid #0079B1;
-    background: linear-gradient(to bottom, #ffffff 0%, #009FDB 200%);
+    border-bottom: 4px solid #509810;
+    background: linear-gradient(to bottom, #ffffff 0%, #758f5f 200%);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.2);
     height: 55px;
     left: 0;
@@ -47,7 +47,7 @@
 }
 
 #toggle_btn:hover>.bar-icon span {
-    background-color: #00C9FF;
+    background-color: #376a5a;
 }
 
 .bar-icon span:nth-child(2) {
@@ -104,7 +104,7 @@
     margin: 0;
     position: relative;
     z-index: 99;
-    border-left: 2px solid #0079B1;
+    border-left: 2px solid #222222;
 }
 
 .user-menu.nav>li>a {
@@ -179,7 +179,7 @@
 .sidebar-inner {
     height: 100%;
     transition: all 0.2s ease-in-out 0s;
-overflow: auto;
+    overflow: auto;
 }
 
 .sidebar-menu {
@@ -316,7 +316,11 @@ overflow: auto;
     vertical-align: middle;
     align-items: center;
 }
-.sidebar-menu ul ul.child a {    padding: 10px 15px 10px 45px;}
+
+.sidebar-menu ul ul.child a {
+    padding: 10px 15px 10px 45px;
+}
+
 .sidebar-menu ul ul {
     display: none;
 }
@@ -595,11 +599,6 @@ html.menu-opened body {
     height: 45px;
 }
 
-#backbutton i {
-    font-size: 26px;
-    cursor: pointer;
-}
-
 @media only screen and (min-width: 991px) {
     #toggle_btn {
         color: #999;
@@ -615,7 +614,7 @@ html.menu-opened body {
     .mini-sidebar .header .header-left {
         padding: 0 5px;
         width: 250px;
-        border-right: 2px solid #0079B1;
+        border-right: 2px solid #509810;
     }
     .mini-sidebar .sidebar {
         width: 60px;
@@ -670,8 +669,8 @@ html.menu-opened body {
         opacity: 1;
     }
     .mini-sidebar .sidebar .sidebar-menu>ul>li>a i {
-        font-size: 30px;
-        width: 30px;
+        font-size: 24px;
+        width: 24px;
     }
     .mini-sidebar.expand-menu .sidebar .sidebar-menu>ul>li>a i {
         font-size: 24px;
@@ -685,7 +684,7 @@ html.menu-opened body {
 @media only screen and (max-width: 991.98px) {
     .header .header-left {
         position: absolute;
-        width: 95%;
+        width: 100%;
     }
     .mobile_btn {
         display: block;
@@ -704,7 +703,7 @@ html.menu-opened body {
         padding-right: 0;
     }
     a.mobile_btn {
-        color: #0079B1;
+        color: #678c40;
         font-size: 24px;
         height: 55px;
         left: 0;
@@ -784,18 +783,3 @@ html.menu-opened body {
         z-index: 10;
     }
 }
-
-
-/*@media only screen and (max-width: 543px) {
-	.containerSchbox {
-		position: fixed;
-		width:100%;
-		top:55px;
-		right:0;
-		left:auto;
-		border-bottom: 4px solid #0079B1;
-		background: linear-gradient(to bottom, #ffffff 0%, #758f5f 200%);
-		box-shadow: 0 1px 1px 0 rgb(0 0 0 / 20%);
-		border-left: 2px solid #0079B1;
-	}
-}*/

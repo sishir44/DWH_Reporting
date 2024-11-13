@@ -2,7 +2,7 @@
 
 
 function getSchRecord(ajaxPostUrl) {
-
+    
     $.ajax({
         type: "POST",
 
@@ -39,15 +39,13 @@ $("#autocomplete").focusout(function () {
 
 
 function searchbox(myJsonString) {
-
-
     $('#autocomplete').autocomplete({
         position: { my: "right top", at: "right bottom" },
         lookup: myJsonString,
 
 
         onSelect: function (suggestion) {
-       
+            debugger;
             window.location = suggestion.data
             $('#autocomplete').val("");
 

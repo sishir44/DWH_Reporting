@@ -18,7 +18,7 @@
     transition: all 0.3s ease;
 } 
 body { 
-    display: table;
+    display: block;
     font-family: $default-font;
     font-size: 16px;
     width: 100%
@@ -945,7 +945,8 @@ header .form-inline {
     transform: none !important;
 }
 
-.for-notification {
+.for-
+{
     .dropdown-menu {
         .dropdown-item {
             padding: 5px 15px !important;

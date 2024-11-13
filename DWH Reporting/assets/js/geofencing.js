@@ -1,4 +1,27 @@
-﻿function GetCoordinatesByStoreID(storeID, module, callback) {
+﻿function SendNotifationtoMobile() {
+    
+    $.ajax({
+        type: "GET",
+        url: urlSendNotification,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('mis@mlink.com' + ':' + 'app@mis#1'));
+        },
+        dataType: "json",
+        success: function (data) {
+            var successValue = data.Res.success;
+
+            console.log(successValue);
+            console.log(data);
+            alert(data.Message);
+        },
+        error: function (xhr, status, error) {
+            // Handle any errors here
+            console.error("Error:", status, error);
+        }
+    });
+}
+
+function GetCoordinatesByStoreID(storeID, module, callback) {
     $.ajax({
         type: "GET",
         url: urlget,
@@ -9,28 +32,31 @@
             var results = [];
 
             function processRow(i) {
+                
                 if (i < dataTable.length) {
                     var row = dataTable[i];
 
                     if (row.RangeAlert == "1") {
-                        Geofencing(row.StoreLatitude, row.StoreLongitude, storeID, module, row.UserAccuracy, function (result) {
+                        SendNotifationtoMobile()
+                        Geofencing(dataTable, storeID, module, function (result) {
                             // alert('Result from Geofencing: ' + result[1]);
                             callback([result[0], result[1]]);
                             results.push(result);
                             processRow(i + 1); // Process the next row
                         });
                     } else {
-                        Geofencing(row.StoreLatitude, row.StoreLongitude, storeID, module, row.UserAccuracy, function (result) {
+                        SendNotifationtoMobile()
+                        Geofencing(dataTable, storeID, module, function (result) {
                             // alert('Result from Geofencing: ' + result[1]);
-                            callback([result[0], result[1]]);
+                            callback(["1", "1"]);
                             results.push(result);
                             processRow(i + 1); // Process the next row
                         });
-                        //alert('Nothing');
+
                         processRow(i + 1); // Process the next row
                     }
                 } else {
-                    callback(["0", "0"]);
+                    callback(["1", "1"]);
                     //return "1";
                     // callback([""], [""]);
                     // All rows processed, do something with the results if needed
@@ -48,13 +74,15 @@
 
 // Rest of your code...
 
-function Geofencing(Lat, Long, storeID, module, UserAccuracy, callback) {
+function Geofencing(data, storeID, module, callback) {
     // Your existing Geofencing code...
     var msg = "";
     var res = "";
     var err = "";
     var userAgent = "";
     var browserName = "";
+    var Lat = data[0].StoreLatitude;
+    var Long = data[0].StoreLongitude;
     var isJavaScriptEnabled = (typeof window !== 'undefined' && typeof window.navigator !== 'undefined' && typeof window.navigator.userAgent !== 'undefined');
 
     if (isJavaScriptEnabled) {
@@ -72,39 +100,61 @@ function Geofencing(Lat, Long, storeID, module, UserAccuracy, callback) {
             timeout: 5000, // Maximum time to wait for location data (in milliseconds)
             maximumAge: 0 // Maximum age of cached location data (0 means no cache)
         };
-
+       
         navigator.geolocation.getCurrentPosition(function (position) {
             const userLatitude = position.coords.latitude;
             const userLongitude = position.coords.longitude;
-            UserAccuracy = position.coords.accuracy; // Accuracy in meters
+            const userAccuracy = position.coords.accuracy;// Accuracy in meters
+            const userAccuracyNumber = Math.round(userAccuracy);
 
             // Replace these coordinates with the desired location for comparison
-            const targetLatitude = Lat; // Example latitude
-            const targetLongitude = Long; // Example longitude
+            var targetLatitude = Lat; // Example latitude
+            var targetLongitude = Long; // Example longitude
+            var distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
+            distance = Math.round(distance);
+            //var minDistance = Infinity;
+            //for (var i = 0; i < data.length; i++) {
 
-            // Calculate the distance between the user's location and the target location
-            const distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
-
-
-            if (distance <= UserAccuracy) {
+            //    var distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
+            //    if (distance < minDistance) {
+            //        minDistance = distance;
+            //        targetLatitude = data[i].StoreLatitude;
+            //        targetLongitude = data[i].StoreLongitude;
+            //    }
+            //}
+            if (distance <= userAccuracyNumber) {
                 // alert(`The user's accuracy (${userAccuracy} meters) is greater than or equal to the distance (${distance} meters).`);
                 res = "1";
-                msg = `The user's accuracy for (${module}) (${UserAccuracy} meters) is greater than or equal to the distance (${distance} meters).`
-
-
-            } else {
+                msg = `The user's accuracy for (${module}) (${userAccuracyNumber} meters) is greater than or equal to the distance (${distance} meters).`;
+            }
+            else {
                 //alert(`The user's accuracy (${userAccuracy} meters) is less than the distance (${distance} meters).`);
                 res = "0";
-                msg = `The user's accuracy for (${module}) (${UserAccuracy} meters) is less than the distance (${distance} meters).`;
-
+                msg = `The user's accuracy for (${module}) (${userAccuracyNumber} meters) is less than the distance (${distance} meters).`;
             }
+            // Calculate the distance between the user's location and the target location
+            // const distance = calculateDistance(userLatitude, userLongitude, targetLatitude, targetLongitude);
+
+
+            //if (distance <= UserAccuracy) {
+            //    // alert(`The user's accuracy (${userAccuracy} meters) is greater than or equal to the distance (${distance} meters).`);
+            //    res = "1";
+            //    msg = `The user's accuracy for (${module}) (${UserAccuracy} meters) is greater than or equal to the distance (${distance} meters).`
+
+
+            //} else {
+            //    //alert(`The user's accuracy (${userAccuracy} meters) is less than the distance (${distance} meters).`);
+            //    res = "0";
+            //    msg = `The user's accuracy for (${module}) (${UserAccuracy} meters) is less than the distance (${distance} meters).`;
+
+            //}
             var obj = {
                 StoreID: storeID,
                 StoreLatitude: targetLatitude,
                 StoreLongitude: targetLongitude,
                 UserLatitude: userLatitude,
                 UserLongitude: userLongitude,
-                UserAccuracy: UserAccuracy,
+                UserAccuracy: userAccuracyNumber,
                 Distance: distance,
                 Message: msg,
                 InRadius: res,
@@ -236,3 +286,5 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 function toRadians(degrees) {
     return degrees * (Math.PI / 180);
 }
+
+//GetDeviceTokenLatestAppVersion

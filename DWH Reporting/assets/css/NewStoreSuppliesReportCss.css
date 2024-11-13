@@ -1,7 +1,6 @@
 ﻿.toast-center {
     top: 50%;
     left: 40%;
-    
 }
 
 .content {
@@ -22,8 +21,6 @@
 .minHeight {
     min-height: 500px !important;
 }
-
-
 
 table.dataTable thead th, table.dataTable thead td {
     padding: 6px 18px 25px 18px;

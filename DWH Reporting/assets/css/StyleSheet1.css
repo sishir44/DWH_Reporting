@@ -1,0 +1,50 @@
+﻿@keyframes aniVertical {
+    0% {
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.datagrid__row {
+    animation: aniVertical 3s ease;
+    animation-iteration-count: infinite;
+    animation-fill-mode: forwards;
+    opacity: 0;
+    
+}
+@keyframes aniHorizontal {
+    0% {
+        background-position: -100% 0;
+    }
+
+    100% {
+        background-position: 100% 0;
+    }
+}
+
+.datagrid__row {
+    position: relative;
+}
+
+    .datagrid__row:before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation-name: aniHorizontal;
+        animation-duration: 3.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        background: linear-gradient( to right, #cccccc 2%, #666666 18%, #cccccc 33% );
+        background-size: 50%;
+    }
+    .datagrid__row:before {
+        mix-blend-mode: overlay;
+    }

@@ -2,15 +2,15 @@
     top: 50%;
     left: 40%;
 }
-
+.card .card-body {
+    padding: 10px 0 0 0 !important;
+}
 .content {
     padding: 10px 0px 0px 10px;
     /*width: 1024px;*/
 }
 .card .card-body {
-   
-    padding: 0 !important;
-   
+    padding: 10px !important;
 }
 
 #fth {
@@ -41,7 +41,7 @@
 }
 
 .dataTables_filter label {
-    margin-bottom: 0 !important;
+    margin-bottom: .5rem !important;
     font-size: 12px;
 }
 
