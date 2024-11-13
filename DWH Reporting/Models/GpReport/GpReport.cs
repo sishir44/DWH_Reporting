@@ -1774,5 +1774,7 @@ namespace DWH_Reporting.Models.GpReport
         public string ProtAdv1 { get; set; }
         public string TimeStamp { get; set; }
         public string ProtAdv4 { get; set; }
+        public string Monthly_AchivedHoursTrending { get; set; }
+        public string WeeklyBudgetedHRS { get; set; }
     }
 }

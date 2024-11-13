@@ -438,24 +438,23 @@
                         <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
                                style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px;" />
 
-                        <label>90% & Above</label>
-                        <input type="button" name="OPS" id="opsTotal" class="form-control"
-                               value="32" title="Above 100%"
+                        <label>Between 70%</label>
+                        <input type="button" name="OPS" id="Between" class="form-control"
+                               value="" title="Above 100%"
                                style="background-color: green; color:white; height: 35px;" />
                     </div>
-
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
-                        <label>Between 70%-</label>
-                        <input type="button" name="above90" id="trafTotal" class="form-control"
+                        <label>90% & Above</label>
+                        <input type="button" name="above90" id="Above" class="form-control"
                                title="Traffic"
-                               value="26"
+                               value=""
                                style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
 
                         <label>Less 70%</label>
-                        <input type="button" name="above90" id="csatTotal" class="form-control"
+                        <input type="button" name="above90" id="CSAT70" class="form-control"
                                title="CSAT"
-                               value="14"
+                               value=""
                                style="background-color: orange; color:white; height: 35px;" />
                     </div>
 
@@ -566,7 +565,7 @@
                             }
                         }
                         <tr class="numbered_header">
-                            @for (int i = 1; i <= 82; i++) // Loop from 1 to 164
+                            @for (int i = 1; i <= 76; i++) // Loop from 1 to 164
                             {
                                 <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
@@ -576,92 +575,90 @@
                             <th rowspan="2" style="background-color: black; color:white;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Store</th>
                             <th rowspan="2" style="background-color: black; color:white;">Store Contact</th>
-                            <th id="ColSpan78" colspan="78">
+                            <th id="ColSpan78" colspan="75">
                             </th>
                         </tr>
                         <tr class="main_header">
-                            @*<td>Monthly<br>Achived Hours<br>Trending %              </td>*@
-                            <td>Weekly<br>Budgeted<br>HRS                           </td>
-                            @*<td>GROSS<br> ADDS<br> Goals              </td>*@
-                            <td>GROSS ADDS<br>Trend%<br> To Goal      </td>
-                            <td>GROSS ADDS<br> Goals                      </td>
-                            <td>GROSS<br>ADDS                            </td>
-                            <td>GROSS<br>ADDS Net<br>    OFF                    </td>
-                            <td>Total<br> Traffic                         </td>
-                            <td>PPVGA per<br>Traffic%                   </td>
-                            <td>Fiber<br> Conversion                      </td>
-                            <td>Broadband<br> +_Fiber<br> Net OFF             </td>
-                            <td>Fiber Green<br> Check                     </td>
-                            <td>APO                                   </td>
-                            <td>CSAT                                  </td>
-                            <td>ProtAdv &<br>HomeTech%                  </td>
-                            <td>BreakEven<br> Numbers                     </td>
-                            <td>$GP - With<br> Spif Trending              </td>
-                            <td>GP Trending<br> %                         </td>
-                            <td>Total $GP<br> Goals                       </td>
-                            <td>OPS<br>Trending to<br> Goals %               </td>
-                            <td>TOTAL OPS Goals                       </td>
-                            <td>TOTAL<br> OPS                             </td>
-                            <td>Upgrade<br>Trending to<br>Goals %           </td>
-                            <td>MTD UPGRADES<br> Goals                    </td>
-                            <td>MTD<br>UPGRADES<br>Net OFF                  </td>
-                            <td>T,W,C Devices Trend<br> to Goal %         </td>
-                            <td>T,W,C<br>Devices<br> QTY Goals               </td>
-                            <td>T,W,C<br>Devices<br> QTY Net<br> OFF             </td>
-                            <td>AIA<br> Business<br> Conversion               </td>
-                            <td>AIA C<br>Conversion               </td>
-                            <td>AIA Green<br>Check              </td>
-                            <td>AIA B<br>Internet                        </td>
-                            <td>AIA C<br>Internet                        </td>
-                            <td>OPS Per-<br>Traffic %                    </td>
-                            <td>CRU Ach<br>MTD                           </td>
-                            <td>FN Ach<br>MTD                            </td>
-                            <td>GROSS<br>ADDS<br>Trend                      </td>
-                            <td>Broadband<br>Goals                       </td>
-                            <td>Broadband +<br>Fiber                     </td>
-                            <td>BroadBand less<br>Then (300MB)          </td>
-                            <td>New Fiber<br> (300MB)                     </td>
-                            <td>New Fiber<br> (500MB)                     </td>
-                            <td>New Fiber<br> (1G)                        </td>
-                            <td>Fiber Upgrades<br>Net OFF                </td>
-                            <td>Broadband + Fiber<br>Trend              </td>
-                            <td>Broadband +<br>Fiber Trend%             </td>
-                            <td>Prem Video<br>Goals                      </td>
-                            <td>Prem Video                            </td>
-                            <td>Prem Video Net<br> OFF                    </td>
-                            <td>Prem Video<br>Trend %                    </td>
-                            <td>Prem Video<br>Trend                      </td>
-                            <td>$GP Achieved -<br>With Spif        </td>
-                            <td>$GP per BOX                           </td>
-                            <td>TOTAL OPS<br>Trending                    </td>
-                            <td>GROSS ADDS<br>$GP                        </td>
-                            <td>MTD UPGRADES                          </td>
-                            <td>MTD UPGRADES<br>$GP                      </td>
-                            <td>Broad Band +<br>Fiber $GP               </td>
-                            <td>Broadband $GP                         </td>
-                            <td>Broadband Less<br>then (300Mb) QI<br>Spiff  </td>
-                            <td>New Fiber<br>(300 MB) QI<br>Spiff           </td>
-                            <td>New Fiber<br>(500 MB) QI<br>Spiff           </td>
-                            <td>New Fiber<br>(1G) QI Spiff               </td>
-                            <td>Prem Video $GP                        </td>
-                            <td>Prem Video Spiff                      </td>
-                            <td>Access $GP                            </td>
-                            <td>Access $<br>Revenue                      </td>
-                            <td>Access Qty                            </td>
-                            <td>FN Ach<br>Average QTD                   </td>
-                            <td>FN Ach $                              </td>
-
-                            <td>CRU VGA Cnt                           </td>
-                            <td>CRU Ach Average<br>QTD                  </td>
-                            <td>CRU Ach Voice $                       </td>
-                            <td>CRU Ach<br>DATA $                        </td>
-                            <td>T,W,C Devices<br>QTY Trend               </td>
-                            <td>T,W,C Devices<br>GP                      </td>
-                            <td>HomeTech<br>Protect                      </td>
-                            <td>Total<br>Protection %                    </td>
-                            <td>ProtAdv 1                             </td>
-                            <td>ProtAdv 4                             </td>
-
+                            <td>Monthly<br>Achived Hours<br>Trending % </td>
+                            <td>Weekly<br>Budgeted<br>HRS</td>
+                            <td>GROSS ADDS<br>Trend%<br> To Goal</td>
+                            <td>Total<br> Traffic</td>
+                            <td>PPVGA per<br>Traffic%</td>
+                            <td>Fiber<br> Conversion</td>
+                            <td>APO</td>
+                            <td>CSAT</td>
+                            <td>ProtAdv &<br>HomeTech%</td>
+                            <td>BreakEven<br> Numbers</td>
+                            <td>$GP - With<br> Spif Trending</td>
+                            <td>Total $GP<br> Goals</td>
+                            <td>OPS<br>Trending to<br> Goals % </td>
+                            <td>TOTAL<br> OPS</td>
+                            <td>Upgrade<br>Trending to<br>Goals %</td>
+                            <td>MTD UPGRADES<br> Goals</td>
+                            <td>MTD<br>UPGRADES<br>Net OFF</td>
+                            <td>T,W,C Devices Trend<br> to Goal %</td>
+                            <td>T,W,C<br>Devices<br> QTY Goals </td>
+                            <td>T,W,C<br>Devices<br> QTY Net<br> OFF</td>
+                            <td>AIA<br> Business<br> Conversion</td>
+                            <td>AIA C<br>Conversion</td>
+                            <td>AIA Green<br>Check</td>
+                            <td>AIA B<br>Internet</td>
+                            <td>AIA C<br>Internet</td>
+                            <td>OPS Per-<br>Traffic %</td>
+                            <td>CRU Ach<br>MTD</td>
+                            <td>FN Ach<br>MTD </td>
+                            <td>GROSS<br>ADDS<br>Trend</td>
+                            <td>Broadband<br>Goals </td>
+                            <td>Broadband +<br>Fiber</td>
+                            <td>BroadBand less<br>Then (300MB)</td>
+                            <td>New Fiber<br> (300MB)</td>
+                            <td>New Fiber<br> (500MB) </td>
+                            <td>New Fiber<br> (1G) </td>
+                            <td>Fiber Upgrades<br>Net OFF</td>
+                            <td>Broadband + Fiber<br>Trend</td>
+                            <td>Broadband +<br>Fiber Trend% </td>
+                            <td>Prem Video<br>Goals </td>
+                            <td>Prem Video</td>
+                            <td>Prem Video Net<br> OFF</td>
+                            <td>Prem Video<br>Trend % </td>
+                            <td>Prem Video<br>Trend </td>
+                            <td>$GP Achieved -<br>With Spif</td>
+                            <td>$GP per BOX </td>
+                            <td>TOTAL OPS<br>Trending</td>
+                            <td>GROSS ADDS<br>$GP</td>
+                            <td>MTD UPGRADES</td>
+                            <td>MTD UPGRADES<br>$GP</td>
+                            <td>Broad Band +<br>Fiber $GP</td>
+                            <td>Broadband $GP</td>
+                            <td>Broadband Less<br>then (300Mb) QI<br>Spiff</td>
+                            <td>New Fiber<br>(300 MB) QI<br>Spiff</td>
+                            <td>New Fiber<br>(500 MB) QI<br>Spiff</td>
+                            <td>New Fiber<br>(1G) QI Spiff</td>
+                            <td>Prem Video $GP</td>
+                            <td>Prem Video Spiff </td>
+                            <td>Access $GP </td>
+                            <td>Access $<br>Revenue</td>
+                            <td>Access Qty</td>
+                            <td>FN Ach<br>Average QTD</td>
+                            <td>FN Ach $</td>
+                            <td>CRU Ach Voice</td>
+                            <td>CRU Ach Average<br>QTD </td>
+                            <td>CRU Ach Voice $</td>
+                            <td>CRU Ach<br>DATA $</td>
+                            <td>T,W,C Devices<br>QTY Trend</td>
+                            <td>T,W,C Devices<br>GP</td>
+                            <td>HomeTech<br>Protect</td>
+                            <td>Total<br>Protection %</td>
+                            <td>ProtAdv 1</td>
+                            <td>ProtAdv 4</td>
+                            @*<td>GROSS ADDS<br> Goals</td>
+                            <td>GROSS<br>ADDS</td>
+                            <td>GROSS<br>ADDS Net<br> OFF </td>
+                            <td>Broadband<br> +_Fiber<br> Net OFF </td>
+                            <td>Fiber Green<br> Check</td>
+                            <td>GP Trending<br> %</td>
+                            <td>TOTAL OPS Goals</td>
+                            <td>CRU VGA Cnt </td>*@
                         </tr>
                     </thead>
 
@@ -674,94 +671,100 @@
                         foreach (var record in sortedRecords)
                         //foreach (var record in recordsFct_StoreNumber)
                         {
-                            <tr class="main_data" data-sd="@record.SD" data-tm="@record.TM" data-tir="@record.Tier" data-store="@record.Store" data-mkt="@record.Market">
-                                <td style="background-color: black; color: white; font-weight:bold;">@record.Market      </td>
-                                <td style="background-color: black; color: white; font-weight:bold;">@record.TM   </td>
-                                <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
-                                <td>@record.StoreContact</td>
+                    <tr class="main_data" data-sd="@record.SD" data-tm="@record.TM" data-tir="@record.Tier" data-store="@record.Store" data-mkt="@record.Market">
+                        <td style="background-color: black; color: white; font-weight:bold;">@record.Market      </td>
+                        <td style="background-color: black; color: white; font-weight:bold;">@record.TM   </td>
+                        <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
+                        <td>@record.StoreContact</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Monthly_AchivedHoursTrending != null ? record.Monthly_AchivedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Monthly_AchivedHoursTrending))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WeeklyBudgetedHRS))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTraffic != null ? record.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTraffic)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
+                        <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
+                        <td class="breakevenCLS">@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSTrendingToGoalsPercentage))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOff != null ? record.MTDUpgradesNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWDevicesTrendToGoalPercentage != null ? record.TWDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesTrendToGoalPercentage))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyGoals != null ? record.TWDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyNetOff != null ? record.TWDevicesQtyNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABusinessConversion)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAConsumerConversion)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAGreenCheckConsumer != null ? record.AIAGreenCheckConsumer.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAGreenCheckConsumer)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABInternet)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIACInternet)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSPerTrafficPercentage)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrend)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiber != null ? record.BroadbandFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiber)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandLessThan300MB != null ? record.BroadBandLessThan300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandLessThan300MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOff != null ? record.FiberUpgradesNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberTrendPercentage)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoGoals != null ? record.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGoals)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOff != null ? record.PremVideoNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoTrendPercentage)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrend != null ? record.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoTrend)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPPerBox)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalOPSTrending != null ? record.TotalOPSTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSTrending)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGP != null ? record.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUpgrades != null ? record.MTDUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgrades)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGP != null ? record.MTDUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberGP != null ? record.BroadBandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThan300MBQISpiff != null ? record.BroadbandLessThan300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessThan300MBQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MBQISpiff != null ? record.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MBQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MBQISpiff != null ? record.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MBQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber1GQISpiff != null ? record.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1GQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNAchAverageQTD != null ? record.FNAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchAverageQTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchVoice != null ? record.CRUAchVoice.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchVoice)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchAverageQTD != null ? record.CRUAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchAverageQTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchVoice != null ? record.CRUAchVoice.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchVoice)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchData != null ? record.CRUAchData.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchData)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyTrend != null ? record.TWDevicesQtyTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyTrend)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWDevicesGP != null ? record.TWDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
 
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTraffic != null ? record.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTraffic)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
-                                <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
-                                <td class="breakevenCLS">@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSTrendingToGoalsPercentage))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOff != null ? record.MTDUpgradesNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWDevicesTrendToGoalPercentage != null ? record.TWDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesTrendToGoalPercentage))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyGoals != null ? record.TWDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyNetOff != null ? record.TWDevicesQtyNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABusinessConversion)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAConsumerConversion)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAGreenCheckConsumer != null ? record.AIAGreenCheckConsumer.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAGreenCheckConsumer)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABInternet)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIACInternet)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSPerTrafficPercentage)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrend)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiber != null ? record.BroadbandFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiber)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandLessThan300MB != null ? record.BroadBandLessThan300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandLessThan300MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOff != null ? record.FiberUpgradesNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberTrendPercentage)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoGoals != null ? record.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGoals)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOff != null ? record.PremVideoNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoTrendPercentage)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrend != null ? record.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoTrend)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPPerBox)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSTrending != null ? record.TotalOPSTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSTrending)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGP != null ? record.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgrades != null ? record.MTDUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgrades)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGP != null ? record.MTDUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberGP != null ? record.BroadBandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThan300MBQISpiff != null ? record.BroadbandLessThan300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessThan300MBQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MBQISpiff != null ? record.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MBQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MBQISpiff != null ? record.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MBQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber1GQISpiff != null ? record.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1GQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNAchAverageQTD != null ? record.FNAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchAverageQTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchAverageQTD != null ? record.CRUAchAverageQTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchAverageQTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchVoice != null ? record.CRUAchVoice.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchVoice)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchData != null ? record.CRUAchData.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchData)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyTrend != null ? record.TWDevicesQtyTrend.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesQtyTrend)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWDevicesGP != null ? record.TWDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWDevicesGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
-                                @*<td>@(String.IsNullOrWhiteSpace(record.TimeStamp != null ? record.TimeStamp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TimeStamp)))</td>*@
 
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
+                        @*<td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>*@
 
-                            </tr>
+
+
+
+                        @*<td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
+        <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
+        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
+        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
+        <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
+        <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
+        <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>*@
+
+
+                    </tr>
 
                         }
                     }
@@ -937,7 +940,7 @@
     // Function to highlight TM and Store cells
     function highlightCells() {
         //GROSS ADDS Goals
-        var cells = document.querySelectorAll(".gross-adds-goals");
+        var cells = document.querySelectorAll(".Csatval");
 
         cells.forEach(function (cell) {
             // Parse the cell's text content as a float
@@ -973,6 +976,40 @@
                 cell.style.color = "black";
             }
         });
+        //CSAT70
+        var CSAT70Cells = document.querySelectorAll(".csat");
+        var CSAT70Count = 0;
+        CSAT70Cells.forEach(function (cell) {
+            var CSAT70Name = cell.textContent.trim();
+            if (CSAT70Name < 70) {
+                CSAT70Count++;
+            }
+        });
+        
+        document.getElementById("CSAT70").value = CSAT70Count;
+
+        //Above
+        var AboveCells = document.querySelectorAll(".csat");
+        var AboveCount = 0;
+        AboveCells.forEach(function (cell) {
+            var AboveName = cell.textContent.trim();
+            if (AboveName < 90) {
+                AboveCount++;
+            }
+        });
+        document.getElementById("Above").value = AboveCount;
+
+        //Between
+        var BetweenCells = document.querySelectorAll(".csat");
+        var BetweenCount = 0;
+        BetweenCells.forEach(function (cell) {
+            var BetweenName = cell.textContent.trim();
+            if (BetweenName <= 70) {
+                BetweenCount++;
+            }
+        });
+        document.getElementById("Between").value = BetweenCount;
+
 
         //Total Stores
         // Select all cells with the 'stores' class
@@ -1112,6 +1149,7 @@
 
         TMSelect.disabled = false;  // Ensure TM dropdown is enabled after clearing filters
     }
+
     function resetMarketDropdown() {
         var MARKETSelect = document.getElementById('Market');
         MARKETSelect.innerHTML = '';  // Clear all existing options
@@ -1153,6 +1191,7 @@
 
         MARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
     }
+
     function resetStoresDropdown() {
         var STORESSelect = document.getElementById('Stores');
         STORESSelect.innerHTML = '';  // Clear all existing options
@@ -1727,6 +1766,7 @@
             });
         }
     }
+
     function MKTfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
         // Clear the Market dropdown
@@ -1775,6 +1815,7 @@
             });
         }
     }
+
     function MKTfilterTiersOptions(selectedValues) {
         var tiersSelect = document.getElementById('Tiers');
         // Clear the tiers dropdown
@@ -1824,6 +1865,7 @@
             });
         }
     }
+
     function MKTfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         // Clear the Stores dropdown
@@ -1873,6 +1915,7 @@
             });
         }
     }
+
     function MKTfilterSDOptions(selectedValues) {
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
@@ -2087,6 +2130,7 @@
             });
         }
     }
+
     function STRfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
         // Clear the Market dropdown
@@ -2135,6 +2179,7 @@
             });
         }
     }
+
     function STRfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         // Clear the Stores dropdown
@@ -2183,6 +2228,7 @@
             });
         }
     }
+
     function STRfilterTiersOptions(selectedValues) {
         var tiersSelect = document.getElementById('Tiers');
         // Clear the tiers dropdown
@@ -2233,6 +2279,7 @@
             });
         }
     }
+
     function STRfilterSDOptions(selectedValues) {
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
@@ -2456,6 +2503,7 @@
             });
         }
     }
+
     function TIRfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
         // Clear the TM dropdown
@@ -2504,6 +2552,7 @@
             });
         }
     }
+
     function TIRfilterTiersOptions(selectedValues) {
         var tiersSelect = document.getElementById('Tiers');
         // Clear the tiers dropdown
@@ -2553,6 +2602,7 @@
             });
         }
     }
+
     function TIRfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         //console.log(selectedValues);
@@ -2603,6 +2653,7 @@
             });
         }
     }
+
     function TIRfilterSDOptions(selectedValues) {
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
@@ -2865,6 +2916,7 @@
             });
         }
     }
+
     function SDfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
         // Clear the Market dropdown
@@ -2915,6 +2967,7 @@
             });
         }
     }
+
     function SDfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         // Clear the Stores dropdown
@@ -2965,6 +3018,7 @@
             });
         }
     }
+
     function SDfilterTiersOptions(selectedValues) {
         var tiersSelect = document.getElementById('Tiers');
         // Clear the tiers dropdown
@@ -3015,6 +3069,7 @@
             });
         }
     }
+
     function SDfilterSDOptions(selectedValues) {
 
         var SDSelect = document.getElementById('SD');
@@ -3065,6 +3120,7 @@
             });
         }
     }
+
 
     //////////////////////////////////////////////////////////
 </script>

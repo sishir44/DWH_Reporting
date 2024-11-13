@@ -1187,13 +1187,13 @@
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.TM      </td>
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.Market   </td>
                                 <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
-                                <td>@record.UniqueID                                       </td>
-                                <td>@record.DealerCode                                          </td>
-                                <td>@record.Tiers                                       </td>
-                                <td>@record.RSMSRSM                                         </td>
-                                <td>@record.Role                                             </td>
-                                <td>@record.HITStore                                        </td>
-                                <td>@record.SD                                           </td>
+                                <td>@record.UniqueID</td>
+                                <td>@record.DealerCode</td>
+                                <td>@record.Tiers</td>
+                                <td>@record.RSMSRSM</td>
+                                <td>@record.Role</td>
+                                <td>@record.HITStore</td>
+                                <td>@record.SD</td>
 
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>

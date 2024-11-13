@@ -897,7 +897,9 @@ namespace DWH_Reporting.Controllers
                     TotalProtectionPercentage = row["Total Protection %"].ToString(),
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     //TimeStamp = row["TimeStamp"].ToString(),
-                    ProtAdv4 = row["ProtAdv 4"].ToString()
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    Monthly_AchivedHoursTrending = row["Monthly_AchivedHoursTrending"].ToString(),
+                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
 
                 };
 
