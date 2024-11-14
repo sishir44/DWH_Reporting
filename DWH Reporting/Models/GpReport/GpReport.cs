@@ -1484,6 +1484,8 @@ namespace DWH_Reporting.Models.GpReport
     public class Fct_StoreNumberAttributesModel
     {
         public string VP { get; set; }
+        public string MUL_MktMngr { get; set; }
+        public string MUL_Market { get; set; }
         public string Region { get; set; }
         public string SD { get; set; }
         public string UniqueID { get; set; }

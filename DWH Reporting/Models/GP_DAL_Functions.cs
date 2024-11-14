@@ -328,6 +328,43 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+        public static DataTable Get_MUL_Mgr()
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "Get_MUL_Mgr";
+
+                SPParameters spParam = new SPParameters();
+                return objDal.Getdata(spParam);
+            }
+            catch (Exception ex)
+            {
+                // Log or handle the exception as needed
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+        public static DataTable GetFct_StoreNumberTotalTM(string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_StoreNumberTotalTM";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
         public static DataTable GetTrendingCommissionData(string date)
         {
             try
@@ -338,6 +375,24 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@date", SqlDbType.NVarChar, date);
                 DataTable DT = objDal.Getdata(spParam);
                 return DT;
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
+        public static DataTable GetRecords_summaryTotal(string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetRecords_summaryTotal";
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
             }
             catch (Exception ex)
             {

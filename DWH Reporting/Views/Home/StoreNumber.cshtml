@@ -9,6 +9,8 @@
     var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsGet_MUL_Mgr = ViewData["Get_MUL_Mgr"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsGet_MUL_Mkt = ViewData["Get_MUL_Mkt"] as IEnumerable<Fct_StoreNumberAttributesModel>;
 
 }
 @using DWH_Reporting.Models.GpReport;
@@ -40,14 +42,20 @@
     <title>MTD Reports</title>
 
     <style>
+        .single-line-button {
+            white-space: nowrap;
+        }
+
+        .row.head {
+            width: 100%;
+        }
+
         .modal-dialog {
             max-width: 100%; /* Remove max-width constraint */
             width: 100vw; /* Full viewport width */
             margin: 0; /* Remove default margin */
         }
-        .row.head {
-            width: 100%;
-        }
+
         /* Full-width modal content */
         .modal-content {
             width: 100%;
@@ -391,7 +399,6 @@
 </head>
 <body style="padding-top:0; background-color:#B2D6F2;">
     <div id="loadingScreen">
-        @*<img id="loadingLogo" src="~/Image/logo23.png" alt="Loading Logo">*@
         <img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">
 
     </div>
@@ -404,7 +411,7 @@
                             @*<img src="~/Image/smLogoMobily.png" />*@
                         </div>
                         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <h3 style="margin-top:14px; font-size:22px;" class="title">|  MTD @ViewBag.Title</h3>
+                            <h3 style="margin-top:6px; font-size:20px;" class="title">|  MTD @ViewBag.Title</h3>
                         </div>
                     </div>
                 </div>
@@ -440,7 +447,7 @@
 
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter">
+                            <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter" onclick="clearfilter()">
                                 <i class="fas fa-filter"></i>
                             </button>
                         </div>
@@ -459,13 +466,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row sub-header" style="background-color: grey;width: 100%; margin: 0 auto;">
+            <div class="row sub-header" style="background-color: grey;width: 100%;margin: 0 auto;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
                         <div id="TimeStamp">
                             @if (ViewBag.ReportDate != null)
                             {
-                                <p style="margin-bottom: 0rem; font-size: 12px;">Report Date: @ViewBag.ReportDate</p>
+                                <p style="margin-bottom: 0rem; font-size: 12px; margin-left:20px;">Report Date: @ViewBag.ReportDate</p>
                             }
                             else
                             {
@@ -489,31 +496,51 @@
             </div>
             <div class="fields" style="background-color:white;  overflow-x: auto; white-space: nowrap;">
                 <div class="row testimonial-group" style="display: inline-block;">
+
                     <!-- Budgeted Hours and Total Ops -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <label>Total Stores</label>
                         <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
-                               style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px;" />
+                               style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px; margin-left:10px;" />
 
                         <label>Above 100%</label>
-                        <input type="button" name="OPS" id="opsTotal" class="form-control"
-                               value="@ViewBag.TotalOps" title="Above 100%"
-                               style="background-color: green; color:white; height: 35px;" />
+                        <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
+                               title="Above 100%" value=""
+                               style="background-color: green; color:white; height: 35px; margin-left:10px; margin-bottom:5px;" />
                     </div>
 
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
-                        <label>Above Breakeven</label>
-                        <input type="button" name="above90" id="trafTotal" class="form-control"
+                        <label>Above 70%</label>
+                        <input type="button" name="above90" id="tbeCountDisplay70" class="form-control"
                                title="Traffic"
-                               value=@String.Format("{0:N1}", Convert.ToDouble(@ViewBag.Traffic))
+                               value=""
                                style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
 
-                        <label>Less than Breakeven</label>
-                        <input type="button" name="above90" id="csatTotal" class="form-control"
+                        <label>Above 90%</label>
+                        <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
                                title="CSAT"
-                               value=@String.Format("{0:N1}", Convert.ToDouble(@ViewBag.CSAT))
-                               style="background-color: orange; color:white; height: 35px;" />
+                               value=""
+                               style="background-color: orange; color:white; height: 35px; margin-bottom:5px;" />
+                    </div>
+
+                    <!-- Search SD -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" />
+                        @*<select class="form-control selector" id="SD" multiple onchange="filterSDData()">*@
+                        <select class="form-control selector" id="SD" multiple>
+                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.SDList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Text">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
+                            }
+                        </select>
                     </div>
 
                     <!-- Search TM -->
@@ -585,23 +612,7 @@
                             }
                         </select>
                     </div>
-                    <!-- Search SD -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" />
-                        <select class="form-control selector" id="SD" multiple onchange="filterSDData()">
-                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
-                            {
-                                foreach (var item in ViewBag.SDList)
-                                {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Text">@item.Text</option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
-                            }
-                        </select>
-                    </div>
+
 
                 </div>
             </div>
@@ -623,14 +634,14 @@
                             }
                         }
                         <tr class="numbered_header">
-                            @for (int i = 1; i <= 162; i++) // Loop from 1 to 164
+                            @for (int i = 1; i <= 164; i++) // Loop from 1 to 164
                             {
                                 <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
                         </tr>
                         <tr class="spanned_header">
-                            @*<th rowspan="2" style="background-color: black; color:white;">Self Note</th>
-                                <th rowspan="2" style="background-color: black; color:white;">View</th>*@
+                            <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
+                            <th rowspan="2" style="background-color: black; color:white;">View</th>
 
                             <th rowspan="2" style="background-color: black; color:white;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Market</th>
@@ -647,9 +658,9 @@
                         </tr>
                         <tr class="main_header">
                             <td>Monthly<br>Achieved Hours<br>Trending %  </td>
-                            <td style="background-color: green; color:white;">GROSS ADDS<br>Trend%<br>To Goal                         </td>
-                            <td style="background-color: green; color:white;">Gross<br>Adds<br>Goals          </td>
-                            <td style="background-color: green; color:white;">Gross<br>Adds<br>NetOFF         </td>
+                            <td style="background-color: #063B73; color:white;">GROSS ADDS<br>Trend%<br>To Goal                         </td>
+                            <td style="background-color: #063B73; color:white;">Gross<br>Adds<br>Goals          </td>
+                            <td style="background-color: #063B73; color:white;">Gross<br>Adds<br>NetOFF         </td>
                             <td>PPVGA per<br>Traffic %                    </td>
                             <td>Total<br>Traffic  </td>
                             <td>Fiber<br>Conversion                              </td>
@@ -808,8 +819,8 @@
                         foreach (var record in recordsFct_StoreNumberTotal)
                         {
                             <tr class="total_data">
-                                @*<td></td>
-                                    <td></td>*@
+                                <td></td>
+                                <td></td>
 
                                 <td></td>
                                 <td>Grand Total</td>
@@ -1001,12 +1012,14 @@
                                         if (record2.Market == record.Market && record2.TM == record.TM)
                                         {
                                             <tr id="totTM" class="total_dataTM">
-                                                @*<td></td>
-                                                    <td></td>*@
+                                                <td></td>
+                                                <td></td>
 
-                                                <td colspan="2">TM Total</td>
-                                                <td style="display:none"></td>
+                                                <td>TM Total</td>
                                                 <td>@record2.TM</td>
+                                                @*<td style="display:none;"></td>*@
+
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
@@ -1024,10 +1037,10 @@
                                                 <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberNetOFF != null ? record2.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberNetOFF)))</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.FiberGreenCheck != null ? record2.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberGreenCheck)))</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.APO)))</td>
-                                                <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CSAT)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CSAT))) %</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.ProtAdvHomeTechPercentage))) %</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
-                                                <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TrendingToBreakEven)))</td>
+                                                <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TrendingToBreakEven))) %</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.GPWithSpifTrending != null ? record2.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPWithSpifTrending)))</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPTrendingPercentage))) %</td>
                                                 <td>@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalGPGoals)))</td>
@@ -1178,22 +1191,189 @@
                             // Update the current market
                             currentMarket = record.Market;
 
-                            <tr class="main_data" data-OPS="@record.TotalOPS" data-Traffic="@record.TotalTraffic" data-bhrs="@record.MonthlyBudgetedHRS" data-csat="@record.CSAT" data-sd="@record.SD" data-vp="@record.VP" data-reg="@record.Region" data-tir="@record.Tiers" data-store="@record.Store" data-mkt="@record.Market" data-tm="@record.TM" data-rsm="@record.RSMSRSM" data-role="@record.Role">
+                            <tr class="main_data"
+                                data-modalTotalTraffic="@record.TotalTraffic"
+                                data-modalFiberConversion="@record.FiberConversion"
+                                data-modalBroadbandFiberNetOFF="@record.BroadbandFiberNetOFF"
+                                data-modalFiberGreenCheck="@record.FiberGreenCheck"
+                                data-modalAPO="@record.APO"
+                                data-modalCSAT="@record.CSAT"
+                                data-modalProtAdvHomeTechPercentage="@record.ProtAdvHomeTechPercentage"
+                                data-modalBreakEvenNumbers="@record.BreakEvenNumbers"
+                                data-modalTrendingToBreakEven="@record.TrendingToBreakEven"
+                                data-modalGPWithSpifTrending="@record.GPWithSpifTrending"
+                                data-modalGPTrendingPercentage="@record.GPTrendingPercentage"
+                                data-modalTotalGPGoals="@record.TotalGPGoals"
+                                data-modalOPSTrendingToGoalsPercentage="@record.OPSTrendingToGoalsPercentage"
+                                data-modalTotalOPSGoals="@record.TotalOPSGoals"
+                                data-modalTotalOPS="@record.TotalOPS"
+                                data-modalUpgradeTrendingToGoalsPercentage="@record.UpgradeTrendingToGoalsPercentage"
+                                data-modalMTDUpgradesGoals="@record.MTDUpgradesGoals"
+                                data-modalMTDUpgradesNetOFF="@record.MTDUpgradesNetOFF"
+                                data-modalTWCDevicesTrendToGoalPercentage="@record.TWCDevicesTrendToGoalPercentage"
+                                data-modalTWCDevicesQtyGoals="@record.TWCDevicesQtyGoals"
+                                data-modalTWCDevicesQtyNetOFF="@record.TWCDevicesQtyNetOFF"
+                                data-modalAIABusinessConversion="@record.AIABusinessConversion"
+                                data-modalAIAConsumerConversion="@record.AIAConsumerConversion"
+                                data-modalAIAGreenCheckConsumer="@record.AIAGreenCheckConsumer"
+                                data-modalAIACInternet="@record.AIACInternet"
+                                data-modalAIABInternet="@record.AIABInternet"
+                                data-modalTotalOPSTrending="@record.TotalOPSTrending"
+                                data-modalOPSPerTrafficPercentage="@record.OPSPerTrafficPercentage"
+                                data-modalCRUAchMTD="@record.CRUAchMTD"
+                                data-modalFNAchMTD="@record.FNAchMTD"
+                                data-modalGPPerBox="@record.GPPerBox"
+                                data-modalTotalGPAchievedWithSpif="@record.TotalGPAchievedWithSpif"
+                                data-modalGrossAdds="@record.GrossAdds"
+                                data-modalChargeBack="@record.ChargeBack"
+                                data-modalGrossAddsTrend="@record.GrossAddsTrend"
+                                data-modalGrossAddsGP="@record.GrossAddsGP"
+                                data-modalGrossAddsGPTrending="@record.GrossAddsGPTrending"
+                                data-modalARBusinessFNProgramAverageQ2Target="@record.ARBusinessFNProgramAverageQ2Target "
+                                data-modalFNAchAverageQTD="@record.FNAchAverageQTD"
+                                data-modalRemainingToAchieveFNAverageQ2Target="@record.RemainingToAchieveFNAverageQ2Target"
+                                data-modalFNAchTrend="@record.FNAchTrend"
+                                data-modalFNAchDollars="@record.FNAchDollars"
+                                data-modalARBusinessCRUProgramAverageQ2Target="@record.ARBusinessCRUProgramAverageQ2Target"
+                                data-modalCRUAchVoice="@record.CRUAchVoice"
+                                data-modalCRUAchDATA="@record.CRUAchDATA"
+                                data-modalCRUAchAverageQTD="@record.CRUAchAverageQTD"
+                                data-modalRemainingToAchieveCRUAverageQ2Target="@record.RemainingToAchieveCRUAverageQ2Target"
+                                data-modalCRUAchTrend="@record.CRUAchTrend"
+                                data-modalCRUAchVoiceDollars="@record.CRUAchVoiceDollars"
+                                data-modalCRUAchDATADollars="@record.CRUAchDATADollars"
+                                data-modalMTDUpgrades="@record.MTDUpgrades"
+                                data-modalChargeBack1="@record.ChargeBack1"
+                                data-modalMTDUpgradesTrending="@record.MTDUpgradesTrending"
+                                data-modalMTDUpgradesGP="@record.MTDUpgradesGP"
+                                data-modalMTDUpgradesGPTrending="@record.MTDUpgradesGPTrending"
+                                data-modalNextUp="@record.NextUp"
+                                data-modalNextUpSpif="@record.NextUpSpif"
+                                data-modalPremiumActivation="@record.PremiumActivation"
+                                data-modalPremiumActivationNetOFF="@record.PremiumActivationNetOFF"
+                                data-modalChargeBack2="@record.ChargeBack2"
+                                data-modalPremiumActivationGP="@record.PremiumActivationGP"
+                                data-modalExtraActivation="@record.ExtraActivation"
+                                data-modalExtraActivationNetOFF="@record.ExtraActivationNetOFF"
+                                data-modalChargeBack3="@record.ChargeBack3"
+                                data-modalExtraActivationGP="@record.ExtraActivationGP"
+                                data-modalNonExtraNonPremiumActivation="@record.NonExtraNonPremiumActivation"
+                                data-modalNonExtraNonPremiumActivationNetOFF="@record.NonExtraNonPremiumActivationNetOFF"
+                                data-modalNonExtraNonPremiumActivationGP="@record.NonExtraNonPremiumActivationGP"
+                                data-modalPremiumUpgrade="@record.PremiumUpgrade"
+                                data-modalChargeBack4="@record.ChargeBack4"
+                                data-modalPremiumUpgradeNetOff="@record.PremiumUpgradeNetOff"
+                                data-modalPremiumUpgradeGP="@record.PremiumUpgradeGP"
+                                data-modalExtraUpgrade="@record.ExtraUpgrade"
+                                data-modalChargeBack5="@record.ChargeBack5"
+                                data-modalExtraUpgradeNetOff="@record.ExtraUpgradeNetOff"
+                                data-modalExtraUpgradeGP="@record.ExtraUpgradeGP"
+                                data-modalAIAGoals="@record.AIAGoals"
+                                data-modalChargeBack6="@record.ChargeBack6"
+                                data-modalAIAInternetNetOff="@record.AIAInternetNetOff"
+                                data-modalAIATr="@record.AIATrending"
+                                data-modalAIAIntG="@record.AIAInternetGP"
+                                data-modalBBG="@record.BroadbandGoals"
+                                data-modalBBL300="@record.BroadbandLessThen300MB"
+                                data-modalNF300="@record.NewFiber300MB"
+                                data-modalNF500="@record.NewFiber500MB"
+                                data-modalNF1G="@record.NewFiber1G"
+                                data-modalTBBNF="@record.TotalBroadbandNewFiber"
+                                data-modalBBNFNOFF="@record.BroadbandNewFiberNetOFF"
+                                data-modalCB1="@record.ChargeBack1"
+                                data-modalFUpg="@record.FiberUpgrades"
+                                data-modalFUpgNOFF="@record.FiberUpgradesNetOFF"
+                                data-modalCB2="@record.ChargeBack2"
+                                data-modalBBF="@record.BroadbandFiber"
+                                data-modalBBFTr="@record.BroadbandFiberTrend"
+                                data-modalBBFTrPer="@record.BroadbandFiberTrendPercentage"
+                                data-modalBBL300QI="@record.BroadbandLessThen300MBQISpiff"
+                                data-modalNF300QI="@record.NewFiber300MBQISpiff"
+                                data-modalNF500QI="@record.NewFiber500MBQISpiff"
+                                data-modalNF1GQI="@record.NewFiber1GQISpiff"
+                                data-modalFUpgGP="@record.FiberUpgradeGP"
+                                data-modalBBGP="@record.BroadbandGP"
+                                data-modalBBFGP="@record.BroadbandFiberGP"
+                                data-modalBBFGPTr="@record.BroadbandFiberGPTrending"
+                                data-modalTF="@record.TurboFeature"
+                                data-modalTFGP="@record.TurboFeatureGP"
+                                data-modalPVG="@record.PremVideoGoals"
+                                data-modalPV="@record.PremVideo"
+                                data-modalPVNOFF="@record.PremVideoNetOFF"
+                                data-modalCB3="@record.ChargeBack3"
+                                data-modalPVTr="@record.PremVideoTrend"
+                                data-modalPVTrPer="@record.PremVideoTrendPercentage"
+                                data-modalPVGP="@record.PremVideoGP"
+                                data-modalPVSpf="@record.PremVideoSpiff"
+                                data-modalPVGPTr="@record.PremVideoGPTrending"
+                                data-modalEG="@record.EntertainmentGoals"
+                                data-modalEAch="@record.EntertainmentAch"
+                                data-modalETr="@record.EntertainmentTrending"
+                                data-modalETrGPer="@record.EntertainmentTrendingToGoalsPercentage"
+                                data-modalTWCDQTY="@record.TWCDevicesQty"
+                                data-modalCB4="@record.ChargeBack4"
+                                data-modalTWCDQTYTr="@record.TWCDevicesQtyTrend"
+                                data-modalTWCD="@record.TWCDevicesDollars"
+                                data-modalPGSpiff="@record.ProjectedGeographicSpif"
+                                data-modalPQTY="@record.PrepaidQty"
+                                data-modalPGA="@record.PrepaidToGA"
+                                data-modalPNOFF="@record.PrepaidNetOFF"
+                                data-modalCB5="@record.ChargeBack5"
+                                data-modalPGP="@record.PrepaidGP"
+                                data-modalPAuto="@record.PrepaidWithAutopay"
+                                data-modalAGP="@record.AccessGP"
+                                data-modalAQTY="@record.AccessQty"
+                                data-modalAQTYTr="@record.AccessQtyTrending"
+                                data-modalAR="@record.AccessRevenue"
+                                data-modalFQTY="@record.FeaturesQty"
+                                data-modalFQTYNOFF="@record.FeaturesQtyNetOFF"
+                                data-modalCB6="@record.ChargeBack6"
+                                data-modalTPPer="@record.TotalProtectionPercentage"
+                                data-modalPADV1="@record.ProtAdv1"
+                                data-modalPADV4="@record.ProtAdv4"
+                                data-modalFGP="@record.FeaturesGP"
+                                data-modalWBHRS="@record.WeeklyBudgetedHRS"
+                                data-modalWEAPerS="@record.WeeklyEmployeeAveragePerStore"
+                                data-modalMBHRS="@record.MonthlyBudgetedHRS"
+                                data-modalMAHRS="@record.MonthlyAchievedHRS"
+                                data-modalMAHRSTr="@record.MonthlyAchievedHoursTrending"
+                                data-modalGACloseRT="@record.GACloseRt"
+                                data-modalHTP="@record.HomeTechProtect"
+                                data-PPVGAperTrf="@record.PPVGAPerTrafficPercentage"
+                                data-GANetOff="@record.GrossAddsNetOFF"
+                                data-GAG="@record.GrossAddsGoals"
+                                data-GATr="@record.GrossAddsTrend"
+                                data-MAHTr="@record.MonthlyAchievedHoursTrendingPercentage"
+                                data-DC="@record.DealerCode"
+                                data-UID="@record.UniqueID"
+                                data-sd="@record.SD"
+                                data-vp="@record.VP"
+                                data-reg="@record.Region"
+                                data-tir="@record.Tiers"
+                                data-store="@record.Store"
+                                data-mkt="@record.Market"
+                                data-tm="@record.TM"
+                                data-rsm="@record.RSMSRSM"
+                                data-role="@record.Role">
 
-                                @*<td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="CommentView(this)" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal">Add</button></td>
-                                    <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview">View</button></td>*@
+                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="CommentView(this)" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal">Add</button></td>
+                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
-
+                                @*<td>
+                                        <button type="button" class="btn btn-primary" onclick="showEmployeeDetails('@record.UniqueID')" data-toggle="modal" data-target="#dataview">
+                                            View Details
+                                        </button>
+                                    </td>*@
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.TM      </td>
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.Market   </td>
                                 <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
-                                <td>@record.UniqueID</td>
-                                <td>@record.DealerCode</td>
-                                <td>@record.Tiers</td>
-                                <td>@record.RSMSRSM</td>
-                                <td>@record.Role</td>
-                                <td>@record.HITStore</td>
-                                <td>@record.SD</td>
+                                <td>@record.UniqueID                                       </td>
+                                <td>@record.DealerCode                                          </td>
+                                <td>@record.Tiers                                       </td>
+                                <td>@record.RSMSRSM                                         </td>
+                                <td>@record.Role                                             </td>
+                                <td>@record.HITStore                                        </td>
+                                <td>@record.SD                                           </td>
 
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
@@ -1205,10 +1385,10 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
-                                <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                                <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
-                                <td class="breakevenCLS">@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                                <td class="tbreakevenCLS">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100)) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
@@ -3826,7 +4006,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="employeeModalLabel">Employee Details</h5>
+                        <h5 class="modal-title" id="employeeModalLabel">Employee Notes</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -3834,8 +4014,8 @@
                     <div class="modal-body">
                         <div class="modal-content">
                             <div class="modal-header bg-success">
-                                <h4 class="modal-title text-white" id="staticBackdropLabel" style="width:70%">SelfNote</h4>
-                                <h4 class="modal-title text-white" id="staticBackdropLabel" style="width:50%">Add Comments</h4>
+                                <h4 class="modal-title text-white" id="staticBackdropLabel" style="width:70%">Self Note</h4>
+                                <h4 class="modal-title text-white" id="staticBackdropLabel2" style="width:50%">Add Comments</h4>
                                 <button type="button" onclick="LoadNoteandCommentData()" title="Refresh" class="btn rounded-circle mt-1"><i class="fa fa-repeat text-success"></i></button>
                                 <button type="button" title="Close" class="btn btn-close bg-transparent" data-dismiss="modal" aria-label="Close"><i class="fa fa-close fa-2x text-white"></i></button>
                             </div>
@@ -3848,7 +4028,39 @@
                                             <div class="col-6">
                                                 <div class="row">
                                                     <div class="form-group col mb-1 mt-1 pr-0">
-                                                        <select class="form-control form-control-sm" id="ddCommentDesignation"><option value="0" selected="">Select an Employee</option><option value="40169">TM - Debra Morales&nbsp;</option><option value="41234">AVP - Sam Colletta</option></select>
+                                                        @*<select class="form-control form-control-sm" id="ddCommentDesignation"><option value="0" selected="">Select an Employee</option><option value="40169">TM - Debra Morales&nbsp;</option><option value="41234">AVP - Sam Colletta</option></select>*@
+
+                                                        <select class="form-control selector" id="ddCommentDesignation" onchange="fnCommentDesignation()">
+                                                            @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+                                                            {
+                                                                <option value="0" selected>Select an Employee</option>
+                                                                foreach (var item in ViewBag.TMList)
+                                                                {
+                                                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">TM - @item.Text</option>
+                                                                }
+                                                            }
+                                                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+                                                            {
+                                                                foreach (var item in ViewBag.SDList)
+                                                                {
+                                                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">SD - @item.Text</option>
+                                                                }
+                                                            }
+                                                            @if (recordsGet_MUL_Mgr != null && recordsGet_MUL_Mgr.Any())
+                                                            {
+                                                                foreach (var item in recordsGet_MUL_Mgr)
+                                                                {
+                                                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                                                            value="@item.MUL_MktMngr">
+                                                                        MMM - @item.MUL_MktMngr
+                                                                    </option>
+                                                                }
+                                                            }
+                                                            else
+                                                            {
+                                                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No Data available</option>
+                                                            }
+                                                        </select>
                                                     </div>
                                                     <div class="form-group col mb-1 mt-1 pl-1">
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="resetEmployeeDD()">Reset</button>
@@ -3863,21 +4075,26 @@
                                                         <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
                                                     </div>
                                                     <div class="nodata" id="nonotes" style="display: flex;">
-                                                        <h5 class="text-secondary"><b>No Notes</b></h5>
+                                                        <h5 class="text-secondary"><b>Notes</b></h5>
+
                                                     </div>
-                                                    <div id="notedesc" class="card-body scrollable" style="height:400px"></div>
+                                                    <textarea id="noteTextArea" class="form-control" rows="20" placeholder="Enter notes here..." style="flex: 1; height:400px;"></textarea>
+                                                    @*<div id="notedesc" class="card-body scrollable" style="height:400px"></div>*@
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6 mb-2">
-                                                <div class="loader" id="commentsloader" style="display: none;">
-                                                    <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
-                                                </div>
-                                                <div class="nodata" id="nocomments" style="display: flex;">
-                                                    <h5 class="text-secondary"><b>No Comments</b></h5>
-                                                </div>
+
                                                 <div class="card">
-                                                    <div id="commentdesc" class="card-body scrollable" style="height:400px"></div>
+                                                    <div class="loader" id="commentsloader" style="display: none;">
+                                                        <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
+                                                    </div>
+                                                    <div class="nodata" id="nocomments" style="display: flex;">
+                                                        <h5 class="text-secondary"><b>Comments</b></h5>
+                                                    </div>
+                                                    <textarea id="commentTextArea" class="form-control" rows="20" placeholder="Enter comments here..." style="flex: 1; height:400px;"></textarea>
+                                                    @*<div id="commentdesc" class="card-body scrollable" style="height:400px"></div>*@
+
                                                 </div>
                                             </div>
                                         </div>
@@ -3889,7 +4106,8 @@
                                                                 <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="notes" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
                                                             </div>*@
                                                         <div class="col-md-1">
-                                                            <button onclick="addnote()" class="btn btn-success rounded-circle mt-2" title="Send"><i class="fa fa-send"></i>Add Note</button>
+                                                            <button onclick="addnote()" class="btn btn-secondary single-line-button" title="AddNote">Add Note</button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3901,7 +4119,8 @@
                                                                 <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="comments" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
                                                             </div>*@
                                                         <div class="col-md-1 ">
-                                                            <button onclick="addComment()" class="btn btn-success rounded-circle mt-2" title="Send"><i class="fa fa-send"></i>Add Comment</button>
+                                                            <button onclick="addComment()" class="btn btn-secondary single-line-button" title="Send"><i class="fa fa-send"></i>Add Comment</button>
+
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3920,14 +4139,571 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="dataview" tabindex="-1" role="dialog" aria-labelledby="dataviewLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: dodgerblue; color: white; font-weight:bold; display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                        <h5 class="modal-title" style="flex: 1; text-align: left;">Store: <span id="modalStore"></span></h5>
+                        <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Employee Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="flex: 1; text-align: right;">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body" style="border-collapse: collapse; overflow-y: auto; overflow-x: auto; white-space: nowrap;">
+                        <table id="tblDetails" class="table table-bordered">
+                            <thead>
+                                <tr class="main_data" style="background-color: black; color: white;">
+                                    <th style="background-color: black; color: white;"><b>TM</b></th>
+                                    <th style="background-color: black; color: white;"><b>Market</b></th>
+                                    <th style="background-color: black; color: white;"><b>Store</b></th>
+                                    <th style="background-color: black; color: white;"><b>Unique ID</b></th>
+                                    <th style="background-color: black; color: white;"><b>Dealer Code</b></th>
+                                    <th style="background-color: black; color: white;"><b>Tiers</b></th>
+                                    <th style="background-color: black; color: white;"><b>SD</b></th>
+                                    <th style="background-color: black; color: white;">Monthly<br>Achieved Hours<br>Trending %</th>
+                                    <th style="background-color: dodgerblue; color: white;">GROSS ADDS<br>Trend%<br>To Goal</th>
+                                    <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>Goals</th>
+                                    <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>NetOFF</th>
+                                    <th style="background-color: black; color: white;">PPVGA per<br>Traffic %</th>
+
+                                    <th style="background-color: black; color: white;">Total<br>Traffic                             </th>
+                                    <th style="background-color: black; color: white;">Fiber<br>Conversion                          </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Fiber<br>NetOFF                     </th>
+                                    <th style="background-color: black; color: white;">Fiber<br>Green<br>Check                          </th>
+                                    <th style="background-color: black; color: white;">APO                                      </th>
+                                    <th style="background-color: black; color: white;">CSAT                                     </th>
+                                    <th style="background-color: black; color: white;">ProtAdv<br>HomeTech<br>Percentage                </th>
+                                    <th style="background-color: black; color: white;">Break Even<br>Numbers                         </th>
+                                    <th style="background-color: black; color: white;">Trending<br>ToBreakEven                      </th>
+                                    <th style="background-color: black; color: white;">GPWithSpif<br>Trending                       </th>
+                                    <th style="background-color: black; color: white;">GP<br>TrendingP<br>ercentage                     </th>
+                                    <th style="background-color: black; color: white;">Total<br>GPGoals                             </th>
+                                    <th style="background-color: black; color: white;">OPSTrending<br>ToGoals<br>Percentage             </th>
+                                    <th style="background-color: black; color: white;">Total<br>OPSGoals                            </th>
+                                    <th style="background-color: black; color: white;">Total<br>OPS                                 </th>
+                                    <th style="background-color: black; color: white;">Upgrade<br>TrendingToGoals<br>Percentage         </th>
+                                    <th style="background-color: black; color: white;">MTD<br>Upgrades<br>Goals                         </th>
+                                    <th style="background-color: black; color: white;">MTD<br>Upgrades<br>NetOFF                        </th>
+                                    <th style="background-color: black; color: white;">TWC<br>DevicesTrendTo<br>GoalPercentage          </th>
+                                    <th style="background-color: black; color: white;">TWC<br>DevicesQty<br><br>Goals                       </th>
+                                    <th style="background-color: black; color: white;">TWC<br>DevicesQtyNetOFF                      </th>
+                                    <th style="background-color: black; color: white;">AIA<br>Business<br>Conversion                    </th>
+                                    <th style="background-color: black; color: white;">AIA<br>ConsumerConversion                    </th>
+                                    <th style="background-color: black; color: white;">AIA<br>GreenCheck<br>Consumer                    </th>
+                                    <th style="background-color: black; color: white;">AIAC<br>Internet                             </th>
+                                    <th style="background-color: black; color: white;">AIAB<br>Internet                             </th>
+                                    <th style="background-color: black; color: white;">Total<br>OPS<br>Trending                         </th>
+                                    <th style="background-color: black; color: white;">OPS<br>PerTraffic<br>Percentage                  </th>
+                                    <th style="background-color: black; color: white;">CRUAchMTD                                </th>
+                                    <th style="background-color: black; color: white;">FNAchMTD                                 </th>
+                                    <th style="background-color: black; color: white;">GPPerBox                                 </th>
+                                    <th style="background-color: black; color: white;">TotalGP<br>Achieved<br>WithSpif                  </th>
+                                    <th style="background-color: black; color: white;">GrossAdds                                </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">GrossAdds<br>Trend                           </th>
+                                    <th style="background-color: black; color: white;">GrossAdds<br>GP                              </th>
+                                    <th style="background-color: black; color: white;">GrossAdds<br>GPTrending                      </th>
+                                    <th style="background-color: black; color: white;">AR<br>BusinessFNProgram<br>AverageQ2Target       </th>
+                                    <th style="background-color: black; color: white;">FN<br>AchAverage<br>QTD                          </th>
+                                    <th style="background-color: black; color: white;">Remaining<br>ToAchieveFNAverageQ2Target      </th>
+                                    <th style="background-color: black; color: white;">FN<br>AchTrend                               </th>
+                                    <th style="background-color: black; color: white;">FN<br>Ach<br>Dollars                             </th>
+                                    <th style="background-color: black; color: white;">AR<br>BusinessCRUProgram<br>AverageQ2Target      </th>
+                                    <th style="background-color: black; color: white;">CRU<br>AchVoice                              </th>
+                                    <th style="background-color: black; color: white;">CRU<br>AchDATA                               </th>
+                                    <th style="background-color: black; color: white;">CRU<br>AchAverage<br>QTD                         </th>
+                                    <th style="background-color: black; color: white;">RemainingTo<br>AchieveCRUAverage<br>Q2Target     </th>
+                                    <th style="background-color: black; color: white;">CRU<br>AchTrend                              </th>
+                                    <th style="background-color: black; color: white;">CRU<br>AchVoiceDollars                       </th>
+                                    <th style="background-color: black; color: white;">CRU<br>Ach<br>DATADollars                        </th>
+                                    <th style="background-color: black; color: white;">MTD<br>Upgrades                              </th>
+                                    <th style="background-color: black; color: white;">ChargeBack1                              </th>
+                                    <th style="background-color: black; color: white;">MTD<br>Upgrades<br>Trending                      </th>
+                                    <th style="background-color: black; color: white;">MTD<br>UpgradesGP                            </th>
+                                    <th style="background-color: black; color: white;">MTD<br>Upgrades<br>GPTrending                    </th>
+                                    <th style="background-color: black; color: white;">NextUp                                   </th>
+                                    <th style="background-color: black; color: white;">NextUp<br>Spif                               </th>
+                                    <th style="background-color: black; color: white;">Premium<br>Activation                        </th>
+                                    <th style="background-color: black; color: white;">Premium<br>ActivationNetOFF                  </th>
+                                    <th style="background-color: black; color: white;">ChargeBack2                              </th>
+                                    <th style="background-color: black; color: white;">Premium<br>ActivationGP                      </th>
+                                    <th style="background-color: black; color: white;">Extra<br>Activation                          </th>
+                                    <th style="background-color: black; color: white;">Extra<br>ActivationNetOFF                    </th>
+                                    <th style="background-color: black; color: white;">ChargeBack3                              </th>
+                                    <th style="background-color: black; color: white;">Extra<br>ActivationGP                        </th>
+                                    <th style="background-color: black; color: white;">NonExtra<br>NonPremium<br>Activation             </th>
+                                    <th style="background-color: black; color: white;">NonExtra<br>NonPremium<br>ActivationNetOFF       </th>
+                                    <th style="background-color: black; color: white;">NonExtra<br>NonPremium<br>ActivationGP           </th>
+                                    <th style="background-color: black; color: white;">Premium<br>Upgrade                           </th>
+                                    <th style="background-color: black; color: white;">ChargeBack4                              </th>
+                                    <th style="background-color: black; color: white;">Premium<br>Upgrade<br>NetOff                     </th>
+                                    <th style="background-color: black; color: white;">Premium<br>Upgrade<br>GP                         </th>
+                                    <th style="background-color: black; color: white;">Extra<br>Upgrade                             </th>
+                                    <th style="background-color: black; color: white;">ChargeBack5                              </th>
+                                    <th style="background-color: black; color: white;">Extra<br>Upgrade<br>NetOff                       </th>
+                                    <th style="background-color: black; color: white;">Extra<br>Upgrade<br>GP                           </th>
+                                    <th style="background-color: black; color: white;">AIA<br>Goals                                 </th>
+                                    <th style="background-color: black; color: white;">ChargeBack6                              </th>
+                                    <th style="background-color: black; color: white;">AIA<br>Internet<br>NetOff                        </th>
+
+                                    <th style="background-color: black; color: white;">AIA<br>Trending                          </th>
+                                    <th style="background-color: black; color: white;">AIA<br>Internet<br>$GP                   </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Goals                       </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Less Then<br>(300MB)        </th>
+                                    <th style="background-color: black; color: white;">New Fiber<br>300MB                       </th>
+                                    <th style="background-color: black; color: white;">New Fiber<br>500MB                       </th>
+                                    <th style="background-color: black; color: white;">New Fiber<br>(1G)                        </th>
+                                    <th style="background-color: black; color: white;">Total<br>Broadband +<br>NewFiber         </th>
+                                    <th style="background-color: black; color: white;">Broadband +<br>New Fiber<br>Net OFF      </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">Fiber<br>Upgrades                        </th>
+                                    <th style="background-color: black; color: white;">Fiber<br>Upgrades<br>Net OFF             </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">Broadband +<br>Fiber                     </th>
+                                    <th style="background-color: black; color: white;">Broadband +<br>Fiber Trend               </th>
+                                    <th style="background-color: black; color: white;">Broadband +<br>Fiber Trend %             </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Less Then(300Mb)<br>QI Spiff</th>
+                                    <th style="background-color: black; color: white;">NewFiber<br>(300MB)<br>QISpiff           </th>
+                                    <th style="background-color: black; color: white;">NewFiber<br>(500MB)<br>QISpiff           </th>
+                                    <th style="background-color: black; color: white;">NewFiber<br>(1G)<br>QI Spiff             </th>
+                                    <th style="background-color: black; color: white;">Fiber<br>Upgrade<br>$GP                  </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>$GP                         </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Fiber<br>$GP                </th>
+                                    <th style="background-color: black; color: white;">Broadband<br>Fiber $GP<br>Trending       </th>
+                                    <th style="background-color: black; color: white;">Turbo<br>Feature                         </th>
+                                    <th style="background-color: black; color: white;">Turbo<br>Feature<br>$GP                  </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video<br>Goals                   </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video                            </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video<br>Net OFF                 </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video<br>Trend                   </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video Trend %                    </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video<br>$GP                     </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video<br>Spiff                   </th>
+                                    <th style="background-color: black; color: white;">Prem<br>Video $GP<br>Trending            </th>
+                                    <th style="background-color: black; color: white;">Entertainment<br>Goals                   </th>
+                                    <th style="background-color: black; color: white;">Entertainment<br>Ach                     </th>
+                                    <th style="background-color: black; color: white;">Entertainment<br>Trending                </th>
+                                    <th style="background-color: black; color: white;">Entertainment<br>Trending to Goals %     </th>
+                                    <th style="background-color: black; color: white;">T.W.C<br>Devices<br>QTY                  </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">T,W,C<br>Devices QTY<br>Trend            </th>
+                                    <th style="background-color: black; color: white;">T,W,C<br>Devices<br>$                    </th>
+                                    <th style="background-color: black; color: white;">Projected<br>Geographic<br>spif          </th>
+                                    <th style="background-color: black; color: white;">Prepaid<br>QTY                           </th>
+                                    <th style="background-color: black; color: white;">Prepaid<br>to GA                         </th>
+                                    <th style="background-color: black; color: white;">Prepaid<br>NetOFF                        </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">Prepaid<br>$GP                           </th>
+                                    <th style="background-color: black; color: white;">Prepaid<br>with<br>Autopay               </th>
+                                    <th style="background-color: black; color: white;">Access<br>$GP                            </th>
+                                    <th style="background-color: black; color: white;">Access<br>Qty                            </th>
+                                    <th style="background-color: black; color: white;">Access<br>Qty<br>Trending                </th>
+                                    <th style="background-color: black; color: white;">Access $<br>Revenue                      </th>
+                                    <th style="background-color: black; color: white;">Features<br>QTY                          </th>
+                                    <th style="background-color: black; color: white;">Features<br>QTY Net OFF                  </th>
+                                    <th style="background-color: black; color: white;">ChargeBack                               </th>
+                                    <th style="background-color: black; color: white;">Total<br>Protection %                    </th>
+                                    <th style="background-color: black; color: white;">ProtAdv1                                 </th>
+                                    <th style="background-color: black; color: white;">ProtAdv4                                 </th>
+                                    <th style="background-color: black; color: white;">Features<br>$GP                          </th>
+                                    <th style="background-color: black; color: white;">Weekly<br>Budgeted<br>HRS                </th>
+                                    <th style="background-color: black; color: white;">Weekly<br>Employee Average<br>Per store  </th>
+                                    <th style="background-color: black; color: white;">Monthly<br>Budgeted<br>HRS               </th>
+                                    <th style="background-color: black; color: white;">Monthly<br>Achived<br>Hours              </th>
+                                    <th style="background-color: black; color: white;">Monthly<br>Achived Hours<br>Trending     </th>
+                                    <th style="background-color: black; color: white;">GA<br>Close<br>Rt                        </th>
+                                    <th style="background-color: black; color: white;">HomeTech<br>Protect                      </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="main_data">
+                                    <td><span id="modalTM"></span></td>
+                                    <td><span id="modalMarket"></span></td>
+                                    <td><span id="modalStore"></span></td>
+                                    <td><span id="modalUniqueID"></span></td>
+                                    <td><span id="modalDealerCode"></span></td>
+                                    <td><span id="modalTiers"></span></td>
+                                    <td><span id="modalSD"></span></td>
+                                    <td><span id="modalMAHTr"></span></td>
+                                    <td><span id="modalGATr"></span></td>
+                                    <td><span id="modalGAG"></span></td>
+                                    <td><span id="modalGANetOff"></span></td>
+                                    <td><span id="modalPPVGAperTrf"></span></td>
+
+                                    <td><span id="modalTotalTraffic"></span></td>
+                                    <td><span id="modalFiberConversion"></span></td>
+                                    <td><span id="modalBroadbandFiberNetOFF"></span></td>
+                                    <td><span id="modalFiberGreenCheck"></span></td>
+                                    <td><span id="modalAPO"></span></td>
+                                    <td><span id="modalCSAT"></span></td>
+                                    <td><span id="modalProtAdvHomeTechPercentage"></span></td>
+                                    <td><span id="modalBreakEvenNumbers"></span></td>
+                                    <td><span id="modalTrendingToBreakEven"></span></td>
+                                    <td><span id="modalGPWithSpifTrending"></span></td>
+                                    <td><span id="modalGPTrendingPercentage"></span></td>
+                                    <td><span id="modalTotalGPGoals"></span></td>
+                                    <td><span id="modalOPSTrendingToGoalsPercentage"></span></td>
+                                    <td><span id="modalTotalOPSGoals"></span></td>
+                                    <td><span id="modalTotalOPS"></span></td>
+                                    <td><span id="modalUpgradeTrendingToGoalsPercentage"></span></td>
+                                    <td><span id="modalMTDUpgradesGoals"></span></td>
+                                    <td><span id="modalMTDUpgradesNetOFF"></span></td>
+                                    <td><span id="modalTWCDevicesTrendToGoalPercentage"></span></td>
+                                    <td><span id="modalTWCDevicesQtyGoals"></span></td>
+                                    <td><span id="modalTWCDevicesQtyNetOFF"></span></td>
+                                    <td><span id="modalAIABusinessConversion"></span></td>
+                                    <td><span id="modalAIAConsumerConversion"></span></td>
+                                    <td><span id="modalAIAGreenCheckConsumer"></span></td>
+                                    <td><span id="modalAIACInternet"></span></td>
+                                    <td><span id="modalAIABInternet"></span></td>
+                                    <td><span id="modalTotalOPSTrending"></span></td>
+                                    <td><span id="modalOPSPerTrafficPercentage"></span></td>
+                                    <td><span id="modalCRUAchMTD"></span></td>
+                                    <td><span id="modalFNAchMTD"></span></td>
+                                    <td><span id="modalGPPerBox"></span></td>
+                                    <td><span id="modalTotalGPAchievedWithSpif"></span></td>
+                                    <td><span id="modalGrossAdds"></span></td>
+                                    <td><span id="modalChargeBack"></span></td>
+                                    <td><span id="modalGrossAddsTrend"></span></td>
+                                    <td><span id="modalGrossAddsGP"></span></td>
+                                    <td><span id="modalGrossAddsGPTrending"></span></td>
+                                    <td><span id="modalARBusinessFNProgramAverageQ2Target"></span></td>
+                                    <td><span id="modalFNAchAverageQTD"></span></td>
+                                    <td><span id="modalRemainingToAchieveFNAverageQ2Target"></span></td>
+                                    <td><span id="modalFNAchTrend"></span></td>
+                                    <td><span id="modalFNAchDollars"></span></td>
+                                    <td><span id="modalARBusinessCRUProgramAverageQ2Target"></span></td>
+                                    <td><span id="modalCRUAchVoice"></span></td>
+                                    <td><span id="modalCRUAchDATA"></span></td>
+                                    <td><span id="modalCRUAchAverageQTD"></span></td>
+                                    <td><span id="modalRemainingToAchieveCRUAverageQ2Target"></span></td>
+                                    <td><span id="modalCRUAchTrend"></span></td>
+                                    <td><span id="modalCRUAchVoiceDollars"></span></td>
+                                    <td><span id="modalCRUAchDATADollars"></span></td>
+                                    <td><span id="modalMTDUpgrades"></span></td>
+                                    <td><span id="modalChargeBack1"></span></td>
+                                    <td><span id="modalMTDUpgradesTrending"></span></td>
+                                    <td><span id="modalMTDUpgradesGP"></span></td>
+                                    <td><span id="modalMTDUpgradesGPTrending"></span></td>
+                                    <td><span id="modalNextUp"></span></td>
+                                    <td><span id="modalNextUpSpif"></span></td>
+                                    <td><span id="modalPremiumActivation"></span></td>
+                                    <td><span id="modalPremiumActivationNetOFF"></span></td>
+                                    <td><span id="modalChargeBack2"></span></td>
+                                    <td><span id="modalPremiumActivationGP"></span></td>
+                                    <td><span id="modalExtraActivation"></span></td>
+                                    <td><span id="modalExtraActivationNetOFF"></span></td>
+                                    <td><span id="modalChargeBack3"></span></td>
+                                    <td><span id="modalExtraActivationGP"></span></td>
+                                    <td><span id="modalNonExtraNonPremiumActivation"></span></td>
+                                    <td><span id="modalNonExtraNonPremiumActivationNetOFF"></span></td>
+                                    <td><span id="modalNonExtraNonPremiumActivationGP"></span></td>
+                                    <td><span id="modalPremiumUpgrade"></span></td>
+                                    <td><span id="modalChargeBack4"></span></td>
+                                    <td><span id="modalPremiumUpgradeNetOff"></span></td>
+                                    <td><span id="modalPremiumUpgradeGP"></span></td>
+                                    <td><span id="modalExtraUpgrade"></span></td>
+                                    <td><span id="modalChargeBack5"></span></td>
+                                    <td><span id="modalExtraUpgradeNetOff"></span></td>
+                                    <td><span id="modalExtraUpgradeGP"></span></td>
+                                    <td><span id="modalAIAGoals"></span></td>
+                                    <td><span id="modalChargeBack6"></span></td>
+                                    <td><span id="modalAIAInternetNetOff"></span></td>
+
+
+                                    <td><span id="modalAIATr"></span></td>
+                                    <td><span id="modalAIAIntG"></span></td>
+                                    <td><span id="modalBBG"></span></td>
+                                    <td><span id="modalBBL300"></span></td>
+                                    <td><span id="modalNF300"></span></td>
+                                    <td><span id="modalNF500"></span></td>
+                                    <td><span id="modalNF1G"></span></td>
+                                    <td><span id="modalTBBNF"></span></td>
+                                    <td><span id="modalBBNFNOFF"></span></td>
+                                    <td><span id="modalCB1"></span></td>
+                                    <td><span id="modalFUpg"></span></td>
+                                    <td><span id="modalFUpgNOFF"></span></td>
+                                    <td><span id="modalCB2"></span></td>
+                                    <td><span id="modalBBF"></span></td>
+                                    <td><span id="modalBBFTr"></span></td>
+                                    <td><span id="modalBBFTrPer"></span></td>
+                                    <td><span id="modalBBL300QI"></span></td>
+                                    <td><span id="modalNF300QI"></span></td>
+                                    <td><span id="modalNF500QI"></span></td>
+                                    <td><span id="modalNF1GQI"></span></td>
+                                    <td><span id="modalFUpgGP"></span></td>
+                                    <td><span id="modalBBGP"></span></td>
+                                    <td><span id="modalBBFGP"></span></td>
+                                    <td><span id="modalBBFGPTr"></span></td>
+                                    <td><span id="modalTF"></span></td>
+                                    <td><span id="modalTFGP"></span></td>
+                                    <td><span id="modalPVG"></span></td>
+                                    <td><span id="modalPV"></span></td>
+                                    <td><span id="modalPVNOFF"></span></td>
+                                    <td><span id="modalCB3"></span></td>
+                                    <td><span id="modalPVTr"></span></td>
+                                    <td><span id="modalPVTrPer"></span></td>
+                                    <td><span id="modalPVGP"></span></td>
+                                    <td><span id="modalPVSpf"></span></td>
+                                    <td><span id="modalPVGPTr"></span></td>
+                                    <td><span id="modalEG"></span></td>
+                                    <td><span id="modalEAch"></span></td>
+                                    <td><span id="modalETr"></span></td>
+                                    <td><span id="modalETrGPer"></span></td>
+                                    <td><span id="modalTWCDQTY"></span></td>
+                                    <td><span id="modalCB4"></span></td>
+                                    <td><span id="modalTWCDQTYTr"></span></td>
+                                    <td><span id="modalTWCD"></span></td>
+                                    <td><span id="modalPGSpiff"></span></td>
+                                    <td><span id="modalPQTY"></span></td>
+                                    <td><span id="modalPGA"></span></td>
+                                    <td><span id="modalPNOFF"></span></td>
+                                    <td><span id="modalCB5"></span></td>
+                                    <td><span id="modalPGP"></span></td>
+                                    <td><span id="modalPAuto"></span></td>
+                                    <td><span id="modalAGP"></span></td>
+                                    <td><span id="modalAQTY"></span></td>
+                                    <td><span id="modalAQTYTr"></span></td>
+                                    <td><span id="modalAR"></span></td>
+                                    <td><span id="modalFQTY"></span></td>
+                                    <td><span id="modalFQTYNOFF"></span></td>
+                                    <td><span id="modalCB5"></span></td>
+                                    <td><span id="modalTPPer"></span></td>
+                                    <td><span id="modalPADV1"></span></td>
+                                    <td><span id="modalPADV4"></span></td>
+                                    <td><span id="modalFGP"></span></td>
+                                    <td><span id="modalWBHRS"></span></td>
+                                    <td><span id="modalWEAPerS"></span></td>
+                                    <td><span id="modalMBHRS"></span></td>
+                                    <td><span id="modalMAHRS"></span></td>
+                                    <td><span id="modalMAHRSTr"></span></td>
+                                    <td><span id="modalGACloseRT"></span></td>
+                                    <td><span id="modalHTP"></span></td>
+
+                                    @*<td><span id="modalOPS"></span></td>
+                                        <td><span id="modalTraffic"></span></td>
+                                        <td><span id="modalBhrs"></span></td>
+                                        <td><span id="modalCsat"></span></td>
+                                        <td><span id="modalVP"></span></td>
+                                        <td><span id="modalRegion"></span></td>
+                                        <td><span id="modalRSM"></span></td>
+                                        <td><span id="modalRole"></span></td>*@
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <footer>
-        <div class="mt-4" style="padding-left:40%;background-color:#B2D6F2;">
+        <div style="padding-left:40%;background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
     </footer>
 </body>
+
+<script>
+    function MTDStoreEmployeeView(button) {
+        // Find the parent row of the clicked button
+        var row = button.closest('.main_data');
+
+        // Extract data from the row's data attributes
+
+        document.getElementById('modalTM').innerText = row.getAttribute('data-tm');
+        document.getElementById('modalMarket').innerText = row.getAttribute('data-mkt');
+        document.getElementById('modalStore').innerText = row.getAttribute('data-store');
+        document.getElementById('modalUniqueID').innerText = row.getAttribute('data-UID');
+        document.getElementById('modalDealerCode').innerText = row.getAttribute('data-DC');
+        document.getElementById('modalTiers').innerText = row.getAttribute('data-tir');
+        document.getElementById('modalSD').innerText = row.getAttribute('data-sd');
+        document.getElementById('modalMAHTr').innerText = row.getAttribute('data-MAHTr');
+        document.getElementById('modalGATr').innerText = row.getAttribute('data-GATr');
+        document.getElementById('modalGAG').innerText = row.getAttribute('data-GAG');
+        document.getElementById('modalGANetOff').innerText = row.getAttribute('data-GANetOff');
+        document.getElementById('modalPPVGAperTrf').innerText = row.getAttribute('data-PPVGAperTrf');
+
+        document.getElementById('modalTotalTraffic').innerText = row.getAttribute('data-modalTotalTraffic');
+        document.getElementById('modalFiberConversion').innerText = row.getAttribute('data-modalFiberConversion');
+        document.getElementById('modalBroadbandFiberNetOFF').innerText = row.getAttribute('data-modalBroadbandFiberNetOFF');
+        document.getElementById('modalFiberGreenCheck').innerText = row.getAttribute('data-modalFiberGreenCheck');
+        document.getElementById('modalAPO').innerText = row.getAttribute('data-modalAPO');
+        document.getElementById('modalCSAT').innerText = row.getAttribute('data-modalCSAT');
+        document.getElementById('modalProtAdvHomeTechPercentage').innerText = row.getAttribute('data-modalProtAdvHomeTechPercentage');
+        document.getElementById('modalBreakEvenNumbers').innerText = row.getAttribute('data-modalBreakEvenNumbers');
+        document.getElementById('modalTrendingToBreakEven').innerText = row.getAttribute('data-modalTrendingToBreakEven');
+        document.getElementById('modalGPWithSpifTrending').innerText = row.getAttribute('data-modalGPWithSpifTrending');
+        document.getElementById('modalGPTrendingPercentage').innerText = row.getAttribute('data-modalGPTrendingPercentage');
+        document.getElementById('modalTotalGPGoals').innerText = row.getAttribute('data-modalTotalGPGoals');
+        document.getElementById('modalOPSTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalOPSTrendingToGoalsPercentage');
+        document.getElementById('modalTotalOPSGoals').innerText = row.getAttribute('data-modalTotalOPSGoals');
+        document.getElementById('modalTotalOPS').innerText = row.getAttribute('data-modalTotalOPS');
+        document.getElementById('modalUpgradeTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalUpgradeTrendingToGoalsPercentage');
+        document.getElementById('modalMTDUpgradesGoals').innerText = row.getAttribute('data-modalMTDUpgradesGoals');
+        document.getElementById('modalMTDUpgradesNetOFF').innerText = row.getAttribute('data-modalMTDUpgradesNetOFF');
+        document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = row.getAttribute('data-modalTWCDevicesTrendToGoalPercentage');
+        document.getElementById('modalTWCDevicesQtyGoals').innerText = row.getAttribute('data-modalTWCDevicesQtyGoals');
+        document.getElementById('modalTWCDevicesQtyNetOFF').innerText = row.getAttribute('data-modalTWCDevicesQtyNetOFF');
+        document.getElementById('modalAIABusinessConversion').innerText = row.getAttribute('data-modalAIABusinessConversion');
+        document.getElementById('modalAIAConsumerConversion').innerText = row.getAttribute('data-modalAIAConsumerConversion');
+        document.getElementById('modalAIAGreenCheckConsumer').innerText = row.getAttribute('data-modalAIAGreenCheckConsumer');
+        document.getElementById('modalAIACInternet').innerText = row.getAttribute('data-modalAIACInternet');
+        document.getElementById('modalAIABInternet').innerText = row.getAttribute('data-modalAIABInternet');
+        document.getElementById('modalTotalOPSTrending').innerText = row.getAttribute('data-modalTotalOPSTrending');
+        document.getElementById('modalOPSPerTrafficPercentage').innerText = row.getAttribute('data-modalOPSPerTrafficPercentage');
+        document.getElementById('modalCRUAchMTD').innerText = row.getAttribute('data-modalCRUAchMTD');
+        document.getElementById('modalFNAchMTD').innerText = row.getAttribute('data-modalFNAchMTD');
+        document.getElementById('modalGPPerBox').innerText = row.getAttribute('data-modalGPPerBox');
+        document.getElementById('modalTotalGPAchievedWithSpif').innerText = row.getAttribute('data-modalTotalGPAchievedWithSpif');
+        document.getElementById('modalGrossAdds').innerText = row.getAttribute('data-modalGrossAdds');
+        document.getElementById('modalChargeBack').innerText = row.getAttribute('data-modalChargeBack');
+        document.getElementById('modalGrossAddsTrend').innerText = row.getAttribute('data-modalGrossAddsTrend');
+        document.getElementById('modalGrossAddsGP').innerText = row.getAttribute('data-modalGrossAddsGP');
+        document.getElementById('modalGrossAddsGPTrending').innerText = row.getAttribute('data-modalGrossAddsGPTrending');
+        document.getElementById('modalARBusinessFNProgramAverageQ2Target').innerText = row.getAttribute('data-modalARBusinessFNProgramAverageQ2Target');
+        document.getElementById('modalFNAchAverageQTD').innerText = row.getAttribute('data-modalFNAchAverageQTD');
+        document.getElementById('modalRemainingToAchieveFNAverageQ2Target').innerText = row.getAttribute('data-modalRemainingToAchieveFNAverageQ2Target');
+        document.getElementById('modalFNAchTrend').innerText = row.getAttribute('data-modalFNAchTrend');
+        document.getElementById('modalFNAchDollars').innerText = row.getAttribute('data-modalFNAchDollars');
+        document.getElementById('modalARBusinessCRUProgramAverageQ2Target').innerText = row.getAttribute('data-modalARBusinessCRUProgramAverageQ2Target');
+        document.getElementById('modalCRUAchVoice').innerText = row.getAttribute('data-modalCRUAchVoice');
+        document.getElementById('modalCRUAchDATA').innerText = row.getAttribute('data-modalCRUAchDATA');
+        document.getElementById('modalCRUAchAverageQTD').innerText = row.getAttribute('data-modalCRUAchAverageQTD');
+        document.getElementById('modalRemainingToAchieveCRUAverageQ2Target').innerText = row.getAttribute('data-modalRemainingToAchieveCRUAverageQ2Targe');
+        document.getElementById('modalCRUAchTrend').innerText = row.getAttribute('data-modalCRUAchTrend');
+        document.getElementById('modalCRUAchVoiceDollars').innerText = row.getAttribute('data-modalCRUAchVoiceDollars');
+        document.getElementById('modalCRUAchDATADollars').innerText = row.getAttribute('data-modalCRUAchDATADollars');
+        document.getElementById('modalMTDUpgrades').innerText = row.getAttribute('data-modalMTDUpgrades');
+        document.getElementById('modalChargeBack1').innerText = row.getAttribute('data-modalChargeBack1');
+        document.getElementById('modalMTDUpgradesTrending').innerText = row.getAttribute('data-modalMTDUpgradesTrending');
+        document.getElementById('modalMTDUpgradesGP').innerText = row.getAttribute('data-modalMTDUpgradesGP');
+        document.getElementById('modalMTDUpgradesGPTrending').innerText = row.getAttribute('data-modalMTDUpgradesGPTrending');
+        document.getElementById('modalNextUp').innerText = row.getAttribute('data-modalNextUp');
+        document.getElementById('modalNextUpSpif').innerText = row.getAttribute('data-modalNextUpSpif');
+        document.getElementById('modalPremiumActivation').innerText = row.getAttribute('data-modalPremiumActivation');
+        document.getElementById('modalPremiumActivationNetOFF').innerText = row.getAttribute('data-modalPremiumActivationNetOFF');
+        document.getElementById('modalChargeBack2').innerText = row.getAttribute('data-modalChargeBack2');
+        document.getElementById('modalPremiumActivationGP').innerText = row.getAttribute('data-modalPremiumActivationGP');
+        document.getElementById('modalExtraActivation').innerText = row.getAttribute('data-modalExtraActivation');
+        document.getElementById('modalExtraActivationNetOFF').innerText = row.getAttribute('data-modalExtraActivationNetOFF');
+        document.getElementById('modalChargeBack3').innerText = row.getAttribute('data-modalChargeBack3');
+        document.getElementById('modalExtraActivationGP').innerText = row.getAttribute('data-modalExtraActivationGP');
+        document.getElementById('modalNonExtraNonPremiumActivation').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivation');
+        document.getElementById('modalNonExtraNonPremiumActivationNetOFF').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivationNetOFF');
+        document.getElementById('modalNonExtraNonPremiumActivationGP').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivationGP');
+        document.getElementById('modalPremiumUpgrade').innerText = row.getAttribute('data-modalPremiumUpgrade');
+        document.getElementById('modalChargeBack4').innerText = row.getAttribute('data-modalChargeBack4');
+        document.getElementById('modalPremiumUpgradeNetOff').innerText = row.getAttribute('data-modalPremiumUpgradeNetOff');
+        document.getElementById('modalPremiumUpgradeGP').innerText = row.getAttribute('data-modalPremiumUpgradeGP');
+        document.getElementById('modalExtraUpgrade').innerText = row.getAttribute('data-modalExtraUpgrade');
+        document.getElementById('modalChargeBack5').innerText = row.getAttribute('data-modalChargeBack5');
+        document.getElementById('modalExtraUpgradeNetOff').innerText = row.getAttribute('data-modalExtraUpgradeNetOff');
+        document.getElementById('modalExtraUpgradeGP').innerText = row.getAttribute('data-modalExtraUpgradeGP');
+        document.getElementById('modalAIAGoals').innerText = row.getAttribute('data-modalAIAGoals');
+        document.getElementById('modalChargeBack6').innerText = row.getAttribute('data-modalChargeBack6');
+        document.getElementById('modalAIAInternetNetOff').innerText = row.getAttribute('data-modalAIAInternetNetOff');
+
+        document.getElementById('modalAIATr').innerText = row.getAttribute('data-modalAIATr');
+        document.getElementById('modalAIAIntG').innerText = row.getAttribute('data-modalAIAIntG');
+        document.getElementById('modalBBG').innerText = row.getAttribute('data-modalBBG');
+        document.getElementById('modalBBL300').innerText = row.getAttribute('data-modalBBL300');
+        document.getElementById('modalNF300').innerText = row.getAttribute('data-modalNF300');
+        document.getElementById('modalNF500').innerText = row.getAttribute('data-modalNF500');
+        document.getElementById('modalNF1G').innerText = row.getAttribute('data-modalNF1G');
+        document.getElementById('modalTBBNF').innerText = row.getAttribute('data-modalTBBNF');
+        document.getElementById('modalBBNFNOFF').innerText = row.getAttribute('data-modalBBNFNOFF');
+        document.getElementById('modalCB1').innerText = row.getAttribute('data-modalCB1');
+        document.getElementById('modalFUpg').innerText = row.getAttribute('data-modalFUpg');
+        document.getElementById('modalFUpgNOFF').innerText = row.getAttribute('data-modalFUpgNOFF');
+        document.getElementById('modalCB2').innerText = row.getAttribute('data-modalCB2 ');
+        document.getElementById('modalBBF').innerText = row.getAttribute('data-modalBBF');
+        document.getElementById('modalBBFTr').innerText = row.getAttribute('data-modalBBFTr');
+        document.getElementById('modalBBFTrPer').innerText = row.getAttribute('data-modalBBFTrPer');
+        document.getElementById('modalBBL300QI').innerText = row.getAttribute('data-modalBBL300QI');
+        document.getElementById('modalNF300QI').innerText = row.getAttribute('data-modalNF300QI');
+        document.getElementById('modalNF500QI').innerText = row.getAttribute('data-modalNF500QI');
+        document.getElementById('modalNF1GQI').innerText = row.getAttribute('data-modalNF1GQI');
+        document.getElementById('modalFUpgGP').innerText = row.getAttribute('data-modalFUpgGP');
+        document.getElementById('modalBBGP').innerText = row.getAttribute('data-modalBBGP');
+        document.getElementById('modalBBFGP').innerText = row.getAttribute('data-modalBBFGP');
+        document.getElementById('modalBBFGPTr').innerText = row.getAttribute('data-modalBBFGPTr');
+        document.getElementById('modalTF').innerText = row.getAttribute('data-modalTF');
+        document.getElementById('modalTFGP').innerText = row.getAttribute('data-modalTFGP');
+        document.getElementById('modalPVG').innerText = row.getAttribute('data-modalPVG');
+        document.getElementById('modalPV').innerText = row.getAttribute('data-modalPV');
+        document.getElementById('modalPVNOFF').innerText = row.getAttribute('data-modalPVNOFF');
+        document.getElementById('modalCB3').innerText = row.getAttribute('data-modalCB3');
+        document.getElementById('modalPVTr').innerText = row.getAttribute('data-modalPVTr');
+        document.getElementById('modalPVTrPer').innerText = row.getAttribute('data-modalPVTrPer');
+        document.getElementById('modalPVGP').innerText = row.getAttribute('data-modalPVGP');
+        document.getElementById('modalPVSpf').innerText = row.getAttribute('data-modalPVSpf');
+        document.getElementById('modalPVGPTr').innerText = row.getAttribute('data-modalPVGPTr');
+        document.getElementById('modalEG').innerText = row.getAttribute('data-modalEG');
+        document.getElementById('modalEAch').innerText = row.getAttribute('data-modalEAch');
+        document.getElementById('modalETr').innerText = row.getAttribute('data-modalETr');
+        document.getElementById('modalETrGPer').innerText = row.getAttribute('data-modalETrGPer');
+        document.getElementById('modalTWCDQTY').innerText = row.getAttribute('data-modalTWCDQTY');
+        document.getElementById('modalCB4').innerText = row.getAttribute('data-modalCB4');
+        document.getElementById('modalTWCDQTYTr').innerText = row.getAttribute('data-modalTWCDQTYTr');
+        document.getElementById('modalTWCD').innerText = row.getAttribute('data-modalTWCD');
+        document.getElementById('modalPGSpiff').innerText = row.getAttribute('data-modalPGSpiff');
+        document.getElementById('modalPQTY').innerText = row.getAttribute('data-modalPQTY');
+        document.getElementById('modalPGA').innerText = row.getAttribute('data-modalPGA');
+        document.getElementById('modalPNOFF').innerText = row.getAttribute('data-modalPNOFF');
+        document.getElementById('modalCB5').innerText = row.getAttribute('data-modalCB5');
+        document.getElementById('modalPGP').innerText = row.getAttribute('data-modalPGP');
+        document.getElementById('modalPAuto').innerText = row.getAttribute('data-modalPAuto');
+        document.getElementById('modalAGP').innerText = row.getAttribute('data-modalAGP');
+        document.getElementById('modalAQTY').innerText = row.getAttribute('data-modalAQTY');
+        document.getElementById('modalAQTYTr').innerText = row.getAttribute('data-modalAQTYTr');
+        document.getElementById('modalAR').innerText = row.getAttribute('data-modalAR');
+        document.getElementById('modalFQTY').innerText = row.getAttribute('data-modalFQTY');
+        document.getElementById('modalFQTYNOFF').innerText = row.getAttribute('data-modalFQTYNOFF');
+        document.getElementById('modalCB5').innerText = row.getAttribute('data-modalCB5');
+        document.getElementById('modalTPPer').innerText = row.getAttribute('data-modalTPPer');
+        document.getElementById('modalPADV1').innerText = row.getAttribute('data-modalPADV1');
+        document.getElementById('modalPADV4').innerText = row.getAttribute('data-modalPADV4');
+        document.getElementById('modalFGP').innerText = row.getAttribute('data-modalFGP');
+        document.getElementById('modalWBHRS').innerText = row.getAttribute('data-modalWBHRS');
+        document.getElementById('modalWEAPerS').innerText = row.getAttribute('data-modalWEAPerS');
+        document.getElementById('modalMBHRS').innerText = row.getAttribute('data-modalMBHRS');
+        document.getElementById('modalMAHRS').innerText = row.getAttribute('data-modalMAHRS');
+        document.getElementById('modalMAHRSTr').innerText = row.getAttribute('data-modalMAHRSTr');
+        document.getElementById('modalGACloseRT').innerText = row.getAttribute('data-modalGACloseRT');
+        document.getElementById('modalHTP').innerText = row.getAttribute('data-modalHTP');
+        document.getElementById('modalOPS').innerText = row.getAttribute('data-modalOPS');
+        document.getElementById('modalTraffic').innerText = row.getAttribute('data-modalTraffic');
+        document.getElementById('modalBhrs').innerText = row.getAttribute('data-modalBhrs');
+        document.getElementById('modalCsat').innerText = row.getAttribute('data-modalCsat');
+        document.getElementById('modalVP').innerText = row.getAttribute('data-modalVP');
+        document.getElementById('modalRegion').innerText = row.getAttribute('data-modalRegion');
+        document.getElementById('modalRSM').innerText = row.getAttribute('data-modalRSM');
+        document.getElementById('modalRole').innerText = row.getAttribute('data-modalRole');
+    }
+
+    function LoadNoteandCommentData() {
+        // Reset the employee dropdown to "Select an Employee"
+        document.getElementById("ddCommentDesignation").selectedIndex = 0;
+        // Clear the textarea
+        document.getElementById("noteTextArea").value = "";
+        document.getElementById("commentTextArea").value = "";
+    }
+
+    function resetEmployeeDD() {
+        // Reset the employee dropdown to "Select an Employee"
+        document.getElementById("ddCommentDesignation").selectedIndex = 0;
+        // Clear the textarea
+        document.getElementById("noteTextArea").value = "";
+        document.getElementById("commentTextArea").value = "";
+    }
+</script>
 <script>
     $(document).ready(function () {
         var windowheight = $(window).height()
@@ -3949,7 +4725,7 @@
             paging: false,
             ordering: false,
             fixedColumns: {
-                leftColumns: 3, // Freeze the first 3 columns
+                leftColumns: 5, // Freeze the first 3 columns
             }
         });
     }
@@ -4059,91 +4835,10 @@
     document.getElementById("nextBtn").addEventListener("click", showNextDiv);
     document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
 </script>
-<script>
-    // Function to highlight TM and Store cells
-    function highlightCells() {
-        //GROSS ADDS Goals
-        var cells = document.querySelectorAll(".gross-adds-goals");
 
-        cells.forEach(function (cell) {
-            // Parse the cell's text content as a float
-            var value = parseFloat(cell.textContent);
-
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value > 70.0) {
-                cell.style.backgroundColor = "green";  // Set background color
-                cell.style.color = "white";  // Set text color
-            }
-
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value < 60.0) {
-                cell.style.backgroundColor = "yellow";  // Set background color
-                cell.style.color = "black";  // Set text color
-            }
-        });
-
-        //CSAT
-        var csat = document.querySelectorAll(".csat");
-
-        csat.forEach(function (cell) {
-
-            var value = parseFloat(cell.textContent);
-
-            if (!isNaN(value) && value > 0.7) {
-                cell.style.backgroundColor = "green";
-                cell.style.color = "white";
-            }
-
-            if (!isNaN(value) && value < 0.7) {
-                cell.style.backgroundColor = "yellow";
-                cell.style.color = "black";
-            }
-        });
-
-        //Total Stores
-        // Select all cells with the 'stores' class
-        var storeCells = document.querySelectorAll(".stores");
-        var storeCount = 0;
-
-        // Loop through each cell and count if it has a store name
-        storeCells.forEach(function (cell) {
-            var storeName = cell.textContent.trim();
-
-            // Check if the cell has a non-empty store name
-            if (storeName) {
-                storeCount++;
-            }
-        });
-
-        // Display the count in the view by setting it to an element's text content
-        //document.getElementById("storeCountDisplay").textContent = storeCount;
-        document.getElementById("storeCountDisplay").value = storeCount;
-
-
-        // Break Even Calc
-        // Select all cells with the 'stores' class
-        var beCells = document.querySelectorAll(".breakevenCLS");
-        var beCount = 0;
-
-        // Loop through each cell and count if it has a store name
-        beCells.forEach(function (cell) {
-            var beName = cell.textContent.trim();
-
-            if (!isNaN(beName) && beName > 90) {
-                beCount++;
-            }
-        });
-
-        // Display the count in the view by setting it to an element's text content
-        document.getElementById("beCountDisplay").textContent = beCount;
-
-    }
-    // Call the function to apply the highlighting
-    highlightCells();
-</script>
 <script>
 
-    function clearFilter(){
+    function clearFilter() {
         // Clear the selected options in all the dropdowns
         document.getElementById('SD').selectedIndex = -1;
         document.getElementById('Tiers').selectedIndex = -1;
@@ -4151,14 +4846,6 @@
         document.getElementById('Market').selectedIndex = -1;
         document.getElementById('TM').selectedIndex = -1;
 
-        document.getElementById('csatTotal').value = @String.Format("{0:N1}", Convert.ToDouble(@ViewBag.CSAT));
-
-        @*var value = @ViewBag.ActualBudHRS;
-        document.getElementById('bhrsTotal').value = parseFloat(value.toFixed(1));*@
-
-
-        document.getElementById('trafTotal').value = @ViewBag.Traffic
-        document.getElementById('opsTotal').value = @ViewBag.TotalOps
 
         // Use DataTables API to clear filters and show all rows
         var table = $('#tbl').DataTable();
@@ -4707,8 +5394,8 @@
 
             //TMSelect.disabled = true;
 
-                // Populate the Market dropdown with only the Market from filtered rows
-                availableMarket.forEach(MarketValue => {
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
                 var option = document.createElement('option');
                 option.value = MarketValue;
                 option.text = MarketValue;
@@ -4856,7 +5543,7 @@
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-               /* option.style.color = 'grey';*/  // Highlight in red (optional)
+                /* option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
                 SDSelect.add(option);
             });
@@ -5020,7 +5707,7 @@
 
         // If any SD is selected, disable the TM dropdown but populate with matching options
         if (selectedValues.length > 0) {
-           //TMSelect.disabled = true;
+            //TMSelect.disabled = true;
 
             // Populate the TM dropdown with only the TM from filtered rows
             availableTM.forEach(TMValue => {
@@ -5068,7 +5755,7 @@
 
         // If any SD is selected, disable the Market dropdown but populate with matching options
         if (selectedValues.length > 0) {
-           // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the Market dropdown with only the Market from filtered rows
             availableMarket.forEach(MarketValue => {
@@ -5080,7 +5767,7 @@
             });
         } else {
             // If no SD is selected, enable the Market dropdown and reset all options
-           // MarketSelect.disabled = false;
+            // MarketSelect.disabled = false;
 
             // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
             var allRows = document.querySelectorAll('#tbl tbody tr');
@@ -5214,7 +5901,7 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-           //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
@@ -5457,7 +6144,7 @@
 
         // If any SD is selected, disable the Market dropdown but populate with matching options
         if (selectedValues.length > 0) {
-           //MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+            //MarketSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the Market dropdown with only the Market from filtered rows
             availableMarket.forEach(MarketValue => {
@@ -5771,9 +6458,9 @@
             TIRfilterSDOptions(selectedValues);
 
             tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled  = true;
+            mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled  = true;
+            tirAlreadySelected.disabled = true;
         }
 
         // Set the value of the input button to display the total CSAT
@@ -6122,10 +6809,10 @@
 
         //SD
 
-        var tmAlreadySelected   = document.getElementById('TM');
-        var mktAlreadySelected  = document.getElementById('Market');
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
         var storAlreadySelected = document.getElementById('Stores');
-        var tirAlreadySelected  = document.getElementById('Tiers');
+        var tirAlreadySelected = document.getElementById('Tiers');
         var sdAlreadySelected = document.getElementById('SD');
 
 
@@ -6390,7 +7077,7 @@
                 var option = document.createElement('option');
                 option.value = tiersValue;
                 option.text = tiersValue;
-                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.color = 'grey';  // Highlight in red (optional)
                 //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
 
                 tiersSelect.add(option);
@@ -6604,6 +7291,114 @@
             ]
         }
     });
+</script>
+
+<!--Highlight values-->
+<script>
+    // Function to highlight TM and Store cells
+    function highlightCells() {
+        //GROSS ADDS Goals
+        var cells = document.querySelectorAll(".gross-adds-goals");
+
+        cells.forEach(function (cell) {
+            // Parse the cell's text content as a float
+            var value = parseFloat(cell.textContent);
+
+            // Check if the value is greater than 50
+            if (!isNaN(value) && value > 70.0) {
+                cell.style.backgroundColor = "green";  // Set background color
+                cell.style.color = "white";  // Set text color
+            }
+
+            // Check if the value is greater than 50
+            if (!isNaN(value) && value < 60.0) {
+                cell.style.backgroundColor = "yellow";  // Set background color
+                cell.style.color = "black";  // Set text color
+            }
+        });
+
+        //CSAT
+        var csat = document.querySelectorAll(".csat");
+
+        csat.forEach(function (cell) {
+
+            var value = parseFloat(cell.textContent);
+
+            if (!isNaN(value) && value > 0.7) {
+                cell.style.backgroundColor = "green";
+                cell.style.color = "white";
+            }
+
+            if (!isNaN(value) && value < 0.7) {
+                cell.style.backgroundColor = "yellow";
+                cell.style.color = "black";
+            }
+        });
+
+        //Total Stores
+        // Select all cells with the 'stores' class
+        var storeCells = document.querySelectorAll(".stores");
+        var storeCount = 0;
+
+        // Loop through each cell and count if it has a store name
+        storeCells.forEach(function (cell) {
+            var storeName = cell.textContent.trim();
+
+            // Check if the cell has a non-empty store name
+            if (storeName) {
+                storeCount++;
+            }
+        });
+
+        // Display the count in the view by setting it to an element's text content
+        //document.getElementById("storeCountDisplay").textContent = storeCount;
+        document.getElementById("storeCountDisplay").value = storeCount;
+
+
+
+    }
+    // Call the function to apply the highlighting
+    highlightCells();
+</script>
+<!--Highlight Trending Break Even-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Tr Break Even Calc
+        var tbeCells = document.querySelectorAll(".tbreakevenCLS");
+        var tbeCount = 0;
+        var tbeCount70 = 0;
+        var tbeCount90 = 0;
+
+        tbeCells.forEach(function (cell) {
+            var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
+            if (!isNaN(tbeValue) && tbeValue > 100) {
+                tbeCount++;
+            }
+            if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 90) {
+                tbeCount70++;
+            }
+            if (!isNaN(tbeValue) && tbeValue > 90 && tbeValue < 100) {
+                tbeCount90++;
+            }
+        });
+
+        var tbeCountDisplay = document.getElementById("tbeCountDisplay");
+        if (tbeCountDisplay) {
+            tbeCountDisplay.value = tbeCount;
+        }
+
+        var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
+        if (tbeCountDisplay70) {
+            tbeCountDisplay70.value = tbeCount70;
+        }
+
+        var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
+        if (tbeCountDisplay90) {
+            tbeCountDisplay90.value = tbeCount90;
+        }
+    });
+
+
 </script>
 
 
