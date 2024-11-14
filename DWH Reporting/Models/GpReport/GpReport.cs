@@ -1651,6 +1651,7 @@ namespace DWH_Reporting.Models.GpReport
         public string GACloseRt { get; set; }
         public string HomeTechProtect { get; set; }
         public string TimeStamp { get; set; }
+        public string DateKey { get; set; }
     }
 
 
@@ -1779,4 +1780,16 @@ namespace DWH_Reporting.Models.GpReport
         public string Monthly_AchivedHoursTrending { get; set; }
         public string WeeklyBudgetedHRS { get; set; }
     }
+
+    public class NoteModel
+    {
+        public string UniqueID { get; set; }
+        public string DealerCode { get; set; }
+        public string DateKey { get; set; }
+        public string Comment { get; set; }
+        public string Note { get; set; }
+        public string Employee { get; set; }
+        
+    }
+
 }
