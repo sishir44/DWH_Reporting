@@ -42,6 +42,22 @@
     <title>MTD Reports</title>
 
     <style>
+        button#btnaddnote {
+            padding: 1px 10px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        button#btndataview {
+            padding: 1px 10px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        button#btnaddnote:hover, button#btndataview:hover {
+            color: white !important;
+        }
+
         .single-line-button {
             white-space: nowrap;
         }
@@ -395,19 +411,6 @@
             color: white;
             background-color: #3357E1;
         }
-        button#btnaddnote {
-            padding: 1px 10px;
-            font-size: 13px;
-            margin-top: 8px;
-        }
-        button#btndataview {
-            padding: 1px 10px;
-            font-size: 13px;
-            margin-top: 8px;
-        }
-        button#btnaddnote:hover, button#btndataview:hover {
-            color: white !important;
-        }
     </style>
 </head>
 <body style="padding-top:0; background-color:#B2D6F2;">
@@ -506,7 +509,7 @@
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
             <div class="fields" style="background-color:white;  overflow-x: auto; white-space: nowrap;">
                 <div class="row testimonial-group" style="display: inline-block;">
 
@@ -1367,9 +1370,12 @@
                                 data-mkt="@record.Market"
                                 data-tm="@record.TM"
                                 data-rsm="@record.RSMSRSM"
-                                data-role="@record.Role">
+                                data-role="@record.Role"
+                                data-uid="@record.UniqueID"
+                                data-dc="@record.DealerCode"
+                                data-dkey="@record.DateKey">
 
-                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="CommentView(this)" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal">Add</button></td>
+                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
                                 <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                 @*<td>
@@ -4015,13 +4021,13 @@
 
         </div>
         <!-- Modal Structure -->
-        <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel" aria-hidden="true">
+        <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="employeeModalLabel">Employee Notes</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                            <span>&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
@@ -4085,7 +4091,7 @@
                                             <div class="col-md-6  mb-2">
                                                 <div class="card">
                                                     <div class="loader" id="notesloader" style="display: none;">
-                                                        <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
+                                                        @*<img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">*@
                                                     </div>
                                                     <div class="nodata" id="nonotes" style="display: flex;">
                                                         <h5 class="text-secondary"><b>Notes</b></h5>
@@ -4100,14 +4106,13 @@
 
                                                 <div class="card">
                                                     <div class="loader" id="commentsloader" style="display: none;">
-                                                        <img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">
+                                                        @*<img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">*@
                                                     </div>
                                                     <div class="nodata" id="nocomments" style="display: flex;">
                                                         <h5 class="text-secondary"><b>Comments</b></h5>
                                                     </div>
                                                     <textarea id="commentTextArea" class="form-control" rows="20" placeholder="Enter comments here..." style="flex: 1; height:400px;"></textarea>
                                                     @*<div id="commentdesc" class="card-body scrollable" style="height:400px"></div>*@
-
                                                 </div>
                                             </div>
                                         </div>
@@ -4119,7 +4124,7 @@
                                                                 <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="notes" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
                                                             </div>*@
                                                         <div class="col-md-1">
-                                                            <button onclick="addnote()" class="btn btn-secondary single-line-button" title="AddNote">Add Note</button>
+                                                            <button onclick="addnote('data-uid','data-dc','data-dkey')" class="btn btn-secondary single-line-button" title="AddNote">Add Note</button>
 
                                                         </div>
                                                     </div>
@@ -4132,7 +4137,7 @@
                                                                 <div class="jqte"><div class="jqte_toolbar unselectable" role="toolbar" unselectable="on" style="user-select: none;"><div class="jqte_tool jqte_tool_1 unselectable" role="button" data-tool="0" unselectable="on" style="user-select: none;"><a class="jqte_tool_label unselectable" unselectable="on" style="user-select: none;"><span class="jqte_tool_text unselectable" unselectable="on" style="user-select: none;">Normal</span><span class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></span></a><div class="jqte_formats unselectable" unselectable="on" style="user-select: none;"><a jqte-formatval="p" class="jqte_format jqte_format_0 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Normal</a><a jqte-formatval="h1" class="jqte_format jqte_format_1 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 1</a><a jqte-formatval="h2" class="jqte_format jqte_format_2 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 2</a><a jqte-formatval="h3" class="jqte_format jqte_format_3 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 3</a><a jqte-formatval="h4" class="jqte_format jqte_format_4 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 4</a><a jqte-formatval="h5" class="jqte_format jqte_format_5 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 5</a><a jqte-formatval="h6" class="jqte_format jqte_format_6 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Header 6</a><a jqte-formatval="pre" class="jqte_format jqte_format_7 unselectable" role="menuitem" unselectable="on" style="user-select: none;">Preformatted</a></div></div><div class="jqte_tool jqte_tool_2 unselectable" role="button" data-tool="1" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_fontsizes unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="10" class="jqte_fontsize unselectable" style="font-size: 10px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="12" class="jqte_fontsize unselectable" style="font-size: 12px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="16" class="jqte_fontsize unselectable" style="font-size: 16px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="18" class="jqte_fontsize unselectable" style="font-size: 18px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="20" class="jqte_fontsize unselectable" style="font-size: 20px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="24" class="jqte_fontsize unselectable" style="font-size: 24px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a><a jqte-styleval="28" class="jqte_fontsize unselectable" style="font-size: 28px; user-select: none;" role="menuitem" unselectable="on">Abcdefgh...</a></div></div><div class="jqte_tool jqte_tool_3 unselectable" role="button" data-tool="2" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a><div class="jqte_cpalette unselectable" unselectable="on" style="user-select: none;"><a jqte-styleval="0,0,0" class="jqte_color unselectable" style="background-color: rgb(0, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="68,68,68" class="jqte_color unselectable" style="background-color: rgb(68, 68, 68); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,102,102" class="jqte_color unselectable" style="background-color: rgb(102, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,153,153" class="jqte_color unselectable" style="background-color: rgb(153, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,204,204" class="jqte_color unselectable" style="background-color: rgb(204, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="238,238,238" class="jqte_color unselectable" style="background-color: rgb(238, 238, 238); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="243,243,243" class="jqte_color unselectable" style="background-color: rgb(243, 243, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,255" class="jqte_color unselectable" style="background-color: rgb(255, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="255,0,0" class="jqte_color unselectable" style="background-color: rgb(255, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,153,0" class="jqte_color unselectable" style="background-color: rgb(255, 153, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,255,0" class="jqte_color unselectable" style="background-color: rgb(255, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,0" class="jqte_color unselectable" style="background-color: rgb(0, 255, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,255,255" class="jqte_color unselectable" style="background-color: rgb(0, 255, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="0,0,255" class="jqte_color unselectable" style="background-color: rgb(0, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,255" class="jqte_color unselectable" style="background-color: rgb(153, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,0,255" class="jqte_color unselectable" style="background-color: rgb(255, 0, 255); user-select: none;" role="gridcell" unselectable="on"></a><div class="jqte_colorSeperator"></div><a jqte-styleval="244,204,204" class="jqte_color unselectable" style="background-color: rgb(244, 204, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="252,229,205" class="jqte_color unselectable" style="background-color: rgb(252, 229, 205); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,242,204" class="jqte_color unselectable" style="background-color: rgb(255, 242, 204); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,234,211" class="jqte_color unselectable" style="background-color: rgb(217, 234, 211); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="208,224,227" class="jqte_color unselectable" style="background-color: rgb(208, 224, 227); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="207,226,243" class="jqte_color unselectable" style="background-color: rgb(207, 226, 243); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="217,210,233" class="jqte_color unselectable" style="background-color: rgb(217, 210, 233); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,209,220" class="jqte_color unselectable" style="background-color: rgb(234, 209, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="234,153,153" class="jqte_color unselectable" style="background-color: rgb(234, 153, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="249,203,156" class="jqte_color unselectable" style="background-color: rgb(249, 203, 156); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,229,153" class="jqte_color unselectable" style="background-color: rgb(255, 229, 153); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="182,215,168" class="jqte_color unselectable" style="background-color: rgb(182, 215, 168); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="162,196,201" class="jqte_color unselectable" style="background-color: rgb(162, 196, 201); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="159,197,232" class="jqte_color unselectable" style="background-color: rgb(159, 197, 232); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,167,214" class="jqte_color unselectable" style="background-color: rgb(180, 167, 214); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="213,166,189" class="jqte_color unselectable" style="background-color: rgb(213, 166, 189); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="224,102,102" class="jqte_color unselectable" style="background-color: rgb(224, 102, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="246,178,107" class="jqte_color unselectable" style="background-color: rgb(246, 178, 107); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="255,217,102" class="jqte_color unselectable" style="background-color: rgb(255, 217, 102); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="147,196,125" class="jqte_color unselectable" style="background-color: rgb(147, 196, 125); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="118,165,175" class="jqte_color unselectable" style="background-color: rgb(118, 165, 175); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="111,168,220" class="jqte_color unselectable" style="background-color: rgb(111, 168, 220); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="142,124,195" class="jqte_color unselectable" style="background-color: rgb(142, 124, 195); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="194,123,160" class="jqte_color unselectable" style="background-color: rgb(194, 123, 160); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="204,0,0" class="jqte_color unselectable" style="background-color: rgb(204, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="230,145,56" class="jqte_color unselectable" style="background-color: rgb(230, 145, 56); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="241,194,50" class="jqte_color unselectable" style="background-color: rgb(241, 194, 50); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="106,168,79" class="jqte_color unselectable" style="background-color: rgb(106, 168, 79); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="69,129,142" class="jqte_color unselectable" style="background-color: rgb(69, 129, 142); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="61,133,198" class="jqte_color unselectable" style="background-color: rgb(61, 133, 198); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="103,78,167" class="jqte_color unselectable" style="background-color: rgb(103, 78, 167); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="166,77,121" class="jqte_color unselectable" style="background-color: rgb(166, 77, 121); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="153,0,0" class="jqte_color unselectable" style="background-color: rgb(153, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="180,95,6" class="jqte_color unselectable" style="background-color: rgb(180, 95, 6); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="191,144,0" class="jqte_color unselectable" style="background-color: rgb(191, 144, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="56,118,29" class="jqte_color unselectable" style="background-color: rgb(56, 118, 29); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="19,79,92" class="jqte_color unselectable" style="background-color: rgb(19, 79, 92); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="11,83,148" class="jqte_color unselectable" style="background-color: rgb(11, 83, 148); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="53,28,117" class="jqte_color unselectable" style="background-color: rgb(53, 28, 117); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="116,27,71" class="jqte_color unselectable" style="background-color: rgb(116, 27, 71); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="102,0,0" class="jqte_color unselectable" style="background-color: rgb(102, 0, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="120,63,4" class="jqte_color unselectable" style="background-color: rgb(120, 63, 4); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="127,96,0" class="jqte_color unselectable" style="background-color: rgb(127, 96, 0); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="39,78,19" class="jqte_color unselectable" style="background-color: rgb(39, 78, 19); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="12,52,61" class="jqte_color unselectable" style="background-color: rgb(12, 52, 61); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="7,55,99" class="jqte_color unselectable" style="background-color: rgb(7, 55, 99); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="32,18,77" class="jqte_color unselectable" style="background-color: rgb(32, 18, 77); user-select: none;" role="gridcell" unselectable="on"></a><a jqte-styleval="76,17,48" class="jqte_color unselectable" style="background-color: rgb(76, 17, 48); user-select: none;" role="gridcell" unselectable="on"></a></div></div><div class="jqte_tool jqte_tool_4 unselectable" role="button" data-tool="3" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_5 unselectable" role="button" data-tool="4" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_6 unselectable" role="button" data-tool="5" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_7 unselectable" role="button" data-tool="6" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_8 unselectable" role="button" data-tool="7" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_9 unselectable" role="button" data-tool="8" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_10 unselectable" role="button" data-tool="9" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_11 unselectable" role="button" data-tool="10" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_12 unselectable" role="button" data-tool="11" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_13 unselectable" role="button" data-tool="12" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_14 unselectable" role="button" data-tool="13" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_15 unselectable" role="button" data-tool="14" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_16 unselectable" role="button" data-tool="15" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_17 unselectable" role="button" data-tool="16" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_18 unselectable" role="button" data-tool="17" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_19 unselectable" role="button" data-tool="18" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_20 unselectable" role="button" data-tool="19" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div><div class="jqte_tool jqte_tool_21 unselectable" role="button" data-tool="20" unselectable="on" style="user-select: none;"><a class="jqte_tool_icon unselectable" unselectable="on" style="user-select: none;"></a></div></div><div class="jqte_linkform" style="display:none" role="dialog"><div class="jqte_linktypeselect unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypeview unselectable" unselectable="on" style="user-select: none;"><div class="jqte_linktypearrow unselectable" unselectable="on" style="user-select: none;"></div><div class="jqte_linktypetext">Web Address</div></div><div class="jqte_linktypes unselectable" role="menu" unselectable="on" style="user-select: none;"><a jqte-linktype="0" unselectable="on" class="unselectable" style="user-select: none;">Web Address</a><a jqte-linktype="1" unselectable="on" class="unselectable" style="user-select: none;">E-mail Address</a><a jqte-linktype="2" unselectable="on" class="unselectable" style="user-select: none;">Picture URL</a></div></div><input class="jqte_linkinput" type="text/css" value=""><div class="jqte_linkbutton unselectable" unselectable="on" style="user-select: none;">OK</div> <div style="height:1px;float:none;clear:both"></div></div><div class="jqte_editor" contenteditable="true"></div><div class="jqte_source jqte_hiddenField"><textarea rows="5" id="comments" name="textarea" class="jqte-test" required="" data-origin="textarea"></textarea></div></div>
                                                             </div>*@
                                                         <div class="col-md-1 ">
-                                                            <button onclick="addComment()" class="btn btn-secondary single-line-button" title="Send"><i class="fa fa-send"></i>Add Comment</button>
+                                                            <button onclick="addnote('data-uid','data-dc','data-dkey')" class="btn btn-secondary single-line-button" title="Send"><i class="fa fa-send"></i>Add Comment</button>
 
                                                         </div>
                                                     </div>
@@ -4152,14 +4157,14 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="dataview" tabindex="-1" role="dialog" aria-labelledby="dataviewLabel" aria-hidden="true">
+        <div class="modal fade" id="dataview" tabindex="-1" role="dialog" aria-labelledby="dataviewLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: dodgerblue; color: white; font-weight:bold; display: flex; justify-content: space-between; align-items: center; width: 100%;">
                         <h5 class="modal-title" style="flex: 1; text-align: left;">Store: <span id="modalStore"></span></h5>
                         <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Employee Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="flex: 1; text-align: right;">
-                            <span aria-hidden="true">&times;</span>
+                            <span>&times;</span>
                         </button>
                     </div>
 
@@ -4522,7 +4527,7 @@
         </div>
     </footer>
 </body>
-
+<!--Function to Add/View working-->
 <script>
     function MTDStoreEmployeeView(button) {
         // Find the parent row of the clicked button
@@ -4716,6 +4721,75 @@
         document.getElementById("noteTextArea").value = "";
         document.getElementById("commentTextArea").value = "";
     }
+
+    function loadNoteData(uniqueID, dealercode, datekey) {
+
+        $.ajax({
+            url: '/Home/SaveUniqueIDToSession', // Route to save UniqueID in session
+            type: 'POST',
+            data: {
+                UniqueID: uniqueID,
+                DealerCode: dealercode,
+                DateKey: datekey
+            }
+        });
+
+        // AJAX call to the server to get note data
+        $.ajax({
+            url: '/Home/GetNoteData', // Ensure this matches your route
+            type: 'POST',
+            data: { UniqueID: uniqueID },
+            success: function (response) {
+                //console.log("Response received:", response); // Check the structure
+                if (response && response.Note) {
+                    document.getElementById("noteTextArea").value = response.Note;
+                    document.getElementById("commentTextArea").value = response.Comment;
+
+                    var selectElement = document.getElementById("ddCommentDesignation");
+                    var options = selectElement.options;
+                    for (var i = 0; i < options.length; i++) {
+                        if (options[i].text === response.Employee) {  // Match by text
+                            selectElement.selectedIndex = i;          // Set selected option
+                            break;
+                        }
+                    }
+
+                } else {
+                    //console.log("No data for notes received.");
+                    document.getElementById("noteTextArea").value = "";
+                    document.getElementById("commentTextArea").value = "";
+                    document.getElementById("ddCommentDesignation").selectedIndex = 0;
+                }
+            }
+        });
+    }
+
+    function addnote() {
+
+        var comment = document.getElementById("commentTextArea").value;
+        var note = document.getElementById("noteTextArea").value;
+        var empSelect = document.getElementById("ddCommentDesignation");
+        var empText = empSelect.options[empSelect.selectedIndex].text;
+
+        // AJAX call to insert or update note
+        $.ajax({
+            url: '/Home/AddOrUpdateNote', // Adjust to your controller path
+            type: 'POST',
+            data: {
+                Comment: comment,
+                Note: note,
+                Employee: empText
+            },
+            success: function (response) {
+                alert(response.message); // Display a success or error message
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+                alert("There was an error saving the note.");
+            }
+        });
+    }
+
 </script>
 <script>
     $(document).ready(function () {
@@ -7272,38 +7346,38 @@
 </script>
 <!-- Script to Initialize Quill -->
 <script>
-    var quill = new Quill('#notedesc', {
-        theme: 'snow',  // Specify theme in configuration
-        placeholder: 'Type your note here...',
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['link', 'blockquote', 'code-block', 'image'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ script: 'sub' }, { script: 'super' }],
-                [{ align: [] }],
-                ['clean']                                         // Remove formatting button
-            ]
-        }
-    });
+    //var quill = new Quill('#notedesc', {
+    //    theme: 'snow',  // Specify theme in configuration
+    //    placeholder: 'Type your note here...',
+    //    modules: {
+    //        toolbar: [
+    //            [{ header: [1, 2, false] }],
+    //            ['bold', 'italic', 'underline'],
+    //            ['link', 'blockquote', 'code-block', 'image'],
+    //            [{ list: 'ordered' }, { list: 'bullet' }],
+    //            [{ script: 'sub' }, { script: 'super' }],
+    //            [{ align: [] }],
+    //            ['clean']                                         // Remove formatting button
+    //        ]
+    //    }
+    //});
 
-    //commentdesc
-    var quill = new Quill('#commentdesc', {
-        theme: 'snow',  // Specify theme in configuration
-        placeholder: 'Type your note here...',
-        modules: {
-            toolbar: [
-                [{ header: [1, 2, false] }],
-                ['bold', 'italic', 'underline'],
-                ['link', 'blockquote', 'code-block', 'image'],
-                [{ list: 'ordered' }, { list: 'bullet' }],
-                [{ script: 'sub' }, { script: 'super' }],
-                [{ align: [] }],
-                ['clean']                                         // Remove formatting button
-            ]
-        }
-    });
+    ////commentdesc
+    //var quill = new Quill('#commentdesc', {
+    //    theme: 'snow',  // Specify theme in configuration
+    //    placeholder: 'Type your note here...',
+    //    modules: {
+    //        toolbar: [
+    //            [{ header: [1, 2, false] }],
+    //            ['bold', 'italic', 'underline'],
+    //            ['link', 'blockquote', 'code-block', 'image'],
+    //            [{ list: 'ordered' }, { list: 'bullet' }],
+    //            [{ script: 'sub' }, { script: 'super' }],
+    //            [{ align: [] }],
+    //            ['clean']                                         // Remove formatting button
+    //        ]
+    //    }
+    //});
 </script>
 
 <!--Highlight values-->

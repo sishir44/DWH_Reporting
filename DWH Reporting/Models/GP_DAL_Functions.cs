@@ -400,5 +400,103 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+        
+        public static DataTable GetNoteByParameters(string UniqueID_Param)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetNoteByParameters";
+
+                // Create SPParameters object and add the date parameter
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@UniqueID", SqlDbType.NVarChar, UniqueID_Param);
+
+                // Execute stored procedure with the parameters
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
+
+        public static DataTable spUpdateNote(string UniqueID, string DealerCode, string DateKey, string Comment, string Note, string Employee)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "spUpdateNote";
+
+                // Create SPParameters object and add the date parameter
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@UniqueID", SqlDbType.NVarChar, UniqueID);
+                spParam.SetParam("@DealerCode", SqlDbType.NVarChar, DealerCode);
+                spParam.SetParam("@DateKey", SqlDbType.NVarChar, DateKey);
+                spParam.SetParam("@Comment", SqlDbType.NVarChar, Comment);
+                spParam.SetParam("@Note", SqlDbType.NVarChar, Note);
+                spParam.SetParam("@Employee", SqlDbType.NVarChar, Employee);
+
+                // Execute stored procedure with the parameters
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
+
+        public static DataTable spInsertNote(string UniqueID, string DealerCode, string DateKey, string Comment, string Note, string Employee)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "spInsertNote";
+
+                // Create SPParameters object and add the date parameter
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@UniqueID", SqlDbType.NVarChar, UniqueID);
+                spParam.SetParam("@DealerCode", SqlDbType.NVarChar, DealerCode);
+                spParam.SetParam("@DateKey", SqlDbType.NVarChar, DateKey);
+                spParam.SetParam("@Comment", SqlDbType.NVarChar, Comment);
+                spParam.SetParam("@Note", SqlDbType.NVarChar, Note);
+                spParam.SetParam("@Employee", SqlDbType.NVarChar, Employee);
+
+                // Execute stored procedure with the parameters
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
+        public static bool CheckIfNoteExists(string uniqueID)
+        {
+            string UniqueID_Param = uniqueID;
+            bool res;
+
+            DataTable GetNoteByParameters = GP_DAL_Functions.GetNoteByParameters(UniqueID_Param);
+
+            if (GetNoteByParameters.Rows.Count > 0)
+            {
+                return res = true;
+            }
+
+            return res = false;
+        }
+
+
     }
 }

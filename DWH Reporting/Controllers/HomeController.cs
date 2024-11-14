@@ -313,7 +313,8 @@ namespace DWH_Reporting.Controllers
                     MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
                     MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
                     GACloseRt = row["GA Close Rt"].ToString(),
-                    HomeTechProtect = row["HomeTech Protect"].ToString()
+                    HomeTechProtect = row["HomeTech Protect"].ToString(),
+                    DateKey = row["DateKey"].ToString()
                     //TimeStamp = row["TimeStamp"].ToString()
 
                 };
@@ -1381,6 +1382,75 @@ namespace DWH_Reporting.Controllers
             //{
             //    ViewBag.RoleList = new List<SelectListItem>();
             //}
+        }
+
+        [HttpPost]
+        public JsonResult GetNoteData(string UniqueID)
+        {
+            string UniqueID_Param = UniqueID;
+
+            DataTable GetNoteByParameters = GP_DAL_Functions.GetNoteByParameters(UniqueID_Param);
+
+            NoteModel result = null;
+
+            if (GetNoteByParameters.Rows.Count > 0)
+            {
+                var row = GetNoteByParameters.Rows[0];
+                result = new NoteModel
+                {
+                    UniqueID = row["Unique ID"].ToString(),
+                    DealerCode = row["Dealer Code"].ToString(),
+                    DateKey = row["DateKey"].ToString(),
+                    Comment = row["Comment"].ToString(),
+                    Note = row["Note"].ToString(),
+                    Employee = row["Employee"].ToString(),
+                };
+            }
+
+            return Json(result); // Returning a single NoteModel
+        }
+
+        [HttpPost]
+        public JsonResult AddOrUpdateNote(string Comment, string Note, string Employee)
+        {
+            var uniqueID = Session["UniqueID"] as string;
+            var dealerCode = Session["DealerCode"] as string;
+            var dateKey = Session["DateKey"] as string;
+            string message;
+
+            try
+            {
+                // Check if the note with the given UniqueID exists
+                bool noteExists = GP_DAL_Functions.CheckIfNoteExists(uniqueID); // Implement this function to check existence
+
+                if (noteExists)
+                {
+                    // Call the update stored procedure
+                    GP_DAL_Functions.spUpdateNote(uniqueID, dealerCode, dateKey, Comment, Note, Employee);
+                    message = "Note updated successfully.";
+                }
+                else
+                {
+                    // Call the insert stored procedure
+                    GP_DAL_Functions.spInsertNote(uniqueID, dealerCode, dateKey, Comment, Note, Employee);
+                    message = "Note added successfully.";
+                }
+
+                return Json(new { success = true, message = message });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Error: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult SaveUniqueIDToSession(string UniqueID, string DealerCode, string DateKey)
+        {
+            Session["UniqueID"] = UniqueID;
+            Session["DealerCode"] = DealerCode;
+            Session["DateKey"] = DateKey;
+            return Json(new { success = true });
         }
 
     }
