@@ -197,6 +197,7 @@
   <ItemGroup>
     <Content Include="assets\css\AdminLTE.min.css" />
     <Content Include="assets\css\cs-skin-elastic.css" />
+    <Content Include="assets\css\custom.min.css" />
     <Content Include="assets\css\daterangepicker\bootstrap-datetimepicker.min.css" />
     <Content Include="assets\css\daterangepicker\daterangepicker.css" />
     <Content Include="assets\css\external_files\AdminLTE.min.css" />
@@ -327,6 +328,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\table2excel.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_GPLayout.cshtml" />
     <Content Include="web.config" />
