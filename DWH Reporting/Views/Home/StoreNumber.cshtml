@@ -5,7 +5,7 @@
 }
 
 @{
-    // Retrieve the data from ViewDa
+    // Retrieve the data from ViewData
     var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
@@ -13,9 +13,11 @@
     var recordsGet_MUL_Mkt = ViewData["Get_MUL_Mkt"] as IEnumerable<Fct_StoreNumberAttributesModel>;
 
 }
+
 @using DWH_Reporting.Models.GpReport;
 
 <!DOCTYPE html>
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -35,10 +37,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- Include Quill's CSS and JS -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-
     <title>MTD Reports</title>
 
     <style>
@@ -54,9 +52,9 @@
             margin-top: 8px;
         }
 
-        button#btnaddnote:hover, button#btndataview:hover {
-            color: white !important;
-        }
+            button#btnaddnote:hover, button#btndataview:hover {
+                color: white !important;
+            }
 
         .single-line-button {
             white-space: nowrap;
@@ -412,14 +410,22 @@
             background-color: #3357E1;
         }
     </style>
+
 </head>
+
 <body style="padding-top:0; background-color:#B2D6F2;">
+
+    <!-- LOADING LOGO -->
     <div id="loadingScreen">
         <img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">
 
     </div>
+
     <div>
+
         <div id="div1" class="content" style="background-color:#B2D6F2;">
+
+            <!-- TITLE & DATE FILTER & EXPORT BTN-->
             <div class="row head">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
@@ -482,6 +488,8 @@
                     </div>
                 </div>
             </div>
+
+            <!-- UPDATED RPT DATE -->
             <div class="row sub-header" style="background-color: grey;width: 100%;margin: 0 auto;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
@@ -510,7 +518,10 @@
                     </div>
                 </div>
             </div>
+
+            <!-- FILTERS -->
             <div class="fields" style="background-color:white;  overflow-x: auto; white-space: nowrap;">
+
                 <div class="row testimonial-group" style="display: inline-block;">
 
                     <!-- Budgeted Hours and Total Ops -->
@@ -519,7 +530,7 @@
                         <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
                                style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px; margin-left:10px;" />
 
-                        <label>Above 100%</label>
+                        <label>100% & Above</label>
                         <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
                                title="Above 100%" value=""
                                style="background-color: green; color:white; height: 35px; margin-left:10px; margin-bottom:5px;" />
@@ -533,7 +544,7 @@
                                value=""
                                style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
 
-                        <label>Above 90%</label>
+                        <label>Less Than 70%</label>
                         <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
                                title="CSAT"
                                value=""
@@ -576,6 +587,7 @@
                             }
                         </select>
                     </div>
+
                     <!-- Search Market -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" />
@@ -593,6 +605,49 @@
                             }
                         </select>
                     </div>
+
+                    <!-- Search MUL_MktMngr -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search Multi Manager" />
+                        <select class="form-control selector" id="MULMngr" multiple onchange="filterMULMngrData()">
+                            @if (recordsGet_MUL_Mgr != null && recordsGet_MUL_Mgr.Any())
+                            {
+                                foreach (var item in recordsGet_MUL_Mgr)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                            value="@item.MUL_MktMngr">
+                                        @item.MUL_MktMngr
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search MUL_Market -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchMULMkt" id="textSearchMULMkt" class="selectorinput form-control" placeholder="Search Multi Market" />
+                        <select class="form-control selector" id="MULMkt" multiple onchange="filterMULMktData()">
+                            @if (recordsGet_MUL_Mkt != null && recordsGet_MUL_Mkt.Any())
+                            {
+                                foreach (var item in recordsGet_MUL_Mkt)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                            value="@item.MUL_Market">
+                                        @item.MUL_Market
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Market available</option>
+                            }
+                        </select>
+                    </div>
+
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" />
@@ -611,6 +666,7 @@
                         </select>
 
                     </div>
+
                     <!-- Search Tiers -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" />
@@ -629,13 +685,19 @@
                         </select>
                     </div>
 
-
                 </div>
+
             </div>
+
+            <!-- DATA TBL -->
             <div id="myDiv">
+
                 <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
+
                     <thead>
+
                         @functions {
+
                             // Helper method to convert number to corresponding alphabet(s)
                             public static string GetAlphabetFromNumber(int number)
                             {
@@ -649,19 +711,25 @@
                                 return result;
                             }
                         }
+
+                        <!-- SOW ALPHA HEAD ABOVE COL -->
                         <tr class="numbered_header">
                             @for (int i = 1; i <= 164; i++) // Loop from 1 to 164
                             {
                                 <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
                         </tr>
+
+                        <!-- Hierarchy COL HEAD-->
                         <tr class="spanned_header">
+
+                            <!-- 5 Freeze COL -->
                             <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
                             <th rowspan="2" style="background-color: black; color:white;">View</th>
-
                             <th rowspan="2" style="background-color: black; color:white;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Market</th>
                             <th rowspan="2" style="background-color: black; color:white;">Store</th>
+
                             <th rowspan="2" style="background-color: black; color:white;">Unique ID</th>
                             <th rowspan="2" style="background-color: black; color:white;">Dealer Code</th>
                             <th rowspan="2" style="background-color: black; color:white;">Tiers</th>
@@ -669,9 +737,13 @@
                             <th rowspan="2" style="background-color: black; color:white;">Role</th>
                             <th rowspan="2" style="background-color: black; color:white;">HIT Store</th>
                             <th rowspan="2" style="background-color: black; color:white;">SD</th>
-                            <th id="ColSpan152" colspan="152">
-                            </th>
+
+                            <!-- Calc data header for HEADING -->
+                            <th id="ColSpan152" colspan="152"></th>
+
                         </tr>
+
+                        <!-- CALC COL HEAD-->
                         <tr class="main_header">
                             <td>Monthly<br>Achieved Hours<br>Trending %  </td>
                             <td style="background-color: #063B73; color:white;">GROSS ADDS<br>Trend%<br>To Goal                         </td>
@@ -829,11 +901,14 @@
                             <td>HomeTech<br>Protect                              </td>
 
                         </tr>
+
                     </thead>
+
                     @if (recordsFct_StoreNumberTotal != null)
                     {
                         foreach (var record in recordsFct_StoreNumberTotal)
                         {
+                            // GRAND TOTAL
                             <tr class="total_data">
                                 <td></td>
                                 <td></td>
@@ -1005,7 +1080,9 @@
                         }
 
                     }
+
                     @{
+                        //Counter Market
                         string currentMarket = null;
 
                     }
@@ -1018,6 +1095,7 @@
                         foreach (var record in sortedRecords)
                         {
                             // Check if the market has changed
+
                             //if (currentMarket != null && currentMarket != record.Market)
                             if (currentMarket != record.Market)
                             {
@@ -1027,6 +1105,7 @@
                                     {
                                         if (record2.Market == record.Market && record2.TM == record.TM)
                                         {
+                                            //TM wise total each market
                                             <tr id="totTM" class="total_dataTM">
                                                 <td></td>
                                                 <td></td>
@@ -1207,6 +1286,7 @@
                             // Update the current market
                             currentMarket = record.Market;
 
+                            <!-- Data ALL CALC -->
                             <tr class="main_data"
                                 data-modalTotalTraffic="@record.TotalTraffic"
                                 data-modalFiberConversion="@record.FiberConversion"
@@ -1375,25 +1455,23 @@
                                 data-dc="@record.DealerCode"
                                 data-dkey="@record.DateKey">
 
+                                <!-- ADD/VIEW BTN -->
                                 <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
                                 <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
-                                @*<td>
-                                        <button type="button" class="btn btn-primary" onclick="showEmployeeDetails('@record.UniqueID')" data-toggle="modal" data-target="#dataview">
-                                            View Details
-                                        </button>
-                                    </td>*@
+                                <!-- Hierarchy -->
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.TM      </td>
                                 <td style="background-color: black; color: white; font-weight:bold;">@record.Market   </td>
                                 <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
-                                <td>@record.UniqueID                                       </td>
-                                <td>@record.DealerCode                                          </td>
-                                <td>@record.Tiers                                       </td>
-                                <td>@record.RSMSRSM                                         </td>
-                                <td>@record.Role                                             </td>
-                                <td>@record.HITStore                                        </td>
-                                <td>@record.SD                                           </td>
+                                <td>@record.UniqueID</td>
+                                <td>@record.DealerCode</td>
+                                <td>@record.Tiers</td>
+                                <td>@record.RSMSRSM</td>
+                                <td>@record.Role</td>
+                                <td>@record.HITStore</td>
+                                <td>@record.SD</td>
 
+                                <!-- Data SP SN -->
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
                                 <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
@@ -3903,26 +3981,26 @@
 
                                 </td>
                                 @*<td>
-                                        @{
-                                            string TrainingHours;
+                                @{
+                                    string TrainingHours;
 
-                                            double th; // Declare the variable outside
+                                    double th; // Declare the variable outside
 
-                                            if (record.TrainingHours != null && Double.TryParse(record.TrainingHours.ToString(), out th))
-                                            {
-                                                // If the value can be parsed to double, format it
-                                                TrainingHours = String.Format("{0:N1}", th);
-                                            }
-                                            else
-                                            {
-                                                // If the value is null or can't be parsed to double, show an alternative message
-                                                TrainingHours = "-";
-                                            }
-                                        }
+                                    if (record.TrainingHours != null && Double.TryParse(record.TrainingHours.ToString(), out th))
+                                    {
+                                        // If the value can be parsed to double, format it
+                                        TrainingHours = String.Format("{0:N1}", th);
+                                    }
+                                    else
+                                    {
+                                        // If the value is null or can't be parsed to double, show an alternative message
+                                        TrainingHours = "-";
+                                    }
+                                }
 
-                                        <p>@TrainingHours</p>
+                                <p>@TrainingHours</p>
 
-                                    </td>*@
+                            </td>*@
                                 <td>
                                     @{
                                         string MonthlyAchievedHRS;
@@ -4010,17 +4088,26 @@
                             </tr>
                         }
                     }
+
                 </table>
+
             </div>
+
         </div>
+
+        <!-- PBI SN -->
         <div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
             <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
+
         </div>
+
+        <!-- PBI EN -->
         <div id="div3" class="content" style="background-color:#B2D6F2; cursor: pointer;">
             <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
 
         </div>
-        <!-- Modal Structure -->
+
+        <!-- Modal ADD NOTE/COMMENT Structure -->
         <div class="modal fade" id="employeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -4157,6 +4244,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- Modal DETAILS VIEW Structure -->
         <div class="modal fade" id="dataview" tabindex="-1" role="dialog" aria-labelledby="dataviewLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -4172,6 +4261,7 @@
                         <table id="tblDetails" class="table table-bordered">
                             <thead>
                                 <tr class="main_data" style="background-color: black; color: white;">
+
                                     <th style="background-color: black; color: white;"><b>TM</b></th>
                                     <th style="background-color: black; color: white;"><b>Market</b></th>
                                     <th style="background-color: black; color: white;"><b>Store</b></th>
@@ -4184,7 +4274,6 @@
                                     <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>Goals</th>
                                     <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>NetOFF</th>
                                     <th style="background-color: black; color: white;">PPVGA per<br>Traffic %</th>
-
                                     <th style="background-color: black; color: white;">Total<br>Traffic                             </th>
                                     <th style="background-color: black; color: white;">Fiber<br>Conversion                          </th>
                                     <th style="background-color: black; color: white;">Broadband<br>Fiber<br>NetOFF                     </th>
@@ -4263,8 +4352,7 @@
                                     <th style="background-color: black; color: white;">Extra<br>Upgrade<br>GP                           </th>
                                     <th style="background-color: black; color: white;">AIA<br>Goals                                 </th>
                                     <th style="background-color: black; color: white;">ChargeBack6                              </th>
-                                    <th style="background-color: black; color: white;">AIA<br>Internet<br>NetOff                        </th>
-
+                                    <th style="background-color: black; color: white;">AIA<br>Internet<br>NetOff
                                     <th style="background-color: black; color: white;">AIA<br>Trending                          </th>
                                     <th style="background-color: black; color: white;">AIA<br>Internet<br>$GP                   </th>
                                     <th style="background-color: black; color: white;">Broadband<br>Goals                       </th>
@@ -4333,10 +4421,12 @@
                                     <th style="background-color: black; color: white;">Monthly<br>Achived Hours<br>Trending     </th>
                                     <th style="background-color: black; color: white;">GA<br>Close<br>Rt                        </th>
                                     <th style="background-color: black; color: white;">HomeTech<br>Protect                      </th>
+
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="main_data">
+
                                     <td><span id="modalTM"></span></td>
                                     <td><span id="modalMarket"></span></td>
                                     <td><span id="modalStore"></span></td>
@@ -4349,7 +4439,6 @@
                                     <td><span id="modalGAG"></span></td>
                                     <td><span id="modalGANetOff"></span></td>
                                     <td><span id="modalPPVGAperTrf"></span></td>
-
                                     <td><span id="modalTotalTraffic"></span></td>
                                     <td><span id="modalFiberConversion"></span></td>
                                     <td><span id="modalBroadbandFiberNetOFF"></span></td>
@@ -4429,8 +4518,6 @@
                                     <td><span id="modalAIAGoals"></span></td>
                                     <td><span id="modalChargeBack6"></span></td>
                                     <td><span id="modalAIAInternetNetOff"></span></td>
-
-
                                     <td><span id="modalAIATr"></span></td>
                                     <td><span id="modalAIAIntG"></span></td>
                                     <td><span id="modalBBG"></span></td>
@@ -4500,14 +4587,6 @@
                                     <td><span id="modalGACloseRT"></span></td>
                                     <td><span id="modalHTP"></span></td>
 
-                                    @*<td><span id="modalOPS"></span></td>
-                                        <td><span id="modalTraffic"></span></td>
-                                        <td><span id="modalBhrs"></span></td>
-                                        <td><span id="modalCsat"></span></td>
-                                        <td><span id="modalVP"></span></td>
-                                        <td><span id="modalRegion"></span></td>
-                                        <td><span id="modalRSM"></span></td>
-                                        <td><span id="modalRole"></span></td>*@
                                 </tr>
                             </tbody>
                         </table>
@@ -4519,16 +4598,122 @@
                 </div>
             </div>
         </div>
+
     </div>
+
+    <!--NEXT/PREV BTN -->
     <footer>
         <div style="padding-left:40%;background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
     </footer>
+
 </body>
-<!--Function to Add/View working-->
+
+<!--  Page Load & TBL & Print -->
 <script>
+    $(document).ready(function () {
+        var windowheight = $(window).height()
+
+        var height = (windowheight - 400) + "px"
+        updateDataTable(height);
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+
+
+    });
+    function updateDataTable(S_height) {
+        $('#tbl').DataTable({
+            scrollY: S_height,
+            scrollX: true,
+            scrollCollapse: true,
+            searching: false,  // Disable default search since we're using custom search
+            bInfo: false,
+            paging: false,
+            ordering: false,
+            fixedColumns: {
+                leftColumns: 5, // Freeze the first 3 columns
+            }
+        });
+    }
+
+    function test() {
+
+        $("td:hidden").remove();
+        var $clonedTable = $('#tbl').clone();
+        var $clonedTable2 = $('#tbl2').clone();
+
+        $clonedTable.find('[style*="display: none"]').remove();
+        $clonedTable2.find('[style*="display: none"]').remove();
+
+        $clonedTable.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+
+        $clonedTable2.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+    }
+
+    //function takeshot() {
+    //    //window.print();
+
+    //    // Get the content of the div
+    //    var divContents = document.getElementById("myDiv").innerHTML;
+    //    // Open a new window
+    //    var printWindow = window.open('', '', 'height=500, width=800');
+    //    // Write the content into the new window
+    //    printWindow.document.write('<html><head><title>Print Div</title>');
+    //    printWindow.document.write('</head><body >');
+    //    printWindow.document.write(divContents);
+    //    printWindow.document.write('</body></html>');
+    //    // Close the document to render the content
+    //    printWindow.document.close();
+    //    // Wait for the content to load and then call the print function
+    //    printWindow.onload = function () {
+    //        printWindow.focus(); // Required for IE and some browsers
+    //        printWindow.print();
+    //        printWindow.close();
+    //    };
+    //}
+
+    //function printFullTable() {
+    //    var tableContent = document.getElementById('tbl').outerHTML;
+    //    var originalContents = document.body.innerHTML;
+
+    //    document.body.innerHTML = tableContent;
+
+    //    window.print();
+
+    //    document.body.innerHTML = originalContents;
+    //}
+
+    function printTable() {
+        //Hide all unnecessary elements by adding a 'print-hidden' class
+        var elementsToHide = document.querySelectorAll('header, footer, .sidebar, .navbar, .other-section'); // Customize this to the elements you want hidden
+        elementsToHide.forEach(function (el) {
+            el.style.display = 'none';
+        });
+
+        // Temporarily show only the table
+        var table = document.getElementById("tbl");
+        table.style.display = 'table'; // Ensure the table is displayed
+
+        // Open the print dialog
+        window.print();
+
+        // Restore visibility of previously hidden elements
+        elementsToHide.forEach(function (el) {
+            el.style.display = ''; // Restore to default
+        });
+    }
+
+</script>
+
+<!--Add/View buttons working -->
+<script>
+
     function MTDStoreEmployeeView(button) {
         // Find the parent row of the clicked button
         var row = button.closest('.main_data');
@@ -4723,6 +4908,7 @@
     }
 
     function loadNoteData(uniqueID, dealercode, datekey) {
+        resetEmployeeDD();
 
         $.ajax({
             url: '/Home/SaveUniqueIDToSession', // Route to save UniqueID in session
@@ -4791,99 +4977,7 @@
     }
 
 </script>
-<script>
-    $(document).ready(function () {
-        var windowheight = $(window).height()
 
-        var height = (windowheight - 400) + "px"
-        updateDataTable(height);
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
-
-
-    });
-    function updateDataTable(S_height) {
-        $('#tbl').DataTable({
-            scrollY: S_height,
-            scrollX: true,
-            scrollCollapse: true,
-            searching: false,  // Disable default search since we're using custom search
-            bInfo: false,
-            paging: false,
-            ordering: false,
-            fixedColumns: {
-                leftColumns: 5, // Freeze the first 3 columns
-            }
-        });
-    }
-    function test() {
-
-        $("td:hidden").remove();
-        var $clonedTable = $('#tbl').clone();
-        var $clonedTable2 = $('#tbl2').clone();
-
-        $clonedTable.find('[style*="display: none"]').remove();
-        $clonedTable2.find('[style*="display: none"]').remove();
-
-        $clonedTable.table2excel({
-            filename: "StoreNumberReport.xls"
-        });
-
-        $clonedTable2.table2excel({
-            filename: "StoreNumberReport.xls"
-        });
-    }
-    function takeshot() {
-        //window.print();
-
-        // Get the content of the div
-        var divContents = document.getElementById("myDiv").innerHTML;
-        // Open a new window
-        var printWindow = window.open('', '', 'height=500, width=800');
-        // Write the content into the new window
-        printWindow.document.write('<html><head><title>Print Div</title>');
-        printWindow.document.write('</head><body >');
-        printWindow.document.write(divContents);
-        printWindow.document.write('</body></html>');
-        // Close the document to render the content
-        printWindow.document.close();
-        // Wait for the content to load and then call the print function
-        printWindow.onload = function () {
-            printWindow.focus(); // Required for IE and some browsers
-            printWindow.print();
-            printWindow.close();
-        };
-    }
-    function printTable() {
-        //Hide all unnecessary elements by adding a 'print-hidden' class
-        var elementsToHide = document.querySelectorAll('header, footer, .sidebar, .navbar, .other-section'); // Customize this to the elements you want hidden
-        elementsToHide.forEach(function (el) {
-            el.style.display = 'none';
-        });
-
-        // Temporarily show only the table
-        var table = document.getElementById("tbl");
-        table.style.display = 'table'; // Ensure the table is displayed
-
-        // Open the print dialog
-        window.print();
-
-        // Restore visibility of previously hidden elements
-        elementsToHide.forEach(function (el) {
-            el.style.display = ''; // Restore to default
-        });
-    }
-    function printFullTable() {
-        var tableContent = document.getElementById('tbl').outerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = tableContent;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-    }
-</script>
 <!-- Next Prev btn -->
 <script>
     const divs = document.querySelectorAll(".content");
@@ -4923,6 +5017,7 @@
     document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
 </script>
 
+<!-- Filters working -->
 <script>
 
     function clearFilter() {
@@ -7239,8 +7334,10 @@
 
     //////////////////////////////////////////////////////////
 </script>
+
+<!--Option List data -->
 <script type="text/javascript">
-    var regionList = [];
+    @*var regionList = [];
 
     @if (ViewBag.RegionList != null && ViewBag.RegionList.Count > 0)
     {
@@ -7256,7 +7353,7 @@
         <text>
         vpList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.VPList));
         </text>
-    }
+    }*@
 
     var sdList = [];
 
@@ -7303,7 +7400,7 @@
         </text>
     }
 
-    var rsmList = [];
+    @*var rsmList = [];
 
     @if (ViewBag.RSMList != null && ViewBag.RSMList.Count > 0)
     {
@@ -7319,65 +7416,17 @@
         <text>
         roleList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RoleList));
         </text>
-    }
+    }*@
 
 </script>
+
+<!--loading screen-->
 <script>
     // JavaScript to hide the loading screen when the view has loaded
     window.addEventListener('load', function () {
         document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
         document.getElementById('content').style.display = 'block'; // Show content
     });
-</script>
-<!-- Optional JavaScript for dynamically loading employee details -->
-<script>
-    function CommentView(button) {
-        // Example of getting employee data; replace this with actual data fetching
-        const employeeDetails = `
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Position:</strong> Software Engineer</p>
-            <p><strong>Department:</strong> IT</p>
-            <p><strong>Email:</strong> john.doe@example.com</p>
-        `;
-
-        // Populate the modal with employee details
-        document.getElementById('employeeDetails').innerHTML = employeeDetails;
-    }
-</script>
-<!-- Script to Initialize Quill -->
-<script>
-    //var quill = new Quill('#notedesc', {
-    //    theme: 'snow',  // Specify theme in configuration
-    //    placeholder: 'Type your note here...',
-    //    modules: {
-    //        toolbar: [
-    //            [{ header: [1, 2, false] }],
-    //            ['bold', 'italic', 'underline'],
-    //            ['link', 'blockquote', 'code-block', 'image'],
-    //            [{ list: 'ordered' }, { list: 'bullet' }],
-    //            [{ script: 'sub' }, { script: 'super' }],
-    //            [{ align: [] }],
-    //            ['clean']                                         // Remove formatting button
-    //        ]
-    //    }
-    //});
-
-    ////commentdesc
-    //var quill = new Quill('#commentdesc', {
-    //    theme: 'snow',  // Specify theme in configuration
-    //    placeholder: 'Type your note here...',
-    //    modules: {
-    //        toolbar: [
-    //            [{ header: [1, 2, false] }],
-    //            ['bold', 'italic', 'underline'],
-    //            ['link', 'blockquote', 'code-block', 'image'],
-    //            [{ list: 'ordered' }, { list: 'bullet' }],
-    //            [{ script: 'sub' }, { script: 'super' }],
-    //            [{ align: [] }],
-    //            ['clean']                                         // Remove formatting button
-    //        ]
-    //    }
-    //});
 </script>
 
 <!--Highlight values-->
@@ -7447,6 +7496,7 @@
     // Call the function to apply the highlighting
     highlightCells();
 </script>
+
 <!--Highlight Trending Break Even-->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -7461,10 +7511,10 @@
             if (!isNaN(tbeValue) && tbeValue > 100) {
                 tbeCount++;
             }
-            if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 90) {
+            if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 100) {
                 tbeCount70++;
             }
-            if (!isNaN(tbeValue) && tbeValue > 90 && tbeValue < 100) {
+            if (!isNaN(tbeValue) && tbeValue < 70) {
                 tbeCount90++;
             }
         });
@@ -7485,7 +7535,4 @@
         }
     });
 
-
 </script>
-
-
