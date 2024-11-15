@@ -333,19 +333,7 @@ namespace DWH_Reporting.Controllers
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)
             {
                 Fct_StoreNumberAttributesModel model3 = new Fct_StoreNumberAttributesModel
-                {
-                    //VP = row["VP"].ToString(),
-                    //Region = row["Region"].ToString(),
-                    //SD = row["SD"].ToString(),
-                    //UniqueID = row["Unique ID"].ToString(),
-                    //DealerCode = row["Dealer Code"].ToString(),
-                    //Tiers = row["Tiers"].ToString(),
-                    //Store = row["Store"].ToString(),
-                    //HITStore = row["HIT Store"].ToString(),
-                    //Market = row["Market"].ToString(),
-                    //TM = row["TM"].ToString(),
-                    //RSMSRSM = row["RSM/SRSM"].ToString(),
-                    //Role = row["Role"].ToString(),
+                {                    
                     //MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
@@ -501,12 +489,7 @@ namespace DWH_Reporting.Controllers
                     HomeTechProtect = row["HomeTech Protect"].ToString()
                     //TimeStamp = row["TimeStamp"].ToString()
                 };
-
-                ViewBag.CSAT = row["CSAT"].ToString();
-                ViewBag.TotalOps = row["TOTAL OPS"].ToString();
-                ViewBag.ActualBudHRS = row["Monthly Budgeted HRS"].ToString();
-                ViewBag.Traffic = row["Total Traffic"].ToString();
-
+                
                 lisn_tot.Add(model3);
             }
             ViewBag.Date = GpReport.DateTimes;
@@ -525,19 +508,8 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel model4 = new Fct_StoreNumberAttributesModel
                 {
-                    //VP = row["VP"].ToString(),
-                    //Region = row["Region"].ToString(),
-                    //SD = row["SD"].ToString(),
-                    //UniqueID = row["Unique ID"].ToString(),
-                    //DealerCode = row["Dealer Code"].ToString(),
-                    //Tiers = row["Tiers"].ToString(),
-                    //Store = row["Store"].ToString(),
-                    //HITStore = row["HIT Store"].ToString(),
                     Market = row["Market"].ToString(),
                     TM = row["TM"].ToString(),
-                    //RSMSRSM = row["RSM/SRSM"].ToString(),
-                    //Role = row["Role"].ToString(),
-                    //MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
@@ -764,19 +736,19 @@ namespace DWH_Reporting.Controllers
                 storesNamesSet.Add(rsmName);
                 storesNamesSet.Add(roleName);
 
-                // Add to the list as SelectListItem
-                vpList.Add(new SelectListItem
-                {
-                    Value = vpName, // You can change this to another column if needed
-                    Text = vpName
-                });
+                //// Add to the list as SelectListItem
+                //vpList.Add(new SelectListItem
+                //{
+                //    Value = vpName, // You can change this to another column if needed
+                //    Text = vpName
+                //});
 
-                // Add to the list as SelectListItem
-                regionList.Add(new SelectListItem
-                {
-                    Value = regionName,
-                    Text = regionName
-                });
+                //// Add to the list as SelectListItem
+                //regionList.Add(new SelectListItem
+                //{
+                //    Value = regionName,
+                //    Text = regionName
+                //});
 
                 // Add to the list as SelectListItem
                 sdList.Add(new SelectListItem
@@ -809,46 +781,46 @@ namespace DWH_Reporting.Controllers
                     Text = tmName
                 });
 
-                rsmList.Add(new SelectListItem
-                {
-                    Value = rsmName,
-                    Text = rsmName
-                });
+                //rsmList.Add(new SelectListItem
+                //{
+                //    Value = rsmName,
+                //    Text = rsmName
+                //});
 
-                roleList.Add(new SelectListItem
-                {
-                    Value = roleName,
-                    Text = roleName
-                });
+                //roleList.Add(new SelectListItem
+                //{
+                //    Value = roleName,
+                //    Text = roleName
+                //});
 
             }
 
-            //Unique record working in list
+            ////Unique record working in list
 
-            if (vpList != null && vpList.Count > 0)
-            {
-                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-                var distinctVPList = vpList.GroupBy(x => x.Value)
-                                           .Select(g => g.First()) // Or group by x.Text if needed
-                                           .ToList();
-                ViewBag.VPList = distinctVPList;
-            }
-            else
-            {
-                ViewBag.VPList = new List<SelectListItem>();
-            }
-            if (regionList != null && regionList.Count > 0)
-            {
-                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-                var distinctRegionList = regionList.GroupBy(x => x.Value)
-                                           .Select(g => g.First()) // Or group by x.Text if needed
-                                           .ToList();
-                ViewBag.RegionList = distinctRegionList;
-            }
-            else
-            {
-                ViewBag.RegionList = new List<SelectListItem>();
-            }
+            //if (vpList != null && vpList.Count > 0)
+            //{
+            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+            //    var distinctVPList = vpList.GroupBy(x => x.Value)
+            //                               .Select(g => g.First()) // Or group by x.Text if needed
+            //                               .ToList();
+            //    ViewBag.VPList = distinctVPList;
+            //}
+            //else
+            //{
+            //    ViewBag.VPList = new List<SelectListItem>();
+            //}
+            //if (regionList != null && regionList.Count > 0)
+            //{
+            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+            //    var distinctRegionList = regionList.GroupBy(x => x.Value)
+            //                               .Select(g => g.First()) // Or group by x.Text if needed
+            //                               .ToList();
+            //    ViewBag.RegionList = distinctRegionList;
+            //}
+            //else
+            //{
+            //    ViewBag.RegionList = new List<SelectListItem>();
+            //}
             if (sdList != null && sdList.Count > 0)
             {
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
@@ -909,30 +881,30 @@ namespace DWH_Reporting.Controllers
             {
                 ViewBag.TMList = new List<SelectListItem>();
             }
-            if (rsmList != null && rsmList.Count > 0)
-            {
-                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-                var distinctRSMList = rsmList.GroupBy(x => x.Value)
-                                           .Select(g => g.First()) // Or group by x.Text if needed
-                                           .ToList();
-                ViewBag.RSMList = distinctRSMList;
-            }
-            else
-            {
-                ViewBag.RSMList = new List<SelectListItem>();
-            }
-            if (roleList != null && roleList.Count > 0)
-            {
-                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-                var distinctRoleList = roleList.GroupBy(x => x.Value)
-                                           .Select(g => g.First()) // Or group by x.Text if needed
-                                           .ToList();
-                ViewBag.RoleList = distinctRoleList;
-            }
-            else
-            {
-                ViewBag.RoleList = new List<SelectListItem>();
-            }
+            //if (rsmList != null && rsmList.Count > 0)
+            //{
+            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+            //    var distinctRSMList = rsmList.GroupBy(x => x.Value)
+            //                               .Select(g => g.First()) // Or group by x.Text if needed
+            //                               .ToList();
+            //    ViewBag.RSMList = distinctRSMList;
+            //}
+            //else
+            //{
+            //    ViewBag.RSMList = new List<SelectListItem>();
+            //}
+            //if (roleList != null && roleList.Count > 0)
+            //{
+            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+            //    var distinctRoleList = roleList.GroupBy(x => x.Value)
+            //                               .Select(g => g.First()) // Or group by x.Text if needed
+            //                               .ToList();
+            //    ViewBag.RoleList = distinctRoleList;
+            //}
+            //else
+            //{
+            //    ViewBag.RoleList = new List<SelectListItem>();
+            //}
         }
 
         public ActionResult TrendingCommission()
@@ -1017,7 +989,6 @@ namespace DWH_Reporting.Controllers
         {
 
             string dateParam = selectedDate;
-            //string dateParam = "2024-10-14";
 
             // Call your function with the date parameter
             DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam);
@@ -1122,7 +1093,7 @@ namespace DWH_Reporting.Controllers
                 lisn2_lst.Add(model);
             }
 
-            ViewBag.Date = GpReport.DateTimes;
+            //ViewBag.Date = GpReport.DateTimes;
             ViewData["GetFct_Summary"] = lisn2_lst;
 
 
@@ -1207,13 +1178,13 @@ namespace DWH_Reporting.Controllers
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     ProtAdv4 = row["ProtAdv 4"].ToString(),
                 };
-                ViewBag.CSAT = row["CSAT"].ToString();
-                ViewBag.TotalOps = row["TOTAL OPS"].ToString();
+                //ViewBag.CSAT = row["CSAT"].ToString();
+                //ViewBag.TotalOps = row["TOTAL OPS"].ToString();
                 //ViewBag.ActualBudHRS = row["Monthly Budgeted HRS"].ToString();
-                ViewBag.Traffic = row["Total Traffic"].ToString();
+                //ViewBag.Traffic = row["Total Traffic"].ToString();
                 lisn_tot.Add(totalNum);
             }
-            ViewBag.Date = GpReport.DateTimes;
+            //ViewBag.Date = GpReport.DateTimes;
             ViewData["GetRecords_summaryTotal"] = lisn_tot;
             ///ViewBag.Date = GpReport.DateTimes;
 

@@ -4908,6 +4908,7 @@
     }
 
     function loadNoteData(uniqueID, dealercode, datekey) {
+        resetEmployeeDD();
 
         $.ajax({
             url: '/Home/SaveUniqueIDToSession', // Route to save UniqueID in session
