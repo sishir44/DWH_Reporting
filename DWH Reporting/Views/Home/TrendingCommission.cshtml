@@ -47,7 +47,13 @@
         margin-left: 0px;
         zoom: 1;
     }*/
-   
+    input#reprtdateason {
+        border: 0;
+        background: #0079b1;
+        color: white;
+        font-size: 23px;
+        font-weight: bold;
+    }
 </style>
 
 <div class="content container-fluid">
@@ -69,7 +75,7 @@
                     <div class="row">
                         <div class="col-md-12 mt-3">
                             <div class="Reporthead">
-                                <h3>Report as on <span id="reportdate"></span></h3>
+                                <h3>Report as on <input type="date" id="reprtdateason" class="datereport" readonly /></h3>
                             </div>
                         </div>
                     </div>
@@ -125,7 +131,11 @@
 <script>
     $(document).ready(function () {
         loadDataTable();
+        $("#datefilter").change(function () {
+            $('#reprtdateason').val($('#datefilter').val());
+        });
     });
+
 
     function loadDataTable() {
 
@@ -165,7 +175,7 @@
             }
         });
         table.clear();
-        $('#reportdate').text('');
+        //$('#reprtdateason').val('');
 
         $("#imageloader2").hide();
         var datefilter = $('#datefilter').val() || "";
@@ -178,9 +188,10 @@
                 $("#imageloader2").hide();
                 if (data != '') {
                     $.each(data, function (i, item) {
-                        var rpdate = new Date(item.MaxDate).toLocaleDateString();
+                        //var rpdate = new Date(item.MaxDate).toLocaleDateString();
                         $('#datefilter').val(item.MaxDate)
-                        $('#reportdate').text(rpdate);
+                        //  $('#reportdate').text($('#datefilter').val());
+                        $('#reprtdateason').val(item.MaxDate);
                         table.row.add([
                             item.EmpID, item.EmpName, item.Role, item.Store, item.StoreUID, item.EmployeeRank,
                             item.BucketWage === 'Bucket'
@@ -191,7 +202,7 @@
                             //    : "$" + parseFloat(item.EOMCommissionTrendingBucket).toFixed(2) ,
                             item.BucketWage,
                             item.TOTALOPS,
-                            parseFloat(item.CSAT).toFixed(2) + "%", 
+                            parseFloat(item.CSAT).toFixed(2) + "%",
                             item.GROSSADDSNetOFF,
                             item.FNAchMTD,
                             item.CRUAchMTD,
