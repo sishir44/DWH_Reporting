@@ -920,6 +920,21 @@ namespace DWH_Reporting.Controllers
                 throw;
             }
         }
+
+        public ActionResult TrendingCommissionMobileView()
+        {
+            try
+            {
+                return View();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public JsonResult TrendingCommissionData(string date)
         {
 
