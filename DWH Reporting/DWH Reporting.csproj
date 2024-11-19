@@ -342,6 +342,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Summary.cshtml" />
     <Content Include="Views\Home\TrendingCommissionMobileView.cshtml" />
+    <Content Include="Views\Home\EmployeeRank.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
