@@ -113,6 +113,24 @@ namespace DWH_Reporting.Controllers
         }
 
         //[Authorization]
+        public ActionResult HRSMRank(string selectedDate)
+        {
+            try
+            {
+
+                ShowStoreNumber(selectedDate);
+
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return Content("Report is being uploaded. Please try again in few minutes");
+            }
+
+        }
+
+        //[Authorization]
         public ActionResult EmployeeNumber(string selectedDate)
         {
             try
