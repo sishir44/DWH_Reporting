@@ -11,6 +11,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
+    <link rel="shortcut icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
 
     <link rel="icon" type="image/x-icon" class="js-site-favicon" href="https://mis.mobilelinkusa.com/TestMTDEmp/favicon.ico">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -151,7 +153,7 @@
         #tbl thead th:nth-child(2),
         #tbl thead th:nth-child(3),
         #tbl thead th:nth-child(4),
-        #tbl thead th:nth-child(5){
+        #tbl thead th:nth-child(5) {
             position: sticky;
             z-index: 12;
         }
@@ -188,6 +190,7 @@
             max-width: 70px !important;
             text-align: center;
         }
+
         #tbl tbody td:nth-child(1),
         #tbl tbody td:nth-child(2),
         #tbl tbody td:nth-child(3),
@@ -234,11 +237,13 @@
             color: white;
             vertical-align: middle;
         }
+
         table tr td:nth-child(5) {
             background-color: black;
             color: white;
             vertical-align: middle;
         }
+
         table tr th {
             background-color: black;
             color: white;
@@ -318,25 +323,32 @@
             box-shadow: inset 0 0 5px #7e5d2e;
             border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb {
+
+        /*::-webkit-scrollbar-thumb {
             background: #0079B1;
             border-radius: 10px;
+        }*/
+        ::-webkit-scrollbar-thumb {
+            background: #063b73;
+            border-radius: 10px;
         }
+            ::-webkit-scrollbar-thumb:hover {
+                background: gray;
+            }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: gray;
-        }
         h3.heading {
             font-weight: 700;
-            background: #0079b1;
+            background: #063b73;
             color: white;
             padding: 9px;
         }
+
         input#datefilter {
             width: 18%;
             padding: 13px 5px;
             margin: 10px 0px;
         }
+
         button#ViewAll {
             padding: 2px 12px;
         }
@@ -363,7 +375,8 @@
                 <div class="table-responsive" id="printtable">
                     <div id="imageloader2" style=" padding-left: 543px;"></div>
                     <div id="demoDW">
-                        <table cellspacing="0" id="tbl" class="table-bordered" style="width:100%"></table>
+                        <table cellspacing="0" id="tbl" class="table-bordered" style="width:100%">
+                        </table>
                     </div>
                 </div>
             </div>
@@ -372,11 +385,22 @@
 
 
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.2/css/fixedColumns.dataTables.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.3.2/css/fixedColumns.dataTables.min.css">   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js"></script>
     <script>
 
         function createTableHeader() {
+
+            function getAlphabetFromNumber(number) {
+                let result = '';
+                while (number > 0) {
+                    number--; 
+                    result = String.fromCharCode('A'.charCodeAt(0) + (number % 26)) + result;
+                    number = Math.floor(number / 26);
+                }
+                return result;
+            }
+
             const headers = [
                 { text: "Emp ID", style: "background-color: rgb(6, 59, 115);color:white" },
                 { text: "Employees", style: "background-color: rgb(6, 59, 115);color:white"},
@@ -405,22 +429,51 @@
                 { text: "ProtAdv  4", style: "background-color: rgb(6, 59, 115);color:white" }
             ];
 
-            // Create thead element
-            const thead = document.createElement("thead");
-            const headerRow = document.createElement("tr");
-            
+            const table = $("#tbl");
+            const thead = $("<thead></thead>");
+
+            // Second header row with alphabetical headers
+            const headerRow2 = $("<tr></tr>");
+            for (let i = 1; i <= headers.length; i++) {
+                const alphabetHeader = getAlphabetFromNumber(i);
+                const th = $("<th></th>")
+                    .text(alphabetHeader)
+                    .css({
+                        fontSize: "8px",
+                        backgroundColor: "lightgray",
+                        color: "black",
+                        textAlign: "center"
+                    });
+                headerRow2.append(th);
+            }
+            thead.append(headerRow2);
+
+            // First header row
+            const headerRow1 = $("<tr></tr>");
             headers.forEach(header => {
-                const th = document.createElement("th");
-                th.innerHTML = header.text;
-                th.style.cssText = header.style; 
-                if (header.class) {
-                    th.classList.add(header.class); 
-                }
-                headerRow.appendChild(th);
+                const th = $("<th></th>").text(header.text).css("cssText", header.style);
+                headerRow1.append(th);
             });
-            thead.appendChild(headerRow);
-            const table = document.getElementById("tbl");
-            table.appendChild(thead);
+            thead.append(headerRow1);
+            table.append(thead);
+
+
+            // Create thead element
+            //const thead = document.createElement("thead");
+            //const headerRow = document.createElement("tr");
+            
+            //headers.forEach(header => {
+            //    const th = document.createElement("th");
+            //    th.innerHTML = header.text;
+            //    th.style.cssText = header.style; 
+            //    if (header.class) {
+            //        th.classList.add(header.class); 
+            //    }
+            //    headerRow.appendChild(th);
+            //});
+            //thead.appendChild(headerRow);
+            //const table = document.getElementById("tbl");
+            //table.appendChild(thead);
         }
         function TrendingCommissionData(data) {
             $('#tbl').empty();
