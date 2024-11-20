@@ -282,26 +282,35 @@
         }
 
         .scrollable {
-            height: 100px;
+            height: 13px;
+            width:13px;
             overflow-y: scroll;
         }
 
         ::-webkit-scrollbar {
             width: auto;
+            height: 13px;
+            width: 13px;
         }
 
         ::-webkit-scrollbar-track {
             box-shadow: inset 0 0 5px grey;
             border-radius: 10px;
+            height: 13px;
+            width: 13px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: #0046bf;
             border-radius: 10px;
+            height: 13px;
+            width: 13px;
         }
 
             ::-webkit-scrollbar-thumb:hover {
                 background: #404040;
+                height: 13px;
+                width: 13px;
             }
 
         body {
@@ -440,7 +449,7 @@
                             @*<img src="~/Image/smLogoMobily.png" />*@
                         </div>
                         <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <h3 style="margin-top:6px; font-size:20px;" class="title">|  MTD @ViewBag.Title</h3>
+                            <h3 style="margin-top:6px; font-weight:800; font-size:20px;" class="title">|  MTD @ViewBag.Title</h3>
                         </div>
                     </div>
                 </div>
@@ -527,7 +536,7 @@
             </div>
 
             <!-- FILTERS -->
-            <div class="fields" style="background-color:white;  overflow-x: auto; white-space: nowrap;">
+            <div class="fields" style="background-color:white; font-size:8px; overflow-x: auto; white-space: nowrap;">
 
                 <div class="row testimonial-group" style="display: inline-block;">
 
@@ -567,7 +576,7 @@
                             {
                                 foreach (var item in ViewBag.SDList)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Text">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Text">@item.Text</option>
                                 }
                             }
                             else
@@ -585,7 +594,7 @@
                             {
                                 foreach (var item in ViewBag.TMList)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -603,7 +612,7 @@
                             {
                                 foreach (var item in ViewBag.MarketList)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -621,7 +630,7 @@
                             {
                                 foreach (var item in recordsGet_MUL_Mgr)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
                                             value="@item.MUL_MktMngr">
                                         @item.MUL_MktMngr
                                     </option>
@@ -642,7 +651,7 @@
                             {
                                 foreach (var item in recordsGet_MUL_Mkt)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
                                             value="@item.MUL_Market">
                                         @item.MUL_Market
                                     </option>
@@ -663,7 +672,7 @@
                             {
                                 foreach (var item in ViewBag.StoresList)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -682,7 +691,7 @@
                             {
                                 foreach (var item in ViewBag.tiersList)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
@@ -731,18 +740,18 @@
                         <tr class="spanned_header">
 
                             <!-- 5 Freeze COL -->
-                            <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
+                            <th rowspan="2" style="background-color: black; color:white;  white-space: normal; word-wrap: break-word;">Self Note</th>
                             <th rowspan="2" style="background-color: black; color:white;">View</th>
                             <th rowspan="2" style="background-color: black; color:white;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Market</th>
                             <th rowspan="2" style="background-color: black; color:white;">Store</th>
 
-                            <th rowspan="2" style="background-color: black; color:white;">Unique ID</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Dealer Code</th>
+                            <th rowspan="2" style="background-color: black; color:white;  white-space: normal; word-wrap: break-word;">Unique ID</th>
+                            <th rowspan="2" style="background-color: black; color:white;  white-space: normal; word-wrap: break-word;">Dealer Code</th>
                             <th rowspan="2" style="background-color: black; color:white;">Tiers</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Store Contact</th>
+                            <th rowspan="2" style="background-color: black; color:white;  white-space: normal; word-wrap: break-word;">Store Contact</th>
                             <th rowspan="2" style="background-color: black; color:white;">Role</th>
-                            <th rowspan="2" style="background-color: black; color:white;">HIT Store</th>
+                            <th rowspan="2" style="background-color: black; color:white;  white-space: normal; word-wrap: break-word;">HIT Store</th>
                             <th rowspan="2" style="background-color: black; color:white;">SD</th>
 
                             <!-- Calc data header for HEADING -->
@@ -919,7 +928,6 @@
                             <tr class="total_data">
                                 <td></td>
                                 <td></td>
-
                                 <td></td>
                                 <td>Grand Total</td>
                                 <td></td>
@@ -1118,7 +1126,7 @@
                                                 <td></td>
 
                                                 <td>TM Total</td>
-                                                <td>@record2.TM</td>
+                                                <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record2.TM</td>
                                                 @*<td style="display:none;"></td>*@
 
                                                 <td></td>
@@ -1468,16 +1476,16 @@
                                 <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                 <!-- Hierarchy -->
-                                <td style="background-color: black; color: white; font-weight:bold;">@record.TM      </td>
-                                <td style="background-color: black; color: white; font-weight:bold;">@record.Market   </td>
-                                <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
+                                <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.TM      </td>
+                                <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
+                                <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
                                 <td>@record.UniqueID</td>
                                 <td>@record.DealerCode</td>
                                 <td>@record.Tiers</td>
                                 <td>@record.RSMSRSM</td>
                                 <td>@record.Role</td>
                                 <td>@record.HITStore</td>
-                                <td>@record.SD</td>
+                                <td style=" white-space: normal; word-wrap: break-word;">@record.SD</td>
 
                                 <!-- Data SP SN -->
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
