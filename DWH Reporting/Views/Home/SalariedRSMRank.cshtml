@@ -1,0 +1,3568 @@
+﻿
+@{
+    ViewBag.Title = "Salaried RSM Rank";
+    Layout = null;
+}
+
+@{
+    // Retrieve the data from ViewData
+    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsGet_MUL_Mgr = ViewData["Get_MUL_Mgr"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsGet_MUL_Mkt = ViewData["Get_MUL_Mkt"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+
+}
+
+@using DWH_Reporting.Models.GpReport;
+
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://mis.mobilyllc.com/MobilyGpStatus/Content/Css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    @*<script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>*@
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://mis.mobilyllc.com/MobilyGpStatus/Content/Js/jquery.table2excel.js"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+
+    <title>MTD Reports</title>
+
+    <style>
+        button#btnaddnote {
+            padding: 1px 10px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+        button#btndataview {
+            padding: 1px 10px;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
+            button#btnaddnote:hover, button#btndataview:hover {
+                color: white !important;
+            }
+
+        .single-line-button {
+            white-space: nowrap;
+        }
+
+        .row.head {
+            width: 100%;
+        }
+
+        .modal-dialog {
+            max-width: 100%; /* Remove max-width constraint */
+            width: 100vw; /* Full viewport width */
+            margin: 0; /* Remove default margin */
+        }
+
+        /* Full-width modal content */
+        .modal-content {
+            width: 100%;
+            height: 100%; /* Optional: full height if needed */
+            border-radius: 0; /* Optional: remove border radius for a more rectangular look */
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid rgba(0, 0, 0, .2);
+            outline: 0;
+        }
+
+
+        /* Loading screen styling */
+        #loadingScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparent background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        /* Logo styling */
+        #loadingLogo {
+            width: 150px; /* Adjust logo size as needed */
+        }
+
+
+
+        .btn {
+            border-radius: 10px;
+            background-image: linear-gradient(#0046bf54, #0046bf);
+            color: white;
+            border: none;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+            .btn.green {
+                background-color: green;
+            }
+
+        .GP_heading {
+            color: #0046bf;
+            text-align: center;
+            font-size: 26px;
+            margin-top: 10px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .date_time {
+            color: #0046bf;
+            text-align: center;
+            font-size: 12px;
+            margin-top: 5px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .VP_data {
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #215967;
+            font-size: 12px;
+        }
+
+        tr.main_header {
+            /*background-color: #c0c0c0;
+            color: black;*/
+            vertical-align: middle !important;
+            text-align: center;
+            font-size: 10px;
+            background-color: black;
+            color: white;
+            border: 1px solid white;
+        }
+
+        tr.grand_total {
+            font-size: 12.5px;
+            text-align: center;
+            color: red;
+            background-color: white;
+        }
+
+        .grand_total tr, th {
+            /*border: 1px solid;
+            border-color: white;*/
+        }
+
+        tr.TM_data {
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #92cddc;
+        }
+
+        tr.SD_data {
+            font-size: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #31869b;
+        }
+
+        .datacell_white {
+            font-size: 11.5px;
+            text-align: center;
+            color: black;
+            background-color: white;
+        }
+
+        .datacell_alternate {
+            font-size: 11.5px;
+            text-align: center;
+            color: black;
+            background-color: #daeef3;
+        }
+
+        tr.main_row th {
+            text-align: center;
+            font-size: 13px;
+            background-color: #c0c0c0;
+            color: black;
+            vertical-align: middle;
+            font-weight: bold;
+        }
+
+
+        /*.table-bordered td {
+            border: 1px solid #000000;
+        }*/
+
+        .rounded {
+            -webkit-border-radius: 30px;
+            -moz-border-radius: 30px;
+            border-radius: 30px;
+        }
+
+        .semi-square {
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        #mainselection select {
+            border: 0;
+            color: #EEE;
+            background: transparent;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            padding: 2px 10px;
+            *background: #58B14C;
+            -webkit-appearance: none;
+        }
+
+        #mainselection {
+            overflow: hidden;
+            color: white;
+            -moz-border-radius: 9px 9px 9px 9px;
+            -webkit-border-radius: 9px 9px 9px 9px;
+            border-radius: 9px 9px 9px 9px;
+            box-shadow: 1px 1px 11px #330033;
+        }
+
+        select#soflow, select#soflow-color {
+            -webkit-appearance: button;
+            -webkit-border-radius: 2px;
+            -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+            -webkit-padding-end: 20px;
+            -webkit-padding-start: 2px;
+            -webkit-user-select: none;
+            background-position: 97% center;
+            background-repeat: no-repeat;
+            /*border: 1px solid #AAA;*/
+            color: white;
+            font-size: inherit;
+            margin: 20px;
+            overflow: hidden;
+            padding: 5px 10px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        select#soflow-color {
+            color: #fff;
+            background-color: #779126;
+            -webkit-border-radius: 20px;
+            -moz-border-radius: 20px;
+            border-radius: 20px;
+            padding-left: 15px;
+        }
+
+        .table th {
+            padding: 0px !important;
+            text-align: center;
+        }
+
+        [data-toggle="toggle"] {
+            display: none;
+        }
+
+        .scrollable {
+            height: 100px;
+            overflow-y: scroll;
+        }
+
+        ::-webkit-scrollbar {
+            width: auto;
+        }
+
+        ::-webkit-scrollbar-track {
+            box-shadow: inset 0 0 5px grey;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0046bf;
+            border-radius: 10px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #404040;
+            }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            transition: background-color .5s;
+        }
+
+        table.table-bordered.dataTable.no-footer.DTFC_Cloned {
+            background-color: #0a0128;
+            color: white;
+        }
+
+        .table-bordered thead td, .table-bordered thead th {
+            border-bottom-width: 0;
+        }
+
+        .DTFC_LeftBodyWrapper {
+            position: relative;
+            top: 0px;
+            overflow: hidden;
+        }
+
+        .dataTables_scrollBody {
+            position: relative;
+            overflow: auto;
+            width: 100%;
+        }
+
+        /*.table thead tr th {
+            border: 1px solid #000000;
+        }*/
+
+        .table thead th {
+            vertical-align: middle;
+        }
+
+        td.sorting_1 {
+            background-color: black !important;
+            color: white;
+        }
+
+        .table th, .table td {
+            padding: 5px;
+            text-align: center;
+        }
+
+        .textleft {
+            text-align: left;
+        }
+
+        tr.spanned_header th {
+            text-align: center;
+            font-size: 13px;
+            /*color: white;*/
+            vertical-align: middle;
+            border: 1px solid white;
+        }
+
+        tr.main_header td {
+            text-align: center;
+            font-size: 13px;
+            background-color: black;
+            color: white;
+            vertical-align: middle;
+            font-weight: bold;
+            border: 1px solid white;
+        }
+
+        tr.grand_total th {
+            font-size: 13px;
+            text-align: center;
+            color: red;
+            background-color: white;
+        }
+
+        tr.main_data td {
+            font-size: 12px;
+            text-align: center;
+            color: black;
+            background-color: #F4D2C4;
+            border: 1px solid white;
+        }
+
+        tr.main_data:nth-child(odd) td {
+            background-color: white;
+            border: 1px solid white;
+        }
+
+        tr.total_data td {
+            font-size: 12px;
+            text-align: center;
+            color: white;
+            background-color: black;
+            border: 1px solid white;
+        }
+
+        tr.total_dataTM td {
+            font-size: 12px;
+            text-align: center;
+            color: white;
+            background-color: black;
+            border: 1px solid white;
+        }
+
+
+        tr.MUSM_data {
+            font-size: 13px;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            background-color: #3357E1;
+        }
+    </style>
+
+</head>
+
+<body style="padding-top:0; background-color:#B2D6F2;">
+
+
+
+    <!-- LOADING LOGO -->
+    <div id="loadingScreen">
+        <img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">
+
+    </div>
+
+    <div>
+
+        <div id="div1" class="content" style="background-color:#B2D6F2;">
+
+            <!-- TITLE & DATE FILTER & EXPORT BTN-->
+            <div class="row head">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            @*<img src="~/Image/smLogoMobily.png" />*@
+                        </div>
+                        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                            <h3 style="margin-top:6px; font-size:20px;" class="title">|  MTD Salaried RSM Rank</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                    <div class="row">
+                        @{
+                            var today = DateTime.Today.ToString("yyyy-MM-dd");
+                            var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+                        }
+
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                            @using (Html.BeginForm("SalariedRSMRank", "Home", FormMethod.Get))
+                            {
+                                <div class="form-group">
+                                    <input type="date"
+                                           id="selectedDate"
+                                           name="selectedDate"
+                                           class="form-control"
+                                           title="Select Date"
+                                           style="margin-top:8px; background-color:#A5CFF0; font-size: 14px; font-weight: bold; color:#0C5D0C; border:black"
+                                           onchange="this.form.submit();"
+                                           max="@yesterday" /> <!-- Disable today and future dates -->
+                                </div>
+                            }
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            @using (Html.BeginForm("SalariedRSMRank", "Home", FormMethod.Get))
+                            {
+                                <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="resetid">
+                                    <i class="fas fa-retweet"></i>
+                                </button>
+                            }
+
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter" onclick="clearfilter()">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <button class="headerbtndiv btn float-right form-control" title="Export in Excel" onclick="test()">
+
+                                <i class="fas fa-file-excel"></i>
+
+                            </button>
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <button class="headerbtndiv btn float-right form-control" title="Print" onclick="printTable()">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UPDATED RPT DATE -->
+            <div class="row sub-header" style="background-color: grey;width: 100%;margin: 0 auto;">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
+                        <div id="TimeStamp">
+                            @if (ViewBag.ReportDate != null)
+                            {
+                                <p style="margin-bottom: 0rem; font-size: 12px; margin-left:20px;">Report Date: @ViewBag.ReportDate</p>
+                            }
+                            else
+                            {
+                                <p style="color: red;">Data not available</p>
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-end;">
+                        <div id="LastupdatedOn">
+                            @if (ViewBag.LatestTimeStamp != null)
+                            {
+                                <p style="margin-bottom: 0rem; font-size: 12px;">Update Date & Time: @ViewBag.LatestTimeStamp </p>
+                            }
+                            else
+                            {
+                                <p style="color: red;">Data not available</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="fields" style="background-color:white;  overflow-x: auto; white-space: nowrap;">
+
+                <div class="row testimonial-group" style="display: inline-block;">
+
+                    <!-- Budgeted Hours and Total Ops -->
+                    <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
+                        <label>Total Stores</label>
+                        <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
+                               style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px; margin-left:10px;" />
+
+                        <label>100% & Above</label>
+                        <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
+                               title="Above 100%" value=""
+                               style="background-color: green; color:white; height: 35px; margin-left:10px; margin-bottom:5px;" />
+                    </div>
+
+                    <!-- Month and isactive -->
+                    <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
+                        <label>Above 70%</label>
+                        <input type="button" name="above90" id="tbeCountDisplay70" class="form-control"
+                               title="Traffic"
+                               value=""
+                               style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
+
+                        <label>Less Than 70%</label>
+                        <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
+                               title="CSAT"
+                               value=""
+                               style="background-color: orange; color:white; height: 35px; margin-bottom:5px;" />
+                    </div>
+
+                    <!-- Search SD -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" />
+                        @*<select class="form-control selector" id="SD" multiple onchange="filterSDData()">*@
+                        <select class="form-control selector" id="SD" multiple>
+                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.SDList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Text">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search TM -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" />
+                        <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
+                            @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.TMList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No TM available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search Market -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" />
+                        <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
+                            @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.MarketList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Market available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search MUL_MktMngr -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search Multi Manager" />
+                        <select class="form-control selector" id="MULMngr" multiple onchange="filterMULMngrData()">
+                            @if (recordsGet_MUL_Mgr != null && recordsGet_MUL_Mgr.Any())
+                            {
+                                foreach (var item in recordsGet_MUL_Mgr)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                            value="@item.MUL_MktMngr">
+                                        @item.MUL_MktMngr
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search MUL_Market -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchMULMkt" id="textSearchMULMkt" class="selectorinput form-control" placeholder="Search Multi Market" />
+                        <select class="form-control selector" id="MULMkt" multiple onchange="filterMULMktData()">
+                            @if (recordsGet_MUL_Mkt != null && recordsGet_MUL_Mkt.Any())
+                            {
+                                foreach (var item in recordsGet_MUL_Mkt)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                            value="@item.MUL_Market">
+                                        @item.MUL_Market
+                                    </option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Market available</option>
+                            }
+                        </select>
+                    </div>
+
+                    <!-- Search Stores -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" />
+                        <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
+                            @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.StoresList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Stores available</option>
+                            }
+                        </select>
+
+                    </div>
+
+                    <!-- Search Tiers -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" />
+                        <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
+                            @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.tiersList)
+                                {
+                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; " disabled>No Tiers available</option>
+                            }
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- DATA TBL -->
+            <div id="myDiv">
+
+                <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
+
+                    <thead>
+
+                        @functions {
+
+                            // Helper method to convert number to corresponding alphabet(s)
+                            public static string GetAlphabetFromNumber(int number)
+                            {
+                                string result = string.Empty;
+                                while (number > 0)
+                                {
+                                    number--; // Decrement to handle 1-based indexing
+                                    result = (char)('A' + (number % 26)) + result;
+                                    number /= 26;
+                                }
+                                return result;
+                            }
+                        }
+
+                        <!-- SHOW ALPHA HEAD ABOVE COL -->
+                        <tr class="numbered_header">
+                            @for (int i = 1; i <= 46; i++)
+                            {
+                                <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
+                            }
+                        </tr>
+
+                        <!-- Hierarchy COL HEAD-->
+                        <tr class="spanned_header">
+
+                            <th rowspan="2" style="background-color: brown; color:white;">Region</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">SD</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Unique ID</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Dealer Code</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Store</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">RSM ID</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Store Manager</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Pay Type</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Store Status</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">Market</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">TM Names</th>
+                            <th rowspan="2" style="background-color: brown; color:white;">MMM</th>
+
+                            <!-- Calc data header for HEADING -->
+                            <th id="ColSpan34" colspan="34"></th>
+
+                        </tr>
+
+                        <!-- CALC COL HEAD-->
+                        <tr class="main_header">
+                            <td style="background-color: red; color:white;">RANK</td>
+                            <td style="background-color: red; color:white;">Score</td>
+                            <td style="background-color: skyblue; color:black;">Store<br>Bonus</td>
+                            <td style="background-color: skyblue; color:black;">Store<br>Bonus<br>Rank</td>
+                            <td style="background-color: hotpink; color:white;">RSC<br>Making<br>Commission</td>
+                            <td style="background-color: hotpink; color:white;">RSC<br>Making<br>Commission<br>Rank</td>
+                            <td style="background-color: purple; color:white;">CSAT (86%)</td>
+                            <td style="background-color: purple; color:white;">CSAT<br>Store<br>Rank</td>
+                            <td style="background-color: lightgreen; color:black;">GROSS ADDS<br>Trend% To<br>Goal (80%)</td>
+                            <td style="background-color: lightgreen; color:black;">GROSS ADDS<br>Trend% To<br>Goal<br>Store Rank</td>
+                            <td style="background-color: peachpuff; color:black;">PPVGA<br>Close Rate<br>(4.0%)</td>
+                            <td style="background-color: peachpuff; color:black;">PPVGA<br>Close Rate<br>(4.0%) RANK</td>
+                            <td style="background-color: dimgrey; color:white;">CRU<br>Voice</td>
+                            <td style="background-color: dimgrey; color:white;">CRU<br>Voice<br>Rank</td>
+                            <td style="background-color: #063B73; color:white;">FN Voice</td>
+                            <td style="background-color: #063B73; color:white;">FN Voice<br>Rank<br></td>
+                            <td style="background-color: dimgrey; color:white;">Prepaid</td>
+                            <td style="background-color: dimgrey; color:white;">Prepaid<br>Rank</td>
+                            <td style="background-color: skyblue; color:black;">T,W,C<br>Devices</td>
+                            <td style="background-color: skyblue; color:black;">T,W,C<br>Devices<br>Store Rank</td>
+                            <td style="background-color: deepskyblue; color:black;">Prem<br>Video</td>
+                            <td style="background-color: deepskyblue; color:black;">Prem<br>Video<br>Store Rank</td>
+                            <td style="background-color: #063B73; color:white;">AIA</td>
+                            <td style="background-color: #063B73; color:white;">AIA<br>Rank</td>
+                            <td style="background-color: black; color:white;">Broadband +<br>Fiber</td>
+                            <td style="background-color: black; color:white;">Broadband +<br>Fiber Store<br>Rank</td>
+                            <td style="background-color: #063B73; color:white;">Upgrade</td>
+                            <td style="background-color: #063B73; color:white;">Upgrade<br>Rank</td>
+                            <td style="background-color: hotpink; color:white;">Next Up<br>(80%)</td>
+                            <td style="background-color: hotpink; color:white;">Next Up<br>Store<br>Rank</td>
+                            <td style="background-color: dimgrey; color:white;">ProtAdv<br>and HTP<br>Attach<br>Rt (60%)</td>
+                            <td style="background-color: dimgrey; color:white;">Protection<br>Store<br>Rank</td>
+                            <td style="background-color: forestgreen; color:white;">Accessory<br>Rev</td>
+                            <td style="background-color: forestgreen; color:white;">Accessory<br>Rev Rank</td>
+
+                        </tr>
+
+                    </thead>
+
+                    @if (recordsFct_StoreNumberTotal != null)
+                    {
+                        foreach (var record in recordsFct_StoreNumberTotal)
+                        {
+                            // GRAND TOTAL
+                            <tr class="total_data">
+
+                                <td></td>
+                                <td>Grand Total</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTrafficPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyNetOFF != null ? record.TWCDevicesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABusinessConversion)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyGoals)))</td>
+                                
+                            </tr>
+                        }
+
+                    }
+
+                    @if (recordsFct_StoreNumber != null)
+                    {
+                        // Sort records by Market
+                        var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.Market);
+
+                        foreach (var record in sortedRecords)
+                        {
+                            <!-- Data ALL CALC -->
+                            <tr class="main_data"
+                                data-modalTotalTraffic="@record.TotalTraffic"
+                                data-modalFiberConversion="@record.FiberConversion"
+                                data-modalBroadbandFiberNetOFF="@record.BroadbandFiberNetOFF"
+                                data-modalFiberGreenCheck="@record.FiberGreenCheck"
+                                data-modalAPO="@record.APO"
+                                data-modalCSAT="@record.CSAT"
+                                data-modalProtAdvHomeTechPercentage="@record.ProtAdvHomeTechPercentage"
+                                data-modalBreakEvenNumbers="@record.BreakEvenNumbers"
+                                data-modalTrendingToBreakEven="@record.TrendingToBreakEven"
+                                data-modalGPWithSpifTrending="@record.GPWithSpifTrending"
+                                data-modalGPTrendingPercentage="@record.GPTrendingPercentage"
+                                data-modalTotalGPGoals="@record.TotalGPGoals"
+                                data-modalOPSTrendingToGoalsPercentage="@record.OPSTrendingToGoalsPercentage"
+                                data-modalTotalOPSGoals="@record.TotalOPSGoals"
+                                data-modalTotalOPS="@record.TotalOPS"
+                                data-modalUpgradeTrendingToGoalsPercentage="@record.UpgradeTrendingToGoalsPercentage"
+                                data-modalMTDUpgradesGoals="@record.MTDUpgradesGoals"
+                                data-modalMTDUpgradesNetOFF="@record.MTDUpgradesNetOFF"
+                                data-modalTWCDevicesTrendToGoalPercentage="@record.TWCDevicesTrendToGoalPercentage"
+                                data-modalTWCDevicesQtyGoals="@record.TWCDevicesQtyGoals"
+                                data-modalTWCDevicesQtyNetOFF="@record.TWCDevicesQtyNetOFF"
+                                data-modalAIABusinessConversion="@record.AIABusinessConversion"
+                                data-modalAIAConsumerConversion="@record.AIAConsumerConversion"
+                                data-modalAIAGreenCheckConsumer="@record.AIAGreenCheckConsumer"
+                                data-modalAIACInternet="@record.AIACInternet"
+                                data-modalAIABInternet="@record.AIABInternet"
+                                data-modalTotalOPSTrending="@record.TotalOPSTrending"
+                                data-modalOPSPerTrafficPercentage="@record.OPSPerTrafficPercentage"
+                                data-modalCRUAchMTD="@record.CRUAchMTD"
+                                data-modalFNAchMTD="@record.FNAchMTD"
+                                data-modalGPPerBox="@record.GPPerBox"
+                                data-modalTotalGPAchievedWithSpif="@record.TotalGPAchievedWithSpif"
+                                data-modalGrossAdds="@record.GrossAdds"
+                                data-modalChargeBack="@record.ChargeBack"
+                                data-modalGrossAddsTrend="@record.GrossAddsTrend"
+                                data-modalGrossAddsGP="@record.GrossAddsGP"
+                                data-modalGrossAddsGPTrending="@record.GrossAddsGPTrending"
+                                data-modalARBusinessFNProgramAverageQ2Target="@record.ARBusinessFNProgramAverageQ2Target "
+                                data-modalFNAchAverageQTD="@record.FNAchAverageQTD"
+                                data-modalRemainingToAchieveFNAverageQ2Target="@record.RemainingToAchieveFNAverageQ2Target"
+                                data-modalFNAchTrend="@record.FNAchTrend"
+                                data-modalFNAchDollars="@record.FNAchDollars"
+                                data-modalARBusinessCRUProgramAverageQ2Target="@record.ARBusinessCRUProgramAverageQ2Target"
+                                data-modalCRUAchVoice="@record.CRUAchVoice"
+                                data-modalCRUAchDATA="@record.CRUAchDATA"
+                                data-modalCRUAchAverageQTD="@record.CRUAchAverageQTD"
+                                data-modalRemainingToAchieveCRUAverageQ2Target="@record.RemainingToAchieveCRUAverageQ2Target"
+                                data-modalCRUAchTrend="@record.CRUAchTrend"
+                                data-modalCRUAchVoiceDollars="@record.CRUAchVoiceDollars"
+                                data-modalCRUAchDATADollars="@record.CRUAchDATADollars"
+                                data-modalMTDUpgrades="@record.MTDUpgrades"
+                                data-modalChargeBack1="@record.ChargeBack1"
+                                data-modalMTDUpgradesTrending="@record.MTDUpgradesTrending"
+                                data-modalMTDUpgradesGP="@record.MTDUpgradesGP"
+                                data-modalMTDUpgradesGPTrending="@record.MTDUpgradesGPTrending"
+                                data-modalNextUp="@record.NextUp"
+                                data-modalNextUpSpif="@record.NextUpSpif"
+                                data-modalPremiumActivation="@record.PremiumActivation"
+                                data-modalPremiumActivationNetOFF="@record.PremiumActivationNetOFF"
+                                data-modalChargeBack2="@record.ChargeBack2"
+                                data-modalPremiumActivationGP="@record.PremiumActivationGP"
+                                data-modalExtraActivation="@record.ExtraActivation"
+                                data-modalExtraActivationNetOFF="@record.ExtraActivationNetOFF"
+                                data-modalChargeBack3="@record.ChargeBack3"
+                                data-modalExtraActivationGP="@record.ExtraActivationGP"
+                                data-modalNonExtraNonPremiumActivation="@record.NonExtraNonPremiumActivation"
+                                data-modalNonExtraNonPremiumActivationNetOFF="@record.NonExtraNonPremiumActivationNetOFF"
+                                data-modalNonExtraNonPremiumActivationGP="@record.NonExtraNonPremiumActivationGP"
+                                data-modalPremiumUpgrade="@record.PremiumUpgrade"
+                                data-modalChargeBack4="@record.ChargeBack4"
+                                data-modalPremiumUpgradeNetOff="@record.PremiumUpgradeNetOff"
+                                data-modalPremiumUpgradeGP="@record.PremiumUpgradeGP"
+                                data-modalExtraUpgrade="@record.ExtraUpgrade"
+                                data-modalChargeBack5="@record.ChargeBack5"
+                                data-modalExtraUpgradeNetOff="@record.ExtraUpgradeNetOff"
+                                data-modalExtraUpgradeGP="@record.ExtraUpgradeGP"
+                                data-modalAIAGoals="@record.AIAGoals"
+                                data-modalChargeBack6="@record.ChargeBack6"
+                                data-modalAIAInternetNetOff="@record.AIAInternetNetOff"
+                                data-modalAIATr="@record.AIATrending"
+                                data-modalAIAIntG="@record.AIAInternetGP"
+                                data-modalBBG="@record.BroadbandGoals"
+                                data-modalBBL300="@record.BroadbandLessThen300MB"
+                                data-modalNF300="@record.NewFiber300MB"
+                                data-modalNF500="@record.NewFiber500MB"
+                                data-modalNF1G="@record.NewFiber1G"
+                                data-modalTBBNF="@record.TotalBroadbandNewFiber"
+                                data-modalBBNFNOFF="@record.BroadbandNewFiberNetOFF"
+                                data-modalCB1="@record.ChargeBack1"
+                                data-modalFUpg="@record.FiberUpgrades"
+                                data-modalFUpgNOFF="@record.FiberUpgradesNetOFF"
+                                data-modalCB2="@record.ChargeBack2"
+                                data-modalBBF="@record.BroadbandFiber"
+                                data-modalBBFTr="@record.BroadbandFiberTrend"
+                                data-modalBBFTrPer="@record.BroadbandFiberTrendPercentage"
+                                data-modalBBL300QI="@record.BroadbandLessThen300MBQISpiff"
+                                data-modalNF300QI="@record.NewFiber300MBQISpiff"
+                                data-modalNF500QI="@record.NewFiber500MBQISpiff"
+                                data-modalNF1GQI="@record.NewFiber1GQISpiff"
+                                data-modalFUpgGP="@record.FiberUpgradeGP"
+                                data-modalBBGP="@record.BroadbandGP"
+                                data-modalBBFGP="@record.BroadbandFiberGP"
+                                data-modalBBFGPTr="@record.BroadbandFiberGPTrending"
+                                data-modalTF="@record.TurboFeature"
+                                data-modalTFGP="@record.TurboFeatureGP"
+                                data-modalPVG="@record.PremVideoGoals"
+                                data-modalPV="@record.PremVideo"
+                                data-modalPVNOFF="@record.PremVideoNetOFF"
+                                data-modalCB3="@record.ChargeBack3"
+                                data-modalPVTr="@record.PremVideoTrend"
+                                data-modalPVTrPer="@record.PremVideoTrendPercentage"
+                                data-modalPVGP="@record.PremVideoGP"
+                                data-modalPVSpf="@record.PremVideoSpiff"
+                                data-modalPVGPTr="@record.PremVideoGPTrending"
+                                data-modalEG="@record.EntertainmentGoals"
+                                data-modalEAch="@record.EntertainmentAch"
+                                data-modalETr="@record.EntertainmentTrending"
+                                data-modalETrGPer="@record.EntertainmentTrendingToGoalsPercentage"
+                                data-modalTWCDQTY="@record.TWCDevicesQty"
+                                data-modalCB4="@record.ChargeBack4"
+                                data-modalTWCDQTYTr="@record.TWCDevicesQtyTrend"
+                                data-modalTWCD="@record.TWCDevicesDollars"
+                                data-modalPGSpiff="@record.ProjectedGeographicSpif"
+                                data-modalPQTY="@record.PrepaidQty"
+                                data-modalPGA="@record.PrepaidToGA"
+                                data-modalPNOFF="@record.PrepaidNetOFF"
+                                data-modalCB5="@record.ChargeBack5"
+                                data-modalPGP="@record.PrepaidGP"
+                                data-modalPAuto="@record.PrepaidWithAutopay"
+                                data-modalAGP="@record.AccessGP"
+                                data-modalAQTY="@record.AccessQty"
+                                data-modalAQTYTr="@record.AccessQtyTrending"
+                                data-modalAR="@record.AccessRevenue"
+                                data-modalFQTY="@record.FeaturesQty"
+                                data-modalFQTYNOFF="@record.FeaturesQtyNetOFF"
+                                data-modalCB6="@record.ChargeBack6"
+                                data-modalTPPer="@record.TotalProtectionPercentage"
+                                data-modalPADV1="@record.ProtAdv1"
+                                data-modalPADV4="@record.ProtAdv4"
+                                data-modalFGP="@record.FeaturesGP"
+                                data-modalWBHRS="@record.WeeklyBudgetedHRS"
+                                data-modalWEAPerS="@record.WeeklyEmployeeAveragePerStore"
+                                data-modalMBHRS="@record.MonthlyBudgetedHRS"
+                                data-modalMAHRS="@record.MonthlyAchievedHRS"
+                                data-modalMAHRSTr="@record.MonthlyAchievedHoursTrending"
+                                data-modalGACloseRT="@record.GACloseRt"
+                                data-modalHTP="@record.HomeTechProtect"
+                                data-PPVGAperTrf="@record.PPVGAPerTrafficPercentage"
+                                data-GANetOff="@record.GrossAddsNetOFF"
+                                data-GAG="@record.GrossAddsGoals"
+                                data-GATr="@record.GrossAddsTrend"
+                                data-MAHTr="@record.MonthlyAchievedHoursTrendingPercentage"
+                                data-DC="@record.DealerCode"
+                                data-UID="@record.UniqueID"
+                                data-sd="@record.SD"
+                                data-vp="@record.VP"
+                                data-reg="@record.Region"
+                                data-tir="@record.Tiers"
+                                data-store="@record.Store"
+                                data-mkt="@record.Market"
+                                data-tm="@record.TM"
+                                data-rsm="@record.RSMSRSM"
+                                data-role="@record.Role"
+                                data-uid="@record.UniqueID"
+                                data-dc="@record.DealerCode"
+                                data-dkey="@record.DateKey"
+                                data-modalOPS="@record.TotalOPS">
+
+                                <!-- Hierarchy -->
+                                <td style="background-color: black; color: white; font-weight:bold;">@record.Region      </td>
+                                <td style="background-color: black; color: white; font-weight:bold;">@record.SD   </td>
+                                <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.UniqueID </td>
+                                <td>@record.DealerCode</td>
+                                <td>@record.Store</td>
+                                <td></td>
+                                <td></td>
+                                <td>@record.Market</td>
+                                <td>@record.TM</td>
+                                <td>@record.MUL_MktMngr</td>
+                                <td>@record.TM</td>
+                                <td>@record.MUL_MktMngr</td>
+                                <!-- Data SP SN -->
+                                <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
+                                <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTrafficPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
+                                <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                                <td class="tbreakevenCLS">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100)) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OPSTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyNetOFF != null ? record.TWCDevicesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABusinessConversion)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQtyGoals)))</td>
+                                
+                            </tr>
+                        }
+                    }
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+
+    <!--NEXT/PREV BTN -->
+    <footer>
+        <div style="padding-left:40%;background-color:#B2D6F2;">
+            <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
+            <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
+        </div>
+    </footer>
+
+</body>
+
+<!--  Page Load & TBL & Print -->
+<script>
+    $(document).ready(function () {
+        var windowheight = $(window).height()
+
+        var height = (windowheight - 400) + "px"
+        updateDataTable(height);
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+
+
+    });
+
+    function updateDataTable(S_height) {
+        $('#tbl').DataTable({
+            scrollY: S_height,
+            scrollX: true,
+            scrollCollapse: true,
+            searching: false,
+            bInfo: false,
+            paging: false,
+            ordering: false,
+            fixedColumns: {
+                leftColumns: 3,
+            }
+        });
+    }
+
+    function test() {
+
+        $("td:hidden").remove();
+        var $clonedTable = $('#tbl').clone();
+        var $clonedTable2 = $('#tbl2').clone();
+
+        $clonedTable.find('[style*="display: none"]').remove();
+        $clonedTable2.find('[style*="display: none"]').remove();
+
+        $clonedTable.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+
+        $clonedTable2.table2excel({
+            filename: "StoreNumberReport.xls"
+        });
+    }
+
+    function printTable() {
+        //Hide all unnecessary elements by adding a 'print-hidden' class
+        var elementsToHide = document.querySelectorAll('header, footer, .sidebar, .navbar, .other-section'); // Customize this to the elements you want hidden
+        elementsToHide.forEach(function (el) {
+            el.style.display = 'none';
+        });
+
+        // Temporarily show only the table
+        var table = document.getElementById("tbl");
+        table.style.display = 'table'; // Ensure the table is displayed
+
+        // Open the print dialog
+        window.print();
+
+        // Restore visibility of previously hidden elements
+        elementsToHide.forEach(function (el) {
+            el.style.display = ''; // Restore to default
+        });
+    }
+
+</script>
+
+<!-- Next Prev btn -->
+<script>
+    const divs = document.querySelectorAll(".content");
+    let currentDiv = 0;
+    function showDiv(index) {
+        divs.forEach((div, i) => {
+            div.style.display = i === index ? "block" : "none";
+        });
+    }
+    function showNextDiv() {
+        //console.log(currentDiv);
+        if (currentDiv === 0) {
+            //console.log(currentDiv);
+            currentDiv = 2;
+            showDiv(currentDiv);
+            document.getElementById("nextBtn").disabled = true;
+            document.getElementById("nextBtn").style.color = 'red';
+
+            document.getElementById("prevBtn").disabled = false;
+            document.getElementById("prevBtn").style.color = 'white';
+        }
+    }
+    function showPrevDiv() {
+        if (currentDiv === 2) {
+            currentDiv = 0;
+            showDiv(currentDiv);
+            document.getElementById("nextBtn").disabled = false;
+            document.getElementById("nextBtn").style.color = 'white';
+
+            document.getElementById("prevBtn").disabled = true;
+            document.getElementById("prevBtn").style.color = 'red';
+        }
+    }
+    // Initialize by showing the first div
+    showDiv(currentDiv);
+    document.getElementById("nextBtn").addEventListener("click", showNextDiv);
+    document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
+</script>
+
+<!-- Filters working -->
+<script>
+
+    function clearFilter() {
+        // Clear the selected options in all the dropdowns
+        document.getElementById('SD').selectedIndex = -1;
+        document.getElementById('Tiers').selectedIndex = -1;
+        document.getElementById('Stores').selectedIndex = -1;
+        document.getElementById('Market').selectedIndex = -1;
+        document.getElementById('TM').selectedIndex = -1;
+
+
+        // Use DataTables API to clear filters and show all rows
+        var table = $('#tbl').DataTable();
+        table.search('').columns().search('').draw();  // Clear any global or column-specific filters
+
+        // Show all the rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        rows.forEach(row => {
+            row.style.display = ''; // Show all rows
+        });
+
+        ////////////////////////////////
+        // Restore the all dropdown to its original state
+        resetSDDropdown();
+        resetTIERSDropdown();
+        resetStoresDropdown();
+        resetMarketDropdown();
+        resetTMDropdown();
+
+        // Use the DataTables custom filter API to clear any search
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+            if (row.hasClass('total_dataTM')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+    }
+    // Bind the clear filter function to the button
+    document.getElementById('clearfilter').addEventListener('click', clearFilter);
+    ////////////////Reset ALL DDL ///////////////////////
+
+    function resetTMDropdown() {
+        var TMSelect = document.getElementById('TM');
+        TMSelect.innerHTML = '';  // Clear all existing options
+
+        if (tmList.length > 0) {
+
+            // Repopulate TM dropdown with the options from TMList array
+            tmList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = 'lightblue';
+                option.style.color = 'black';
+                option.style.borderRadius = '7px';
+                option.style.padding = '5px 0';
+                option.style.marginBottom = '8px';
+                option.style.fontSize = '12px';
+
+                TMSelect.add(option);
+            });
+        } else {
+            // Add a "No TM available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No TM available';
+
+            // Apply custom styles to the "No TM" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            TMSelect.add(noOption);
+        }
+
+        TMSelect.disabled = false;  // Ensure TM dropdown is enabled after clearing filters
+    }
+    function resetMarketDropdown() {
+        var MARKETSelect = document.getElementById('Market');
+        MARKETSelect.innerHTML = '';  // Clear all existing options
+
+        if (mktList.length > 0) {
+
+            // Repopulate MARKET dropdown with the options from MarketList array
+            mktList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = 'lightblue';
+                option.style.color = 'black';
+                option.style.borderRadius = '7px';
+                option.style.padding = '5px 0';
+                option.style.marginBottom = '8px';
+                option.style.fontSize = '12px';
+
+                MARKETSelect.add(option);
+            });
+        } else {
+            // Add a "No MARKET available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No MARKET available';
+
+            // Apply custom styles to the "No MARKET" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            MARKETSelect.add(noOption);
+        }
+
+        MARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
+    }
+    function resetStoresDropdown() {
+        var STORESSelect = document.getElementById('Stores');
+        STORESSelect.innerHTML = '';  // Clear all existing options
+
+        if (storeList.length > 0) {
+
+            // Repopulate STORES dropdown with the options from StoresList array
+            storeList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = 'lightblue';
+                option.style.color = 'black';
+                option.style.borderRadius = '7px';
+                option.style.padding = '5px 0';
+                option.style.marginBottom = '8px';
+                option.style.fontSize = '12px';
+
+                STORESSelect.add(option);
+            });
+        } else {
+            // Add a "No STORES available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No STORES available';
+
+            // Apply custom styles to the "No STORES" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            STORESSelect.add(noOption);
+        }
+
+        STORESSelect.disabled = false;  // Ensure STORES dropdown is enabled after clearing filters
+    }
+    function resetTIERSDropdown() {
+        var TIERSSelect = document.getElementById('Tiers');
+        TIERSSelect.innerHTML = '';  // Clear all existing options
+
+        if (tiersList.length > 0) {
+
+            // Repopulate TIERS dropdown with the options from TiersList array
+            tiersList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = 'lightblue';
+                option.style.color = 'black';
+                option.style.borderRadius = '7px';
+                option.style.padding = '5px 0';
+                option.style.marginBottom = '8px';
+                option.style.fontSize = '12px';
+
+                TIERSSelect.add(option);
+            });
+        } else {
+            // Add a "No TIERS available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No TIERS available';
+
+            // Apply custom styles to the "No TIERS" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            TIERSSelect.add(noOption);
+        }
+
+        TIERSSelect.disabled = false;  // Ensure TIERS dropdown is enabled after clearing filters
+    }
+    function resetSDDropdown() {
+        var sdSelect = document.getElementById('SD');
+        sdSelect.innerHTML = '';  // Clear all existing options
+
+        if (sdList.length > 0) {
+            // Repopulate Sd dropdown with the options from sdList array
+            sdList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = 'lightblue';
+                option.style.color = 'black';
+                option.style.borderRadius = '7px';
+                option.style.padding = '5px 0';
+                option.style.marginBottom = '8px';
+                option.style.fontSize = '12px';
+
+                sdSelect.add(option);
+            });
+        } else {
+            // Add a "No Sd available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No Sd available';
+
+            // Apply custom styles to the "No Sd" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            sdSelect.add(noOption);
+        }
+
+        sdSelect.disabled = false;  // Ensure Sd dropdown is enabled after clearing filters
+    }
+    ////////////////////////////////////////////////////////
+
+    function TMFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchTM').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var tmValue = row.getAttribute('data-tm'); // Get the TM value from the row's data attribute
+            if (tmValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = ''; // Show row if it matches the text input
+            } else {
+                row.style.display = 'none'; // Hide row if it doesn't match
+            }
+        });
+    }
+    ////////////////TM Hierarchy/////////////////////////
+    function filterTMData() {
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('TM').selectedOptions).map(option => option.value);
+        //console.log(selectedValues);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        var totalCSAT = 0;  // Initialize CSAT total
+        var totalBHRS = 0;
+        var totalTraffic = 0;
+        var totalOps = 0;
+
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var StoresValue = row.getAttribute('data-tm');
+            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
+            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
+            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
+            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+
+            }
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+
+            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
+                totalBHRS += bhrsValue;
+                totalTraffic += trafValue;
+                totalOps += opsValue;
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchTM').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //TM
+
+        //var sdAlreadySelected = document.getElementById('SD');
+        //var mktAlreadySelected = document.getElementById('Market');
+        var tmAlreadySelected = document.getElementById('TM');
+
+
+        //Fill TM and Others
+
+        TMfilterTMOptions(selectedValues);
+        TMfilterMarketOptions(selectedValues);
+        TMfilterStoresOptions(selectedValues);
+        TMfilterTiersOptions(selectedValues);
+        TMfilterSDOptions(selectedValues);
+
+        tmAlreadySelected.disabled = true;
+
+        // Set the value of the input button to display the total CSAT
+        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
+        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
+        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
+        document.getElementById('opsTotal').value = totalOps.toFixed(1);
+    }
+
+    function TMfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //TMSelect.disabled = true;
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';
+                TMSelect.add(option);
+            });
+        }
+        //else {
+
+        //    TMSelect.disabled = false;
+
+        //    // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+        //    var allRows = document.querySelectorAll('#tbl tbody tr');
+        //    allRows.forEach(row => {
+        //        var TMValue = row.getAttribute('data-tm');
+        //        if (TMValue) {
+        //            var option = document.createElement('option');
+        //            option.value = TMValue;
+        //            option.text = TMValue;
+        //            TMSelect.add(option);
+        //        }
+        //    });
+        //}
+    }
+    function TMfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        var TMSelect = document.getElementById('TM');
+        //console.log(MarketSelect);
+        //console.log(TMSelect);
+
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+
+        if (selectedValues.length > 0) {
+
+            //TMSelect.disabled = true;
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                /*option.style.color = 'grey';  */// Highlight in red (optional)
+                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                MarketSelect.add(option);
+            });
+        } else {
+
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function TMfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                /*option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function TMfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*tiersSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                /*option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function TMfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                /* option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+
+    ////////////////////////////////////////////////////////
+
+    function MarketFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchMarket').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var mktValue = row.getAttribute('data-mkt'); // Get the Market value from the row's data attribute
+            if (mktValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = ''; // Show row if it matches the text input
+            } else {
+                row.style.display = 'none'; // Hide row if it doesn't match
+            }
+        });
+    }
+    ////////////////Market Hierarchy/////////////////////////
+    function filterMarketData() {
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('Market').selectedOptions).map(option => option.value);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        var totalCSAT = 0;  // Initialize CSAT total
+        var totalBHRS = 0;
+        var totalTraffic = 0;
+        var totalOps = 0;
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var StoresValue = row.getAttribute('data-mkt');
+            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
+            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
+            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
+            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+
+            }
+
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
+                totalBHRS += bhrsValue;
+                totalTraffic += trafValue;
+                totalOps += opsValue;
+
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchStores').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //Market
+
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+
+        if (tmAlreadySelected.disabled) {
+
+            MKTfilterMarketOptions(selectedValues);
+            MKTfilterTiersOptions(selectedValues);
+            MKTfilterStoresOptions(selectedValues);
+
+            mktAlreadySelected.disabled = true;
+
+        }
+        else {
+
+            MKTfilterTMOptions(selectedValues);
+            MKTfilterMarketOptions(selectedValues);
+            MKTfilterTiersOptions(selectedValues);
+            MKTfilterStoresOptions(selectedValues);
+            MKTfilterSDOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+        }
+
+        // Set the value of the input button to display the total CSAT
+        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
+        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
+        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
+        document.getElementById('opsTotal').value = totalOps.toFixed(1);
+    }
+
+    function MKTfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //TMSelect.disabled = true;
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';
+                TMSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the TM dropdown and reset all options
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*tiersSelect.disabled = true; */ // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                /* option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                /*option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                //option.style.color = 'grey';
+                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+    //////////////////////////////////////////////////////
+
+    function StoresFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchStores').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var tirValue = row.getAttribute('data-store'); // Get the VP value from the row's data attribute
+            if (tirValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = ''; // Show row if it matches the text input
+            } else {
+                row.style.display = 'none'; // Hide row if it doesn't match
+            }
+        });
+    }
+    ////////////////Stores Hierarchy/////////////////////////
+    function filterStoresData() {
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('Stores').selectedOptions).map(option => option.value);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        var totalCSAT = 0;  // Initialize CSAT total
+        var totalBHRS = 0;
+        var totalTraffic = 0;
+        var totalOps = 0;
+
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var StoresValue = row.getAttribute('data-store');
+            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
+            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
+            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
+            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
+                totalBHRS += bhrsValue;
+                totalTraffic += trafValue;
+                totalOps += opsValue;
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchStores').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //Stores
+
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+        var storAlreadySelected = document.getElementById('Stores');
+        var tirAlreadySelected = document.getElementById('Tiers');
+        var sdAlreadySelected = document.getElementById('SD');
+
+        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
+
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
+
+            storAlreadySelected.disabled = true;
+
+        } else if (tmAlreadySelected.disabled) {
+
+            STRfilterMarketOptions(selectedValues);
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
+
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+
+        } else if (mktAlreadySelected.disabled) {
+
+            STRfilterTMOptions(selectedValues);
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+        }
+        else {
+
+            STRfilterTMOptions(selectedValues);
+            STRfilterMarketOptions(selectedValues);
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+
+        // Set the value of the input button to display the total CSAT
+        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
+        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
+        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
+        document.getElementById('opsTotal').value = totalOps.toFixed(1);
+
+    }
+
+    function STRfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //TMSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                TMSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the TM dropdown and reset all options
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function STRfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            //MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function STRfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //StoresSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function STRfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //tiersSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                option.style.color = 'grey';
+                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function STRfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                option.style.color = 'grey';
+                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+    //////////////////////////////////////////////////////
+
+    function TiersFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchTiers').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var tirValue = row.getAttribute('data-tir'); // Get the VP value from the row's data attribute
+            if (tirValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = ''; // Show row if it matches the text input
+            } else {
+                row.style.display = 'none'; // Hide row if it doesn't match
+            }
+        });
+    }
+    ////////////////Tiers Hierarchy/////////////////////////
+    function filterTiersData() {
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('Tiers').selectedOptions).map(option => option.value);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        var totalCSAT = 0;  // Initialize CSAT total
+        var totalBHRS = 0;
+        var totalTraffic = 0;
+        var totalOps = 0;
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var TiersValue = row.getAttribute('data-tir');
+            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
+            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
+            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
+            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
+
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+            } else if (selectedValues.length === 0 || selectedValues.includes(TiersValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
+                totalBHRS += bhrsValue;
+                totalTraffic += trafValue;
+                totalOps += opsValue;
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchTiers').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+        var storAlreadySelected = document.getElementById('Stores');
+        var tirAlreadySelected = document.getElementById('Tiers');
+
+
+        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
+
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+
+            tirAlreadySelected.disabled = true;
+        }
+
+        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
+            //console.log("TM & MKT");
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+        }
+
+        else if (tmAlreadySelected.disabled) {
+
+            TIRfilterMarketOptions(selectedValues);
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+        }
+
+        else if (storAlreadySelected.disabled) {
+
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+
+            tirAlreadySelected.disabled = true;
+        }
+        else {
+
+            TIRfilterTMOptions(selectedValues);
+            TIRfilterMarketOptions(selectedValues);
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+        }
+
+        // Set the value of the input button to display the total CSAT
+        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
+        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
+        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
+        document.getElementById('opsTotal').value = totalOps.toFixed(1);
+
+    }
+
+    function TIRfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            //MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function TIRfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //TMSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                TMSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the TM dropdown and reset all options
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function TIRfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //tiersSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function TIRfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        //console.log(selectedValues);
+
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                option.style.color = 'grey';
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function TIRfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                /*option.style.color = 'grey'; */
+                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+    //////////////////////////////////////////////////////
+
+    function SDFilter() {
+        var input = document.getElementById('textSearchSD').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            // Data contains all the columns in the row as an array
+            var rowContent = data.join(' ').toUpperCase();
+
+            // If the row contains the input, return true to keep the row visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+    }
+    ////////////////SD Hierarchy/////////////////////////
+    function filterSDData() {
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('SD').selectedOptions).map(option => option.value);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        var totalCSAT = 0;  // Initialize CSAT total
+        var totalBHRS = 0;
+        var totalTraffic = 0;
+        var totalOps = 0;
+
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var StoresValue = row.getAttribute('data-sd');
+            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
+            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
+            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
+            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+            }
+
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
+                totalBHRS += bhrsValue;
+                totalTraffic += trafValue;
+                totalOps += opsValue;
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchSD').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        $('#tbl').DataTable().draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        // Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //SD
+
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+        var storAlreadySelected = document.getElementById('Stores');
+        var tirAlreadySelected = document.getElementById('Tiers');
+        var sdAlreadySelected = document.getElementById('SD');
+
+
+        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled && tirAlreadySelected.disabled) {
+
+            SDfilterSDOptions(selectedValues);
+
+            sdAlreadySelected.disabled = true;
+        }
+        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
+
+            //SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
+
+            SDfilterStoresOptions(selectedValues);
+            SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+        else if (tmAlreadySelected.disabled) {
+
+            SDfilterMarketOptions(selectedValues);
+            SDfilterStoresOptions(selectedValues);
+            SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+        else if (mktAlreadySelected.disabled) {
+
+            SDfilterStoresOptions(selectedValues);
+            SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+        else if (storAlreadySelected.disabled) {
+
+            SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+        else if (tirAlreadySelected.disabled) {
+
+            SDfilterSDOptions(selectedValues);
+
+            sdAlreadySelected.disabled = true;
+        }
+        else {
+
+            SDfilterTMOptions(selectedValues);
+            SDfilterMarketOptions(selectedValues);
+            SDfilterStoresOptions(selectedValues);
+            SDfilterTiersOptions(selectedValues);
+            SDfilterSDOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+            sdAlreadySelected.disabled = true;
+        }
+
+        // Set the value of the input button to display the total CSAT
+        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
+        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
+        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
+        document.getElementById('opsTotal').value = totalOps.toFixed(1);
+
+    }
+
+    function SDfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*TMSelect.disabled = true; */ // Keep the dropdown disabled if required
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                //option.style = 'font:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                TMSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the TM dropdown and reset all options
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function SDfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*MarketSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            //MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function SDfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function SDfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*tiersSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function SDfilterSDOptions(selectedValues) {
+
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                SDSelect.add(option);
+            });
+
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+
+    //////////////////////////////////////////////////////////
+</script>
+
+<!--Option List data -->
+<script type="text/javascript">
+    var regionList = [];
+
+    @if (ViewBag.RegionList != null && ViewBag.RegionList.Count > 0)
+    {
+        <text>
+        regionList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RegionList));
+        </text>
+    }
+
+    var vpList = [];
+
+    @if (ViewBag.VPList != null && ViewBag.VPList.Count > 0)
+    {
+        <text>
+        vpList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.VPList));
+        </text>
+    }
+
+    var sdList = [];
+
+    @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+    {
+        <text>
+        sdList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
+        </text>
+    }
+
+    var tiersList = [];
+
+    @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
+    {
+        <text>
+        tiersList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.tiersList));
+        </text>
+    }
+
+    var storeList = [];
+
+    @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
+    {
+        <text>
+        storeList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.StoresList));
+        </text>
+    }
+
+    var mktList = [];
+
+    @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
+    {
+        <text>
+        mktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MarketList));
+        </text>
+    }
+
+    var tmList = [];
+
+    @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+    {
+        <text>
+        tmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.TMList));
+        </text>
+    }
+
+    var rsmList = [];
+
+    @if (ViewBag.RSMList != null && ViewBag.RSMList.Count > 0)
+    {
+        <text>
+        rsmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RSMList));
+        </text>
+    }
+
+    var roleList = [];
+
+    @if (ViewBag.RoleList != null && ViewBag.RoleList.Count > 0)
+    {
+        <text>
+        roleList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RoleList));
+        </text>
+    }
+
+</script>
+
+<!--loading screen-->
+<script>
+    // JavaScript to hide the loading screen when the view has loaded
+    window.addEventListener('load', function () {
+        document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
+        document.getElementById('content').style.display = 'block'; // Show content
+    });
+</script>
+
+
+<!--Highlight Trending Break Even-->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        //Total Stores
+        // Select all cells with the 'stores' class
+        var storeCells = document.querySelectorAll(".stores");
+        var storeCount = 0;
+
+        // Loop through each cell and count if it has a store name
+        storeCells.forEach(function (cell) {
+            var storeName = cell.textContent.trim();
+
+            // Check if the cell has a non-empty store name
+            if (storeName) {
+                storeCount++;
+            }
+        });
+
+        // Display the count in the view by setting it to an element's text content
+        //document.getElementById("storeCountDisplay").textContent = storeCount;
+        document.getElementById("storeCountDisplay").value = storeCount;
+
+
+
+
+        // Tr Break Even Calc
+        var tbeCells = document.querySelectorAll(".tbreakevenCLS");
+        var tbeCount = 0;
+        var tbeCount70 = 0;
+        var tbeCount90 = 0;
+
+        tbeCells.forEach(function (cell) {
+            var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
+            if (!isNaN(tbeValue) && tbeValue > 100) {
+                tbeCount++;
+            }
+            if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 100) {
+                tbeCount70++;
+            }
+            if (!isNaN(tbeValue) && tbeValue < 70) {
+                tbeCount90++;
+            }
+        });
+
+        var tbeCountDisplay = document.getElementById("tbeCountDisplay");
+        if (tbeCountDisplay) {
+            tbeCountDisplay.value = tbeCount;
+        }
+
+        var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
+        if (tbeCountDisplay70) {
+            tbeCountDisplay70.value = tbeCount70;
+        }
+
+        var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
+        if (tbeCountDisplay90) {
+            tbeCountDisplay90.value = tbeCount90;
+        }
+    });
+
+</script>

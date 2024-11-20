@@ -345,6 +345,7 @@
     <Content Include="Views\Home\EmployeeRank.cshtml" />
     <Content Include="Views\Home\StoreRank.cshtml" />
     <Content Include="Views\Home\HRSMRank.cshtml" />
+    <Content Include="Views\Home\SalariedRSMRank.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
