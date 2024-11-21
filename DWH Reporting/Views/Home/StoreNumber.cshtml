@@ -797,7 +797,7 @@
                                         <th rowspan="2" style="background-color: black; color:white;">Store Contact</th>
                                         <th rowspan="2" style="background-color: black; color:white;">Role</th>
                                         <th rowspan="2" style="background-color: black; color:white;">HIT Store</th>
-                                        <th rowspan="2" style="background-color: black; color:white;">SD</th>
+                                        <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">SD</th>
 
                                         <!-- Calc data header for HEADING -->
                                         <th id="ColSpan152" colspan="152"></th>
@@ -1171,11 +1171,12 @@
                                 <tr id="totTM" class="total_dataTM">
                                     <td></td>
                                     <td></td>
+                                    <td>TM Total</td>
+                                    <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                                     <td></td>
                                     <td></td>
 
-                                    <td>TM Total</td>
-                                    <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
+
                                     @*<td style="display:none;"></td>*@
 
                                     <td></td>
@@ -1533,7 +1534,7 @@
                                     <td>@record.UniqueID</td>
                                     <td>@record.DealerCode</td>
                                     <td>@record.Tiers</td>
-                                    <td>@record.RSMSRSM</td>
+                                    <td style="white-space: normal; word-wrap: break-word;">@record.RSMSRSM</td>
                                     <td>@record.Role</td>
                                     <td>@record.HITStore</td>
                                     <td style=" white-space: normal; word-wrap: break-word;">@record.SD</td>
@@ -4705,7 +4706,7 @@
             paging: false,
             ordering: false,
             fixedColumns: {
-                leftColumns: 5, // Freeze the first 5 columns
+                leftColumns: 7, 
             }
         });
     }
