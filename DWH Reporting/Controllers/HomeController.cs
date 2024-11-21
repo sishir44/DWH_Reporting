@@ -230,6 +230,8 @@ namespace DWH_Reporting.Controllers
                     Store = row["Store"].ToString(),
                     HITStore = row["HIT Store"].ToString(),
                     Market = row["Market"].ToString(),
+                    MUL_MktMngr = row["MUL_MktMngr"].ToString(),
+                    MUL_Market = row["MUL_Market"].ToString(),
                     TM = row["TM"].ToString(),
                     RSMSRSM = row["RSM/SRSM"].ToString(),
                     Role = row["Role"].ToString(),
