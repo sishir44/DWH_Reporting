@@ -153,7 +153,7 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                ShowStoreNumber(selectedDate);
+                ShowEmployeeNumber(selectedDate);
 
                 return View();
 
@@ -979,6 +979,727 @@ namespace DWH_Reporting.Controllers
             //{
             //    ViewBag.RoleList = new List<SelectListItem>();
             //}
+        }
+
+        private void ShowEmployeeNumber(string selectedDate)
+        {
+
+            string dateParam = selectedDate;
+
+            //Get Multi Mkt & Mngr
+            DataTable Get_MUL_Mgr = GP_DAL_Functions.Get_MUL_Mgr();
+            List<Fct_StoreNumberAttributesModel> lst_MUL_Mkt_Mngr = new List<Fct_StoreNumberAttributesModel>();
+            List<Fct_StoreNumberAttributesModel> lst_MUL_Mkt = new List<Fct_StoreNumberAttributesModel>();
+            foreach (DataRow row in Get_MUL_Mgr.Rows)
+            {
+                Fct_StoreNumberAttributesModel modelMUL_MktMngr = new Fct_StoreNumberAttributesModel
+                {
+                    MUL_MktMngr = row["MUL_MktMngr"].ToString()
+                };
+                Fct_StoreNumberAttributesModel modelMUL_Mkt = new Fct_StoreNumberAttributesModel
+                {
+                    MUL_Market = row["MUL_Market"].ToString()
+                };
+
+
+                lst_MUL_Mkt_Mngr.Add(modelMUL_MktMngr);
+                lst_MUL_Mkt.Add(modelMUL_Mkt);
+            }
+
+            ViewData["Get_MUL_Mgr"] = lst_MUL_Mkt_Mngr;
+            ViewData["Get_MUL_Mkt"] = lst_MUL_Mkt;
+
+            ////////////////////////////////////////////////////////////////////////
+
+            // Call your function with the date parameter
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam);
+
+            List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
+
+            foreach (DataRow row in Fct_StoreNumber.Rows)
+            {
+                Fct_StoreNumberAttributesModel model = new Fct_StoreNumberAttributesModel
+                {
+                    VP = row["VP"].ToString(),
+                    Region = row["Region"].ToString(),
+                    SD = row["SD"].ToString(),
+                    UniqueID = row["Unique ID"].ToString(),
+                    DealerCode = row["Dealer Code"].ToString(),
+                    Tiers = row["Tiers"].ToString(),
+                    Store = row["Store"].ToString(),
+                    HITStore = row["HIT Store"].ToString(),
+                    Market = row["Market"].ToString(),
+                    MUL_MktMngr = row["MUL_MktMngr"].ToString(),
+                    MUL_Market = row["MUL_Market"].ToString(),
+                    TM = row["TM"].ToString(),
+                    RSMSRSM = row["RSM/SRSM"].ToString(),
+                    Role = row["Role"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
+                    GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv & HomeTech %"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    TrendingToBreakEven = row["Trending to BreakEven"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GP Trending %"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPS Trending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["Upgrade Trending to Goals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    MTDUpgradesNetOFF = row["MTD UPGRADES Net OFF"].ToString(),
+                    TWCDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWCDevicesQtyGoals = row["T,W,C Devices QTY Goals"].ToString(),
+                    TWCDevicesQtyNetOFF = row["T,W,C Devices QTY Net OFF"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA Consumer Conversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA Green Check Consumer"].ToString(),
+                    AIACInternet = row["AIA C Internet"].ToString(),
+                    AIABInternet = row["AIA B Internet"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPS Trending"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per- Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU Ach MTD"].ToString(),
+                    FNAchMTD = row["FN Ach MTD"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    ChargeBack = row["Charge Back"].ToString(),
+                    GrossAddsTrend = row["GROSS ADDS Trend"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS $GP"].ToString(),
+                    GrossAddsGPTrending = row["GROSS ADDS $GP Trending"].ToString(),
+                    ARBusinessFNProgramAverageQ2Target = row["AR Business FN Program Average Q2 Target"].ToString(),
+                    FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
+                    RemainingToAchieveFNAverageQ2Target = row["Remaining to Achive FN Average Q2 target"].ToString(),
+                    FNAchTrend = row["FN Ach Trend"].ToString(),
+                    FNAchDollars = row["FN Ach $"].ToString(),
+                    ARBusinessCRUProgramAverageQ2Target = row["AR Business CRU Program Average Q2 Target"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
+                    CRUAchDATA = row["CRU Ach DATA"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
+                    RemainingToAchieveCRUAverageQ2Target = row["Remaining to Achive CRU Average Q2 target"].ToString(),
+                    CRUAchTrend = row["CRU Ach Trend"].ToString(),
+                    CRUAchVoiceDollars = row["CRU Ach Voice $"].ToString(),
+                    CRUAchDATADollars = row["CRU Ach DATA $"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    ChargeBack1 = row["Charge Back1"].ToString(),
+                    MTDUpgradesTrending = row["MTD UPGRADES_Trending"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
+                    MTDUpgradesGPTrending = row["MTD UPGRADES $GP Trending"].ToString(),
+                    NextUp = row["Next UP"].ToString(),
+                    NextUpSpif = row["Next UP Spif"].ToString(),
+                    PremiumActivation = row["Premium Activation"].ToString(),
+                    PremiumActivationNetOFF = row["Premium Activation Net OFF"].ToString(),
+                    ChargeBack2 = row["Charge Back2"].ToString(),
+                    PremiumActivationGP = row["Premium Activation $GP"].ToString(),
+                    ExtraActivation = row["Extra Activation"].ToString(),
+                    ExtraActivationNetOFF = row["Extra Activation Net OFF"].ToString(),
+                    ChargeBack3 = row["Charge Back3"].ToString(),
+                    ExtraActivationGP = row["Extra Activation $GP"].ToString(),
+                    NonExtraNonPremiumActivation = row["Non Extra / Non Premium Activation"].ToString(),
+                    NonExtraNonPremiumActivationNetOFF = row["Non Extra / Non Premium Activation Net OFF"].ToString(),
+                    NonExtraNonPremiumActivationGP = row["Non Extra / Non Premium Activation $GP"].ToString(),
+                    PremiumUpgrade = row["Premium Upgrade"].ToString(),
+                    ChargeBack4 = row["Charge Back4"].ToString(),
+                    PremiumUpgradeNetOff = row["Premium Upgrade Net Off"].ToString(),
+                    PremiumUpgradeGP = row["Premium Upgrade $GP"].ToString(),
+                    ExtraUpgrade = row["Extra Upgrade"].ToString(),
+                    ChargeBack5 = row["Charge Back5"].ToString(),
+                    ExtraUpgradeNetOff = row["Extra Upgrade Net Off"].ToString(),
+                    ExtraUpgradeGP = row["Extra Upgrade $GP"].ToString(),
+                    AIAGoals = row["AIA Goals"].ToString(),
+                    ChargeBack6 = row["Charge Back6"].ToString(),
+                    AIAInternetNetOff = row["AIA Internet Net Off"].ToString(),
+                    AIATrending = row["AIA Trending"].ToString(),
+                    AIAInternetGP = row["AIA Internet $GP"].ToString(),
+                    BroadbandGoals = row["Broadband Goals"].ToString(),
+                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
+                    BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
+                    ChargeBack7 = row["Charge Back7"].ToString(),
+                    FiberUpgrades = row["Fiber Upgrades"].ToString(),
+                    FiberUpgradesNetOFF = row["Fiber Upgrades Net OFF"].ToString(),
+                    ChargeBack8 = row["Charge Back8"].ToString(),
+                    BroadbandFiber = row["Broadband +_Fiber"].ToString(),
+                    BroadbandFiberTrend = row["Broadband +_Fiber _Trend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband + Fiber Trend%"].ToString(),
+                    BroadbandLessThen300MBQISpiff = row["Broadband Less then (300Mb) QI Spiff"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber (300 MB) QI Spiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber (500 MB) QI Spiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber (1G) QI Spiff"].ToString(),
+                    FiberUpgradeGP = row["Fiber Upgrade  $GP"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    BroadbandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandFiberGPTrending = row["Broad Band + Fiber _$GP Trending"].ToString(),
+                    TurboFeature = row["Turbo Feature"].ToString(),
+                    TurboFeatureGP = row["Turbo Feature $GP"].ToString(),
+                    PremVideoGoals = row["Prem Video Goals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoNetOFF = row["Prem Video Net OFF"].ToString(),
+                    ChargeBack9 = row["Charge Back9"].ToString(),
+                    PremVideoTrend = row["Prem Video Trend"].ToString(),
+                    PremVideoTrendPercentage = row["Prem Video Trend %"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    PremVideoGPTrending = row["Prem Video $GP Trending"].ToString(),
+                    EntertainmentGoals = row["Entertainment Goals"].ToString(),
+                    EntertainmentAch = row["Entertainment Ach"].ToString(),
+                    EntertainmentTrending = row["Entertainment _Trending"].ToString(),
+                    EntertainmentTrendingToGoalsPercentage = row["Entertainment Trending to Goals %"].ToString(),
+                    TWCDevicesQty = row["T#W#C Devices QTY"].ToString(),
+                    ChargeBack10 = row["Charge Back10"].ToString(),
+                    TWCDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
+                    TWCDevicesDollars = row["T,W,C Devices $"].ToString(),
+                    ProjectedGeographicSpif = row["Projected Geographic spif"].ToString(),
+                    PrepaidQty = row["Prepaid QTY"].ToString(),
+                    PrepaidToGA = row["Prepaid to GA"].ToString(),
+                    PrepaidNetOFF = row["Prepaid Net OFF"].ToString(),
+                    ChargeBack11 = row["Charge Back11"].ToString(),
+                    PrepaidGP = row["Prepaid $GP"].ToString(),
+                    PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessQtyTrending = row["Access Qty _Trending"].ToString(),
+                    AccessRevenue = row["Access $ Revenue"].ToString(),
+                    FeaturesQty = row["Features QTY"].ToString(),
+                    FeaturesQtyNetOFF = row["Features QTY Net OFF"].ToString(),
+                    ChargeBack12 = row["Charge Back12"].ToString(),
+                    TotalProtectionPercentage = row["Total Protection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    FeaturesGP = row["Features $GP"].ToString(),
+                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
+                    WeeklyEmployeeAveragePerStore = row["Weekly Employee Average Per store"].ToString(),
+                    MonthlyBudgetedHRS = row["Monthly Budgeted HRS"].ToString(),
+                    TrainingHours = row["Training Hours"].ToString(),
+                    MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
+                    MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
+                    GACloseRt = row["GA Close Rt"].ToString(),
+                    HomeTechProtect = row["HomeTech Protect"].ToString(),
+                    DateKey = row["DateKey"].ToString()
+                    //TimeStamp = row["TimeStamp"].ToString()
+
+                };
+
+                lisn2_lst.Add(model);
+            }
+
+            ViewBag.Date = GpReport.DateTimes;
+            ViewData["Fct_StoreNumber"] = lisn2_lst;
+
+            ////////////////Get Total
+
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam);
+            List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
+
+            foreach (DataRow row in Fct_StoreNumberTotal.Rows)
+            {
+                Fct_StoreNumberAttributesModel model3 = new Fct_StoreNumberAttributesModel
+                {
+                    //MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
+                    GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv & HomeTech %"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    TrendingToBreakEven = row["Trending to BreakEven"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GP Trending %"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPS Trending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["Upgrade Trending to Goals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    MTDUpgradesNetOFF = row["MTD UPGRADES Net OFF"].ToString(),
+                    TWCDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWCDevicesQtyGoals = row["T,W,C Devices QTY Goals"].ToString(),
+                    TWCDevicesQtyNetOFF = row["T,W,C Devices QTY Net OFF"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA Consumer Conversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA Green Check Consumer"].ToString(),
+                    AIACInternet = row["AIA C Internet"].ToString(),
+                    AIABInternet = row["AIA B Internet"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPS Trending"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per- Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU Ach MTD"].ToString(),
+                    FNAchMTD = row["FN Ach MTD"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    ChargeBack = row["Charge Back"].ToString(),
+                    GrossAddsTrend = row["GROSS ADDS Trend"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS $GP"].ToString(),
+                    GrossAddsGPTrending = row["GROSS ADDS $GP Trending"].ToString(),
+                    ARBusinessFNProgramAverageQ2Target = row["AR Business FN Program Average Q2 Target"].ToString(),
+                    FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
+                    RemainingToAchieveFNAverageQ2Target = row["Remaining to Achive FN Average Q2 target"].ToString(),
+                    FNAchTrend = row["FN Ach Trend"].ToString(),
+                    FNAchDollars = row["FN Ach $"].ToString(),
+                    ARBusinessCRUProgramAverageQ2Target = row["AR Business CRU Program Average Q2 Target"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
+                    CRUAchDATA = row["CRU Ach DATA"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
+                    RemainingToAchieveCRUAverageQ2Target = row["Remaining to Achive CRU Average Q2 target"].ToString(),
+                    CRUAchTrend = row["CRU Ach Trend"].ToString(),
+                    CRUAchVoiceDollars = row["CRU Ach Voice $"].ToString(),
+                    CRUAchDATADollars = row["CRU Ach DATA $"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    ChargeBack1 = row["Charge Back1"].ToString(),
+                    MTDUpgradesTrending = row["MTD UPGRADES_Trending"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
+                    MTDUpgradesGPTrending = row["MTD UPGRADES $GP Trending"].ToString(),
+                    NextUp = row["Next UP"].ToString(),
+                    NextUpSpif = row["Next UP Spif"].ToString(),
+                    PremiumActivation = row["Premium Activation"].ToString(),
+                    PremiumActivationNetOFF = row["Premium Activation Net OFF"].ToString(),
+                    ChargeBack2 = row["Charge Back2"].ToString(),
+                    PremiumActivationGP = row["Premium Activation $GP"].ToString(),
+                    ExtraActivation = row["Extra Activation"].ToString(),
+                    ExtraActivationNetOFF = row["Extra Activation Net OFF"].ToString(),
+                    ChargeBack3 = row["Charge Back3"].ToString(),
+                    ExtraActivationGP = row["Extra Activation $GP"].ToString(),
+                    NonExtraNonPremiumActivation = row["Non Extra / Non Premium Activation"].ToString(),
+                    NonExtraNonPremiumActivationNetOFF = row["Non Extra / Non Premium Activation Net OFF"].ToString(),
+                    NonExtraNonPremiumActivationGP = row["Non Extra / Non Premium Activation $GP"].ToString(),
+                    PremiumUpgrade = row["Premium Upgrade"].ToString(),
+                    ChargeBack4 = row["Charge Back4"].ToString(),
+                    PremiumUpgradeNetOff = row["Premium Upgrade Net Off"].ToString(),
+                    PremiumUpgradeGP = row["Premium Upgrade $GP"].ToString(),
+                    ExtraUpgrade = row["Extra Upgrade"].ToString(),
+                    ChargeBack5 = row["Charge Back5"].ToString(),
+                    ExtraUpgradeNetOff = row["Extra Upgrade Net Off"].ToString(),
+                    ExtraUpgradeGP = row["Extra Upgrade $GP"].ToString(),
+                    AIAGoals = row["AIA Goals"].ToString(),
+                    ChargeBack6 = row["Charge Back6"].ToString(),
+                    AIAInternetNetOff = row["AIA Internet Net Off"].ToString(),
+                    AIATrending = row["AIA Trending"].ToString(),
+                    AIAInternetGP = row["AIA Internet $GP"].ToString(),
+                    BroadbandGoals = row["Broadband Goals"].ToString(),
+                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
+                    BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
+                    ChargeBack7 = row["Charge Back7"].ToString(),
+                    FiberUpgrades = row["Fiber Upgrades"].ToString(),
+                    FiberUpgradesNetOFF = row["Fiber Upgrades Net OFF"].ToString(),
+                    ChargeBack8 = row["Charge Back8"].ToString(),
+                    BroadbandFiber = row["Broadband +_Fiber"].ToString(),
+                    BroadbandFiberTrend = row["Broadband +_Fiber _Trend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband + Fiber Trend%"].ToString(),
+                    BroadbandLessThen300MBQISpiff = row["Broadband Less then (300Mb) QI Spiff"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber (300 MB) QI Spiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber (500 MB) QI Spiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber (1G) QI Spiff"].ToString(),
+                    FiberUpgradeGP = row["Fiber Upgrade  $GP"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    BroadbandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandFiberGPTrending = row["Broad Band + Fiber _$GP Trending"].ToString(),
+                    TurboFeature = row["Turbo Feature"].ToString(),
+                    TurboFeatureGP = row["Turbo Feature $GP"].ToString(),
+                    PremVideoGoals = row["Prem Video Goals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoNetOFF = row["Prem Video Net OFF"].ToString(),
+                    ChargeBack9 = row["Charge Back9"].ToString(),
+                    PremVideoTrend = row["Prem Video Trend"].ToString(),
+                    PremVideoTrendPercentage = row["Prem Video Trend %"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    PremVideoGPTrending = row["Prem Video $GP Trending"].ToString(),
+                    EntertainmentGoals = row["Entertainment Goals"].ToString(),
+                    EntertainmentAch = row["Entertainment Ach"].ToString(),
+                    EntertainmentTrending = row["Entertainment _Trending"].ToString(),
+                    EntertainmentTrendingToGoalsPercentage = row["Entertainment Trending to Goals %"].ToString(),
+                    TWCDevicesQty = row["T#W#C Devices QTY"].ToString(),
+                    ChargeBack10 = row["Charge Back10"].ToString(),
+                    TWCDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
+                    TWCDevicesDollars = row["T,W,C Devices $"].ToString(),
+                    ProjectedGeographicSpif = row["Projected Geographic spif"].ToString(),
+                    PrepaidQty = row["Prepaid QTY"].ToString(),
+                    PrepaidToGA = row["Prepaid to GA"].ToString(),
+                    PrepaidNetOFF = row["Prepaid Net OFF"].ToString(),
+                    ChargeBack11 = row["Charge Back11"].ToString(),
+                    PrepaidGP = row["Prepaid $GP"].ToString(),
+                    PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessQtyTrending = row["Access Qty _Trending"].ToString(),
+                    AccessRevenue = row["Access $ Revenue"].ToString(),
+                    FeaturesQty = row["Features QTY"].ToString(),
+                    FeaturesQtyNetOFF = row["Features QTY Net OFF"].ToString(),
+                    ChargeBack12 = row["Charge Back12"].ToString(),
+                    TotalProtectionPercentage = row["Total Protection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    FeaturesGP = row["Features $GP"].ToString(),
+                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
+                    WeeklyEmployeeAveragePerStore = row["Weekly Employee Average Per store"].ToString(),
+                    MonthlyBudgetedHRS = row["Monthly Budgeted HRS"].ToString(),
+                    //TrainingHours = row["Training Hours"].ToString(),
+                    MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
+                    MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
+                    GACloseRt = row["GA Close Rt"].ToString(),
+                    HomeTechProtect = row["HomeTech Protect"].ToString()
+                    //TimeStamp = row["TimeStamp"].ToString()
+                };
+
+                lisn_tot.Add(model3);
+            }
+            ViewBag.Date = GpReport.DateTimes;
+
+            ViewData["GetFct_StoreNumberTotal"] = lisn_tot;
+
+            ///////////////////////////////////////////////////////////////////////////////
+
+
+            ////////////////Get TM Total
+
+            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam);
+            List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
+
+            foreach (DataRow row in Fct_StoreNumberTotalTM.Rows)
+            {
+                Fct_StoreNumberAttributesModel model4 = new Fct_StoreNumberAttributesModel
+                {
+                    Market = row["Market"].ToString(),
+                    TM = row["TM"].ToString(),
+                    GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv & HomeTech %"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    TrendingToBreakEven = row["Trending to BreakEven"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GP Trending %"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPS Trending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["Upgrade Trending to Goals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    MTDUpgradesNetOFF = row["MTD UPGRADES Net OFF"].ToString(),
+                    TWCDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWCDevicesQtyGoals = row["T,W,C Devices QTY Goals"].ToString(),
+                    TWCDevicesQtyNetOFF = row["T,W,C Devices QTY Net OFF"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA Consumer Conversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA Green Check Consumer"].ToString(),
+                    AIACInternet = row["AIA C Internet"].ToString(),
+                    AIABInternet = row["AIA B Internet"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPS Trending"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per- Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU Ach MTD"].ToString(),
+                    FNAchMTD = row["FN Ach MTD"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    ChargeBack = row["Charge Back"].ToString(),
+                    GrossAddsTrend = row["GROSS ADDS Trend"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS $GP"].ToString(),
+                    GrossAddsGPTrending = row["GROSS ADDS $GP Trending"].ToString(),
+                    ARBusinessFNProgramAverageQ2Target = row["AR Business FN Program Average Q2 Target"].ToString(),
+                    FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
+                    RemainingToAchieveFNAverageQ2Target = row["Remaining to Achive FN Average Q2 target"].ToString(),
+                    FNAchTrend = row["FN Ach Trend"].ToString(),
+                    FNAchDollars = row["FN Ach $"].ToString(),
+                    ARBusinessCRUProgramAverageQ2Target = row["AR Business CRU Program Average Q2 Target"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
+                    CRUAchDATA = row["CRU Ach DATA"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
+                    RemainingToAchieveCRUAverageQ2Target = row["Remaining to Achive CRU Average Q2 target"].ToString(),
+                    CRUAchTrend = row["CRU Ach Trend"].ToString(),
+                    CRUAchVoiceDollars = row["CRU Ach Voice $"].ToString(),
+                    CRUAchDATADollars = row["CRU Ach DATA $"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    ChargeBack1 = row["Charge Back1"].ToString(),
+                    MTDUpgradesTrending = row["MTD UPGRADES_Trending"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
+                    MTDUpgradesGPTrending = row["MTD UPGRADES $GP Trending"].ToString(),
+                    NextUp = row["Next UP"].ToString(),
+                    NextUpSpif = row["Next UP Spif"].ToString(),
+                    PremiumActivation = row["Premium Activation"].ToString(),
+                    PremiumActivationNetOFF = row["Premium Activation Net OFF"].ToString(),
+                    ChargeBack2 = row["Charge Back2"].ToString(),
+                    PremiumActivationGP = row["Premium Activation $GP"].ToString(),
+                    ExtraActivation = row["Extra Activation"].ToString(),
+                    ExtraActivationNetOFF = row["Extra Activation Net OFF"].ToString(),
+                    ChargeBack3 = row["Charge Back3"].ToString(),
+                    ExtraActivationGP = row["Extra Activation $GP"].ToString(),
+                    NonExtraNonPremiumActivation = row["Non Extra / Non Premium Activation"].ToString(),
+                    NonExtraNonPremiumActivationNetOFF = row["Non Extra / Non Premium Activation Net OFF"].ToString(),
+                    NonExtraNonPremiumActivationGP = row["Non Extra / Non Premium Activation $GP"].ToString(),
+                    PremiumUpgrade = row["Premium Upgrade"].ToString(),
+                    ChargeBack4 = row["Charge Back4"].ToString(),
+                    PremiumUpgradeNetOff = row["Premium Upgrade Net Off"].ToString(),
+                    PremiumUpgradeGP = row["Premium Upgrade $GP"].ToString(),
+                    ExtraUpgrade = row["Extra Upgrade"].ToString(),
+                    ChargeBack5 = row["Charge Back5"].ToString(),
+                    ExtraUpgradeNetOff = row["Extra Upgrade Net Off"].ToString(),
+                    ExtraUpgradeGP = row["Extra Upgrade $GP"].ToString(),
+                    AIAGoals = row["AIA Goals"].ToString(),
+                    ChargeBack6 = row["Charge Back6"].ToString(),
+                    AIAInternetNetOff = row["AIA Internet Net Off"].ToString(),
+                    AIATrending = row["AIA Trending"].ToString(),
+                    AIAInternetGP = row["AIA Internet $GP"].ToString(),
+                    BroadbandGoals = row["Broadband Goals"].ToString(),
+                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
+                    BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
+                    ChargeBack7 = row["Charge Back7"].ToString(),
+                    FiberUpgrades = row["Fiber Upgrades"].ToString(),
+                    FiberUpgradesNetOFF = row["Fiber Upgrades Net OFF"].ToString(),
+                    ChargeBack8 = row["Charge Back8"].ToString(),
+                    BroadbandFiber = row["Broadband +_Fiber"].ToString(),
+                    BroadbandFiberTrend = row["Broadband +_Fiber _Trend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband + Fiber Trend%"].ToString(),
+                    BroadbandLessThen300MBQISpiff = row["Broadband Less then (300Mb) QI Spiff"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber (300 MB) QI Spiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber (500 MB) QI Spiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber (1G) QI Spiff"].ToString(),
+                    FiberUpgradeGP = row["Fiber Upgrade  $GP"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    BroadbandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandFiberGPTrending = row["Broad Band + Fiber _$GP Trending"].ToString(),
+                    TurboFeature = row["Turbo Feature"].ToString(),
+                    TurboFeatureGP = row["Turbo Feature $GP"].ToString(),
+                    PremVideoGoals = row["Prem Video Goals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoNetOFF = row["Prem Video Net OFF"].ToString(),
+                    ChargeBack9 = row["Charge Back9"].ToString(),
+                    PremVideoTrend = row["Prem Video Trend"].ToString(),
+                    PremVideoTrendPercentage = row["Prem Video Trend %"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    PremVideoGPTrending = row["Prem Video $GP Trending"].ToString(),
+                    EntertainmentGoals = row["Entertainment Goals"].ToString(),
+                    EntertainmentAch = row["Entertainment Ach"].ToString(),
+                    EntertainmentTrending = row["Entertainment _Trending"].ToString(),
+                    EntertainmentTrendingToGoalsPercentage = row["Entertainment Trending to Goals %"].ToString(),
+                    TWCDevicesQty = row["T#W#C Devices QTY"].ToString(),
+                    ChargeBack10 = row["Charge Back10"].ToString(),
+                    TWCDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
+                    TWCDevicesDollars = row["T,W,C Devices $"].ToString(),
+                    ProjectedGeographicSpif = row["Projected Geographic spif"].ToString(),
+                    PrepaidQty = row["Prepaid QTY"].ToString(),
+                    PrepaidToGA = row["Prepaid to GA"].ToString(),
+                    PrepaidNetOFF = row["Prepaid Net OFF"].ToString(),
+                    ChargeBack11 = row["Charge Back11"].ToString(),
+                    PrepaidGP = row["Prepaid $GP"].ToString(),
+                    PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessQtyTrending = row["Access Qty _Trending"].ToString(),
+                    AccessRevenue = row["Access $ Revenue"].ToString(),
+                    FeaturesQty = row["Features QTY"].ToString(),
+                    FeaturesQtyNetOFF = row["Features QTY Net OFF"].ToString(),
+                    ChargeBack12 = row["Charge Back12"].ToString(),
+                    TotalProtectionPercentage = row["Total Protection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    FeaturesGP = row["Features $GP"].ToString(),
+                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
+                    WeeklyEmployeeAveragePerStore = row["Weekly Employee Average Per store"].ToString(),
+                    MonthlyBudgetedHRS = row["Monthly Budgeted HRS"].ToString(),
+                    //TrainingHours = row["Training Hours"].ToString(),
+                    MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
+                    MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
+                    GACloseRt = row["GA Close Rt"].ToString(),
+                    HomeTechProtect = row["HomeTech Protect"].ToString()
+                    //TimeStamp = row["TimeStamp"].ToString()
+                };
+
+                lisn_totTM.Add(model4);
+            }
+
+            ViewData["GetFct_StoreNumberTotalTM"] = lisn_totTM;
+
+            ///////////////////////////////////////////////////////////////////////////////
+
+            //For Last TimeStamp
+
+            if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
+            {
+                // Use LINQ to find the latest TimeStamp
+                var latestTimeStamp = Fct_StoreNumber.AsEnumerable()
+                                                     .Max(row => row.Field<DateTime>("TimeStamp"));
+                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                // Output the result
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                                                                                           // Subtract one day from the TimeStamp
+
+                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                ViewBag.LatestTimeStamp = "No data available";
+            }
+
+            //For Filters
+
+            List<SelectListItem> vpList = new List<SelectListItem>();
+            List<SelectListItem> regionList = new List<SelectListItem>();
+            List<SelectListItem> sdList = new List<SelectListItem>();
+            List<SelectListItem> tiersList = new List<SelectListItem>();
+            List<SelectListItem> storesList = new List<SelectListItem>();
+            List<SelectListItem> marketList = new List<SelectListItem>();
+            List<SelectListItem> tmList = new List<SelectListItem>();
+            List<SelectListItem> rsmList = new List<SelectListItem>();
+            List<SelectListItem> roleList = new List<SelectListItem>();
+
+            HashSet<string> vpNamesSet = new HashSet<string>();
+            HashSet<string> regionNamesSet = new HashSet<string>();
+            HashSet<string> sdNamesSet = new HashSet<string>(); // To store unique region names
+            HashSet<string> tiersNamesSet = new HashSet<string>();
+            HashSet<string> storesNamesSet = new HashSet<string>();
+            HashSet<string> marketNamesSet = new HashSet<string>();
+            HashSet<string> tmNamesSet = new HashSet<string>();
+            HashSet<string> rsmNamesSet = new HashSet<string>();
+            HashSet<string> roleNamesSet = new HashSet<string>();
+
+            // Assuming your DataTable has a column named "SD" that holds the region names
+            foreach (DataRow row in Fct_StoreNumber.Rows)
+            {
+                string vpName = row["VP"].ToString();
+                string sdName = row["SD"].ToString(); // Assuming the SD column contains SD names
+                string tiersName = row["Tiers"].ToString();
+                string regionName = row["Region"].ToString();
+                string storesName = row["Store"].ToString();
+                string marketName = row["Market"].ToString();
+                string tmName = row["TM"].ToString();
+                string rsmName = row["RSM/SRSM"].ToString();
+                string roleName = row["Role"].ToString();
+
+                vpNamesSet.Add(vpName);
+                sdNamesSet.Add(sdName);
+                tiersNamesSet.Add(tiersName);
+                regionNamesSet.Add(regionName);
+                storesNamesSet.Add(storesName);
+                storesNamesSet.Add(marketName);
+                storesNamesSet.Add(tmName);
+                storesNamesSet.Add(rsmName);
+                storesNamesSet.Add(roleName);
+
+                // Add to the list as SelectListItem
+                sdList.Add(new SelectListItem
+                {
+                    Value = sdName,
+                    Text = sdName
+                });
+
+                tiersList.Add(new SelectListItem
+                {
+                    Value = tiersName,
+                    Text = tiersName
+                });
+
+                storesList.Add(new SelectListItem
+                {
+                    Value = storesName,
+                    Text = storesName
+                });
+
+                marketList.Add(new SelectListItem
+                {
+                    Value = marketName,
+                    Text = marketName
+                });
+
+                tmList.Add(new SelectListItem
+                {
+                    Value = tmName,
+                    Text = tmName
+                });
+            }
+            if (sdList != null && sdList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctSDList = sdList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.SDList = distinctSDList;
+            }
+            else
+            {
+                ViewBag.SDList = new List<SelectListItem>();
+            }
+            if (tiersList != null && tiersList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distincttiersList = tiersList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.tiersList = distincttiersList;
+            }
+            else
+            {
+                ViewBag.tiersList = new List<SelectListItem>();
+            }
+            if (storesList != null && storesList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctStoresList = storesList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.StoresList = distinctStoresList;
+            }
+            else
+            {
+                ViewBag.StoresList = new List<SelectListItem>();
+            }
+            if (marketList != null && marketList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctMarketList = marketList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.MarketList = distinctMarketList;
+            }
+            else
+            {
+                ViewBag.MarketList = new List<SelectListItem>();
+            }
+            if (tmList != null && tmList.Count > 0)
+            {
+                // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
+                var distinctTMList = tmList.GroupBy(x => x.Value)
+                                           .Select(g => g.First()) // Or group by x.Text if needed
+                                           .ToList();
+                ViewBag.TMList = distinctTMList;
+            }
+            else
+            {
+                ViewBag.TMList = new List<SelectListItem>();
+            }
         }
 
         public ActionResult TrendingCommission()
