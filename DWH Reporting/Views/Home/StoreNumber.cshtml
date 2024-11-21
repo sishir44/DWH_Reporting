@@ -785,8 +785,8 @@
                                         <!-- 5 Freeze COL -->
                                         <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
                                         <th rowspan="2" style="background-color: black; color:white;">View</th>
-                                        <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                         <th rowspan="2" style="background-color: black; color:white;">Market</th>
+                                        <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">TM</th>
                                         <th rowspan="2" style="background-color: black; color:white;">Multi Market</th>
                                         <th rowspan="2" style="background-color: black; color:white;">MMM</th>
                                         <th rowspan="2" style="background-color: black; color:white;">Store</th>
@@ -975,8 +975,8 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
                                     <td></td>
-                                    <td>Grand Total</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1171,14 +1171,10 @@
                                 <tr id="totTM" class="total_dataTM">
                                     <td></td>
                                     <td></td>
-                                    <td>TM Total</td>
+                                    <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
                                     <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                                     <td></td>
                                     <td></td>
-
-
-                                    @*<td style="display:none;"></td>*@
-
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -1526,8 +1522,8 @@
                                     <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                     <!-- Hierarchy -->
-                                    <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.TM      </td>
                                     <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
+                                    <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.TM      </td>
                                     <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MUL_Market   </td>
                                     <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MUL_MktMngr   </td>
                                     <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
