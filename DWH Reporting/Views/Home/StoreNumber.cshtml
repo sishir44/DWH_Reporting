@@ -22,6 +22,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    <link rel="apple-touch-icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
+    <link rel="shortcut icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
+
     @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -153,7 +156,6 @@
             background-color: black;
             color: white;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -163,7 +165,6 @@
             text-align: center;
             color: red;
             background-color: white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -210,7 +211,6 @@
             color: black;
             vertical-align: middle;
             font-weight: bold;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -284,7 +284,6 @@
         .table th {
             padding: 0px !important;
             text-align: center;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -295,7 +294,7 @@
 
         .scrollable {
             height: 13px;
-            width:13px;
+            width: 13px;
             overflow-y: scroll;
         }
 
@@ -364,12 +363,19 @@
             color: white;
         }
 
-        .table th, .table td {
+        /*.table th, .table td {
             padding: 5px;
             text-align: center;
-
             white-space: normal;
             word-wrap: break-word;
+        }*/
+
+        th, td {
+            font-size: 9px;
+            padding: 4px;
+            min-width: 70px;
+            max-width: 70px !important;
+            text-align: center;
         }
 
         .textleft {
@@ -382,7 +388,6 @@
             /*color: white;*/
             vertical-align: middle;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -395,7 +400,6 @@
             vertical-align: middle;
             font-weight: bold;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -405,7 +409,6 @@
             text-align: center;
             color: red;
             background-color: white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -416,7 +419,6 @@
             color: black;
             background-color: #F4D2C4;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -424,7 +426,6 @@
         tr.main_data:nth-child(odd) td {
             background-color: white;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
@@ -445,11 +446,15 @@
             color: black;
             background-color: sandybrown;
             border: 1px solid white;
-
             white-space: normal;
             word-wrap: break-word;
         }
 
+        #tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
 
         tr.MUSM_data {
             font-size: 13px;
@@ -458,13 +463,83 @@
             color: white;
             background-color: #3357E1;
         }
+
         #demoDW {
             width: 100%;
             max-height: 90vh;
             overflow: auto;
         }
     </style>
+    <style>
 
+
+        #tbl th[scope=row] {
+            left: -1px;
+            z-index: 1;
+        }
+
+        #tbl th[scope=col] {
+            left: -2px;
+            z-index: 3;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl tbody td:nth-child(2),
+        #tbl tbody td:nth-child(3),
+        #tbl tbody td:nth-child(4),
+        #tbl tbody td:nth-child(5),
+        #tbl tbody td:nth-child(6),
+        #tbl tbody td:nth-child(7) {
+            position: sticky;
+            z-index: 1;
+        }
+
+        #tbl thead th:nth-child(1),
+        #tbl thead th:nth-child(2),
+        #tbl thead th:nth-child(3),
+        #tbl thead th:nth-child(4),
+        #tbl thead th:nth-child(5),
+        #tbl thead th:nth-child(6),
+        #tbl thead th:nth-child(7) {
+            position: sticky;
+            z-index: 12;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl thead th:nth-child(1) {
+            left: 0;
+        }
+
+        #tbl tbody td:nth-child(2),
+        #tbl thead th:nth-child(2) {
+            left: 70px;
+        }
+
+        #tbl tbody td:nth-child(3),
+        #tbl thead th:nth-child(3) {
+            left: 140px;
+        }
+
+        #tbl tbody td:nth-child(4),
+        #tbl thead th:nth-child(4) {
+            left: 210px;
+        }
+
+        #tbl tbody td:nth-child(5),
+        #tbl thead th:nth-child(5) {
+            left: 280px;
+        }
+
+        #tbl tbody td:nth-child(6),
+        #tbl thead th:nth-child(6) {
+            left: 350px;
+        }
+
+        #tbl tbody td:nth-child(7),
+        #tbl thead th:nth-child(7) {
+            left: 420px;
+        }
+    </style>
 </head>
 
 <body style="padding-top:0; background-color:#B2D6F2;">
@@ -800,7 +875,7 @@
                                         <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">SD</th>
 
                                         <!-- Calc data header for HEADING -->
-                                        <th id="ColSpan152" colspan="152"></th>
+                                        @*<th id="ColSpan152" colspan="152"></th>*@
 
                                     </tr>
 
@@ -4671,7 +4746,7 @@
 
     <!--NEXT/PREV BTN -->
     <footer>
-        <div style="padding-left:40%;background-color:#B2D6F2;">
+        <div class="mt-4" style="padding-left:40%;background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
@@ -4681,31 +4756,31 @@
 
 <!--  Page Load & TBL & Print -->
 <script>
-    $(document).ready(function () {
-        var windowheight = $(window).height()
+    //$(document).ready(function () {
+    //    var windowheight = $(window).height()
 
-        var height = (windowheight - 400) + "px"
-        updateDataTable(height);
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
+    //    var height = (windowheight - 400) + "px"
+    //    updateDataTable(height);
+    //    $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
+    //    $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
 
 
-    });
+    //});
 
-    function updateDataTable(S_height) {
-        $('#tbl').DataTable({
-            scrollY: S_height,
-            scrollX: true,
-            scrollCollapse: true,
-            searching: false,  // Disable default search since we're using custom search
-            bInfo: false,
-            paging: false,
-            ordering: false,
-            fixedColumns: {
-                leftColumns: 7, 
-            }
-        });
-    }
+    //function updateDataTable(S_height) {
+    //    $('#tbl').DataTable({
+    //        scrollY: S_height,
+    //        scrollX: true,
+    //        scrollCollapse: true,
+    //        searching: false,  // Disable default search since we're using custom search
+    //        bInfo: false,
+    //        paging: false,
+    //        ordering: false,
+    //        fixedColumns: {
+    //            leftColumns: 7, 
+    //        }
+    //    });
+    //}
 
     function test() {
 
@@ -5781,8 +5856,8 @@
 
 
         // Use DataTables API to clear filters and show all rows
-        var table = $('#tbl').DataTable();
-        table.search('').columns().search('').draw();  // Clear any global or column-specific filters
+        //var table = $('#tbl');
+        //table.search('').columns().search('').draw();  // Clear any global or column-specific filters
 
         // Show all the rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
@@ -5817,7 +5892,7 @@
             return rowContent.indexOf(input) > -1 || input === '';
         });
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+       // $('#tbl').draw();
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
     }
@@ -6108,7 +6183,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+    //    $('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -6579,7 +6654,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+       // $('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -6941,7 +7016,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -7332,7 +7407,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -7664,7 +7739,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -7733,7 +7808,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
