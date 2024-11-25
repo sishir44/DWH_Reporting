@@ -11,10 +11,7 @@
     // Retrieve the data from ViewData
     var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    var recordsGet_MUL_Mgr = ViewData["Get_MUL_Mgr"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    var recordsGet_MUL_Mkt = ViewData["Get_MUL_Mkt"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-
+    var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;    
     var recordsFct_EmployeeNumberTotal = ViewData["GetFct_EmployeeNumberTotal"] as IEnumerable<Fct_EmployeeNumberAttributesModel>;
 }
 @using DWH_Reporting.Models.GpReport;
@@ -639,7 +636,7 @@
                         </select>
                     </div>
 
-                    <!-- Search MUL_MktMngr -->
+                    @*<!-- Search MUL_MktMngr -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search Multi Manager" />
                         <select class="form-control selector" id="MULMngr" multiple onchange="filterMULMngrData()">
@@ -679,7 +676,7 @@
                                 <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Market available</option>
                             }
                         </select>
-                    </div>
+                    </div>*@
 
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
@@ -1276,8 +1273,8 @@
     </div>
     <footer>
         <div class="mt-4" style="padding-left:40%; background-color:#B2D6F2;">
-            @*<button id="prevBtn"  style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Previous</button>
-                <button id="nextBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Next</button>*@
+            <button id="prevBtn"  style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Previous</button>
+            <button id="nextBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Next</button>
 
         </div>
     </footer>
