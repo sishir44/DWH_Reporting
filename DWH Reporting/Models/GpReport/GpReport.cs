@@ -1484,8 +1484,6 @@ namespace DWH_Reporting.Models.GpReport
     public class Fct_StoreNumberAttributesModel
     {
         public string VP { get; set; }
-        public string MUL_MktMngr { get; set; }
-        public string MUL_Market { get; set; }
         public string Region { get; set; }
         public string SD { get; set; }
         public string UniqueID { get; set; }
@@ -1494,6 +1492,8 @@ namespace DWH_Reporting.Models.GpReport
         public string Store { get; set; }
         public string HITStore { get; set; }
         public string Market { get; set; }
+        public string MULMkt { get; set; }
+        public string MULMngr { get; set; }
         public string TM { get; set; }
         public string RSMSRSM { get; set; }
         public string Role { get; set; }
@@ -1652,6 +1652,160 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeTechProtect { get; set; }
         public string TimeStamp { get; set; }
         public string DateKey { get; set; }
+    }
+
+    public class Fct_EmployeeNumberAttributesModel
+    {
+        //Hierarchy Attributes
+        public string VP { get; set; }
+        public string MUL_MktMngr { get; set; }
+        public string MUL_Market { get; set; }
+        public string Region { get; set; }
+        public string SD { get; set; }
+        public string UniqueID { get; set; }
+        public string DealerCode { get; set; }
+        public string Tiers { get; set; }
+        public string Store { get; set; }
+        public string HITStore { get; set; }
+        public string Market { get; set; }
+        public string TM { get; set; }
+        public string RSMSRSM { get; set; }
+        public string Role { get; set; }
+
+        //Calculated Attributes
+        public string TOTALOPS                                      { get; set; }
+        public string GPperBOX                                      { get; set; }
+        public string GPGOAL                                        { get; set; }
+        public string TotalGPAchievedWithSpif                       { get; set; }
+        public string Trending                                      { get; set; }
+        public string CSAT                                          { get; set; }
+        public string GROSSADDS                                     { get; set; }
+        public string GROSSADDSNetOFF                               { get; set; }
+        public string ChargeBackACTIVATION                          { get; set; }
+        public string GROSSADDSGP                                  { get; set; }
+        public string FNAchMTD                                      { get; set; }
+        public string FNAch                                        { get; set; }
+        public string CRUAchMTD                                     { get; set; }
+        public string CRUAch                                       { get; set; }
+        public string NextUP                                         { get; set; }
+        public string NextUPSpif                                    { get; set; }
+        public string PremiumActivation                              { get; set; }
+        public string PremiumActivationNetOFF                      { get; set; }
+        public string ChargeBackPREMIUMACT                         { get; set; }
+        public string PremiumActivationGP                         { get; set; }
+        public string ExtraActivation                                { get; set; }
+        public string ExtraActivationNetOFF                        { get; set; }
+        public string ChargeBackEXTRAACT                           { get; set; }
+        public string ExtraActivationGP                            { get; set; }
+        public string NonExtraNonPremiumActivation              { get; set; }
+        public string NonExtraNonPremiumActivationNetOFF      { get; set; }
+        public string NonExtraNonPremiumActivationGP          { get; set; }
+        public string MTDUPGRADES                                    { get; set; }
+        public string MTDUPGRADESNetOFF                            { get; set; }
+        public string ChargeBackUPGRADE                             { get; set; }
+        public string MTDUPGRADESGP                                { get; set; }
+        public string PremiumUpgrade                                 { get; set; }
+        public string ChargeBackPREMIUMUPGRADE                     { get; set; }
+        public string PremiumUpgradeNetOff                         { get; set; }
+        public string PremiumUpgradeGP                             { get; set; }
+        public string ExtraUpgrade                                   { get; set; }
+        public string ChargeBackEXTRAUPGRADE                       { get; set; }
+        public string ExtraUpgradeNetOff                           { get; set; }
+        public string ExtraUpgradeGP                               { get; set; }
+        public string AIAInternet                                    { get; set; }
+        public string AIAInternetCancellation                       { get; set; }
+        public string AIAInternetNetOff                            { get; set; }
+        public string BroadBandlessThen300MB                     { get; set; }
+        public string NewFiber300MB                                { get; set; }
+        public string NewFiber500MB                                { get; set; }
+        public string NewFiber1G                                   { get; set; }
+        public string TotalNewFiber                                { get; set; }
+        public string TotalBroadbandNewfiber                      { get; set; }
+        public string BroadbandNewfiberNetOFF                   { get; set; }
+        public string ChargeBackBB                                  { get; set; }
+        public string FiberUpgrades                                  { get; set; }
+        public string FiberUpgradesNetOFF                          { get; set; }
+        public string ChargeBackFIBREUPG                          { get; set; }
+        public string BroadBandFiberUpgrade                      { get; set; }
+        public string BroadBandFiberUpgradeNetOFF              { get; set; }
+        public string BroadbandLessthen300MbQISpiff             { get; set; }
+        public string Newfiber300MBQISpiff                      { get; set; }
+        public string Newfiber500MBQISpiff                      { get; set; }
+        public string Newfiber1GQISpiff                          { get; set; }
+        public string FiberUpgradesGP                               { get; set; }
+        public string BroadbandNewfiberGP                       { get; set; }
+        public string BroadbandFiberGP                           { get; set; }
+        public string TurboFeature                                   { get; set; }
+        public string TurboFeatureGP                               { get; set; }
+        public string PremVideo                                      { get; set; }
+        public string PremVideoNetOFF                              { get; set; }
+        public string ChargeBackTV                                  { get; set; }
+        public string PremVideoGP                                  { get; set; }
+        public string PremVideoSpiff                                { get; set; }
+        public string TWCDevicesQTY                               { get; set; }
+        public string TWCDevicesNetOFF                              { get; set; }
+        public string ChargeBackTWC                                 { get; set; }
+        public string TWCDevicesGP                                  { get; set; }
+        public string ProjectedGeographicSpif                       { get; set; }
+        public string PrepaidGP                                     { get; set; }
+        public string PrepaidQTY                                     { get; set; }
+        public string PrepaidtoGA                                  { get; set; }
+        public string PrepaidNetOFF                                 { get; set; }
+        public string ChargeBackPREPAIDACTIVATION                  { get; set; }
+        public string PrepaidwithAutopay                            { get; set; }
+        public string AccessGP                                      { get; set; }
+        public string AccessQty                                      { get; set; }
+        public string AccessRevenue                                { get; set; }
+        public string INSURANCE                                       { get; set; }
+        public string ChargeBackINSURANCE                           { get; set; }
+        public string INSURANCEGP                                   { get; set; }
+        public string ProtAdv1                                       { get; set; }
+        public string ProtAdv4                                       { get; set; }
+        public string PROTECTIONPACK                                 { get; set; }
+        public string PROTECTIONPACKNetOFF                         { get; set; }
+        public string ChargeBackPROTECTION                          { get; set; }
+        public string PROTECTIONPACKGP                             { get; set; }
+        public string HomeTechProtect                                { get; set; }
+        public string ProtAdvHomeTech                            { get; set; }
+        public string DREAMWk1to7                                { get; set; }
+        public string DREAMWk8to14                              { get; set; }
+        public string DREAMWk15to21                              { get; set; }
+        public string DREAMWk22to28                              { get; set; }
+        public string DREAMWk29to31                              { get; set; }
+        public string PPVGACommission                                { get; set; }
+        public string PPVGAEliteCommission                          { get; set; }
+        public string PPVGAExtraCommission                          { get; set; }
+        public string FNCommission                                   { get; set; }
+        public string CRUCommission                                  { get; set; }
+        public string PremiumVideoCommission                        { get; set; }
+        public string AIAInternetCommission                         { get; set; }
+        public string BroadbandCommission                            { get; set; }
+        public string NewFiberCommission                            { get; set; }
+        public string FiberUpgradeCommission                        { get; set; }
+        public string UPGCommission                                  { get; set; }
+        public string UpgradeEliteCommission                        { get; set; }
+        public string UpgradeExtraCommission                        { get; set; }
+        public string WearbaleTabletCommission                    { get; set; }
+        public string Hometech                                        { get; set; }
+        public string NextUp                                          { get; set; }
+        public string ProtectAdvantage1Commission                  { get; set; }
+        public string ProtectAdvantage4Commission                  { get; set; }
+        public string PrepaidCommission                              { get; set; }
+        public string AccessoryGPCommission                         { get; set; }
+        public string Commission                                      { get; set; }
+        public string CommissionEligibility                         { get; set; }
+        public string RegHrsAchved                                  { get; set; }
+        public string OT                                              { get; set; }
+        public string HourlyRateUSD                                { get; set; }
+        public string Salary                                          { get; set; }
+        public string GeoSPIFFOPS                                   { get; set; }
+        public string GeoRate                                        { get; set; }
+        public string MinWage                                        { get; set; }
+        public string MinWage150                                { get; set; }
+        public string TotalCompNew                                  { get; set; }
+        public string TotalCompAfter150Check                    { get; set; }
+        public string CommissionBucketMTD                           { get; set; }
+        public string EOMCommissionTrendingBucket                   { get; set; }
     }
 
 

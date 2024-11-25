@@ -328,6 +328,26 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+        public static DataTable GetFct_EmployeeNumberTotal(string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_EmployeeNumberTotal";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
         public static DataTable Get_MUL_Mgr()
         {
             try
