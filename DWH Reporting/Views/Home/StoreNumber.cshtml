@@ -5913,12 +5913,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 TMSelect.add(option);
             });
@@ -5954,12 +5954,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 MARKETSelect.add(option);
             });
@@ -5995,12 +5995,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 STORESSelect.add(option);
             });
@@ -6036,12 +6036,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 TIERSSelect.add(option);
             });
@@ -6076,12 +6076,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 sdSelect.add(option);
             });
@@ -6354,6 +6354,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         }
@@ -6408,7 +6409,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 /*option.style.color = 'grey';  */// Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 MarketSelect.add(option);
             });
         } else {
@@ -6454,7 +6455,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 StoresSelect.add(option);
             });
         } else {
@@ -6503,7 +6504,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 tiersSelect.add(option);
             });
         } else {
@@ -6523,6 +6524,8 @@
             });
         }
     }
+
+   
     function TMfilterSDOptions(selectedValues) {
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
@@ -6544,15 +6547,16 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                /* option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 SDSelect.add(option);
             });
         } else {
@@ -6723,6 +6727,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -6771,6 +6776,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -6819,7 +6825,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 /* option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 tiersSelect.add(option);
             });
         } else {
@@ -6868,7 +6874,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 StoresSelect.add(option);
             });
         } else {
@@ -6909,15 +6915,16 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                //option.style.color = 'grey';
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 SDSelect.add(option);
             });
         } else {
@@ -7112,6 +7119,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -7160,6 +7168,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -7208,6 +7217,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 StoresSelect.add(option);
             });
         } else {
@@ -7255,8 +7265,8 @@
                 var option = document.createElement('option');
                 option.value = tiersValue;
                 option.text = tiersValue;
-                option.style.color = 'grey';
-                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                //option.style.color = 'grey';
+                option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
                 tiersSelect.add(option);
             });
@@ -7298,7 +7308,7 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
@@ -7306,7 +7316,8 @@
                 option.value = SDValue;
                 option.text = SDValue;
                 option.style.color = 'grey';
-                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.fontSize = '10px';
+                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
 
                 SDSelect.add(option);
@@ -7508,6 +7519,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -7556,6 +7568,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -7604,7 +7617,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
-
+                option.style.fontSize = '10px';
                 tiersSelect.add(option);
             });
         } else {
@@ -7655,6 +7668,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 StoresSelect.add(option);
             });
         } else {
@@ -7695,15 +7709,16 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                /*option.style.color = 'grey'; */
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
                 SDSelect.add(option);
             });
