@@ -8345,15 +8345,16 @@
 
         // If any SD is selected, disable the tiers dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //tiersSelect.disabled = true;  // Keep the dropdown disabled if required
+            tiersSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the tiers dropdown with only the tiers from filtered rows
             availableTiers.forEach(tiersValue => {
                 var option = document.createElement('option');
                 option.value = tiersValue;
                 option.text = tiersValue;
-                //option.style.color = 'grey';
-                option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
                 tiersSelect.add(option);
             });
