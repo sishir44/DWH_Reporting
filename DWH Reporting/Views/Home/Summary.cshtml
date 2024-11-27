@@ -826,7 +826,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>@(String.IsNullOrWhiteSpace(record2.Monthly_AchivedHoursTrending != null ? record2.Monthly_AchivedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.Monthly_AchivedHoursTrending))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record2.WeeklyBudgetedHRS != null ? record2.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.WeeklyBudgetedHRS))) %</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record2.WeeklyBudgetedHRS != null ? record2.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.WeeklyBudgetedHRS)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsTrendToGoal)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalTraffic)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTraffic != null ? record2.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PPVGAPerTraffic)))</td>
@@ -921,7 +921,7 @@
                                         <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
                                         <td>@record.StoreContact</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Monthly_AchivedHoursTrending != null ? record.Monthly_AchivedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Monthly_AchivedHoursTrending))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WeeklyBudgetedHRS))) %</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WeeklyBudgetedHRS)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTraffic != null ? record.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTraffic)))</td>
