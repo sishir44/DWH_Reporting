@@ -1863,9 +1863,11 @@ namespace DWH_Reporting.Controllers
                     StoreContact = row["StoreContact"].ToString(),
                     ReportDate = row["ReportDate"].ToString(),
                     DealerCode = row["DealerCode"].ToString(),
-                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    Monthly_AchivedHoursTrending = row["Monthly_AchivedHoursTrending"].ToString(),
+                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
-                    GrossAdds = row["GROSS ADDS Goals"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsNetOff = row["GROSS ADDS Net OFF"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
                     PPVGAPerTraffic = row["PPVGA per Traffic%"].ToString(),
@@ -1931,6 +1933,7 @@ namespace DWH_Reporting.Controllers
                     FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
                     FNAch = row["FN Ach $"].ToString(),
                     CRUVGACnt = row["CRU VGA Cnt"].ToString(),
+                    //CRU ACH VOICE
                     CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice $"].ToString(),
                     CRUAchData = row["CRU Ach DATA $"].ToString(),
@@ -1941,8 +1944,6 @@ namespace DWH_Reporting.Controllers
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     //TimeStamp = row["TimeStamp"].ToString(),
                     ProtAdv4 = row["ProtAdv 4"].ToString(),
-                    Monthly_AchivedHoursTrending = row["Monthly_AchivedHoursTrending"].ToString(),
-                    WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
 
                 };
 
