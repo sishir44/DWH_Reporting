@@ -883,7 +883,7 @@
                                 <!-- CALC COL HEAD-->
                                 <tr class="main_header">
                                     <td>Monthly Achieved Hours Trending%  </td>
-                                    <td style="background-color: #063B73; color:white;">GROSS ADDS<br>Trend%<br>To Goal                         </td>
+                                    <td style="background-color: #063B73; color:white;">GROSS ADDS<br>Trend%<br>To Goal                        </td>
                                     <td style="background-color: #063B73; color:white;">Gross<br>Adds<br>Goals          </td>
                                     <td style="background-color: #063B73; color:white;">Gross<br>Adds<br>NetOFF         </td>
                                     <td>PPVGA per Traffic%                    </td>
@@ -1062,7 +1062,7 @@
                                         <td></td>
                                         <td></td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)*100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTrafficPercentage))) %</td>
@@ -1260,7 +1260,7 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage))) %</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsTrendToGoal)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsTrendToGoal)*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsGoals)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTrafficPercentage != null ? record2.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.PPVGAPerTrafficPercentage))) %</td>
@@ -1615,7 +1615,7 @@
 
                                         <!-- Data SP SN -->
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)*100))%</td>
                                         <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAPerTrafficPercentage))) %</td>
