@@ -588,22 +588,22 @@
                         <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
                                style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px;margin-left: 10px;" />
 
-                        <label>Between 70%</label>
-                        <input type="button" name="OPS" id="Between" class="form-control"
+                        <label>Above 100%</label>
+                        <input type="button" name="GAtrGoals100" id="GATrGoal100" class="form-control"
                                value="" title="Above 100%"
                                style="background-color: green; color:white; height: 35px;margin-left: 10px;margin-bottom: 5px;" />
                     </div>
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
-                        <label>90% & Above</label>
-                        <input type="button" name="above90" id="Above" class="form-control"
-                               title="Traffic"
+                        <label>Above 70%</label>
+                        <input type="button" name="GATrGoal90" id="GATrGoal90" class="form-control"
+                               title="Above 70%"
                                value=""
                                style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
 
-                        <label>Less 70%</label>
-                        <input type="button" name="above90" id="CSAT70" class="form-control"
-                               title="CSAT"
+                        <label>Less Than 70%</label>
+                        <input type="button" name="less70" id="GATrGoal70" class="form-control"
+                               title="Gross Adds trend"
                                value=""
                                style="background-color: orange; color:white; height: 35px;" />
                     </div>
@@ -836,11 +836,11 @@
                                 <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOff != null ? record2.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsNetOff)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalTraffic)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTraffic != null ? record2.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PPVGAPerTraffic))*100))%</td>
-                                <td>@(String.IsNullOrWhiteSpace(record2.FiberConversion != null ? record2.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.FiberConversion))*100))%</td>
+                                <td>@(String.IsNullOrWhiteSpace(record2.FiberConversion != null ? record2.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberConversion)))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.APO)))</td>
-                                <td class="csat">@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.CSAT))*100))%</td>
+                                <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.CSAT))*100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.ProtAdvHomeTechPercentage))*100))%</td>
-                                <td class="breakevenCLS">$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
+                                <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record2.GPWithSpifTrending != null ? record2.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GPWithSpifTrending)))</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalGPGoals)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.OPSTrendingToGoalsPercentage != null ? record2.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.OPSTrendingToGoalsPercentage))*100))%</td>
@@ -928,13 +928,19 @@
                                 <td>@record.StoreContact</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.Monthly_AchivedHoursTrending != null ? record.Monthly_AchivedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Monthly_AchivedHoursTrending)))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WeeklyBudgetedHRS)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal))*100))%</td>
+                                @*<td class="GATrGoal">@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal))*100))%</td>*@
+                                <td class="GATrGoal">
+                                    @String.Format("{0:N1}", record.GrossAddsTrendToGoal != null
+                                        ? (Convert.ToDouble(record.GrossAddsTrendToGoal) * 100)
+                                        : 0)
+                                    %
+                                </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTraffic != null ? record.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTraffic))*100))%</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.FiberConversion))*100))%</td>
+                                <td class="FC">@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
                                 <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.CSAT))*100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage))*100))%</td>
@@ -1188,6 +1194,7 @@
     function highlightCells() {
         //GROSS ADDS Goals
         var cells = document.querySelectorAll(".Csatval");
+        var GATrGoal = document.querySelectorAll(".GATrGoal");
 
         cells.forEach(function (cell) {
             // Parse the cell's text content as a float
@@ -1213,49 +1220,92 @@
 
             var value = parseFloat(cell.textContent);
 
-            if (!isNaN(value) && value > 0.7) {
+            if (!isNaN(value) && value > 70) {
                 cell.style.backgroundColor = "green";
                 cell.style.color = "white";
             }
 
-            if (!isNaN(value) && value < 0.7) {
+            if (!isNaN(value) && value < 70) {
                 cell.style.backgroundColor = "yellow";
                 cell.style.color = "black";
             }
         });
-        //CSAT70
-        var CSAT70Cells = document.querySelectorAll(".csat");
-        var CSAT70Count = 0;
-        CSAT70Cells.forEach(function (cell) {
-            var CSAT70Name = cell.textContent.trim();
-            if (CSAT70Name < 70) {
-                CSAT70Count++;
+        ////CSAT70
+        //var CSAT70Cells = document.querySelectorAll(".csat");
+        //var CSAT70Count = 0;
+        //CSAT70Cells.forEach(function (cell) {
+        //    var CSAT70Name = cell.textContent.trim();
+        //    if (CSAT70Name < 70) {
+        //        CSAT70Count++;
+        //    }
+        //});
+
+        //document.getElementById("CSAT70").value = CSAT70Count;
+
+        ////GATrGoal <70%
+        
+        var GATrGoal70Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal70Count = 0;
+
+        GATrGoal70Cells.forEach(function (cell) {
+            var GATrGoal70Name = cell.textContent.trim().replace('%', ''); // Remove % symbol
+            var GATrGoal70Value = parseFloat(GATrGoal70Name); // Convert to number
+            if (GATrGoal70Value < 70) {
+                GATrGoal70Count++;
             }
         });
 
-        document.getElementById("CSAT70").value = CSAT70Count;
+        document.getElementById("GATrGoal70").value = GATrGoal70Count;
 
-        //Above
-        var AboveCells = document.querySelectorAll(".csat");
-        var AboveCount = 0;
-        AboveCells.forEach(function (cell) {
-            var AboveName = cell.textContent.trim();
-            if (AboveName < 90) {
-                AboveCount++;
+        //GATrGoal >100%
+        var GATrGoal100Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal100Count = 0;
+        
+        GATrGoal100Cells.forEach(function (cell) {
+            var GATrGoal100Name = cell.textContent.trim().replace('%', ''); // Remove % symbol
+            var GATrGoal100Value = parseFloat(GATrGoal100Name); // Convert to number
+            if (GATrGoal100Value > 100) {
+                GATrGoal100Count++;
             }
         });
-        document.getElementById("Above").value = AboveCount;
 
-        //Between
-        var BetweenCells = document.querySelectorAll(".csat");
-        var BetweenCount = 0;
-        BetweenCells.forEach(function (cell) {
-            var BetweenName = cell.textContent.trim();
-            if (BetweenName <= 70) {
-                BetweenCount++;
+        document.getElementById("GATrGoal100").value = GATrGoal100Count;
+
+
+        //GATrGoal >70%
+        var GATrGoal90Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal90Count = 0;
+        GATrGoal90Cells.forEach(function (cell) {
+            var GATrGoal90Name = cell.textContent.trim().replace('%', ''); // Remove % symbol
+            var GATrGoal90Value = parseFloat(GATrGoal90Name); // Convert to number
+            if (GATrGoal90Value > 70 && GATrGoal90Value < 100) {
+                GATrGoal90Count++;
             }
         });
-        document.getElementById("Between").value = BetweenCount;
+
+        document.getElementById("GATrGoal90").value = GATrGoal90Count;
+
+        ////Above
+        //var AboveCells = document.querySelectorAll(".csat");
+        //var AboveCount = 0;
+        //AboveCells.forEach(function (cell) {
+        //    var AboveName = cell.textContent.trim();
+        //    if (AboveName < 90) {
+        //        AboveCount++;
+        //    }
+        //});
+        //document.getElementById("Above").value = AboveCount;
+
+        ////Between
+        //var BetweenCells = document.querySelectorAll(".csat");
+        //var BetweenCount = 0;
+        //BetweenCells.forEach(function (cell) {
+        //    var BetweenName = cell.textContent.trim();
+        //    if (BetweenName <= 70) {
+        //        BetweenCount++;
+        //    }
+        //});
+        //document.getElementById("Between").value = BetweenCount;
 
 
         //Total Stores
@@ -1265,6 +1315,7 @@
 
         // Loop through each cell and count if it has a store name
         storeCells.forEach(function (cell) {
+            //debugger;
             var storeName = cell.textContent.trim();
 
             // Check if the cell has a non-empty store name
@@ -1278,22 +1329,22 @@
         document.getElementById("storeCountDisplay").value = storeCount;
 
 
-        // Break Even Calc
-        // Select all cells with the 'stores' class
-        var beCells = document.querySelectorAll(".breakevenCLS");
-        var beCount = 0;
+        //// Gross Adds Trends to Goals Calc
+        //// Select all cells with the 'stores' class
+        //var beCells = document.querySelectorAll(".breakevenCLS");
+        //var beCount = 0;
 
-        // Loop through each cell and count if it has a store name
-        beCells.forEach(function (cell) {
-            var beName = cell.textContent.trim();
+        //// Loop through each cell and count if it has a store name
+        //beCells.forEach(function (cell) {
+        //    var beName = cell.textContent.trim();
 
-            if (!isNaN(beName) && beName > 90) {
-                beCount++;
-            }
-        });
+        //    if (!isNaN(beName) && beName > 90) {
+        //        beCount++;
+        //    }
+        //});
 
-        // Display the count in the view by setting it to an element's text content
-        document.getElementById("beCountDisplay").textContent = beCount;
+        //// Display the count in the view by setting it to an element's text content
+        //document.getElementById("beCountDisplay").textContent = beCount;
 
     }
     // Call the function to apply the highlighting
