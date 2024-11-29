@@ -1071,10 +1071,10 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.APO)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage))*100))%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage))*100))%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
@@ -1093,7 +1093,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIACInternet)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIABInternet)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TotalOPSTrending != null ? record.TotalOPSTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalOPSTrending)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSPerTrafficPercentage))*100))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSPerTrafficPercentage))*100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPPerBox)))</td>
@@ -1246,7 +1246,7 @@
                                                     //TM wise total each market
                                                     <tr id="totTM" class="total_dataTM">
                                                         <td></td>
-                                                        @*<td></td>*@
+                                                        <td></td>
                                                         <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
                                                         <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                                                         <td></td>
@@ -1258,7 +1258,7 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
+                                                        @*<td></td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage))*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal))*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.GrossAddsGoals)))</td>
@@ -1269,7 +1269,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberNetOFF != null ? record2.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BroadbandFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberGreenCheck != null ? record2.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.FiberGreenCheck)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.APO)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CSAT))) %</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.CSAT)))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.ProtAdvHomeTechPercentage))*100))%</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven))*100))%</td>

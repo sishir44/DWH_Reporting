@@ -408,7 +408,7 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel model3 = new Fct_StoreNumberAttributesModel
                 {                    
-                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
@@ -584,6 +584,8 @@ namespace DWH_Reporting.Controllers
                 {
                     Market = row["Market"].ToString(),
                     TM = row["TM"].ToString(),
+
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
