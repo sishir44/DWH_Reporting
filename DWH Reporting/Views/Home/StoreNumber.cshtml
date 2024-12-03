@@ -469,6 +469,22 @@
             max-height: 60vh;
             overflow: auto;
         }
+        input.selectorinput {
+            font-size: 13px;
+            margin-top: 5px;
+        }
+        .maindiv {
+            margin-left: 9px;
+        }
+            .maindiv label {
+                position: relative;
+                top: 1px;
+                font-size: 10px;
+            }
+        .maindiv input {
+            position: relative;
+            top: -4px;
+        }
     </style>
     <style>
 
@@ -549,7 +565,8 @@
 
     <!-- LOADING LOGO -->
     <div id="loadingScreen">
-        <img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">
+        @*<img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">*@
+        <img id="loadingLogo" src="https://mis.mobilyllc.com/mobilylogin/image/mobilyloader.gif" alt="Loading Logo">
 
     </div>
 
@@ -658,29 +675,33 @@
 
                     <!-- Budgeted Hours and Total Ops -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
-                        <label>Total Stores</label>
-                        <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
-                               style="background-color: #31869b; color:white; height: 35px; margin-bottom: 10px; margin-left:10px;" />
+                        <div class="maindiv">
+                            <label>Total Stores</label>
+                            <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
+                                   style="background-color: #31869b;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
 
-                        <label>100% & Above</label>
-                        <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
-                               title="Above 100%" value=""
-                               style="background-color: green; color:white; height: 35px; margin-left:10px; margin-bottom:5px;" />
+                            <label>100% & Above</label>
+                            <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
+                                   title="Above 100%" value=""
+                                   style="background-color: green;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                        </div>
                     </div>
 
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
-                        <label>Above 70%</label>
-                        <input type="button" name="above90" id="tbeCountDisplay70" class="form-control"
-                               title="Traffic"
-                               value=""
-                               style="background-color: deeppink; color:white; height: 35px; margin-bottom: 10px;" />
+                        <div class="maindiv">
+                            <label>Above 70%</label>
+                            <input type="button" name="above90" id="tbeCountDisplay70" class="form-control"
+                                   title="Traffic"
+                                   value=""
+                                   style="background-color: deeppink; color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
 
-                        <label>Less Than 70%</label>
-                        <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
-                               title="CSAT"
-                               value=""
-                               style="background-color: orange; color:white; height: 35px; margin-bottom:5px;" />
+                            <label>Less Than 70%</label>
+                            <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
+                                   title="CSAT"
+                                   value=""
+                                   style="background-color: orange;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                        </div>
                     </div>
 
                     <!-- Search SD -->
@@ -863,7 +884,7 @@
                                     <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
                                     <th rowspan="2" style="background-color: black; color:white;">View</th>
                                     <th rowspan="2" style="background-color: black; color:white;">Market</th>
-                                    <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">TM</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                     @*<th rowspan="2" style="background-color: black; color:white;">Multi Market</th>*@
                                     <th rowspan="2" style="background-color: black; color:white;">MMM</th>
                                     <th rowspan="2" style="background-color: black; color:white;">Store</th>
