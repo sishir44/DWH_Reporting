@@ -1579,6 +1579,7 @@ namespace DWH_Reporting.Models.GpReport
         public string ExtraUpgradeNetOff { get; set; }
         public string ExtraUpgradeGP { get; set; }
         public string AIAGoals { get; set; }
+        public string AIAInternet { get; set; }
         public string ChargeBack6 { get; set; }
         public string AIAInternetNetOff { get; set; }
         public string AIATrending { get; set; }

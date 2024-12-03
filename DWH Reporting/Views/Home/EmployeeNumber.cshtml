@@ -1,12 +1,12 @@
 ﻿
 @{
-                Layout = null;
-                ViewBag.Title = "Employee Number";
+    Layout = null;
+    ViewBag.Title = "Employee Number";
 }
 
 @{
     // Retrieve the data from ViewData
-    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;    
+    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_EmployeeNumberTotal = ViewData["GetFct_EmployeeNumberTotal"] as IEnumerable<Fct_EmployeeNumberAttributesModel>;
 }
 
@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <title>MTD Reports</title>
+
 
     <style>
         button#btnaddnote {
@@ -347,11 +348,19 @@
             color: white;
         }
 
-        .table th, .table td {
+        /*.table th, .table td {
             padding: 5px;
             text-align: center;
             white-space: normal;
             word-wrap: break-word;
+        }*/
+
+        th, td {
+            font-size: 9px;
+            padding: 3px;
+            min-width: 70px;
+            max-width: 65px !important;
+            text-align: center;
         }
 
         .textleft {
@@ -390,7 +399,7 @@
         }
 
         tr.main_data td {
-            font-size: 10px;
+            font-size: 9px;
             text-align: center;
             color: black;
             background-color: #F4D2C4;
@@ -426,6 +435,11 @@
             word-wrap: break-word;
         }
 
+        #tbl thead {
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
 
         tr.MUSM_data {
             font-size: 13px;
@@ -437,9 +451,52 @@
 
         #demoDW {
             width: 100%;
-            max-height: 90vh;
+            max-height: 60vh;
             overflow: auto;
         }
+    </style>
+    <style>
+
+
+        #tbl th[scope=row] {
+            left: -1px;
+            z-index: 1;
+        }
+
+        #tbl th[scope=col] {
+            left: -2px;
+            z-index: 3;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl tbody td:nth-child(2),
+        #tbl tbody td:nth-child(3){
+            position: sticky;
+            z-index: 1;
+        }
+
+        #tbl thead th:nth-child(1),
+        #tbl thead th:nth-child(2),
+        #tbl thead th:nth-child(3){
+            position: sticky;
+            z-index: 12;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl thead th:nth-child(1) {
+            left: 0;
+        }
+
+        #tbl tbody td:nth-child(2),
+        #tbl thead th:nth-child(2) {
+            left: 70px;
+        }
+
+        #tbl tbody td:nth-child(3),
+        #tbl thead th:nth-child(3) {
+            left: 140px;
+        }
+
     </style>
 </head>
 <body style="padding-top:0; background-color:#B2D6F2;">
@@ -502,10 +559,16 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <button class="headerbtndiv btn float-right form-control" title="Export in Excel" onclick="test()">
+
                                 <i class="fas fa-file-excel"></i>
+
                             </button>
                         </div>
-                        
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <button class="headerbtndiv btn float-right form-control" title="Print" onclick="printTable()">
+                                <i class="fas fa-print"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -571,7 +634,7 @@
                                value=""
                                style="background-color: orange; color:white; height: 35px; margin-bottom:5px;" />
                     </div>
-                                       
+
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" />
@@ -607,48 +670,6 @@
                             }
                         </select>
                     </div>
-
-                    @*<!-- Search MUL_MktMngr -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search Multi Manager" />
-                        <select class="form-control selector" id="MULMngr" multiple onchange="filterMULMngrData()">
-                            @if (recordsGet_MUL_Mgr != null && recordsGet_MUL_Mgr.Any())
-                            {
-                                foreach (var item in recordsGet_MUL_Mgr)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
-                                            value="@item.MUL_MktMngr">
-                                        @item.MUL_MktMngr
-                                    </option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
-                            }
-                        </select>
-                    </div>
-
-                    <!-- Search MUL_Market -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchMULMkt" id="textSearchMULMkt" class="selectorinput form-control" placeholder="Search Multi Market" />
-                        <select class="form-control selector" id="MULMkt" multiple onchange="filterMULMktData()">
-                            @if (recordsGet_MUL_Mkt != null && recordsGet_MUL_Mkt.Any())
-                            {
-                                foreach (var item in recordsGet_MUL_Mkt)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
-                                            value="@item.MUL_Market">
-                                        @item.MUL_Market
-                                    </option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Market available</option>
-                            }
-                        </select>
-                    </div>*@
 
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
@@ -710,19 +731,19 @@
                         }
 
                         <tr class="numbered_header">
-                            @for (int i = 1; i <= 155; i++)
+                            @for (int i = 1; i <= 154; i++)
                             {
                                 <th style="font-size:8px; background-color: #E6E6E6; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
                         </tr>
 
-                        <tr class="spanned_header">                           
+                        <tr class="spanned_header">
                             @*<th rowspan="2" style="background-color: black; color:white;">Region</th>
-                              <th rowspan="2" style="background-color: black; color:white;">SD</th>*@
+                                <th rowspan="2" style="background-color: black; color:white;">SD</th>*@
                             <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">Store</th>
                             <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">TM</th>
                             <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">Market</th>
-                            <th rowspan="2" style="background-color: black; color:white;">MMM</th>
+                            @*<th rowspan="2" style="background-color: black; color:white;">MMM</th>*@
                             <th rowspan="2" style="background-color: black; color:white;">Unique ID</th>
                             <th rowspan="2" style="background-color: black; color:white;">Dealer Code</th>
                             <th rowspan="2" style="background-color: black; color:white;">Emp ID  (Paycom)</th>
@@ -886,170 +907,170 @@
                         foreach (var record in recordsFct_EmployeeNumberTotal)
                         {
                             // GRAND TOTAL
-                    <tr class="total_data">
+                            <tr class="total_data">
 
-                        @*<td></td>
-                        <td></td>*@
-                        <td></td>
-                        <td></td>
-                        <td>Grand Total</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TOTALOPS != null ? record.TOTALOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TOTALOPS))) %</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GPperBOX != null ? record.GPperBOX.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPperBOX)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GPGOAL != null ? record.GPGOAL.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPGOAL)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Trending != null ? record.Trending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Trending)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDS != null ? record.GROSSADDS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDS)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSNetOFF != null ? record.GROSSADDSNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackACTIVATION != null ? record.ChargeBackACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackACTIVATION)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSGP != null ? record.GROSSADDSGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CRUAch != null ? record.CRUAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAch)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NextUP != null ? record.NextUP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NextUPSpif != null ? record.NextUPSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUPSpif)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivation != null ? record.PremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivation)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationNetOFF != null ? record.PremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMACT != null ? record.ChargeBackPREMIUMACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMACT)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationGP != null ? record.PremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivation != null ? record.ExtraActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivation)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationNetOFF != null ? record.ExtraActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAACT != null ? record.ChargeBackEXTRAACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAACT)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationGP != null ? record.ExtraActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivation != null ? record.NonExtraNonPremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivation)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationNetOFF != null ? record.NonExtraNonPremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationGP != null ? record.NonExtraNonPremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADES != null ? record.MTDUPGRADES.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADES)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESNetOFF != null ? record.MTDUPGRADESNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackUPGRADE != null ? record.ChargeBackUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackUPGRADE)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESGP != null ? record.MTDUPGRADESGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgrade != null ? record.PremiumUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgrade)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMUPGRADE != null ? record.ChargeBackPREMIUMUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMUPGRADE)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeNetOff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeGP != null ? record.PremiumUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgrade != null ? record.ExtraUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgrade)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAUPGRADE != null ? record.ChargeBackEXTRAUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAUPGRADE)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeNetOff != null ? record.ExtraUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeNetOff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeGP != null ? record.ExtraUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternet)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCancellation != null ? record.AIAInternetCancellation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCancellation)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandlessThen300MB != null ? record.BroadBandlessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandlessThen300MB)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TotalNewFiber != null ? record.TotalNewFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalNewFiber)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TotalBroadbandNewfiber != null ? record.TotalBroadbandNewfiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalBroadbandNewfiber)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberNetOFF != null ? record.BroadbandNewfiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackBB != null ? record.ChargeBackBB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackBB)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgrades != null ? record.FiberUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgrades)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOFF != null ? record.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackFIBREUPG != null ? record.ChargeBackFIBREUPG.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackFIBREUPG)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgrade != null ? record.BroadBandFiberUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgrade)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgradeNetOFF != null ? record.BroadBandFiberUpgradeNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgradeNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessthen300MbQISpiff != null ? record.BroadbandLessthen300MbQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessthen300MbQISpiff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Newfiber500MBQISpiff != null ? record.Newfiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber500MBQISpiff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Newfiber1GQISpiff != null ? record.Newfiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber1GQISpiff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesGP != null ? record.FiberUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeature)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeatureGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTV != null ? record.ChargeBackTV.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTV)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQTY != null ? record.TWCDevicesQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQTY)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesNetOFF != null ? record.TWCDevicesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTWC != null ? record.ChargeBackTWC.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTWC)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesGP != null ? record.TWCDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidQTY != null ? record.PrepaidQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidQTY)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidtoGA != null ? record.PrepaidtoGA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidtoGA)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREPAIDACTIVATION != null ? record.ChargeBackPREPAIDACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREPAIDACTIVATION)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidwithAutopay != null ? record.PrepaidwithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidwithAutopay)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.INSURANCE != null ? record.INSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCE)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackINSURANCE != null ? record.ChargeBackINSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackINSURANCE)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.INSURANCEGP != null ? record.INSURANCEGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCEGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACK != null ? record.PROTECTIONPACK.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACK)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKNetOFF != null ? record.PROTECTIONPACKNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKNetOFF)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPROTECTION != null ? record.ChargeBackPROTECTION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPROTECTION)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKGP != null ? record.PROTECTIONPACKGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTech != null ? record.ProtAdvHomeTech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTech)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk1to7 != null ? record.DREAMWk1to7.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk1to7)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk8to14 != null ? record.DREAMWk8to14.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk8to14)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk15to21 != null ? record.DREAMWk15to21.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk15to21)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk22to28 != null ? record.DREAMWk22to28.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk22to28)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk29to31 != null ? record.DREAMWk29to31.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk29to31)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PPVGACommission != null ? record.PPVGACommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGACommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PPVGAEliteCommission != null ? record.PPVGAEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAEliteCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PPVGAExtraCommission != null ? record.PPVGAExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAExtraCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FNCommission != null ? record.FNCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CRUCommission != null ? record.CRUCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PremiumVideoCommission != null ? record.PremiumVideoCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumVideoCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCommission != null ? record.AIAInternetCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandCommission != null ? record.BroadbandCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NewFiberCommission != null ? record.NewFiberCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiberCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradeCommission != null ? record.FiberUpgradeCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradeCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.UPGCommission != null ? record.UPGCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UPGCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.UpgradeEliteCommission != null ? record.UpgradeEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeEliteCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.UpgradeExtraCommission != null ? record.UpgradeExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeExtraCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.WearbaleTabletCommission != null ? record.WearbaleTabletCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WearbaleTabletCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Hometech != null ? record.Hometech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Hometech)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUp)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage1Commission != null ? record.ProtectAdvantage1Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage1Commission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage4Commission != null ? record.ProtectAdvantage4Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage4Commission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidCommission != null ? record.PrepaidCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPCommission != null ? record.AccessoryGPCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessoryGPCommission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Commission != null ? record.Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Commission)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CommissionEligibility != null ? record.CommissionEligibility.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionEligibility)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.RegHrsAchved != null ? record.RegHrsAchved.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.RegHrsAchved)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.OT != null ? record.OT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OT)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.HourlyRateUSD != null ? record.HourlyRateUSD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HourlyRateUSD)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.Salary != null ? record.Salary.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Salary)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GeoSPIFFOPS != null ? record.GeoSPIFFOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoSPIFFOPS)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.GeoRate != null ? record.GeoRate.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoRate)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.MinWage != null ? record.MinWage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.MinWage150 != null ? record.MinWage150.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage150)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TotalCompNew != null ? record.TotalCompNew.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompNew)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.TotalCompAfter150Check != null ? record.TotalCompAfter150Check.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompAfter150Check)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.CommissionBucketMTD != null ? record.CommissionBucketMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionBucketMTD)))</td>
-                        <td>@(String.IsNullOrWhiteSpace(record.EOMCommissionTrendingBucket != null ? record.EOMCommissionTrendingBucket.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.EOMCommissionTrendingBucket)))</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
+                                @*<td></td>
+                                    <td></td>*@
+                                <td></td>
+                                <td></td>
+                                <td>Grand Total</td>
+                                @*<td></td>*@
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TOTALOPS != null ? record.TOTALOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TOTALOPS))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPperBOX != null ? record.GPperBOX.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPperBOX)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPGOAL != null ? record.GPGOAL.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPGOAL)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Trending != null ? record.Trending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Trending)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDS != null ? record.GROSSADDS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSNetOFF != null ? record.GROSSADDSNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackACTIVATION != null ? record.ChargeBackACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackACTIVATION)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSGP != null ? record.GROSSADDSGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CRUAch != null ? record.CRUAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAch)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NextUP != null ? record.NextUP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NextUPSpif != null ? record.NextUPSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUPSpif)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivation != null ? record.PremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivation)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationNetOFF != null ? record.PremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMACT != null ? record.ChargeBackPREMIUMACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMACT)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationGP != null ? record.PremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivation != null ? record.ExtraActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivation)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationNetOFF != null ? record.ExtraActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAACT != null ? record.ChargeBackEXTRAACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAACT)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationGP != null ? record.ExtraActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivation != null ? record.NonExtraNonPremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivation)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationNetOFF != null ? record.NonExtraNonPremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationGP != null ? record.NonExtraNonPremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADES != null ? record.MTDUPGRADES.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADES)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESNetOFF != null ? record.MTDUPGRADESNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackUPGRADE != null ? record.ChargeBackUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackUPGRADE)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESGP != null ? record.MTDUPGRADESGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgrade != null ? record.PremiumUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgrade)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMUPGRADE != null ? record.ChargeBackPREMIUMUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMUPGRADE)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeNetOff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeGP != null ? record.PremiumUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgrade != null ? record.ExtraUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgrade)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAUPGRADE != null ? record.ChargeBackEXTRAUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAUPGRADE)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeNetOff != null ? record.ExtraUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeNetOff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeGP != null ? record.ExtraUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternet)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCancellation != null ? record.AIAInternetCancellation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCancellation)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandlessThen300MB != null ? record.BroadBandlessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandlessThen300MB)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalNewFiber != null ? record.TotalNewFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalNewFiber)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalBroadbandNewfiber != null ? record.TotalBroadbandNewfiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalBroadbandNewfiber)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberNetOFF != null ? record.BroadbandNewfiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackBB != null ? record.ChargeBackBB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackBB)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgrades != null ? record.FiberUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgrades)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOFF != null ? record.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackFIBREUPG != null ? record.ChargeBackFIBREUPG.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackFIBREUPG)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgrade != null ? record.BroadBandFiberUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgrade)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgradeNetOFF != null ? record.BroadBandFiberUpgradeNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgradeNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessthen300MbQISpiff != null ? record.BroadbandLessthen300MbQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessthen300MbQISpiff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Newfiber500MBQISpiff != null ? record.Newfiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber500MBQISpiff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Newfiber1GQISpiff != null ? record.Newfiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber1GQISpiff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesGP != null ? record.FiberUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeature)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeatureGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTV != null ? record.ChargeBackTV.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTV)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQTY != null ? record.TWCDevicesQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQTY)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesNetOFF != null ? record.TWCDevicesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTWC != null ? record.ChargeBackTWC.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTWC)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesGP != null ? record.TWCDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidQTY != null ? record.PrepaidQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidQTY)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidtoGA != null ? record.PrepaidtoGA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidtoGA)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREPAIDACTIVATION != null ? record.ChargeBackPREPAIDACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREPAIDACTIVATION)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidwithAutopay != null ? record.PrepaidwithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidwithAutopay)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.INSURANCE != null ? record.INSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCE)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackINSURANCE != null ? record.ChargeBackINSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackINSURANCE)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.INSURANCEGP != null ? record.INSURANCEGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCEGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACK != null ? record.PROTECTIONPACK.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACK)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKNetOFF != null ? record.PROTECTIONPACKNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKNetOFF)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPROTECTION != null ? record.ChargeBackPROTECTION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPROTECTION)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKGP != null ? record.PROTECTIONPACKGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTech != null ? record.ProtAdvHomeTech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTech)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk1to7 != null ? record.DREAMWk1to7.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk1to7)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk8to14 != null ? record.DREAMWk8to14.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk8to14)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk15to21 != null ? record.DREAMWk15to21.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk15to21)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk22to28 != null ? record.DREAMWk22to28.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk22to28)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk29to31 != null ? record.DREAMWk29to31.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk29to31)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PPVGACommission != null ? record.PPVGACommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGACommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAEliteCommission != null ? record.PPVGAEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAEliteCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAExtraCommission != null ? record.PPVGAExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAExtraCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FNCommission != null ? record.FNCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CRUCommission != null ? record.CRUCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PremiumVideoCommission != null ? record.PremiumVideoCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumVideoCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCommission != null ? record.AIAInternetCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandCommission != null ? record.BroadbandCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NewFiberCommission != null ? record.NewFiberCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiberCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradeCommission != null ? record.FiberUpgradeCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradeCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UPGCommission != null ? record.UPGCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UPGCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeEliteCommission != null ? record.UpgradeEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeEliteCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeExtraCommission != null ? record.UpgradeExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeExtraCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.WearbaleTabletCommission != null ? record.WearbaleTabletCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WearbaleTabletCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Hometech != null ? record.Hometech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Hometech)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUp)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage1Commission != null ? record.ProtectAdvantage1Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage1Commission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage4Commission != null ? record.ProtectAdvantage4Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage4Commission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidCommission != null ? record.PrepaidCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPCommission != null ? record.AccessoryGPCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessoryGPCommission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Commission != null ? record.Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Commission)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CommissionEligibility != null ? record.CommissionEligibility.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionEligibility)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.RegHrsAchved != null ? record.RegHrsAchved.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.RegHrsAchved)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.OT != null ? record.OT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OT)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.HourlyRateUSD != null ? record.HourlyRateUSD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HourlyRateUSD)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.Salary != null ? record.Salary.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Salary)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GeoSPIFFOPS != null ? record.GeoSPIFFOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoSPIFFOPS)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GeoRate != null ? record.GeoRate.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoRate)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MinWage != null ? record.MinWage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.MinWage150 != null ? record.MinWage150.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage150)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalCompNew != null ? record.TotalCompNew.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompNew)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalCompAfter150Check != null ? record.TotalCompAfter150Check.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompAfter150Check)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CommissionBucketMTD != null ? record.CommissionBucketMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionBucketMTD)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.EOMCommissionTrendingBucket != null ? record.EOMCommissionTrendingBucket.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.EOMCommissionTrendingBucket)))</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
                         }
 
@@ -1062,11 +1083,11 @@
                             <tr class="main_data" data-bhrs="@record.MonthlyBudgetedHRS" data-csat="@record.CSAT" data-sd="@record.SD" data-vp="@record.VP" data-reg="@record.Region" data-tir="@record.Tiers" data-store="@record.Store" data-mkt="@record.Market" data-tm="@record.TM" data-rsm="@record.RSMSRSM" data-role="@record.Role">
 
                                 @*<td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.Region   </td>
-                                  <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.SD </td>*@
+                                    <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.SD </td>*@
                                 <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.Store </td>
                                 <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.TM      </td>
                                 <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.Market      </td>
-                                <td style="background-color: black; color:white;">  </td>
+                                @*<td style="background-color: black; color:white;">  </td>*@
                                 <td style="background-color: black; color:white;">@record.UniqueID      </td>
                                 <td style="background-color: black; color:white;">@record.DealerCode   </td>
                                 <td style="background-color: black; color:white;"> </td>
@@ -1229,8 +1250,10 @@
             </div>
         </div>
     </div>
-   
+
 </body>
+
+<!-- On Page Load freeze -->
 <script>
     $(document).ready(function () {
         var windowheight = $(window).height()
@@ -1284,12 +1307,15 @@
         document.getElementById('Tiers').selectedIndex = -1;
         document.getElementById('Stores').selectedIndex = -1;
         document.getElementById('Market').selectedIndex = -1;
+        document.getElementById('MULMkt').selectedIndex = -1;
+        document.getElementById('MULMngr').selectedIndex = -1;
         document.getElementById('TM').selectedIndex = -1;
 
 
+
         // Use DataTables API to clear filters and show all rows
-        var table = $('#tbl').DataTable();
-        table.search('').columns().search('').draw();  // Clear any global or column-specific filters
+        //var table = $('#tbl');
+        //table.search('').columns().search('').draw();  // Clear any global or column-specific filters
 
         // Show all the rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
@@ -1303,6 +1329,8 @@
         resetTIERSDropdown();
         resetStoresDropdown();
         resetMarketDropdown();
+        resetmMarketDropdown();
+        resetmmmDropdown();
         resetTMDropdown();
 
         // Use the DataTables custom filter API to clear any search
@@ -1324,7 +1352,7 @@
             return rowContent.indexOf(input) > -1 || input === '';
         });
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        // $('#tbl').draw();
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
     }
@@ -1345,12 +1373,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 TMSelect.add(option);
             });
@@ -1386,12 +1414,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 MARKETSelect.add(option);
             });
@@ -1414,6 +1442,88 @@
 
         MARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
     }
+    function resetmMarketDropdown() {
+        var mMARKETSelect = document.getElementById('MULMkt');
+        mMARKETSelect.innerHTML = '';  // Clear all existing options
+
+        if (mmktList.length > 0) {
+
+            // Repopulate mMARKET dropdown with the options from mMarketList array
+            mmktList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
+
+                mMARKETSelect.add(option);
+            });
+        } else {
+            // Add a "No mMARKET available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No Multi MARKET available';
+
+            // Apply custom styles to the "No Multi MARKET" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            mMARKETSelect.add(noOption);
+        }
+
+        mMARKETSelect.disabled = false;  // Ensure Multi MARKET dropdown is enabled after clearing filters
+    }
+    function resetmmmDropdown() {
+        var mmMARKETSelect = document.getElementById('MULMngr');
+        mmMARKETSelect.innerHTML = '';  // Clear all existing options
+
+        if (mmmList.length > 0) {
+
+            // Repopulate mmMARKET dropdown with the options from mmMarketList array
+            mmmList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+
+                // Apply custom styles to the option
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
+
+                mmMARKETSelect.add(option);
+            });
+        } else {
+            // Add a "No mmMARKET available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No Multi Market Manager available';
+
+            // Apply custom styles to the "No mmMARKET" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            mmMARKETSelect.add(noOption);
+        }
+
+        mmMARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
+    }
     function resetStoresDropdown() {
         var STORESSelect = document.getElementById('Stores');
         STORESSelect.innerHTML = '';  // Clear all existing options
@@ -1427,12 +1537,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 STORESSelect.add(option);
             });
@@ -1468,12 +1578,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 TIERSSelect.add(option);
             });
@@ -1508,12 +1618,12 @@
                 option.text = item.Text;
 
                 // Apply custom styles to the option
-                option.style.backgroundColor = 'lightblue';
-                option.style.color = 'black';
-                option.style.borderRadius = '7px';
-                option.style.padding = '5px 0';
-                option.style.marginBottom = '8px';
-                option.style.fontSize = '12px';
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
 
                 sdSelect.add(option);
             });
@@ -1536,6 +1646,7 @@
 
         sdSelect.disabled = false;  // Ensure Sd dropdown is enabled after clearing filters
     }
+
     ////////////////////////////////////////////////////////
 
     function TMFilter() {
@@ -1560,19 +1671,10 @@
 
         // Get all rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
-        var totalCSAT = 0;  // Initialize CSAT total
-        var totalBHRS = 0;
-        var totalTraffic = 0;
-        var totalOps = 0;
-
 
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-tm');
-            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
-            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
-            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
-            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
             if (row.classList.contains('total_dataTM')) {
                 row.style.display = 'none';  // Always show the "Grand Total" row
@@ -1584,10 +1686,6 @@
 
             } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
                 row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
-                totalBHRS += bhrsValue;
-                totalTraffic += trafValue;
-                totalOps += opsValue;
 
             } else {
                 row.style.display = 'none';  // Hide row if Tiers does not match
@@ -1615,7 +1713,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //    $('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -1624,137 +1722,25 @@
 
         //TM
 
-        //var sdAlreadySelected = document.getElementById('SD');
-        //var mktAlreadySelected = document.getElementById('Market');
+        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
-
-        //if (regAlreadySelected.disabled && sdAlreadySelected.disabled && mktAlreadySelected.disabled) {
-        //    //4. if VP & Region & SD & Market selected
-        //    //      leave VP & Region & SD & Market to fill
-        //    //      fill and Disabled TM + fill Right Ftr
-        //    TMfilterTMOptions(selectedValues);
-        //    //TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    tmAlreadySelected.disabled = true;
-
-        //} else if (regAlreadySelected.disabled && sdAlreadySelected.disabled) {
-        //    //3. if VP & Region & SD selected
-        //    //      leave VP & Region & SD to fill
-        //    //      fill and Disabled Left Market + fill Right Ftr
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    //TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled = true;
-
-        //}
-
-        //else if (regAlreadySelected.disabled) {
-        //    //2. if VP & Region selected
-        //    //      leave VP & Region to fill
-        //    //      fill and Disabled Left SD & Market + fill Right Ftr
-        //    TMfilterSDOptions(selectedValues);
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    //TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    sdAlreadySelected.disabled = true;
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled = true;
-
-        //} else {
+        var mktAlreadySelected = document.getElementById('Market');
+        var mmktAlreadySelected = document.getElementById('MULMkt');
+        var mmmAlreadySelected = document.getElementById('MULMngr');
 
         //Fill TM and Others
 
         TMfilterTMOptions(selectedValues);
         TMfilterMarketOptions(selectedValues);
+        TMfiltermMarketOptions(selectedValues);
+        TMfiltermmmOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
         TMfilterSDOptions(selectedValues);
 
+        sdAlreadySelected.disabled = true;
         tmAlreadySelected.disabled = true;
-        //}
 
-        //if (vpAlreadySelected.disabled && regAlreadySelected.disabled && sdAlreadySelected.disabled && mktAlreadySelected.disabled) {
-        //    //4. if VP & Region & SD & Market selected
-        //    //      leave VP & Region & SD & Market to fill
-        //    //      fill and Disabled TM + fill Right Ftr
-        //    TMfilterTMOptions(selectedValues);
-        //    TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    tmAlreadySelected.disabled = true;
-
-        //} else if (vpAlreadySelected.disabled && regAlreadySelected.disabled && sdAlreadySelected.disabled) {
-        //    //3. if VP & Region & SD selected
-        //    //      leave VP & Region & SD to fill
-        //    //      fill and Disabled Left Market + fill Right Ftr
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled = true;
-
-        //}
-
-        //else if (vpAlreadySelected.disabled && regAlreadySelected.disabled) {
-        //    //2. if VP & Region selected
-        //    //      leave VP & Region to fill
-        //    //      fill and Disabled Left SD & Market + fill Right Ftr
-        //    TMfilterSDOptions(selectedValues);
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    sdAlreadySelected.disabled = true;
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled = true;
-
-        //}  else if (vpAlreadySelected.disabled) {
-        //    //1. if VP selected
-        //    //      leave VP to fill
-        //    //      fill and Disabled Left Region & SD & Market & TM + fill Right Ftr
-        //    TMfilterRegionOptions(selectedValues);
-        //    TMfilterSDOptions(selectedValues);
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    regAlreadySelected.disabled = true;
-        //    sdAlreadySelected.disabled = true;
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled = true;
-        //} else {
-        //    //5. if TM select
-        //    //      fill and Disabled VP & Region & SD & Market & TM + fill Right Ftr
-        //    TMfilterVPOptions(selectedValues);
-        //    TMfilterRegionOptions(selectedValues);
-        //    TMfilterSDOptions(selectedValues);
-        //    TMfilterMarketOptions(selectedValues);
-        //    TMfilterTMOptions(selectedValues);
-        //    TMfilterTiersOptions(selectedValues);
-        //    TMfilterStoresOptions(selectedValues);
-
-        //    vpAlreadySelected.disabled  = true;
-        //    regAlreadySelected.disabled = true;
-        //    sdAlreadySelected.disabled  = true;
-        //    mktAlreadySelected.disabled = true;
-        //    tmAlreadySelected.disabled  = true;
-        //}
-
-        // Set the value of the input button to display the total CSAT
-        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
-        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
-        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
-        document.getElementById('opsTotal').value = totalOps.toFixed(1);
     }
 
     function TMfilterTMOptions(selectedValues) {
@@ -1778,7 +1764,7 @@
 
         // If any SD is selected, disable the TM dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //TMSelect.disabled = true;
+            TMSelect.disabled = true;
 
             // Populate the TM dropdown with only the TM from filtered rows
             availableTM.forEach(TMValue => {
@@ -1786,25 +1772,26 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         }
-        //else {
+        else {
 
-        //    TMSelect.disabled = false;
+            //TMSelect.disabled = false;
 
-        //    // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
-        //    var allRows = document.querySelectorAll('#tbl tbody tr');
-        //    allRows.forEach(row => {
-        //        var TMValue = row.getAttribute('data-tm');
-        //        if (TMValue) {
-        //            var option = document.createElement('option');
-        //            option.value = TMValue;
-        //            option.text = TMValue;
-        //            TMSelect.add(option);
-        //        }
-        //    });
-        //}
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
     }
     function TMfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
@@ -1840,7 +1827,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 /*option.style.color = 'grey';  */// Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 MarketSelect.add(option);
             });
         } else {
@@ -1848,6 +1835,104 @@
             var allRows = document.querySelectorAll('#tbl tbody tr');
             allRows.forEach(row => {
                 var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function TMfiltermMarketOptions(selectedValues) {
+        var mMarketSelect = document.getElementById('MULMkt');
+        var TMSelect = document.getElementById('TM');
+
+        // Clear the Market dropdown
+        mMarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availablemMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var mMarketValue = row.getAttribute('data-mmkt');
+            if (mMarketValue) {
+                availablemMarket.add(mMarketValue);
+            }
+        });
+
+
+        if (selectedValues.length > 0) {
+
+            //TMSelect.disabled = true;
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availablemMarket.forEach(mMarketValue => {
+                var option = document.createElement('option');
+                option.value = mMarketValue;
+                option.text = mMarketValue;
+                /*option.style.color = 'grey';  */// Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                mMarketSelect.add(option);
+            });
+        } else {
+
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var mMarketValue = row.getAttribute('data-mmkt');
+                if (mMarketValue) {
+                    var option = document.createElement('option');
+                    option.value = mMarketValue;
+                    option.text = mMarketValue;
+                    mMarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function TMfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMngr');
+        var TMSelect = document.getElementById('TM');
+
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+
+        if (selectedValues.length > 0) {
+
+            TMSelect.disabled = true;
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                /*option.style.color = 'grey';  */// Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                MarketSelect.add(option);
+            });
+        } else {
+
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
                 if (MarketValue) {
                     var option = document.createElement('option');
                     option.value = MarketValue;
@@ -1886,7 +1971,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 StoresSelect.add(option);
             });
         } else {
@@ -1935,7 +2020,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 tiersSelect.add(option);
             });
         } else {
@@ -1976,15 +2061,16 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                /* option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 SDSelect.add(option);
             });
         } else {
@@ -2028,18 +2114,10 @@
 
         // Get all rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
-        var totalCSAT = 0;  // Initialize CSAT total
-        var totalBHRS = 0;
-        var totalTraffic = 0;
-        var totalOps = 0;
 
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-mkt');
-            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
-            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
-            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
-            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
             if (row.classList.contains('total_dataTM')) {
                 row.style.display = 'none';  // Always show the "Grand Total" row
@@ -2051,11 +2129,6 @@
                 row.style.display = '';  // Always show the "Grand Total" row
             } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
                 row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
-                totalBHRS += bhrsValue;
-                totalTraffic += trafValue;
-                totalOps += opsValue;
-
 
             } else {
                 row.style.display = 'none';  // Hide row if Tiers does not match
@@ -2086,7 +2159,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        // $('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -2094,16 +2167,21 @@
         //Hierarchy Now handle disabling and filtering the others dropdowns
 
         //Market
-
+        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
+        var mmktAlreadySelected = document.getElementById('MULMkt');
+        var mmmAlreadySelected = document.getElementById('MULMngr');
 
         if (tmAlreadySelected.disabled) {
 
             MKTfilterMarketOptions(selectedValues);
+            MKTfiltermMarketOptions(selectedValues);
+            MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
 
         }
@@ -2111,19 +2189,19 @@
 
             MKTfilterTMOptions(selectedValues);
             MKTfilterMarketOptions(selectedValues);
+            MKTfiltermMarketOptions(selectedValues);
+            MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
             MKTfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
         }
 
-        // Set the value of the input button to display the total CSAT
-        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
-        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
-        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
-        document.getElementById('opsTotal').value = totalOps.toFixed(1);
     }
 
     function MKTfilterTMOptions(selectedValues) {
@@ -2155,6 +2233,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -2203,6 +2282,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -2213,6 +2293,104 @@
             var allRows = document.querySelectorAll('#tbl tbody tr');
             allRows.forEach(row => {
                 var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfiltermMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMkt');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function MKTfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMngr');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
                 if (MarketValue) {
                     var option = document.createElement('option');
                     option.value = MarketValue;
@@ -2251,7 +2429,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 /* option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 tiersSelect.add(option);
             });
         } else {
@@ -2300,7 +2478,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
                 StoresSelect.add(option);
             });
         } else {
@@ -2341,15 +2519,967 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                //option.style.color = 'grey';
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+    //////////////////////////////////////////////////////
+
+    function mMarketFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchMULMkt').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var mmktValue = row.getAttribute('data-mmkt');
+            if (mmktValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+    ////////////////Market Hierarchy/////////////////////////
+    function filtermMarketData() {
+
+        var selectedValues = Array.from(document.getElementById('MULMkt').selectedOptions).map(option => option.value);
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var mmValue = row.getAttribute('data-mmkt');
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';
+
+            }
+
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';
+            } else if (selectedValues.length === 0 || selectedValues.includes(mmValue)) {
+                row.style.display = '';
+
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        var input = document.getElementById('textSearchMULMkt').value.toUpperCase();
+
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        // $('#tbl').draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //mMarket
+        var sdAlreadySelected = document.getElementById('SD');
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+        var mmktAlreadySelected = document.getElementById('MULMkt');
+
+        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
+
+            mMKTfiltermMarketOptions(selectedValues);
+            mMKTfiltermmmOptions(selectedValues);
+            mMKTfilterTiersOptions(selectedValues);
+            mMKTfilterStoresOptions(selectedValues);
+
+            //sdAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+
+        }
+        else if (tmAlreadySelected.disabled) {
+
+            mMKTfilterMarketOptions(selectedValues);
+            mMKTfiltermMarketOptions(selectedValues);
+            mMKTfiltermmmOptions(selectedValues);
+            mMKTfilterTiersOptions(selectedValues);
+            mMKTfilterStoresOptions(selectedValues);
+
+            //sdAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+
+        } else if (mktAlreadySelected.disabled) {
+
+            mMKTfilterTMOptions(selectedValues);
+            mMKTfiltermMarketOptions(selectedValues);
+            mMKTfiltermmmOptions(selectedValues);
+            mMKTfilterTiersOptions(selectedValues);
+            mMKTfilterStoresOptions(selectedValues);
+
+            //sdAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+
+        }
+        else {
+
+            mMKTfilterTMOptions(selectedValues);
+            mMKTfilterMarketOptions(selectedValues);
+            mMKTfiltermMarketOptions(selectedValues);
+            mMKTfiltermmmOptions(selectedValues);
+            mMKTfilterTiersOptions(selectedValues);
+            mMKTfilterStoresOptions(selectedValues);
+            mMKTfilterSDOptions(selectedValues);
+
+            sdAlreadySelected.disabled = true;
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+        }
+
+    }
+
+    function mMKTfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //TMSelect.disabled = true;
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                TMSelect.add(option);
+            });
+        } else {
+
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfiltermMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMkt');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMngr');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*tiersSelect.disabled = true; */ // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                /* option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                /*option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function mMKTfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                SDSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the SD dropdown and reset all options
+            //SDSelect.disabled = false;
+
+            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDSelect.add(option);
+                }
+            });
+        }
+    }
+    //////////////////////////////////////////////////////
+
+    function mmmFilter() {
+        // Optional: If you want to add the text search functionality too, you can implement it here
+        var input = document.getElementById('textSearchMULMngr').value.toUpperCase();
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        rows.forEach(row => {
+            var mmmValue = row.getAttribute('data-mmm'); // Get the Market value from the row's data attribute
+            if (mmmValue.toUpperCase().indexOf(input) > -1 || input === '') {
+                row.style.display = ''; // Show row if it matches the text input
+            } else {
+                row.style.display = 'none'; // Hide row if it doesn't match
+            }
+        });
+    }
+    ////////////////Market Hierarchy/////////////////////////
+    function filtermmmData() {
+
+        // Get selected Tiers values from the dropdown
+        var selectedValues = Array.from(document.getElementById('MULMngr').selectedOptions).map(option => option.value);
+
+        // Get all rows in the table
+        var rows = document.querySelectorAll('#tbl tbody tr');
+
+        // Loop through each row and check if the Tiers column matches the selected values
+        rows.forEach(row => {
+            var mmmValue = row.getAttribute('data-mmm');
+
+            if (row.classList.contains('total_dataTM')) {
+                row.style.display = 'none';  // Always show the "Grand Total" row
+
+            }
+
+            // Check if this row is the "Grand Total" row
+            if (row.classList.contains('total_data')) {
+                row.style.display = '';  // Always show the "Grand Total" row
+            } else if (selectedValues.length === 0 || selectedValues.includes(mmmValue)) {
+                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
+
+            } else {
+                row.style.display = 'none';  // Hide row if Tiers does not match
+            }
+        });
+
+        // Handle the search input filter for DataTables
+        var input = document.getElementById('textSearchMULMngr').value.toUpperCase();
+
+        // Use the DataTables custom filter API
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            var rowContent = data.join(' ').toUpperCase();
+
+            // Check if the row contains the input
+            var row = $('#tbl tbody tr').eq(dataIndex);
+
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_dataTM')) {
+                return false;  // Always show the "Grand Total" row
+            }
+            // Always return true for the "Grand Total" row
+            if (row.hasClass('total_data')) {
+                return true;  // Always show the "Grand Total" row
+            }
+
+            // If the row contains the input, return true to keep it visible
+            return rowContent.indexOf(input) > -1 || input === '';
+        });
+
+        // Redraw the table with the new search criteria
+        // $('#tbl').draw();
+
+        // Remove the custom search after use to avoid stacking filters
+        $.fn.dataTable.ext.search.pop();
+
+        //Hierarchy Now handle disabling and filtering the others dropdowns
+
+        //mmm
+        var sdAlreadySelected = document.getElementById('SD');
+        var tmAlreadySelected = document.getElementById('TM');
+        var mktAlreadySelected = document.getElementById('Market');
+        var mmktAlreadySelected = document.getElementById('MULMkt');
+        var mmmAlreadySelected = document.getElementById('MULMngr');
+
+        if (tmAlreadySelected.disabled) {
+
+            //mmmfilterMarketOptions(selectedValues);
+            //mmmfiltermMarketOptions(selectedValues);
+            mmmfiltermmmOptions(selectedValues);
+            mmmfilterTiersOptions(selectedValues);
+            mmmfilterStoresOptions(selectedValues);
+
+            mktAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
+
+        } else if (mktAlreadySelected.disabled) {
+
+            mmmfiltermMarketOptions(selectedValues);
+            mmmfiltermmmOptions(selectedValues);
+            mmmfilterTiersOptions(selectedValues);
+            mmmfilterStoresOptions(selectedValues);
+
+            mmktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
+
+        } else if (mmktAlreadySelected.disabled) {
+
+            mmmfiltermmmOptions(selectedValues);
+            mmmfilterTiersOptions(selectedValues);
+            mmmfilterStoresOptions(selectedValues);
+
+            mmmAlreadySelected.disabled = true;
+        }
+        else {
+
+            mmmfilterTMOptions(selectedValues);
+            mmmfilterMarketOptions(selectedValues);
+            mmmfiltermMarketOptions(selectedValues);
+            mmmfiltermmmOptions(selectedValues);
+            mmmfilterTiersOptions(selectedValues);
+            mmmfilterStoresOptions(selectedValues);
+            mmmfilterSDOptions(selectedValues);
+
+            sdAlreadySelected.disabled = true;
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            mmktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
+        }
+
+    }
+
+    function mmmfilterTMOptions(selectedValues) {
+        var TMSelect = document.getElementById('TM');
+        // Clear the TM dropdown
+        TMSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var TMValue = row.getAttribute('data-tm');
+            if (TMValue) {
+                availableTM.add(TMValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            TMSelect.disabled = true;
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableTM.forEach(TMValue => {
+                var option = document.createElement('option');
+                option.value = TMValue;
+                option.text = TMValue;
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                TMSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the TM dropdown and reset all options
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var TMValue = row.getAttribute('data-tm');
+                if (TMValue) {
+                    var option = document.createElement('option');
+                    option.value = TMValue;
+                    option.text = TMValue;
+                    TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfilterMarketOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mkt');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfiltermMarketOptions(selectedValues) {
+        var mMarketSelect = document.getElementById('MULMkt');
+        // Clear the Market dropdown
+        mMarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availablemMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var mMarketValue = row.getAttribute('data-mmkt');
+            if (mMarketValue) {
+                availablemMarket.add(mMarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availablemMarket.forEach(mMarketValue => {
+                var option = document.createElement('option');
+                option.value = mMarketValue;
+                option.text = mMarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                mMarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var mMarketValue = row.getAttribute('data-mmkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = mMarketValue;
+                    option.text = mMarketValue;
+                    mMarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('Market');
+        var mMarketSelect = document.getElementById('MULMkt');
+        var mmmSelect = document.getElementById('MULMngr');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            MarketSelect.disabled = true;
+            mMarketSelect.disabled = true;
+            mmmSelect.disabled = true;
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfilterTiersOptions(selectedValues) {
+        var tiersSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        tiersSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*tiersSelect.disabled = true; */ // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                /* option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                tiersSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //tiersSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    tiersSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfilterStoresOptions(selectedValues) {
+        var StoresSelect = document.getElementById('Stores');
+        // Clear the Stores dropdown
+        StoresSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique Stores values from the filtered rows
+        var availableStores = new Set();
+        filteredRows.forEach(row => {
+
+            var StoresValue = row.getAttribute('data-store');
+            if (StoresValue) {
+                availableStores.add(StoresValue);
+            }
+        });
+
+        // If any SD is selected, disable the Stores dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
+
+            // Populate the Stores dropdown with only the Stores from filtered rows
+            availableStores.forEach(StoresValue => {
+                var option = document.createElement('option');
+                option.value = StoresValue;
+                option.text = StoresValue;
+                /*option.style.color = 'grey';*/  // Highlight in red (optional)
+                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                StoresSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Stores dropdown and reset all options
+            //StoresSelect.disabled = false;
+
+            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var StoresValue = row.getAttribute('data-store');
+                if (StoresValue) {
+                    var option = document.createElement('option');
+                    option.value = StoresValue;
+                    option.text = StoresValue;
+                    StoresSelect.add(option);
+                }
+            });
+        }
+    }
+    function mmmfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the SD dropdown
+        SDSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
+
+        // Collect all unique SD values from the filtered rows
+        var availableSDs = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSDs.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the SD dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the SD dropdown with only the SDs from filtered rows
+            availableSDs.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+
+
                 SDSelect.add(option);
             });
         } else {
@@ -2392,19 +3522,10 @@
 
         // Get all rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
-        var totalCSAT = 0;  // Initialize CSAT total
-        var totalBHRS = 0;
-        var totalTraffic = 0;
-        var totalOps = 0;
-
 
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-store');
-            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
-            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
-            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
-            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
             if (row.classList.contains('total_dataTM')) {
                 row.style.display = 'none';  // Always show the "Grand Total" row
@@ -2414,10 +3535,6 @@
                 row.style.display = '';  // Always show the "Grand Total" row
             } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
                 row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
-                totalBHRS += bhrsValue;
-                totalTraffic += trafValue;
-                totalOps += opsValue;
 
             } else {
                 row.style.display = 'none';  // Hide row if Tiers does not match
@@ -2448,7 +3565,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -2459,6 +3576,7 @@
 
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
+        var mmmAlreadySelected = document.getElementById('MULMngr');
         var storAlreadySelected = document.getElementById('Stores');
         var tirAlreadySelected = document.getElementById('Tiers');
         var sdAlreadySelected = document.getElementById('SD');
@@ -2469,6 +3587,7 @@
             STRfilterTiersOptions(selectedValues);
             STRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
 
         } else if (tmAlreadySelected.disabled) {
@@ -2478,6 +3597,7 @@
             STRfilterTiersOptions(selectedValues);
             STRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
 
@@ -2488,6 +3608,7 @@
             STRfilterTiersOptions(selectedValues);
             STRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             tmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
         }
@@ -2495,23 +3616,19 @@
 
             STRfilterTMOptions(selectedValues);
             STRfilterMarketOptions(selectedValues);
+            STRfiltermmmOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
             STRfilterSDOptions(selectedValues);
 
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
 
             tirAlreadySelected.disabled = true;
             sdAlreadySelected.disabled = true;
         }
-
-        // Set the value of the input button to display the total CSAT
-        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
-        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
-        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
-        document.getElementById('opsTotal').value = totalOps.toFixed(1);
 
     }
 
@@ -2544,6 +3661,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -2592,6 +3710,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -2602,6 +3721,55 @@
             var allRows = document.querySelectorAll('#tbl tbody tr');
             allRows.forEach(row => {
                 var MarketValue = row.getAttribute('data-mkt');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
+                }
+            });
+        }
+    }
+    function STRfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMngr');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
                 if (MarketValue) {
                     var option = document.createElement('option');
                     option.value = MarketValue;
@@ -2640,6 +3808,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 StoresSelect.add(option);
             });
         } else {
@@ -2680,7 +3849,7 @@
 
         // If any SD is selected, disable the tiers dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //tiersSelect.disabled = true;  // Keep the dropdown disabled if required
+            tiersSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the tiers dropdown with only the tiers from filtered rows
             availableTiers.forEach(tiersValue => {
@@ -2688,7 +3857,8 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 option.style.color = 'grey';
-                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.fontSize = '10px';
+                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
                 tiersSelect.add(option);
             });
@@ -2730,7 +3900,7 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
@@ -2738,7 +3908,8 @@
                 option.value = SDValue;
                 option.text = SDValue;
                 option.style.color = 'grey';
-                //option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.fontSize = '10px';
+                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
 
                 SDSelect.add(option);
@@ -2760,6 +3931,8 @@
             });
         }
     }
+
+
     //////////////////////////////////////////////////////
 
     function TiersFilter() {
@@ -2783,18 +3956,10 @@
 
         // Get all rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
-        var totalCSAT = 0;  // Initialize CSAT total
-        var totalBHRS = 0;
-        var totalTraffic = 0;
-        var totalOps = 0;
 
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var TiersValue = row.getAttribute('data-tir');
-            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
-            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
-            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
-            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
             if (row.classList.contains('total_dataTM')) {
                 row.style.display = 'none';  // Always show the "Grand Total" row
@@ -2805,10 +3970,6 @@
                 row.style.display = '';  // Always show the "Grand Total" row
             } else if (selectedValues.length === 0 || selectedValues.includes(TiersValue)) {
                 row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
-                totalBHRS += bhrsValue;
-                totalTraffic += trafValue;
-                totalOps += opsValue;
 
             } else {
                 row.style.display = 'none';  // Hide row if Tiers does not match
@@ -2839,13 +4000,13 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
 
         //Hierarchy Now handle disabling and filtering the others dropdowns
-
+        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
         var storAlreadySelected = document.getElementById('Stores');
@@ -2857,6 +4018,7 @@
             TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
 
@@ -2866,6 +4028,7 @@
             TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
@@ -2877,6 +4040,7 @@
             TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
@@ -2887,6 +4051,7 @@
             TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
         else {
@@ -2897,17 +4062,12 @@
             TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
 
+            sdAlreadySelected.disabled = true;
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
-
-        // Set the value of the input button to display the total CSAT
-        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
-        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
-        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
-        document.getElementById('opsTotal').value = totalOps.toFixed(1);
 
     }
 
@@ -2940,6 +4100,7 @@
                 option.value = MarketValue;
                 option.text = MarketValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 MarketSelect.add(option);
             });
         } else {
@@ -2988,6 +4149,7 @@
                 option.value = TMValue;
                 option.text = TMValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
                 TMSelect.add(option);
             });
         } else {
@@ -3036,7 +4198,7 @@
                 option.value = tiersValue;
                 option.text = tiersValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
-
+                option.style.fontSize = '10px';
                 tiersSelect.add(option);
             });
         } else {
@@ -3087,6 +4249,7 @@
                 option.value = StoresValue;
                 option.text = StoresValue;
                 option.style.color = 'grey';
+                option.style.fontSize = '10px';
                 StoresSelect.add(option);
             });
         } else {
@@ -3127,15 +4290,16 @@
 
         // If any SD is selected, disable the SD dropdown but populate with matching options
         if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
+            SDSelect.disabled = true;  // Keep the dropdown disabled if required
 
             // Populate the SD dropdown with only the SDs from filtered rows
             availableSDs.forEach(SDValue => {
                 var option = document.createElement('option');
                 option.value = SDValue;
                 option.text = SDValue;
-                /*option.style.color = 'grey'; */
-                option.style = ' font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
                 SDSelect.add(option);
             });
@@ -3171,7 +4335,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -3183,19 +4347,10 @@
 
         // Get all rows in the table
         var rows = document.querySelectorAll('#tbl tbody tr');
-        var totalCSAT = 0;  // Initialize CSAT total
-        var totalBHRS = 0;
-        var totalTraffic = 0;
-        var totalOps = 0;
-
 
         // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-sd');
-            var csatValue = parseFloat(row.getAttribute('data-csat')) || 0;  // Get the CSAT value from data-csat attribute
-            var bhrsValue = parseFloat(row.getAttribute('data-bhrs')) || 0;
-            var trafValue = parseFloat(row.getAttribute('data-Traffic')) || 0;
-            var opsValue = parseFloat(row.getAttribute('data-OPS')) || 0;
 
             if (row.classList.contains('total_dataTM')) {
                 row.style.display = 'none';  // Always show the "Grand Total" row
@@ -3240,7 +4395,7 @@
         });
 
         // Redraw the table with the new search criteria
-        $('#tbl').DataTable().draw();
+        //$('#tbl').draw();
 
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
@@ -3330,12 +4485,6 @@
             tirAlreadySelected.disabled = true;
             sdAlreadySelected.disabled = true;
         }
-
-        // Set the value of the input button to display the total CSAT
-        document.getElementById('csatTotal').value = totalCSAT.toFixed(1);
-        document.getElementById('bhrsTotal').value = totalBHRS.toFixed(1);
-        document.getElementById('trafTotal').value = totalTraffic.toFixed(1);
-        document.getElementById('opsTotal').value = totalOps.toFixed(1);
 
     }
 
@@ -3639,5 +4788,110 @@
             tbeCountDisplay90.value = tbeCount90;
         }
     });
+
 </script>
+
+<!--Option List data -->
+<script type="text/javascript">
+    @*var regionList = [];
+
+    @if (ViewBag.RegionList != null && ViewBag.RegionList.Count > 0)
+    {
+        <text>
+        regionList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RegionList));
+        </text>
+    }
+
+    var vpList = [];
+
+    @if (ViewBag.VPList != null && ViewBag.VPList.Count > 0)
+    {
+        <text>
+        vpList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.VPList));
+        </text>
+    }*@
+
+    var sdList = [];
+
+    @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+    {
+        <text>
+        sdList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
+        </text>
+    }
+
+    var tiersList = [];
+
+    @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
+    {
+        <text>
+        tiersList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.tiersList));
+        </text>
+    }
+
+    var storeList = [];
+
+    @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
+    {
+        <text>
+        storeList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.StoresList));
+        </text>
+    }
+
+    var mktList = [];
+
+    @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
+    {
+        <text>
+        mktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MarketList));
+        </text>
+    }
+
+    var mmktList = [];
+
+    @if (ViewBag.mMarketList != null && ViewBag.mMarketList.Count > 0)
+    {
+        <text>
+        mmktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.mMarketList));
+        </text>
+    }
+
+    var mmmList = [];
+
+    @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
+    {
+        <text>
+        mmmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.mmmList));
+        </text>
+    }
+
+    var tmList = [];
+
+    @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+    {
+        <text>
+        tmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.TMList));
+        </text>
+    }
+
+    @*var rsmList = [];
+
+    @if (ViewBag.RSMList != null && ViewBag.RSMList.Count > 0)
+    {
+        <text>
+        rsmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RSMList));
+        </text>
+    }
+
+    var roleList = [];
+
+    @if (ViewBag.RoleList != null && ViewBag.RoleList.Count > 0)
+    {
+        <text>
+        roleList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RoleList));
+        </text>
+    }*@
+
+</script>
+
 
