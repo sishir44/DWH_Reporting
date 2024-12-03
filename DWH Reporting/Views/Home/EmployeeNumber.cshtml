@@ -1,19 +1,15 @@
 ﻿
 @{
-                /**/
-
                 Layout = null;
                 ViewBag.Title = "Employee Number";
 }
 
 @{
-
     // Retrieve the data from ViewData
-    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;    
+    var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;    
     var recordsFct_EmployeeNumberTotal = ViewData["GetFct_EmployeeNumberTotal"] as IEnumerable<Fct_EmployeeNumberAttributesModel>;
 }
+
 @using DWH_Reporting.Models.GpReport;
 
 <!DOCTYPE html>
@@ -447,14 +443,15 @@
     </style>
 </head>
 <body style="padding-top:0; background-color:#B2D6F2;">
+
     <!-- LOADING LOGO -->
     <div id="loadingScreen">
         <img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">
-
     </div>
 
     <div>
         <div id="div1" class="content" style="background-color:#B2D6F2;">
+
             <!-- TITLE & DATE FILTER & EXPORT BTN-->
             <div class="row head">
                 <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
@@ -475,7 +472,7 @@
                         }
 
                         <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
-                            @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Get))
+                            @using (Html.BeginForm("EmployeeNumber", "Home", FormMethod.Get))
                             {
                                 <div class="form-group">
                                     <input type="date"
@@ -490,7 +487,7 @@
                             }
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Get))
+                            @using (Html.BeginForm("EmployeeNumber", "Home", FormMethod.Get))
                             {
                                 <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="resetid">
                                     <i class="fas fa-retweet"></i>
@@ -505,16 +502,10 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <button class="headerbtndiv btn float-right form-control" title="Export in Excel" onclick="test()">
-
                                 <i class="fas fa-file-excel"></i>
-
                             </button>
                         </div>
-                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            <button class="headerbtndiv btn float-right form-control" title="Print" onclick="printTable()">
-                                <i class="fas fa-print"></i>
-                            </button>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -580,26 +571,7 @@
                                value=""
                                style="background-color: orange; color:white; height: 35px; margin-bottom:5px;" />
                     </div>
-
-                    <!-- Search SD -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" />
-                        @*<select class="form-control selector" id="SD" multiple onchange="filterSDData()">*@
-                        <select class="form-control selector" id="SD" multiple>
-                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
-                            {
-                                foreach (var item in ViewBag.SDList)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Text">@item.Text</option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
-                            }
-                        </select>
-                    </div>
-
+                                       
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" />
@@ -718,13 +690,10 @@
                 </div>
 
             </div>
+
             <div id="myDiv">
                 <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
-
-                    @*@try
-                        {*@
                     <thead>
-
                         @functions {
                             // Helper method to convert number to corresponding alphabet(s)
                             public static string GetAlphabetFromNumber(int number)
@@ -741,28 +710,28 @@
                         }
 
                         <tr class="numbered_header">
-                            @for (int i = 1; i <= 157; i++) // Loop from 1 to 164
+                            @for (int i = 1; i <= 155; i++)
                             {
                                 <th style="font-size:8px; background-color: #E6E6E6; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                             }
                         </tr>
-                        <tr class="spanned_header">
-                            @*14*@
-                            <th rowspan="2" style="background-color: black; color:white;">Region</th>
-                            <th rowspan="2" style="background-color: black; color:white;">SD</th>
+
+                        <tr class="spanned_header">                           
+                            @*<th rowspan="2" style="background-color: black; color:white;">Region</th>
+                              <th rowspan="2" style="background-color: black; color:white;">SD</th>*@
+                            <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">Store</th>
+                            <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">TM</th>
+                            <th rowspan="2" style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">Market</th>
+                            <th rowspan="2" style="background-color: black; color:white;">MMM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Unique ID</th>
                             <th rowspan="2" style="background-color: black; color:white;">Dealer Code</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Store</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Market</th>
-                            <th rowspan="2" style="background-color: black; color:white;">TM</th>
-                            <th rowspan="2" style="background-color: black; color:white;">MMM</th>
                             <th rowspan="2" style="background-color: black; color:white;">Emp ID  (Paycom)</th>
                             <th rowspan="2" style="background-color: black; color:white;">Employees</th>
                             <th rowspan="2" style="background-color: black; color:white;">Role</th>
                             <th rowspan="2" style="background-color: black; color:white;">Status</th>
                             <th rowspan="2" style="background-color: black; color:white;">Hire Date</th>
                             <th rowspan="2" style="background-color: black; color:white;">Pay Type</th>
-                            <th id="ColSpan147" colspan="147"></th>
+                            <th id="ColSpan151" colspan="151"></th>
                         </tr>
                         <tr class="main_header">
                             <td style="background-color: green; color:white;">TOTAL<br>OPS </td>
@@ -917,170 +886,170 @@
                         foreach (var record in recordsFct_EmployeeNumberTotal)
                         {
                             // GRAND TOTAL
-                            <tr class="total_data">
+                    <tr class="total_data">
 
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TOTALOPS != null ? record.TOTALOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TOTALOPS))) %</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GPperBOX != null ? record.GPperBOX.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPperBOX)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GPGOAL != null ? record.GPGOAL.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPGOAL)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Trending != null ? record.Trending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Trending)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDS != null ? record.GROSSADDS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDS)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSNetOFF != null ? record.GROSSADDSNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackACTIVATION != null ? record.ChargeBackACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackACTIVATION)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSGP != null ? record.GROSSADDSGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUAch != null ? record.CRUAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAch)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NextUP != null ? record.NextUP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NextUPSpif != null ? record.NextUPSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUPSpif)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivation != null ? record.PremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivation)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationNetOFF != null ? record.PremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMACT != null ? record.ChargeBackPREMIUMACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMACT)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationGP != null ? record.PremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivation != null ? record.ExtraActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivation)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationNetOFF != null ? record.ExtraActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAACT != null ? record.ChargeBackEXTRAACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAACT)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationGP != null ? record.ExtraActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivation != null ? record.NonExtraNonPremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivation)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationNetOFF != null ? record.NonExtraNonPremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationGP != null ? record.NonExtraNonPremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADES != null ? record.MTDUPGRADES.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADES)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESNetOFF != null ? record.MTDUPGRADESNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackUPGRADE != null ? record.ChargeBackUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackUPGRADE)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESGP != null ? record.MTDUPGRADESGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgrade != null ? record.PremiumUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgrade)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMUPGRADE != null ? record.ChargeBackPREMIUMUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMUPGRADE)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeGP != null ? record.PremiumUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgrade != null ? record.ExtraUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgrade)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAUPGRADE != null ? record.ChargeBackEXTRAUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAUPGRADE)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeNetOff != null ? record.ExtraUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeGP != null ? record.ExtraUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternet)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCancellation != null ? record.AIAInternetCancellation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCancellation)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandlessThen300MB != null ? record.BroadBandlessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandlessThen300MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalNewFiber != null ? record.TotalNewFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalNewFiber)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalBroadbandNewfiber != null ? record.TotalBroadbandNewfiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalBroadbandNewfiber)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberNetOFF != null ? record.BroadbandNewfiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackBB != null ? record.ChargeBackBB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackBB)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgrades != null ? record.FiberUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgrades)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOFF != null ? record.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackFIBREUPG != null ? record.ChargeBackFIBREUPG.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackFIBREUPG)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgrade != null ? record.BroadBandFiberUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgrade)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgradeNetOFF != null ? record.BroadBandFiberUpgradeNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgradeNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessthen300MbQISpiff != null ? record.BroadbandLessthen300MbQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessthen300MbQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Newfiber500MBQISpiff != null ? record.Newfiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber500MBQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Newfiber1GQISpiff != null ? record.Newfiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber1GQISpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesGP != null ? record.FiberUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeature)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeatureGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTV != null ? record.ChargeBackTV.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTV)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQTY != null ? record.TWCDevicesQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQTY)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesNetOFF != null ? record.TWCDevicesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTWC != null ? record.ChargeBackTWC.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTWC)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesGP != null ? record.TWCDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidQTY != null ? record.PrepaidQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidQTY)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidtoGA != null ? record.PrepaidtoGA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidtoGA)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREPAIDACTIVATION != null ? record.ChargeBackPREPAIDACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREPAIDACTIVATION)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidwithAutopay != null ? record.PrepaidwithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidwithAutopay)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.INSURANCE != null ? record.INSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCE)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackINSURANCE != null ? record.ChargeBackINSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackINSURANCE)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.INSURANCEGP != null ? record.INSURANCEGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCEGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACK != null ? record.PROTECTIONPACK.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACK)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKNetOFF != null ? record.PROTECTIONPACKNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKNetOFF)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPROTECTION != null ? record.ChargeBackPROTECTION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPROTECTION)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKGP != null ? record.PROTECTIONPACKGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTech != null ? record.ProtAdvHomeTech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTech)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk1to7 != null ? record.DREAMWk1to7.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk1to7)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk8to14 != null ? record.DREAMWk8to14.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk8to14)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk15to21 != null ? record.DREAMWk15to21.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk15to21)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk22to28 != null ? record.DREAMWk22to28.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk22to28)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.DREAMWk29to31 != null ? record.DREAMWk29to31.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk29to31)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PPVGACommission != null ? record.PPVGACommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGACommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAEliteCommission != null ? record.PPVGAEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAEliteCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PPVGAExtraCommission != null ? record.PPVGAExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAExtraCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FNCommission != null ? record.FNCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CRUCommission != null ? record.CRUCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PremiumVideoCommission != null ? record.PremiumVideoCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumVideoCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCommission != null ? record.AIAInternetCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandCommission != null ? record.BroadbandCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NewFiberCommission != null ? record.NewFiberCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiberCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradeCommission != null ? record.FiberUpgradeCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradeCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.UPGCommission != null ? record.UPGCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UPGCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeEliteCommission != null ? record.UpgradeEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeEliteCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.UpgradeExtraCommission != null ? record.UpgradeExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeExtraCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.WearbaleTabletCommission != null ? record.WearbaleTabletCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WearbaleTabletCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Hometech != null ? record.Hometech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Hometech)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUp)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage1Commission != null ? record.ProtectAdvantage1Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage1Commission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage4Commission != null ? record.ProtectAdvantage4Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage4Commission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PrepaidCommission != null ? record.PrepaidCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPCommission != null ? record.AccessoryGPCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessoryGPCommission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Commission != null ? record.Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Commission)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CommissionEligibility != null ? record.CommissionEligibility.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionEligibility)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.RegHrsAchved != null ? record.RegHrsAchved.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.RegHrsAchved)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.OT != null ? record.OT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OT)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.HourlyRateUSD != null ? record.HourlyRateUSD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HourlyRateUSD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.Salary != null ? record.Salary.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Salary)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GeoSPIFFOPS != null ? record.GeoSPIFFOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoSPIFFOPS)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GeoRate != null ? record.GeoRate.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoRate)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MinWage != null ? record.MinWage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.MinWage150 != null ? record.MinWage150.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage150)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalCompNew != null ? record.TotalCompNew.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompNew)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalCompAfter150Check != null ? record.TotalCompAfter150Check.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompAfter150Check)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.CommissionBucketMTD != null ? record.CommissionBucketMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionBucketMTD)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.EOMCommissionTrendingBucket != null ? record.EOMCommissionTrendingBucket.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.EOMCommissionTrendingBucket)))</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
+                        @*<td></td>
+                        <td></td>*@
+                        <td></td>
+                        <td></td>
+                        <td>Grand Total</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TOTALOPS != null ? record.TOTALOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TOTALOPS))) %</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GPperBOX != null ? record.GPperBOX.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPperBOX)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GPGOAL != null ? record.GPGOAL.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPGOAL)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Trending != null ? record.Trending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Trending)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDS != null ? record.GROSSADDS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDS)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSNetOFF != null ? record.GROSSADDSNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackACTIVATION != null ? record.ChargeBackACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackACTIVATION)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GROSSADDSGP != null ? record.GROSSADDSGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GROSSADDSGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNAchMTD != null ? record.FNAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAchMTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNAch != null ? record.FNAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNAch)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTD != null ? record.CRUAchMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAchMTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUAch != null ? record.CRUAch.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUAch)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NextUP != null ? record.NextUP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NextUPSpif != null ? record.NextUPSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUPSpif)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivation != null ? record.PremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivation)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationNetOFF != null ? record.PremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMACT != null ? record.ChargeBackPREMIUMACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMACT)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumActivationGP != null ? record.PremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumActivationGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivation != null ? record.ExtraActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivation)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationNetOFF != null ? record.ExtraActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAACT != null ? record.ChargeBackEXTRAACT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAACT)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraActivationGP != null ? record.ExtraActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraActivationGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivation != null ? record.NonExtraNonPremiumActivation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivation)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationNetOFF != null ? record.NonExtraNonPremiumActivationNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NonExtraNonPremiumActivationGP != null ? record.NonExtraNonPremiumActivationGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NonExtraNonPremiumActivationGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADES != null ? record.MTDUPGRADES.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADES)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESNetOFF != null ? record.MTDUPGRADESNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackUPGRADE != null ? record.ChargeBackUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackUPGRADE)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MTDUPGRADESGP != null ? record.MTDUPGRADESGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MTDUPGRADESGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgrade != null ? record.PremiumUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgrade)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREMIUMUPGRADE != null ? record.ChargeBackPREMIUMUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREMIUMUPGRADE)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeGP != null ? record.PremiumUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumUpgradeGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgrade != null ? record.ExtraUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgrade)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackEXTRAUPGRADE != null ? record.ChargeBackEXTRAUPGRADE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackEXTRAUPGRADE)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeNetOff != null ? record.ExtraUpgradeNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ExtraUpgradeGP != null ? record.ExtraUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ExtraUpgradeGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternet)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCancellation != null ? record.AIAInternetCancellation.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCancellation)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandlessThen300MB != null ? record.BroadBandlessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandlessThen300MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber300MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MB != null ? record.NewFiber500MB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber500MB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiber1G != null ? record.NewFiber1G.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiber1G)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalNewFiber != null ? record.TotalNewFiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalNewFiber)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalBroadbandNewfiber != null ? record.TotalBroadbandNewfiber.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalBroadbandNewfiber)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberNetOFF != null ? record.BroadbandNewfiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackBB != null ? record.ChargeBackBB.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackBB)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgrades != null ? record.FiberUpgrades.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgrades)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOFF != null ? record.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackFIBREUPG != null ? record.ChargeBackFIBREUPG.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackFIBREUPG)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgrade != null ? record.BroadBandFiberUpgrade.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgrade)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadBandFiberUpgradeNetOFF != null ? record.BroadBandFiberUpgradeNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadBandFiberUpgradeNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessthen300MbQISpiff != null ? record.BroadbandLessthen300MbQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandLessthen300MbQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Newfiber500MBQISpiff != null ? record.Newfiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber500MBQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Newfiber1GQISpiff != null ? record.Newfiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Newfiber1GQISpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesGP != null ? record.FiberUpgradesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradesGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeature)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TurboFeatureGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideo != null ? record.PremVideo.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideo)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTV != null ? record.ChargeBackTV.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTV)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremVideoSpiff)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQTY != null ? record.TWCDevicesQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesQTY)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesNetOFF != null ? record.TWCDevicesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackTWC != null ? record.ChargeBackTWC.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackTWC)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesGP != null ? record.TWCDevicesGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TWCDevicesGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidQTY != null ? record.PrepaidQTY.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidQTY)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidtoGA != null ? record.PrepaidtoGA.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidtoGA)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPREPAIDACTIVATION != null ? record.ChargeBackPREPAIDACTIVATION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPREPAIDACTIVATION)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidwithAutopay != null ? record.PrepaidwithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidwithAutopay)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessQty)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessRevenue != null ? record.AccessRevenue.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessRevenue)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.INSURANCE != null ? record.INSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCE)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackINSURANCE != null ? record.ChargeBackINSURANCE.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackINSURANCE)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.INSURANCEGP != null ? record.INSURANCEGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.INSURANCEGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv1)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdv4)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACK != null ? record.PROTECTIONPACK.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACK)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKNetOFF != null ? record.PROTECTIONPACKNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKNetOFF)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ChargeBackPROTECTION != null ? record.ChargeBackPROTECTION.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ChargeBackPROTECTION)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PROTECTIONPACKGP != null ? record.PROTECTIONPACKGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PROTECTIONPACKGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HomeTechProtect)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTech != null ? record.ProtAdvHomeTech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTech)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk1to7 != null ? record.DREAMWk1to7.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk1to7)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk8to14 != null ? record.DREAMWk8to14.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk8to14)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk15to21 != null ? record.DREAMWk15to21.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk15to21)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk22to28 != null ? record.DREAMWk22to28.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk22to28)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.DREAMWk29to31 != null ? record.DREAMWk29to31.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.DREAMWk29to31)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PPVGACommission != null ? record.PPVGACommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGACommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PPVGAEliteCommission != null ? record.PPVGAEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAEliteCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PPVGAExtraCommission != null ? record.PPVGAExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PPVGAExtraCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FNCommission != null ? record.FNCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FNCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CRUCommission != null ? record.CRUCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PremiumVideoCommission != null ? record.PremiumVideoCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PremiumVideoCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AIAInternetCommission != null ? record.AIAInternetCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AIAInternetCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandCommission != null ? record.BroadbandCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NewFiberCommission != null ? record.NewFiberCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NewFiberCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradeCommission != null ? record.FiberUpgradeCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberUpgradeCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.UPGCommission != null ? record.UPGCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UPGCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.UpgradeEliteCommission != null ? record.UpgradeEliteCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeEliteCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.UpgradeExtraCommission != null ? record.UpgradeExtraCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.UpgradeExtraCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.WearbaleTabletCommission != null ? record.WearbaleTabletCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WearbaleTabletCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Hometech != null ? record.Hometech.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Hometech)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.NextUp)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage1Commission != null ? record.ProtectAdvantage1Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage1Commission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.ProtectAdvantage4Commission != null ? record.ProtectAdvantage4Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtectAdvantage4Commission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidCommission != null ? record.PrepaidCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.PrepaidCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPCommission != null ? record.AccessoryGPCommission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.AccessoryGPCommission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Commission != null ? record.Commission.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Commission)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CommissionEligibility != null ? record.CommissionEligibility.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionEligibility)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.RegHrsAchved != null ? record.RegHrsAchved.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.RegHrsAchved)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.OT != null ? record.OT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.OT)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.HourlyRateUSD != null ? record.HourlyRateUSD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.HourlyRateUSD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.Salary != null ? record.Salary.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.Salary)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GeoSPIFFOPS != null ? record.GeoSPIFFOPS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoSPIFFOPS)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.GeoRate != null ? record.GeoRate.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GeoRate)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MinWage != null ? record.MinWage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.MinWage150 != null ? record.MinWage150.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MinWage150)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalCompNew != null ? record.TotalCompNew.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompNew)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.TotalCompAfter150Check != null ? record.TotalCompAfter150Check.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalCompAfter150Check)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.CommissionBucketMTD != null ? record.CommissionBucketMTD.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CommissionBucketMTD)))</td>
+                        <td>@(String.IsNullOrWhiteSpace(record.EOMCommissionTrendingBucket != null ? record.EOMCommissionTrendingBucket.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.EOMCommissionTrendingBucket)))</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
 
                         }
 
@@ -1092,14 +1061,18 @@
                         {
                             <tr class="main_data" data-bhrs="@record.MonthlyBudgetedHRS" data-csat="@record.CSAT" data-sd="@record.SD" data-vp="@record.VP" data-reg="@record.Region" data-tir="@record.Tiers" data-store="@record.Store" data-mkt="@record.Market" data-tm="@record.TM" data-rsm="@record.RSMSRSM" data-role="@record.Role">
 
-                                <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.Region   </td>
-                                <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.SD </td>
-                                <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.UniqueID      </td>
-                                <td style="background-color: black; color:white;">@record.DealerCode   </td>
-                                <td style="background-color: black; color:white;">@record.Store </td>
-                                <td style="background-color: black; color:white;">@record.Market      </td>
-                                <td style="background-color: black; color:white;">@record.TM      </td>
+                                @*<td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.Region   </td>
+                                  <td class="freeze-col" style="background-color: black; color: white; font-weight:bold;">@record.SD </td>*@
+                                <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.Store </td>
+                                <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.TM      </td>
+                                <td style="background-color: black; color:white; white-space: normal; word-wrap: break-word;">@record.Market      </td>
                                 <td style="background-color: black; color:white;">  </td>
+                                <td style="background-color: black; color:white;">@record.UniqueID      </td>
+                                <td style="background-color: black; color:white;">@record.DealerCode   </td>
+                                <td style="background-color: black; color:white;"> </td>
+                                <td style="background-color: black; color:white;"> </td>
+                                <td style="background-color: black; color:white;"> </td>
+                                <td style="background-color: black; color:white;"> </td>
                                 <td style="background-color: black; color:white;"> </td>
                                 <td style="background-color: black; color:white;"> </td>
 
@@ -1116,7 +1089,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.ProtAdvHomeTechPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
-                                <td  class="tbreakevenCLS">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))</td>
+                                <td class="tbreakevenCLS">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TrendingToBreakEven)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalGPGoals)))</td>
@@ -1246,10 +1219,6 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
 
                             </tr>
 
@@ -1257,27 +1226,10 @@
                     }
 
                 </table>
-
             </div>
         </div>
-        <div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
-
-            <iframe title="MISMobilyProject1" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiM2E1OWFiMmUtNDM0MS00NzY2LWIzOWEtYjVhNTM5ODgxZjQ4IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
-
-        </div>
-        <div id="div3" class="content" style="background-color:#B2D6F2; cursor: pointer;">
-
-            <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiOWYxOWNhYjEtYTA2Mi00MTNhLTg2MzctYzdmYWYxODExOGM5IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
-
-        </div>
     </div>
-    <footer>
-        <div class="mt-4" style="padding-left:40%; background-color:#B2D6F2;">
-            <button id="prevBtn"  style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Previous</button>
-            <button id="nextBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Next</button>
-
-        </div>
-    </footer>
+   
 </body>
 <script>
     $(document).ready(function () {
@@ -1321,222 +1273,8 @@
             filename: "EmployeeNumberReport.xls"
         });
     }
-    function takeshot() {
-        //window.print();
-
-        // Get the content of the div
-        var divContents = document.getElementById("myDiv").innerHTML;
-        // Open a new window
-        var printWindow = window.open('', '', 'height=500, width=800');
-        // Write the content into the new window
-        printWindow.document.write('<html><head><title>Print Div</title>');
-        printWindow.document.write('</head><body >');
-        printWindow.document.write(divContents);
-        printWindow.document.write('</body></html>');
-        // Close the document to render the content
-        printWindow.document.close();
-        // Wait for the content to load and then call the print function
-        printWindow.onload = function () {
-            printWindow.focus(); // Required for IE and some browsers
-            printWindow.print();
-            printWindow.close();
-        };
-    }
-    function printTable() {
-        //Hide all unnecessary elements by adding a 'print-hidden' class
-        var elementsToHide = document.querySelectorAll('header, footer, .sidebar, .navbar, .other-section'); // Customize this to the elements you want hidden
-        elementsToHide.forEach(function (el) {
-            el.style.display = 'none';
-        });
-
-        // Temporarily show only the table
-        var table = document.getElementById("tbl");
-        table.style.display = 'table'; // Ensure the table is displayed
-
-        // Open the print dialog
-        window.print();
-
-        // Restore visibility of previously hidden elements
-        elementsToHide.forEach(function (el) {
-            el.style.display = ''; // Restore to default
-        });
-    }
-    function printFullTable() {
-        var tableContent = document.getElementById('tbl').outerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = tableContent;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-    }
-    function hideDivAndButton() {
-        var myDiv = document.getElementById('myDiv');
-        var hideButton = document.getElementById('hideButton');
-        var myDiv2 = document.getElementById('myDiv2');
-        var hideButton2 = document.getElementById('hideButton2');
-
-        // Hide the div
-        myDiv.style.display = 'none';
-        myDiv2.style.display = 'block';
-
-        // Hide the button
-        hideButton.style.display = 'none';
-        hideButton2.style.display = 'block';
-
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
-    }
-    function hideDivAndButton2() {
-        var myDiv = document.getElementById('myDiv');
-        var hideButton = document.getElementById('hideButton');
-        var myDiv2 = document.getElementById('myDiv2');
-        var hideButton2 = document.getElementById('hideButton2');
-
-        // Hide the div
-        myDiv.style.display = 'block';
-        myDiv2.style.display = 'none';
-
-        // Hide the button
-        hideButton.style.display = 'block';
-        hideButton2.style.display = 'none';
-
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-        $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
-    }
 </script>
-<script>
-    const divs = document.querySelectorAll(".content");
-    let currentDiv = 0;
-    function showDiv(index) {
-        divs.forEach((div, i) => {
-            div.style.display = i === index ? "block" : "none";
-        });
-    }
-    function showNextDiv() {
 
-        if (currentDiv === 1) {
-            currentDiv = 0;
-            showDiv(currentDiv);
-
-            document.getElementById("nextBtn").disabled = true;
-            document.getElementById("nextBtn").style.color = 'red';
-
-        }
-        if (currentDiv === 2) {
-            currentDiv = 1;
-            showDiv(currentDiv);
-        }
-
-        //EN
-        //if (currentDiv < 3) {
-        //    currentDiv = 0;  // Increment currentDiv to show the next div RPT EN
-        //    showDiv(currentDiv);
-        //    document.getElementById("nextBtn").disabled = true;
-        //    document.getElementById("nextBtn").style.color = 'red';
-        //}
-
-        // Enable the "Previous" button and set its color
-        document.getElementById("prevBtn").disabled = false;
-        document.getElementById("prevBtn").style.color = 'white';
-
-        // If we're now on DIV1, disable the "Next" button
-        //if (currentDiv === 0) {
-        //    document.getElementById("nextBtn").disabled = true;
-        //    document.getElementById("nextBtn").style.color = 'red';
-        //}
-    }
-    function showPrevDiv() {
-        // First click: If you're on DIV1 RPT, show DIV2 EN
-        if (currentDiv === 0) {
-            currentDiv = 1;  // Set currentDiv to 1 to show DIV2 EN
-            showDiv(currentDiv);
-            document.getElementById("nextBtn").disabled = false;  // Enable the "Next" button
-            document.getElementById("nextBtn").style.color = 'white';  // Ensure the "Previous" button is enabled
-
-            return;
-        }
-
-        // Second click: If you're on DIV2 EN, show DIV3 SN
-        if (currentDiv === 1) {
-            currentDiv = 2;  // Set currentDiv to 2 to show DIV3 SN
-            showDiv(currentDiv);
-            document.getElementById("nextBtn").disabled = false;  // Enable the "Next" button
-            document.getElementById("nextBtn").style.color = 'white';  // Ensure the "Previous" button is enabled
-
-
-            return;
-        }
-
-        // Third click: If you're on DIV3 SN, redirect to the desired URL-SN
-        if (currentDiv === 2) {
-            window.location.href = "http://localhost:52163/Home/StoreNumber";  // Redirect to the URL
-
-            //window.location.href = "https://mis.mobilyllc.com/DWHReporting/Home/StoreNumber";
-            return;
-        }
-
-        // For other divs, decrement currentDiv and show the previous div
-        if (currentDiv > 0) {
-            currentDiv--;
-            showDiv(currentDiv);
-
-            // Disable "Previous" button if now on the first div
-            if (currentDiv === 0) {
-                document.getElementById("prevBtn").disabled = false;
-                document.getElementById("prevBtn").style.color = 'white';
-            }
-
-            // Ensure the "Next" button is enabled
-            document.getElementById("nextBtn").disabled = false;
-            document.getElementById("nextBtn").style.color = 'white';
-        }
-    }
-
-    // Initialize by showing the first div
-    showDiv(currentDiv);
-    document.getElementById("nextBtn").addEventListener("click", showNextDiv);
-    document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
-</script>
-<script>
-    // Function to highlight TM and Store cells
-    function highlightCells() {
-        // Get the table element
-        var table = document.getElementById("tbl");
-
-        // Loop through all rows with the class 'main_data'
-        var rows = document.getElementsByClassName("main_data");
-        for (var i = 0; i < rows.length; i++) {
-            // Get the TM cell (10th column in the row)
-            var gatgCell = rows[i].cells[15];
-            // Get the Store cell (7th column in the row)
-            var storeCell = rows[i].cells[6];
-
-            var dCell = rows[i].cells[13];
-
-            // Get the TM value and convert it to a number by removing the $ sign
-            //var gatgCell = parseFloat(gatgCell.innerText.replace('$', ''));
-            //var gatgCell = parseFloat(gatgCell.innerText.match(/[0-9,.]+/)[0]);
-            var gatgCellv = parseFloat(gatgCell.innerText);
-
-
-            // If the TM value is greater than 20, change the background color to yellow and font color to white
-            if (gatgCellv > 20) {
-                gatgCell.style.backgroundColor = "green";  // Set background color to green
-                gatgCell.style.color = "white";  // Set font color to white
-            }
-            // Check if the Store value contains a comma
-            if (storeCell.innerText.includes('-')) {
-                storeCell.style.backgroundColor = "orange";  // Set background color to yellow
-                storeCell.style.color = "white";  // Set font color to white
-            }
-        }
-    }
-
-    // Call the function to apply the highlighting
-    highlightCells();
-</script>
 <!-- Filters working -->
 <script>
 
@@ -3854,6 +3592,7 @@
 
     //////////////////////////////////////////////////////////
 </script>
+
 <!--loading screen-->
 <script>
     // JavaScript to hide the loading screen when the view has loaded
@@ -3862,7 +3601,8 @@
         document.getElementById('content').style.display = 'block'; // Show content
     });
 </script>
-<!--Highlight Trending Break Even-->
+
+<!--Indicatores Trending Break Even-->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         // Tr Break Even Calc
