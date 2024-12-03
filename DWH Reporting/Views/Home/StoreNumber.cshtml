@@ -1644,47 +1644,47 @@
                                 <td class="gross-adds-goals">
                                     @(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())
                                 </td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())
                                 </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTrafficPercentage)) * 100))%</td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TotalTraffic)).ToString())
                                 </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.FiberConversion)) * 100))%</td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.BroadbandFiberNetOFF)).ToString())
                                 </td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.FiberGreenCheck)).ToString())
                                 </td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
-                                <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))%</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
-                                <td class="tbreakevenCLS">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
+                                <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage)) * 100))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSTrendingToGoalsPercentage)) * 100))%</td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TotalOPSGoals)).ToString())
                                 </td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.TotalOPS != null ? record.TotalOPS.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TotalOPS)).ToString())
                                 </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.MTDUpgradesGoals)).ToString())
                                 </td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.MTDUpgradesNetOFF)).ToString())
                                 </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyGoals)).ToString())
                                 </td>
-                                <td class="gross-adds-goals">
+                                <td>
                                     @(String.IsNullOrWhiteSpace(record.TWCDevicesQtyNetOFF != null ? record.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyNetOFF)).ToString())
                                 </td>
                                 <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AIABusinessConversion)) * 100))%</td>
@@ -9519,13 +9519,13 @@
 
             // Check if the value is greater than 50
             if (!isNaN(value) && value > 70.0) {
-                cell.style.backgroundColor = "green";  // Set background color
+                cell.style.backgroundColor = "#008000";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
 
             // Check if the value is greater than 50
             if (!isNaN(value) && value < 60.0) {
-                cell.style.backgroundColor = "yellow";  // Set background color
+                cell.style.backgroundColor = "#ffa500";  // Set background color
                 cell.style.color = "black";  // Set text color
             }
         });
@@ -9538,12 +9538,12 @@
             var value = parseFloat(cell.textContent);
 
             if (!isNaN(value) && value > 0.7) {
-                cell.style.backgroundColor = "green";
+                cell.style.backgroundColor = "#008000";
                 cell.style.color = "white";
             }
 
             if (!isNaN(value) && value < 0.7) {
-                cell.style.backgroundColor = "yellow";
+                cell.style.backgroundColor = "#ffa500";
                 cell.style.color = "black";
             }
         });
@@ -9587,6 +9587,7 @@
             var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
             if (!isNaN(tbeValue) && tbeValue > 100) {
                 tbeCount++;
+
             }
             if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 100) {
                 tbeCount70++;
@@ -9595,7 +9596,22 @@
                 tbeCount90++;
             }
         });
+        tbeCells.forEach(function (cell) {
+            // Parse the cell's text content as a float
+            var value = parseFloat(cell.textContent);
 
+            // Check if the value is greater than 50
+            if (!isNaN(value) && value > 100.0) {
+                cell.style.backgroundColor = "#008000";  // Set background color
+                cell.style.color = "white";  // Set text color
+            }
+
+            // Check if the value is greater than 50
+            if (!isNaN(value) && value < 70.0) {
+                cell.style.backgroundColor = "#ffa500";  // Set background color
+                cell.style.color = "black";  // Set text color
+            }
+        });
         var tbeCountDisplay = document.getElementById("tbeCountDisplay");
         if (tbeCountDisplay) {
             tbeCountDisplay.value = tbeCount;
