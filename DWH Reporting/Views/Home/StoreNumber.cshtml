@@ -1161,7 +1161,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.FiberUpgradesNetOFF != null ? record.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberUpgradesNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ChargeBack8 != null ? record.ChargeBack8.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack8)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiber != null ? record.BroadbandFiber.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiber)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MBQISpiff != null ? record.BroadbandLessThen300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MBQISpiff)))</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.NewFiber300MBQISpiff != null ? record.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MBQISpiff)))</td>
@@ -1360,7 +1360,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record2.FiberUpgradesNetOFF != null ? record2.FiberUpgradesNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FiberUpgradesNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack8 != null ? record2.ChargeBack8.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ChargeBack8)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiber != null ? record2.BroadbandFiber.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiber)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBQISpiff != null ? record2.BroadbandLessThen300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MBQISpiff)))</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber300MBQISpiff != null ? record2.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MBQISpiff)))</td>
@@ -3154,7 +3154,7 @@
                                         if (record.BroadbandFiberTrend != null && Double.TryParse(record.BroadbandFiberTrend.ToString(), out BBFibTr))
                                         {
                                             // If the value can be paqtsed to double, format it
-                                            BroadbandFiberTrend = String.Format("{0:N1}", BBFibTr);
+                                            BroadbandFiberTrend = String.Format("{0:N0}", BBFibTr);
                                         }
                                         else
                                         {
