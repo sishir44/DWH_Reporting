@@ -23,7 +23,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -621,10 +620,10 @@
                             {
                                 foreach (var item in recordsGet_MUL_Mgr)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                    @*<option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
                                             value="@item.MUL_MktMngr">
                                         @item.MUL_MktMngr
-                                    </option>
+                                    </option>*@
                                 }
                             }
                             else
@@ -642,10 +641,10 @@
                             {
                                 foreach (var item in recordsGet_MUL_Mkt)
                                 {
-                                    <option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
+                                    @*<option style="border-radius: 6px; background-color:lightblue; text-align: center; color: black; margin-bottom: 5px; font-size: 12px;"
                                             value="@item.MUL_Market">
                                         @item.MUL_Market
-                                    </option>
+                                    </option>*@
                                 }
                             }
                             else
@@ -1035,10 +1034,9 @@
                                 <td></td>
                                 <td>@record.Market</td>
                                 <td>@record.TM</td>
-                                <td>@record.MUL_MktMngr</td>
+                                <td>@record.Market</td>
                                 <td>@record.TM</td>
-                                <td>@record.MUL_MktMngr</td>
-                                <!-- Data SP SN -->
+                                <td>@record.Market</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage))) %</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsTrendToGoal)))</td>
                                 <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
