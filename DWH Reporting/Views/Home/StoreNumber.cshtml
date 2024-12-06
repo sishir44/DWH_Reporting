@@ -70,7 +70,7 @@
 
         .row.head {
             width: 100%;
-            margin-bottom: -7px;
+            margin-bottom: -9px;
         }
         .modal-dialog {
             max-width: 100%; /* Remove max-width constraint */
@@ -107,15 +107,12 @@
         #loadingLogo {
             width: 150px; /* Adjust logo size as needed */
         }
-
-
-
         .btn {
             border-radius: 10px;
             background-image: linear-gradient(#0046bf54, #0046bf);
             color: white;
             border: none;
-            margin: 5px;
+            margin: 7px 0px;
             cursor: pointer;
         }
 
@@ -373,7 +370,7 @@
         th, td {
             font-size: 9px;
             padding: 3px;
-            min-width: 70px;
+            min-width: 40px;
             max-width: 65px !important;
             text-align: center;
         }
@@ -466,7 +463,7 @@
 
         #demoDW {
             width: 100%;
-            max-height: 60vh;
+            max-height: 71vh;
             overflow: auto;
         }
         input.selectorinput {
@@ -522,31 +519,37 @@
         #tbl tbody td:nth-child(1),
         #tbl thead th:nth-child(1) {
             left: 0;
+            min-width: 65px !important;
         }
 
         #tbl tbody td:nth-child(2),
         #tbl thead th:nth-child(2) {
-            left: 70px;
+            left: 65px;
+            min-width: 65px !important;
         }
 
         #tbl tbody td:nth-child(3),
         #tbl thead th:nth-child(3) {
-            left: 140px;
+            left: 130px;
+            min-width: 65px !important;
         }
 
         #tbl tbody td:nth-child(4),
         #tbl thead th:nth-child(4) {
-            left: 210px;
+            left: 195px;
+            min-width: 65px !important;
         }
 
         #tbl tbody td:nth-child(5),
         #tbl thead th:nth-child(5) {
-            left: 280px;
+            left: 260px;
+            min-width: 65px !important;
         }
 
         #tbl tbody td:nth-child(6),
         #tbl thead th:nth-child(6) {
-            left: 350px;
+            left: 325px;
+            min-width: 65px !important;
         }
 
         /*#tbl tbody td:nth-child(7),
@@ -555,6 +558,8 @@
         }*/
         button.headerbtndiv {
             height: 33px !important;
+            width: 90%;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -4845,8 +4850,8 @@
     </div>
 
     <!--NEXT/PREV BTN -->
-    <footer>
-        <div class="mt-4" style="padding-left:40%;background-color:#B2D6F2;">
+    <footer style="display:none;">
+        <div class="mt-4 d-md-none" style="padding-left:40%;background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
