@@ -7471,8 +7471,7 @@
             });
         }
     }
-
-
+    
     //////////////////////////////////////////////////////
 
     function TiersFilter() {
@@ -7548,6 +7547,7 @@
         //Hierarchy Now handle disabling and filtering the others dropdowns
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
+        var mmmAlreadySelected = document.getElementById('MULMngr');
         var storAlreadySelected = document.getElementById('Stores');
         var tirAlreadySelected = document.getElementById('Tiers');
 
@@ -7555,17 +7555,21 @@
         if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
 
             TIRfilterTiersOptions(selectedValues);
-
+            TIRfiltermmmOptions(selectedValues);
             
             tirAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
         }
 
         else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-           
+
+
+            TIRfiltermmmOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
 
-            
+
+            mmmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
@@ -7573,11 +7577,13 @@
         else if (tmAlreadySelected.disabled) {
 
             TIRfilterMarketOptions(selectedValues);
+            TIRfiltermmmOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
 
             
-            mktAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;            
+            mmmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
@@ -7593,12 +7599,14 @@
 
             TIRfilterTMOptions(selectedValues);
             TIRfilterMarketOptions(selectedValues);
+            TIRfiltermmmOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
 
             
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
@@ -7699,6 +7707,55 @@
                     option.value = TMValue;
                     option.text = TMValue;
                     TMSelect.add(option);
+                }
+            });
+        }
+    }
+    function TIRfiltermmmOptions(selectedValues) {
+        var MarketSelect = document.getElementById('MULMngr');
+        // Clear the Market dropdown
+        MarketSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique Market values from the filtered rows
+        var availableMarket = new Set();
+        filteredRows.forEach(row => {
+
+            var MarketValue = row.getAttribute('data-mmm');
+            if (MarketValue) {
+                availableMarket.add(MarketValue);
+            }
+        });
+
+        // If any SD is selected, disable the Market dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the Market dropdown with only the Market from filtered rows
+            availableMarket.forEach(MarketValue => {
+                var option = document.createElement('option');
+                option.value = MarketValue;
+                option.text = MarketValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                MarketSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the Market dropdown and reset all options
+            // MarketSelect.disabled = false;
+
+            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var MarketValue = row.getAttribute('data-mmm');
+                if (MarketValue) {
+                    var option = document.createElement('option');
+                    option.value = MarketValue;
+                    option.text = MarketValue;
+                    MarketSelect.add(option);
                 }
             });
         }
