@@ -5,13 +5,10 @@
 }
 
 @{
-    // Retrieve the data from ViewData
     var recordsFct_StoreNumber = ViewData["Fct_StoreNumber"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    //var recordsGet_MUL_Mgr = ViewData["Get_MUL_Mgr"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-    //var recordsGet_MUL_Mkt = ViewData["Get_MUL_Mkt"] as IEnumerable<Fct_StoreNumberAttributesModel>;
-
+    
 }
 
 @using DWH_Reporting.Models.GpReport;
@@ -48,6 +45,83 @@
     <title>MTD Reports</title>
 
     <style>
+               
+        #tbl th[scope=row] {
+            left: -1px;
+            z-index: 1;
+        }
+
+        #tbl th[scope=col] {
+            left: -2px;
+            z-index: 3;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl tbody td:nth-child(2),
+        #tbl tbody td:nth-child(3),
+        #tbl tbody td:nth-child(4),
+        #tbl tbody td:nth-child(5),
+        #tbl tbody td:nth-child(6) {
+            position: sticky;
+            z-index: 1;
+        }
+
+        #tbl thead th:nth-child(1),
+        #tbl thead th:nth-child(2),
+        #tbl thead th:nth-child(3),
+        #tbl thead th:nth-child(4),
+        #tbl thead th:nth-child(5),
+        #tbl thead th:nth-child(6) {
+            position: sticky;
+            z-index: 12;
+        }
+
+        #tbl tbody td:nth-child(1),
+        #tbl thead th:nth-child(1) {
+            left: 0;
+            min-width: 65px !important;
+        }
+
+        #tbl tbody td:nth-child(2),
+        #tbl thead th:nth-child(2) {
+            left: 65px;
+            min-width: 65px !important;
+        }
+
+        #tbl tbody td:nth-child(3),
+        #tbl thead th:nth-child(3) {
+            left: 130px;
+            min-width: 65px !important;
+        }
+
+        #tbl tbody td:nth-child(4),
+        #tbl thead th:nth-child(4) {
+            left: 195px;
+            min-width: 65px !important;
+        }
+
+        #tbl tbody td:nth-child(5),
+        #tbl thead th:nth-child(5) {
+            left: 260px;
+            min-width: 65px !important;
+        }
+
+        #tbl tbody td:nth-child(6),
+        #tbl thead th:nth-child(6) {
+            left: 325px;
+            min-width: 65px !important;
+        }
+
+        /*#tbl tbody td:nth-child(7),
+        #tbl thead th:nth-child(7) {
+            left: 420px;
+        }*/
+        button.headerbtndiv {
+            height: 33px !important;
+            width: 150%;
+            font-size: 13px;
+        }
+
         button#btnaddnote {
             padding: 1px 10px;
             font-size: 13px;
@@ -486,122 +560,36 @@
             top: -4px;
         }
     </style>
-    <style>
 
-
-        #tbl th[scope=row] {
-            left: -1px;
-            z-index: 1;
-        }
-
-        #tbl th[scope=col] {
-            left: -2px;
-            z-index: 3;
-        }
-
-        #tbl tbody td:nth-child(1),
-        #tbl tbody td:nth-child(2),
-        #tbl tbody td:nth-child(3),
-        #tbl tbody td:nth-child(4),
-        #tbl tbody td:nth-child(5),
-        #tbl tbody td:nth-child(6) {
-            position: sticky;
-            z-index: 1;
-        }
-
-        #tbl thead th:nth-child(1),
-        #tbl thead th:nth-child(2),
-        #tbl thead th:nth-child(3),
-        #tbl thead th:nth-child(4),
-        #tbl thead th:nth-child(5),
-        #tbl thead th:nth-child(6) {
-            position: sticky;
-            z-index: 12;
-        }
-
-        #tbl tbody td:nth-child(1),
-        #tbl thead th:nth-child(1) {
-            left: 0;
-            min-width: 65px !important;
-        }
-
-        #tbl tbody td:nth-child(2),
-        #tbl thead th:nth-child(2) {
-            left: 65px;
-            min-width: 65px !important;
-        }
-
-        #tbl tbody td:nth-child(3),
-        #tbl thead th:nth-child(3) {
-            left: 130px;
-            min-width: 65px !important;
-        }
-
-        #tbl tbody td:nth-child(4),
-        #tbl thead th:nth-child(4) {
-            left: 195px;
-            min-width: 65px !important;
-        }
-
-        #tbl tbody td:nth-child(5),
-        #tbl thead th:nth-child(5) {
-            left: 260px;
-            min-width: 65px !important;
-        }
-
-        #tbl tbody td:nth-child(6),
-        #tbl thead th:nth-child(6) {
-            left: 325px;
-            min-width: 65px !important;
-        }
-
-        /*#tbl tbody td:nth-child(7),
-        #tbl thead th:nth-child(7) {
-            left: 420px;
-        }*/
-        button.headerbtndiv {
-            height: 33px !important;
-            width: 80%;
-            font-size: 13px;
-        }
-    </style>
 </head>
 
 <body style="padding-top:0; background-color:#B2D6F2;">
 
-
-
     <!-- LOADING LOGO -->
     <div id="loadingScreen">
-        @*<img id="loadingLogo" src="~/Image/spinner-8565_256.gif" alt="Loading Logo">*@
         <img id="loadingLogo" src="https://mis.mobilyllc.com/mobilylogin/image/mobilyloader.gif" alt="Loading Logo">
 
     </div>
 
     <div>
-
         <div id="div1" class="content" style="background-color:#B2D6F2;">
 
             <!-- TITLE & DATE FILTER & EXPORT BTN-->
             <div class="row head">
-                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
-                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            @*<img src="~/Image/smLogoMobily.png" />*@
-                        </div>
-                        <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
-                            <h3 style="margin-top:11px; font-weight:800; font-size:20px;" class="title">|  MTD @ViewBag.Title</h3>
-                        </div>
+                        <h3 style="margin-top:10px; margin-left:50px; font-weight:800; font-size:16px;" class="title">|  MTD @ViewBag.Title</h3>
+
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         @{
                             var today = DateTime.Today.ToString("yyyy-MM-dd");
                             var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
                         }
 
-                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
                             @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Get))
                             {
                                 <div class="form-group">
@@ -637,11 +625,11 @@
 
                             </button>
                         </div>
-                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                        @*<div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
                             <button class="headerbtndiv btn float-right form-control" title="Print" onclick="printTable()">
                                 <i class="fas fa-print"></i>
                             </button>
-                        </div>
+                        </div>*@
                     </div>
                 </div>
             </div>
@@ -852,7 +840,6 @@
             </div>
 
             <!-- DATA TBL -->
-
             <div class="table-responsive" id="printtable">
                 <div id="imageloader2" style=" padding-left: 543px;"></div>
                 <div id="demoDW">
@@ -4339,21 +4326,7 @@
                     </div>
                 </div>
             </div>
-
-
-
-        </div>
-
-        <!-- PBI SN -->
-        <div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
-            <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
-
-        </div>
-
-        <!-- PBI EN -->
-        <div id="div3" class="content" style="background-color:#B2D6F2; cursor: pointer;">
-            <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
-
+                       
         </div>
 
         <!-- Modal ADD NOTE/COMMENT Structure -->
@@ -4851,15 +4824,6 @@
         </div>
 
     </div>
-
-    <!--NEXT/PREV BTN -->
-    <footer style="display:none;">
-        <div class="mt-4 d-md-none" style="padding-left:40%;background-color:#B2D6F2;">
-            <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
-            <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
-        </div>
-    </footer>
-
 </body>
 
 <!--  Page Load & TBL & Print -->
