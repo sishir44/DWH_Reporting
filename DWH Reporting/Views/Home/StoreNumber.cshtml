@@ -544,7 +544,7 @@
             overflow: auto;
         }
         input.selectorinput {
-            font-size: 13px;
+            font-size: 10px;
             margin-top: 5px;
         }
         .maindiv {
@@ -572,7 +572,7 @@
     </div>
 
     <div>
-        <div id="div1" class="content" style="background-color:#B2D6F2;">
+        <div id="content" class="content" style="background-color:#B2D6F2;">
 
             <!-- TITLE & DATE FILTER & EXPORT BTN-->
             <div class="row head">
@@ -614,7 +614,7 @@
 
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter" onclick="clearfilter()">
+                            <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilterID" onclick="clearfilter()">
                                 <i class="fas fa-filter"></i>
                             </button>
                         </div>
@@ -625,11 +625,6 @@
 
                             </button>
                         </div>
-                        @*<div class="col-lg-1 col-md-12 col-sm-12 col-xs-12">
-                            <button class="headerbtndiv btn float-right form-control" title="Print" onclick="printTable()">
-                                <i class="fas fa-print"></i>
-                            </button>
-                        </div>*@
                     </div>
                 </div>
             </div>
@@ -673,13 +668,13 @@
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
                             <label>Total Stores</label>
-                            <input type="button" name="STR" id="storeCountDisplay" class="form-control" value="0"
-                                   style="background-color: #31869b;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                            <input type="button" name="GAGoals" id="storeCountDisplay" class="form-control" value="0"
+                                   style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
 
                             <label>100% & Above</label>
-                            <input type="button" name="OPS" id="tbeCountDisplay" class="form-control"
+                            <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
                                    title="Above 100%" value=""
-                                   style="background-color: green;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
                         </div>
                     </div>
 
@@ -687,36 +682,17 @@
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
                             <label>Above 70%</label>
-                            <input type="button" name="above90" id="tbeCountDisplay70" class="form-control"
-                                   title="Traffic"
+                            <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
+                                   title="Above 70%"
                                    value=""
-                                   style="background-color: deeppink; color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: deeppink; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
 
                             <label>Less Than 70%</label>
-                            <input type="button" name="above90" id="tbeCountDisplay90" class="form-control"
-                                   title="CSAT"
+                            <input type="button" name="<70" id="tbeCountDisplay90" class="form-control"
+                                   title="Less Than 70%"
                                    value=""
-                                   style="background-color: orange;  color:white;font-size: 14px; height: 30px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
                         </div>
-                    </div>
-
-                    <!-- Search SD -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 d-md-none" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" />
-                        @*<select class="form-control selector" id="SD" multiple onchange="filterSDData()">*@
-                        <select class="form-control selector" id="SD" multiple>
-                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
-                            {
-                                foreach (var item in ViewBag.SDList)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Text">@item.Text</option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
-                            }
-                        </select>
                     </div>
 
                     <!-- Search TM -->
@@ -754,29 +730,7 @@
                             }
                         </select>
                     </div>
-
-
-                    <!-- Search MUL_Market -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top; display:none !important">
-                        <input type="text" name="textSearchMULMkt" id="textSearchMULMkt" class="selectorinput form-control" placeholder="Search Multi Market" />
-                        <select class="form-control selector" id="MULMkt" multiple onchange="filtermMarketData()">
-                            @if (ViewBag.mMarketList != null && ViewBag.mMarketList.Count > 0)
-                            {
-                                foreach (var item in ViewBag.mMarketList)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
-                                            value="@item.Value">
-                                        @item.Text
-                                    </option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Market available</option>
-                            }
-                        </select>
-                    </div>
-
+                    
                     <!-- Search MUL_MktMngr -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search MMM" />
@@ -4828,31 +4782,6 @@
 
 <!--  Page Load & TBL & Print -->
 <script>
-    //$(document).ready(function () {
-    //    var windowheight = $(window).height()
-
-    //    var height = (windowheight - 400) + "px"
-    //    updateDataTable(height);
-    //    $($.fn.dataTable.tables(true)).DataTable().columns.adjust();
-    //    $($.fn.dataTable.tables(true)).DataTable().columns.adjust().draw();
-
-
-    //});
-
-    //function updateDataTable(S_height) {
-    //    $('#tbl').DataTable({
-    //        scrollY: S_height,
-    //        scrollX: true,
-    //        scrollCollapse: true,
-    //        searching: false,  // Disable default search since we're using custom search
-    //        bInfo: false,
-    //        paging: false,
-    //        ordering: false,
-    //        fixedColumns: {
-    //            leftColumns: 7,
-    //        }
-    //    });
-    //}
 
     function test() {
 
@@ -4871,39 +4800,6 @@
             filename: "StoreNumberReport.xls"
         });
     }
-
-    //function takeshot() {
-    //    //window.print();
-
-    //    // Get the content of the div
-    //    var divContents = document.getElementById("myDiv").innerHTML;
-    //    // Open a new window
-    //    var printWindow = window.open('', '', 'height=500, width=800');
-    //    // Write the content into the new window
-    //    printWindow.document.write('<html><head><title>Print Div</title>');
-    //    printWindow.document.write('</head><body >');
-    //    printWindow.document.write(divContents);
-    //    printWindow.document.write('</body></html>');
-    //    // Close the document to render the content
-    //    printWindow.document.close();
-    //    // Wait for the content to load and then call the print function
-    //    printWindow.onload = function () {
-    //        printWindow.focus(); // Required for IE and some browsers
-    //        printWindow.print();
-    //        printWindow.close();
-    //    };
-    //}
-
-    //function printFullTable() {
-    //    var tableContent = document.getElementById('tbl').outerHTML;
-    //    var originalContents = document.body.innerHTML;
-
-    //    document.body.innerHTML = tableContent;
-
-    //    window.print();
-
-    //    document.body.innerHTML = originalContents;
-    //}
 
     function printTable() {
         //Hide all unnecessary elements by adding a 'print-hidden' class
@@ -5883,55 +5779,14 @@
 
 </script>
 
-<!-- Next Prev btn -->
-<script>
-    const divs = document.querySelectorAll(".content");
-    let currentDiv = 0;
-    function showDiv(index) {
-        divs.forEach((div, i) => {
-            div.style.display = i === index ? "block" : "none";
-        });
-    }
-    function showNextDiv() {
-        //console.log(currentDiv);
-        if (currentDiv === 0) {
-            //console.log(currentDiv);
-            currentDiv = 2;
-            showDiv(currentDiv);
-            document.getElementById("nextBtn").disabled = true;
-            document.getElementById("nextBtn").style.color = 'red';
-
-            document.getElementById("prevBtn").disabled = false;
-            document.getElementById("prevBtn").style.color = 'white';
-        }
-    }
-    function showPrevDiv() {
-        if (currentDiv === 2) {
-            currentDiv = 0;
-            showDiv(currentDiv);
-            document.getElementById("nextBtn").disabled = false;
-            document.getElementById("nextBtn").style.color = 'white';
-
-            document.getElementById("prevBtn").disabled = true;
-            document.getElementById("prevBtn").style.color = 'red';
-        }
-    }
-    // Initialize by showing the first div
-    showDiv(currentDiv);
-    document.getElementById("nextBtn").addEventListener("click", showNextDiv);
-    document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
-</script>
-
 <!-- Filters working -->
 <script>
 
     function clearFilter() {
         // Clear the selected options in all the dropdowns
-        document.getElementById('SD').selectedIndex = -1;
         document.getElementById('Tiers').selectedIndex = -1;
         document.getElementById('Stores').selectedIndex = -1;
         document.getElementById('Market').selectedIndex = -1;
-        document.getElementById('MULMkt').selectedIndex = -1;
         document.getElementById('MULMngr').selectedIndex = -1;
         document.getElementById('TM').selectedIndex = -1;
 
@@ -5949,11 +5804,9 @@
 
         ////////////////////////////////
         // Restore the all dropdown to its original state
-        resetSDDropdown();
         resetTIERSDropdown();
         resetStoresDropdown();
         resetMarketDropdown();
-        resetmMarketDropdown();
         resetmmmDropdown();
         resetTMDropdown();
 
@@ -5981,7 +5834,8 @@
         $.fn.dataTable.ext.search.pop();
     }
     // Bind the clear filter function to the button
-    document.getElementById('clearfilter').addEventListener('click', clearFilter);
+    document.getElementById('clearfilterID').addEventListener('click', clearFilter);
+
     ////////////////Reset ALL DDL ///////////////////////
 
     function resetTMDropdown() {
@@ -6065,47 +5919,6 @@
         }
 
         MARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
-    }
-    function resetmMarketDropdown() {
-        var mMARKETSelect = document.getElementById('MULMkt');
-        mMARKETSelect.innerHTML = '';  // Clear all existing options
-
-        if (mmktList.length > 0) {
-
-            // Repopulate mMARKET dropdown with the options from mMarketList array
-            mmktList.forEach(function (item) {
-                var option = document.createElement('option');
-                option.value = item.Value;
-                option.text = item.Text;
-
-                // Apply custom styles to the option
-                option.style.backgroundColor = '#3A75D0';
-                option.style.color = 'white';
-                option.style.borderRadius = '6px';
-                option.style.marginBottom = '5px';
-                option.style.fontSize = '10px';
-                option.style.textAlign = 'center';
-
-                mMARKETSelect.add(option);
-            });
-        } else {
-            // Add a "No mMARKET available" option if necessary
-            var noOption = document.createElement('option');
-            noOption.disabled = true;
-            noOption.text = 'No Multi MARKET available';
-
-            // Apply custom styles to the "No Multi MARKET" option
-            noOption.style.backgroundColor = 'lightblue';
-            noOption.style.color = 'black';
-            noOption.style.borderRadius = '7px';
-            noOption.style.padding = '5px 0';
-            noOption.style.marginBottom = '8px';
-            nooption.style.fontSize = '12px';
-
-            mMARKETSelect.add(noOption);
-        }
-
-        mMARKETSelect.disabled = false;  // Ensure Multi MARKET dropdown is enabled after clearing filters
     }
     function resetmmmDropdown() {
         var mmMARKETSelect = document.getElementById('MULMngr');
@@ -6230,46 +6043,6 @@
 
         TIERSSelect.disabled = false;  // Ensure TIERS dropdown is enabled after clearing filters
     }
-    function resetSDDropdown() {
-        var sdSelect = document.getElementById('SD');
-        sdSelect.innerHTML = '';  // Clear all existing options
-
-        if (sdList.length > 0) {
-            // Repopulate Sd dropdown with the options from sdList array
-            sdList.forEach(function (item) {
-                var option = document.createElement('option');
-                option.value = item.Value;
-                option.text = item.Text;
-
-                // Apply custom styles to the option
-                option.style.backgroundColor = '#3A75D0';
-                option.style.color = 'white';
-                option.style.borderRadius = '6px';
-                option.style.marginBottom = '5px';
-                option.style.fontSize = '10px';
-                option.style.textAlign = 'center';
-
-                sdSelect.add(option);
-            });
-        } else {
-            // Add a "No Sd available" option if necessary
-            var noOption = document.createElement('option');
-            noOption.disabled = true;
-            noOption.text = 'No Sd available';
-
-            // Apply custom styles to the "No Sd" option
-            noOption.style.backgroundColor = 'lightblue';
-            noOption.style.color = 'black';
-            noOption.style.borderRadius = '7px';
-            noOption.style.padding = '5px 0';
-            noOption.style.marginBottom = '8px';
-            nooption.style.fontSize = '12px';
-
-            sdSelect.add(noOption);
-        }
-
-        sdSelect.disabled = false;  // Ensure Sd dropdown is enabled after clearing filters
-    }
 
     ////////////////////////////////////////////////////////
 
@@ -6346,23 +6119,16 @@
 
         //TM
 
-        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmktAlreadySelected = document.getElementById('MULMkt');
-        var mmmAlreadySelected = document.getElementById('MULMngr');
 
         //Fill TM and Others
 
         TMfilterTMOptions(selectedValues);
-        TMfilterMarketOptions(selectedValues);
-        TMfiltermMarketOptions(selectedValues);
+        TMfilterMarketOptions(selectedValues);        
         TMfiltermmmOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
-        TMfilterSDOptions(selectedValues);
-
-        sdAlreadySelected.disabled = true;
+        
         tmAlreadySelected.disabled = true;
 
     }
@@ -6464,55 +6230,6 @@
                     option.value = MarketValue;
                     option.text = MarketValue;
                     MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function TMfiltermMarketOptions(selectedValues) {
-        var mMarketSelect = document.getElementById('MULMkt');
-        var TMSelect = document.getElementById('TM');
-
-        // Clear the Market dropdown
-        mMarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
-
-        // Collect all unique Market values from the filtered rows
-        var availablemMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var mMarketValue = row.getAttribute('data-mmkt');
-            if (mMarketValue) {
-                availablemMarket.add(mMarketValue);
-            }
-        });
-
-
-        if (selectedValues.length > 0) {
-
-            //TMSelect.disabled = true;
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availablemMarket.forEach(mMarketValue => {
-                var option = document.createElement('option');
-                option.value = mMarketValue;
-                option.text = mMarketValue;
-                /*option.style.color = 'grey';  */// Highlight in red (optional)
-                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                mMarketSelect.add(option);
-            });
-        } else {
-
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var mMarketValue = row.getAttribute('data-mmkt');
-                if (mMarketValue) {
-                    var option = document.createElement('option');
-                    option.value = mMarketValue;
-                    option.text = mMarketValue;
-                    mMarketSelect.add(option);
                 }
             });
         }
@@ -6664,57 +6381,6 @@
             });
         }
     }
-    function TMfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tm')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
-
     ////////////////////////////////////////////////////////
 
     function MarketFilter() {
@@ -6791,38 +6457,32 @@
         //Hierarchy Now handle disabling and filtering the others dropdowns
 
         //Market
-        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
-        var mmktAlreadySelected = document.getElementById('MULMkt');
         var mmmAlreadySelected = document.getElementById('MULMngr');
 
         if (tmAlreadySelected.disabled) {
 
-            MKTfilterMarketOptions(selectedValues);
-            MKTfiltermMarketOptions(selectedValues);
+            MKTfilterMarketOptions(selectedValues);            
             MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             mktAlreadySelected.disabled = true;
 
         }
         else {
 
             MKTfilterTMOptions(selectedValues);
-            MKTfilterMarketOptions(selectedValues);
-            MKTfiltermMarketOptions(selectedValues);
+            MKTfilterMarketOptions(selectedValues);            
             MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
-            MKTfilterStoresOptions(selectedValues);
-            MKTfilterSDOptions(selectedValues);
+            MKTfilterStoresOptions(selectedValues);            
 
-            sdAlreadySelected.disabled = true;
+            
             tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;            
             mmmAlreadySelected.disabled = true;
         }
 
@@ -6917,55 +6577,6 @@
             var allRows = document.querySelectorAll('#tbl tbody tr');
             allRows.forEach(row => {
                 var MarketValue = row.getAttribute('data-mkt');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = MarketValue;
-                    option.text = MarketValue;
-                    MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function MKTfiltermMarketOptions(selectedValues) {
-        var MarketSelect = document.getElementById('MULMkt');
-        // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
-
-        // Collect all unique Market values from the filtered rows
-        var availableMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var MarketValue = row.getAttribute('data-mmkt');
-            if (MarketValue) {
-                availableMarket.add(MarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availableMarket.forEach(MarketValue => {
-                var option = document.createElement('option');
-                option.value = MarketValue;
-                option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                option.style.fontSize = '10px';
-                MarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            // MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var MarketValue = row.getAttribute('data-mmkt');
                 if (MarketValue) {
                     var option = document.createElement('option');
                     option.value = MarketValue;
@@ -7122,527 +6733,8 @@
             });
         }
     }
-    function MKTfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mkt')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
     //////////////////////////////////////////////////////
-
-    function mMarketFilter() {
-        // Optional: If you want to add the text search functionality too, you can implement it here
-        var input = document.getElementById('textSearchMULMkt').value.toUpperCase();
-        var rows = document.querySelectorAll('#tbl tbody tr');
-
-        rows.forEach(row => {
-            var mmktValue = row.getAttribute('data-mmkt');
-            if (mmktValue.toUpperCase().indexOf(input) > -1 || input === '') {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    }
-    ////////////////Market Hierarchy/////////////////////////
-    function filtermMarketData() {
-
-        var selectedValues = Array.from(document.getElementById('MULMkt').selectedOptions).map(option => option.value);
-        var rows = document.querySelectorAll('#tbl tbody tr');
-
-        rows.forEach(row => {
-            var mmValue = row.getAttribute('data-mmkt');
-
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';
-
-            }
-
-            // Check if this row is the "Grand Total" row
-            if (row.classList.contains('total_data')) {
-                row.style.display = '';
-            } else if (selectedValues.length === 0 || selectedValues.includes(mmValue)) {
-                row.style.display = '';
-
-            } else {
-                row.style.display = 'none';
-            }
-        });
-
-        var input = document.getElementById('textSearchMULMkt').value.toUpperCase();
-
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
-
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        // $('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //mMarket
-        var sdAlreadySelected = document.getElementById('SD');
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmktAlreadySelected = document.getElementById('MULMkt');
-
-        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-
-            mMKTfiltermMarketOptions(selectedValues);
-            mMKTfiltermmmOptions(selectedValues);
-            mMKTfilterTiersOptions(selectedValues);
-            mMKTfilterStoresOptions(selectedValues);
-
-            //sdAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
-
-        }
-        else if (tmAlreadySelected.disabled) {
-
-            mMKTfilterMarketOptions(selectedValues);
-            mMKTfiltermMarketOptions(selectedValues);
-            mMKTfiltermmmOptions(selectedValues);
-            mMKTfilterTiersOptions(selectedValues);
-            mMKTfilterStoresOptions(selectedValues);
-
-            //sdAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
-
-        } else if (mktAlreadySelected.disabled) {
-
-            mMKTfilterTMOptions(selectedValues);
-            mMKTfiltermMarketOptions(selectedValues);
-            mMKTfiltermmmOptions(selectedValues);
-            mMKTfilterTiersOptions(selectedValues);
-            mMKTfilterStoresOptions(selectedValues);
-
-            //sdAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
-
-        }
-        else {
-
-            mMKTfilterTMOptions(selectedValues);
-            mMKTfilterMarketOptions(selectedValues);
-            mMKTfiltermMarketOptions(selectedValues);
-            mMKTfiltermmmOptions(selectedValues);
-            mMKTfilterTiersOptions(selectedValues);
-            mMKTfilterStoresOptions(selectedValues);
-            mMKTfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
-        }
-
-    }
-
-    function mMKTfilterTMOptions(selectedValues) {
-        var TMSelect = document.getElementById('TM');
-        // Clear the TM dropdown
-        TMSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique TM values from the filtered rows
-        var availableTM = new Set();
-        filteredRows.forEach(row => {
-
-            var TMValue = row.getAttribute('data-tm');
-            if (TMValue) {
-                availableTM.add(TMValue);
-            }
-        });
-
-        // If any SD is selected, disable the TM dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            //TMSelect.disabled = true;
-
-            // Populate the TM dropdown with only the TM from filtered rows
-            availableTM.forEach(TMValue => {
-                var option = document.createElement('option');
-                option.value = TMValue;
-                option.text = TMValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                TMSelect.add(option);
-            });
-        } else {
-
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var TMValue = row.getAttribute('data-tm');
-                if (TMValue) {
-                    var option = document.createElement('option');
-                    option.value = TMValue;
-                    option.text = TMValue;
-                    TMSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfilterMarketOptions(selectedValues) {
-        var MarketSelect = document.getElementById('Market');
-        // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique Market values from the filtered rows
-        var availableMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var MarketValue = row.getAttribute('data-mkt');
-            if (MarketValue) {
-                availableMarket.add(MarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availableMarket.forEach(MarketValue => {
-                var option = document.createElement('option');
-                option.value = MarketValue;
-                option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                option.style.fontSize = '10px';
-                MarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            // MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var MarketValue = row.getAttribute('data-mkt');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = MarketValue;
-                    option.text = MarketValue;
-                    MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfiltermMarketOptions(selectedValues) {
-        var MarketSelect = document.getElementById('MULMkt');
-        // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique Market values from the filtered rows
-        var availableMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var MarketValue = row.getAttribute('data-mmkt');
-            if (MarketValue) {
-                availableMarket.add(MarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availableMarket.forEach(MarketValue => {
-                var option = document.createElement('option');
-                option.value = MarketValue;
-                option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                option.style.fontSize = '10px';
-                MarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            // MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var MarketValue = row.getAttribute('data-mmkt');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = MarketValue;
-                    option.text = MarketValue;
-                    MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfiltermmmOptions(selectedValues) {
-        var MarketSelect = document.getElementById('MULMngr');
-        // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique Market values from the filtered rows
-        var availableMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var MarketValue = row.getAttribute('data-mmm');
-            if (MarketValue) {
-                availableMarket.add(MarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availableMarket.forEach(MarketValue => {
-                var option = document.createElement('option');
-                option.value = MarketValue;
-                option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                option.style.fontSize = '10px';
-                MarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            // MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var MarketValue = row.getAttribute('data-mmm');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = MarketValue;
-                    option.text = MarketValue;
-                    MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfilterTiersOptions(selectedValues) {
-        var tiersSelect = document.getElementById('Tiers');
-        // Clear the tiers dropdown
-        tiersSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique tiers values from the filtered rows
-        var availableTiers = new Set();
-        filteredRows.forEach(row => {
-
-            var tiersValue = row.getAttribute('data-tir');
-            if (tiersValue) {
-                availableTiers.add(tiersValue);
-            }
-        });
-
-        // If any SD is selected, disable the tiers dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*tiersSelect.disabled = true; */ // Keep the dropdown disabled if required
-
-            // Populate the tiers dropdown with only the tiers from filtered rows
-            availableTiers.forEach(tiersValue => {
-                var option = document.createElement('option');
-                option.value = tiersValue;
-                option.text = tiersValue;
-                /* option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                tiersSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the tiers dropdown and reset all options
-            //tiersSelect.disabled = false;
-
-            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var tiersValue = row.getAttribute('data-tir');
-                if (tiersValue) {
-                    var option = document.createElement('option');
-                    option.value = tiersValue;
-                    option.text = tiersValue;
-                    tiersSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfilterStoresOptions(selectedValues) {
-        var StoresSelect = document.getElementById('Stores');
-        // Clear the Stores dropdown
-        StoresSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique Stores values from the filtered rows
-        var availableStores = new Set();
-        filteredRows.forEach(row => {
-
-            var StoresValue = row.getAttribute('data-store');
-            if (StoresValue) {
-                availableStores.add(StoresValue);
-            }
-        });
-
-        // If any SD is selected, disable the Stores dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
-
-            // Populate the Stores dropdown with only the Stores from filtered rows
-            availableStores.forEach(StoresValue => {
-                var option = document.createElement('option');
-                option.value = StoresValue;
-                option.text = StoresValue;
-                /*option.style.color = 'grey';*/  // Highlight in red (optional)
-                option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                StoresSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Stores dropdown and reset all options
-            //StoresSelect.disabled = false;
-
-            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var StoresValue = row.getAttribute('data-store');
-                if (StoresValue) {
-                    var option = document.createElement('option');
-                    option.value = StoresValue;
-                    option.text = StoresValue;
-                    StoresSelect.add(option);
-                }
-            });
-        }
-    }
-    function mMKTfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmkt')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
-    //////////////////////////////////////////////////////
-
+    
     function mmmFilter() {
         // Optional: If you want to add the text search functionality too, you can implement it here
         var input = document.getElementById('textSearchMULMngr').value.toUpperCase();
@@ -7659,7 +6751,7 @@
     }
     ////////////////Market Hierarchy/////////////////////////
     function filtermmmData() {
-
+        
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('MULMngr').selectedOptions).map(option => option.value);
 
@@ -7718,56 +6810,40 @@
         //Hierarchy Now handle disabling and filtering the others dropdowns
 
         //mmm
-        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
-        var mmktAlreadySelected = document.getElementById('MULMkt');
         var mmmAlreadySelected = document.getElementById('MULMngr');
+        var storAlreadySelected = document.getElementById('Stores');
+        var tirAlreadySelected = document.getElementById('Tiers');
 
         if (tmAlreadySelected.disabled) {
 
-            //mmmfilterMarketOptions(selectedValues);
-            //mmmfiltermMarketOptions(selectedValues);
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
 
-            mktAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;            
             mmmAlreadySelected.disabled = true;
 
         } else if (mktAlreadySelected.disabled) {
 
-            mmmfiltermMarketOptions(selectedValues);
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
-
-            mmktAlreadySelected.disabled = true;
+                        
             mmmAlreadySelected.disabled = true;
 
-        } else if (mmktAlreadySelected.disabled) {
-
-            mmmfiltermmmOptions(selectedValues);
-            mmmfilterTiersOptions(selectedValues);
-            mmmfilterStoresOptions(selectedValues);
-
-            mmmAlreadySelected.disabled = true;
-        }
+        } 
         else {
 
             mmmfilterTMOptions(selectedValues);
             mmmfilterMarketOptions(selectedValues);
-            mmmfiltermMarketOptions(selectedValues);
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
-            mmmfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
+                        
             tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmktAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;            
             mmmAlreadySelected.disabled = true;
         }
 
@@ -7871,61 +6947,12 @@
             });
         }
     }
-    function mmmfiltermMarketOptions(selectedValues) {
-        var mMarketSelect = document.getElementById('MULMkt');
-        // Clear the Market dropdown
-        mMarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
-
-        // Collect all unique Market values from the filtered rows
-        var availablemMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var mMarketValue = row.getAttribute('data-mmkt');
-            if (mMarketValue) {
-                availablemMarket.add(mMarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            // MarketSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availablemMarket.forEach(mMarketValue => {
-                var option = document.createElement('option');
-                option.value = mMarketValue;
-                option.text = mMarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                option.style.fontSize = '10px';
-                mMarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            // MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var mMarketValue = row.getAttribute('data-mmkt');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = mMarketValue;
-                    option.text = mMarketValue;
-                    mMarketSelect.add(option);
-                }
-            });
-        }
-    }
     function mmmfiltermmmOptions(selectedValues) {
-        var MarketSelect = document.getElementById('Market');
-        var mMarketSelect = document.getElementById('MULMkt');
+        //var MarketSelect = document.getElementById('Market');
         var mmmSelect = document.getElementById('MULMngr');
         // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
+        //MarketSelect.innerHTML = '';
+        mmmSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -7941,10 +6968,10 @@
             }
         });
 
-        // If any SD is selected, disable the Market dropdown but populate with matching options
+         //If any SD is selected, disable the Market dropdown but populate with matching options
+
         if (selectedValues.length > 0) {
-            MarketSelect.disabled = true;
-            mMarketSelect.disabled = true;
+            //MarketSelect.disabled = true;
             mmmSelect.disabled = true;
 
             // Populate the Market dropdown with only the Market from filtered rows
@@ -7952,9 +6979,9 @@
                 var option = document.createElement('option');
                 option.value = MarketValue;
                 option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
+                //option.style.color = 'grey';  // Highlight in red (optional)
                 option.style.fontSize = '10px';
-                MarketSelect.add(option);
+                mmmSelect.add(option);
             });
         } else {
             // If no SD is selected, enable the Market dropdown and reset all options
@@ -7968,10 +6995,12 @@
                     var option = document.createElement('option');
                     option.value = MarketValue;
                     option.text = MarketValue;
-                    MarketSelect.add(option);
+                    mmmSelect.add(option);
                 }
             });
         }
+       
+
     }
     function mmmfilterTiersOptions(selectedValues) {
         var tiersSelect = document.getElementById('Tiers');
@@ -8071,58 +7100,6 @@
             });
         }
     }
-    function mmmfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-mmm')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-
-
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
     //////////////////////////////////////////////////////
 
     function StoresFilter() {
@@ -8203,15 +7180,12 @@
         var mmmAlreadySelected = document.getElementById('MULMngr');
         var storAlreadySelected = document.getElementById('Stores');
         var tirAlreadySelected = document.getElementById('Tiers');
-        var sdAlreadySelected = document.getElementById('SD');
 
         if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
 
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            STRfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
+                        
             storAlreadySelected.disabled = true;
 
         } else if (tmAlreadySelected.disabled) {
@@ -8219,9 +7193,7 @@
             STRfilterMarketOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            STRfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
+                        
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
 
@@ -8230,9 +7202,7 @@
             STRfilterTMOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            STRfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
+                        
             tmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
         }
@@ -8243,15 +7213,13 @@
             STRfiltermmmOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            STRfilterSDOptions(selectedValues);
 
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
             mmmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
-
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            
         }
 
     }
@@ -8503,58 +7471,6 @@
             });
         }
     }
-    function STRfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-Store')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-
-
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
 
 
     //////////////////////////////////////////////////////
@@ -8630,7 +7546,6 @@
         $.fn.dataTable.ext.search.pop();
 
         //Hierarchy Now handle disabling and filtering the others dropdowns
-        var sdAlreadySelected = document.getElementById('SD');
         var tmAlreadySelected = document.getElementById('TM');
         var mktAlreadySelected = document.getElementById('Market');
         var storAlreadySelected = document.getElementById('Stores');
@@ -8640,19 +7555,17 @@
         if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
 
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             tirAlreadySelected.disabled = true;
         }
 
         else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-            //console.log("TM & MKT");
+           
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
         }
@@ -8662,9 +7575,8 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
@@ -8673,9 +7585,8 @@
         else if (storAlreadySelected.disabled) {
 
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             tirAlreadySelected.disabled = true;
         }
         else {
@@ -8684,9 +7595,8 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            
             tmAlreadySelected.disabled = true;
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
@@ -8893,507 +7803,12 @@
             });
         }
     }
-    function TIRfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';
-                option.style.fontSize = '10px';
-                //option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-
-                SDSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
     //////////////////////////////////////////////////////
 
-    function SDFilter() {
-        var input = document.getElementById('textSearchSD').value.toUpperCase();
-
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            // Data contains all the columns in the row as an array
-            var rowContent = data.join(' ').toUpperCase();
-
-            // If the row contains the input, return true to keep the row visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        //$('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-    }
-    ////////////////SD Hierarchy/////////////////////////
-    function filterSDData() {
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('SD').selectedOptions).map(option => option.value);
-
-        // Get all rows in the table
-        var rows = document.querySelectorAll('#tbl tbody tr');
-
-        // Loop through each row and check if the Tiers column matches the selected values
-        rows.forEach(row => {
-            var StoresValue = row.getAttribute('data-sd');
-
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            }
-
-            // Check if this row is the "Grand Total" row
-            if (row.classList.contains('total_data')) {
-                row.style.display = '';  // Always show the "Grand Total" row
-            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-                totalCSAT += csatValue;  // Sum the CSAT value for visible rows
-                totalBHRS += bhrsValue;
-                totalTraffic += trafValue;
-                totalOps += opsValue;
-
-            } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
-            }
-        });
-
-        // Handle the search input filter for DataTables
-        var input = document.getElementById('textSearchSD').value.toUpperCase();
-
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
-
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
-
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        //$('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        // Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //SD
-
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var storAlreadySelected = document.getElementById('Stores');
-        var tirAlreadySelected = document.getElementById('Tiers');
-        var sdAlreadySelected = document.getElementById('SD');
-
-
-        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled && tirAlreadySelected.disabled) {
-
-            SDfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
-        }
-        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
-
-            //SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-
-            SDfilterStoresOptions(selectedValues);
-            SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-        else if (tmAlreadySelected.disabled) {
-
-            SDfilterMarketOptions(selectedValues);
-            SDfilterStoresOptions(selectedValues);
-            SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            mktAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-        else if (mktAlreadySelected.disabled) {
-
-            SDfilterStoresOptions(selectedValues);
-            SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-        else if (storAlreadySelected.disabled) {
-
-            SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-        else if (tirAlreadySelected.disabled) {
-
-            SDfilterSDOptions(selectedValues);
-
-            sdAlreadySelected.disabled = true;
-        }
-        else {
-
-            SDfilterTMOptions(selectedValues);
-            SDfilterMarketOptions(selectedValues);
-            SDfilterStoresOptions(selectedValues);
-            SDfilterTiersOptions(selectedValues);
-            SDfilterSDOptions(selectedValues);
-
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
-        }
-
-    }
-
-    function SDfilterTMOptions(selectedValues) {
-        var TMSelect = document.getElementById('TM');
-        // Clear the TM dropdown
-        TMSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
-
-        // Collect all unique TM values from the filtered rows
-        var availableTM = new Set();
-        filteredRows.forEach(row => {
-
-            var TMValue = row.getAttribute('data-tm');
-            if (TMValue) {
-                availableTM.add(TMValue);
-            }
-        });
-
-        // If any SD is selected, disable the TM dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*TMSelect.disabled = true; */ // Keep the dropdown disabled if required
-
-            // Populate the TM dropdown with only the TM from filtered rows
-            availableTM.forEach(TMValue => {
-                var option = document.createElement('option');
-                option.value = TMValue;
-                option.text = TMValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                //option.style = 'font:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
-
-                TMSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the TM dropdown and reset all options
-            //TMSelect.disabled = false;
-
-            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var TMValue = row.getAttribute('data-tm');
-                if (TMValue) {
-                    var option = document.createElement('option');
-                    option.value = TMValue;
-                    option.text = TMValue;
-                    TMSelect.add(option);
-                }
-            });
-        }
-    }
-    function SDfilterMarketOptions(selectedValues) {
-        var MarketSelect = document.getElementById('Market');
-        // Clear the Market dropdown
-        MarketSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
-
-        // Collect all unique Market values from the filtered rows
-        var availableMarket = new Set();
-        filteredRows.forEach(row => {
-
-            var MarketValue = row.getAttribute('data-mkt');
-            if (MarketValue) {
-                availableMarket.add(MarketValue);
-            }
-        });
-
-        // If any SD is selected, disable the Market dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*MarketSelect.disabled = true;*/  // Keep the dropdown disabled if required
-
-            // Populate the Market dropdown with only the Market from filtered rows
-            availableMarket.forEach(MarketValue => {
-                var option = document.createElement('option');
-                option.value = MarketValue;
-                option.text = MarketValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
-
-                MarketSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Market dropdown and reset all options
-            //MarketSelect.disabled = false;
-
-            // Optionally, repopulate with all Market (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var MarketValue = row.getAttribute('data-mkt');
-                if (MarketValue) {
-                    var option = document.createElement('option');
-                    option.value = MarketValue;
-                    option.text = MarketValue;
-                    MarketSelect.add(option);
-                }
-            });
-        }
-    }
-    function SDfilterStoresOptions(selectedValues) {
-        var StoresSelect = document.getElementById('Stores');
-        // Clear the Stores dropdown
-        StoresSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
-
-        // Collect all unique Stores values from the filtered rows
-        var availableStores = new Set();
-        filteredRows.forEach(row => {
-
-            var StoresValue = row.getAttribute('data-store');
-            if (StoresValue) {
-                availableStores.add(StoresValue);
-            }
-        });
-
-        // If any SD is selected, disable the Stores dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*StoresSelect.disabled = true;*/  // Keep the dropdown disabled if required
-
-            // Populate the Stores dropdown with only the Stores from filtered rows
-            availableStores.forEach(StoresValue => {
-                var option = document.createElement('option');
-                option.value = StoresValue;
-                option.text = StoresValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
-
-                StoresSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the Stores dropdown and reset all options
-            //StoresSelect.disabled = false;
-
-            // Optionally, repopulate with all Stores (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var StoresValue = row.getAttribute('data-store');
-                if (StoresValue) {
-                    var option = document.createElement('option');
-                    option.value = StoresValue;
-                    option.text = StoresValue;
-                    StoresSelect.add(option);
-                }
-            });
-        }
-    }
-    function SDfilterTiersOptions(selectedValues) {
-        var tiersSelect = document.getElementById('Tiers');
-        // Clear the tiers dropdown
-        tiersSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
-
-        // Collect all unique tiers values from the filtered rows
-        var availableTiers = new Set();
-        filteredRows.forEach(row => {
-
-            var tiersValue = row.getAttribute('data-tir');
-            if (tiersValue) {
-                availableTiers.add(tiersValue);
-            }
-        });
-
-        // If any SD is selected, disable the tiers dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            /*tiersSelect.disabled = true;*/  // Keep the dropdown disabled if required
-
-            // Populate the tiers dropdown with only the tiers from filtered rows
-            availableTiers.forEach(tiersValue => {
-                var option = document.createElement('option');
-                option.value = tiersValue;
-                option.text = tiersValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                //option.style = 'font-size:12px; background-color:lightblue; color:black; border-radius: 7px; padding: 5px 0; margin-bottom: 3px;'
-
-                tiersSelect.add(option);
-            });
-        } else {
-            // If no SD is selected, enable the tiers dropdown and reset all options
-            //tiersSelect.disabled = false;
-
-            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var tiersValue = row.getAttribute('data-tir');
-                if (tiersValue) {
-                    var option = document.createElement('option');
-                    option.value = tiersValue;
-                    option.text = tiersValue;
-                    tiersSelect.add(option);
-                }
-            });
-        }
-    }
-    function SDfilterSDOptions(selectedValues) {
-
-        var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
-        SDSelect.innerHTML = '';
-
-        // Get all visible table rows after the SD filter
-        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
-
-        // Collect all unique SD values from the filtered rows
-        var availableSDs = new Set();
-        filteredRows.forEach(row => {
-
-            var SDValue = row.getAttribute('data-sd');
-            if (SDValue) {
-                availableSDs.add(SDValue);
-            }
-        });
-
-        // If any SD is selected, disable the SD dropdown but populate with matching options
-        if (selectedValues.length > 0) {
-            //SDSelect.disabled = true;  // Keep the dropdown disabled if required
-
-            // Populate the SD dropdown with only the SDs from filtered rows
-            availableSDs.forEach(SDValue => {
-                var option = document.createElement('option');
-                option.value = SDValue;
-                option.text = SDValue;
-                option.style.color = 'grey';  // Highlight in red (optional)
-                SDSelect.add(option);
-            });
-
-        } else {
-            // If no SD is selected, enable the SD dropdown and reset all options
-            //SDSelect.disabled = false;
-
-            // Optionally, repopulate with all SDs (e.g., from original ViewBag or data source)
-            var allRows = document.querySelectorAll('#tbl tbody tr');
-            allRows.forEach(row => {
-                var SDValue = row.getAttribute('data-sd');
-                if (SDValue) {
-                    var option = document.createElement('option');
-                    option.value = SDValue;
-                    option.text = SDValue;
-                    SDSelect.add(option);
-                }
-            });
-        }
-    }
-
-    //////////////////////////////////////////////////////////
 </script>
 
 <!--Option List data -->
 <script type="text/javascript">
-    @*var regionList = [];
-
-    @if (ViewBag.RegionList != null && ViewBag.RegionList.Count > 0)
-    {
-        <text>
-        regionList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RegionList));
-        </text>
-    }
-
-    var vpList = [];
-
-    @if (ViewBag.VPList != null && ViewBag.VPList.Count > 0)
-    {
-        <text>
-        vpList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.VPList));
-        </text>
-    }*@
-
-    var sdList = [];
-
-    @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
-    {
-        <text>
-        sdList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
-        </text>
-    }
 
     var tiersList = [];
 
@@ -9422,15 +7837,7 @@
         </text>
     }
 
-    var mmktList = [];
-
-    @if (ViewBag.mMarketList != null && ViewBag.mMarketList.Count > 0)
-    {
-        <text>
-        mmktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.mMarketList));
-        </text>
-    }
-
+    
     var mmmList = [];
 
     @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
@@ -9448,24 +7855,6 @@
         tmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.TMList));
         </text>
     }
-
-    @*var rsmList = [];
-
-    @if (ViewBag.RSMList != null && ViewBag.RSMList.Count > 0)
-    {
-        <text>
-        rsmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RSMList));
-        </text>
-    }
-
-    var roleList = [];
-
-    @if (ViewBag.RoleList != null && ViewBag.RoleList.Count > 0)
-    {
-        <text>
-        roleList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.RoleList));
-        </text>
-    }*@
 
 </script>
 
