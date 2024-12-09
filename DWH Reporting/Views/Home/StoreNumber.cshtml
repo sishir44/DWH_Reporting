@@ -45,7 +45,7 @@
     <title>MTD Reports</title>
 
     <style>
-               
+
         #tbl th[scope=row] {
             left: -1px;
             z-index: 1;
@@ -124,13 +124,13 @@
 
         button#btnaddnote {
             padding: 1px 10px;
-            font-size: 13px;
+            font-size: 10px;
             margin-top: 8px;
         }
 
         button#btndataview {
             padding: 1px 10px;
-            font-size: 13px;
+            font-size: 10px;
             margin-top: 8px;
         }
 
@@ -1570,8 +1570,8 @@
                                 data-modalOPS="@record.TotalOPS">
 
                                 <!-- ADD/VIEW BTN -->
-                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
-                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
+                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
+                                <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                 <!-- Hierarchy -->
                                 <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
