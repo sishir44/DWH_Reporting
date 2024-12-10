@@ -4848,7 +4848,7 @@
         const MAHTrValue = row.getAttribute('data-MAHTr');
         console.log(MAHTrValue);
         // Format the value
-        const formattedMAHTrValue = formatValue(MAHTrValue);
+        const formattedMAHTrValue = formatValueP(MAHTrValue);
         // Set the formatted value in the span's text content
         document.getElementById('modalMAHTr').innerText = formattedMAHTrValue + '%';
 
@@ -4878,7 +4878,7 @@
 
         //document.getElementById('modalPPVGAperTrf').innerText = row.getAttribute('data-PPVGAperTrf');
         const PPVGAperTrfValue = row.getAttribute('data-PPVGAperTrf');
-        const formattedPPVGAperTrfValue = formatValue(PPVGAperTrfValue);
+        const formattedPPVGAperTrfValue = formatValueP(PPVGAperTrfValue);
         document.getElementById('modalPPVGAperTrf').innerText = formattedPPVGAperTrfValue + '%';
 
         //document.getElementById('modalTotalTraffic').innerText = row.getAttribute('data-modalTotalTraffic');
@@ -4888,8 +4888,8 @@
 
         //document.getElementById('modalFiberConversion').innerText = row.getAttribute('data-modalFiberConversion');
         const modalFiberConversionValue = row.getAttribute('data-modalFiberConversion');
-        const formattedmodalFiberConversionValue = formatValue(modalFiberConversion);
-        document.getElementById('modalFiberConversion').innerText = formattedmodalFiberConversionValue;
+        const formattedmodalFiberConversionValue = formatValueP(modalFiberConversionValue);
+        document.getElementById('modalFiberConversion').innerText = formattedmodalFiberConversionValue + '%';
 
         //document.getElementById('modalBroadbandFiberNetOFF').innerText = row.getAttribute('data-modalBroadbandFiberNetOFF');
         const modalBroadbandFiberNetOFFValue = row.getAttribute('data-modalBroadbandFiberNetOFF');
@@ -4908,12 +4908,12 @@
 
         //document.getElementById('modalCSAT').innerText = row.getAttribute('data-modalCSAT');
         const modalCSATValue = row.getAttribute('data-modalCSAT');
-        const formattedmodalCSATValue = formatValue(modalCSATValue);
+        const formattedmodalCSATValue = formatValueP(modalCSATValue);
         document.getElementById('modalCSAT').innerText = formattedmodalCSATValue + '%';
 
         //document.getElementById('modalProtAdvHomeTechPercentage').innerText = row.getAttribute('data-modalProtAdvHomeTechPercentage');
         const modalProtAdvHomeTechPercentageValue = row.getAttribute('data-modalProtAdvHomeTechPercentage');
-        const formattedmodalProtAdvHomeTechPercentageValue = formatValue(modalProtAdvHomeTechPercentageValue);
+        const formattedmodalProtAdvHomeTechPercentageValue = formatValueP(modalProtAdvHomeTechPercentageValue);
         document.getElementById('modalProtAdvHomeTechPercentage').innerText = formattedmodalProtAdvHomeTechPercentageValue + '%';
 
         //document.getElementById('modalBreakEvenNumbers').innerText = row.getAttribute('data-modalBreakEvenNumbers');
@@ -4923,7 +4923,7 @@
 
         //document.getElementById('modalTrendingToBreakEven').innerText = row.getAttribute('data-modalTrendingToBreakEven');
         const modalTrendingToBreakEvenValue = row.getAttribute('data-modalTrendingToBreakEven');
-        const formattedGmodalTrendingToBreakEvenValue = formatValue(modalTrendingToBreakEvenValue);
+        const formattedGmodalTrendingToBreakEvenValue = formatValueP(modalTrendingToBreakEvenValue);
         document.getElementById('modalTrendingToBreakEven').innerText = formattedGmodalTrendingToBreakEvenValue + '%';
 
         //document.getElementById('modalGPWithSpifTrending').innerText = row.getAttribute('data-modalGPWithSpifTrending');
@@ -4933,7 +4933,7 @@
 
         //document.getElementById('modalGPTrendingPercentage').innerText = row.getAttribute('data-modalGPTrendingPercentage');
         const modalGPTrendingPercentageValue = row.getAttribute('data-modalGPTrendingPercentage');
-        const formattedmodalGPTrendingPercentageValue = formatValue(modalGPTrendingPercentageValue);
+        const formattedmodalGPTrendingPercentageValue = formatValueP(modalGPTrendingPercentageValue);
         document.getElementById('modalGPTrendingPercentage').innerText = formattedmodalGPTrendingPercentageValue + '%';
 
         //document.getElementById('modalTotalGPGoals').innerText = row.getAttribute('data-modalTotalGPGoals');
@@ -4943,7 +4943,7 @@
 
         //document.getElementById('modalOPSTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalOPSTrendingToGoalsPercentage');
         const modalOPSTrendingToGoalsPercentageValue = row.getAttribute('data-modalOPSTrendingToGoalsPercentage');
-        const formattedmodalOPSTrendingToGoalsPercentageValue = formatValue(modalOPSTrendingToGoalsPercentageValue);
+        const formattedmodalOPSTrendingToGoalsPercentageValue = formatValueP(modalOPSTrendingToGoalsPercentageValue);
         document.getElementById('modalOPSTrendingToGoalsPercentage').innerText = formattedmodalOPSTrendingToGoalsPercentageValue + '%';
 
         //document.getElementById('modalTotalOPSGoals').innerText = row.getAttribute('data-modalTotalOPSGoals');
@@ -4958,7 +4958,7 @@
 
         //document.getElementById('modalUpgradeTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalUpgradeTrendingToGoalsPercentage');
         const modalUpgradeTrendingToGoalsPercentageValue = row.getAttribute('data-modalUpgradeTrendingToGoalsPercentage');
-        const formattedmodalUpgradeTrendingToGoalsPercentageValue = formatValue(modalUpgradeTrendingToGoalsPercentageValue);
+        const formattedmodalUpgradeTrendingToGoalsPercentageValue = formatValueP(modalUpgradeTrendingToGoalsPercentageValue);
         document.getElementById('modalUpgradeTrendingToGoalsPercentage').innerText = formattedmodalUpgradeTrendingToGoalsPercentageValue + '%';
 
         //document.getElementById('modalMTDUpgradesGoals').innerText = row.getAttribute('data-modalMTDUpgradesGoals');
@@ -4973,8 +4973,8 @@
 
         //document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = row.getAttribute('data-modalTWCDevicesTrendToGoalPercentage');
         const modalTWCDevicesTrendToGoalPercentageValue = row.getAttribute('data-modalTWCDevicesTrendToGoalPercentage');
-        const formattedmodalTWCDevicesTrendToGoalPercentageValue = formatValue(modalTWCDevicesTrendToGoalPercentageValue);
-        document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = formattedmodalTWCDevicesTrendToGoalPercentageValue;
+        const formattedmodalTWCDevicesTrendToGoalPercentageValue = formatValueP(modalTWCDevicesTrendToGoalPercentageValue);
+        document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = formattedmodalTWCDevicesTrendToGoalPercentageValue + '%';
 
         //document.getElementById('modalTWCDevicesQtyGoals').innerText = row.getAttribute('data-modalTWCDevicesQtyGoals');
         const modalTWCDevicesQtyGoalsValue = row.getAttribute('data-modalTWCDevicesQtyGoals');
@@ -4988,12 +4988,12 @@
 
         //document.getElementById('modalAIABusinessConversion').innerText = row.getAttribute('data-modalAIABusinessConversion');
         const modalAIABusinessConversionValue = row.getAttribute('data-modalAIABusinessConversion');
-        const formattedmodalAIABusinessConversionValue = formatValue(modalAIABusinessConversionValue);
+        const formattedmodalAIABusinessConversionValue = formatValueP(modalAIABusinessConversionValue);
         document.getElementById('modalAIABusinessConversion').innerText = formattedmodalAIABusinessConversionValue;
 
         //document.getElementById('modalAIAConsumerConversion').innerText = row.getAttribute('data-modalAIAConsumerConversion');
         const modalAIAConsumerConversionValue = row.getAttribute('data-modalAIAConsumerConversion');
-        const formattedmodalAIAConsumerConversionValue = formatValue(modalAIAConsumerConversionValue);
+        const formattedmodalAIAConsumerConversionValue = formatValueP(modalAIAConsumerConversionValue);
         document.getElementById('modalAIAConsumerConversion').innerText = formattedmodalAIAConsumerConversionValue;
 
         //document.getElementById('modalAIAGreenCheckConsumer').innerText = row.getAttribute('data-modalAIAGreenCheckConsumer');
@@ -5018,8 +5018,8 @@
 
         //document.getElementById('modalOPSPerTrafficPercentage').innerText = row.getAttribute('data-modalOPSPerTrafficPercentage');
         const modalOPSPerTrafficPercentageValue = row.getAttribute('data-modalOPSPerTrafficPercentage');
-        const formattedmodalOPSPerTrafficPercentageValue = formatValue(modalOPSPerTrafficPercentageValue);
-        document.getElementById('modalOPSPerTrafficPercentage').innerText = formattedmodalOPSPerTrafficPercentageValue;
+        const formattedmodalOPSPerTrafficPercentageValue = formatValueP(modalOPSPerTrafficPercentageValue);
+        document.getElementById('modalOPSPerTrafficPercentage').innerText = formattedmodalOPSPerTrafficPercentageValue + '%';
 
         //document.getElementById('modalCRUAchMTD').innerText = row.getAttribute('data-modalCRUAchMTD');
         const modalCRUAchMTDValue = row.getAttribute('data-modalCRUAchMTD');
@@ -5359,7 +5359,7 @@
 
         //document.getElementById('modalBBFTrPer').innerText = row.getAttribute('data-modalBBFTrPer');
         const modalBBFTrPerValue = row.getAttribute('data-modalBBFTrPer');
-        const formattedmodalBBFTrPerValue = formatValue(modalBBFTrPerValue);
+        const formattedmodalBBFTrPerValue = formatValueP(modalBBFTrPerValue);
         document.getElementById('modalBBFTrPer').innerText = formattedmodalBBFTrPerValue + '%';
 
         //document.getElementById('modalBBL300QI').innerText = row.getAttribute('data-modalBBL300QI');
@@ -5439,8 +5439,8 @@
 
         //document.getElementById('modalPVTrPer').innerText = row.getAttribute('data-modalPVTrPer');
         const modalPVTrPerValue = row.getAttribute('data-modalPVTrPer');
-        const formattedmodalPVTrPerValue = formatValue(modalPVTrPerValue);
-        document.getElementById('modalPVTrPer').innerText = formattedmodalPVTrPerValue;
+        const formattedmodalPVTrPerValue = formatValueP(modalPVTrPerValue);
+        document.getElementById('modalPVTrPer').innerText = formattedmodalPVTrPerValue + '%';
 
         //document.getElementById('modalPVGP').innerText = row.getAttribute('data-modalPVGP');
         const modalPVGPValue = row.getAttribute('data-modalPVGP');
@@ -5474,8 +5474,8 @@
 
         //document.getElementById('modalETrGPer').innerText = row.getAttribute('data-modalETrGPer');
         const modalETrGPerValue = row.getAttribute('data-modalETrGPer');
-        const formattedmodalETrGPerValue = formatValue(modalETrGPerValue);
-        document.getElementById('modalETrGPer').innerText = formattedmodalETrGPerValue;
+        const formattedmodalETrGPerValue = formatValueP(modalETrGPerValue);
+        document.getElementById('modalETrGPer').innerText = formattedmodalETrGPerValue + '%';
 
         //document.getElementById('modalTWCDQTY').innerText = row.getAttribute('data-modalTWCDQTY');
         const modalTWCDQTYValue = row.getAttribute('data-modalTWCDQTY');
@@ -5569,7 +5569,7 @@
 
         //document.getElementById('modalTPPer').innerText = row.getAttribute('data-modalTPPer');
         const modalTPPerValue = row.getAttribute('data-modalTPPer');
-        const formattedmodalTPPerValue = formatValue(modalTPPerValue);
+        const formattedmodalTPPerValue = formatValueP(modalTPPerValue);
         document.getElementById('modalTPPer').innerText = formattedmodalTPPerValue + '%';
 
         //document.getElementById('modalPADV1').innerText = row.getAttribute('data-modalPADV1');
@@ -5614,53 +5614,13 @@
 
         //document.getElementById('modalGACloseRT').innerText = row.getAttribute('data-modalGACloseRT');
         const modalGACloseRTValue = row.getAttribute('data-modalGACloseRT');
-        const formattedmodalGACloseRTValue = formatValue(modalGACloseRTValue);
+        const formattedmodalGACloseRTValue = formatValueP(modalGACloseRTValue);
         document.getElementById('modalGACloseRT').innerText = formattedmodalGACloseRTValue;
 
         //document.getElementById('modalHTP').innerText = row.getAttribute('data-modalHTP');
         const modalHTPValue = row.getAttribute('data-modalHTP');
         const formattedmodalHTPValue = formatValue(modalHTPValue);
         document.getElementById('modalHTP').innerText = formattedmodalHTPValue;
-
-        //document.getElementById('modalOPS').innerText = row.getAttribute('data-modalOPS');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalTraffic').innerText = row.getAttribute('data-modalTraffic');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalBhrs').innerText = row.getAttribute('data-modalBhrs');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalCsat').innerText = row.getAttribute('data-modalCsat');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalVP').innerText = row.getAttribute('data-modalVP');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalRegion').innerText = row.getAttribute('data-modalRegion');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalRSM').innerText = row.getAttribute('data-modalRSM');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-        //document.getElementById('modalRole').innerText = row.getAttribute('data-modalRole');
-        ////const GANetOffValue = row.getAttribute('data-GANetOff');
-        ////const formattedGANetOffValue = formatValue(GANetOffValue);
-        ////document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
 
     }
 
@@ -5757,22 +5717,22 @@
         value = value.replace(/,/g, "");
 
         if (value === null || value === undefined || isNaN(value)) {
+            return "0"; // Default for empty or null values
+        }
+        // Format to 1 decimal place
+        return parseFloat(value).toFixed(0);
+    }
+
+    function formatValueP(value) {
+        // Ensure the value is treated as a string
+        value = value.toString();
+
+        // Remove commas from the value
+        value = value.replace(/,/g, "");
+
+        if (value === null || value === undefined || isNaN(value)) {
             return "0.00"; // Default for empty or null values
         }
-
-        //// Remove the `$` symbol only if it's at the start of the string
-        //if (value.startsWith("$")) {
-        //    value = value.substring(1); // Remove the first character
-        //}
-
-        //// Remove any other unwanted symbols like `%` using regex
-        //value = value.replace(/[^0-9.-]/g, "");
-
-        //// Check if the cleaned value is valid
-        //if (isNaN(value) || value.trim() === "") {
-        //    return "0.00"; // Default for invalid values
-        //}
-
         // Format to 1 decimal place
         return parseFloat(value).toFixed(1);
     }
