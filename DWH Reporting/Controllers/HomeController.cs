@@ -2304,7 +2304,7 @@ namespace DWH_Reporting.Controllers
                 {
                     // Call the insert stored procedure
                     GP_DAL_Functions.spInsertNote(uniqueID, dealerCode, dateKey, Comment, Note, Employee);
-                    message = "Note added successfully.";
+                    message = "Employee Note Inserted successfully.";
                 }
 
                 return Json(new { success = true, message = message });
