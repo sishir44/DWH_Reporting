@@ -1654,7 +1654,7 @@ namespace DWH_Reporting.Models.GpReport
         public string TimeStamp { get; set; }
         public string DateKey { get; set; }
     }
-
+    
     public class Fct_EmployeeNumberAttributesModel
     {
         //Hierarchy Attributes
