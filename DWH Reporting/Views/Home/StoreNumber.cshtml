@@ -6051,7 +6051,7 @@
                         <td>$${response.CRUAchDATADollars || ''}</td>
                         <td>${response.MTDUpgrades || ''}</td>
                         <td>${response.ChargeBack1 || ''}</td>
-                        <td>${response.MTDUpgradesTrending || ''}</td>
+                        <td>${parseFloat(response.MTDUpgradesTrending || 0).toFixed(0)}</td>
                         <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0)}</td>
                         <td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0)}</td>
                         <td>${response.NextUp || ''}</td>
