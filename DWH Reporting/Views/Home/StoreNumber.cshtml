@@ -1849,7 +1849,7 @@
                                                 @(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.FiberGreenCheck)).ToString())
                                             </td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CSAT)))%</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.CSAT)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
                                             <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
