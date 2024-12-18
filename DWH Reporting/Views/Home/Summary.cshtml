@@ -777,27 +777,27 @@
                                     <td>Monthly<br>Achived Hours<br>Trending % </td>
                                     <td>Weekly<br>Budgeted<br>HRS</td>
                                     <td>GROSS ADDS<br>Trend%<br> To Goal</td>
-                                    <td>GROSS ADDS<br> Goals</td>
+                                    <td>GROSS<br>ADDS<br> Goals</td>
                                     <td>GROSS<br>ADDS</td>
-                                    <td>GROSS<br>ADDS Net<br> OFF </td>
+                                    <td>GROSS<br>ADDS<br>Net<br> OFF </td>
                                     <td>Total<br> Traffic</td>
-                                    <td>PPVGA per<br>Traffic%</td>
+                                    <td>PPVGA<br>per<br>Traffic%</td>
                                     <td>Fiber<br> Conversion</td>
                                     <td>Broadband<br>+ Fiber Net<br>OFF</td>
                                     <td>Fiber<br>Green<br> Check</td>
                                     <td>APO</td>
                                     <td>CSAT</td>
-                                    <td>ProtAdv &<br>HomeTech%</td>
+                                    <td>ProtAdv &<br>HomeTech %</td>
                                     <td>BreakEven<br> Numbers</td>
                                     <td>$GP - With<br> Spif Trending</td>
                                     <td>Total $GP<br> Goals</td>
                                     <td>OPS<br>Trending to<br> Goals % </td>
-                                    <td>TOTAL<br> OPS Goals</td>
+                                    <td>TOTAL<br>OPS<br>Goals</td>
                                     <td>TOTAL<br> OPS</td>
                                     <td>Upgrade<br>Trending to<br>Goals %</td>
-                                    <td>MTD UPGRADES<br> Goals</td>
+                                    <td>MTD<br>UPGRADES<br>Goals</td>
                                     <td>MTD<br>UPGRADES<br>Net OFF</td>
-                                    <td>T,W,C Devices Trend<br> to Goal %</td>
+                                    <td>T,W,C<br>Devices<br>Trend<br>to Goal %</td>
                                     <td>T,W,C<br>Devices<br> QTY Goals </td>
                                     <td>T,W,C<br>Devices<br> QTY Net<br> OFF</td>
                                     <td>AIA<br> Business<br> Conversion</td>
@@ -867,7 +867,7 @@
                                 foreach (var record2 in records_summaryTotal)
                                 {
                                     //76 col
-                            <tr id ="loadedToalRow" class="total_data">
+                            <tr id = "loadedToalRow" class="total_data">
                                 <td></td>
                                 <td>Grand Total</td>
                                 <td></td>
@@ -1426,6 +1426,7 @@
         },
         success: function (response) {
             $('#tbl tbody').find('#loadedToalRow').remove();
+            $('#tbl tbody').find('.filtered_data').remove();
             console.log("RESPONSE: " + response);
             var newRow = `
 <tr class="filtered_data">
@@ -1571,6 +1572,7 @@
         //$('#tbl').draw();
         // Remove the custom search after use to avoid stacking filters
         $.fn.dataTable.ext.search.pop();
+        loadGTotalByFilter();
     }
 
     // Bind the clear filter function to the button
@@ -1753,8 +1755,8 @@
         TIERSSelect.disabled = false;  // Ensure TIERS dropdown is enabled after clearing filters
     }
     function resetSDDropdown() {
-        var sdSelect = document.getElementById('SD');
-        sdSelect.innerHTML = '';  // Clear all existing options
+       // var sdSelect = document.getElementById('SD');
+        //sdSelect.innerHTML = '';  // Clear all existing options
 
         if (sdList.length > 0) {
             // Repopulate Sd dropdown with the options from sdList array
@@ -1773,7 +1775,7 @@
                 option.style.textAlign = 'center';
 
 
-                sdSelect.add(option);
+               // sdSelect.add(option);
             });
         } else {
             // Add a "No Sd available" option if necessary
@@ -1789,10 +1791,10 @@
             noOption.style.marginBottom = '8px';
             nooption.style.fontSize = '12px';
 
-            sdSelect.add(noOption);
+            //sdSelect.add(noOption);
         }
 
-        sdSelect.disabled = false;  // Ensure Sd dropdown is enabled after clearing filters
+        //sdSelect.disabled = false;  // Ensure Sd dropdown is enabled after clearing filters
     }
     ////////////////////////////////////////////////////////
 
@@ -2057,9 +2059,9 @@
         }
     }
     function TMfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
+        //var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
-        SDSelect.innerHTML = '';
+        //SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -2086,7 +2088,7 @@
                 option.text = SDValue;
                 /* option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                SDSelect.add(option);
+                //SDSelect.add(option);
             });
         } else {
             // If no SD is selected, enable the SD dropdown and reset all options
@@ -2100,7 +2102,7 @@
                     var option = document.createElement('option');
                     option.value = SDValue;
                     option.text = SDValue;
-                    SDSelect.add(option);
+                    //SDSelect.add(option);
                 }
             });
         }
@@ -2408,9 +2410,9 @@
     }
 
     function MKTfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
+        //var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
-        SDSelect.innerHTML = '';
+        //SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -2437,7 +2439,7 @@
                 option.text = SDValue;
                 //option.style.color = 'grey';
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
-                SDSelect.add(option);
+                //SDSelect.add(option);
             });
         } else {
             // If no SD is selected, enable the SD dropdown and reset all options
@@ -2451,7 +2453,7 @@
                     var option = document.createElement('option');
                     option.value = SDValue;
                     option.text = SDValue;
-                    SDSelect.add(option);
+                    //SDSelect.add(option);
                 }
             });
         }
@@ -2576,7 +2578,7 @@
             storAlreadySelected.disabled = true;
 
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
             $('tr.filter_data').remove();
             loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, storAlreadySelected.innerText);
         }
@@ -2785,9 +2787,9 @@
     }
 
     function STRfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
+        //var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
-        SDSelect.innerHTML = '';
+        //SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -2817,7 +2819,7 @@
                 option.style = ' font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
 
-                SDSelect.add(option);
+                //SDSelect.add(option);
             });
         } else {
             // If no SD is selected, enable the SD dropdown and reset all options
@@ -2831,7 +2833,7 @@
                     var option = document.createElement('option');
                     option.value = SDValue;
                     option.text = SDValue;
-                    SDSelect.add(option);
+                    //SDSelect.add(option);
                 }
             });
         }
@@ -3165,9 +3167,9 @@
     }
 
     function TIRfilterSDOptions(selectedValues) {
-        var SDSelect = document.getElementById('SD');
+        //var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
-        SDSelect.innerHTML = '';
+        //SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -3195,7 +3197,7 @@
                 /*option.style.color = 'grey'; */
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
 
-                SDSelect.add(option);
+               //SDSelect.add(option);
             });
         } else {
             // If no SD is selected, enable the SD dropdown and reset all options
@@ -3209,7 +3211,7 @@
                     var option = document.createElement('option');
                     option.value = SDValue;
                     option.text = SDValue;
-                    SDSelect.add(option);
+                    //SDSelect.add(option);
                 }
             });
         }
@@ -3297,7 +3299,7 @@
 
             SDfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
 
@@ -3305,7 +3307,7 @@
             SDfilterSDOptions(selectedValues);
 
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
 
@@ -3315,7 +3317,7 @@
 
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (tmAlreadySelected.disabled) {
 
@@ -3327,7 +3329,7 @@
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (mktAlreadySelected.disabled) {
 
@@ -3337,7 +3339,7 @@
 
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (storAlreadySelected.disabled) {
 
@@ -3345,13 +3347,13 @@
             SDfilterSDOptions(selectedValues);
 
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else if (tirAlreadySelected.disabled) {
 
             SDfilterSDOptions(selectedValues);
 
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
         else {
 
@@ -3365,7 +3367,7 @@
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             tirAlreadySelected.disabled = true;
-            sdAlreadySelected.disabled = true;
+            //sdAlreadySelected.disabled = true;
         }
 
         // Set the value of the input button to display the total CSAT
@@ -3588,7 +3590,7 @@
 
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
-        SDSelect.innerHTML = '';
+        //SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
@@ -3615,7 +3617,7 @@
                 option.text = SDValue;
                 option.style.color = 'grey';  // Highlight in red (optional)
                 option.style.fontSize = '10px';
-                SDSelect.add(option);
+                //SDSelect.add(option);
             });
 
         } else {
@@ -3630,7 +3632,7 @@
                     var option = document.createElement('option');
                     option.value = SDValue;
                     option.text = SDValue;
-                    SDSelect.add(option);
+                    //SDSelect.add(option);
                 }
             });
         }
