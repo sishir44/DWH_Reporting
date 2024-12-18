@@ -2835,6 +2835,163 @@ namespace DWH_Reporting.Controllers
             return Json(result); 
         }
 
+        [HttpGet]
+        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
+        {
+
+            ////////////////Get Filter Total
+
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers);
+            List<Fct_StoreSummaryAttributesModel> lisn_tot = new List<Fct_StoreSummaryAttributesModel>();
+
+            foreach (DataRow row in FilterTotal.Rows)
+            {
+                Fct_StoreSummaryAttributesModel modelFT = new Fct_StoreSummaryAttributesModel
+                {
+
+                    GrossAddsTrendToGoal = row["GROSS ADDSTrend% To Goal"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv &HomeTech%"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GPTrending%"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPSTrending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["UpgradeTrending toGoals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA CConversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA GreenCheck"].ToString(),
+                    AIACInternet = row["AIA CInternet"].ToString(),
+                    AIABInternet = row["AIA BInternet"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPSTrending"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per-Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU AchMTD"].ToString(),
+                    FNAchMTD = row["FN AchMTD"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalGPAchievedWithSpif = row["$GP Achieved -With Spif"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS$GP"].ToString(),
+                    FNAchAverageQTD = row["FN AchAverage QTD"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach AverageQTD"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES$GP"].ToString(),
+                    BroadbandGoals = row["BroadbandGoals"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    BroadbandFiber = row["Broadband +Fiber"].ToString(),
+                    BroadbandFiberTrend = row["Broadband + FiberTrend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband +Fiber Trend%"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber(300 MB) QISpiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber(500 MB) QISpiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber(1G) QI Spiff"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    PremVideoGoals = row["Prem VideoGoals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoTrend = row["Prem VideoTrend"].ToString(),
+                    PremVideoTrendPercentage = row["Prem VideoTrend %"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessRevenue = row["Access $Revenue"].ToString(),
+                    TotalProtectionPercentage = row["TotalProtection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    WeeklyBudgetedHRS = row["WeeklyBudgetedHRS"].ToString(),
+                    HomeTechProtect = row["HomeTechProtect"].ToString()
+                };
+
+                lisn_tot.Add(modelFT);
+            }
+
+            ViewData["GetFilterTotal"] = lisn_tot;
+
+            Fct_StoreSummaryAttributesModel result = null;
+
+            if (FilterTotal.Rows.Count > 0)
+            {
+                var row = FilterTotal.Rows[0];
+                result = new Fct_StoreSummaryAttributesModel
+                {
+                    GrossAddsTrendToGoal = row["GROSS ADDSTrend% To Goal"].ToString(),
+                    GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
+                    TotalTraffic = row["Total Traffic"].ToString(),
+                    FiberConversion = row["Fiber Conversion"].ToString(),
+                    FiberGreenCheck = row["Fiber Green Check"].ToString(),
+                    APO = row["APO"].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv &HomeTech%"].ToString(),
+                    BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
+                    GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
+                    GPTrendingPercentage = row["GPTrending%"].ToString(),
+                    TotalGPGoals = row["Total $GP Goals"].ToString(),
+                    OPSTrendingToGoalsPercentage = row["OPSTrending to Goals %"].ToString(),
+                    TotalOPSGoals = row["TOTAL OPS Goals"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    UpgradeTrendingToGoalsPercentage = row["UpgradeTrending toGoals %"].ToString(),
+                    MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    AIABusinessConversion = row["AIA Business Conversion"].ToString(),
+                    AIAConsumerConversion = row["AIA CConversion"].ToString(),
+                    AIAGreenCheckConsumer = row["AIA GreenCheck"].ToString(),
+                    AIACInternet = row["AIA CInternet"].ToString(),
+                    AIABInternet = row["AIA BInternet"].ToString(),
+                    TotalOPSTrending = row["TOTAL OPSTrending"].ToString(),
+                    OPSPerTrafficPercentage = row["OPS Per-Traffic %"].ToString(),
+                    CRUAchMTD = row["CRU AchMTD"].ToString(),
+                    FNAchMTD = row["FN AchMTD"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    TotalGPAchievedWithSpif = row["$GP Achieved -With Spif"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS$GP"].ToString(),
+                    FNAchAverageQTD = row["FN AchAverage QTD"].ToString(),
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
+                    CRUAchAverageQTD = row["CRU Ach AverageQTD"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES$GP"].ToString(),
+                    BroadbandGoals = row["BroadbandGoals"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    BroadbandFiber = row["Broadband +Fiber"].ToString(),
+                    BroadbandFiberTrend = row["Broadband + FiberTrend"].ToString(),
+                    BroadbandFiberTrendPercentage = row["Broadband +Fiber Trend%"].ToString(),
+                    NewFiber300MBQISpiff = row["New Fiber(300 MB) QISpiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New Fiber(500 MB) QISpiff"].ToString(),
+                    NewFiber1GQISpiff = row["New Fiber(1G) QI Spiff"].ToString(),
+                    BroadbandGP = row["Broadband $GP"].ToString(),
+                    PremVideoGoals = row["Prem VideoGoals"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoTrend = row["Prem VideoTrend"].ToString(),
+                    PremVideoTrendPercentage = row["Prem VideoTrend %"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessRevenue = row["Access $Revenue"].ToString(),
+                    TotalProtectionPercentage = row["TotalProtection %"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    WeeklyBudgetedHRS = row["WeeklyBudgetedHRS"].ToString(),
+                    HomeTechProtect = row["HomeTechProtect"].ToString()
+
+                };
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
 
     }
 }
