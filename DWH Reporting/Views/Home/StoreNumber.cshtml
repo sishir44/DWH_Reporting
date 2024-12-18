@@ -3386,7 +3386,7 @@
                                                     if (record.BroadbandFiberTrendPercentage != null && Double.TryParse(record.BroadbandFiberTrendPercentage.ToString(), out BBFibTrPer))
                                                     {
                                                         // If the value can be paqtsed to double, format it
-                                                        BroadbandFiberTrendPercentage = String.Format("{0:N0}", BBFibTrPer);
+                                                        BroadbandFiberTrendPercentage = String.Format("{0:N0}", BBFibTrPer * 100);
                                                     }
                                                     else
                                                     {
