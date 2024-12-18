@@ -1245,19 +1245,22 @@
         var cells = document.querySelectorAll(".Csatval");
         var GATrGoal = document.querySelectorAll(".GATrGoal");
 
-        cells.forEach(function (cell) {
-            // Parse the cell's text content as a float
+        GATrGoal.forEach(function (cell) {
+            
             var value = parseFloat(cell.textContent);
 
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value > 70.0) {
+            if (!isNaN(value) && value > 99.0) {
                 cell.style.backgroundColor = "green";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
 
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value < 60.0) {
-                cell.style.backgroundColor = "yellow";  // Set background color
+            if (!isNaN(value) && value > 70.0 && value < 100.0) {
+                cell.style.backgroundColor = "#FF1493";  // Set background color
+                cell.style.color = "white";  // Set text color
+            }
+            
+            if (!isNaN(value) && value < 70.0) {
+                cell.style.backgroundColor = "#FFA500";  // Set background color
                 cell.style.color = "black";  // Set text color
             }
         });
@@ -1269,14 +1272,19 @@
 
             var value = parseFloat(cell.textContent);
 
-            if (!isNaN(value) && value > 70) {
-                cell.style.backgroundColor = "green";
-                cell.style.color = "white";
+            if (!isNaN(value) && value > 99.0) {
+                cell.style.backgroundColor = "green";  // Set background color
+                cell.style.color = "white";  // Set text color
             }
 
-            if (!isNaN(value) && value < 70) {
-                cell.style.backgroundColor = "yellow";
-                cell.style.color = "black";
+            if (!isNaN(value) && value > 70.0 && value < 100.0) {
+                cell.style.backgroundColor = "#FF1493";  // Set background color
+                cell.style.color = "white";  // Set text color
+            }
+
+            if (!isNaN(value) && value < 70.0) {
+                cell.style.backgroundColor = "#FFA500";  // Set background color
+                cell.style.color = "black";  // Set text color
             }
         });
         ////CSAT70
@@ -1293,7 +1301,7 @@
 
         ////GATrGoal <70%
         
-        var GATrGoal70Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal70Cells = document.querySelectorAll(".csat");
         var GATrGoal70Count = 0;
 
         GATrGoal70Cells.forEach(function (cell) {
@@ -1307,7 +1315,7 @@
         document.getElementById("GATrGoal70").value = GATrGoal70Count;
 
         //GATrGoal >100%
-        var GATrGoal100Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal100Cells = document.querySelectorAll(".csat");
         var GATrGoal100Count = 0;
         
         GATrGoal100Cells.forEach(function (cell) {
@@ -1322,7 +1330,7 @@
 
 
         //GATrGoal >70%
-        var GATrGoal90Cells = document.querySelectorAll(".GATrGoal");
+        var GATrGoal90Cells = document.querySelectorAll(".csat");
         var GATrGoal90Count = 0;
         GATrGoal90Cells.forEach(function (cell) {
             var GATrGoal90Name = cell.textContent.trim().replace('%', ''); // Remove % symbol
