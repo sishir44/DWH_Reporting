@@ -4668,7 +4668,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: dodgerblue; color: white; font-weight:bold; display: flex; justify-content: space-between; align-items: center; width: 100%;">
                         <h5 class="modal-title" style="flex: 1; text-align: left;">Store: <span id="modalStore"></span></h5>
-                        <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Employee Details</h5>
+                        <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Store Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="flex: 1; text-align: right;">
                             <span>&times;</span>
                         </button>
@@ -5996,30 +5996,30 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td>${parseFloat(response.MonthlyAchievedHoursTrendingPercentage || 0).toFixed(1)}%</td>
-                        <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.MonthlyAchievedHoursTrendingPercentage || 0) * 100).toFixed(1)}%</td>
+                        <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0)}</td>
                         <td>${response.GrossAddsNetOFF || ''}</td>
-                        <td>${parseFloat(response.PPVGAPerTrafficPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${response.TotalTraffic || ''}</td>
-                        <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${response.BroadbandFiberNetOFF || ''}</td>
                         <td>${response.FiberGreenCheck || ''}</td>
                         <td>$${parseFloat(response.APO || 0).toFixed(0)}</td>
                         <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
-                        <td>${parseFloat(response.ProtAdvHomeTechPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0)}</td>
                         <td>${parseFloat(response.TrendingToBreakEven || 0).toFixed(1)}%</td>
                         <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0)}</td>
-                        <td>${parseFloat(response.GPTrendingPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0)}</td>
-                        <td>${parseFloat(response.OPSTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat(response.TotalOPSGoals || 0).toFixed(0)}</td>
                         <td>${response.TotalOPS || ''}</td>
                         <td>${parseFloat(response.UpgradeTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
                         <td>${response.MTDUpgradesGoals || ''}</td>
                         <td>${response.MTDUpgradesNetOFF || ''}</td>
-                        <td>${parseFloat(response.TWCDevicesTrendToGoalPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${response.TWCDevicesQtyGoals || ''}</td>
                         <td>${response.TWCDevicesQtyNetOFF || ''}</td>
                         <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
@@ -6096,7 +6096,7 @@
                         <td>${response.ChargeBack8 || ''}</td>
                         <td>${response.BroadbandFiber || ''}</td>
                         <td>${parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)}</td>
-                        <td>${parseFloat(response.BroadbandFiberTrendPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${response.BroadbandLessThen300MBQISpiff || ''}</td>
                         <td>$${response.NewFiber300MBQISpiff || ''}</td>
                         <td>$${response.NewFiber500MBQISpiff || ''}</td>
@@ -6112,7 +6112,7 @@
                         <td>${response.PremVideoNetOFF || ''}</td>
                         <td>${response.ChargeBack9 || ''}</td>
                         <td>${parseFloat(response.PremVideoTrend || 0).toFixed(0)}</td>
-                        <td>${parseFloat(response.PremVideoTrendPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${response.PremVideoGP || ''}</td>
                         <td>$${response.PremVideoSpiff || ''}</td>
                         <td>$${response.PremVideoGPTrending || ''}</td>
@@ -6147,7 +6147,7 @@
                         <td>${response.MonthlyBudgetedHRS || ''}</td>
                         <td>${parseFloat(response.MonthlyAchievedHRS || 0).toFixed(0)}</td>
                         <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(0)}</td>
-                        <td>${parseFloat(response.GACloseRt || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.GACloseRt || 0) * 100).toFixed(1)}%</td>
                         <td>${response.HomeTechProtect || ''}</td>
                     </tr>
                 `;
