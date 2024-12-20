@@ -1971,7 +1971,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ChargeBack9 != null ? record.ChargeBack9.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack9)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrend != null ? record.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoTrend)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoTrendPercentage)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoTrendPercentage)))%</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoSpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGPTrending != null ? record.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGPTrending)))</td>
@@ -3634,14 +3634,14 @@
                         <td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${response.BroadbandFiberNetOFF || ''}</td>
                         <td>${response.FiberGreenCheck || ''}</td>
-                        <td>$${parseFloat(response.APO || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
                         <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.TrendingToBreakEven || 0).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat(response.TotalOPSGoals || 0).toFixed(0)}</td>
                         <td>${response.TotalOPS || ''}</td>
@@ -3660,58 +3660,58 @@
                         <td>${parseFloat(response.OPSPerTrafficPercentage || 0).toFixed(1)}%</td>
                         <td>${response.CRUAchMTD || ''}</td>
                         <td>${response.FNAchMTD || ''}</td>
-                        <td>$${parseFloat(response.GPPerBox || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.GrossAdds || ''}</td>
                         <td>${response.ChargeBack || ''}</td>
                         <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.GrossAddsGPTrending || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>$${parseFloat(response.GrossAddsGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.ARBusinessFNProgramAverageQ2Target || ''}</td>
                         <td>${response.FNAchAverageQTD || ''}</td>
                         <td>${response.RemainingToAchieveFNAverageQ2Target || ''}</td>
                         <td>${parseFloat(response.FNAchTrend || 0).toFixed(0)}</td>
-                        <td>$${response.FNAchDollars || ''}</td>
+                        <td>$${response.FNAchDollars ? parseFloat(response.FNAchDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.ARBusinessCRUProgramAverageQ2Target || ''}</td>
                         <td>${response.CRUAchVoice || ''}</td>
                         <td>${response.CRUAchDATA || ''}</td>
                         <td>${response.CRUAchAverageQTD || ''}</td>
                         <td>${response.RemainingToAchieveCRUAverageQ2Target || ''}</td>
                         <td>${parseFloat(response.CRUAchTrend || 0).toFixed(0)}</td>
-                        <td>$${response.CRUAchVoiceDollars || ''}</td>
-                        <td>$${response.CRUAchDATADollars || ''}</td>
+                        <td>$${response.CRUAchVoiceDollars ? parseFloat(response.CRUAchVoiceDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.CRUAchDATADollars ? parseFloat(response.CRUAchDATADollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.MTDUpgrades || ''}</td>
                         <td>${response.ChargeBack1 || ''}</td>
                         <td>${parseFloat(response.MTDUpgradesTrending || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.NextUp || ''}</td>
-                        <td>$${response.NextUpSpif || ''}</td>
+                        <td>$${response.NextUpSpif ? parseFloat(response.NextUpSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.PremiumActivation || ''}</td>
                         <td>${response.PremiumActivationNetOFF || ''}</td>
                         <td>${response.ChargeBack2 || ''}</td>
-                        <td>$${response.PremiumActivationGP || ''}</td>
+                        <td>$${response.PremiumActivationGP ? parseFloat(response.PremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.ExtraActivation || ''}</td>
                         <td>${response.ExtraActivationNetOFF || ''}</td>
                         <td>${response.ChargeBack3 || ''}</td>
-                        <td>$${response.ExtraActivationGP || ''}</td>
+                        <td>$${response.ExtraActivationGP ? parseFloat(response.ExtraActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.NonExtraNonPremiumActivation || ''}</td>
                         <td>${response.NonExtraNonPremiumActivationNetOFF || ''}</td>
-                        <td>$${response.NonExtraNonPremiumActivationGP || ''}</td>
+                        <td>$${response.NonExtraNonPremiumActivationGP ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.PremiumUpgrade || ''}</td>
                         <td>${response.ChargeBack4 || ''}</td>
                         <td>${response.PremiumUpgradeNetOff || ''}</td>
-                        <td>$${response.PremiumUpgradeGP || ''}</td>
+                        <td>$${response.PremiumUpgradeGP ? parseFloat(response.PremiumUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.ExtraUpgrade || ''}</td>
                         <td>${response.ChargeBack5 || ''}</td>
                         <td>${response.ExtraUpgradeNetOff || ''}</td>
-                        <td>$${response.ExtraUpgradeGP || ''}</td>
+                        <td>$${response.ExtraUpgradeGP ? parseFloat(response.ExtraUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.AIAGoals || ''}</td>
-                        <td>$${response.AIAInternet || ''}</td>
+                        <td>${response.AIAInternet || ''}</td>
                         <td>${response.ChargeBack6 || ''}</td>
                         <td>${response.AIAInternetNetOff || ''}</td>
                         <td>${parseFloat(response.AIATrending || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.AIAInternetGP || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.AIAInternetGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.BroadbandGoals || ''}</td>
                         <td>${response.BroadbandLessThen300MB || ''}</td>
                         <td>${response.NewFiber300MB || ''}</td>
@@ -3726,25 +3726,25 @@
                         <td>${response.BroadbandFiber || ''}</td>
                         <td>${parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)}</td>
                         <td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${response.BroadbandLessThen300MBQISpiff || ''}</td>
-                        <td>$${response.NewFiber300MBQISpiff || ''}</td>
-                        <td>$${response.NewFiber500MBQISpiff || ''}</td>
-                        <td>$${response.NewFiber1GQISpiff || ''}</td>
-                        <td>$${response.FiberUpgradeGP || ''}</td>
-                        <td>$${response.BroadbandGP || ''}</td>
-                        <td>$${response.BroadbandFiberGP || ''}</td>
-                        <td>$${response.BroadbandFiberGPTrending || ''}</td>
+                        <td>$${response.BroadbandLessThen300MBQISpiff ? parseFloat(response.BroadbandLessThen300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.NewFiber300MBQISpiff ? parseFloat(response.NewFiber300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.NewFiber500MBQISpiff ? parseFloat(response.NewFiber500MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.NewFiber1GQISpiff ? parseFloat(response.NewFiber1GQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.FiberUpgradeGP ? parseFloat(response.FiberUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.BroadbandGP ? parseFloat(response.BroadbandGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.BroadbandFiberGP ? parseFloat(response.BroadbandFiberGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.BroadbandFiberGPTrending ? parseFloat(response.BroadbandFiberGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.TurboFeature || ''}</td>
-                        <td>$${response.TurboFeatureGP || ''}</td>
+                        <td>$${response.TurboFeatureGP ? parseFloat(response.TurboFeatureGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.PremVideoGoals || ''}</td>
                         <td>${response.PremVideo || ''}</td>
                         <td>${response.PremVideoNetOFF || ''}</td>
                         <td>${response.ChargeBack9 || ''}</td>
                         <td>${parseFloat(response.PremVideoTrend || 0).toFixed(0)}</td>
                         <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${response.PremVideoGP || ''}</td>
-                        <td>$${response.PremVideoSpiff || ''}</td>
-                        <td>$${response.PremVideoGPTrending || ''}</td>
+                        <td>$${response.PremVideoGP ? parseFloat(response.PremVideoGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.PremVideoSpiff ? parseFloat(response.PremVideoSpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.PremVideoGPTrending ? parseFloat(response.PremVideoGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.EntertainmentGoals || ''}</td>
                         <td>${response.EntertainmentAch || ''}</td>
                         <td>${parseFloat(response.EntertainmentTrending || 0).toFixed(0)}</td>
@@ -3752,25 +3752,25 @@
                         <td>${response.TWCDevicesQty || ''}</td>
                         <td>${response.ChargeBack10 || ''}</td>
                         <td>${parseFloat(response.TWCDevicesQtyTrend || 0).toFixed(0)}</td>
-                        <td>$${response.TWCDevicesDollars || ''}</td>
-                        <td>$${response.ProjectedGeographicSpif || ''}</td>
+                        <td>$${response.TWCDevicesDollars ? parseFloat(response.TWCDevicesDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>$${response.ProjectedGeographicSpif ? parseFloat(response.ProjectedGeographicSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.PrepaidQty || ''}</td>
                         <td>${response.PrepaidToGA || ''}</td>
                         <td>${response.PrepaidNetOFF || ''}</td>
                         <td>${response.ChargeBack11 || ''}</td>
-                        <td>$${response.PrepaidGP|| ''}</td>
+                        <td>$${response.PrepaidGP ? parseFloat(response.PrepaidGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.PrepaidWithAutopay || ''}</td>
-                        <td>$${parseFloat(response.AccessGP || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.AccessGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.AccessQty || ''}</td>
                         <td>${parseFloat(response.AccessQtyTrending || 0).toFixed(0)}</td>
-                        <td>$${parseFloat(response.AccessRevenue || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.AccessRevenue || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.FeaturesQty || ''}</td>
                         <td>${response.FeaturesQtyNetOFF || ''}</td>
                         <td>${response.ChargeBack12 || ''}</td>
                         <td>${parseFloat(response.TotalProtectionPercentage || 0).toFixed(1)}%</td>
                         <td>${response.ProtAdv1	|| ''}</td>
                         <td>${response.ProtAdv4 || ''}</td>
-                        <td>$${parseFloat(response.FeaturesGP || 0).toFixed(0)}</td>
+                        <td>$${parseFloat(response.FeaturesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${response.WeeklyBudgetedHRS || ''}</td>
                         <td>${parseFloat(response.WeeklyEmployeeAveragePerStore || 0).toFixed(0)}</td>
                         <td>${response.MonthlyBudgetedHRS || ''}</td>
