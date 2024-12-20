@@ -50,6 +50,20 @@
     <title>MTD Reports</title>
 
     <style>
+        .optionfilter {
+            background-color: #3A75D0 !important;
+            border-radius: 6px;
+            text-align: center;
+            color: white;
+            margin-bottom: 5px;
+            font-size: 12px;
+        }
+
+        option.optionfilter:hover {
+            background-color: #1E272E !important;
+            color: white;
+            cursor: pointer;
+        }
 
         #tbl th[scope=row] {
             left: -1px;
@@ -758,7 +772,7 @@
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="Above 70%"
                                    value=""
-                                   style="background-color: purple; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
 
                             <label>Less Than 70%</label>
                             <input type="button" name="<70" id="tbeCountDisplay90" class="form-control"
@@ -776,12 +790,12 @@
                             {
                                 foreach (var item in ViewBag.TMList)
                                 {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
                             {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No TM available</option>
+                                <option class="optionfilter" style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No TM available</option>
                             }
                         </select>
                     </div>
@@ -794,12 +808,12 @@
                             {
                                 foreach (var item in ViewBag.MarketList)
                                 {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
                             {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Market available</option>
+                                <option class="optionfilter" style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Market available</option>
                             }
                         </select>
                     </div>
@@ -812,7 +826,7 @@
                             {
                                 foreach (var item in ViewBag.mmmList)
                                 {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;"
                                             value="@item.Value">
                                         @item.Text
                                     </option>
@@ -820,7 +834,7 @@
                             }
                             else
                             {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
+                                <option class="optionfilter" style="font-size:12px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
                             }
                         </select>
                     </div>
@@ -833,12 +847,12 @@
                             {
                                 foreach (var item in ViewBag.StoresList)
                                 {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
                             {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Stores available</option>
+                                <option class="optionfilter" style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No Stores available</option>
                             }
                         </select>
 
@@ -852,12 +866,12 @@
                             {
                                 foreach (var item in ViewBag.tiersList)
                                 {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
                                 }
                             }
                             else
                             {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; " disabled>No Tiers available</option>
+                                <option class="optionfilter" style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px; " disabled>No Tiers available</option>
                             }
                         </select>
                     </div>
@@ -1983,7 +1997,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record.FeaturesQty != null ? record.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQty)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.FeaturesQtyNetOFF != null ? record.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQtyNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ChargeBack12 != null ? record.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack12)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TotalProtectionPercentage)) * 100))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv1)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv4)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.FeaturesGP != null ? record.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesGP)))</td>
@@ -6010,7 +6024,7 @@
             }
 
             if (!isNaN(value) && value > 70.0 && value < 100.0) {
-                cell.style.backgroundColor = "purple"; 
+                cell.style.backgroundColor = "#0046BF"; 
                 cell.style.color = "white"; 
             }
             
@@ -6032,7 +6046,7 @@
             }
 
             if (!isNaN(value) && value > 70.0 && value < 100.0) {
-                cell.style.backgroundColor = "purple";
+                cell.style.backgroundColor = "#0046BF";
                 cell.style.color = "white";
             }
 
@@ -6107,8 +6121,8 @@
             }
             // Check if the value is greater than >70 <100
             if (!isNaN(value) && value > 70.0 && value < 100.0) {
-                cell.style.backgroundColor = "purple";  // Set background color
-                cell.style.color = "black";  // Set text color
+                cell.style.backgroundColor = "#0046BF";  // Set background color
+                cell.style.color = "white";  // Set text color
             }
         });
         var tbeCountDisplay = document.getElementById("tbeCountDisplay");
