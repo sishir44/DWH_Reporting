@@ -2848,8 +2848,10 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreSummaryAttributesModel modelFT = new Fct_StoreSummaryAttributesModel
                 {
-
+                    Monthly_AchivedHoursTrending = row["MonthlyAchived HoursTrending %"].ToString(),
+                    PPVGAPerTraffic = row["PPVGA perTraffic%"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDSTrend% To Goal"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
                     FiberConversion = row["Fiber Conversion"].ToString(),
@@ -2866,6 +2868,7 @@ namespace DWH_Reporting.Controllers
                     TotalOPS = row["TOTAL OPS"].ToString(),
                     UpgradeTrendingToGoalsPercentage = row["UpgradeTrending toGoals %"].ToString(),
                     MTDUpgradesGoals = row["MTD UPGRADES Goals"].ToString(),
+                    MTDUpgradesNetOff = row["MTDUPGRADESNet OFF"].ToString(),
                     AIABusinessConversion = row["AIA Business Conversion"].ToString(),
                     AIAConsumerConversion = row["AIA CConversion"].ToString(),
                     AIAGreenCheckConsumer = row["AIA GreenCheck"].ToString(),
@@ -2877,8 +2880,8 @@ namespace DWH_Reporting.Controllers
                     FNAchMTD = row["FN AchMTD"].ToString(),
                     GPPerBox = row["$GP per BOX"].ToString(),
                     TotalGPAchievedWithSpif = row["$GP Achieved -With Spif"].ToString(),
-                    GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
+                    GrossAddsNetOff = row["GROSS ADDS Net OFF"].ToString(),
                     GrossAddsGP = row["GROSS ADDS$GP"].ToString(),
                     FNAchAverageQTD = row["FN AchAverage QTD"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice"].ToString(),
@@ -2889,6 +2892,7 @@ namespace DWH_Reporting.Controllers
                     NewFiber300MB = row["New Fiber (300MB)"].ToString(),
                     NewFiber500MB = row["New Fiber (500MB)"].ToString(),
                     NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    BroadbandFiberNetOff = row["Broadband +_Fiber Net OFF"].ToString(),
                     BroadbandFiber = row["Broadband +Fiber"].ToString(),
                     BroadbandFiberTrend = row["Broadband + FiberTrend"].ToString(),
                     BroadbandFiberTrendPercentage = row["Broadband +Fiber Trend%"].ToString(),
@@ -2909,7 +2913,21 @@ namespace DWH_Reporting.Controllers
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     ProtAdv4 = row["ProtAdv 4"].ToString(),
                     WeeklyBudgetedHRS = row["WeeklyBudgetedHRS"].ToString(),
-                    HomeTechProtect = row["HomeTechProtect"].ToString()
+                    HomeTechProtect = row["HomeTechProtect"].ToString(),
+                    TWDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWDevicesQtyGoals = row["T,W,CDevices QTY Goals"].ToString(),
+                    TWDevicesQtyNetOff = row["T,W,CDevices QTY Net OFF"].ToString(),
+                    BroadBandLessThan300MB = row["BroadBand lessThen (300MB)"].ToString(),
+                    FiberUpgradesNetOff = row["Fiber UpgradesNet OFF"].ToString(),
+                    PremVideoNetOff = row["Prem Video Net OFF"].ToString(),
+                    BroadBandFiberGP = row["Broad Band +Fiber $GP"].ToString(),
+                    BroadbandLessThan300MBQISpiff = row["Broadband Lessthen (300Mb) QISpiff"].ToString(),
+                    FNAch = row["FN Ach $"].ToString(),
+                    CRUVGACnt = row["CRU Ach Voice $"].ToString(),
+                    CRUAchData = row["CRU Ach Voice $"].ToString(),
+                    TWDevicesQtyTrend = row["T,W,C DevicesQTY Trend"].ToString()
+
+                    //MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
                 };
 
                 lisn_tot.Add(modelFT);
@@ -2924,6 +2942,9 @@ namespace DWH_Reporting.Controllers
                 var row = FilterTotal.Rows[0];
                 result = new Fct_StoreSummaryAttributesModel
                 {
+                    Monthly_AchivedHoursTrending = row["MonthlyAchived HoursTrending %"].ToString(),
+                    PPVGAPerTraffic = row["PPVGA perTraffic%"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDSTrend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
@@ -2952,18 +2973,20 @@ namespace DWH_Reporting.Controllers
                     FNAchMTD = row["FN AchMTD"].ToString(),
                     GPPerBox = row["$GP per BOX"].ToString(),
                     TotalGPAchievedWithSpif = row["$GP Achieved -With Spif"].ToString(),
-                    GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
+                    GrossAddsNetOff = row["GROSS ADDS Net OFF"].ToString(),
                     GrossAddsGP = row["GROSS ADDS$GP"].ToString(),
                     FNAchAverageQTD = row["FN AchAverage QTD"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice"].ToString(),
                     CRUAchAverageQTD = row["CRU Ach AverageQTD"].ToString(),
+                    MTDUpgradesNetOff = row["MTDUPGRADESNet OFF"].ToString(),
                     MTDUpgrades = row["MTD UPGRADES"].ToString(),
                     MTDUpgradesGP = row["MTD UPGRADES$GP"].ToString(),
                     BroadbandGoals = row["BroadbandGoals"].ToString(),
                     NewFiber300MB = row["New Fiber (300MB)"].ToString(),
                     NewFiber500MB = row["New Fiber (500MB)"].ToString(),
                     NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    BroadbandFiberNetOff = row["Broadband +_Fiber Net OFF"].ToString(),
                     BroadbandFiber = row["Broadband +Fiber"].ToString(),
                     BroadbandFiberTrend = row["Broadband + FiberTrend"].ToString(),
                     BroadbandFiberTrendPercentage = row["Broadband +Fiber Trend%"].ToString(),
@@ -2984,8 +3007,19 @@ namespace DWH_Reporting.Controllers
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     ProtAdv4 = row["ProtAdv 4"].ToString(),
                     WeeklyBudgetedHRS = row["WeeklyBudgetedHRS"].ToString(),
-                    HomeTechProtect = row["HomeTechProtect"].ToString()
-
+                    HomeTechProtect = row["HomeTechProtect"].ToString(),
+                    TWDevicesTrendToGoalPercentage = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    TWDevicesQtyGoals = row["T,W,CDevices QTY Goals"].ToString(),
+                    TWDevicesQtyNetOff = row["T,W,CDevices QTY Net OFF"].ToString(),
+                    BroadBandLessThan300MB = row["BroadBand lessThen (300MB)"].ToString(),
+                    FiberUpgradesNetOff = row["Fiber UpgradesNet OFF"].ToString(),
+                    PremVideoNetOff = row["Prem Video Net OFF"].ToString(),
+                    BroadBandFiberGP = row["Broad Band +Fiber $GP"].ToString(),
+                    BroadbandLessThan300MBQISpiff = row["Broadband Lessthen (300Mb) QISpiff"].ToString(),
+                    FNAch = row["FN Ach $"].ToString(),
+                    CRUVGACnt = row["CRU Ach Voice $"].ToString(),
+                    CRUAchData = row["CRU Ach Voice $"].ToString(),
+                    TWDevicesQtyTrend = row["T,W,C DevicesQTY Trend"].ToString()
                 };
             }
 
