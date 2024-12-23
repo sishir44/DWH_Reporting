@@ -927,7 +927,7 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel model4 = new Fct_StoreNumberAttributesModel
                 {
-                    Market = row["Market"].ToString(),
+                    //Market = row["Market"].ToString(),
                     MULMngr = row["MUL_MktMngr"].ToString(),
 
                     MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),

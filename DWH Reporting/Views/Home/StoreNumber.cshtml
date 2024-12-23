@@ -541,7 +541,7 @@
             font-size: 10px;
             text-align: center;
             color: black;
-            background-color: sandybrown;
+            background-color: #cdedff;
             border: 1px solid white;
             white-space: normal;
             word-wrap: break-word;
@@ -551,7 +551,7 @@
             font-size: 10px;
             text-align: center;
             color: white;
-            background-color: #0046BF;
+            background-color: #155497;
             border: 1px solid white;
             white-space: normal;
             word-wrap: break-word;
@@ -583,7 +583,7 @@
 
         #demoDW {
             width: 100%;
-            max-height: 71vh;
+            max-height: 75vh;
             overflow: auto;
         }
 
@@ -765,12 +765,12 @@
                         <div class="maindiv">
                             <label>Total Stores</label>
                             <input type="button" name="GAGoals" id="storeCountDisplay" class="form-control" value="0"
-                                   style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
                             <label>100% & Above</label>
                             <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
                                    title="Above 100%" value=""
-                                   style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
 
@@ -781,13 +781,13 @@
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="Above 70%"
                                    value=""
-                                   style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
                             <label>Less Than 70%</label>
                             <input type="button" name="<70" id="tbeCountDisplay90" class="form-control"
                                    title="Less Than 70%"
                                    value=""
-                                   style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 3px 0 !important;" />
+                                   style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
 
@@ -1297,7 +1297,9 @@
                             @if (recordsFct_StoreNumber != null)
                             {
                                 // Sort records by Market
-                                var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.Market);
+                                var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.MULMngr);
+                                //var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.Market).ThenBy(record => record.MULMngr);
+
 
                                 foreach (var record in sortedRecords)
                                 {
@@ -1485,14 +1487,20 @@
 
                                                 }
                                             }
-
+                                            currentMarket = record.Market;
                                         }
 
+                                    }
+
+
+
+                                    if (currentMMM != record.MULMngr)
+                                    {
                                         if (recordsFct_StoreNumberTotalMMM != null)
                                         {
                                             foreach (var record2 in recordsFct_StoreNumberTotalMMM)
                                             {
-                                                if (record2.Market == record.Market && record2.MULMngr == record.MULMngr)
+                                                if (record2.MULMngr == record.MULMngr)
                                                 {
                                                     //TM wise total each market
                                                     <tr id="totMMM" class="total_dataMMM">
@@ -1669,13 +1677,10 @@
 
                                                 }
                                             }
-
+                                            currentMMM = record.MULMngr;
                                         }
                                     }
 
-                                    // Update the current market
-                                    currentMarket = record.Market;
-                                    currentMMM = record.Market;
 
                                     <!-- Data ALL CALC -->
                                     <tr class="main_data"
@@ -2025,6 +2030,8 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.HomeTechProtect)))</td>
                                     </tr>
                                 }
+
+
                             }
 
                         </table>
@@ -3531,7 +3538,8 @@
         resetEmployeeDD();
 
         $.ajax({
-            url: '/Home/SaveUniqueIDToSession', // Route to save UniqueID in session
+            //url: '../Home/SaveUniqueIDToSession', // Route to save UniqueID in session
+            url:'@Url.Action("SaveUniqueIDToSession", "Home")',
             type: 'POST',
             data: {
                 UniqueID: uniqueID,
@@ -3542,7 +3550,8 @@
 
         // AJAX call to the server to get note data
         $.ajax({
-            url: '/Home/GetNoteData', // Ensure this matches your route
+            //url: '../Home/GetNoteData', // Ensure this matches your route
+            url:'@Url.Action("GetNoteData", "Home")',
             type: 'POST',
             data: { UniqueID: uniqueID },
             success: function (response) {
@@ -3579,7 +3588,8 @@
 
         // AJAX call to insert or update note
         $.ajax({
-            url: '/Home/AddOrUpdateNote', // Adjust to your controller path
+            //url: '../Home/AddOrUpdateNote', // Adjust to your controller path
+            url:'@Url.Action("AddOrUpdateNote", "Home")',
             type: 'POST',
             data: {
                 Comment: comment,
@@ -3616,7 +3626,8 @@
         //      "\nSelected Tiers: " + (tiersText || "null"));
 
         $.ajax({
-            url: '/Home/GetGTotal',
+            //url: '../Home/GetGTotal',
+            url:'@Url.Action("GetGTotal", "Home")',
             type: 'POST',
             data: {
                 dateParam: dateP,
@@ -3937,7 +3948,7 @@
                 option.style.marginBottom = '5px';
                 option.style.fontSize = '10px';
                 option.style.textAlign = 'center';
-
+                option.classList.add('optionfilter');
                 TMSelect.add(option);
             });
         } else {
@@ -3953,7 +3964,6 @@
             noOption.style.padding = '5px 0';
             noOption.style.marginBottom = '8px';
             nooption.style.fontSize = '12px';
-
             TMSelect.add(noOption);
         }
 
@@ -3978,7 +3988,7 @@
                 option.style.marginBottom = '5px';
                 option.style.fontSize = '10px';
                 option.style.textAlign = 'center';
-
+                option.classList.add('optionfilter');
                 MARKETSelect.add(option);
             });
         } else {
@@ -4019,7 +4029,7 @@
                 option.style.marginBottom = '5px';
                 option.style.fontSize = '10px';
                 option.style.textAlign = 'center';
-
+                option.classList.add('optionfilter');
                 mmMARKETSelect.add(option);
             });
         } else {
@@ -4060,7 +4070,7 @@
                 option.style.marginBottom = '5px';
                 option.style.fontSize = '10px';
                 option.style.textAlign = 'center';
-
+                option.classList.add('optionfilter');
                 STORESSelect.add(option);
             });
         } else {
@@ -4101,7 +4111,7 @@
                 option.style.marginBottom = '5px';
                 option.style.fontSize = '10px';
                 option.style.textAlign = 'center';
-
+                option.classList.add('optionfilter');
                 TIERSSelect.add(option);
             });
         } else {
@@ -4303,6 +4313,7 @@
                 option.text = MarketValue;
                 /*option.style.color = 'grey';  */// Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 MarketSelect.add(option);
             });
         } else {
@@ -4352,6 +4363,7 @@
                 option.text = MarketValue;
                 /*option.style.color = 'grey';  */// Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 MarketSelect.add(option);
             });
         } else {
@@ -4398,6 +4410,7 @@
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 StoresSelect.add(option);
             });
         } else {
@@ -4447,6 +4460,7 @@
                 option.text = tiersValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 tiersSelect.add(option);
             });
         } else {
@@ -4758,6 +4772,7 @@
                 option.text = tiersValue;
                 /* option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 tiersSelect.add(option);
             });
         } else {
@@ -4807,6 +4822,7 @@
                 option.text = StoresValue;
                 /*option.style.color = 'grey';*/  // Highlight in red (optional)
                 option.style = 'font-size:10px; background-color:#3A75D0; color:white; border-radius: 6px;text-align: center; margin-bottom:5px;'
+                option.classList.add('optionfilter');
                 StoresSelect.add(option);
             });
         } else {
