@@ -21,18 +21,23 @@
     <link rel="apple-touch-icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
     <link rel="shortcut icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
 
+    @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://mis.mobilyllc.com/MobilyGpStatus/Content/Css/bootstrap.min.css" rel="stylesheet" />
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
-    <link src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
-    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
-    <script src="https://mis.mobilyllc.com/MobilyGpStatus/Content/Js/jquery.table2excel.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @*<script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>*@
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://mis.mobilyllc.com/MobilyGpStatus/Content/Js/jquery.table2excel.js"></script>
+    <link href="https://cdn.datatables.net/fixedcolumns/3.3.2/css/fixedColumns.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/fixedcolumns/3.3.2/js/dataTables.fixedColumns.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <script src="~/Scripts/bootstrap.min.js"></script>
     <title>MTD Reports</title>
 
@@ -471,7 +476,7 @@
             font-size: 9px;
             padding: 4px;
             min-width: auto;
-            max-width:auto;
+            max-width: auto;
             text-align: center;
         }
 
@@ -1170,19 +1175,19 @@
 
 
         </div>
-        <div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
+        @*<div id="div2" class="content" style="background-color:#B2D6F2; cursor: pointer;">
             <iframe title="MISMobilyProject2" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
         </div>
         <div id="div3" class="content" style="background-color:#B2D6F2; cursor: pointer;">
             <iframe title="MISMobilyProject1" width="100%" height="595" src="https://app.powerbi.com/view?r=eyJrIjoiNjkxZGJlNjItODY5My00NjM2LTk3ZjUtYTM2OTM3MGI1NDM0IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9" frameborder="0" allowFullScreen="true"></iframe>
-        </div>
+        </div>*@
     </div>
-    <footer>
+    @*<footer>
         <div class="mt-4" style="padding-left:40%; background-color:#B2D6F2;">
             <button id="prevBtn" disabled style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:red">Previous</button>
             <button id="nextBtn" style="border-radius:10px; width:20%; background-image: linear-gradient(#0046bf54, #0046bf);color:white">Next</button>
         </div>
-    </footer>
+    </footer>*@
 </body>
 
 </html>
@@ -1290,55 +1295,55 @@
     }
 </script>
 <script>
-    const divs = document.querySelectorAll(".content");
-    let currentDiv = 0;
-    function showDiv(index) {
-        divs.forEach((div, i) => {
-            div.style.display = i === index ? "block" : "none";
-        });
-    }
-    function showNextDiv() {
+    //const divs = document.querySelectorAll(".content");
+    //let currentDiv = 0;
+    //function showDiv(index) {
+    //    divs.forEach((div, i) => {
+    //        div.style.display = i === index ? "block" : "none";
+    //    });
+    //}
+    //function showNextDiv() {
 
-        if (currentDiv === divs.length - 1) {
-            // Redirect when next button is clicked on DIV2
-            //window.location.href = "http://localhost:52163/Home/EmployeeNumber";
-            window.location.href = "https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9";
-            return;
-        }
-        if (currentDiv === divs.length - 1) {
+    //    if (currentDiv === divs.length - 1) {
+    //        // Redirect when next button is clicked on DIV2
+    //        //window.location.href = "http://localhost:52163/Home/EmployeeNumber";
+    //        window.location.href = "https://app.powerbi.com/view?r=eyJrIjoiMGQ3Y2IyN2YtNjc1NC00MDI0LWJmYzUtMzVkNjU4YmQ5ZDc1IiwidCI6IjE5N2FkNTc5LTcwMzctNGIwMC04ZjAxLWQ3MTJkMzZmYTYxZSIsImMiOjl9";
+    //        return;
+    //    }
+    //    if (currentDiv === divs.length - 1) {
 
-            document.getElementById("nextBtn").disabled = true;
-            document.getElementById("nextBtn").style.color = 'red';
-        }
-        if (currentDiv < divs.length - 1) {
-            window.location.href = "https://mis.mobilyllc.com/DWHReporting/Home/StoreNo?";
-            return;
+    //        document.getElementById("nextBtn").disabled = true;
+    //        document.getElementById("nextBtn").style.color = 'red';
+    //    }
+    //    if (currentDiv < divs.length - 1) {
+    //        window.location.href = "https://mis.mobilyllc.com/DWHReporting/Home/StoreNo?";
+    //        return;
 
-            document.getElementById("prevBtn").disabled = false;
-            document.getElementById("prevBtn").style.color = 'white';
-            currentDiv++;
-            showDiv(currentDiv);
-        }
-    }
-    function showPrevDiv() {
-        if (currentDiv > 0) {
-            currentDiv--;
-            showDiv(currentDiv);
-            // If at the first div, disable the "prev" button
-            if (currentDiv === 0) {
-                document.getElementById("prevBtn").disabled = true;
-                document.getElementById("prevBtn").style.color = 'red';
-            }
+    //        document.getElementById("prevBtn").disabled = false;
+    //        document.getElementById("prevBtn").style.color = 'white';
+    //        currentDiv++;
+    //        showDiv(currentDiv);
+    //    }
+    //}
+    //function showPrevDiv() {
+    //    if (currentDiv > 0) {
+    //        currentDiv--;
+    //        showDiv(currentDiv);
+    //        // If at the first div, disable the "prev" button
+    //        if (currentDiv === 0) {
+    //            document.getElementById("prevBtn").disabled = true;
+    //            document.getElementById("prevBtn").style.color = 'red';
+    //        }
 
-            // Make sure the "next" button is enabled
-            document.getElementById("nextBtn").disabled = false;
-            document.getElementById("nextBtn").style.color = 'white';
-        }
-    }
-    ////Initialize by showing the first div
-    showDiv(currentDiv);
-    document.getElementById("nextBtn").addEventListener("click", showNextDiv);
-    document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
+    //        // Make sure the "next" button is enabled
+    //        document.getElementById("nextBtn").disabled = false;
+    //        document.getElementById("nextBtn").style.color = 'white';
+    //    }
+    //}
+    //////Initialize by showing the first div
+    //showDiv(currentDiv);
+    //document.getElementById("nextBtn").addEventListener("click", showNextDiv);
+    //document.getElementById("prevBtn").addEventListener("click", showPrevDiv);
 </script>
 <script>
     // Function to highlight TM and Store cells
@@ -1510,12 +1515,14 @@
     highlightCells();
 </script>
 <script>
-    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date=null, Sd=null) {
+
+    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date = null, Sd = null) {
+    const baseUrl = '@Url.Content("~/")';
     var dateP = "@ViewBag.ReportDate"; // Razor value for date
     var Sd = 'Elio Portocarrero';
-
+    var endpoint = baseUrl + "Home/GetFilteredDataSum";
     $.ajax({
-        url: '/Home/GetFilteredDataSum', // Your controller's action method
+        url: endpoint, // Your controller's action method
         type: 'GET',
         data: {
             dateParam: dateP,
@@ -1529,92 +1536,92 @@
         success: function (response) {
             $('#tbl tbody').find('#loadedToalRow').remove();
             $('#tbl tbody').find('.filtered_data').remove();
-            console.log("RESPONSE: " + response);
+            //console.log("RESPONSE: " + response);
             var newRow = `
-<tr class="filtered_data">
-    <td></td>
-    <td>Grand Total</td>
-    <td></td>
-    <td></td>
-    <td>${parseFloat(response.Monthly_AchivedHoursTrending || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.GrossAdds || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.GrossAddsNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TotalTraffic || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.PPVGAPerTraffic || 0)}%</td>
-    <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.BroadbandFiberNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.FiberGreenCheck || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.APO || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.ProtAdvHomeTechPercentage || 0).toFixed(1)}%</td>
-    <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.OPSTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.TotalOPSGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TotalOPS || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.UpgradeTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.MTDUpgradesGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.MTDUpgradesNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TWDevicesTrendToGoalPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.TWDevicesQtyGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TWDevicesQtyNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.AIAGreenCheckConsumer || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.AIABInternet || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.AIACInternet || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.OPSPerTrafficPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.CRUAchMTD || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.FNAchMTD || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.BroadbandGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.BroadbandFiber || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.BroadBandLessThan300MB || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.NewFiber300MB || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.NewFiber500MB || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.NewFiber1G || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.FiberUpgradesNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.BroadbandFiberTrend || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.BroadbandFiberTrendPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.PremVideoGoals || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.PremVideo || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.PremVideoNetOff || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.PremVideoTrendPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.PremVideoTrend || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.GPPerBox || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TotalOPSTrending || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.MTDUpgrades || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.BroadBandFiberGP || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.BroadbandGP || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.BroadbandLessThan300MBQISpiff || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.NewFiber300MBQISpiff || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.NewFiber500MBQISpiff || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.NewFiber1GQISpiff || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.PremVideoGP || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.PremVideoSpiff || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.AccessGP || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.AccessRevenue || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.AccessQty || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.FNAchAverageQTD || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.FNAch || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.CRUAchVoice || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.CRUAchAverageQTD || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.CRUAchVoice || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.CRUAchData || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TWDevicesQtyTrend || 0).toFixed(1)}</td>
-    <td>$${parseFloat(response.TWDevicesGP || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.HomeTechProtect || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.TotalProtectionPercentage || 0).toFixed(1)}%</td>
-    <td>${parseFloat(response.ProtAdv1 || 0).toFixed(1)}</td>
-    <td>${parseFloat(response.ProtAdv4 || 0).toFixed(1)}</td>
-</tr>`;
+                <tr class="filtered_data">
+                <td></td>
+                <td>Grand Total</td>
+                <td></td>
+                <td></td>
+                <td>${parseFloat(response.Monthly_AchivedHoursTrending || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.GrossAdds || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.GrossAddsNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TotalTraffic || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.PPVGAPerTraffic || 0)}%</td>
+                <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.BroadbandFiberNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.FiberGreenCheck || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.APO || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.ProtAdvHomeTechPercentage || 0).toFixed(1)}%</td>
+                <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.OPSTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.TotalOPSGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TotalOPS || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.UpgradeTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.MTDUpgradesGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.MTDUpgradesNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TWDevicesTrendToGoalPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.TWDevicesQtyGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TWDevicesQtyNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.AIAGreenCheckConsumer || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.AIABInternet || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.AIACInternet || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.OPSPerTrafficPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.CRUAchMTD || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.FNAchMTD || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.BroadbandGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.BroadbandFiber || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.BroadBandLessThan300MB || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.NewFiber300MB || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.NewFiber500MB || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.NewFiber1G || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.FiberUpgradesNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.BroadbandFiberTrend || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.BroadbandFiberTrendPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.PremVideoGoals || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.PremVideo || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.PremVideoNetOff || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.PremVideoTrendPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.PremVideoTrend || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.GPPerBox || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TotalOPSTrending || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.MTDUpgrades || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.BroadBandFiberGP || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.BroadbandGP || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.BroadbandLessThan300MBQISpiff || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.NewFiber300MBQISpiff || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.NewFiber500MBQISpiff || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.NewFiber1GQISpiff || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.PremVideoGP || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.PremVideoSpiff || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.AccessGP || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.AccessRevenue || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.AccessQty || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.FNAchAverageQTD || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.FNAch || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.CRUAchVoice || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.CRUAchAverageQTD || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.CRUAchVoice || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.CRUAchData || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TWDevicesQtyTrend || 0).toFixed(1)}</td>
+                <td>$${parseFloat(response.TWDevicesGP || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.HomeTechProtect || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.TotalProtectionPercentage || 0).toFixed(1)}%</td>
+                <td>${parseFloat(response.ProtAdv1 || 0).toFixed(1)}</td>
+                <td>${parseFloat(response.ProtAdv4 || 0).toFixed(1)}</td>
+                </tr>`;
 
 
             // Append the new row to the table
