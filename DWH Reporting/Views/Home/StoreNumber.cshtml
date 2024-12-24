@@ -1297,7 +1297,11 @@
                             @if (recordsFct_StoreNumber != null)
                             {
                                 // Sort records by Market
-                                var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.MULMngr);
+                                var sortedRecords = recordsFct_StoreNumber
+                                .OrderBy(record => record.MULMngr) // Sort true before false
+                                .ThenBy(record => record.Market);          // Sort by Market next
+                                                           
+                                //var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.MULMngr && record=>record.Market);
                                 //var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.Market).ThenBy(record => record.MULMngr);
 
 
@@ -1311,7 +1315,7 @@
                                         {
                                             foreach (var record2 in recordsFct_StoreNumberTotalTM)
                                             {
-                                                if (record2.Market == record.Market && record2.TM == record.TM)
+                                                if (record2.MULMngr == record.MULMngr && record2.TM == record.TM)
                                                 {
                                                     //TM wise total each market
                                                     <tr id="totTM" class="total_dataTM">
