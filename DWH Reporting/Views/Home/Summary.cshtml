@@ -1544,83 +1544,92 @@
                 <td></td>
                 <td></td>
                 <td>${parseFloat(response.Monthly_AchivedHoursTrending || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.WeeklyBudgetedHRS || 0)).toLocaleString()}</td>
                 <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.GrossAdds || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.GrossAddsNetOff || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.TotalTraffic || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.GrossAddsGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.GrossAdds || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.GrossAddsNetOff || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TotalTraffic || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.PPVGAPerTraffic || 0).toFixed(1)}%</td>
                 <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.BroadbandFiberNetOff || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.FiberGreenCheck || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.APO || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiberNetOff || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FiberGreenCheck || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.APO || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
                 <td>${parseFloat(response.ProtAdvHomeTechPercentage || 0).toFixed(1)}%</td>
-                <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiberNetOff || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FiberGreenCheck || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.APO || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.OPSTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.TotalOPSGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.TotalOPS || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.TotalOPSGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TotalOPS || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.UpgradeTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.MTDUpgradesGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.MTDUpgradesNetOff || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.MTDUpgradesNetOff || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.TWDevicesTrendToGoalPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.TWDevicesQtyGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.TWDevicesQtyNetOff || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
                 <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.AIAGreenCheckConsumer || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.AIABInternet || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.AIACInternet || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.AIAGreenCheckConsumer || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.AIABInternet || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.AIACInternet || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.OPSPerTrafficPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.CRUAchMTD || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.FNAchMTD || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.BroadbandGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.BroadbandFiber || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.BroadBandLessThan300MB || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.NewFiber300MB || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.NewFiber500MB || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.NewFiber1G || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.FiberUpgradesNetOff || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.CRUAchMTD || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FNAchMTD || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.GrossAddsTrend || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiber || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadBandLessThan300MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber300MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber500MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber1G || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FiberUpgradesNetOff || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiberTrend || 0)).toLocaleString()}</td>
                 <td>${parseFloat(response.BroadbandFiberTrendPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.PremVideoGoals || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.PremVideo || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.PremVideoNetOff || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.PremVideoGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.PremVideo || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.PremVideoNetOff || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.PremVideoTrendPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.PremVideoTrend || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.GPPerBox || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.TotalOPSTrending || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.MTDUpgrades || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.BroadBandFiberGP || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.BroadbandGP || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.BroadbandLessThan300MBQISpif || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.NewFiber300MBQISpiff || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.NewFiber500MBQISpiff || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.NewFiber1GQISpiff || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.PremVideoGP || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.PremVideoSpiff || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.AccessGP || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.AccessRevenue || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.AccessQty || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.FNAchAverageQTD || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.FNAch || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.CRUAchVoice || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.CRUAchAverageQTD || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.CRUAchVoice || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.CRUAchData || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.TWDevicesQtyTrend || 0).toFixed(0)}</td>
-                <td>$${parseFloat(response.TWDevicesGP || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.HomeTechProtect || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.PremVideoTrend || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.TotalGPAchievedWithSpif || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.GPPerBox || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TotalOPSTrending || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.GrossAddsGP || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.MTDUpgrades || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.MTDUpgradesGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadBandFiberGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandLessThan300MBQISpif || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber300MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber500MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber1GQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.PremVideoGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.PremVideoSpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.AccessGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.AccessRevenue || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.AccessQty || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FNAchAverageQTD || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.FNAch || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.CRUAchVoice || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.CRUAchVoice || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.CRUAchData || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TWDevicesQtyTrend || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.HomeTechProtect || 0)).toLocaleString()}</td>
+
                 <td>${parseFloat(response.TotalProtectionPercentage || 0).toFixed(1)}%</td>
-                <td>${parseFloat(response.ProtAdv1 || 0).toFixed(0)}</td>
-                <td>${parseFloat(response.ProtAdv4 || 0).toFixed(0)}</td>
+                <td>${Math.round(parseFloat(response.ProtAdv1 || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.ProtAdv4 || 0)).toLocaleString()}</td>
                 </tr>`;
 
 
