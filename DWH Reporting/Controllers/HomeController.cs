@@ -406,6 +406,7 @@ namespace DWH_Reporting.Controllers
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    Converged = row["converged%"].ToString(),
                     PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
                     FiberConversion = row["Fiber Conversion"].ToString(),
