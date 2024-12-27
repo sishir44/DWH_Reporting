@@ -2211,7 +2211,7 @@ namespace DWH_Reporting.Controllers
                     StoreContact = row["StoreContact"].ToString(),
                     ReportDate = row["ReportDate"].ToString(),
                     DealerCode = row["DealerCode"].ToString(),
-                    Monthly_AchivedHoursTrending = row["Monthly_AchivedHoursTrending"].ToString(),
+                    Monthly_AchivedHoursTrending = MultiplyAndRoundPercentage(row["Monthly_AchivedHoursTrending"]),
                     WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
