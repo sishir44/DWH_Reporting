@@ -3060,6 +3060,7 @@ namespace DWH_Reporting.Controllers
                     GrossAddsNetOff = row["GROSS ADDS Net OFF"].ToString(),
                     GrossAddsGP = row["GROSS ADDS$GP"].ToString(),
                     FNAchAverageQTD = row["FN AchAverage QTD"].ToString(),
+                    CRUAchVoiceDollar = row["CRU Ach Voice $"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice"].ToString(),
                     CRUAchAverageQTD = row["CRU Ach AverageQTD"].ToString(),
                     MTDUpgrades = row["MTD UPGRADES"].ToString(),
@@ -3100,7 +3101,7 @@ namespace DWH_Reporting.Controllers
                     BroadbandLessThan300MBQISpiff = row["Broadband Lessthen (300Mb) QISpiff"].ToString(),
                     FNAch = row["FN Ach $"].ToString(),
                     CRUVGACnt = row["CRU Ach Voice $"].ToString(),
-                    CRUAchData = row["CRU Ach Voice $"].ToString(),
+                   // CRUAchData = row["CRU Ach Voice $"].ToString(),
                     TWDevicesQtyTrend = row["T,W,C DevicesQTY Trend"].ToString()
 
                     //MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
@@ -3159,7 +3160,9 @@ namespace DWH_Reporting.Controllers
                     GrossAddsNetOff = RoundToNearestWhole(row["GROSS ADDS Net OFF"]),
                     GrossAddsGP = RoundToNearestWhole(row["GROSS ADDS$GP"]),
                     FNAchAverageQTD = RoundToNearestWhole(row["FN AchAverage QTD"]),
+                    CRUAchData = RoundToNearestWhole(row["CRU AchDATA $"]),
                     CRUAchVoice = RoundToNearestWhole(row["CRU Ach Voice"]),
+                    CRUAchVoiceDollar = RoundToNearestWhole(row["CRU Ach Voice $"]),
                     CRUAchAverageQTD = RoundToNearestWhole(row["CRU Ach AverageQTD"]),
                     MTDUpgradesNetOff = RoundToNearestWhole(row["MTDUPGRADESNet OFF"]),
                     MTDUpgrades = RoundToNearestWhole(row["MTD UPGRADES"]),
@@ -3196,7 +3199,6 @@ namespace DWH_Reporting.Controllers
                     BroadbandLessThan300MBQISpiff = RoundToNearestWhole(row["Broadband Lessthen (300Mb) QISpiff"]),
                     FNAch = RoundToNearestWhole(row["FN Ach $"]),
                     CRUVGACnt = RoundToNearestWhole(row["CRU Ach Voice $"]),
-                    CRUAchData = RoundToNearestWhole(row["CRU Ach Voice $"]),
                     TWDevicesQtyTrend = RoundToNearestWhole(row["T,W,C DevicesQTY Trend"]),
                     TWDevicesGP = RoundToNearestWhole(row["T,W,C DevicesGP"])
                 };

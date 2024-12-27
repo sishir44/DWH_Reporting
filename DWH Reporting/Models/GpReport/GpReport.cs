@@ -1924,6 +1924,7 @@ namespace DWH_Reporting.Models.GpReport
         public string CRUVGACnt { get; set; }
         public string CRUAchAverageQTD { get; set; }
         public string CRUAchVoice { get; set; }
+        public string CRUAchVoiceDollar { get; set; }
         public string CRUAchData { get; set; }
         public string TWDevicesQtyTrend { get; set; }
         public string TWDevicesGP { get; set; }
