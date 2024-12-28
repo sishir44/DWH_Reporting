@@ -1869,6 +1869,7 @@ namespace DWH_Reporting.Models.GpReport
         public string BreakEvenNumbers { get; set; }
         public string GPWithSpifTrending { get; set; }
         public string GPTrendingPercentage { get; set; }
+        public string GPTrending { get; set; }
         public string TotalGPGoals { get; set; }
         public string OPSTrendingToGoalsPercentage { get; set; }
         public string TotalOPSGoals { get; set; }
@@ -1934,6 +1935,8 @@ namespace DWH_Reporting.Models.GpReport
         public string TimeStamp { get; set; }
         public string ProtAdv4 { get; set; }
         public string Monthly_AchivedHoursTrending { get; set; }
+        public string AIAGreenCheck { get; set; }
+
         public string WeeklyBudgetedHRS { get; set; }
     }
 
@@ -1946,6 +1949,89 @@ namespace DWH_Reporting.Models.GpReport
         public string Note { get; set; }
         public string Employee { get; set; }
         
+    }
+
+    public class StoreSummaryAttributes
+    {
+        public string MonthlyAchievedHoursTrending { get; set; }
+        public string WeeklyBudgetedHRS { get; set; }
+        public string GrossAddsTrendToGoal { get; set; }
+        public string GrossAddsGoals { get; set; }
+        public string GrossAdds { get; set; }
+        public string GrossAddsNetOff { get; set; }
+        public string TotalTraffic { get; set; }
+        public string PPVGAPerTraffic { get; set; }
+        public string FiberConversion { get; set; }
+        public string BroadbandFiberNetOff { get; set; }
+        public string FiberGreenCheck { get; set; }
+        public string APO { get; set; }
+        public string CSAT { get; set; }
+        public string ProtAdvHomeTech { get; set; }
+        public string BreakEvenNumbers { get; set; }
+        public string GPWithSpifTrending { get; set; }
+        public string TotalGPGoals { get; set; }
+        public string GPTrending { get; set; }
+        public string OPSTrendingToGoals { get; set; }
+        public string TotalOPSGoals { get; set; }
+        public string TotalOPS { get; set; }
+        public string UpgradeTrendingToGoals { get; set; }
+        public string MTDUpgradesGoals { get; set; }
+        public string MTDUpgradesNetOff { get; set; }
+        public string TWDevicesTrendToGoal { get; set; }
+        public string TWDevicesQtyGoals { get; set; }
+        public string TWDevicesQtyNetOff { get; set; }
+        public string AIABusinessConversion { get; set; }
+        public string AIAConsumerConversion { get; set; }
+        public string AIAGreenCheck { get; set; }
+        public string AIABInternet { get; set; }
+        public string AIACInternet { get; set; }
+        public string OPSPerTraffic { get; set; }
+        public string CRUAchMTD { get; set; }
+        public string FNAchMTD { get; set; }
+        public string GrossAddsTrend { get; set; }
+        public string BroadbandGoals { get; set; }
+        public string BroadbandFiber { get; set; }
+        public string BroadbandLessThan300MB { get; set; }
+        public string NewFiber300MB { get; set; }
+        public string NewFiber500MB { get; set; }
+        public string NewFiber1G { get; set; }
+        public string FiberUpgradesNetOff { get; set; }
+        public string BroadbandFiberTrend { get; set; }
+        public string BroadbandFiberTrendPercentage { get; set; }
+        public string PremVideoGoals { get; set; }
+        public string PremVideo { get; set; }
+        public string PremVideoNetOff { get; set; }
+        public string PremVideoTrendPercentage { get; set; }
+        public string PremVideoTrend { get; set; }
+        public string GPAchievedWithSpif { get; set; }
+        public string GPPerBox { get; set; }
+        public string TotalOPSTrending { get; set; }
+        public string GrossAddsGP { get; set; }
+        public string MTDUpgrades { get; set; }
+        public string MTDUpgradesGP { get; set; }
+        public string BroadbandFiberGP { get; set; }
+        public string BroadbandGP { get; set; }
+        public string BroadbandLessThan300MBQISpiff { get; set; }
+        public string NewFiber300MBQISpiff { get; set; }
+        public string NewFiber500MBQISpiff { get; set; }
+        public string NewFiber1GQISpiff { get; set; }
+        public string PremVideoGP { get; set; }
+        public string PremVideoSpiff { get; set; }
+        public string AccessGP { get; set; }
+        public string AccessRevenue { get; set; }
+        public string AccessQty { get; set; }
+        public string FNAchAverageQTD { get; set; }
+        public string FNAch { get; set; }
+        public string CRUAchVoice { get; set; }
+        public string CRUAchAverageQTD { get; set; }
+        public string CRUAchVoiceDollar { get; set; }
+        public string CRUAchData { get; set; }
+        public string TWDevicesQtyTrend { get; set; }
+        public string TWDevicesGP { get; set; }
+        public string HomeTechProtect { get; set; }
+        public string TotalProtectionPercentage { get; set; }
+        public string ProtAdv1 { get; set; }
+        public string ProtAdv4 { get; set; }
     }
 
 }
