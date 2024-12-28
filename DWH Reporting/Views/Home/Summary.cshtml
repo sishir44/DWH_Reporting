@@ -1545,7 +1545,7 @@
                 <td></td>
                 <td></td>
                  <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(1)}%</td>
-                  <td>${response.WeeklyBudgetedHRS || ''}</td>
+                  <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toLocaleString()}</td>
                   <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.GrossAddsGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.GrossAdds || 0)).toLocaleString()}</td>
