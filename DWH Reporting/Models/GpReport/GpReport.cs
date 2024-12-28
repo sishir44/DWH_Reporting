@@ -1501,6 +1501,7 @@ namespace DWH_Reporting.Models.GpReport
         public string GrossAddsTrendToGoal { get; set; }
         public string GrossAddsGoals { get; set; }
         public string GrossAddsNetOFF { get; set; }
+        public string Converged { get; set; }
         public string PPVGAPerTrafficPercentage { get; set; }
         public string TotalTraffic { get; set; }
         public string FiberConversion { get; set; }
