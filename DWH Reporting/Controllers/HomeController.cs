@@ -36,6 +36,26 @@ namespace DWH_Reporting.Controllers
 
         }
 
+        public ActionResult LadingPage()
+        {
+            try
+            {
+                //string user;
+                ////user = Request.QueryString["userid"];
+                //user = Session["userid"].ToString();
+
+
+            }
+            catch (Exception ex)
+            {
+
+                return Content("Something Went Wrong.!! Please Contact MIS Department " + ex.Message);
+            }
+
+            return View();
+
+        }
+
         //[Authorization]
         public ActionResult EmpNo()
         {
