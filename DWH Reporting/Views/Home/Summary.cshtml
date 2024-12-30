@@ -1571,8 +1571,8 @@
                   <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)} %</td>
                   <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
-                  <td>${Math.round(parseFloat(response.AIABusinessConversion || 0)).toLocaleString()}</td>
-                  <td>${Math.round(parseFloat(response.AIAConsumerConversion || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.AIAGreenCheck || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.AIABInternet || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.AIACInternet || 0)).toLocaleString()}</td>
