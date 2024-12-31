@@ -1654,6 +1654,27 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeTechProtect { get; set; }
         public string TimeStamp { get; set; }
         public string DateKey { get; set; }
+
+        //Employee
+        public string EmpID { get; set; }
+        public string Employees { get; set; }
+        public string Status { get; set; }
+        public string HireDate { get; set; }
+        public string PayType { get; set; }
+        public string GPGOAL { get; set; }
+        public string Trending { get; set; }
+        public string TrendingPer { get; set; }
+        public string AIAInternetCancellation { get; set; }
+        public string TotalNewFiber { get; set; }
+        public string BroadbandFiberUpgrade { get; set; }
+        public string BroadbandFiberUpgradeNetOFF { get; set; }
+        public string BroadbandNewFiberGP { get; set; }
+        public string INSURANCE { get; set; }
+        public string INSURANCEGP { get; set; }
+        public string PROTECTION_PACK { get; set; }
+        public string PROTECTION_PACK_NetOFF { get; set; }
+        public string PROTECTION_PACK_GP { get; set; }
+        
     }
     
     public class Fct_EmployeeNumberAttributesModel

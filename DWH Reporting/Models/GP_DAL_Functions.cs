@@ -356,6 +356,28 @@ namespace DWH_Reporting.Models
             }
         }
 
+        public static DataTable EmpDet(string UniqueID, string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GETMTDEmployee_Detail";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@Unique", SqlDbType.Int, UniqueID);
+                spParam.SetParam("@date", SqlDbType.DateTime, dateParam);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
         public static DataTable SummaryFilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers)
         {
             try

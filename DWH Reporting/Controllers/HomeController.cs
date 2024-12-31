@@ -2684,6 +2684,134 @@ namespace DWH_Reporting.Controllers
             }
         }
 
+        [HttpGet]
+        public JsonResult GetEmpDetail(string UniqueID, string dateParam)
+        {
+            ////////////////Get Employee Detail
+            List<Fct_StoreNumberAttributesModel> lisn_emp = new List<Fct_StoreNumberAttributesModel>();
+            DataTable EmpDet = GP_DAL_Functions.EmpDet(UniqueID, dateParam);
+            foreach (DataRow row in EmpDet.Rows)
+            {
+                Fct_StoreNumberAttributesModel modelDetail = new Fct_StoreNumberAttributesModel
+                {
+                    UniqueID = row["Unique ID"].ToString(),
+                    DealerCode = row["Dealer Code"].ToString(),
+                    Store = row["Store"].ToString(),
+                    Market = row["Market"].ToString(),
+                    TM = row["TM"].ToString(),
+                    MULMngr = row["Multi Market Manager"].ToString(),
+                    EmpID = row["Emp ID (Paycom)"].ToString(),
+                    Employees = row["Employees"].ToString(),
+                    Role = row["Role"].ToString(),
+                    Status = row["Status"].ToString(),
+                    HireDate = row["Hire Date"].ToString(),
+                    PayType = row["Pay Type"].ToString(),
+                    TotalOPS = row["TOTAL OPS"].ToString(),
+                    GPPerBox = row["$GP per BOX"].ToString(),
+                    GPGOAL = row["GP GOAL ($)"].ToString(),
+                    TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
+                    Trending = row["Trending ($)"].ToString(),
+                    TrendingPer = row["Trending % "].ToString(),
+                    CSAT = row["CSAT"].ToString(),
+                    GrossAdds = row["GROSS ADDS"].ToString(),
+                    GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    ChargeBack = row["Charge Back"].ToString(),
+                    GrossAddsGP = row["GROSS ADDS $GP"].ToString(),
+                    FNAchMTD = row["FN Ach MTD"].ToString(),
+                    FNAchDollars = row["FN Ach $"].ToString(),
+                    CRUAchMTD = row["CRU Ach MTD"].ToString(),
+                    CRUAchDATADollars = row["CRU Ach $"].ToString(),
+                    NextUp = row["Next UP"].ToString(),
+                    NextUpSpif = row["Next UP Spif"].ToString(),
+                    PremiumActivation = row["Premium Activation"].ToString(),
+                    PremiumActivationNetOFF = row["Premium Activation Net OFF"].ToString(),
+                    ChargeBack1 = row["Charge Back 1"].ToString(),
+                    PremiumActivationGP = row["Premium Activation $GP"].ToString(),
+                    ExtraActivation = row["Extra Activation"].ToString(),
+                    ExtraActivationNetOFF = row["Extra Activation Net OFF"].ToString(),
+                    ChargeBack2 = row["Charge Back 2"].ToString(),
+                    ExtraActivationGP = row["Extra Activation $GP"].ToString(),
+                    NonExtraNonPremiumActivation = row["Non Extra / Non Premium Activation"].ToString(),
+                    NonExtraNonPremiumActivationNetOFF = row["Non Extra/ Non Premium Activation Net OFF"].ToString(),
+                    NonExtraNonPremiumActivationGP = row["Non Extra/ Non Premium Activation $GP"].ToString(),
+                    MTDUpgrades = row["MTD UPGRADES"].ToString(),
+                    MTDUpgradesNetOFF = row["MTD UPGRADES Net OFF"].ToString(),
+                    ChargeBack3 = row["Charge Back 3"].ToString(),
+                    MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
+                    PremiumUpgrade = row["Premium Upgrade"].ToString(),
+                    ChargeBack4 = row["Charge Back 4"].ToString(),
+                    PremiumUpgradeNetOff = row["Premium Upgrade Net Off"].ToString(),
+                    PremiumUpgradeGP = row["Premium Upgrade $GP"].ToString(),
+                    ExtraUpgrade = row["Extra Upgrade"].ToString(),
+                    ChargeBack5 = row["Charge Back 5"].ToString(),
+                    ExtraUpgradeNetOff = row["Extra Upgrade Net Off"].ToString(),
+                    ExtraUpgradeGP = row["Extra Upgrade $GP"].ToString(),
+                    AIABInternet = row["AIA Internet"].ToString(),
+                    AIAInternetCancellation = row["AIA Internet Cancellation"].ToString(),
+                    AIAInternetNetOff = row["AIA Internet Net Off"].ToString(),
+                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(),
+                    NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber500MB = row["New Fiber (500MB)"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    TotalNewFiber = row["Total New Fiber"].ToString(),
+                    TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
+                    BroadbandFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
+                    ChargeBack6 = row["Charge Back 6"].ToString(),
+                    FiberUpgrades = row["Fiber Upgrades"].ToString(),
+                    FiberUpgradesNetOFF = row["Fiber Upgrades Net OFF"].ToString(),
+                    ChargeBack7 = row["Charge Back 7"].ToString(),
+                    BroadbandFiberUpgrade = row["Broad Band +Fiber Upgrade"].ToString(),
+                    BroadbandFiberUpgradeNetOFF = row["Broad Band +Fiber Upgrade Net OFF"].ToString(),
+                    BroadbandLessThen300MBQISpiff = row["Broadband Less then (300Mb) QI Spiff"].ToString(),
+                    NewFiber300MBQISpiff = row["New fiber (300 MB) QI Spiff"].ToString(),
+                    NewFiber500MBQISpiff = row["New fiber (500 MB) QI Spiff"].ToString(),
+                    NewFiber1GQISpiff = row["New fiber (1G) QI Spiff"].ToString(),
+                    FiberUpgradeGP = row["Fiber Upgrades GP"].ToString(),
+                    BroadbandNewFiberGP = row["Broadband + New fiber $GP"].ToString(),
+                    BroadbandFiberGP = row["Broadband +Fiber $GP"].ToString(),
+                    TurboFeature = row["Turbo Feature"].ToString(),
+                    TurboFeatureGP = row["Turbo Feature $GP"].ToString(),
+                    PremVideo = row["Prem Video"].ToString(),
+                    PremVideoNetOFF = row["Prem Video Net OFF"].ToString(),
+                    ChargeBack8 = row["Charge Back 8"].ToString(),
+                    PremVideoGP = row["Prem Video $GP"].ToString(),
+                    PremVideoSpiff = row["Prem Video Spiff"].ToString(),
+                    TWCDevicesQty = row["T.W.C Devices QTY"].ToString(),
+                    TWCDevicesQtyNetOFF = row["Tab+Wear+Connected Devices Net OFF"].ToString(),
+                    ChargeBack9 = row["Charge Back 9"].ToString(),
+                    TWCDevicesDollars = row["Tab+Wear+Connected Devices $ GP"].ToString(),
+                    ProjectedGeographicSpif = row["Projected Geographic Spif"].ToString(),
+                    PrepaidGP = row["Prepaid $GP"].ToString(),
+                    PrepaidQty = row["Prepaid QTY"].ToString(),
+                    PrepaidToGA = row["Prepaid to GA"].ToString(),
+                    PrepaidNetOFF = row["Prepaid Net OFF"].ToString(),
+                    ChargeBack10 = row["Charge Back 10"].ToString(),
+                    PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
+                    AccessGP = row["Access $GP"].ToString(),
+                    AccessQty = row["Access Qty"].ToString(),
+                    AccessRevenue = row["Access $ Revenue"].ToString(),
+                    INSURANCE = row["INSURANCE"].ToString(),
+                    ChargeBack11 = row["Charge Back 11"].ToString(),
+                    INSURANCEGP = row["INSURANCE $GP"].ToString(),
+                    ProtAdv1 = row["ProtAdv 1"].ToString(),
+                    ProtAdv4 = row["ProtAdv 4"].ToString(),
+                    PROTECTION_PACK = row["PROTECTION PACK"].ToString(),
+                    PROTECTION_PACK_NetOFF = row["PROTECTION PACK Net OFF"].ToString(),
+                    ChargeBack12 = row["Charge Back 12"].ToString(),
+                    PROTECTION_PACK_GP = row["PROTECTION PACK $GP"].ToString(),
+                    HomeTechProtect = row["HomeTech Protect"].ToString(),
+                    //ProtAdv & HomeTech % DREAM(Wk 1 to 7)    
+                    //DREAM(Wk 8 to 14)   DREAM(Wk 15 to 21)  
+                    //DREAM(Wk 22 to 28)  DREAM(Wk 29 to 31)  
+                    //Working Days    Trending Days   Remaing Days    PPVGA Commission    PPVGA Elite Commission  PPVGA Extra Commission  FN Commission   CRU Commission  Premium Video Commission    AIA Internet Commission Broadband Commission    New Fiber Commission    Fiber Upgrade Commission    UPGCommission   Upgrade Elite Commission    Upgrade Extra Commission    Wearbale & Tablet Commission    Hometech    Next Up 1   Protect Advantage 1 Commission  Protect Advantage 4 Commission  Prepaid Commission  Accessory GP Commission CSAT 1  Commission  Semi Comm Calculation   Commission Eligibility(YES - 1)(NO - 0)   Reg Hrs Achved  OT  Hourly Rate(USD)   Salary  Geo SPIFF OPS   Geo Rate    Total Comp New  PAY Commission Bucket MTD(5th Nov' 24)	Nov’24 EOM Commission Trending Bucket	Effective Rate	ReportDate	TimeStamp
+
+                };
+                lisn_emp.Add(modelDetail);
+            }
+            ViewData["GetEmpDetail"] = lisn_emp;
+            return Json(lisn_emp,JsonRequestBehavior.AllowGet);
+        }
+
         [HttpPost]
         public JsonResult SaveUniqueIDToSession(string UniqueID, string DealerCode, string DateKey)
         {

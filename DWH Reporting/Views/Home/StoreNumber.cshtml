@@ -10,6 +10,7 @@
     var recordsFct_StoreNumberTotalTM = ViewData["GetFct_StoreNumberTotalTM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFct_StoreNumberTotalMMM = ViewData["GetFct_StoreNumberTotalMMM"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var recordsFilterTotal = ViewData["GetFilterTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
+    var recordsEmpDet = ViewData["GetEmpDetail"] as IEnumerable<Fct_StoreNumberAttributesModel>;
 
 }
 
@@ -150,13 +151,13 @@
             margin-top: 8px;
         }
 
-        button#btndataview {
+        button.btndataview {
             padding: 1px 10px;
             font-size: 10px;
             margin-top: 8px;
         }
 
-            button#btnaddnote:hover, button#btndataview:hover {
+            button#btnaddnote:hover, button.btndataview:hover {
                 color: white !important;
             }
 
@@ -914,7 +915,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 165; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 166; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -925,7 +926,7 @@
 
                                     <!-- 5 Freeze COL -->
                                     <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
-                                    @*<th rowspan="2" style="background-color: black; color:white;">View</th>*@
+                                    <th rowspan="2" style="background-color: black; color:white;">View</th>
                                     <th rowspan="2" style="background-color: black; color:white;">Market</th>
                                     <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                     @*<th rowspan="2" style="background-color: black; color:white;">Multi Market</th>*@
@@ -1115,7 +1116,7 @@
                             <tr class="total_data">
                                 <td></td>
                                 <td></td>
-                                @*<td></td>*@
+                                <td></td>
                                 @*<td></td>*@
                                 <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
                                 <td></td>
@@ -1318,7 +1319,7 @@
                                                     //TM wise total each market
                             <tr id="totMMM" class="total_dataMMM">
                                 <td></td>
-                                @*<td></td>*@
+                                <td></td>
                                 <td style="white-space: normal; word-wrap: break-word;">MMM Total</td>
                                 <td></td>
                                 <td style="white-space: normal; word-wrap: break-word;">@record2.MULMngr</td>
@@ -1508,7 +1509,7 @@
                                                     //TM wise total each market
                             <tr id="totTM" class="total_dataTM">
                                 <td></td>
-                                @*<td></td>*@
+                                <td></td>
                                 <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
                                 <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                                 <td></td>
@@ -1861,7 +1862,7 @@
 
                                                         <!-- ADD/VIEW BTN -->
                                                         <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
-                                                        @*<button type="button" onclick="MTDStoreEmployeeView(this)" id="btndataview" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>*@
+                                                        <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="@record.UniqueID"  class="btndataview btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                                         <!-- Hierarchy -->
                                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
@@ -2326,8 +2327,8 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: dodgerblue; color: white; font-weight:bold; display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                        <h5 class="modal-title" style="flex: 1; text-align: left;">Store: <span id="modalStore"></span></h5>
-                        <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Store Details</h5>
+                        @*<h5 class="modal-title" style="flex: 1; text-align: left;">Store: <span id="modalStore"></span></h5>*@
+                        <h5 class="modal-title" id="dataviewLabel" style="flex: 1; text-align: center;">Employee Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="flex: 1; text-align: right;">
                             <span>&times;</span>
                         </button>
@@ -2338,24 +2339,24 @@
                             <thead>
                                 <tr class="main_data" style="background-color: black; color: white;">
 
-                                    <th style="background-color: black; color: white;"><b>TM</b></th>
-                                    <th style="background-color: black; color: white;"><b>Market</b></th>
-                                    @*<th style="background-color: black; color: white;"><b>Store</b></th>*@
-                                    <th style="background-color: black; color: white;"><b>Unique ID</b></th>
+                                    <th style="background-color: black; color: white;"><b>Unique<br /> ID</b></th>
                                     <th style="background-color: black; color: white;"><b>Dealer Code</b></th>
-                                    <th style="background-color: black; color: white;"><b>Tiers</b></th>
-                                    <th style="background-color: black; color: white;"><b>SD</b></th>
-                                    <th style="background-color: black; color: white;">Monthly<br>Achieved Hours<br>Trending %</th>
-                                    <th style="background-color: dodgerblue; color: white;">GROSS ADDS<br>Trend%<br>To Goal</th>
-                                    <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>Goals</th>
-                                    <th style="background-color: dodgerblue; color: white;">Gross<br>Adds<br>NetOFF</th>
-                                    <th style="background-color: black; color: white;">PPVGA per<br>Traffic %</th>
-                                    <th style="background-color: black; color: white;">Total<br>Traffic                             </th>
-                                    <th style="background-color: black; color: white;">Fiber<br>Conversion                          </th>
-                                    <th style="background-color: black; color: white;">Broadband<br>Fiber<br>NetOFF                     </th>
-                                    <th style="background-color: black; color: white;">Fiber<br>Green<br>Check                          </th>
-                                    <th style="background-color: black; color: white;">APO                                      </th>
-                                    <th style="background-color: black; color: white;">CSAT                                     </th>
+                                    <th style="background-color: black; color: white;"><b>Store</b></th>
+                                    <th style="background-color: black; color: white;"><b>Market</b></th>
+                                    <th style="background-color: black; color: white;"><b>TM</b></th>
+                                    <th style="background-color: black; color: white;"><b>MMM</b></th>
+                                    <th style="background-color: black; color: white;"><b>EmpID<br />(Paycom)</b></th>
+                                    <th style="background-color: black; color: white;">Employees</th>
+                                    <th style="background-color: dodgerblue; color: white;">Role</th>
+                                    <th style="background-color: dodgerblue; color: white;">Status</th>
+                                    <th style="background-color: dodgerblue; color: white;">Hire Date</th>
+                                    <th style="background-color: black; color: white;">Pay Type</th>
+                                    <th style="background-color: black; color: white;">TOTAL<br>OPS</th>
+                                    <th style="background-color: black; color: white;">$GP per BOX</th>
+                                    <th style="background-color: black; color: white;">GP GOAL($)</th>
+                                    <th style="background-color: black; color: white;">Total $GP Achieved - With Spif</th>
+                                    <th style="background-color: black; color: white;">Trending($)</th>
+                                    <th style="background-color: black; color: white;">Trending %</th>
                                     <th style="background-color: black; color: white;">ProtAdv<br>HomeTech<br>Percentage                </th>
                                     <th style="background-color: black; color: white;">Break Even<br>Numbers                         </th>
                                     <th style="background-color: black; color: white;">Trending<br>ToBreakEven                      </th>
@@ -2501,171 +2502,8 @@
 
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr class="main_data">
-
-                                    <td><span id="modalTM"></span></td>
-                                    <td><span id="modalMarket"></span></td>
-                                    @*<td><span id="modalStore"></span></td>*@
-                                    <td><span id="modalUniqueID"></span></td>
-                                    <td><span id="modalDealerCode"></span></td>
-                                    <td><span id="modalTiers"></span></td>
-                                    <td><span id="modalSD"></span></td>
-                                    <td><span id="modalMAHTr"></span></td>
-                                    <td><span id="modalGATr"></span></td>
-                                    <td><span id="modalGAG"></span></td>
-                                    <td><span id="modalGANetOff"></span></td>
-                                    <td><span id="modalPPVGAperTrf"></span></td>
-                                    <td><span id="modalTotalTraffic"></span></td>
-                                    <td><span id="modalFiberConversion"></span></td>
-                                    <td><span id="modalBroadbandFiberNetOFF"></span></td>
-                                    <td><span id="modalFiberGreenCheck"></span></td>
-                                    <td><span id="modalAPO"></span></td>
-                                    <td><span id="modalCSAT"></span></td>
-                                    <td><span id="modalProtAdvHomeTechPercentage"></span></td>
-                                    <td><span id="modalBreakEvenNumbers"></span></td>
-                                    <td><span id="modalTrendingToBreakEven"></span></td>
-                                    <td><span id="modalGPWithSpifTrending"></span></td>
-                                    <td><span id="modalGPTrendingPercentage"></span></td>
-                                    <td><span id="modalTotalGPGoals"></span></td>
-                                    <td><span id="modalOPSTrendingToGoalsPercentage"></span></td>
-                                    <td><span id="modalTotalOPSGoals"></span></td>
-                                    <td><span id="modalTotalOPS"></span></td>
-                                    <td><span id="modalUpgradeTrendingToGoalsPercentage"></span></td>
-                                    <td><span id="modalMTDUpgradesGoals"></span></td>
-                                    <td><span id="modalMTDUpgradesNetOFF"></span></td>
-                                    <td><span id="modalTWCDevicesTrendToGoalPercentage"></span></td>
-                                    <td><span id="modalTWCDevicesQtyGoals"></span></td>
-                                    <td><span id="modalTWCDevicesQtyNetOFF"></span></td>
-                                    <td><span id="modalAIABusinessConversion"></span></td>
-                                    <td><span id="modalAIAConsumerConversion"></span></td>
-                                    <td><span id="modalAIAGreenCheckConsumer"></span></td>
-                                    <td><span id="modalAIACInternet"></span></td>
-                                    <td><span id="modalAIABInternet"></span></td>
-                                    <td><span id="modalTotalOPSTrending"></span></td>
-                                    <td><span id="modalOPSPerTrafficPercentage"></span></td>
-                                    <td><span id="modalCRUAchMTD"></span></td>
-                                    <td><span id="modalFNAchMTD"></span></td>
-                                    <td><span id="modalGPPerBox"></span></td>
-                                    <td><span id="modalTotalGPAchievedWithSpif"></span></td>
-                                    <td><span id="modalGrossAdds"></span></td>
-                                    <td><span id="modalChargeBack"></span></td>
-                                    <td><span id="modalGrossAddsTrend"></span></td>
-                                    <td><span id="modalGrossAddsGP"></span></td>
-                                    <td><span id="modalGrossAddsGPTrending"></span></td>
-                                    <td><span id="modalARBusinessFNProgramAverageQ2Target"></span></td>
-                                    <td><span id="modalFNAchAverageQTD"></span></td>
-                                    <td><span id="modalRemainingToAchieveFNAverageQ2Target"></span></td>
-                                    <td><span id="modalFNAchTrend"></span></td>
-                                    <td><span id="modalFNAchDollars"></span></td>
-                                    <td><span id="modalARBusinessCRUProgramAverageQ2Target"></span></td>
-                                    <td><span id="modalCRUAchVoice"></span></td>
-                                    <td><span id="modalCRUAchDATA"></span></td>
-                                    <td><span id="modalCRUAchAverageQTD"></span></td>
-                                    <td><span id="modalRemainingToAchieveCRUAverageQ2Target"></span></td>
-                                    <td><span id="modalCRUAchTrend"></span></td>
-                                    <td><span id="modalCRUAchVoiceDollars"></span></td>
-                                    <td><span id="modalCRUAchDATADollars"></span></td>
-                                    <td><span id="modalMTDUpgrades"></span></td>
-                                    <td><span id="modalChargeBack1"></span></td>
-                                    <td><span id="modalMTDUpgradesTrending"></span></td>
-                                    <td><span id="modalMTDUpgradesGP"></span></td>
-                                    <td><span id="modalMTDUpgradesGPTrending"></span></td>
-                                    <td><span id="modalNextUp"></span></td>
-                                    <td><span id="modalNextUpSpif"></span></td>
-                                    <td><span id="modalPremiumActivation"></span></td>
-                                    <td><span id="modalPremiumActivationNetOFF"></span></td>
-                                    <td><span id="modalChargeBack2"></span></td>
-                                    <td><span id="modalPremiumActivationGP"></span></td>
-                                    <td><span id="modalExtraActivation"></span></td>
-                                    <td><span id="modalExtraActivationNetOFF"></span></td>
-                                    <td><span id="modalChargeBack3"></span></td>
-                                    <td><span id="modalExtraActivationGP"></span></td>
-                                    <td><span id="modalNonExtraNonPremiumActivation"></span></td>
-                                    <td><span id="modalNonExtraNonPremiumActivationNetOFF"></span></td>
-                                    <td><span id="modalNonExtraNonPremiumActivationGP"></span></td>
-                                    <td><span id="modalPremiumUpgrade"></span></td>
-                                    <td><span id="modalChargeBack4"></span></td>
-                                    <td><span id="modalPremiumUpgradeNetOff"></span></td>
-                                    <td><span id="modalPremiumUpgradeGP"></span></td>
-                                    <td><span id="modalExtraUpgrade"></span></td>
-                                    <td><span id="modalChargeBack5"></span></td>
-                                    <td><span id="modalExtraUpgradeNetOff"></span></td>
-                                    <td><span id="modalExtraUpgradeGP"></span></td>
-                                    <td><span id="modalAIAGoals"></span></td>
-                                    <td><span id="modalAIAInternet"></span></td>
-                                    <td><span id="modalChargeBack6"></span></td>
-                                    <td><span id="modalAIAInternetNetOff"></span></td>
-                                    <td><span id="modalAIATr"></span></td>
-                                    <td><span id="modalAIAIntG"></span></td>
-                                    <td><span id="modalBBG"></span></td>
-                                    <td><span id="modalBBL300"></span></td>
-                                    <td><span id="modalNF300"></span></td>
-                                    <td><span id="modalNF500"></span></td>
-                                    <td><span id="modalNF1G"></span></td>
-                                    <td><span id="modalTBBNF"></span></td>
-                                    <td><span id="modalBBNFNOFF"></span></td>
-                                    <td><span id="modalCB1"></span></td>
-                                    <td><span id="modalFUpg"></span></td>
-                                    <td><span id="modalFUpgNOFF"></span></td>
-                                    <td><span id="modalCB2"></span></td>
-                                    <td><span id="modalBBF"></span></td>
-                                    <td><span id="modalBBFTr"></span></td>
-                                    <td><span id="modalBBFTrPer"></span></td>
-                                    <td><span id="modalBBL300QI"></span></td>
-                                    <td><span id="modalNF300QI"></span></td>
-                                    <td><span id="modalNF500QI"></span></td>
-                                    <td><span id="modalNF1GQI"></span></td>
-                                    <td><span id="modalFUpgGP"></span></td>
-                                    <td><span id="modalBBGP"></span></td>
-                                    <td><span id="modalBBFGP"></span></td>
-                                    <td><span id="modalBBFGPTr"></span></td>
-                                    <td><span id="modalTF"></span></td>
-                                    <td><span id="modalTFGP"></span></td>
-                                    <td><span id="modalPVG"></span></td>
-                                    <td><span id="modalPV"></span></td>
-                                    <td><span id="modalPVNOFF"></span></td>
-                                    <td><span id="modalCB3"></span></td>
-                                    <td><span id="modalPVTr"></span></td>
-                                    <td><span id="modalPVTrPer"></span></td>
-                                    <td><span id="modalPVGP"></span></td>
-                                    <td><span id="modalPVSpf"></span></td>
-                                    <td><span id="modalPVGPTr"></span></td>
-                                    <td><span id="modalEG"></span></td>
-                                    <td><span id="modalEAch"></span></td>
-                                    <td><span id="modalETr"></span></td>
-                                    <td><span id="modalETrGPer"></span></td>
-                                    <td><span id="modalTWCDQTY"></span></td>
-                                    <td><span id="modalCB4"></span></td>
-                                    <td><span id="modalTWCDQTYTr"></span></td>
-                                    <td><span id="modalTWCD"></span></td>
-                                    <td><span id="modalPGSpiff"></span></td>
-                                    <td><span id="modalPQTY"></span></td>
-                                    <td><span id="modalPGA"></span></td>
-                                    <td><span id="modalPNOFF"></span></td>
-                                    <td><span id="modalCB5"></span></td>
-                                    <td><span id="modalPGP"></span></td>
-                                    <td><span id="modalPAuto"></span></td>
-                                    <td><span id="modalAGP"></span></td>
-                                    <td><span id="modalAQTY"></span></td>
-                                    <td><span id="modalAQTYTr"></span></td>
-                                    <td><span id="modalAR"></span></td>
-                                    <td><span id="modalFQTY"></span></td>
-                                    <td><span id="modalFQTYNOFF"></span></td>
-                                    <td><span id="modalCB6"></span></td>
-                                    <td><span id="modalTPPer"></span></td>
-                                    <td><span id="modalPADV1"></span></td>
-                                    <td><span id="modalPADV4"></span></td>
-                                    <td><span id="modalFGP"></span></td>
-                                    <td><span id="modalWBHRS"></span></td>
-                                    <td><span id="modalWEAPerS"></span></td>
-                                    <td><span id="modalMBHRS"></span></td>
-                                    <td><span id="modalMAHRS"></span></td>
-                                    <td><span id="modalMAHRSTr"></span></td>
-                                    <td><span id="modalGACloseRT"></span></td>
-                                    <td><span id="modalHTP"></span></td>
-
-                                </tr>
+                            <tbody id="tblDetBdy">
+                                
                             </tbody>
                         </table>
                     </div>
@@ -2725,804 +2563,6 @@
 
 <!--Add/View buttons working -->
 <script>
-
-    function MTDStoreEmployeeView(button) {
-        // Find the parent row of the clicked button
-        var row = button.closest('.main_data');
-
-        // Extract data from the row's data attributes
-
-        document.getElementById('modalTM').innerText = row.getAttribute('data-tm');
-        document.getElementById('modalMarket').innerText = row.getAttribute('data-mkt');
-        //document.getElementById('modalmMarket').innerText = row.getAttribute('data-mmkt');
-        //document.getElementById('modalmmm').innerText = row.getAttribute('data-mmm');
-        document.getElementById('modalStore').innerText = row.getAttribute('data-store');
-        document.getElementById('modalUniqueID').innerText = row.getAttribute('data-UID');
-        document.getElementById('modalDealerCode').innerText = row.getAttribute('data-DC');
-        document.getElementById('modalTiers').innerText = row.getAttribute('data-tir');
-        document.getElementById('modalSD').innerText = row.getAttribute('data-sd');
-
-        //Monthly Achieved Hours Trending %
-
-        // Get the updated data-GATr attribute value
-        const MAHTrValue = row.getAttribute('data-MAHTr');
-        console.log(MAHTrValue);
-        // Format the value
-        const formattedMAHTrValue = formatValueP(MAHTrValue);
-        // Set the formatted value in the span's text content
-        document.getElementById('modalMAHTr').innerText = formattedMAHTrValue + '%';
-
-        //GROSS ADDS Trend % To Goal
-
-        // Get the updated data-GATr attribute value
-        const GATrValue = row.getAttribute('data-GATr');
-        // Format the value
-        const formattedGATrValue = formatValue(GATrValue);
-        // Set the formatted value in the span's text content
-        document.getElementById('modalGATr').innerText = formattedGATrValue;
-
-
-        //document.getElementById('modalGAG').innerText = row.getAttribute('data-GAG');
-        // Get the updated data-GAG attribute value
-        const GAGValue = row.getAttribute('data-GAG');
-        // Format the value
-        const formattedGAGValue = formatValue(GAGValue);
-        // Set the formatted value in the span's text content
-        document.getElementById('modalGAG').innerText = formattedGAGValue;
-
-        //document.getElementById('modalGANetOff').innerText = row.getAttribute('data-GANetOff');
-        const GANetOffValue = row.getAttribute('data-GANetOff');
-        const formattedGANetOffValue = formatValue(GANetOffValue);
-        document.getElementById('modalGANetOff').innerText = formattedGANetOffValue;
-
-
-        //document.getElementById('modalPPVGAperTrf').innerText = row.getAttribute('data-PPVGAperTrf');
-        const PPVGAperTrfValue = row.getAttribute('data-PPVGAperTrf');
-        const formattedPPVGAperTrfValue = formatValueP(PPVGAperTrfValue);
-        document.getElementById('modalPPVGAperTrf').innerText = formattedPPVGAperTrfValue + '%';
-
-        //document.getElementById('modalTotalTraffic').innerText = row.getAttribute('data-modalTotalTraffic');
-        const modalTotalTrafficValue = row.getAttribute('data-modalTotalTraffic');
-        const formattedmodalTotalTrafficValue = formatValue(modalTotalTrafficValue);
-        document.getElementById('modalTotalTraffic').innerText = formattedmodalTotalTrafficValue;
-
-        //document.getElementById('modalFiberConversion').innerText = row.getAttribute('data-modalFiberConversion');
-        const modalFiberConversionValue = row.getAttribute('data-modalFiberConversion');
-        const formattedmodalFiberConversionValue = formatValueP(modalFiberConversionValue);
-        document.getElementById('modalFiberConversion').innerText = formattedmodalFiberConversionValue + '%';
-
-        //document.getElementById('modalBroadbandFiberNetOFF').innerText = row.getAttribute('data-modalBroadbandFiberNetOFF');
-        const modalBroadbandFiberNetOFFValue = row.getAttribute('data-modalBroadbandFiberNetOFF');
-        const formattedmodalBroadbandFiberNetOFFValue = formatValue(modalBroadbandFiberNetOFFValue);
-        document.getElementById('modalBroadbandFiberNetOFF').innerText = formattedmodalBroadbandFiberNetOFFValue;
-
-        //document.getElementById('modalFiberGreenCheck').innerText = row.getAttribute('data-modalFiberGreenCheck');
-        const modalFiberGreenCheckValue = row.getAttribute('data-modalFiberGreenCheck');
-        const formattedmodalFiberGreenCheckValue = formatValue(modalFiberGreenCheckValue);
-        document.getElementById('modalFiberGreenCheck').innerText = formattedmodalFiberGreenCheckValue;
-
-        //document.getElementById('modalAPO').innerText = row.getAttribute('data-modalAPO');
-        const modalAPOValue = row.getAttribute('data-modalAPO');
-        const formattedmodalAPOValue = formatValue(modalAPOValue);
-        document.getElementById('modalAPO').innerText = formattedmodalAPOValue;
-
-        //document.getElementById('modalCSAT').innerText = row.getAttribute('data-modalCSAT');
-        const modalCSATValue = row.getAttribute('data-modalCSAT');
-        const formattedmodalCSATValue = formatValueP(modalCSATValue);
-        document.getElementById('modalCSAT').innerText = formattedmodalCSATValue + '%';
-
-        //document.getElementById('modalProtAdvHomeTechPercentage').innerText = row.getAttribute('data-modalProtAdvHomeTechPercentage');
-        const modalProtAdvHomeTechPercentageValue = row.getAttribute('data-modalProtAdvHomeTechPercentage');
-        const formattedmodalProtAdvHomeTechPercentageValue = formatValueP(modalProtAdvHomeTechPercentageValue);
-        document.getElementById('modalProtAdvHomeTechPercentage').innerText = formattedmodalProtAdvHomeTechPercentageValue + '%';
-
-        //document.getElementById('modalBreakEvenNumbers').innerText = row.getAttribute('data-modalBreakEvenNumbers');
-        const modalBreakEvenNumbersValue = row.getAttribute('data-modalBreakEvenNumbers');
-        const formattedmodalBreakEvenNumbersValue = formatValue(modalBreakEvenNumbersValue);
-        document.getElementById('modalBreakEvenNumbers').innerText = formattedmodalBreakEvenNumbersValue;
-
-        //document.getElementById('modalTrendingToBreakEven').innerText = row.getAttribute('data-modalTrendingToBreakEven');
-        const modalTrendingToBreakEvenValue = row.getAttribute('data-modalTrendingToBreakEven');
-        const formattedGmodalTrendingToBreakEvenValue = formatValueP(modalTrendingToBreakEvenValue);
-        document.getElementById('modalTrendingToBreakEven').innerText = formattedGmodalTrendingToBreakEvenValue + '%';
-
-        //document.getElementById('modalGPWithSpifTrending').innerText = row.getAttribute('data-modalGPWithSpifTrending');
-        const modalGPWithSpifTrendingValue = row.getAttribute('data-modalGPWithSpifTrending');
-        const formattedmodalGPWithSpifTrendingValue = formatValue(modalGPWithSpifTrendingValue);
-        document.getElementById('modalGPWithSpifTrending').innerText = formattedmodalGPWithSpifTrendingValue;
-
-        //document.getElementById('modalGPTrendingPercentage').innerText = row.getAttribute('data-modalGPTrendingPercentage');
-        const modalGPTrendingPercentageValue = row.getAttribute('data-modalGPTrendingPercentage');
-        const formattedmodalGPTrendingPercentageValue = formatValueP(modalGPTrendingPercentageValue);
-        document.getElementById('modalGPTrendingPercentage').innerText = formattedmodalGPTrendingPercentageValue + '%';
-
-        //document.getElementById('modalTotalGPGoals').innerText = row.getAttribute('data-modalTotalGPGoals');
-        const modalTotalGPGoalsValue = row.getAttribute('data-modalTotalGPGoals');
-        const formattedmodalTotalGPGoalsValue = formatValue(modalTotalGPGoalsValue);
-        document.getElementById('modalTotalGPGoals').innerText = formattedmodalTotalGPGoalsValue;
-
-        //document.getElementById('modalOPSTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalOPSTrendingToGoalsPercentage');
-        const modalOPSTrendingToGoalsPercentageValue = row.getAttribute('data-modalOPSTrendingToGoalsPercentage');
-        const formattedmodalOPSTrendingToGoalsPercentageValue = formatValueP(modalOPSTrendingToGoalsPercentageValue);
-        document.getElementById('modalOPSTrendingToGoalsPercentage').innerText = formattedmodalOPSTrendingToGoalsPercentageValue + '%';
-
-        //document.getElementById('modalTotalOPSGoals').innerText = row.getAttribute('data-modalTotalOPSGoals');
-        const modalTotalOPSGoalsValue = row.getAttribute('data-modalTotalOPSGoals');
-        const formattedmodalTotalOPSGoalsValue = formatValue(modalTotalOPSGoalsValue);
-        document.getElementById('modalTotalOPSGoals').innerText = formattedmodalTotalOPSGoalsValue;
-
-        //document.getElementById('modalTotalOPS').innerText = row.getAttribute('data-modalTotalOPS');
-        const modalTotalOPSValue = row.getAttribute('data-modalTotalOPS');
-        const formattedmodalTotalOPSValue = formatValue(modalTotalOPSValue);
-        document.getElementById('modalTotalOPS').innerText = formattedmodalTotalOPSValue;
-
-        //document.getElementById('modalUpgradeTrendingToGoalsPercentage').innerText = row.getAttribute('data-modalUpgradeTrendingToGoalsPercentage');
-        const modalUpgradeTrendingToGoalsPercentageValue = row.getAttribute('data-modalUpgradeTrendingToGoalsPercentage');
-        const formattedmodalUpgradeTrendingToGoalsPercentageValue = formatValueP(modalUpgradeTrendingToGoalsPercentageValue);
-        document.getElementById('modalUpgradeTrendingToGoalsPercentage').innerText = formattedmodalUpgradeTrendingToGoalsPercentageValue + '%';
-
-        //document.getElementById('modalMTDUpgradesGoals').innerText = row.getAttribute('data-modalMTDUpgradesGoals');
-        const modalMTDUpgradesGoalsValue = row.getAttribute('data-modalMTDUpgradesGoals');
-        const formattedmodalMTDUpgradesGoalsValue = formatValue(modalMTDUpgradesGoalsValue);
-        document.getElementById('modalMTDUpgradesGoals').innerText = formattedmodalMTDUpgradesGoalsValue;
-
-        //document.getElementById('modalMTDUpgradesNetOFF').innerText = row.getAttribute('data-modalMTDUpgradesNetOFF');
-        const modalMTDUpgradesNetOFFValue = row.getAttribute('data-modalMTDUpgradesNetOFF');
-        const formattedmodalMTDUpgradesNetOFFValue = formatValue(modalMTDUpgradesNetOFFValue);
-        document.getElementById('modalMTDUpgradesNetOFF').innerText = formattedmodalMTDUpgradesNetOFFValue;
-
-        //document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = row.getAttribute('data-modalTWCDevicesTrendToGoalPercentage');
-        const modalTWCDevicesTrendToGoalPercentageValue = row.getAttribute('data-modalTWCDevicesTrendToGoalPercentage');
-        const formattedmodalTWCDevicesTrendToGoalPercentageValue = formatValueP(modalTWCDevicesTrendToGoalPercentageValue);
-        document.getElementById('modalTWCDevicesTrendToGoalPercentage').innerText = formattedmodalTWCDevicesTrendToGoalPercentageValue + '%';
-
-        //document.getElementById('modalTWCDevicesQtyGoals').innerText = row.getAttribute('data-modalTWCDevicesQtyGoals');
-        const modalTWCDevicesQtyGoalsValue = row.getAttribute('data-modalTWCDevicesQtyGoals');
-        const formattedmodalTWCDevicesQtyGoalsValue = formatValue(modalTWCDevicesQtyGoalsValue);
-        document.getElementById('modalTWCDevicesQtyGoals').innerText = formattedmodalTWCDevicesQtyGoalsValue;
-
-        //document.getElementById('modalTWCDevicesQtyNetOFF').innerText = row.getAttribute('data-modalTWCDevicesQtyNetOFF');
-        const modalTWCDevicesQtyNetOFFValue = row.getAttribute('data-modalTWCDevicesQtyNetOFF');
-        const formattedmodalTWCDevicesQtyNetOFFValue = formatValue(modalTWCDevicesQtyNetOFFValue);
-        document.getElementById('modalTWCDevicesQtyNetOFF').innerText = formattedmodalTWCDevicesQtyNetOFFValue;
-
-        //document.getElementById('modalAIABusinessConversion').innerText = row.getAttribute('data-modalAIABusinessConversion');
-        const modalAIABusinessConversionValue = row.getAttribute('data-modalAIABusinessConversion');
-        const formattedmodalAIABusinessConversionValue = formatValueP(modalAIABusinessConversionValue);
-        document.getElementById('modalAIABusinessConversion').innerText = formattedmodalAIABusinessConversionValue;
-
-        //document.getElementById('modalAIAConsumerConversion').innerText = row.getAttribute('data-modalAIAConsumerConversion');
-        const modalAIAConsumerConversionValue = row.getAttribute('data-modalAIAConsumerConversion');
-        const formattedmodalAIAConsumerConversionValue = formatValueP(modalAIAConsumerConversionValue);
-        document.getElementById('modalAIAConsumerConversion').innerText = formattedmodalAIAConsumerConversionValue;
-
-        //document.getElementById('modalAIAGreenCheckConsumer').innerText = row.getAttribute('data-modalAIAGreenCheckConsumer');
-        const modalAIAGreenCheckConsumerValue = row.getAttribute('data-modalAIAGreenCheckConsumer');
-        const formattedmodalAIAGreenCheckConsumerValue = formatValue(modalAIAGreenCheckConsumerValue);
-        document.getElementById('modalAIAGreenCheckConsumer').innerText = formattedmodalAIAGreenCheckConsumerValue;
-
-        //document.getElementById('modalAIACInternet').innerText = row.getAttribute('data-modalAIACInternet');
-        const modalAIACInternetValue = row.getAttribute('data-modalAIACInternet');
-        const formattedmodalAIACInternetValue = formatValue(modalAIACInternetValue);
-        document.getElementById('modalAIACInternet').innerText = formattedmodalAIACInternetValue;
-
-        //document.getElementById('modalAIABInternet').innerText = row.getAttribute('data-modalAIABInternet');
-        const modalAIABInternetValue = row.getAttribute('data-modalAIABInternet');
-        const formattedmodalAIABInternetValue = formatValue(modalAIABInternetValue);
-        document.getElementById('modalAIABInternet').innerText = formattedmodalAIABInternetValue;
-
-        //document.getElementById('modalTotalOPSTrending').innerText = row.getAttribute('data-modalTotalOPSTrending');
-        const modalTotalOPSTrendingValue = row.getAttribute('data-modalTotalOPSTrending');
-        const formattedmodalTotalOPSTrendingValue = formatValue(modalTotalOPSTrendingValue);
-        document.getElementById('modalTotalOPSTrending').innerText = formattedmodalTotalOPSTrendingValue;
-
-        //document.getElementById('modalOPSPerTrafficPercentage').innerText = row.getAttribute('data-modalOPSPerTrafficPercentage');
-        const modalOPSPerTrafficPercentageValue = row.getAttribute('data-modalOPSPerTrafficPercentage');
-        const formattedmodalOPSPerTrafficPercentageValue = formatValueP(modalOPSPerTrafficPercentageValue);
-        document.getElementById('modalOPSPerTrafficPercentage').innerText = formattedmodalOPSPerTrafficPercentageValue + '%';
-
-        //document.getElementById('modalCRUAchMTD').innerText = row.getAttribute('data-modalCRUAchMTD');
-        const modalCRUAchMTDValue = row.getAttribute('data-modalCRUAchMTD');
-        const formattedmodalCRUAchMTDValue = formatValue(modalCRUAchMTDValue);
-        document.getElementById('modalCRUAchMTD').innerText = formattedmodalCRUAchMTDValue;
-
-        //document.getElementById('modalFNAchMTD').innerText = row.getAttribute('data-modalFNAchMTD');
-        const modalFNAchMTDValue = row.getAttribute('data-modalFNAchMTD');
-        const formattedmodalFNAchMTDValue = formatValue(modalFNAchMTDValue);
-        document.getElementById('modalFNAchMTD').innerText = formattedmodalFNAchMTDValue;
-
-        //document.getElementById('modalGPPerBox').innerText = row.getAttribute('data-modalGPPerBox');
-        const modalGPPerBoxValue = row.getAttribute('data-modalGPPerBox');
-        const formattedmodalGPPerBoxValue = formatValue(modalGPPerBoxValue);
-        document.getElementById('modalGPPerBox').innerText = formattedmodalGPPerBoxValue;
-
-        //document.getElementById('modalTotalGPAchievedWithSpif').innerText = row.getAttribute('data-modalTotalGPAchievedWithSpif');
-        const modalTotalGPAchievedWithSpifValue = row.getAttribute('data-modalTotalGPAchievedWithSpif');
-        const formattedmodalTotalGPAchievedWithSpifValue = formatValue(modalTotalGPAchievedWithSpifValue);
-        document.getElementById('modalTotalGPAchievedWithSpif').innerText = formattedmodalTotalGPAchievedWithSpifValue;
-
-        //document.getElementById('modalGrossAdds').innerText = row.getAttribute('data-modalGrossAdds');
-        const modalGrossAddsValue = row.getAttribute('data-modalGrossAdds');
-        const formattedmodalGrossAddsValue = formatValue(modalGrossAddsValue);
-        document.getElementById('modalGrossAdds').innerText = formattedmodalGrossAddsValue;
-
-        //document.getElementById('modalChargeBack').innerText = row.getAttribute('data-modalChargeBack');
-        const modalChargeBackValue = row.getAttribute('data-modalChargeBack');
-        const formattedmodalChargeBackValue = formatValue(modalChargeBackValue);
-        document.getElementById('modalChargeBack').innerText = formattedmodalChargeBackValue;
-
-        //document.getElementById('modalGrossAddsTrend').innerText = row.getAttribute('data-modalGrossAddsTrend');
-        const modalGrossAddsTrendValue = row.getAttribute('data-modalGrossAddsTrend');
-        const formattedmodalGrossAddsTrendValue = formatValue(modalGrossAddsTrendValue);
-        document.getElementById('modalGrossAddsTrend').innerText = formattedmodalGrossAddsTrendValue;
-
-        //document.getElementById('modalGrossAddsGP').innerText = row.getAttribute('data-modalGrossAddsGP');
-        const modalGrossAddsGPValue = row.getAttribute('data-modalGrossAddsGP');
-        const formattedmodalGrossAddsGPValue = formatValue(modalGrossAddsGPValue);
-        document.getElementById('modalGrossAddsGP').innerText = formattedmodalGrossAddsGPValue;
-
-        //document.getElementById('modalGrossAddsGPTrending').innerText = row.getAttribute('data-modalGrossAddsGPTrending');
-        const modalGrossAddsGPTrendingValue = row.getAttribute('data-modalGrossAddsGPTrending');
-        const formattedmodalGrossAddsGPTrendingValue = formatValue(modalGrossAddsGPTrendingValue);
-        document.getElementById('modalGrossAddsGPTrending').innerText = formattedmodalGrossAddsGPTrendingValue;
-
-        //document.getElementById('modalARBusinessFNProgramAverageQ2Target').innerText = row.getAttribute('data-modalARBusinessFNProgramAverageQ2Target');
-        const modalARBusinessFNProgramAverageQ2TargetValue = row.getAttribute('data-modalARBusinessFNProgramAverageQ2Target');
-        const formattedmodalARBusinessFNProgramAverageQ2TargetValue = formatValue(modalARBusinessFNProgramAverageQ2TargetValue);
-        document.getElementById('modalARBusinessFNProgramAverageQ2Target').innerText = formattedmodalARBusinessFNProgramAverageQ2TargetValue;
-
-        //document.getElementById('modalFNAchAverageQTD').innerText = row.getAttribute('data-modalFNAchAverageQTD');
-        const modalFNAchAverageQTDValue = row.getAttribute('data-modalFNAchAverageQTD');
-        const formattedmodalFNAchAverageQTDValue = formatValue(modalFNAchAverageQTDValue);
-        document.getElementById('modalFNAchAverageQTD').innerText = formattedmodalFNAchAverageQTDValue;
-
-        //document.getElementById('modalRemainingToAchieveFNAverageQ2Target').innerText = row.getAttribute('data-modalRemainingToAchieveFNAverageQ2Target');
-        const modalRemainingToAchieveFNAverageQ2TargetValue = row.getAttribute('data-modalRemainingToAchieveFNAverageQ2Target');
-        const formattedmodalRemainingToAchieveFNAverageQ2TargetValue = formatValue(modalRemainingToAchieveFNAverageQ2TargetValue);
-        document.getElementById('modalRemainingToAchieveFNAverageQ2Target').innerText = formattedmodalRemainingToAchieveFNAverageQ2TargetValue;
-
-        //document.getElementById('modalFNAchTrend').innerText = row.getAttribute('data-modalFNAchTrend');
-        const modalFNAchTrendValue = row.getAttribute('data-modalFNAchTrend');
-        const formattedmodalFNAchTrendValue = formatValue(modalFNAchTrendValue);
-        document.getElementById('modalFNAchTrend').innerText = formattedmodalFNAchTrendValue;
-
-        //document.getElementById('modalFNAchDollars').innerText = row.getAttribute('data-modalFNAchDollars');
-        const modalFNAchDollarsValue = row.getAttribute('data-modalFNAchDollars');
-        const formattedmodalFNAchDollarsValue = formatValue(modalFNAchDollarsValue);
-        document.getElementById('modalFNAchDollars').innerText = formattedmodalFNAchDollarsValue;
-
-        //document.getElementById('modalARBusinessCRUProgramAverageQ2Target').innerText = row.getAttribute('data-modalARBusinessCRUProgramAverageQ2Target');
-        const modalARBusinessCRUProgramAverageQ2TargetValue = row.getAttribute('data-modalARBusinessCRUProgramAverageQ2Target');
-        const formattedmodalARBusinessCRUProgramAverageQ2TargetValue = formatValue(modalARBusinessCRUProgramAverageQ2TargetValue);
-        document.getElementById('modalARBusinessCRUProgramAverageQ2Target').innerText = formattedmodalARBusinessCRUProgramAverageQ2TargetValue;
-
-        //document.getElementById('modalCRUAchVoice').innerText = row.getAttribute('data-modalCRUAchVoice');
-        const modalCRUAchVoiceValue = row.getAttribute('data-modalCRUAchVoice');
-        const formattedmodalCRUAchVoiceValue = formatValue(modalCRUAchVoiceValue);
-        document.getElementById('modalCRUAchVoice').innerText = formattedmodalCRUAchVoiceValue;
-
-        //document.getElementById('modalCRUAchDATA').innerText = row.getAttribute('data-modalCRUAchDATA');
-        const modalCRUAchDATAValue = row.getAttribute('data-modalCRUAchDATA');
-        const formattedmodalCRUAchDATAValue = formatValue(modalCRUAchDATAValue);
-        document.getElementById('modalCRUAchDATA').innerText = formattedmodalCRUAchDATAValue;
-
-        //document.getElementById('modalCRUAchAverageQTD').innerText = row.getAttribute('data-modalCRUAchAverageQTD');
-        const modalCRUAchAverageQTDValue = row.getAttribute('data-modalCRUAchAverageQTD');
-        const formattedmodalCRUAchAverageQTDValue = formatValue(modalCRUAchAverageQTDValue);
-        document.getElementById('modalCRUAchAverageQTD').innerText = formattedmodalCRUAchAverageQTDValue;
-
-        //document.getElementById('modalRemainingToAchieveCRUAverageQ2Target').innerText = row.getAttribute('data-modalRemainingToAchieveCRUAverageQ2Target');
-        const modalRemainingToAchieveCRUAverageQ2TargetValue = row.getAttribute('data-modalRemainingToAchieveCRUAverageQ2Target');
-        const formattedmodalRemainingToAchieveCRUAverageQ2TargetValue = formatValue(modalRemainingToAchieveCRUAverageQ2TargetValue);
-        document.getElementById('modalRemainingToAchieveCRUAverageQ2Target').innerText = formattedmodalRemainingToAchieveCRUAverageQ2TargetValue;
-
-        //document.getElementById('modalCRUAchTrend').innerText = row.getAttribute('data-modalCRUAchTrend');
-        const modalCRUAchTrendValue = row.getAttribute('data-modalCRUAchTrend');
-        const formattedmodalCRUAchTrendValue = formatValue(modalCRUAchTrendValue);
-        document.getElementById('modalCRUAchTrend').innerText = formattedmodalCRUAchTrendValue;
-
-        //document.getElementById('modalCRUAchVoiceDollars').innerText = row.getAttribute('data-modalCRUAchVoiceDollars');
-        const modalCRUAchVoiceDollarsValue = row.getAttribute('data-modalCRUAchVoiceDollars');
-        const formattedmodalCRUAchVoiceDollarsValue = formatValue(modalCRUAchVoiceDollarsValue);
-        document.getElementById('modalCRUAchVoiceDollars').innerText = formattedmodalCRUAchVoiceDollarsValue;
-
-        //document.getElementById('modalCRUAchDATADollars').innerText = row.getAttribute('data-modalCRUAchDATADollars');
-        const modalCRUAchDATADollarsValue = row.getAttribute('data-modalCRUAchDATADollars');
-        const formattedmodalCRUAchDATADollarsValue = formatValue(modalCRUAchDATADollarsValue);
-        document.getElementById('modalCRUAchDATADollars').innerText = formattedmodalCRUAchDATADollarsValue;
-
-        //document.getElementById('modalMTDUpgrades').innerText = row.getAttribute('data-modalMTDUpgrades');
-        const modalMTDUpgradesValue = row.getAttribute('data-modalMTDUpgrades');
-        const formattedmodalMTDUpgradesValue = formatValue(modalMTDUpgradesValue);
-        document.getElementById('modalMTDUpgrades').innerText = formattedmodalMTDUpgradesValue;
-
-        //document.getElementById('modalChargeBack1').innerText = row.getAttribute('data-modalChargeBack1');
-        const modalChargeBack1Value = row.getAttribute('data-modalChargeBack1');
-        const formattedmodalChargeBack1Value = formatValue(modalChargeBack1Value);
-        document.getElementById('modalChargeBack1').innerText = formattedmodalChargeBack1Value;
-
-        //document.getElementById('modalMTDUpgradesTrending').innerText = row.getAttribute('data-modalMTDUpgradesTrending');
-        const modalMTDUpgradesTrendingValue = row.getAttribute('data-modalMTDUpgradesTrending');
-        const formattedmodalMTDUpgradesTrendingValue = formatValue(modalMTDUpgradesTrendingValue);
-        document.getElementById('modalMTDUpgradesTrending').innerText = formattedmodalMTDUpgradesTrendingValue;
-
-        //document.getElementById('modalMTDUpgradesGP').innerText = row.getAttribute('data-modalMTDUpgradesGP');
-        const modalMTDUpgradesGPValue = row.getAttribute('data-modalMTDUpgradesGP');
-        const formattedmodalMTDUpgradesGPValue = formatValue(modalMTDUpgradesGPValue);
-        document.getElementById('modalMTDUpgradesGP').innerText = formattedmodalMTDUpgradesGPValue;
-
-        //document.getElementById('modalMTDUpgradesGPTrending').innerText = row.getAttribute('data-modalMTDUpgradesGPTrending');
-        const modalMTDUpgradesGPTrendingValue = row.getAttribute('data-modalMTDUpgradesGPTrending');
-        const formattedmodalMTDUpgradesGPTrendingValue = formatValue(modalMTDUpgradesGPTrendingValue);
-        document.getElementById('modalMTDUpgradesGPTrending').innerText = formattedmodalMTDUpgradesGPTrendingValue;
-
-        //document.getElementById('modalNextUp').innerText = row.getAttribute('data-modalNextUp');
-        const modalNextUpValue = row.getAttribute('data-modalNextUp');
-        const formattedmodalNextUpValue = formatValue(modalNextUpValue);
-        document.getElementById('modalNextUp').innerText = formattedmodalNextUpValue;
-
-        //document.getElementById('modalNextUpSpif').innerText = row.getAttribute('data-modalNextUpSpif');
-        const modalNextUpSpifValue = row.getAttribute('data-modalNextUpSpif');
-        const formattedmodalNextUpSpifValue = formatValue(modalNextUpSpifValue);
-        document.getElementById('modalNextUpSpif').innerText = formattedmodalNextUpSpifValue;
-
-        //document.getElementById('modalPremiumActivation').innerText = row.getAttribute('data-modalPremiumActivation');
-        const modalPremiumActivationValue = row.getAttribute('data-modalPremiumActivation');
-        const formattedmodalPremiumActivationValue = formatValue(modalPremiumActivationValue);
-        document.getElementById('modalPremiumActivation').innerText = formattedmodalPremiumActivationValue;
-
-        //document.getElementById('modalPremiumActivationNetOFF').innerText = row.getAttribute('data-modalPremiumActivationNetOFF');
-        const modalPremiumActivationNetOFFValue = row.getAttribute('data-modalPremiumActivationNetOFF');
-        const formattedmodalPremiumActivationNetOFFValue = formatValue(modalPremiumActivationNetOFFValue);
-        document.getElementById('modalPremiumActivationNetOFF').innerText = formattedmodalPremiumActivationNetOFFValue;
-
-        //document.getElementById('modalChargeBack2').innerText = row.getAttribute('data-modalChargeBack2');
-        const modalChargeBack2Value = row.getAttribute('data-modalChargeBack2');
-        const formattedmodalChargeBack2Value = formatValue(modalChargeBack2Value);
-        document.getElementById('modalChargeBack2').innerText = formattedmodalChargeBack2Value;
-
-        //document.getElementById('modalPremiumActivationGP').innerText = row.getAttribute('data-modalPremiumActivationGP');
-        const modalPremiumActivationGPValue = row.getAttribute('data-modalPremiumActivationGP');
-        const formattedmodalPremiumActivationGPValue = formatValue(modalPremiumActivationGPValue);
-        document.getElementById('modalPremiumActivationGP').innerText = formattedmodalPremiumActivationGPValue;
-
-        //document.getElementById('modalExtraActivation').innerText = row.getAttribute('data-modalExtraActivation');
-        const modalExtraActivationValue = row.getAttribute('data-modalExtraActivation');
-        const formattedmodalExtraActivationValue = formatValue(modalExtraActivationValue);
-        document.getElementById('modalExtraActivation').innerText = formattedmodalExtraActivationValue;
-
-        //document.getElementById('modalExtraActivationNetOFF').innerText = row.getAttribute('data-modalExtraActivationNetOFF');
-        const modalExtraActivationNetOFFValue = row.getAttribute('data-modalExtraActivationNetOFF');
-        const formattedmodalExtraActivationNetOFFValue = formatValue(modalExtraActivationNetOFFValue);
-        document.getElementById('modalExtraActivationNetOFF').innerText = formattedmodalExtraActivationNetOFFValue;
-
-        //document.getElementById('modalChargeBack3').innerText = row.getAttribute('data-modalChargeBack3');
-        const modalChargeBack3Value = row.getAttribute('data-modalChargeBack3');
-        const formattedmodalChargeBack3Value = formatValue(modalChargeBack3Value);
-        document.getElementById('modalChargeBack3').innerText = formattedmodalChargeBack3Value;
-
-        //document.getElementById('modalExtraActivationGP').innerText = row.getAttribute('data-modalExtraActivationGP');
-        const modalExtraActivationGPValue = row.getAttribute('data-modalExtraActivationGP');
-        const formattedmodalExtraActivationGPValue = formatValue(modalExtraActivationGPValue);
-        document.getElementById('modalExtraActivationGP').innerText = formattedmodalExtraActivationGPValue;
-
-        //document.getElementById('modalNonExtraNonPremiumActivation').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivation');
-        const modalNonExtraNonPremiumActivationValue = row.getAttribute('data-modalNonExtraNonPremiumActivation');
-        const formattedmodalNonExtraNonPremiumActivationValue = formatValue(modalNonExtraNonPremiumActivationValue);
-        document.getElementById('modalNonExtraNonPremiumActivation').innerText = formattedmodalNonExtraNonPremiumActivationValue;
-
-        //document.getElementById('modalNonExtraNonPremiumActivationNetOFF').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivationNetOFF');
-        const modalNonExtraNonPremiumActivationNetOFFValue = row.getAttribute('data-modalNonExtraNonPremiumActivationNetOFF');
-        const formattedmodalNonExtraNonPremiumActivationNetOFFValue = formatValue(modalNonExtraNonPremiumActivationNetOFFValue);
-        document.getElementById('modalNonExtraNonPremiumActivationNetOFF').innerText = formattedmodalNonExtraNonPremiumActivationNetOFFValue;
-
-        //document.getElementById('modalNonExtraNonPremiumActivationGP').innerText = row.getAttribute('data-modalNonExtraNonPremiumActivationGP');
-        const modalNonExtraNonPremiumActivationGPValue = row.getAttribute('data-modalNonExtraNonPremiumActivationGP');
-        const formattedmodalNonExtraNonPremiumActivationGPValue = formatValue(modalNonExtraNonPremiumActivationGPValue);
-        document.getElementById('modalNonExtraNonPremiumActivationGP').innerText = formattedmodalNonExtraNonPremiumActivationGPValue;
-
-        //document.getElementById('modalPremiumUpgrade').innerText = row.getAttribute('data-modalPremiumUpgrade');
-        const modalPremiumUpgradeValue = row.getAttribute('data-modalPremiumUpgrade');
-        const formattedmodalPremiumUpgradeValue = formatValue(modalPremiumUpgradeValue);
-        document.getElementById('modalPremiumUpgrade').innerText = formattedmodalPremiumUpgradeValue;
-
-        //document.getElementById('modalChargeBack4').innerText = row.getAttribute('data-modalChargeBack4');
-        const modalChargeBack4Value = row.getAttribute('data-modalChargeBack4');
-        const formattedmodalChargeBack4Value = formatValue(modalChargeBack4Value);
-        document.getElementById('modalChargeBack4').innerText = formattedmodalChargeBack4Value;
-
-        //document.getElementById('modalPremiumUpgradeNetOff').innerText = row.getAttribute('data-modalPremiumUpgradeNetOff');
-        const modalPremiumUpgradeNetOffValue = row.getAttribute('data-modalPremiumUpgradeNetOff');
-        const formattedmodalPremiumUpgradeNetOffValue = formatValue(modalPremiumUpgradeNetOffValue);
-        document.getElementById('modalPremiumUpgradeNetOff').innerText = formattedmodalPremiumUpgradeNetOffValue;
-
-        //document.getElementById('modalPremiumUpgradeGP').innerText = row.getAttribute('data-modalPremiumUpgradeGP');
-        const modalPremiumUpgradeGPValue = row.getAttribute('data-modalPremiumUpgradeGP');
-        const formattedmodalPremiumUpgradeGPValue = formatValue(modalPremiumUpgradeGPValue);
-        document.getElementById('modalPremiumUpgradeGP').innerText = formattedmodalPremiumUpgradeGPValue;
-
-        //document.getElementById('modalExtraUpgrade').innerText = row.getAttribute('data-modalExtraUpgrade');
-        const modalExtraUpgradeValue = row.getAttribute('data-modalExtraUpgrade');
-        const formattedmodalExtraUpgradeValue = formatValue(modalExtraUpgradeValue);
-        document.getElementById('modalExtraUpgrade').innerText = formattedmodalExtraUpgradeValue;
-
-        //document.getElementById('modalChargeBack5').innerText = row.getAttribute('data-modalChargeBack5');
-        const modalChargeBack5Value = row.getAttribute('data-modalChargeBack5');
-        const formattedmodalChargeBack5Value = formatValue(modalChargeBack5Value);
-        document.getElementById('modalChargeBack5').innerText = formattedmodalChargeBack5Value;
-
-        //document.getElementById('modalExtraUpgradeNetOff').innerText = row.getAttribute('data-modalExtraUpgradeNetOff');
-        const modalExtraUpgradeNetOffValue = row.getAttribute('data-modalExtraUpgradeNetOff');
-        const formattedmodalExtraUpgradeNetOffValue = formatValue(modalExtraUpgradeNetOffValue);
-        document.getElementById('modalExtraUpgradeNetOff').innerText = formattedmodalExtraUpgradeNetOffValue;
-
-        //document.getElementById('modalExtraUpgradeGP').innerText = row.getAttribute('data-modalExtraUpgradeGP');
-        const modalExtraUpgradeGPValue = row.getAttribute('data-modalExtraUpgradeGP');
-        const formattedmodalExtraUpgradeGPValue = formatValue(modalExtraUpgradeGPValue);
-        document.getElementById('modalExtraUpgradeGP').innerText = formattedmodalExtraUpgradeGPValue;
-
-        //document.getElementById('modalAIAGoals').innerText = row.getAttribute('data-modalAIAGoals');
-        const modalAIAGoalsValue = row.getAttribute('data-modalAIAGoals');
-        const formattedmodalAIAGoalsValue = formatValue(modalAIAGoalsValue);
-        document.getElementById('modalAIAGoals').innerText = formattedmodalAIAGoalsValue;
-
-        //document.getElementById('modalAIAInternet').innerText = row.getAttribute('data-modalAIAInternet');
-        const modalAIAInternetValue = row.getAttribute('data-modalAIAInternet');
-        const formattedmodalAIAInternetValue = formatValue(modalAIAInternetValue);
-        document.getElementById('modalAIAInternet').innerText = formattedmodalAIAInternetValue;
-
-        //document.getElementById('modalChargeBack6').innerText = row.getAttribute('data-modalChargeBack6');
-        const modalChargeBack6Value = row.getAttribute('data-modalChargeBack6');
-        const formattedmodalChargeBack6Value = formatValue(modalChargeBack6Value);
-        document.getElementById('modalGANetOff').innerText = formattedmodalChargeBack6Value;
-
-        //document.getElementById('modalAIAInternetNetOff').innerText = row.getAttribute('data-modalAIAInternetNetOff');
-        const modalAIAInternetNetOffValue = row.getAttribute('data-modalAIAInternetNetOff');
-        const formattedmodalAIAInternetNetOffValue = formatValue(modalAIAInternetNetOffValue);
-        document.getElementById('modalAIAInternetNetOff').innerText = formattedmodalAIAInternetNetOffValue;
-
-
-        //document.getElementById('modalAIATr').innerText = row.getAttribute('data-modalAIATr');
-        const modalAIATrValue = row.getAttribute('data-modalAIATr');
-        const formattedmodalAIATrValue = formatValue(modalAIATrValue);
-        document.getElementById('modalAIATr').innerText = formattedmodalAIATrValue;
-
-        //document.getElementById('modalAIAIntG').innerText = row.getAttribute('data-modalAIAIntG');
-        const modalAIAIntGValue = row.getAttribute('data-modalAIAIntG');
-        const formattedmodalAIAIntGValue = formatValue(modalAIAIntGValue);
-        document.getElementById('modalAIAIntG').innerText = formattedmodalAIAIntGValue;
-
-        //document.getElementById('modalBBG').innerText = row.getAttribute('data-modalBBG');
-        const modalBBGValue = row.getAttribute('data-modalBBG');
-        const formattedmodalBBGValue = formatValue(modalBBGValue);
-        document.getElementById('modalBBG').innerText = formattedmodalBBGValue;
-
-        //document.getElementById('modalBBL300').innerText = row.getAttribute('data-modalBBL300');
-        const modalBBL300Value = row.getAttribute('data-modalBBL300');
-        const formattedmodalBBL300Value = formatValue(modalBBL300Value);
-        document.getElementById('modalBBL300').innerText = formattedmodalBBL300Value;
-
-        //document.getElementById('modalNF300').innerText = row.getAttribute('data-modalNF300');
-        const modalNF300Value = row.getAttribute('data-modalNF300');
-        const formattedmodalNF300Value = formatValue(modalNF300Value);
-        document.getElementById('modalNF300').innerText = formattedmodalNF300Value;
-
-        //document.getElementById('modalNF500').innerText = row.getAttribute('data-modalNF500');
-        const modalNF500Value = row.getAttribute('data-modalNF500');
-        const formattedmodalNF500Value = formatValue(modalNF500Value);
-        document.getElementById('modalNF500').innerText = formattedmodalNF500Value;
-
-        //document.getElementById('modalNF1G').innerText = row.getAttribute('data-modalNF1G');
-        const modalNF1GValue = row.getAttribute('data-modalNF1G');
-        const formattedmodalNF1GValue = formatValue(modalNF1GValue);
-        document.getElementById('modalNF1G').innerText = formattedmodalNF1GValue;
-
-        //document.getElementById('modalTBBNF').innerText = row.getAttribute('data-modalTBBNF');
-        const modalTBBNFValue = row.getAttribute('data-modalTBBNF');
-        const formattedmodalTBBNFValue = formatValue(modalTBBNFValue);
-        document.getElementById('modalTBBNF').innerText = formattedmodalTBBNFValue;
-
-        //document.getElementById('modalBBNFNOFF').innerText = row.getAttribute('data-modalBBNFNOFF');
-        const modalBBNFNOFFValue = row.getAttribute('data-modalBBNFNOFF');
-        const formattedmodalBBNFNOFFValue = formatValue(modalBBNFNOFFValue);
-        document.getElementById('modalBBNFNOFF').innerText = formattedmodalBBNFNOFFValue;
-
-        //document.getElementById('modalCB1').innerText = row.getAttribute('data-modalCB1');
-        const modalCB1Value = row.getAttribute('data-modalCB1');
-        const formattedmodalCB1Value = formatValue(modalCB1Value);
-        document.getElementById('modalCB1').innerText = formattedmodalCB1Value;
-
-        //document.getElementById('modalFUpg').innerText = row.getAttribute('data-modalFUpg');
-        const modalFUpgValue = row.getAttribute('data-modalFUpg');
-        const formattedmodalFUpgValue = formatValue(modalFUpgValue);
-        document.getElementById('modalFUpg').innerText = formattedmodalFUpgValue;
-
-        //document.getElementById('modalFUpgNOFF').innerText = row.getAttribute('data-modalFUpgNOFF');
-        const modalFUpgNOFFValue = row.getAttribute('data-modalFUpgNOFF');
-        const formattedmodalFUpgNOFFValue = formatValue(modalFUpgNOFFValue);
-        document.getElementById('modalFUpgNOFF').innerText = formattedmodalFUpgNOFFValue;
-
-        //document.getElementById('modalCB2').innerText = row.getAttribute('data-modalCB2 ');
-        const modalCB2Value = row.getAttribute('data-modalCB2');
-        const formattedmodalCB2Value = formatValue(modalCB2Value);
-        document.getElementById('modalCB2').innerText = formattedmodalCB2Value;
-
-        //document.getElementById('modalBBF').innerText = row.getAttribute('data-modalBBF');
-        const modalBBFValue = row.getAttribute('data-modalBBF');
-        const formattedmodalBBFValue = formatValue(modalBBFValue);
-        document.getElementById('modalBBF').innerText = formattedmodalBBFValue;
-
-        //document.getElementById('modalBBFTr').innerText = row.getAttribute('data-modalBBFTr');
-        const modalBBFTrValue = row.getAttribute('data-modalBBFTr');
-        const formattedmodalBBFTrValue = formatValue(modalBBFTrValue);
-        document.getElementById('modalBBFTr').innerText = formattedmodalBBFTrValue;
-
-        //document.getElementById('modalBBFTrPer').innerText = row.getAttribute('data-modalBBFTrPer');
-        const modalBBFTrPerValue = row.getAttribute('data-modalBBFTrPer');
-        const formattedmodalBBFTrPerValue = formatValueP(modalBBFTrPerValue);
-        document.getElementById('modalBBFTrPer').innerText = formattedmodalBBFTrPerValue + '%';
-
-        //document.getElementById('modalBBL300QI').innerText = row.getAttribute('data-modalBBL300QI');
-        const modalBBL300QIValue = row.getAttribute('data-modalBBL300QI');
-        const formattedmodalBBL300QIValue = formatValue(modalBBL300QIValue);
-        document.getElementById('modalBBL300QI').innerText = formattedmodalBBL300QIValue;
-
-        //document.getElementById('modalNF300QI').innerText = row.getAttribute('data-modalNF300QI');
-        const modalNF300QIValue = row.getAttribute('data-modalNF300QI');
-        const formattedmodalNF300QIValue = formatValue(modalNF300QIValue);
-        document.getElementById('modalNF300QI').innerText = formattedmodalNF300QIValue;
-
-        //document.getElementById('modalNF500QI').innerText = row.getAttribute('data-modalNF500QI');
-        const modalNF500QIValue = row.getAttribute('data-modalNF500QI');
-        const formattedmodalNF500QIValue = formatValue(modalNF500QIValue);
-        document.getElementById('modalNF500QI').innerText = formattedmodalNF500QIValue;
-
-        //document.getElementById('modalNF1GQI').innerText = row.getAttribute('data-modalNF1GQI');
-        const modalNF1GQIValue = row.getAttribute('data-modalNF1GQI');
-        const formattedmodalNF1GQIValue = formatValue(modalNF1GQIValue);
-        document.getElementById('modalNF1GQI').innerText = formattedmodalNF1GQIValue;
-
-        //document.getElementById('modalFUpgGP').innerText = row.getAttribute('data-modalFUpgGP');
-        const modalFUpgGPValue = row.getAttribute('data-modalFUpgGP');
-        const formattedmodalFUpgGPValue = formatValue(modalFUpgGPValue);
-        document.getElementById('modalFUpgGP').innerText = formattedmodalFUpgGPValue;
-
-        //document.getElementById('modalBBGP').innerText = row.getAttribute('data-modalBBGP');
-        const modalBBGPValue = row.getAttribute('data-modalBBGP');
-        const formattedmodalBBGPValue = formatValue(modalBBGPValue);
-        document.getElementById('modalBBGP').innerText = modalBBGPValue;
-
-        //document.getElementById('modalBBFGP').innerText = row.getAttribute('data-modalBBFGP');
-        const modalBBFGPValue = row.getAttribute('data-modalBBFGP');
-        const formattedmodalBBFGPValue = formatValue(modalBBFGPValue);
-        document.getElementById('modalBBFGP').innerText = formattedmodalBBFGPValue;
-
-        //document.getElementById('modalBBFGPTr').innerText = row.getAttribute('data-modalBBFGPTr');
-        const modalBBFGPTrValue = row.getAttribute('data-modalBBFGPTr');
-        const formattedmodalBBFGPTrValue = formatValue(modalBBFGPTrValue);
-        document.getElementById('modalBBFGPTr').innerText = formattedmodalBBFGPTrValue;
-
-        //document.getElementById('modalTF').innerText = row.getAttribute('data-modalTF');
-        const modalTFValue = row.getAttribute('data-modalTF');
-        const formattedmodalTFValue = formatValue(modalTFValue);
-        document.getElementById('modalTF').innerText = formattedmodalTFValue;
-
-        //document.getElementById('modalTFGP').innerText = row.getAttribute('data-modalTFGP');
-        const modalTFGPValue = row.getAttribute('data-modalTFGP');
-        const formattedmodalTFGPValue = formatValue(modalTFGPValue);
-        document.getElementById('modalTFGP').innerText = formattedmodalTFGPValue;
-
-        //document.getElementById('modalPVG').innerText = row.getAttribute('data-modalPVG');
-        const modalPVGValue = row.getAttribute('data-modalPVG');
-        const formattedmodalPVGValue = formatValue(modalPVGValue);
-        document.getElementById('modalPVG').innerText = formattedmodalPVGValue;
-
-        //document.getElementById('modalPV').innerText = row.getAttribute('data-modalPV');
-        const modalPVValue = row.getAttribute('data-modalPV');
-        const formattedmodalPVValue = formatValue(modalPVValue);
-        document.getElementById('modalPV').innerText = formattedmodalPVValue;
-
-        //document.getElementById('modalPVNOFF').innerText = row.getAttribute('data-modalPVNOFF');
-        const modalPVNOFFValue = row.getAttribute('data-modalPVNOFF');
-        const formattedmodalPVNOFFValue = formatValue(modalPVNOFFValue);
-        document.getElementById('modalPVNOFF').innerText = formattedmodalPVNOFFValue;
-
-        //document.getElementById('modalCB3').innerText = row.getAttribute('data-modalCB3');
-        const modalCB3Value = row.getAttribute('data-modalCB3');
-        const formattedmodalCB3Value = formatValue(modalCB3Value);
-        document.getElementById('modalCB3').innerText = formattedmodalCB3Value;
-
-        //document.getElementById('modalPVTr').innerText = row.getAttribute('data-modalPVTr');
-        const modalPVTrValue = row.getAttribute('data-modalPVTr');
-        const formattedmodalPVTrValue = formatValue(modalPVTrValue);
-        document.getElementById('modalPVTr').innerText = formattedmodalPVTrValue;
-
-        //document.getElementById('modalPVTrPer').innerText = row.getAttribute('data-modalPVTrPer');
-        const modalPVTrPerValue = row.getAttribute('data-modalPVTrPer');
-        const formattedmodalPVTrPerValue = formatValueP(modalPVTrPerValue);
-        document.getElementById('modalPVTrPer').innerText = formattedmodalPVTrPerValue + '%';
-
-        //document.getElementById('modalPVGP').innerText = row.getAttribute('data-modalPVGP');
-        const modalPVGPValue = row.getAttribute('data-modalPVGP');
-        const formattedmodalPVGPValue = formatValue(modalPVGPValue);
-        document.getElementById('modalPVGP').innerText = formattedmodalPVGPValue;
-
-        //document.getElementById('modalPVSpf').innerText = row.getAttribute('data-modalPVSpf');
-        const modalPVSpfValue = row.getAttribute('data-modalPVSpf');
-        const formattedmodalPVSpfValue = formatValue(modalPVSpfValue);
-        document.getElementById('modalPVSpf').innerText = formattedmodalPVSpfValue;
-
-        //document.getElementById('modalPVGPTr').innerText = row.getAttribute('data-modalPVGPTr');
-        const modalPVGPTrValue = row.getAttribute('data-modalPVGPTr');
-        const formattedmodalPVGPTrValue = formatValue(modalPVGPTrValue);
-        document.getElementById('modalPVGPTr').innerText = formattedmodalPVGPTrValue;
-
-        //document.getElementById('modalEG').innerText = row.getAttribute('data-modalEG');
-        const modalEGValue = row.getAttribute('data-modalEG');
-        const formattedmodalEGValue = formatValue(modalEGValue);
-        document.getElementById('modalEG').innerText = formattedmodalEGValue;
-
-        //document.getElementById('modalEAch').innerText = row.getAttribute('data-modalEAch');
-        const modalEAchValue = row.getAttribute('data-modalEAch');
-        const formattedmodalEAchValue = formatValue(modalEAchValue);
-        document.getElementById('modalEAch').innerText = formattedmodalEAchValue;
-
-        //document.getElementById('modalETr').innerText = row.getAttribute('data-modalETr');
-        const modalETrValue = row.getAttribute('data-modalETr');
-        const formattedmodalETrValue = formatValue(modalETrValue);
-        document.getElementById('modalETr').innerText = formattedmodalETrValue;
-
-        //document.getElementById('modalETrGPer').innerText = row.getAttribute('data-modalETrGPer');
-        const modalETrGPerValue = row.getAttribute('data-modalETrGPer');
-        const formattedmodalETrGPerValue = formatValueP(modalETrGPerValue);
-        document.getElementById('modalETrGPer').innerText = formattedmodalETrGPerValue + '%';
-
-        //document.getElementById('modalTWCDQTY').innerText = row.getAttribute('data-modalTWCDQTY');
-        const modalTWCDQTYValue = row.getAttribute('data-modalTWCDQTY');
-        const formattedmodalTWCDQTYValue = formatValue(modalTWCDQTYValue);
-        document.getElementById('modalTWCDQTY').innerText = formattedmodalTWCDQTYValue;
-
-        //document.getElementById('modalCB4').innerText = row.getAttribute('data-modalCB4');
-        const modalCB4Value = row.getAttribute('data-modalCB4');
-        const formattedmodalCB4Value = formatValue(modalCB4Value);
-        document.getElementById('modalCB4').innerText = formattedmodalCB4Value;
-
-        //document.getElementById('modalTWCDQTYTr').innerText = row.getAttribute('data-modalTWCDQTYTr');
-        const modalTWCDQTYTrValue = row.getAttribute('data-modalTWCDQTYTr');
-        const formattedmodalTWCDQTYTrValue = formatValue(modalTWCDQTYTrValue);
-        document.getElementById('modalTWCDQTYTr').innerText = formattedmodalTWCDQTYTrValue;
-
-        //document.getElementById('modalTWCD').innerText = row.getAttribute('data-modalTWCD');
-        const modalTWCDValue = row.getAttribute('data-modalTWCD');
-        const formattedmodalTWCDValue = formatValue(modalTWCDValue);
-        document.getElementById('modalTWCD').innerText = formattedmodalTWCDValue;
-
-        //document.getElementById('modalPGSpiff').innerText = row.getAttribute('data-modalPGSpiff');
-        const modalPGSpiffValue = row.getAttribute('data-modalPGSpiff');
-        const formattedmodalPGSpiffValue = formatValue(modalPGSpiffValue);
-        document.getElementById('modalPGSpiff').innerText = formattedmodalPGSpiffValue;
-
-        //document.getElementById('modalPQTY').innerText = row.getAttribute('data-modalPQTY');
-        const modalPQTYValue = row.getAttribute('data-modalPQTY');
-        const formattedmodalPQTYValue = formatValue(modalPQTYValue);
-        document.getElementById('modalPQTY').innerText = formattedmodalPQTYValue;
-
-        //document.getElementById('modalPGA').innerText = row.getAttribute('data-modalPGA');
-        const modalPGAValue = row.getAttribute('data-modalPGA');
-        const formattedmodalPGAValue = formatValue(modalPGAValue);
-        document.getElementById('modalPGA').innerText = formattedmodalPGAValue;
-
-        //document.getElementById('modalPNOFF').innerText = row.getAttribute('data-modalPNOFF');
-        const modalPNOFFValue = row.getAttribute('data-modalPNOFF');
-        const formattedmodalPNOFFValue = formatValue(modalPNOFFValue);
-        document.getElementById('modalPNOFF').innerText = formattedmodalPNOFFValue;
-
-        //document.getElementById('modalCB5').innerText = row.getAttribute('data-modalCB5');
-        const modalCB5Value = row.getAttribute('data-modalCB5');
-        const formattedmodalCB5Value = formatValue(modalCB5Value);
-        document.getElementById('modalCB5').innerText = formattedmodalCB5Value;
-
-        //document.getElementById('modalPGP')                                                                                                                                          .innerText = row.getAttribute('data-modalPGP');
-        const modalPGPValue = row.getAttribute('data-modalPGP');
-        const formattedmodalPGPValue = formatValue(modalPGPValue);
-        document.getElementById('modalPGP').innerText = formattedmodalPGPValue;
-
-        //document.getElementById('modalPAuto').innerText = row.getAttribute('data-modalPAuto');
-        const modalPAutoValue = row.getAttribute('data-modalPAuto');
-        const formattedmodalPAutoValue = formatValue(modalPAutoValue);
-        document.getElementById('modalPAuto').innerText = formattedmodalPAutoValue;
-
-        //document.getElementById('modalAGP').innerText = row.getAttribute('data-modalAGP');
-        const modalAGPValue = row.getAttribute('data-modalAGP');
-        const formattedmodalAGPValue = formatValue(modalAGPValue);
-        document.getElementById('modalAGP').innerText = formattedmodalAGPValue;
-
-        //document.getElementById('modalAQTY').innerText = row.getAttribute('data-modalAQTY');
-        const modalAQTYValue = row.getAttribute('data-modalAQTY');
-        const formattedmodalAQTYValue = formatValue(modalAQTYValue);
-        document.getElementById('modalAQTY').innerText = formattedmodalAQTYValue;
-
-        //document.getElementById('modalAQTYTr').innerText = row.getAttribute('data-modalAQTYTr');
-        const modalAQTYTrValue = row.getAttribute('data-modalAQTYTr');
-        const formattedmodalAQTYTrValue = formatValue(modalAQTYTrValue);
-        document.getElementById('modalAQTYTr').innerText = formattedmodalAQTYTrValue;
-
-        //document.getElementById('modalAR').innerText = row.getAttribute('data-modalAR');
-        const modalARValue = row.getAttribute('data-modalAR');
-        const formattedmodalARValue = formatValue(modalARValue);
-        document.getElementById('modalAR').innerText = formattedmodalARValue;
-
-        //document.getElementById('modalFQTY').innerText = row.getAttribute('data-modalFQTY');
-        const modalFQTYValue = row.getAttribute('data-modalFQTY');
-        const formattedmodalFQTYValue = formatValue(modalFQTYValue);
-        document.getElementById('modalFQTY').innerText = formattedmodalFQTYValue;
-
-        //document.getElementById('modalFQTYNOFF').innerText = row.getAttribute('data-modalFQTYNOFF');
-        const modalFQTYNOFFValue = row.getAttribute('data-modalFQTYNOFF');
-        const formattedmodalFQTYNOFFValue = formatValue(modalFQTYNOFFValue);
-        document.getElementById('modalFQTYNOFF').innerText = formattedmodalFQTYNOFFValue;
-
-        //document.getElementById('modalCB6').innerText = row.getAttribute('data-modalCB6');
-        const modalCB6Value = row.getAttribute('data-modalCB6');
-        const formattedmodalCB6Value = formatValue(modalCB6Value);
-        document.getElementById('modalCB6').innerText = formattedmodalCB6Value;
-
-        //document.getElementById('modalTPPer').innerText = row.getAttribute('data-modalTPPer');
-        const modalTPPerValue = row.getAttribute('data-modalTPPer');
-        const formattedmodalTPPerValue = formatValueP(modalTPPerValue);
-        document.getElementById('modalTPPer').innerText = formattedmodalTPPerValue + '%';
-
-        //document.getElementById('modalPADV1').innerText = row.getAttribute('data-modalPADV1');
-        const modalPADV1Value = row.getAttribute('data-modalPADV1');
-        const formattedmodalPADV1Value = formatValue(modalPADV1Value);
-        document.getElementById('modalPADV1').innerText = formattedmodalPADV1Value;
-
-        //document.getElementById('modalPADV4').innerText = row.getAttribute('data-modalPADV4');
-        const modalPADV4Value = row.getAttribute('data-modalPADV4');
-        const formattedmodalPADV4Value = formatValue(modalPADV4Value);
-        document.getElementById('modalPADV4').innerText = formattedmodalPADV4Value;
-
-        //document.getElementById('modalFGP').innerText = row.getAttribute('data-modalFGP');
-        const modalFGPValue = row.getAttribute('data-modalFGP');
-        const formattedmodalFGPValue = formatValue(modalFGPValue);
-        document.getElementById('modalFGP').innerText = formattedmodalFGPValue;
-
-        //document.getElementById('modalWBHRS').innerText = row.getAttribute('data-modalWBHRS');
-        const modalWBHRSValue = row.getAttribute('data-modalWBHRS');
-        const formattedmodalWBHRSValue = formatValue(modalWBHRSValue);
-        document.getElementById('modalWBHRS').innerText = formattedmodalWBHRSValue;
-
-        //document.getElementById('modalWEAPerS').innerText = row.getAttribute('data-modalWEAPerS');
-        const modalWEAPerSValue = row.getAttribute('data-modalWEAPerS');
-        const formattedmodalWEAPerSValue = formatValue(modalWEAPerSValue);
-        document.getElementById('modalWEAPerS').innerText = formattedmodalWEAPerSValue;
-
-        //document.getElementById('modalMBHRS').innerText = row.getAttribute('data-modalMBHRS');
-        const modalMBHRSValue = row.getAttribute('data-modalMBHRS');
-        const formattedmodalMBHRSValue = formatValue(modalMBHRSValue);
-        document.getElementById('modalMBHRS').innerText = formattedmodalMBHRSValue;
-
-        //document.getElementById('modalMAHRS').innerText = row.getAttribute('data-modalMAHRS');
-        const modalMAHRSValue = row.getAttribute('data-modalMAHRS');
-        const formattedmodalMAHRSValue = formatValue(modalMAHRSValue);
-        document.getElementById('modalMAHRS').innerText = formattedmodalMAHRSValue;
-
-        //document.getElementById('modalMAHRSTr').innerText = row.getAttribute('data-modalMAHRSTr');
-        const modalMAHRSTrValue = row.getAttribute('data-modalMAHRSTr');
-        const formattedmodalMAHRSTrValue = formatValue(modalMAHRSTrValue);
-        document.getElementById('modalMAHRSTr').innerText = formattedmodalMAHRSTrValue;
-
-        //document.getElementById('modalGACloseRT').innerText = row.getAttribute('data-modalGACloseRT');
-        const modalGACloseRTValue = row.getAttribute('data-modalGACloseRT');
-        const formattedmodalGACloseRTValue = formatValueP(modalGACloseRTValue);
-        document.getElementById('modalGACloseRT').innerText = formattedmodalGACloseRTValue;
-
-        //document.getElementById('modalHTP').innerText = row.getAttribute('data-modalHTP');
-        const modalHTPValue = row.getAttribute('data-modalHTP');
-        const formattedmodalHTPValue = formatValue(modalHTPValue);
-        document.getElementById('modalHTP').innerText = formattedmodalHTPValue;
-
-    }
 
     function LoadNoteandCommentData() {
         // Reset the employee dropdown to "Select an Employee"
@@ -3621,6 +2661,139 @@
         });
     }
 
+    function MTDStoreEmployeeView(button) {
+        var dateP = "@ViewBag.ReportDate";
+        var id = $('.btndataview').attr('id');
+        $.ajax({
+            url:'@Url.Action("GetEmpDetail", "Home")',
+            type: 'GET',
+            dataType:'json',
+            data: {
+                dateParam: dateP,
+                UniqueID: id
+            },
+            success: function (response) {
+                $('#tblDetBdy').empty("");
+                var Testdata = response;
+                console.log(Testdata);
+                var html = '';
+                for (var i = 0; i < Testdata.length; i++) {
+                    console.log(Testdata[i]);
+                    html += '<tr class="main_data">' +
+                        '<td>' + Testdata[i].UniqueID + '</td>' +
+                        '<td>' + Testdata[i].DealerCode + '</td>' +
+                        '<td>' + Testdata[i].Store + '</td>' +
+                        '<td>' + Testdata[i].Market + '</td>' +
+                        '<td>' + Testdata[i].TM + '</td>' +
+                        '<td>' + Testdata[i].MULMngr + '</td>' +
+                        '<td>' + Testdata[i].EmpID + '</td>' +
+                        '<td>' + Testdata[i].Employees + '</td>' +
+                        '<td>' + Testdata[i].Role + '</td>' +
+                        '<td>' + Testdata[i].Status + '</td>' +
+                        '<td>' + Testdata[i].HireDate + '</td>' +
+                        '<td>' + Testdata[i].PayType + '</td>' +
+                        '<td>' + Testdata[i].TotalOPS + '</td>' +
+                        '<td>' + Testdata[i].GPPerBox + '</td>' +
+                        '<td>' + Testdata[i].GPGOAL + '</td>' +
+                        '<td>' + Testdata[i].TotalGPAchievedWithSpif + '</td>' +
+                        '<td>' + Testdata[i].Trending + '</td>' +
+                        '<td>' + Testdata[i].TrendingPer + '</td>' +
+                        '<td>' + Testdata[i].CSAT + '</td>' +
+                        '<td>' + Testdata[i].GrossAdds + '</td>' +
+                        '<td>' + Testdata[i].GrossAddsNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack + '</td>' +
+                        '<td>' + Testdata[i].GrossAddsGP + '</td>' +
+                        '<td>' + Testdata[i].FNAchMTD + '</td>' +
+                        '<td>' + Testdata[i].FNAchDollars + '</td>' +
+                        '<td>' + Testdata[i].CRUAchMTD + '</td>' +
+                        '<td>' + Testdata[i].CRUAchDATADollars + '</td>' +
+                        '<td>' + Testdata[i].NextUp + '</td>' +
+                        '<td>' + Testdata[i].NextUpSpif + '</td>' +
+                        '<td>' + Testdata[i].PremiumActivation + '</td>' +
+                        '<td>' + Testdata[i].PremiumActivationNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack1 + '</td>' +
+                        '<td>' + Testdata[i].PremiumActivationGP + '</td>' +
+                        '<td>' + Testdata[i].ExtraActivation + '</td>' +
+                        '<td>' + Testdata[i].ExtraActivationNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack2 + '</td>' +
+                        '<td>' + Testdata[i].ExtraActivationGP + '</td>' +
+                        '<td>' + Testdata[i].NonExtraNonPremiumActivation + '</td>' +
+                        '<td>' + Testdata[i].NonExtraNonPremiumActivationNetOFF + '</td>' +
+                        '<td>' + Testdata[i].NonExtraNonPremiumActivationGP + '</td>' +
+                        '<td>' + Testdata[i].MTDUpgrades + '</td>' +
+                        '<td>' + Testdata[i].MTDUpgradesNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack3 + '</td>' +
+                        '<td>' + Testdata[i].MTDUpgradesGP + '</td>' +
+                        '<td>' + Testdata[i].PremiumUpgrade + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack4 + '</td>' +
+                        '<td>' + Testdata[i].PremiumUpgradeNetOff + '</td>' +
+                        '<td>' + Testdata[i].PremiumUpgradeGP + '</td>' +
+                        '<td>' + Testdata[i].ExtraUpgrade + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack5 + '</td>' +
+                        '<td>' + Testdata[i].ExtraUpgradeNetOff + '</td>' +
+                        '<td>' + Testdata[i].ExtraUpgradeGP + '</td>' +
+                        '<td>' + Testdata[i].AIABInternet + '</td>' +
+                        '<td>' + Testdata[i].AIAInternetCancellation + '</td>' +
+                        '<td>' + Testdata[i].AIAInternetNetOff + '</td>' +
+                        '<td>' + Testdata[i].BroadbandLessThen300MB + '</td>' +
+                        '<td>' + Testdata[i].NewFiber300MB + '</td>' +
+                        '<td>' + Testdata[i].NewFiber500MB + '</td>' +
+                        '<td>' + Testdata[i].NewFiber1G + '</td>' +
+                        '<td>' + Testdata[i].TotalNewFiber + '</td>' +
+                        '<td>' + Testdata[i].TotalBroadbandNewFiber + '</td>' +
+                        '<td>' + Testdata[i].BroadbandFiberNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack6 + '</td>' +
+                        '<td>' + Testdata[i].FiberUpgrades + '</td>' +
+                        '<td>' + Testdata[i].FiberUpgradesNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack7 + '</td>' +
+                        '<td>' + Testdata[i].BroadbandFiberUpgrade + '</td>' +
+                        '<td>' + Testdata[i].BroadbandFiberUpgradeNetOFF + '</td>' +
+                        '<td>' + Testdata[i].BroadbandLessThen300MBQISpiff + '</td>' +
+                        '<td>' + Testdata[i].NewFiber300MBQISpiff + '</td>' +
+                        '<td>' + Testdata[i].NewFiber500MBQISpiff + '</td>' +
+                        '<td>' + Testdata[i].NewFiber1GQISpiff + '</td>' +
+                        '<td>' + Testdata[i].FiberUpgradeGP + '</td>' +
+                        '<td>' + Testdata[i].BroadbandNewFiberGP + '</td>' +
+                        '<td>' + Testdata[i].BroadbandFiberGP + '</td>' +
+                        '<td>' + Testdata[i].TurboFeature + '</td>' +
+                        '<td>' + Testdata[i].TurboFeatureGP + '</td>' +
+                        '<td>' + Testdata[i].PremVideo + '</td>' +
+                        '<td>' + Testdata[i].PremVideoNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack8 + '</td>' +
+                        '<td>' + Testdata[i].PremVideoGP + '</td>' +
+                        '<td>' + Testdata[i].PremVideoSpiff + '</td>' +
+                        '<td>' + Testdata[i].TWCDevicesQty + '</td>' +
+                        '<td>' + Testdata[i].TWCDevicesQtyNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack9 + '</td>' +
+                        '<td>' + Testdata[i].TWCDevicesDollars + '</td>' +
+                        '<td>' + Testdata[i].ProjectedGeographicSpif + '</td>' +
+                        '<td>' + Testdata[i].PrepaidGP + '</td>' +
+                        '<td>' + Testdata[i].PrepaidQty + '</td>' +
+                        '<td>' + Testdata[i].TrendingPer + '</td>' +
+                        '<td>' + Testdata[i].PrepaidToGA + '</td>' +
+                        '<td>' + Testdata[i].PrepaidNetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack10 + '</td>' +
+                        '<td>' + Testdata[i].PrepaidWithAutopay + '</td>' +
+                        '<td>' + Testdata[i].AccessGP + '</td>' +
+                        '<td>' + Testdata[i].AccessQty + '</td>' +
+                        '<td>' + Testdata[i].AccessRevenue + '</td>' +
+                        '<td>' + Testdata[i].INSURANCE + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack11 + '</td>' +
+                        '<td>' + Testdata[i].INSURANCEGP + '</td>' +
+                        '<td>' + Testdata[i].ProtAdv1 + '</td>' +
+                        '<td>' + Testdata[i].ProtAdv4 + '</td>' +
+                        '<td>' + Testdata[i].PROTECTION_PACK + '</td>' +
+                        '<td>' + Testdata[i].PROTECTION_PACK_NetOFF + '</td>' +
+                        '<td>' + Testdata[i].ChargeBack12 + '</td>' +
+                        '<td>' + Testdata[i].PROTECTION_PACK_GP + '</td>' +
+                        '<td>' + Testdata[i].HomeTechProtect + '</td>' +
+                        '</tr>';
+                }
+                $('#tblDetBdy').append(html);
+            }
+        });
+    }
+
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null) {
         var dateP = "@ViewBag.ReportDate"; // Pass the Razor value as a string
         var Sd = 'Elio Portocarrero';
@@ -3647,6 +2820,7 @@
             success: function (response) {
                 var newRow = `
                     <tr class="filter_data">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
