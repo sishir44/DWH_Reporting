@@ -36,7 +36,7 @@ namespace DWH_Reporting.Controllers
 
         }
 
-        public ActionResult LadingPage()
+        public ActionResult LandingPage()
         {
             try
             {
