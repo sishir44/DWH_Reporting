@@ -1862,7 +1862,7 @@
 
                                                         <!-- ADD/VIEW BTN -->
                                                         <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey')" id="btnaddnote" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
-                                                        <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView(this)" id="@record.UniqueID"  class="btndataview btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
+                                                        <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView('@record.UniqueID')" id="@record.UniqueID"  class="btndataview btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                                                         <!-- Hierarchy -->
                                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
@@ -2607,9 +2607,9 @@
         });
     }
 
-    function MTDStoreEmployeeView(button) {
+    function MTDStoreEmployeeView(id) {
         var dateP = "@ViewBag.ReportDate";
-        var id = $('.btndataview').attr('id');
+        //var id = $('.btndataview').attr('id');
         $.ajax({
             url:'@Url.Action("GetEmpDetail", "Home")',
             type: 'GET',
