@@ -4549,18 +4549,38 @@
         var storAlreadySelected = document.getElementById('Stores');
         var tirAlreadySelected = document.getElementById('Tiers');
 
-        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-
+        if (mmmAlreadySelected.disabled) {
+            //console.log('mmm');
+            STRfilterTMOptions(selectedValues);
+            STRfilterMarketOptions(selectedValues);
+            STRfiltermmmOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
 
+            tmAlreadySelected.disabled = true;
+            mktAlreadySelected.disabled = true;
+            mmmAlreadySelected.disabled = true;
+            storAlreadySelected.disabled = true;
+            tirAlreadySelected.disabled = true;
+
+            $('tr.filter_data').remove();
+            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
+
+        } else if (mktAlreadySelected.disabled) {
+            //console.log('mkt');
+            STRfilterTMOptions(selectedValues);
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+
+            tmAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
 
             $('tr.filter_data').remove();
             loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
 
-        } else if (tmAlreadySelected.disabled) {
-
+        }
+        else if (tmAlreadySelected.disabled) {
+            //console.log('TM');
             STRfilterMarketOptions(selectedValues);
             STRfiltermmmOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
@@ -4573,21 +4593,10 @@
             $('tr.filter_data').remove();
             loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
 
-        } else if (mktAlreadySelected.disabled) {
-
-            STRfilterTMOptions(selectedValues);
-            STRfilterStoresOptions(selectedValues);
-            STRfilterTiersOptions(selectedValues);
-
-            tmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-
-            $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
-
         }
-        else {
 
+        else {
+            //console.log('Stores');
             STRfilterTMOptions(selectedValues);
             STRfilterMarketOptions(selectedValues);
             STRfiltermmmOptions(selectedValues);
