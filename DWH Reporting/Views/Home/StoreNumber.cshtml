@@ -2168,16 +2168,15 @@
 
                                     <div class="container-fluid">
                                         <div class="row">
-                                            <div class="col-6"></div>
                                             <div class="col-6 mb-3 mt-2">
                                                 <div class="row">
                                                     <div class="form-group col-9 mb-1 mt-1 pr-0">
                                                         @*<select class="form-control form-control-sm" id="ddCommentDesignation"><option value="0" selected="">Select an Employee</option><option value="40169">TM - Debra Morales&nbsp;</option><option value="41234">AVP - Sam Colletta</option></select>*@
 
-                                                        <select class="form-control selector" id="ddCommentDesignation" onchange="fnCommentDesignation()">
+                                                        <select class="form-control selector" id="ddCommentDesignation">
                                                             @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                                                             {
-                                                                <option value="0" selected>Select an Employee</option>
+                                                                <option value="0" selected disabled>Select an Employee</option>
                                                                 foreach (var item in ViewBag.TMList)
                                                                 {
                                                                     <option style="border-radius: 6px; background-color:lightblue; text-align: left; color: black; margin-bottom: 5px; font-size: 14px;" value="@item.Value">TM - @item.Text</option>
@@ -2211,6 +2210,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div class="col-6"></div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6  mb-2">
@@ -2220,7 +2220,6 @@
                                                     </div>
                                                     <div class="nodata" id="nonotes" style="display: flex;">
                                                         <h5 class="text-secondary"><b>Notes</b></h5>
-
                                                     </div>
                                                     <textarea id="noteTextArea" class="form-control" rows="20" placeholder="Enter notes here..." style="flex: 1; height:400px;"></textarea>
                                                     @*<div id="notedesc" class="card-body scrollable" style="height:400px"></div>*@
@@ -2610,14 +2609,28 @@
 
     function validateDropdown() {
         var dropdown = document.getElementById("ddCommentDesignation");
+        //var Note = $("#noteTextArea").val();
+        //var Comments = $("#commentTextArea").val();
         var selectedValue = dropdown.value;
         if (selectedValue === "0" || selectedValue === "" || selectedValue === null) {
-            Swal.fire("Please select a Employee.");
+            Swal.fire("Please select an Employee.");
             dropdown.focus();
             return false;
         }
+        //else if (Note.trim() === "") {
+        //    Swal.fire("Please enter a Note.");
+        //    $("#noteTextArea").focus();
+        //    return false;
+        //}
+        //else if (Comments.trim() === "") {
+        //    Swal.fire("Please enter a Comments.");
+        //    $("#noteTextArea").focus();
+        //    return false;
+        //}
+
         return true;
     }
+
 
 
     function LoadNoteandCommentData() {
@@ -2712,7 +2725,7 @@
             },
             error: function (xhr, status, error) {
                 console.error("Error:", error);
-                alert("There was an error saving the note.");
+                
             }
         });
         }
