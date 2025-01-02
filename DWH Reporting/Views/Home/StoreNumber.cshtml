@@ -2543,6 +2543,12 @@
                                             <th style="background-color: black; color: white;">PROTECTION PACK $GP</th>
                                             <th style="background-color: black; color: white;">HomeTech Protect</th>
 
+                                            <th style="background-color: black; color: white;">ProtAdv & HomeTech %</th>
+                                            <th style="background-color: black; color: white;">PAY</th>
+                                            <th style="background-color: black; color: white;">Commission Bucket $</th>
+                                            <th style="background-color: black; color: white;">EOM Commission Trending Bucket</th>
+                                            <th style="background-color: black; color: white;">Effective Rate</th>
+
                                         </tr>
                                     </thead>
                                     <tbody id="tblDetBdy"></tbody>
@@ -2762,108 +2768,128 @@
                         '<td>' + Testdata[i].Status + '</td>' +
                         '<td>' + Testdata[i].HireDate + '</td>' +
                         '<td>' + Testdata[i].PayType + '</td>' +
-                        '<td>' + Testdata[i].TotalOPS + '</td>' +
-                        '<td>' + Math.round(Testdata[i].GPPerBox) + '</td>' +
-                        '<td>' + Testdata[i].GPGOAL + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TotalOPS) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GPPerBox) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GPGOAL) + '</td>' +
                         '<td>' + Math.round(Testdata[i].TotalGPAchievedWithSpif) + '</td>' +
-                        '<td>' + Math.round(Testdata[i].Trending) + '</td>' +
-                        '<td>' + Math.round(Testdata[i].TrendingPer) + '</td>' +
-                        '<td>' + Testdata[i].CSAT + '</td>' +
-                        '<td>' + Testdata[i].GrossAdds + '</td>' +
-                        '<td>' + Testdata[i].GrossAddsNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack + '</td>' +
-                        '<td>' + Testdata[i].GrossAddsGP + '</td>' +
-                        '<td>' + Testdata[i].FNAchMTD + '</td>' +
-                        '<td>' + Testdata[i].FNAchDollars + '</td>' +
-                        '<td>' + Testdata[i].CRUAchMTD + '</td>' +
-                        '<td>' + Testdata[i].CRUAchDATADollars + '</td>' +
-                        '<td>' + Testdata[i].NextUp + '</td>' +
-                        '<td>' + Testdata[i].NextUpSpif + '</td>' +
-                        '<td>' + Testdata[i].PremiumActivation + '</td>' +
-                        '<td>' + Testdata[i].PremiumActivationNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack1 + '</td>' +
-                        '<td>' + Testdata[i].PremiumActivationGP + '</td>' +
-                        '<td>' + Testdata[i].ExtraActivation + '</td>' +
-                        '<td>' + Testdata[i].ExtraActivationNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack2 + '</td>' +
-                        '<td>' + Testdata[i].ExtraActivationGP + '</td>' +
-                        '<td>' + Testdata[i].NonExtraNonPremiumActivation + '</td>' +
-                        '<td>' + Testdata[i].NonExtraNonPremiumActivationNetOFF + '</td>' +
-                        '<td>' + Testdata[i].NonExtraNonPremiumActivationGP + '</td>' +
-                        '<td>' + Testdata[i].MTDUpgrades + '</td>' +
-                        '<td>' + Testdata[i].MTDUpgradesNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack3 + '</td>' +
-                        '<td>' + Testdata[i].MTDUpgradesGP + '</td>' +
-                        '<td>' + Testdata[i].PremiumUpgrade + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack4 + '</td>' +
-                        '<td>' + Testdata[i].PremiumUpgradeNetOff + '</td>' +
-                        '<td>' + Testdata[i].PremiumUpgradeGP + '</td>' +
-                        '<td>' + Testdata[i].ExtraUpgrade + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack5 + '</td>' +
-                        '<td>' + Testdata[i].ExtraUpgradeNetOff + '</td>' +
-                        '<td>' + Testdata[i].ExtraUpgradeGP + '</td>' +
-                        '<td>' + Testdata[i].AIABInternet + '</td>' +
-                        '<td>' + Testdata[i].AIAInternetCancellation + '</td>' +
-                        '<td>' + Testdata[i].AIAInternetNetOff + '</td>' +
-                        '<td>' + Testdata[i].BroadbandLessThen300MB + '</td>' +
-                        '<td>' + Testdata[i].NewFiber300MB + '</td>' +
-                        '<td>' + Testdata[i].NewFiber500MB + '</td>' +
-                        '<td>' + Testdata[i].NewFiber1G + '</td>' +
-                        '<td>' + Testdata[i].TotalNewFiber + '</td>' +
-                        '<td>' + Testdata[i].TotalBroadbandNewFiber + '</td>' +
-                        '<td>' + Testdata[i].BroadbandFiberNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack6 + '</td>' +
-                        '<td>' + Testdata[i].FiberUpgrades + '</td>' +
-                        '<td>' + Testdata[i].FiberUpgradesNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack7 + '</td>' +
-                        '<td>' + Testdata[i].BroadbandFiberUpgrade + '</td>' +
-                        '<td>' + Testdata[i].BroadbandFiberUpgradeNetOFF + '</td>' +
-                        '<td>' + Testdata[i].BroadbandLessThen300MBQISpiff + '</td>' +
-                        '<td>' + Testdata[i].NewFiber300MBQISpiff + '</td>' +
-                        '<td>' + Testdata[i].NewFiber500MBQISpiff + '</td>' +
-                        '<td>' + Testdata[i].NewFiber1GQISpiff + '</td>' +
-                        '<td>' + Testdata[i].FiberUpgradeGP + '</td>' +
-                        '<td>' + Testdata[i].BroadbandNewFiberGP + '</td>' +
-                        '<td>' + Testdata[i].BroadbandFiberGP + '</td>' +
-                        '<td>' + Testdata[i].TurboFeature + '</td>' +
-                        '<td>' + Testdata[i].TurboFeatureGP + '</td>' +
-                        '<td>' + Testdata[i].PremVideo + '</td>' +
-                        '<td>' + Testdata[i].PremVideoNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack8 + '</td>' +
-                        '<td>' + Testdata[i].PremVideoGP + '</td>' +
-                        '<td>' + Testdata[i].PremVideoSpiff + '</td>' +
-                        '<td>' + Testdata[i].TWCDevicesQty + '</td>' +
-                        '<td>' + Testdata[i].TWCDevicesQtyNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack9 + '</td>' +
-                        '<td>' + Testdata[i].TWCDevicesDollars + '</td>' +
-                        '<td>' + Testdata[i].ProjectedGeographicSpif + '</td>' +
-                        '<td>' + Testdata[i].PrepaidGP + '</td>' +
-                        '<td>' + Testdata[i].PrepaidQty + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].Trending) + '</td>' +
+                        //'<td>' + Math.round(Testdata[i].TrendingPer) + '%' + '</td>' +
+                        '<td>' + Math.round(parseFloat(Testdata[i].TrendingPer)).toFixed(1) + '%' + '</td>' +
+                        //'<td>' + Testdata[i].CSAT + '%' + '</td>' +
+                        '<td>' + Math.round(parseFloat(Testdata[i].CSAT)).toFixed(1) + '%' + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GrossAdds) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GrossAddsNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GrossAddsGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FNAchMTD) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FNAchDollars) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].CRUAchMTD) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].CRUAchDATADollars) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NextUp) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NextUpSpif) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumActivation) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumActivationNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack1) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumActivationGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraActivation) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraActivationNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack2) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraActivationGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NonExtraNonPremiumActivation) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NonExtraNonPremiumActivationNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NonExtraNonPremiumActivationGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].MTDUpgrades) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].MTDUpgradesNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack3) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].MTDUpgradesGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumUpgrade) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack4) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumUpgradeNetOff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumUpgradeGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraUpgrade) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack5) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraUpgradeNetOff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ExtraUpgradeGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AIABInternet) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AIAInternetCancellation) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AIAInternetNetOff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandLessThen300MB) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber300MB) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber500MB) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber1G) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TotalNewFiber) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TotalBroadbandNewFiber) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack6) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FiberUpgrades) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FiberUpgradesNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack7) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberUpgrade) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberUpgradeNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandLessThen300MBQISpiff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber300MBQISpiff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber500MBQISpiff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NewFiber1GQISpiff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FiberUpgradeGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandNewFiberGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TurboFeature) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TurboFeatureGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremVideo) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremVideoNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack8) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremVideoGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremVideoSpiff) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TWCDevicesQty) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TWCDevicesQtyNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack9) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TWCDevicesDollars) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ProjectedGeographicSpif) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PrepaidGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PrepaidQty) + '</td>' +
                         //'<td>' + Testdata[i].TrendingPer + '</td>' +
-                        '<td>' + Testdata[i].PrepaidToGA + '</td>' +
-                        '<td>' + Testdata[i].PrepaidNetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack10 + '</td>' +
-                        '<td>' + Testdata[i].PrepaidWithAutopay + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PrepaidToGA) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PrepaidNetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack10) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PrepaidWithAutopay) + '</td>' +
                         '<td>' + Math.round(Testdata[i].AccessGP) + '</td>' +
-                        '<td>' + Testdata[i].AccessQty + '</td>' +
-                        '<td>' + Testdata[i].AccessRevenue + '</td>' +
-                        '<td>' + Testdata[i].INSURANCE + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack11 + '</td>' +
-                        '<td>' + Testdata[i].INSURANCEGP + '</td>' +
-                        '<td>' + Testdata[i].ProtAdv1 + '</td>' +
-                        '<td>' + Testdata[i].ProtAdv4 + '</td>' +
-                        '<td>' + Testdata[i].PROTECTION_PACK + '</td>' +
-                        '<td>' + Testdata[i].PROTECTION_PACK_NetOFF + '</td>' +
-                        '<td>' + Testdata[i].ChargeBack12 + '</td>' +
-                        '<td>' + Math.round(Testdata[i].PROTECTION_PACK_GP) + '</td>' +
-                        '<td>' + Testdata[i].HomeTechProtect + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AccessQty) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AccessRevenue) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].INSURANCE) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack11) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].INSURANCEGP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ProtAdv1) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ProtAdv4) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PROTECTION_PACK) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PROTECTION_PACK_NetOFF) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].ChargeBack12) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PROTECTION_PACK_GP) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].HomeTechProtect) + '</td>' +
+                        //'<td>' + Testdata[i].ProtAdvHomeTechPercentage + '%' + '</td>' +
+                        '<td>' + Math.round(parseFloat(Testdata[i].ProtAdvHomeTechPercentage)).toFixed(1) + '%' + '</td>' +
+                        '<td>' + (isNaN(Testdata[i].PAY) ? Testdata[i].PAY : addCommaswithRound(Testdata[i].PAY)) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].CommissionBucketMTD)   + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].EOMCommissionTrendingBucket) + '</td>' +
+                        '<td>' + (isNaN(Testdata[i].EffectiveRate) ? Testdata[i].EffectiveRate : addCommaswithRound(Testdata[i].EffectiveRate)) + '</td>' +
                         '</tr>';
                 }
                 $('#tblDetBdy').empty().append(html);
             }
         });
     }
-
+    function addCommaswithRound(nStr) {
+        nStr = Math.round(nStr);
+    nStr += '';
+    x = nStr.split('.');
+    x1 = x[0];
+    x2 = x.length > 1 ? '.' + x[1] : '';
+    var rgx = /(\d+)(\d{3})/;
+    while (rgx.test(x1)) {
+        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+    }
+    var x = x1 + x2;
+    return x;
+};
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null) {
         var dateP = "@ViewBag.ReportDate"; // Pass the Razor value as a string
         var Sd = 'Elio Portocarrero';
@@ -2888,6 +2914,7 @@
                 Tiers: tiersText // Send Tiers text or null
             },
             success: function (response) {
+                console.log(response.Converged + "Test");
                 var newRow = `
                     <tr class="filter_data">
                         <td></td>
@@ -2906,7 +2933,8 @@
                         <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.GrossAddsGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td></td>
+                        <td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
+
                         <td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.TotalTraffic || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>

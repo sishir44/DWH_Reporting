@@ -2800,6 +2800,11 @@ namespace DWH_Reporting.Controllers
                     ChargeBack12 = row["Charge Back 12"].ToString(),
                     PROTECTION_PACK_GP = row["PROTECTION PACK $GP"].ToString(),
                     HomeTechProtect = row["HomeTech Protect"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv & HomeTech %"].ToString(),
+                    PAY = row["PAY"].ToString(),
+                    CommissionBucketMTD = row["Commission Bucket MTD(5th Nov' 24)"].ToString(),
+                    EOMCommissionTrendingBucket = row["Nov’24 EOM Commission Trending Bucket"].ToString(),
+                    EffectiveRate = row["Effective Rate"].ToString(),
                     //ProtAdv & HomeTech % DREAM(Wk 1 to 7)    
                     //DREAM(Wk 8 to 14)   DREAM(Wk 15 to 21)  
                     //DREAM(Wk 22 to 28)  DREAM(Wk 29 to 31)  
@@ -2841,6 +2846,7 @@ namespace DWH_Reporting.Controllers
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
                     PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
+                    Converged = row["converged%"].ToString(),
                     FiberConversion = row["Fiber Conversion"].ToString(),
                     BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
                     FiberGreenCheck = row["Fiber Green Check"].ToString(),
@@ -3011,6 +3017,7 @@ namespace DWH_Reporting.Controllers
                     PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
                     FiberConversion = row["Fiber Conversion"].ToString(),
+                    Converged = row["converged%"].ToString(),
                     BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
                     FiberGreenCheck = row["Fiber Green Check"].ToString(),
                     APO = row["APO"].ToString(),

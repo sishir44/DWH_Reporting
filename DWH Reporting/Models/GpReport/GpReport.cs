@@ -1654,6 +1654,10 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeTechProtect { get; set; }
         public string TimeStamp { get; set; }
         public string DateKey { get; set; }
+        public string PAY { get; set; }
+        public string CommissionBucketMTD { get; set; }
+        public string EOMCommissionTrendingBucket { get; set; }
+        public string EffectiveRate { get; set; }
 
         //Employee
         public string EmpID { get; set; }
