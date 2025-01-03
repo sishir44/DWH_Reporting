@@ -166,7 +166,7 @@
 
         .row.head {
             width: 100%;
-            height: 39px;
+            /*height: 39px;*/
         }
 
         .modal-dialog {
@@ -754,6 +754,12 @@
             word-wrap: break-word;
         }
         /*//<----Detail table css---->//*/
+
+        @@media (min-width: 768px) and (max-width: 1024px) {
+            .sub-header {
+                margin: 5px auto 0px auto !important;
+            }
+        }
     </style>
 </head>
 
@@ -820,7 +826,7 @@
             </div>
 
             <!-- UPDATED RPT DATE -->
-            <div class="row sub-header" style="background-color: grey;width: 100%;margin: 0 auto;">
+            <div class="sub-header" style="background-color: grey;width: 100%;margin: -12px auto 0px auto;">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
                         <div id="TimeStamp">
