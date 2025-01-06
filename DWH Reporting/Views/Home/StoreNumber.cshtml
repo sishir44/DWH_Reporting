@@ -754,9 +754,13 @@
             word-wrap: break-word;
         }
         /*//<----Detail table css---->//*/
-
+        .sub-header {
+            background-color: grey;
+            width: 100%;
+            margin: -12px auto 0px auto;
+        }
         @@media (min-width: 768px) and (max-width: 1024px) {
-            .sub-header {
+            row.sub-header {
                 margin: 5px auto 0px auto !important;
             }
         }
@@ -826,7 +830,7 @@
             </div>
 
             <!-- UPDATED RPT DATE -->
-            <div class="sub-header" style="background-color: grey;width: 100%;margin: -12px auto 0px auto;">
+            <div class="row sub-header">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
                         <div id="TimeStamp">
@@ -1087,7 +1091,7 @@
                                     <td>$GP Per Box                                     </td>
                                     <td>Total $GP Achieved With-Spif                      </td>
                                     <td>Gross Adds                                    </td>
-                                    <td>Charge Back                                   </td>
+                                    <td>$GP Per Box Charge Back                                   </td>
                                     <td>Gross Adds Trend                               </td>
                                     <td>Gross Adds $GP                                  </td>
                                     <td>Gross Adds $GP Trending                          </td>
@@ -1105,7 +1109,7 @@
                                     <td>CRU Ach Voice$                           </td>
                                     <td>CRU Ach DATA$                            </td>
                                     <td>MTD Upgrades                                  </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>MTD Upgrades Charge Back                                  </td>
                                     <td>MTD Upgrades Trending                          </td>
                                     <td>MTD Upgrades $GP                                </td>
                                     <td>MTD Upgrades $GP Trending                        </td>
@@ -1113,26 +1117,26 @@
                                     <td>NextUp Spif                                   </td>
                                     <td>Premium Activation                            </td>
                                     <td>Premium Activation NetOFF                      </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Premium Activation Charge Back                                  </td>
                                     <td>Premium Activation $GP                          </td>
                                     <td>Extra Activation                              </td>
                                     <td>Extra Activation NetOFF                        </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Extra Activation Charge Back                                  </td>
                                     <td>Extra Activation $GP                            </td>
                                     <td>NonExtra NonPremium Activation                 </td>
                                     <td>NonExtra NonPremium Activation NetOFF           </td>
                                     <td>NonExtra NonPremium Activation $GP               </td>
                                     <td>Premium Upgrade                               </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Premium Upgrade Charge Back                                  </td>
                                     <td>Premium Upgrade NetOff                         </td>
                                     <td>Premium Upgrade $GP                             </td>
                                     <td>Extra Upgrade                                 </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Extra Upgrade Charge Back                                  </td>
                                     <td>Extra Upgrade NetOff                           </td>
                                     <td>Extra Upgrade $GP                               </td>
                                     <td>AIA Goals                                     </td>
                                     <td>AIA Internet                                     </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>AIA Internet Charge Back                                  </td>
                                     <td>AIA Internet NetOff                            </td>
                                     <td>AIA Trending                            </td>
                                     <td>AIA Internet $GP                                </td>
@@ -1143,10 +1147,10 @@
                                     <td>New Fiber (1G)                                   </td>
                                     <td>Total Broadband+ NewFiber                       </td>
                                     <td>Broadband+ NewFiber NetOFF                      </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>New Fiber Charge Back                                  </td>
                                     <td>Fiber Upgrades                                </td>
                                     <td>Fiber Upgrades NetOFF                          </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Fiber Upgrades Charge Back                                  </td>
                                     <td>Broadband+ Fiber                               </td>
                                     <td>Broadband+ Fiber Trend                          </td>
                                     <td>Broadband+ Fiber Trend%                </td>
@@ -1163,7 +1167,7 @@
                                     <td>Prem Video Goals                               </td>
                                     <td>Prem Video                                    </td>
                                     <td>Prem Video NetOFF                              </td>
-                                    <td>Charge Back                                  </td>
+                                    <td>Prem Video Charge Back                                  </td>
                                     <td>PremVideo Trend                               </td>
                                     <td>PremVideo Trend %                     </td>
                                     <td>PremVideo $GP                                  </td>
@@ -1174,14 +1178,14 @@
                                     <td>Entertainment Trending                        </td>
                                     <td>Entertainment Trending to Goals%       </td>
                                     <td>T.W.C Devices QTY                                </td>
-                                    <td>Charge Back                                 </td>
+                                    <td>T.W.C Devices Charge Back                                 </td>
                                     <td>T,W,C Devices QTY Trend                           </td>
                                     <td>T,W,C Devices$                           </td>
                                     <td>Projected Geographic Spiff                      </td>
                                     <td>Prepaid QTY                                   </td>
                                     <td>Prepaid to GA                                  </td>
                                     <td>Prepaid NetOFF                                </td>
-                                    <td>Charge Back                                 </td>
+                                    <td>Prepaid Charge Back                                 </td>
                                     <td>Prepaid $GP                                    </td>
                                     <td>Prepaid with Autopay                           </td>
                                     <td>Access $GP                                     </td>
@@ -1190,7 +1194,7 @@
                                     <td>Access$ Revenue                                </td>
                                     <td>Features QTY                                 </td>
                                     <td>Features QTY NetOFF                            </td>
-                                    <td>Charge Back                                 </td>
+                                    <td>Features QTY Charge Back                                 </td>
                                     <td>Total Protection%                    </td>
                                     <td>ProtAdv1                                     </td>
                                     <td>ProtAdv4                                     </td>
