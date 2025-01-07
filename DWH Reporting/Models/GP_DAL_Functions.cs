@@ -313,7 +313,7 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_StoreNumberTotal";
+                objDal.ProcName = "GetFct_StoreNumberTotalCopy";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
@@ -334,7 +334,7 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_StoreNumberTotal_filtereData";
+                objDal.ProcName = "GetFct_StoreNumberTotal_filtereDataCopy";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
@@ -446,7 +446,7 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_StoreNumberTotalTM";
+                objDal.ProcName = "GetFct_StoreNumberTotalTMCopy";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
@@ -466,7 +466,7 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_StoreNumberTotalMMM";
+                objDal.ProcName = "GetFct_StoreNumberTotalMMMCopy";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
