@@ -739,7 +739,7 @@
 
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" />
+                        <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
                         <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
                             @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                             {
@@ -756,7 +756,7 @@
                     </div>
                     <!-- Search Market -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" />
+                        <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" onkeyup="MarketFilter()" />
                         <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
                             @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
                             {
@@ -773,7 +773,7 @@
                     </div>
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" />
+                        <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" onkeyup="StoresFilter()" />
                         <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
                             @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
                             {
@@ -791,7 +791,7 @@
                     </div>
                     <!-- Search Tiers -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" />
+                        <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" onkeyup="TiersFilter()" />
                         <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
                             @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
                             {
@@ -1997,22 +1997,20 @@
     ////////////////////////////////////////////////////////
 
     function TMFilter() {
-        // Optional: If you want to add the text search functionality too, you can implement it here
-        var input = document.getElementById('textSearchTM').value.toUpperCase();
-        var rows = document.querySelectorAll('#tbl tbody tr');
+        const searchInput = document.getElementById('textSearchTM').value.toLowerCase();
+        const options = document.querySelectorAll('#TM option');
 
-        rows.forEach(row => {
-            var tmValue = row.getAttribute('data-tm'); // Get the TM value from the row's data attribute
-            if (tmValue.toUpperCase().indexOf(input) > -1 || input === '') {
-                row.style.display = ''; // Show row if it matches the text input
+        options.forEach(option => {
+            if (option.textContent.toLowerCase().includes(searchInput)) {
+                option.style.display = ''; // Show matching options
             } else {
-                row.style.display = 'none'; // Hide row if it doesn't match
+                option.style.display = 'none'; // Hide non-matching options
             }
         });
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData() {
-
+        debugger;
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('TM').selectedOptions).map(option => option.value);
         //console.log(selectedValues);
@@ -2309,16 +2307,14 @@
     ////////////////////////////////////////////////////////
 
     function MarketFilter() {
-        // Optional: If you want to add the text search functionality too, you can implement it here
-        var input = document.getElementById('textSearchMarket').value.toUpperCase();
-        var rows = document.querySelectorAll('#tbl tbody tr');
+        const searchInput = document.getElementById('textSearchMarket').value.toLowerCase();
+        const options = document.querySelectorAll('#Market option');
 
-        rows.forEach(row => {
-            var mktValue = row.getAttribute('data-mkt'); // Get the Market value from the row's data attribute
-            if (mktValue.toUpperCase().indexOf(input) > -1 || input === '') {
-                row.style.display = ''; // Show row if it matches the text input
+        options.forEach(option => {
+            if (option.textContent.toLowerCase().includes(searchInput)) {
+                option.style.display = ''; // Show matching options
             } else {
-                row.style.display = 'none'; // Hide row if it doesn't match
+                option.style.display = 'none'; // Hide non-matching options
             }
         });
     }
@@ -2659,16 +2655,14 @@
     //////////////////////////////////////////////////////
 
     function StoresFilter() {
-        // Optional: If you want to add the text search functionality too, you can implement it here
-        var input = document.getElementById('textSearchStores').value.toUpperCase();
-        var rows = document.querySelectorAll('#tbl tbody tr');
+        const searchInput = document.getElementById('textSearchStores').value.toLowerCase();
+        const options = document.querySelectorAll('#Stores option');
 
-        rows.forEach(row => {
-            var tirValue = row.getAttribute('data-store'); // Get the VP value from the row's data attribute
-            if (tirValue.toUpperCase().indexOf(input) > -1 || input === '') {
-                row.style.display = ''; // Show row if it matches the text input
+        options.forEach(option => {
+            if (option.textContent.toLowerCase().includes(searchInput)) {
+                option.style.display = ''; // Show matching options
             } else {
-                row.style.display = 'none'; // Hide row if it doesn't match
+                option.style.display = 'none'; // Hide non-matching options
             }
         });
     }
@@ -3040,16 +3034,14 @@
     //////////////////////////////////////////////////////
 
     function TiersFilter() {
-        // Optional: If you want to add the text search functionality too, you can implement it here
-        var input = document.getElementById('textSearchTiers').value.toUpperCase();
-        var rows = document.querySelectorAll('#tbl tbody tr');
+        const searchInput = document.getElementById('textSearchTiers').value.toLowerCase();
+        const options = document.querySelectorAll('#Tiers option');
 
-        rows.forEach(row => {
-            var tirValue = row.getAttribute('data-tir'); // Get the VP value from the row's data attribute
-            if (tirValue.toUpperCase().indexOf(input) > -1 || input === '') {
-                row.style.display = ''; // Show row if it matches the text input
+        options.forEach(option => {
+            if (option.textContent.toLowerCase().includes(searchInput)) {
+                option.style.display = ''; // Show matching options
             } else {
-                row.style.display = 'none'; // Hide row if it doesn't match
+                option.style.display = 'none'; // Hide non-matching options
             }
         });
     }
