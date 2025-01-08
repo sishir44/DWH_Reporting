@@ -1170,11 +1170,11 @@
                                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOff)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalTraffic)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTraffic != null ? record.PPVGAPerTraffic.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTraffic)) * 100))%</td>
-                                            <td class="FC">@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberConversion)))%</td>
+                                            <td class="FC">@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberConversion)))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberGreenCheck)))</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
-                                            <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record.CSAT)) * 100))%</td>
+                                            <td class="csat">@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.CSAT)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                             <td class="breakevenCLS">$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
@@ -1186,11 +1186,11 @@
                                             <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesGoals != null ? record.MTDUpgradesGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesGoals)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOff != null ? record.MTDUpgradesNetOff.ToString() : "") ? "0.00" : String.Format("{0:0}", Convert.ToDouble(record.MTDUpgradesNetOff)))</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.TWDevicesTrendToGoalPercentage != null ? record.TWDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record.TWDevicesTrendToGoalPercentage)) * 100))%</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.TWDevicesTrendToGoalPercentage != null ? record.TWDevicesTrendToGoalPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TWDevicesTrendToGoalPercentage)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyGoals != null ? record.TWDevicesQtyGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWDevicesQtyGoals)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyNetOff != null ? record.TWDevicesQtyNetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWDevicesQtyNetOff)))</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0" : String.Format("{0:N0}", (Convert.ToDouble(record.AIABusinessConversion)) * 100))%</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0" : String.Format("{0:N0}", (Convert.ToDouble(record.AIAConsumerConversion)) * 100))%</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIABusinessConversion)) * 100))%</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIAConsumerConversion)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.AIAGreenCheckConsumer != null ? record.AIAGreenCheckConsumer.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AIAGreenCheckConsumer)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AIABInternet)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AIACInternet)))</td>
@@ -1238,7 +1238,7 @@
                                             <td>@(String.IsNullOrWhiteSpace(record.TWDevicesQtyTrend != null ? record.TWDevicesQtyTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWDevicesQtyTrend)))</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.TWDevicesGP != null ? record.TWDevicesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWDevicesGP)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.HomeTechProtect)))</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TotalProtectionPercentage)))%</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0" : String.Format("{0:N1}", (Convert.ToDouble(record.TotalProtectionPercentage)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv1)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv4)))</td>
                                             @*<td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
@@ -1650,7 +1650,9 @@
                   <td>${parseFloat(response.UpgradeTrendingToGoals || 0.0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.MTDUpgradesNetOff || 0)).toLocaleString()}</td>
+
                   <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)}%</td>
+
                   <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
                   <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>

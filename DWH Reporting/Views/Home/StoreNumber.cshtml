@@ -1385,7 +1385,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyBudgetedHRS != null ? record.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyBudgetedHRS)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHRS != null ? record.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHRS)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrending != null ? record.MonthlyAchievedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHoursTrending)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.HomeTechProtect != null ? record.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.HomeTechProtect)))</td>
 
                             </tr>
@@ -1589,7 +1589,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHRS != null ? record2.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHRS)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrending != null ? record2.MonthlyAchievedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHoursTrending)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.HomeTechProtect != null ? record2.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.HomeTechProtect)))</td>
 
                                                     </tr>
@@ -1777,7 +1777,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHRS != null ? record2.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHRS)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrending != null ? record2.MonthlyAchievedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHoursTrending)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.HomeTechProtect != null ? record2.HomeTechProtect.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.HomeTechProtect)))</td>
 
                                                     </tr>
@@ -2177,6 +2177,7 @@
 
                                     <div class="container-fluid">
                                         <div class="row">
+                                            <div class="col-6"></div>
                                             <div class="col-6 mb-3 mt-2">
                                                 <div class="row">
                                                     <div class="form-group col-9 mb-1 mt-1 pr-0">
@@ -2219,7 +2220,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-6"></div>
                                         </div>
                                         <div class="row mb-3">
                                             <div class="col-md-6  mb-2">
@@ -2228,7 +2228,7 @@
                                                         @*<img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">*@
                                                     </div>
                                                     <div class="nodata" id="nonotes" style="display: flex;">
-                                                        <h5 class="text-secondary"><b>Notes</b></h5>
+                                                        <h5 class="text-secondary"><b>Personal Notes</b></h5>
                                                     </div>
                                                     <textarea id="noteTextArea" class="form-control" rows="20" placeholder="Enter notes here..." style="flex: 1; height:400px;"></textarea>
                                                     @*<div id="notedesc" class="card-body scrollable" style="height:400px"></div>*@
@@ -2242,7 +2242,7 @@
                                                         @*<img src="/MTDEmp/Images/bigloader.gif" alt="Alternate Text">*@
                                                     </div>
                                                     <div class="nodata" id="nocomments" style="display: flex;">
-                                                        <h5 class="text-secondary"><b>Comments</b></h5>
+                                                        <h5 class="text-secondary"><b>Outgoing Comments</b></h5>
                                                     </div>
                                                     <textarea id="commentTextArea" class="form-control" rows="20" placeholder="Enter comments here..." style="flex: 1; height:400px;"></textarea>
                                                     @*<div id="commentdesc" class="card-body scrollable" style="height:400px"></div>*@

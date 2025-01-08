@@ -3424,7 +3424,7 @@ namespace DWH_Reporting.Controllers
                     AccessGP = RoundToNearestWhole(row["Access $GP"]),
                     AccessQty = RoundToNearestWhole(row["Access Qty"]),
                     AccessRevenue = RoundToNearestWhole(row["Access $Revenue"]),
-                    TotalProtectionPercentage = row["TotalProtection %"].ToString(),
+                    TotalProtectionPercentage = MultiplyAndRoundPercentage(row["TotalProtection %"]),
                     ProtAdv1 = RoundToNearestWhole(row["ProtAdv 1"]),
                     ProtAdv4 = RoundToNearestWhole(row["ProtAdv 4"]),
                     WeeklyBudgetedHRS = RoundToNearestWhole(row["WeeklyBudgetedHRS"]),
