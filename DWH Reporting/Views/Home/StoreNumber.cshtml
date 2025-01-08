@@ -154,6 +154,7 @@
             padding: 1px 10px;
             font-size: 10px;
             margin-top: 8px;
+            cursor:pointer !important;
         }
 
             button#btnaddnote:hover, button#btndataview:hover {
@@ -881,7 +882,7 @@
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
-                            <label>Above 70%</label>
+                            <label>70% & Above</label>
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="Above 70%"
                                    value=""
@@ -5431,6 +5432,7 @@
 <!--Highlight Trending Break Even-->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
+        debugger;
         // Tr Break Even Calc
         var tbeCells = document.querySelectorAll(".tbreakevenCLS");
         var tbeCount = 0;
@@ -5439,14 +5441,13 @@
 
         tbeCells.forEach(function (cell) {
             var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
-            if (!isNaN(tbeValue) && tbeValue > 100) {
+            if (!isNaN(tbeValue) && tbeValue >= 100) {
                 tbeCount++;
-
             }
-            if (!isNaN(tbeValue) && tbeValue > 70 && tbeValue < 100) {
+            else if (!isNaN(tbeValue) && tbeValue >= 70 && tbeValue < 100) {
                 tbeCount70++;
             }
-            if (!isNaN(tbeValue) && tbeValue < 70) {
+            else if (!isNaN(tbeValue) && tbeValue < 70) {
                 tbeCount90++;
             }
         });
@@ -5455,7 +5456,7 @@
             var value = parseFloat(cell.textContent);
 
             // Check if the value is greater than 50
-            if (!isNaN(value) && value > 100.0) {
+            if (!isNaN(value) && value >= 100.0) {
                 cell.style.backgroundColor = "#008000";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
@@ -5466,7 +5467,7 @@
                 cell.style.color = "black";  // Set text color
             }
             // Check if the value is greater than >70 <100
-            if (!isNaN(value) && value > 70.0 && value < 100.0) {
+            if (!isNaN(value) && value >= 70.0 && value < 100.0) {
                 cell.style.backgroundColor = "#0046BF";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
