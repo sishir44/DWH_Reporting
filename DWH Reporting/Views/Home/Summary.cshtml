@@ -726,13 +726,13 @@
                             <input type="button" name=">70" id="GATrGoal90" class="form-control"
                                    title="Above 70%"
                                    value=""
-                                   style="background-color: red; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
+                                   style="background-color: orange; color: white; font-size: 10px; height: 20px; margin-bottom: 10px; padding: 0px 0 !important;" />
 
                             <label>Less Than 70%</label>
                             <input type="button" name="<70" id="GATrGoal70" class="form-control"
                                    title="Less Than 70%"
                                    value=""
-                                   style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
+                                   style="background-color: red;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
 
@@ -1447,13 +1447,13 @@
             }
 
             if (!isNaN(value) && value > 70.0 && value < 100.0) {
-                cell.style.backgroundColor = "red";  // Set background color
-                cell.style.color = "white";  // Set text color
+                cell.style.backgroundColor = "#FFA500";  // Set background color
+                cell.style.color = "black";  // Set text color
             }
 
             if (!isNaN(value) && value < 70.0) {
-                cell.style.backgroundColor = "#FFA500";  // Set background color
-                cell.style.color = "black";  // Set text color
+                cell.style.backgroundColor = "red";  // Set background color
+                cell.style.color = "white";  // Set text color
             }
         });
 
@@ -1470,7 +1470,7 @@
             }
 
             if (!isNaN(value) && value > 70.0 && value < 100.0) {
-                cell.style.backgroundColor = "red";  // Set background color
+                cell.style.backgroundColor = "#0046bf";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
 
