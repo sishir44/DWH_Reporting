@@ -1239,7 +1239,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTrafficPercentage)) * 100))%</td>
-                                <td>$@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalTraffic)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalTraffic)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record.FiberConversion)) * 100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberGreenCheck)))</td>
@@ -1376,7 +1376,7 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.FeaturesQty != null ? record.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQty)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FeaturesQtyNetOFF != null ? record.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQtyNetOFF)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ChargeBack12 != null ? record.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack12)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))%</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TotalProtectionPercentage))*100))%</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv1)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv4)))</td>
                                 <td>$@(String.IsNullOrWhiteSpace(record.FeaturesGP != null ? record.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesGP)))</td>
@@ -1443,7 +1443,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTrafficPercentage != null ? record2.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PPVGAPerTrafficPercentage)) * 100))%</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalTraffic)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalTraffic)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberConversion != null ? record2.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record2.FiberConversion)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberNetOFF != null ? record2.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberGreenCheck != null ? record2.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FiberGreenCheck)))</td>
@@ -1580,7 +1580,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQty != null ? record2.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesQty)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQtyNetOFF != null ? record2.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesQtyNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack12 != null ? record2.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ChargeBack12)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProtectionPercentage != null ? record2.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalProtectionPercentage)))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProtectionPercentage != null ? record2.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TotalProtectionPercentage))*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv1 != null ? record2.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv1)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv4 != null ? record2.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv4)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.FeaturesGP != null ? record2.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesGP)))</td>
@@ -1631,7 +1631,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PPVGAPerTrafficPercentage != null ? record2.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PPVGAPerTrafficPercentage)) * 100))%</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalTraffic)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalTraffic != null ? record2.TotalTraffic.ToString() : "") ? "0.0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalTraffic)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberConversion != null ? record2.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N0}", (Convert.ToDouble(record2.FiberConversion)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberNetOFF != null ? record2.BroadbandFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberGreenCheck != null ? record2.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FiberGreenCheck)))</td>
@@ -1768,7 +1768,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQty != null ? record2.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesQty)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FeaturesQtyNetOFF != null ? record2.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesQtyNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ChargeBack12 != null ? record2.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ChargeBack12)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProtectionPercentage != null ? record2.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record2.TotalProtectionPercentage)))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProtectionPercentage != null ? record2.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TotalProtectionPercentage))*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv1 != null ? record2.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv1)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv4 != null ? record2.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv4)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.FeaturesGP != null ? record2.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.FeaturesGP)))</td>
@@ -1989,7 +1989,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTrafficPercentage)) * 100))%</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0" : String.Format("{0:N1}", Convert.ToDouble(record.TotalTraffic)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TotalTraffic)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.FiberConversion != null ? record.FiberConversion.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.FiberConversion)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOFF != null ? record.BroadbandFiberNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.BroadbandFiberNetOFF)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.FiberGreenCheck)).ToString())</td>
@@ -2127,7 +2127,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record.FeaturesQty != null ? record.FeaturesQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQty)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.FeaturesQtyNetOFF != null ? record.FeaturesQtyNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesQtyNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ChargeBack12 != null ? record.ChargeBack12.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack12)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.TotalProtectionPercentage)))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record.TotalProtectionPercentage != null ? record.TotalProtectionPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TotalProtectionPercentage))*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv1)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv4)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.FeaturesGP != null ? record.FeaturesGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FeaturesGP)))</td>
@@ -2944,7 +2944,7 @@
                         <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.TotalTraffic || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>${parseFloat(response.TotalTraffic || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.BroadbandFiberNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.FiberGreenCheck || 0)).toLocaleString('en-US')}</td>
@@ -3081,7 +3081,7 @@
                         <td>${(parseFloat(response.FeaturesQty || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.FeaturesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.ChargeBack12 || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.TotalProtectionPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.TotalProtectionPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.ProtAdv1 || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.ProtAdv4 || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.FeaturesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
