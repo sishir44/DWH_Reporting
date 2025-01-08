@@ -1163,8 +1163,7 @@
                                             <td class="GATrGoal">
                                                 @String.Format("{0:N1}", record.GrossAddsTrendToGoal != null
                                                     ? (Convert.ToDouble(record.GrossAddsTrendToGoal) * 100)
-                                                    : 0)
-                                                %
+                                                    : 0)%
                                             </td>
                                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsGoals)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAdds)))</td>
@@ -1179,7 +1178,7 @@
                                             <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                             <td class="breakevenCLS">$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.GPTrending!= null ? record.GPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrending))) %</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.GPTrending!= null ? record.GPTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrending)))%</td>
                                             <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSTrendingToGoalsPercentage)) * 100))%</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.TotalOPSGoals != null ? record.TotalOPSGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalOPSGoals)))</td>
@@ -1643,23 +1642,23 @@
                   <td>${parseFloat(response.ProtAdvHomeTech || 0).toFixed(1)}%</td>
                   <td>$${Math.round(parseFloat(response.BreakEvenNumbers || 0)).toLocaleString()}</td>
                   <td>$${Math.round(parseFloat(response.GPWithSpifTrending || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.GPTrending || 0).toFixed(1)} %</td>
+                  <td>${parseFloat(response.GPTrending || 0).toFixed(1)}%</td>
                   <td>$${Math.round(parseFloat(response.TotalGPGoals || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.OPSTrendingToGoals || 0.0).toFixed(1)} %</td>
+                  <td>${parseFloat(response.OPSTrendingToGoals || 0.0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.TotalOPSGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.TotalOPS || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.UpgradeTrendingToGoals || 0.0).toFixed(1)} %</td>
+                  <td>${parseFloat(response.UpgradeTrendingToGoals || 0.0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.MTDUpgradesNetOff || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)} %</td>
+                  <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
-                    <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
-                 <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
                   <td>${Math.round(parseFloat(response.AIAGreenCheck || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.AIABInternet || 0)).toLocaleString()}</td>
                   <td>${Math.round(parseFloat(response.AIACInternet || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.OPSPerTraffic || 0.0).toFixed(1)} %</td>
+                  <td>${parseFloat(response.OPSPerTraffic || 0.0).toFixed(1)}%</td>
                 <td>${Math.round(parseFloat(response.CRUAchMTD || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.FNAchMTD || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.GrossAddsTrend || 0)).toLocaleString()}</td>
@@ -1671,12 +1670,12 @@
                 <td>${Math.round(parseFloat(response.NewFiber1G || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.FiberUpgradesNetOff || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.BroadbandFiberTrend || 0)).toLocaleString()}</td>
-                  <td>${parseFloat(response.BroadbandFiberTrendPercentage || '').toFixed(1)} %</td>
+                  <td>${parseFloat(response.BroadbandFiberTrendPercentage || '').toFixed(1)}%</td>
                 <td>${Math.round(parseFloat(response.PremVideoGoals || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.PremVideo || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.PremVideoNetOff || 0)).toLocaleString()}</td>
 
-                  <td>${parseFloat(response.PremVideoTrendPercentage || '').toFixed(1)} %</td>
+                  <td>${parseFloat(response.PremVideoTrendPercentage || '').toFixed(1)}%</td>
                 <td>${Math.round(parseFloat(response.PremVideoTrend || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.GPAchievedWithSpif || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.GPPerBox || 0)).toLocaleString()}</td>
@@ -1705,7 +1704,7 @@
                 <td>${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.HomeTechProtect || 0)).toLocaleString()}</td>
 
-                  <td>${parseFloat(response.TotalProtectionPercentage || '').toFixed(1)} %</td>
+                  <td>${parseFloat(response.TotalProtectionPercentage || '').toFixed(1)}%</td>
                  <td>${Math.round(parseFloat(response.ProtAdv1 || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.ProtAdv4 || 0)).toLocaleString()}</td>
 
