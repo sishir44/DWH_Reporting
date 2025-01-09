@@ -872,7 +872,7 @@
                             <input type="button" name="GAGoals" id="storeCountDisplay" class="form-control" value="0"
                                    style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
-                            <label>100% & Above</label>
+                            <label>100% & above</label>
                             <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
                                    title="Above 100%" value=""
                                    style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
@@ -882,7 +882,7 @@
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
-                            <label>70% & Above</label>
+                            <label>70% & above</label>
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="Above 70%"
                                    value=""
@@ -2783,9 +2783,10 @@
                         '<td>' + Math.round(Testdata[i].TotalGPAchievedWithSpif) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].Trending) + '</td>' +
                         //'<td>' + Math.round(Testdata[i].TrendingPer) + '%' + '</td>' +
-                        '<td>' + Math.round(parseFloat(Testdata[i].TrendingPer)).toFixed(1) + '%' + '</td>' +
+                        '<td>' + parseFloat(Testdata[i].TrendingPer).toFixed(1) + '%' + '</td>' +
                         //'<td>' + Testdata[i].CSAT + '%' + '</td>' +
-                        '<td>' + Math.round(parseFloat(Testdata[i].CSAT)).toFixed(1) + '%' + '</td>' +
+                        //'<td>' + parseFloat(Testdata[i].CSAT).toFixed(1) + '%' + '</td>' +
+                        '<td>' + (parseFloat(Testdata[i].CSAT) * 100).toFixed(1) + '%' + '</td>'+
                         '<td>' + addCommaswithRound(Testdata[i].GrossAdds) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].GrossAddsNetOFF) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].ChargeBack) + '</td>' +
@@ -2875,7 +2876,7 @@
                         '<td>' + addCommaswithRound(Testdata[i].PROTECTION_PACK_GP) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].HomeTechProtect) + '</td>' +
                         //'<td>' + Testdata[i].ProtAdvHomeTechPercentage + '%' + '</td>' +
-                        '<td>' + Math.round(parseFloat(Testdata[i].ProtAdvHomeTechPercentage)).toFixed(1) + '%' + '</td>' +
+                        '<td>' + parseFloat(Testdata[i].ProtAdvHomeTechPercentage).toFixed(1) + '%' + '</td>' +
                         '<td>' + (isNaN(Testdata[i].PAY) ? Testdata[i].PAY : addCommaswithRound(Testdata[i].PAY)) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].CommissionBucketMTD)   + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].EOMCommissionTrendingBucket) + '</td>' +
@@ -5441,10 +5442,10 @@
 
         tbeCells.forEach(function (cell) {
             var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
-            if (!isNaN(tbeValue) && tbeValue >= 100) {
+            if (!isNaN(tbeValue) && tbeValue > 99) {
                 tbeCount++;
             }
-            else if (!isNaN(tbeValue) && tbeValue >= 70 && tbeValue < 100) {
+            else if (!isNaN(tbeValue) && tbeValue > 69 && tbeValue < 100) {
                 tbeCount70++;
             }
             else if (!isNaN(tbeValue) && tbeValue < 70) {
@@ -5456,7 +5457,7 @@
             var value = parseFloat(cell.textContent);
 
             // Check if the value is greater than 50
-            if (!isNaN(value) && value >= 100.0) {
+            if (!isNaN(value) && value > 99.0) {
                 cell.style.backgroundColor = "#008000";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
@@ -5467,7 +5468,7 @@
                 cell.style.color = "black";  // Set text color
             }
             // Check if the value is greater than >70 <100
-            if (!isNaN(value) && value >= 70.0 && value < 100.0) {
+            if (!isNaN(value) && value > 69.0 && value < 100.0) {
                 cell.style.backgroundColor = "#0046BF";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
