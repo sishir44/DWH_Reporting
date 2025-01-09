@@ -872,9 +872,9 @@
                             <input type="button" name="GAGoals" id="storeCountDisplay" class="form-control" value="0"
                                    style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
-                            <label>100% & above</label>
+                            <label>100% & Above</label>
                             <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
-                                   title="Above 100%" value=""
+                                   title="100% & Above" value=""
                                    style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -882,9 +882,9 @@
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
-                            <label>70% & above</label>
+                            <label>70% & Above</label>
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
-                                   title="Above 70%"
+                                   title="70% & Above"
                                    value=""
                                    style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
@@ -2783,10 +2783,9 @@
                         '<td>' + Math.round(Testdata[i].TotalGPAchievedWithSpif) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].Trending) + '</td>' +
                         //'<td>' + Math.round(Testdata[i].TrendingPer) + '%' + '</td>' +
-                        '<td>' + parseFloat(Testdata[i].TrendingPer).toFixed(1) + '%' + '</td>' +
-                        //'<td>' + Testdata[i].CSAT + '%' + '</td>' +
-                        //'<td>' + parseFloat(Testdata[i].CSAT).toFixed(1) + '%' + '</td>' +
-                        '<td>' + (parseFloat(Testdata[i].CSAT) * 100).toFixed(1) + '%' + '</td>'+
+                        '<td>' + roundToOne(Testdata[i].TrendingPer) + '%' + '</td>' +
+                        //'<td>' + Math.round(parseFloat(Testdata[i].CSAT) * 100).toFixed(1) + '%' + '</td>' +
+                        '<td>' + roundToOne(Testdata[i].CSAT * 100).toFixed(1) + '%' + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].GrossAdds) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].GrossAddsNetOFF) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].ChargeBack) + '</td>' +
@@ -2876,7 +2875,7 @@
                         '<td>' + addCommaswithRound(Testdata[i].PROTECTION_PACK_GP) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].HomeTechProtect) + '</td>' +
                         //'<td>' + Testdata[i].ProtAdvHomeTechPercentage + '%' + '</td>' +
-                        '<td>' + parseFloat(Testdata[i].ProtAdvHomeTechPercentage).toFixed(1) + '%' + '</td>' +
+                        '<td>' + roundToOne(Testdata[i].ProtAdvHomeTechPercentage) + '%' + '</td>' +
                         '<td>' + (isNaN(Testdata[i].PAY) ? Testdata[i].PAY : addCommaswithRound(Testdata[i].PAY)) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].CommissionBucketMTD)   + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].EOMCommissionTrendingBucket) + '</td>' +
@@ -2887,6 +2886,10 @@
             }
         });
     }
+    function roundToOne(num) {
+        return +(Math.round(num + "e+1") + "e-1");
+    }
+
     function addCommaswithRound(nStr) {
         nStr = Math.round(nStr);
     nStr += '';

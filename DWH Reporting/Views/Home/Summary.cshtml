@@ -712,9 +712,9 @@
                             <input type="button" name="GAGoals" id="storeCountDisplay" class="form-control" value="0"
                                    style="background-color:#31869b;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
-                            <label>Above 100%</label>
+                            <label>100% & Above</label>
                             <input type="button" name=">100" id="GATrGoal100" class="form-control"
-                                   title="Above 100%" value=""
+                                   title="100% & Above" value=""
                                    style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -722,9 +722,9 @@
                     <!-- Month and isactive -->
                     <div class="col-lg-1 col-md-2 col-sm-12 col-xs-12" style="font-size: 12px; display: inline-block; text-align:center;">
                         <div class="maindiv">
-                            <label>Above 70%</label>
+                            <label>70% & Above</label>
                             <input type="button" name=">70" id="GATrGoal90" class="form-control"
-                                   title="Above 70%"
+                                   title="70% & Above"
                                    value=""
                                    style="background-color: orange; color: white; font-size: 10px; height: 20px; margin-bottom: 10px; padding: 0px 0 !important;" />
 
@@ -1468,7 +1468,7 @@
                 cell.style.color = "white";  // Set text color
             }
 
-            if (!isNaN(value) && value > 70.0 && value < 100.0) {
+            if (!isNaN(value) && value >= 70.0 && value < 100.0) {
                 cell.style.backgroundColor = "#0046bf";  // Set background color
                 cell.style.color = "white";  // Set text color
             }
