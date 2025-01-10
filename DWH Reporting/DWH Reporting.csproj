@@ -182,6 +182,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MobilyMtdUploaderController.cs" />
     <Compile Include="Models\DAL.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -304,6 +305,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Image\RTSFormat.PNG" />
     <Content Include="Image\smLogoMobily.png" />
     <Content Include="Image\logo23.png" />
     <Content Include="Image\spinner-8565_256.gif" />
@@ -328,6 +330,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\table2excel.js" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_GPLayout.cshtml" />
@@ -347,6 +350,8 @@
     <Content Include="Views\Home\HRSMRank.cshtml" />
     <Content Include="Views\Home\SalariedRSMRank.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\Home\StoreNumberUploader.cshtml" />
+    <Content Include="Views\MobilyMtdUploader\StoreNumberUploader.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

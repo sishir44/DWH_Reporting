@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "StoreNumberUploader";
+}
+
+
+<script src="~/Scripts/Site.js"></script>
+<link href="~/Content/Site.css" rel="stylesheet" />
+<br />
+<div class="row mt-4">
+    <label for="datePicker" class="form-label">Select Date</label>
+</div>
+<div class="row mt-4">
+
+    @{
+        var today = DateTime.Today.ToString("yyyy-MM-dd");
+        var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+        Console.WriteLine(yesterday);
+    }
+    @using (Html.BeginForm("StoreNumberUploader", "Home", FormMethod.Post, new { id = "uploadForm" }))
+    {
+        <div class="form-group">
+            <input type="date"
+                   id="selectedDate"
+                   name="selectedDate"
+                   class="form-control"
+                   title="Select KPI Date"
+                   style="margin-top:8px; background-color:#A5CFF0; font-size: 12px; font-weight: bold; color:#383b3f; border:black"
+                   max="@yesterday"
+                   value="@yesterday" /> <!-- Set yesterday's date as default -->
+        </div>
+
+        <!-- Hidden input to send the uploadType value (if needed) -->
+        <input type="hidden" name="uploadType" id="buttonText" />
+        @*<input type="hidden" name="uploadType" value="" />*@
+    }
+
+</div>
+
+
+<!-- Hidden input for the parameter -->
+@*<input type="hidden" id="uploadType" name="uploadType" value="" />*@
+<br />
+<br />
+<!-- Button to Trigger Success Message -->
+<div class="row mt-4">
+    <div class="col">
+        <button id="btnUploadKPI" class="btn btn-primary">Upload KPI</button>
+    </div>
+</div>
+<br />
+<!-- Button to Trigger Success Message -->
+<div class="row mt-4">
+    <div class="col">
+        <button id="btnUploadOther" class="btn btn-primary">Upload Charge Back</button>
+    </div>
+</div>
+
+
+<!-- Success Message -->
+<div class="row">
+    <div class="col" style="margin-top: 10px;">
+        <div>
+            @if (ViewData["StoreNumberUploaderKPI"] != null)
+            {
+                <div class="alert alert-info">
+                    @ViewData["StoreNumberUploaderKPI"]
+                </div>
+            }
+
+            @if (ViewData["StoreNumberUploaderCB"] != null)
+            {
+                <div class="alert alert-info">
+                    @ViewData["StoreNumberUploaderCB"]
+                </div>
+            }
+        </div>
+    </div>
+</div>

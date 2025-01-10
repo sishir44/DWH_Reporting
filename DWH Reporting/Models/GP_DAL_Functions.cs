@@ -613,6 +613,25 @@ namespace DWH_Reporting.Models
             return res = false;
         }
 
+        public static DataTable StoreNumberUploaded(string dateParam)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "RunTempEmpCommission";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@BackDate", SqlDbType.Date, dateParam);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
 
     }
 }
