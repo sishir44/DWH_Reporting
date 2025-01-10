@@ -1562,7 +1562,7 @@
 
         // Loop through each cell and count if it has a store name
         storeCells.forEach(function (cell) {
-            //debugger;
+          
             var storeName = cell.textContent.trim();
 
             // Check if the cell has a non-empty store name
@@ -1600,7 +1600,8 @@
 <script>
 
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date = null, Sd = null) {
-    const baseUrl = '@Url.Content("~/")';
+    
+        const baseUrl = '@Url.Content("~/")';
     var dateP = "@ViewBag.ReportDate"; // Razor value for date
     var Sd = 'Elio Portocarrero';
     var endpoint = baseUrl + "Home/GetFilteredDataSum";
@@ -2011,7 +2012,7 @@
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData() {
-        debugger;
+        
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('TM').selectedOptions).map(option => option.value);
         //console.log(selectedValues);
@@ -2669,7 +2670,7 @@
     }
     ////////////////Stores Hierarchy/////////////////////////
     function filterStoresData() {
-
+    
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('Stores').selectedOptions).map(option => option.value);
 
@@ -2732,7 +2733,7 @@
 
             storAlreadySelected.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText, tirAlreadySelected.innerText);
+            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText, null);
 
         } else if (tmAlreadySelected.disabled) {
 
@@ -2744,7 +2745,7 @@
             mktAlreadySelected.disabled = true;
             storAlreadySelected.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, storAlreadySelected.innerText);
+            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText, null);
 
         } else if (mktAlreadySelected.disabled) {
 
