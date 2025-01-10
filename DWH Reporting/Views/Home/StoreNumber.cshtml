@@ -2953,7 +2953,7 @@
                         <td>${(parseFloat(response.BroadbandFiberNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.FiberGreenCheck || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.CSAT || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.TrendingToBreakEven || 0).toFixed(1)}%</td>
