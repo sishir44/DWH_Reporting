@@ -1158,7 +1158,7 @@
                                             <td class="stores" style="background-color: black; color: white; font-weight:bold;">@record.Store </td>
                                             <td>@record.StoreContact</td>
                                             <td>@(String.IsNullOrWhiteSpace(record.Monthly_AchivedHoursTrending != null ? record.Monthly_AchivedHoursTrending.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.Monthly_AchivedHoursTrending))))%</td>
-                                            <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.WeeklyBudgetedHRS)))</td>
+                                            <td>@(String.IsNullOrWhiteSpace(record.WeeklyBudgetedHRS != null ? record.WeeklyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.WeeklyBudgetedHRS)))</td>
                                             @*<td class="GATrGoal">@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal))*100))%</td>*@
                                             <td class="GATrGoal">
                                                 @String.Format("{0:N1}", record.GrossAddsTrendToGoal != null
@@ -1687,12 +1687,12 @@
                 <td>$${Math.round(parseFloat(response.MTDUpgradesGP || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.BroadbandFiberGP || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.BroadbandGP || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.BroadbandLessThan300MBQISpiff || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.NewFiber300MBQISpiff || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.NewFiber500MBQISpiff || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.NewFiber1GQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandLessThan300MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber300MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber500MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber1GQISpiff || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.PremVideoGP || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.PremVideoSpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.PremVideoSpiff || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.AccessGP || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.AccessRevenue || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.AccessQty || 0)).toLocaleString()}</td>
@@ -1703,7 +1703,7 @@
                 <td>$${Math.round(parseFloat(response.CRUAchVoiceDollar || 0)).toLocaleString()}</td>
                 <td>$${Math.round(parseFloat(response.CRUAchData || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.TWDevicesQtyTrend || 0)).toLocaleString()}</td>
-                <td>${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
                 <td>${Math.round(parseFloat(response.HomeTechProtect || 0)).toLocaleString()}</td>
 
                   <td>${parseFloat(response.TotalProtectionPercentage || '').toFixed(1)}%</td>
