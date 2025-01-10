@@ -2963,19 +2963,19 @@
                         <td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.TotalOPSGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.TotalOPS || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.UpgradeTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.MTDUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.TWCDevicesQtyGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.TWCDevicesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
-                        <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.AIAConsumerConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.AIAGreenCheckConsumer || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIACInternet || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIABInternet || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat(response.TotalOPSTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.OPSPerTrafficPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.OPSPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.CRUAchMTD || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.FNAchMTD || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
@@ -3066,7 +3066,7 @@
                         <td>${(parseFloat(response.EntertainmentGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.EntertainmentAch || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.EntertainmentTrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.EntertainmentTrendingToGoalsPercentage || 0).toFixed(1)}%</td>
+                        <td>${parseFloat((response.EntertainmentTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.TWCDevicesQty || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.ChargeBack10 || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.TWCDevicesQtyTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
