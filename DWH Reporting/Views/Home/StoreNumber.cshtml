@@ -4225,6 +4225,9 @@
             mktAlreadySelected.disabled = true;
             mmmAlreadySelected.disabled = true;
 
+            $('tr.filter_data').remove();
+            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText,null,null);
+
         } else if (mktAlreadySelected.disabled) {
 
             mmmfiltermmmOptions(selectedValues);
@@ -4232,6 +4235,9 @@
             mmmfilterStoresOptions(selectedValues);
 
             mmmAlreadySelected.disabled = true;
+
+            $('tr.filter_data').remove();
+            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, null, null);
 
         }
         else {
@@ -4247,7 +4253,8 @@
             mmmAlreadySelected.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter('', '', mmmAlreadySelected.innerText);
+            loadGTotalByFilter(null, null, mmmAlreadySelected.innerText, null, null);
+
 
         }
 
