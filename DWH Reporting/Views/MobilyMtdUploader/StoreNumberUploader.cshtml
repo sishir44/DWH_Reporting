@@ -17,7 +17,7 @@
         var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
         Console.WriteLine(yesterday);
     }
-    @using (Html.BeginForm("StoreNumberUploader", "Home", FormMethod.Post, new { id = "uploadForm" }))
+    @using (Html.BeginForm("StoreNumberUploader", "MobilyMtdUploader", FormMethod.Post, new { id = "uploadForm" }))
     {
         <div class="form-group">
             <input type="date"
