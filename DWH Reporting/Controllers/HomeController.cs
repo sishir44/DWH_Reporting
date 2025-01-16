@@ -192,12 +192,14 @@ namespace DWH_Reporting.Controllers
         }
 
         [Authorization]
-        public ActionResult Summary(string selectedDate,string UserID)
+        public ActionResult Summary(string selectedDate)
         {
             try
             {
-           
-                ShowStoreSummary(selectedDate,UserID);
+                string userID;
+                userID = Session["userid"].ToString();
+
+                ShowStoreSummary(selectedDate,userID);
 
                 return View();
 
@@ -3180,12 +3182,14 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers,string UserID)
+        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
         {
+            string userID;
+            userID = Session["userid"].ToString();
 
             ////////////////Get Filter Total
 
-            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,UserID);
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,userID);
             List<StoreSummaryAttributes> lisn_tot = new List<StoreSummaryAttributes>();
 
             foreach (DataRow row in FilterTotal.Rows)

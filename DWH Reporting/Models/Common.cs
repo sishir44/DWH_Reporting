@@ -12,9 +12,9 @@ namespace DWH_Reporting.Models
         {
             try
             {
-                DAL obj_dal = new DAL();
+                DALMIS obj_dal = new DALMIS();
                 obj_dal.ProcName = "InsertErrorLogs";
-                SPParameters sp = new SPParameters();
+                SPParametersMIS sp = new SPParametersMIS();
                 sp.SetParam("module", SqlDbType.NVarChar, modulename);
                 sp.SetParam("expmsg", SqlDbType.NVarChar, exception);
                 sp.SetParam("userid", SqlDbType.NVarChar, username);
@@ -31,9 +31,9 @@ namespace DWH_Reporting.Models
         {
             try
             {
-                DAL obj_dal = new DAL();
+                DALMIS obj_dal = new DALMIS();
                 obj_dal.ProcName = "CheckReportAuthentication";
-                SPParameters sp = new SPParameters();
+                SPParametersMIS sp = new SPParametersMIS();
                 sp.SetParam("username", SqlDbType.NVarChar, username);
                 sp.SetParam("secretkey", SqlDbType.NVarChar, secretkey);
                 return obj_dal.Getdata(sp);
@@ -48,9 +48,9 @@ namespace DWH_Reporting.Models
         {
             try
             {
-                DAL obj_dal = new DAL();
+                DALMIS obj_dal = new DALMIS();
                 obj_dal.ProcName = "UpdateReportAuthStatus";
-                SPParameters sp = new SPParameters();
+                SPParametersMIS sp = new SPParametersMIS();
                 sp.SetParam("recid", SqlDbType.NVarChar, authid);
                 return obj_dal.AddData(sp);
             }

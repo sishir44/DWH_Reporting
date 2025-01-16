@@ -514,6 +514,7 @@ namespace DWH_Reporting.Models
                 objDal.ProcName = "GetRecords_summaryTotal";
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
             }
