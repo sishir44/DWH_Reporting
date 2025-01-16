@@ -191,13 +191,13 @@ namespace DWH_Reporting.Controllers
             }
         }
 
-        //[Authorization]
-        public ActionResult Summary(string selectedDate)
+        [Authorization]
+        public ActionResult Summary(string selectedDate,string UserID)
         {
             try
             {
            
-                ShowStoreSummary(selectedDate);
+                ShowStoreSummary(selectedDate,UserID);
 
                 return View();
 
@@ -597,7 +597,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get Total
 
-            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam);
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam,UserID);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)
@@ -773,7 +773,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get TM Total
 
-            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam);
+            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam,UserID);
             List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalTM.Rows)
@@ -950,7 +950,7 @@ namespace DWH_Reporting.Controllers
             
             ////////////////Get MMM Total
 
-            DataTable Fct_StoreNumberTotalMMM = GP_DAL_Functions.GetFct_StoreNumberTotalMMM(dateParam);
+            DataTable Fct_StoreNumberTotalMMM = GP_DAL_Functions.GetFct_StoreNumberTotalMMM(dateParam,UserID);
             List<Fct_StoreNumberAttributesModel> lisn_totMMM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalMMM.Rows)
@@ -1753,7 +1753,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get TM Total
 
-            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam);
+            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam, "1");
             List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalTM.Rows)
@@ -2220,13 +2220,13 @@ namespace DWH_Reporting.Controllers
 
         }
 
-        private void ShowStoreSummary(string selectedDate)
+        private void ShowStoreSummary(string selectedDate, string UserID)
         {
 
             string dateParam = selectedDate;
 
             // Call your function with the date parameter
-            DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam);
+            DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID);
 
             List<Fct_StoreSummaryAttributesModel> lisn2_lst = new List<Fct_StoreSummaryAttributesModel>();
 
@@ -2335,7 +2335,7 @@ namespace DWH_Reporting.Controllers
 
 
             ////////////////Get_Summary Total
-            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetRecords_summaryTotal(dateParam);
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetRecords_summaryTotal(dateParam, UserID);
             List<Fct_StoreSummaryAttributesModel> lisn_tot = new List<Fct_StoreSummaryAttributesModel>();
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)
             {
@@ -2835,12 +2835,12 @@ namespace DWH_Reporting.Controllers
 
 
         [HttpPost]
-        public JsonResult GetGTotal(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
+        public JsonResult GetGTotal(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers,string UserID)
         {
 
             ////////////////Get Filter Total
 
-            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers);
+            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,UserID);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in FilterTotal.Rows)
@@ -3180,12 +3180,12 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
+        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers,string UserID)
         {
 
             ////////////////Get Filter Total
 
-            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers);
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,UserID);
             List<StoreSummaryAttributes> lisn_tot = new List<StoreSummaryAttributes>();
 
             foreach (DataRow row in FilterTotal.Rows)

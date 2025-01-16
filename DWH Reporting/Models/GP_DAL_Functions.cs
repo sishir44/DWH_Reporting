@@ -288,7 +288,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreSummary(string dateParam)
+        public static DataTable GetFct_StoreSummary(string dateParam,string UserID)
         {
             try
             {
@@ -298,6 +298,7 @@ namespace DWH_Reporting.Models
                 // Create SPParameters object and add the date parameter
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 // Execute stored procedure with the parameters
                 DataTable DT = objDal.Getdata(spParam);
@@ -309,7 +310,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreNumberTotal(string dateParam)
+        public static DataTable GetFct_StoreNumberTotal(string dateParam,string UserID)
         {
             try
             {
@@ -318,6 +319,7 @@ namespace DWH_Reporting.Models
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -330,7 +332,7 @@ namespace DWH_Reporting.Models
             }
         }
         
-        public static DataTable FilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers)
+        public static DataTable FilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers,string UserID)
         {
             try
             {
@@ -345,6 +347,7 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@MMM", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(MMM) ? null : MMM);
                 spParam.SetParam("@Store", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Store) ? null : Store);
                 spParam.SetParam("@Tiers", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tiers) ? null : Tiers);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -379,7 +382,7 @@ namespace DWH_Reporting.Models
             }
         }
 
-        public static DataTable SummaryFilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers)
+        public static DataTable SummaryFilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers,string UserID)
         {
             try
             {
@@ -394,6 +397,7 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@MMM", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(MMM) ? null : MMM);
                 spParam.SetParam("@Store", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Store) ? null : Store);
                 spParam.SetParam("@Tiers", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tiers) ? null : Tiers);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -442,7 +446,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreNumberTotalTM(string dateParam)
+        public static DataTable GetFct_StoreNumberTotalTM(string dateParam,string UserID)
         {
             try
             {
@@ -451,6 +455,7 @@ namespace DWH_Reporting.Models
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -462,7 +467,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreNumberTotalMMM(string dateParam)
+        public static DataTable GetFct_StoreNumberTotalMMM(string dateParam,string UserID)
         {
             try
             {
@@ -471,6 +476,7 @@ namespace DWH_Reporting.Models
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -500,7 +506,7 @@ namespace DWH_Reporting.Models
             }
         }
 
-        public static DataTable GetRecords_summaryTotal(string dateParam)
+        public static DataTable GetRecords_summaryTotal(string dateParam,string UserID)
         {
             try
             {
