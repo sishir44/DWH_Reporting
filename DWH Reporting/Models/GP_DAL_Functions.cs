@@ -266,7 +266,7 @@ namespace DWH_Reporting.Models
 
         }
 
-        public static DataTable GetFct_StoreNumberCol2(string dateParam)
+        public static DataTable GetFct_StoreNumberCol2(string dateParam,string UserID)
         {
             try
             {
@@ -276,6 +276,7 @@ namespace DWH_Reporting.Models
                 // Create SPParameters object and add the date parameter
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
 
                 // Execute stored procedure with the parameters
                 DataTable DT = objDal.Getdata(spParam);

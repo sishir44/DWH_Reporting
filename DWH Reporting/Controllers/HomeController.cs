@@ -83,15 +83,16 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-
-                ShowStoreNumber(selectedDate);
+                string userID;
+                userID = Session["userid"].ToString();
+                ShowStoreNumber(selectedDate,userID);
 
                 return View();
 
             }
             catch (Exception ex)
             {
-                return Content("Report is being uploaded. Please try again in few minutes");
+                return Content(ex.Message+"\n\n"+ex.StackTrace+ "\nReport is being uploaded. Please try again in few minutes");
             }
 
         }
@@ -102,7 +103,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate);
+                ShowStoreNumber(selectedDate,"1");
 
                 return View();
 
@@ -120,7 +121,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate);
+                ShowStoreNumber(selectedDate,"1");
 
                 return View();
 
@@ -138,7 +139,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate);
+                ShowStoreNumber(selectedDate,"1");
 
                 return View();
 
@@ -156,7 +157,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate);
+                ShowStoreNumber(selectedDate,"1");
 
                 return View();
 
@@ -202,12 +203,12 @@ namespace DWH_Reporting.Controllers
             }
         }
 
-        private void ShowStoreNumber(string selectedDate)
+        private void ShowStoreNumber(string selectedDate,string UserID)
         {
 
             string dateParam = selectedDate;
 
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam);
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID);
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 
@@ -1403,7 +1404,7 @@ namespace DWH_Reporting.Controllers
 
            
             // Call your function with the date parameter
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam);
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,"1");
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 
