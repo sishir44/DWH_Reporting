@@ -193,6 +193,7 @@
     <Compile Include="Helpers\Encryption.cs" />
     <Compile Include="Helpers\JwtManager.cs" />
     <Compile Include="Models\Common.cs" />
+    <Compile Include="Models\EncryptionHelper.cs" />
     <Compile Include="Models\GpReport\GpReport.cs" />
     <Compile Include="Models\GP_DAL_Functions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

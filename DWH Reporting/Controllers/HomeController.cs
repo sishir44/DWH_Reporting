@@ -91,7 +91,12 @@ namespace DWH_Reporting.Controllers
                 //userID = Session["userid"].ToString();
                 //Common.recorderror("Sessionuserid", userID, "", "0");
                 //Common.recorderror("Sessionuname", name, "", "0");
-                ShowStoreNumber(selectedDate, global.userID);
+
+                global.userID = Request.QueryString["userid"];
+
+                string decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+
+                ShowStoreNumber(selectedDate, decrpedUserId);
 
                 return View();
 
@@ -198,10 +203,11 @@ namespace DWH_Reporting.Controllers
             try
             {
                 global.userID = Request.QueryString["userid"];
-                
+
                 //userID = Session["userid"].ToString();
 
-                ShowStoreSummary(selectedDate, global.userID);
+                string decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                ShowStoreSummary(selectedDate, decrpedUserId);
 
                 return View();
 
