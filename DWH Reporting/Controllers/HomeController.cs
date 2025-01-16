@@ -79,18 +79,19 @@ namespace DWH_Reporting.Controllers
 
         }
 
-       [Authorization]
+       //[Authorization]
         public ActionResult StoreNumber(string selectedDate)
         {
             try
             {
-                string userID;
-                string name;
-                name = Session["username"].ToString();
-                userID = Session["userid"].ToString();
-                Common.recorderror("Sessionuserid", userID, "", "0");
-                Common.recorderror("Sessionuname", name, "", "0");
-                ShowStoreNumber(selectedDate,userID);
+
+                //userID = Request.QueryString["userid"]; ;
+                //string name;
+                //name = Session["username"].ToString();
+                //userID = Session["userid"].ToString();
+                //Common.recorderror("Sessionuserid", userID, "", "0");
+                //Common.recorderror("Sessionuname", name, "", "0");
+                ShowStoreNumber(selectedDate, global.userID);
 
                 return View();
 
@@ -191,15 +192,16 @@ namespace DWH_Reporting.Controllers
             }
         }
 
-        [Authorization]
+        //[Authorization]
         public ActionResult Summary(string selectedDate)
         {
             try
             {
-                string userID;
-                userID = Session["userid"].ToString();
+                global.userID = Request.QueryString["userid"];
+                
+                //userID = Session["userid"].ToString();
 
-                ShowStoreSummary(selectedDate,userID);
+                ShowStoreSummary(selectedDate, global.userID);
 
                 return View();
 
@@ -3184,12 +3186,12 @@ namespace DWH_Reporting.Controllers
         [HttpGet]
         public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
         {
-            string userID;
-            userID = Session["userid"].ToString();
+            //string userID = Request.QueryString["userid"];
+            //userID = Session["userid"].ToString();
 
             ////////////////Get Filter Total
 
-            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,userID);
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, global.userID);
             List<StoreSummaryAttributes> lisn_tot = new List<StoreSummaryAttributes>();
 
             foreach (DataRow row in FilterTotal.Rows)

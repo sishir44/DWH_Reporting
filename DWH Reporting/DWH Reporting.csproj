@@ -183,6 +183,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MobilyMtdUploaderController.cs" />
+    <Compile Include="global.cs" />
     <Compile Include="Models\DALMIS.cs" />
     <Compile Include="Models\DAL.cs" />
     <Compile Include="Global.asax.cs">
