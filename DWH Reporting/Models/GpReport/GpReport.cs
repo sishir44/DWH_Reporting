@@ -1659,8 +1659,29 @@ namespace DWH_Reporting.Models.GpReport
         public string EOMCommissionTrendingBucket { get; set; }
         public string EffectiveRate { get; set; }
 
-        //Employee
-        public string EmpID { get; set; }
+        //New Dot Report
+        public string NextUPTrendPer                             { get; set; }
+        public string PremiumPerGA                              { get; set; }
+        public string ExtraPerGA                               { get; set; }
+        public string ExtraUnlMix70Per                         { get; set; }
+        public string FiberUpgTrend                             { get; set; }
+        public string TotalProt                                 { get; set; }
+        public string TotalProtNetOFF                            { get; set; }
+        public string ProtAdv1NetOff                            { get; set; }
+        public string ProtAdv4NetOff                            { get; set; }
+        public string PrepQTYTrend                              { get; set; }
+        public string AccessRevTrend                            { get; set; }
+        public string WeeklyAchivedHRS                          { get; set; }
+        public string BudgEmp                                 { get; set; }
+        public string FullTimeHourlyHeadCount                 { get; set; }
+        public string PartTimeHourlyHeadCount                 { get; set; }
+        public string TotalHourlyCount                         { get; set; }
+        public string HourlyHeadCntsVar                 { get; set; }
+        public string HourlyCurrHeadCntVarHrs       { get; set; }
+
+
+//Employee
+public string EmpID { get; set; }
         public string Employees { get; set; }
         public string Status { get; set; }
         public string HireDate { get; set; }
