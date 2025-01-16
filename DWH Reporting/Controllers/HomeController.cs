@@ -79,13 +79,17 @@ namespace DWH_Reporting.Controllers
 
         }
 
-        //[Authorization]
+       [Authorization]
         public ActionResult StoreNumber(string selectedDate)
         {
             try
             {
                 string userID;
+                string name;
+                name = Session["username"].ToString();
                 userID = Session["userid"].ToString();
+                Common.recorderror("Sessionuserid", userID, "", "0");
+                Common.recorderror("Sessionuname", name, "", "0");
                 ShowStoreNumber(selectedDate,userID);
 
                 return View();
@@ -192,6 +196,7 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
+           
                 ShowStoreSummary(selectedDate);
 
                 return View();

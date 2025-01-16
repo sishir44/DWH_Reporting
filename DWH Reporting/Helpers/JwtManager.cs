@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using DWH_Reporting.Models;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,6 +14,7 @@ namespace DWH_Reporting.Helpers
         public const string SecretKey = "JIOBLi6eVjBpvGtWBgJzjWd2QH0sOn5tI8rIFXSHKijXWEt/3J2jFYL79DQ1vKu+EtTYgYkwTluFRDdtF41yAQ==";
         public static string GenerateJWTToken(string username, string userid, string hash, int expire_in_Minutes)
         {
+            Common.recorderror("GenerateJWTToken", username + "-" + userid, "", "");
             var symmetric_Key = Convert.FromBase64String(SecretKey);
             var token_Handler = new JwtSecurityTokenHandler();
 
@@ -33,7 +35,7 @@ namespace DWH_Reporting.Helpers
 
             var stoken = token_Handler.CreateToken(securitytokenDescriptor);
             var token = token_Handler.WriteToken(stoken);
-
+            Common.recorderror("GenerateJWTToken", token, "", "");
             return token;
         }
 

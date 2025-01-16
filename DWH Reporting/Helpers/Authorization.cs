@@ -1,5 +1,4 @@
 ﻿using DWH_Reporting.Models;
-using DWH_Reporting.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -38,14 +37,16 @@ namespace DWH_Reporting.Helpers
                     var username = userclaim.Value.ToString();
                     var hash = hashclaim.Value.ToString();
                     var userid = useridclaim.Value.ToString();
-
+                    Common.recorderror("username", username + "-" + userid, "", "");
                     DataTable dt = Common.CheckReportAuth(username, hash);
                     var session = filterContext.HttpContext.Session;
+
+             
                     if (session["isValid"] != null && dt.Rows.Count == 0)
                     {
                         session["username"] = username;
                         session["userid"] = userid;
-
+                        Common.recorderror("sessionuserid", userid, "", "");
                     }
                     else if (dt.Rows.Count == 0)
                     {

@@ -5,8 +5,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
-
-namespace Mobily_GpView.Helpers
+using DWH_Reporting.Models;
+namespace DWH_Reporting.Helpers
 {
     public class Encryption
     {
