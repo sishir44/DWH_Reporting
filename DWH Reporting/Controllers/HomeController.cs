@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using DWH_Reporting.Models.GpReport;
 using DWH_Reporting.Models;
 using System.Linq;
+using DWH_Reporting.Helpers;
 
 namespace DWH_Reporting.Controllers
 {
