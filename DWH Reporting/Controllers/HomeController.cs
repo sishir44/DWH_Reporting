@@ -94,9 +94,9 @@ namespace DWH_Reporting.Controllers
 
                 global.userID = Request.QueryString["userid"];
 
-                string decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
 
-                ShowStoreNumber(selectedDate, decrpedUserId);
+                ShowStoreNumber(selectedDate, global.decrpedUserId);
 
                 return View();
 
@@ -206,8 +206,8 @@ namespace DWH_Reporting.Controllers
 
                 //userID = Session["userid"].ToString();
 
-                string decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                ShowStoreSummary(selectedDate, decrpedUserId);
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                ShowStoreSummary(selectedDate, global.decrpedUserId);
 
                 return View();
 
@@ -3197,7 +3197,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get Filter Total
 
-            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, global.userID);
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, global.decrpedUserId);
             List<StoreSummaryAttributes> lisn_tot = new List<StoreSummaryAttributes>();
 
             foreach (DataRow row in FilterTotal.Rows)
