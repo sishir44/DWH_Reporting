@@ -808,12 +808,11 @@
                             }
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Get))
-                            {
-                                <button type="submit" class="headerbtndiv btn float-right form-control small-btn" title="First Load Data" id="resetid">
+                        
+                                <button type="submit" class="headerbtndiv btn float-right form-control small-btn" title="First Load Data" id="" onclick="refresh()">
                                     <i class="fas fa-retweet"></i>
                                 </button>
-                            }
+                            
 
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
@@ -3266,6 +3265,10 @@
 
 <!-- Filters working -->
 <script>
+
+    function refresh() {
+        location.reload();
+    }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
         $('tr.filter_data').remove();

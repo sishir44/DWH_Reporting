@@ -625,13 +625,10 @@
                             }
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            @using (Html.BeginForm("Summary", "Home", FormMethod.Get))
-                            {
-                                <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="resetid">
+                                <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="" onclick="refresh()">
                                     <i class="fas fa-retweet"></i>
                                 </button>
-                            }
-
+                            
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter">
@@ -1623,7 +1620,9 @@
     highlightCells();
 </script>
 <script>
-
+    function refresh() {
+        location.reload();
+    }
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date = null, Sd = null) {
     
         const baseUrl = '@Url.Content("~/")';
