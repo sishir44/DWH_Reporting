@@ -202,47 +202,18 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                // Retrieve the 'userid' from the query string
-                var queryUserId = Request.QueryString["userid"];
+                global.userID = Request.QueryString["userid"];
 
-                // Check if global.decrpedUserId is already set and not empty
-                if (string.IsNullOrEmpty(global.decrpedUserId))
-                {
-                    if (!string.IsNullOrEmpty(queryUserId))
-                    {
-                        try
-                        {
-                            // Decrypt the userId if it's not null or empty
-                            global.decrpedUserId = EncryptionHelper.Decrypt(queryUserId);
-                        }
-                        catch (FormatException ex)
-                        {
-                            // Handle invalid Base64 format
-                            throw new Exception("Invalid userId format in the query string.", ex);
-                        }
-                    }
-                    else
-                    {
-                        // Default to a safe value if userId is not provided
-                        global.decrpedUserId = EncryptionHelper.Decrypt(queryUserId);
-                    }
-                }
-
-                // Proceed with the store summary logic
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ShowStoreSummary(selectedDate, global.decrpedUserId);
 
                 return View();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log the exception and return an appropriate error view/message
-                // You can use a logging library like Serilog or NLog to log the error
-                // For now, simply throw the exception
-                throw new Exception("An error occurred while processing the summary.", ex);
+                throw;
             }
         }
-
-
         private void ShowStoreNumber(string selectedDate,string UserID)
         {
 

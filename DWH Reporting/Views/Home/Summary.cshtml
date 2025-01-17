@@ -9,6 +9,9 @@
     var recordsFct_StoreNumber = ViewData["GetFct_Summary"] as IEnumerable<Fct_StoreSummaryAttributesModel>;
     //var recordsFct_StoreNumberTotal = ViewData["GetFct_StoreNumberTotal"] as IEnumerable<Fct_StoreNumberAttributesModel>;
     var records_summaryTotal = ViewData["GetRecords_summaryTotal"] as IEnumerable<Fct_StoreSummaryAttributesModel>;
+    var today = DateTime.Today.ToString("yyyy-MM-dd");
+    var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+    var userID = Request.QueryString["userid"];  // Retrieve the userid from the query string
 }
 
 @using DWH_Reporting.Models.GpReport;
@@ -616,7 +619,7 @@
                                            class="form-control"
                                            title="Select Date"
                                            style="margin-top:5px; background-color:#A5CFF0; font-size: 12px; font-weight: bold;height: 30px; color:#383b3f; border:black"
-                                           onchange="this.form.submit();"
+                                           onchange="appendUserIDToURL(this.form);"
                                            max="@yesterday" /> <!-- Disable today and future dates -->
                                 </div>
                             }
@@ -1275,7 +1278,29 @@
     </body>
 
 </html>
+<script type="text/javascript">
+    function appendUserIDToURL(form) {
+        // Get the selected date value
+        var selectedDate = document.getElementById('selectedDate').value;
 
+        // Get the current URL to append the parameters
+        var currentURL = window.location.href;
+
+        // Check if userid is already in the URL
+        var userid = '@userID';
+        if (userid && !currentURL.includes('userid=')) {
+            // If userid is not already in the URL, append it
+            currentURL = currentURL.indexOf('?') > -1 ? currentURL + '&userid=' + userid + '&selectedDate=' + selectedDate : currentURL + '?userid=' + userid + '&selectedDate=' + selectedDate;
+        } else {
+            // If userid is already present, just append the date
+            currentURL = currentURL.replace(/(selectedDate=)([^&]*)/, '$1' + selectedDate); // Update selectedDate if it exists
+        }
+
+        // Set the form action to the new URL
+        form.action = currentURL;
+        form.submit(); // Submit the form
+    }
+</script>
 
 <script>
     $(document).ready(function () {
