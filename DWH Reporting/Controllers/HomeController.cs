@@ -204,13 +204,17 @@ namespace DWH_Reporting.Controllers
             {
                 global.userID = Request.QueryString["userid"];
 
+                //userID = Session["userid"].ToString();
+
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ShowStoreSummary(selectedDate, global.decrpedUserId);
 
                 return View();
+
             }
             catch (Exception)
             {
+
                 throw;
             }
         }
