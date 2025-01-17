@@ -80,7 +80,7 @@ namespace DWH_Reporting.Controllers
         }
 
        //[Authorization]
-        public ActionResult StoreNumber(string selectedDate)
+        public ActionResult StoreNumber()
         {
             try
             {
@@ -96,7 +96,7 @@ namespace DWH_Reporting.Controllers
 
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
 
-                ShowStoreNumber(selectedDate, global.decrpedUserId);
+                ShowStoreNumber(null, global.decrpedUserId);
 
                 return View();
 
@@ -104,6 +104,22 @@ namespace DWH_Reporting.Controllers
             catch (Exception ex)
             {
                 return Content(ex.Message+"\n\n"+ex.StackTrace+ "\nReport is being uploaded. Please try again in few minutes");
+            }
+
+        }
+        [HttpPost]
+        public ActionResult StoreNumber(string selectedDate)
+        {
+            try
+            {
+                ShowStoreNumber(selectedDate, global.decrpedUserId);
+
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
             }
 
         }
@@ -198,7 +214,7 @@ namespace DWH_Reporting.Controllers
         }
 
         //[Authorization]
-        public ActionResult Summary(string selectedDate)
+        public ActionResult Summary()
         {
             try
             {
@@ -206,6 +222,23 @@ namespace DWH_Reporting.Controllers
 
                 //userID = Session["userid"].ToString();
 
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                ShowStoreSummary(null, global.decrpedUserId);
+
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+                throw;
+            }
+        }
+        [HttpPost]
+        public ActionResult Summary(string selectedDate)
+        {
+            try
+            {
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ShowStoreSummary(selectedDate, global.decrpedUserId);
 
