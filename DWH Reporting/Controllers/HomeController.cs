@@ -212,9 +212,9 @@ namespace DWH_Reporting.Controllers
                 return View();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
                 throw;
             }
         }
