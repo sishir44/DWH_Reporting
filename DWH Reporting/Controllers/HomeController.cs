@@ -224,7 +224,7 @@ namespace DWH_Reporting.Controllers
                     else
                     {
                         // Default to a safe value if userId is not provided
-                        global.decrpedUserId = "2";
+                        global.decrpedUserId = EncryptionHelper.Decrypt(queryUserId);
                     }
                 }
 
