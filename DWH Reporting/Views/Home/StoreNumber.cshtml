@@ -3049,7 +3049,7 @@
                         <td></td>
                         <td>${parseFloat((response.MonthlyAchievedHoursTrendingPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.GrossAddsGoals || 0)).toLocaleString('en-US')}</td>
+                        <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
@@ -3164,7 +3164,7 @@
                         <td>${(parseFloat(response.PremVideoNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.ChargeBack9 || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PremVideoTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(0)}%</td>
+                        <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${response.PremVideoGP ? parseFloat(response.PremVideoGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.PremVideoSpiff ? parseFloat(response.PremVideoSpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.PremVideoGPTrending ? parseFloat(response.PremVideoGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
