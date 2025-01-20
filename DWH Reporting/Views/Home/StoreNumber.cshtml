@@ -50,6 +50,39 @@
     <title>MTD Reports</title>
 
     <style>
+     @@media (min-width: 768px) and (max-width: 1024px) {
+        body {
+            overflow: hidden !important;
+        }
+    #tbl tbody td,
+    #tbl thead th {
+        position: static !important;
+        min-width: auto !important;
+        left: auto !important;
+    }
+}
+@@media (min-width: 480px) and (max-width: 768px) {
+        body {
+            overflow: hidden !important;
+        }
+    #tbl tbody td,
+    #tbl thead th {
+        position: static !important;
+        min-width: auto !important;
+        left: auto !important;
+    }
+}
+@@media (max-width: 479px) {
+        body {
+            overflow: hidden !important;
+        }
+    #tbl tbody td,
+    #tbl thead th {
+        position: static !important;
+        min-width: auto !important;
+        left: auto !important;
+    }
+}
         .optionfilter {
             background-color: #3A75D0 !important;
             border-radius: 6px;
