@@ -2246,7 +2246,7 @@ namespace DWH_Reporting.Controllers
                     AccessQty = row["Access Qty"].ToString(),
                     FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
                     FNAch = row["FN Ach $"].ToString(),
-                    CRUVGACnt = row["CRU VGA Cnt"].ToString(),
+                    //CRUVGACnt = row["CRU VGA Cnt"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice"].ToString(),
                     CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
                     CRUAchVoiceDollar = row["CRU Ach Voice $"].ToString(),
