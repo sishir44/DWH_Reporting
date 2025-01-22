@@ -95,7 +95,7 @@ namespace DWH_Reporting.Controllers
                 global.userID = Request.QueryString["userid"];
 
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-               
+                
 
                 ShowStoreNumber(null, global.decrpedUserId);
 
@@ -224,6 +224,7 @@ namespace DWH_Reporting.Controllers
                 //userID = Session["userid"].ToString();
 
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                
                 ShowStoreSummary(null, global.decrpedUserId);
 
                 return View();
@@ -260,200 +261,7 @@ namespace DWH_Reporting.Controllers
             DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID);
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
-
-            ////////////Check DB Changes if Columns removed from SP////////////
-            ///
-            ///// Fetch all column names from the DataTable
-            //List<string> dataTableColumns = new List<string>();
-            //foreach (DataColumn column in Fct_StoreNumber.Columns)
-            //{
-            //    dataTableColumns.Add(column.ColumnName);
-            //}
-
-            //// Define expected column names from your model
-            //List<string> expectedColumns = new List<string>
-            //{
-            //    "VP"    ,
-            //    "Region"    ,
-            //    "SD"    ,
-            //    "Unique ID" ,
-            //    "Dealer Code"   ,
-            //    "Tiers" ,
-            //    "Store" ,
-            //    "HIT Store" ,
-            //    "Market"    ,
-            //    "MUL_MktMngr"   ,
-            //    "MUL_Market"    ,
-            //    "TM"    ,
-            //    "RSM/SRSM"  ,
-            //    "Role"  ,
-            //    "Monthly _Achived Hours Trending %" ,
-            //    "GROSS ADDS Trend% To Goal" ,
-            //     "GROSS ADDS Goals" ,
-            //     "GROSS ADDS Net OFF"   ,
-            //     "PPVGA per Traffic%"   ,
-            //     "Total Traffic"    ,
-            //     "Fiber Conversion" ,
-            //     "Broadband +_Fiber Net OFF"    ,
-            //     "Fiber Green Check"    ,
-            //     "APO"  ,
-            //     "CSAT" ,
-            //     "ProtAdv & HomeTech %" ,
-            //     "BreakEven Numbers"    ,
-            //     "Trending to BreakEven"    ,
-            //     "$GP - With Spif Trending" ,
-            //     "GP Trending %"    ,
-            //     "Total $GP Goals"  ,
-            //     "OPS Trending to Goals %"  ,
-            //     "TOTAL OPS Goals"  ,
-            //     "TOTAL OPS"    ,
-            //     "Upgrade Trending to Goals %"  ,
-            //     "MTD UPGRADES Goals"   ,
-            //     "MTD UPGRADES Net OFF" ,
-            //     "T,W,C Devices Trend to Goal %"    ,
-            //     "T,W,C Devices QTY Goals"  ,
-            //     "T,W,C Devices QTY Net OFF"    ,
-            //     "AIA Business Conversion"  ,
-            //     "AIA Consumer Conversion"  ,
-            //     "AIA Green Check Consumer" ,
-            //     "AIA C Internet"   ,
-            //     "AIA B Internet"   ,
-            //     "TOTAL OPS Trending"   ,
-            //     "OPS Per- Traffic %"   ,
-            //     "CRU Ach MTD"  ,
-            //     "FN Ach MTD"   ,
-            //     "$GP per BOX"  ,
-            //     "Total $GP Achieved - With Spif"   ,
-            //     "GROSS ADDS"   ,
-            //     "Charge Back"  ,
-            //     "GROSS ADDS Trend" ,
-            //     "GROSS ADDS $GP"   ,
-            //     "GROSS ADDS $GP Trending"  ,
-            //     "AR Business FN Program Average Q2 Target" ,
-            //     "FN Ach  Average QTD"  ,
-            //     "Remaining to Achive FN Average Q2 target" ,
-            //     "FN Ach Trend" ,
-            //     "FN Ach $" ,
-            //     "AR Business CRU Program Average Q2 Target"    ,
-            //     "CRU Ach Voice"    ,
-            //     "CRU Ach DATA" ,
-            //     "CRU Ach  Average QTD" ,
-            //     "Remaining to Achive CRU Average Q2 target"    ,
-            //     "CRU Ach Trend"    ,
-            //     "CRU Ach Voice $"  ,
-            //     "CRU Ach DATA $"   ,
-            //     "MTD UPGRADES" ,
-            //     "Charge Back1" ,
-            //     "MTD UPGRADES_Trending"    ,
-            //     "MTD UPGRADES $GP" ,
-            //     "MTD UPGRADES $GP Trending"    ,
-            //     "Next UP"  ,
-            //     "Next UP Spif" ,
-            //     "Premium Activation"   ,
-            //     "Premium Activation Net OFF"   ,
-            //     "Charge Back2" ,
-            //     "Premium Activation $GP"   ,
-            //     "Extra Activation" ,
-            //     "Extra Activation Net OFF" ,
-            //     "Charge Back3" ,
-            //     "Extra Activation $GP" ,
-            //     "Non Extra / Non Premium Activation"   ,
-            //     "Non Extra / Non Premium Activation Net OFF"   ,
-            //     "Non Extra / Non Premium Activation $GP"   ,
-            //     "Premium Upgrade"  ,
-            //     "Charge Back4" ,
-            //     "Premium Upgrade Net Off"  ,
-            //     "Premium Upgrade $GP"  ,
-            //     "Extra Upgrade"    ,
-            //     "Charge Back5" ,
-            //     "Extra Upgrade Net Off"    ,
-            //     "Extra Upgrade $GP"    ,
-            //     "AIA Goals"    ,
-            //     "AIA Internet" ,
-            //     "Charge Back6" ,
-            //     "AIA Internet Net Off" ,
-            //     "AIA Trending" ,
-            //     "AIA Internet $GP" ,
-            //     "Broadband Goals"  ,
-            //     "Broad Band less Then (300MB)" ,
-            //     "New Fiber (300MB)"    ,
-            //     "New Fiber (500MB)"    ,
-            //     "New Fiber (1G)"   ,
-            //     "Total Broadband + Newfiber"   ,
-            //     "Broadband + New fiber Net OFF"    ,
-            //     "Charge Back7" ,
-            //     "Fiber Upgrades"   ,
-            //     "Fiber Upgrades Net OFF"   ,
-            //     "Charge Back8" ,
-            //     "Broadband +_Fiber"    ,
-            //     "Broadband +_Fiber _Trend" ,
-            //     "Broadband + Fiber Trend%" ,
-            //     "Broadband Less then (300Mb) QI Spiff" ,
-            //     "New Fiber (300 MB) QI Spiff"  ,
-            //     "New Fiber (500 MB) QI Spiff"  ,
-            //     "New Fiber (1G) QI Spiff"  ,
-            //     "Fiber Upgrade  $GP"   ,
-            //     "Broadband $GP"    ,
-            //     "Broad Band + Fiber _$GP"  ,
-            //     "Broad Band + Fiber _$GP Trending" ,
-            //     "Turbo Feature"    ,
-            //     "Turbo Feature $GP"    ,
-            //     "Prem Video Goals" ,
-            //     "Prem Video"   ,
-            //     "Prem Video Net OFF"   ,
-            //     "Charge Back9" ,
-            //     "Prem Video Trend" ,
-            //     "Prem Video Trend %"   ,
-            //     "Prem Video $GP"   ,
-            //     "Prem Video Spiff" ,
-            //     "Prem Video $GP Trending"  ,
-            //     "Entertainment Goals"  ,
-            //     "Entertainment Ach"    ,
-            //     "Entertainment _Trending"  ,
-            //     "Entertainment Trending to Goals %"    ,
-            //     "T#W#C Devices QTY"    ,
-            //     "Charge Back10"    ,
-            //     "T,W,C Devices QTY Trend"  ,
-            //     "T,W,C Devices $"  ,
-            //     "Projected Geographic spif"    ,
-            //     "Prepaid QTY"  ,
-            //     "Prepaid to GA"    ,
-            //     "Prepaid Net OFF"  ,
-            //     "Charge Back11"    ,
-            //     "Prepaid $GP"  ,
-            //     "Prepaid with Autopay" ,
-            //     "Access $GP"   ,
-            //     "Access Qty"   ,
-            //     "Access Qty _Trending" ,
-            //     "Access $ Revenue" ,
-            //     "Features QTY" ,
-            //     "Features QTY Net OFF" ,
-            //     "Charge Back12"    ,
-            //     "Total Protection %"   ,
-            //     "ProtAdv 1"    ,
-            //     "ProtAdv 4"    ,
-            //     "Features $GP" ,
-            //     "Weekly Budgeted HRS"  ,
-            //     "Weekly Employee Average Per store"    ,
-            //     "Monthly Budgeted HRS" ,
-            //     "Training Hours"   ,
-            //     "Monthly Achived HRS"  ,
-            //     "Monthly Achived Hours Trending"   ,
-            //     "GA Close Rt"  ,
-            //     "HomeTech Protect"
-
-            //};
-
-            //// Compare DataTable columns with expected columns
-            //var missingColumns = expectedColumns.Except(dataTableColumns).ToList();
-            //var extraColumns = dataTableColumns.Except(expectedColumns).ToList();
-
-            //// Pass the column validation results to the view
-            //ViewData["MissingColumns"] = missingColumns;
-            ////ViewData["ExtraColumns"] = extraColumns;
-
-            ////////////////////////////
-
+            
             foreach (DataRow row in Fct_StoreNumber.Rows)
             {
                 Fct_StoreNumberAttributesModel model = new Fct_StoreNumberAttributesModel
@@ -641,6 +449,7 @@ namespace DWH_Reporting.Controllers
                     TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
                     ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
                     ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
                     AccessRevTrend = row["Access Revenue Trending"].ToString(),
                     WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
                     BudgEmp = row["Budgeted Empolyees"].ToString(),
@@ -834,6 +643,7 @@ namespace DWH_Reporting.Controllers
                     TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
                     ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
                     ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
                     AccessRevTrend = row["Access Revenue Trending"].ToString(),
                     WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
                     BudgEmp = row["Budgeted Empolyees"].ToString(),
@@ -1033,6 +843,7 @@ namespace DWH_Reporting.Controllers
                     TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
                     ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
                     ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
                     AccessRevTrend = row["Access Revenue Trending"].ToString(),
                     WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
                     BudgEmp = row["Budgeted Empolyees"].ToString(),
@@ -1230,6 +1041,7 @@ namespace DWH_Reporting.Controllers
                     TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
                     ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
                     ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
                     AccessRevTrend = row["Access Revenue Trending"].ToString(),
                     WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
                     BudgEmp = row["Budgeted Empolyees"].ToString(),
@@ -2435,9 +2247,9 @@ namespace DWH_Reporting.Controllers
                     FNAchAverageQTD = row["FN Ach  Average QTD"].ToString(),
                     FNAch = row["FN Ach $"].ToString(),
                     CRUVGACnt = row["CRU VGA Cnt"].ToString(),
-                    //CRU ACH VOICE
+                    CRUAchVoice = row["CRU Ach Voice"].ToString(),
                     CRUAchAverageQTD = row["CRU Ach  Average QTD"].ToString(),
-                    CRUAchVoice = row["CRU Ach Voice $"].ToString(),
+                    CRUAchVoiceDollar = row["CRU Ach Voice $"].ToString(),
                     CRUAchData = row["CRU Ach DATA $"].ToString(),
                     TWDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
                     TWDevicesGP = row["T,W,C Devices GP"].ToString(),
@@ -2529,7 +2341,7 @@ namespace DWH_Reporting.Controllers
                     FNAch = row["FN Ach $"].ToString(),
                     CRUAchVoice = row["CRU Ach Voice"].ToString(),
                     CRUAchAverageQTD = row["CRU Ach AverageQTD"].ToString(),
-                    //CRUAchVoiceValue = row["CRU Ach Voice $"].ToString(),
+                    CRUAchVoiceDollar = row["CRU Ach Voice $"].ToString(),
                     CRUAchData = row["CRU AchDATA $"].ToString(),
                     TWDevicesQtyTrend = row["T,W,C DevicesQTY Trend"].ToString(),
                     TWDevicesGP = row["T,W,C DevicesGP"].ToString(),
