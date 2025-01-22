@@ -51,7 +51,7 @@
 
     <style>        
      @@media (min-width: 768px) and (max-width: 1024px) {
-        b/*ody {
+        /*body {
             overflow: hidden !important;
         }*/
     #tbl tbody td,
@@ -2271,8 +2271,8 @@
                                 <td>@(String.IsNullOrWhiteSpace(record.WeeklyAchivedHRS != null ? record.WeeklyAchivedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.WeeklyAchivedHRS)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.BudgEmp != null ? record.BudgEmp.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BudgEmp)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.FullTimeHourlyHeadCount != null ? record.FullTimeHourlyHeadCount.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FullTimeHourlyHeadCount)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.PartTimeHourlyHeadCount != null ? record.PartTimeHourlyHeadCount.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PartTimeHourlyHeadCount)))</td>
-                                <td>@(String.IsNullOrWhiteSpace(record.TotalHourlyCount != null ? record.TotalHourlyCount.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalHourlyCount)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.PartTimeHourlyHeadCount != null ? record.PartTimeHourlyHeadCount.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PartTimeHourlyHeadCount)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.TotalHourlyCount != null ? record.TotalHourlyCount.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TotalHourlyCount)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.HourlyHeadCntsVar != null ? record.HourlyHeadCntsVar.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.HourlyHeadCntsVar)))</td>
                                 <td>@(String.IsNullOrWhiteSpace(record.HourlyCurrHeadCntVarHrs != null ? record.HourlyCurrHeadCntVarHrs.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.HourlyCurrHeadCntVarHrs)))</td>
 
