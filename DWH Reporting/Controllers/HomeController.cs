@@ -2935,8 +2935,30 @@ namespace DWH_Reporting.Controllers
                     MonthlyAchievedHRS = row["Monthly Achived HRS"].ToString(),
                     MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
                     GACloseRt = row["GA Close Rt"].ToString(),
-                    HomeTechProtect = row["HomeTech Protect"].ToString()
+                    HomeTechProtect = row["HomeTech Protect"].ToString(),
                     //TimeStamp = row["TimeStamp"].ToString()
+
+                    //New Dot Columns
+                    NextUPTrendPer = row["Next UP Trend %"].ToString(),
+                    PremiumPerGA = row["Premium % to GA"].ToString(),
+                    ExtraPerGA = row["Extra % to GA"].ToString(),
+                    ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
+                    TotalNewFiber = row["Total New Fiber"].ToString(),
+                    FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),
+                    TotalProt = row["Total Protection"].ToString(),
+                    TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
+                    ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
+                    ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
+                    AccessRevTrend = row["Access Revenue Trending"].ToString(),
+                    WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
+                    BudgEmp = row["Budgeted Empolyees"].ToString(),
+                    FullTimeHourlyHeadCount = row["Full Time Hourly Head Count"].ToString(),
+                    PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
+                    TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
+                    HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+
                 };
 
                 lisn_tot.Add(modelFT);
@@ -3106,8 +3128,29 @@ namespace DWH_Reporting.Controllers
                     MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
                     GACloseRt = row["GA Close Rt"].ToString(),
                     HomeTechProtect = row["HomeTech Protect"].ToString(),
-                  
-            };
+
+                    //New Dot Columns
+                    NextUPTrendPer = row["Next UP Trend %"].ToString(),
+                    PremiumPerGA = row["Premium % to GA"].ToString(),
+                    ExtraPerGA = row["Extra % to GA"].ToString(),
+                    ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
+                    TotalNewFiber = row["Total New Fiber"].ToString(),
+                    FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),
+                    TotalProt = row["Total Protection"].ToString(),
+                    TotalProtNetOFF = row["Total Protection Net OFF "].ToString(),
+                    ProtAdv1NetOff = row["ProtAdv 1 Net Off"].ToString(),
+                    ProtAdv4NetOff = row["ProtAdv 4 Net Off"].ToString(),
+                    PrepQTYTrend = row["Prepaid Qty Trend"].ToString(),
+                    AccessRevTrend = row["Access Revenue Trending"].ToString(),
+                    WeeklyAchivedHRS = row["Weekly Achived HRS"].ToString(),
+                    BudgEmp = row["Budgeted Empolyees"].ToString(),
+                    FullTimeHourlyHeadCount = row["Full Time Hourly Head Count"].ToString(),
+                    PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
+                    TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
+                    HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+
+                };
             }
 
             return Json(result); 
