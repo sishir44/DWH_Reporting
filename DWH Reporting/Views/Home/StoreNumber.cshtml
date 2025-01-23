@@ -3234,11 +3234,11 @@
                         <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.GACloseRt || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.HomeTechProtect || 0)).toLocaleString('en-US')}</td>
-
-                        <td>${parseFloat(response.NextUPTrendPer || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.PremiumPerGA || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.ExtraPerGA || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.ExtraUnlMix70Per || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        
+                        <td>${parseFloat((response.NextUPTrendPer || 0) * 100).toFixed(1)}%</td>
+                        <td>${parseFloat((response.PremiumPerGA || 0) * 100).toFixed(1)}%</td>
+                        <td>${parseFloat((response.ExtraPerGA || 0) * 100).toFixed(1)}%</td>
+                        <td>${parseFloat((response.ExtraUnlMix70Per || 0) * 100).toFixed(1)}%</td>   
                         <td>${parseFloat(response.TotalNewFiber || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.FiberUpgTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.TotalProt || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
