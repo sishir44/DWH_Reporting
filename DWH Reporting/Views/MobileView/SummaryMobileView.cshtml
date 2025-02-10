@@ -896,10 +896,10 @@
             </div>
         </div>
 
-        <div class="fields" style="background-color:white;font-size:8px; overflow-x: auto; white-space: nowrap; margin-top:2px;">
+        <div class="fields p-2" style="background-color: white; font-size: 5px;"">
             <div class="row testimonial-group" style="display: inline-block;">
                 <!-- Button Row -->
-                <div class="d-flex justify-content-start align-items-center gap-2 flex-wrap mb-2">
+                <div class="d-flex justify-content-start align-items-center flex-wrap mb-1" style="gap: 8px;">
                     <button class="btn btn-primary btn-sm" onclick="toggleVisibility('TMSection')">TM</button>
                     <button class="btn btn-primary btn-sm" onclick="toggleVisibility('MarketSection')">Market</button>
                     <button class="btn btn-primary btn-sm" onclick="toggleVisibility('StoresSection')">Stores</button>
@@ -907,25 +907,25 @@
                 </div>
 
                 <!-- Search TM -->
-                <div id="TMSection" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 d-none">
-                    <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
-                    <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
-                        @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.TMList)
+                <div id="TMSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
+                        <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
+                        <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
+                            @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                             {
-                                <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                foreach (var item in ViewBag.TMList)
+                                {
+                                    <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <option class="optionfilter" disabled>No TM available</option>
-                        }
-                    </select>
+                            else
+                            {
+                                <option class="optionfilter" disabled>No TM available</option>
+                            }
+                        </select>
                 </div>
 
                 <!-- Search Market -->
-                <div id="MarketSection" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 d-none">
+                <div id="MarketSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
                     <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" onkeyup="MarketFilter()" />
                     <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
                         @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
@@ -943,7 +943,7 @@
                 </div>
 
                 <!-- Search Stores -->
-                <div id="StoresSection" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 d-none">
+                <div id="StoresSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
                     <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" onkeyup="StoresFilter()" />
                     <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
                         @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
@@ -961,7 +961,7 @@
                 </div>
 
                 <!-- Search Tiers -->
-                <div id="TiersSection" class="col-lg-2 col-md-2 col-sm-12 col-xs-12 d-none">
+                <div id="TiersSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
                     <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" onkeyup="TiersFilter()" />
                     <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
                         @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
@@ -1446,7 +1446,6 @@
         var Sd = 'Elio Portocarrero';
         loadGTotalByFilter(null, null, null, null, null,dateP, Sd);
 
-
     });
     //$(document).ready(function () {
     //    var windowheight = $(window).height()
@@ -1475,7 +1474,7 @@
 
     function toggleVisibility(sectionId) {
         let section = document.getElementById(sectionId);
-        section.classList.toggle('d-none');
+        section.classList.toggle('d-block');
     }
 
     function test() {
