@@ -873,7 +873,7 @@ namespace DWH_Reporting.Controllers
                                                      .Max(row => row.Field<DateTime>("TimeStamp"));
                 var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
                 // Output the result
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd"); // Format as needed
                                                                                            // Subtract one day from the TimeStamp
 
                 ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
