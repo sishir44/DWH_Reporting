@@ -49,8 +49,12 @@
         /*@@media (min-width: 320px) and (max-width: 670px) {*/
         @@media (max-width: 320px) {
             .table-responsive {
-                max-height: 60vh;
-            }
+                max-height: 64vh; /* Limits table height to 64% of viewport height */
+                
+                overflow-y: auto; /* Enables vertical scrolling */
+                overflow-x: hidden; /* Prevents horizontal scrolling */
+                
+            }               
 
             #tbl tbody td,
             #tbl thead th {
@@ -84,6 +88,8 @@
         }*/
             .table-responsive {
                 max-height: 100vh;
+                overflow-y: auto; /* Enables vertical scrolling */
+                overflow-x: hidden; /* Prevents horizontal scrolling */
             }
 
             #tbl tbody td,
