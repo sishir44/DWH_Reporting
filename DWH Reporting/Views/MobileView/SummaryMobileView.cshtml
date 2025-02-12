@@ -46,10 +46,12 @@
 
     <style>
 
-        @@media (min-width: 320px) and (max-width: 670px) {
-            /*body {
-            overflow: hidden !important;
-        }*/
+        /*@@media (min-width: 320px) and (max-width: 670px) {*/
+        @@media (max-width: 320px) {
+            .table-responsive {
+                max-height: 60vh;
+            }
+
             #tbl tbody td,
             #tbl thead th {
                 position: static !important;
@@ -75,10 +77,15 @@
             }
         }
 
-        @@media (min-width: 768px) and (max-width: 1024px) {
+        @@media (min-width: 1024px) {
+            /*@@media (min-width: 768px) and (max-width: 1024px) {*/
             /*body {
             overflow: hidden !important;
         }*/
+            .table-responsive {
+                max-height: 100vh;
+            }
+
             #tbl tbody td,
             #tbl thead th {
                 position: static !important;
@@ -863,7 +870,7 @@
             </div>
         </div>
         <div class="row sub-header">
-            <div class="row">                
+            <div class="row">
                 <!-- INDICATORS -->
                 <div class="container">
                     <div class="row d-flex align-items-center text-center">
@@ -877,7 +884,7 @@
                         <div class="col-3">
                             <label class="d-block">>100%</label>
                             <input type="button" id="GATrGoal100" class="form-control btn-custom"
-                                   title="100% & Above" value="" style="background-color: green; color: white; width: 100%;" />                            
+                                   title="100% & Above" value="" style="background-color: green; color: white; width: 100%;" />
                         </div>
                         <!-- Column 3 -->
                         <div class="col-3">
@@ -895,33 +902,82 @@
                 </div>
             </div>
         </div>
+        <div class="row mt-1">
+            <div class="col-md-12 col-sm-12 col-12 mb-2">
+                <div class="div" style="display: flex; flex-wrap: nowrap;overflow-x: auto;">
 
-        <div class="fields p-2" style="background-color: white; font-size: 5px;"">
+                    <div class="col-sm-3 col-3 text-center border p-2">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <input type="text" name="textSearchTM" id="toggleTM" class="selectorinput form-control" placeholder="TM" onclick="toggleVisibility('TMSection')" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-3 text-center border p-2">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <input type="text" name="textSearchMarket" id="toggleMKT" class="selectorinput form-control" placeholder="Market" onclick="toggleVisibility('MarketSection')" />
+
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="col-sm-3 col-3 text-center border p-2">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <input type="text" name="textSearchMMM" id="toggleMMM" class="selectorinput form-control" placeholder="MMM" onclick="toggleVisibility('MMMSection')" />
+
+                            </div>
+                        </div>
+                    </div>*@
+
+                    <div class="col-sm-3 col-3 text-center border p-2">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <input type="text" name="textSearchStore" id="toggleStore" class="selectorinput form-control" placeholder="Store" onclick="toggleVisibility('StoresSection')" />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-3 text-center border p-2">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                <input type="text" name="textSearchTiers" id="toggleTiers" class="selectorinput form-control" placeholder="Tiers" onclick="toggleVisibility('TiersSection')" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="fields p-2" style="background-color: white; font-size: 5px;" ">
             <div class="row testimonial-group" style="display: inline-block;">
                 <!-- Button Row -->
                 <div class="d-flex justify-content-start align-items-center flex-wrap mb-1" style="gap: 8px;">
-                    <button class="btn btn-primary btn-sm" onclick="toggleVisibility('TMSection')">TM</button>
+                    @*<button class="btn btn-primary btn-sm" onclick="toggleVisibility('TMSection')">TM</button>
                     <button class="btn btn-primary btn-sm" onclick="toggleVisibility('MarketSection')">Market</button>
                     <button class="btn btn-primary btn-sm" onclick="toggleVisibility('StoresSection')">Stores</button>
-                    <button class="btn btn-primary btn-sm" onclick="toggleVisibility('TiersSection')">Tiers</button>
+                    <button class="btn btn-primary btn-sm" onclick="toggleVisibility('TiersSection')">Tiers</button>*@
                 </div>
 
                 <!-- Search TM -->
                 <div id="TMSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
-                        <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
-                        <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
-                            @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+                    <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
+                    <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
+                        @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
+                        {
+                            foreach (var item in ViewBag.TMList)
                             {
-                                foreach (var item in ViewBag.TMList)
-                                {
-                                    <option class="optionfilter" value="@item.Value">@item.Text</option>
-                                }
+                                <option class="optionfilter" value="@item.Value">@item.Text</option>
                             }
-                            else
-                            {
-                                <option class="optionfilter" disabled>No TM available</option>
-                            }
-                        </select>
+                        }
+                        else
+                        {
+                            <option class="optionfilter" disabled>No TM available</option>
+                        }
+                    </select>
                 </div>
 
                 <!-- Search Market -->

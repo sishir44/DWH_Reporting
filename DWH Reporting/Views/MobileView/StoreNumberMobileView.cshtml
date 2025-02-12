@@ -51,39 +51,46 @@
 
     <style>
 
-        @@media (min-width: 320px) and (max-width: 670px) {
+        /*@@media (min-width: 320px) and (max-width: 670px) {*/
+          @@media (max-width: 320px) {
+                .table-responsive {
+                    max-height: 60vh;
+                }
+
+                #tbl tbody td,
+                #tbl thead th {
+                    position: static !important;
+                    min-width: auto !important;
+                    left: auto !important;
+                }
+
+                .btn-custom {
+                    font-size: 12px;
+                    height: 30px; /* Increase button height */
+                    width: 100%; /* Make buttons full width */
+                    padding: 5px 0 !important;
+                }
+
+                .col-sm-12 {
+                    width: 100%;
+                    display: block; /* Stack elements on small screens */
+                }
+
+                label {
+                    font-size: 14px;
+                    font-weight: bold;
+                }
+            }
+
+        @@media (min-width: 1024px) {
+            /*@@media (min-width: 768px) and (max-width: 1024px) {*/
             /*body {
             overflow: hidden !important;
         }*/
-            #tbl tbody td,
-            #tbl thead th {
-                position: static !important;
-                min-width: auto !important;
-                left: auto !important;
+            .table-responsive {
+                max-height: 100vh;
             }
 
-            .btn-custom {
-                font-size: 12px;
-                height: 30px; /* Increase button height */
-                width: 100%; /* Make buttons full width */
-                padding: 5px 0 !important;
-            }
-
-            .col-sm-12 {
-                width: 100%;
-                display: block; /* Stack elements on small screens */
-            }
-
-            label {
-                font-size: 14px;
-                font-weight: bold;
-            }
-        }
-
-        @@media (min-width: 768px) and (max-width: 1024px) {
-            /*body {
-            overflow: hidden !important;
-        }*/
             #tbl tbody td,
             #tbl thead th {
                 position: static !important;
@@ -945,20 +952,71 @@
                 </div>
             </div>
             <!-- FILTERS -->
+            <div class="row mt-1">
+                <div class="col-md-12 col-sm-12 col-12 mb-2">
+                    <div class="div" style="display: flex; flex-wrap: nowrap;overflow-x: auto;">
+
+                        <div class="col-sm-3 col-3 text-center border p-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <input type="text" name="textSearchTM" id="toggleTM" class="selectorinput form-control" placeholder="TM" onclick="toggleVisibility('TMSection')" />
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-3 text-center border p-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <input type="text" name="textSearchMarket" id="toggleMKT" class="selectorinput form-control" placeholder="Market" onclick="toggleVisibility('MarketSection')" />
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-3 text-center border p-2">
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <input type="text" name="textSearchMMM" id="toggleMMM" class="selectorinput form-control" placeholder="MMM" onclick="toggleVisibility('MMMSection')"/>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3 col-3 text-center border p-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <input type="text" name="textSearchStore" id="toggleStore" class="selectorinput form-control" placeholder="Store" onclick="toggleVisibility('StoresSection')"/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-3 text-center border p-2">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col-12">
+                                    <input type="text" name="textSearchTiers" id="toggleTiers" class="selectorinput form-control" placeholder="Tiers" onclick="toggleVisibility('TiersSection')"/>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
             <div class="fields p-2" style="background-color: white; font-size: 5px;">
                 <!-- Button Row with minimized gap -->
                 <div class="d-flex justify-content-start align-items-center flex-wrap mb-1" style="gap: 8px;">
-                    <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('TMSection')">TM</button>
+                    @*<button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('TMSection')">TM</button>
                     <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('MarketSection')">Market</button>
                     <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('MMMSection')">MMM</button>
                     <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('StoresSection')">Stores</button>
-                    <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('TiersSection')">Tiers</button>
+                    <button class="btn btn-primary btn-sm p-1 m-0" onclick="toggleVisibility('TiersSection')">Tiers</button>*@
                 </div>
                 <!-- Filter Sections -->
                 <div class="d-flex flex-wrap gap-3">
                     <!-- Search TM -->
                     <div id="TMSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
                         <input type="text" id="textSearchTM" class="form-control mt-2" placeholder="Search TM" onkeyup="TMFilter()" />
+
                         <select class="form-control" id="TM" multiple onchange="filterTMData()">
                             @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                             {
@@ -1052,7 +1110,7 @@
                 <div id="imageloader2" style=" padding-left: 543px;"></div>
                 <div id="demoDW">
                     <div id="myDiv">
-                        <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
+                        <table id="tbl" class="table-responsive" style="border-collapse: collapse; white-space:nowrap;">
                             <thead>
 
                                 @functions {
