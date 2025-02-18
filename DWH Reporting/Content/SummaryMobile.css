@@ -89,28 +89,18 @@
     #tbl tbody td,
     #tbl thead th {
         position: static !important;
-        min-width: auto !important;
+        /*min-width: auto !important;*/
         left: auto !important;
     }
 
     #demoDW {
         width: 100% !important;
-        max-height: 70vh !important;
+        max-height: 55vh !important;
         overflow: auto !important;
     }
 }
 
-@media (max-width: 479px) {
-    /*body {
-            overflow: hidden !important;
-        }*/
-    #tbl tbody td,
-    #tbl thead th {
-        position: static !important;
-        min-width: auto !important;
-        left: auto !important;
-    }
-}
+
 
 .optionfilter {
     background-color: #3A75D0 !important;
