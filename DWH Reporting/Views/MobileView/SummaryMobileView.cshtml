@@ -134,190 +134,194 @@
                         </div>
                     </div>
                 </div>
-                <!-- Search TM -->
-                <div id="TMSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
-                    <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
-                    <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
-                        @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.TMList)
+            </div>
+            <div class="scroll-container">
+                <div class="scroll-content">
+                    <!-- Search TM -->
+                    <div id="TMSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                        <input type="text" id="textSearchTM" class="form-control mt-2" placeholder="Search TM" onkeyup="TMFilter()" />
+                        <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
+                            @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                             {
-                                <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                foreach (var item in ViewBag.TMList)
+                                {
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <option class="optionfilter" disabled>No TM available</option>
-                        }
-                    </select>
-                </div>
-                <!-- Search Market -->
-                <div id="MarketSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
-                    <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" onkeyup="MarketFilter()" />
-                    <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
-                        @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.MarketList)
+                            else
                             {
-                                <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                <option class="optionfilter" disabled>No TM available</option>
                             }
-                        }
-                        else
-                        {
-                            <option class="optionfilter" disabled>No Market available</option>
-                        }
-                    </select>
-                </div>
-                <!-- Search Stores -->
-                <div id="StoresSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
-                    <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" onkeyup="StoresFilter()" />
-                    <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
-                        @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.StoresList)
+                        </select>
+                    </div>
+                    <!-- Search Market -->
+                    <div id="MarketSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                        <input type="text" id="textSearchMarket" class="form-control mt-2" placeholder="Search Market" onkeyup="MarketFilter()" />
+                        <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
+                            @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
                             {
-                                <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                foreach (var item in ViewBag.MarketList)
+                                {
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                }
                             }
-                        }
-                        else
-                        {
-                            <option class="optionfilter" disabled>No Stores available</option>
-                        }
-                    </select>
-                </div>
-                <!-- Search Tiers -->
-                <div id="TiersSection" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 d-none">
-                    <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" onkeyup="TiersFilter()" />
-                    <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
-                        @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
-                        {
-                            foreach (var item in ViewBag.tiersList)
+                            else
                             {
-                                <option class="optionfilter" value="@item.Value">@item.Text</option>
+                                <option class="optionfilter" disabled>No Market available</option>
                             }
-                        }
-                        else
-                        {
-                            <option class="optionfilter" disabled>No Tiers available</option>
-                        }
-                    </select>
+                        </select>
+                    </div>
+                    <!-- Search Stores -->
+                    <div id="StoresSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                        <input type="text" name="textSearchStores" id="textSearchStores" class="form-control mt-2" placeholder="Search Stores" onkeyup="StoresFilter()" />
+                        <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
+                            @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.StoresList)
+                                {
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option class="optionfilter" disabled>No Stores available</option>
+                            }
+                        </select>
+                    </div>
+                    <!-- Search Tiers -->
+                    <div id="TiersSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                        <input type="text" name="textSearchTiers" id="textSearchTiers" class="form-control mt-2" placeholder="Search Tiers" onkeyup="TiersFilter()" />
+                        <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
+                            @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.tiersList)
+                                {
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option class="optionfilter" disabled>No Tiers available</option>
+                            }
+                        </select>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="table-responsive" id="printtable">
-            <div id="imageloader2" style="padding-left: 543px;"></div>
-            <div id="demoDW">
-                <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
-                    <thead>
-                        @functions {
-                            // Helper method to convert number to corresponding alphabet(s)
-                            public static string GetAlphabetFromNumber(int number)
-                            {
-                                string result = string.Empty;
-                                while (number > 0)
-                                {
-                                    number--; // Decrement to handle 1-based indexing
-                                    result = (char)('A' + (number % 26)) + result;
-                                    number /= 26;
+         </div>
+                <div class="table-responsive" id="printtable">
+                    <div id="imageloader2" style="padding-left: 543px;"></div>
+                    <div id="demoDW">
+                        <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
+                            <thead>
+                                @functions {
+                                    // Helper method to convert number to corresponding alphabet(s)
+                                    public static string GetAlphabetFromNumber(int number)
+                                    {
+                                        string result = string.Empty;
+                                        while (number > 0)
+                                        {
+                                            number--; // Decrement to handle 1-based indexing
+                                            result = (char)('A' + (number % 26)) + result;
+                                            number /= 26;
+                                        }
+                                        return result;
+                                    }
                                 }
-                                return result;
-                            }
-                        }
-                        <tr class="numbered_header">
-                            @for (int i = 1; i <= 83; i++) // Loop from 1 to 80 col
-                            {
-                                <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
-                            }
-                        </tr>
-                        <tr class="spanned_header">
-                            <th rowspan="2" style="background-color: black; color:white;">Market</th>
-                            <th rowspan="2" style="background-color: black; color:white;">TM</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Store</th>
-                            <th rowspan="2" style="background-color: black; color:white;">Store Contact</th>
-                            @*<th id="ColSpan78" colspan="75">
+                                <tr class="numbered_header">
+                                    @for (int i = 1; i <= 83; i++) // Loop from 1 to 80 col
+                                    {
+                                        <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
+                                    }
+                                </tr>
+                                <tr class="spanned_header">
+                                    <th rowspan="2" style="background-color: black; color:white;">Market</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">TM</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">Store</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">Store Contact</th>
+                                    @*<th id="ColSpan78" colspan="75">
                                 </th>*@
-                        </tr>
-                        <tr class="main_header">
-                            <td>Monthly<br>Achived<br>Hours<br>Trending % </td>
-                            <td>Weekly<br>Budgeted<br>HRS</td>
-                            <td>GROSS<br>ADDS<br>Trend%<br>To Goal</td>
-                            <td>GROSS<br>ADDS<br> Goals</td>
-                            <td>GROSS<br>ADDS</td>
-                            <td>GROSS<br>ADDS<br>Net<br> OFF </td>
-                            <td>Total<br> Traffic</td>
-                            <td>PPVGA<br>per<br>Traffic%</td>
-                            <td>Fiber<br> Conversion</td>
-                            <td>Broadband<br>+ Fiber<br>Net<br>OFF</td>
-                            <td>Fiber<br>Green<br> Check</td>
-                            <td>APO</td>
-                            <td>CSAT</td>
-                            <td>ProtAdv<br>&<br>HomeTech %</td>
-                            <td>BreakEven<br> Numbers</td>
-                            <td>$GP - With<br> Spif Trending</td>
-                            <td>GP<br>Trending<br>%</td>
-                            <td>Total $GP<br> Goals</td>
-                            <td>OPS<br>Trending<br>to<br> Goals % </td>
-                            <td>TOTAL<br>OPS<br>Goals</td>
-                            <td>TOTAL<br> OPS</td>
-                            <td>Upgrade<br>Trending to<br>Goals %</td>
-                            <td>MTD<br>UPGRADES<br>Goals</td>
-                            <td>MTD<br>UPGRADES<br>Net<br>OFF</td>
-                            <td>T,W,C<br>Devices<br>Trend<br>to<br>Goal %</td>
-                            <td>T,W,C<br>Devices<br>QTY<br>Goals </td>
-                            <td>T,W,C<br>Devices<br> QTY Net<br> OFF</td>
-                            <td>AIA<br> Business<br> Conversion</td>
-                            <td>AIA C<br>Conversion</td>
-                            <td>AIA<br>Green<br>Check</td>
-                            <td>AIA B<br>Internet</td>
-                            <td>AIA C<br>Internet</td>
-                            <td>OPS<br>Per-<br>Traffic %</td>
-                            <td>CRU<br>Ach<br>MTD</td>
-                            <td>FN<br>Ach<br>MTD </td>
-                            <td>GROSS<br>ADDS<br>Trend</td>
-                            <td>Broadband<br>Goals </td>
-                            <td>Broadband +<br>Fiber</td>
-                            <td>BroadBand<br>less<br>Then<br>(300MB)</td>
-                            <td>New<br>Fiber<br>(300MB)</td>
-                            <td>New<br>Fiber<br> (500MB) </td>
-                            <td>New<br>Fiber<br> (1G) </td>
-                            <td>Fiber<br>Upgrades<br>Net<br>OFF</td>
-                            <td>Broadband+<br>Fiber<br>Trend</td>
-                            <td>Broadband+<br>Fiber<br>Trend% </td>
-                            <td>Prem<br>Video<br>Goals </td>
-                            <td>Prem<br>Video</td>
-                            <td>Prem<br>Video<br>Net<br> OFF</td>
-                            <td>Prem<br>Video<br>Trend % </td>
-                            <td>Prem<br>Video<br>Trend </td>
-                            <td>$GP Achieved -<br>With<br>Spif</td>
-                            <td>$GP<br>per<br>BOX </td>
-                            <td>TOTAL<br>OPS<br>Trending</td>
-                            <td>GROSS<br>ADDS<br>$GP</td>
-                            <td>MTD<br>UPGRADES</td>
-                            <td>MTD<br>UPGRADES<br>$GP</td>
-                            <td>Broad<br>Band +<br>Fiber $GP</td>
-                            <td>Broadband<br>$GP</td>
-                            <td>Broadband<br>Less<br>then<br>(300Mb)<br>QI<br>Spiff</td>
-                            <td>New<br>Fiber<br>(300 MB) QI<br>Spiff</td>
-                            <td>New<br>Fiber<br>(500 MB) QI<br>Spiff</td>
-                            <td>New<br>Fiber<br>(1G) QI <br>Spiff</td>
-                            <td>Prem<br>Video<br>$GP</td>
-                            <td>Prem<br>Video<br>Spiff </td>
-                            <td>Access $GP </td>
-                            <td>Access $<br>Revenue</td>
-                            <td>Access<br>Qty</td>
-                            <td>FN<br>Ach<br>Average<br>QTD</td>
-                            <td>FN Ach $</td>
-                            <td>CRU<br>Ach<br>Voice</td>
-                            <td>CRU<br>Ach<br>Average<br>QTD </td>
-                            <td>CRU<br>Ach<br>Voice $</td>
-                            <td>CRU<br>Ach<br>DATA $</td>
-                            <td>T,W,C<br>Devices<br>QTY<br>Trend</td>
-                            <td>T,W,C<br>Devices<br>GP</td>
-                            <td>HomeTech<br>Protect</td>
-                            <td>Total<br>Protection %</td>
-                            <td>ProtAdv 1</td>
-                            <td>ProtAdv 4</td>
-                            @*<td>GROSS ADDS<br> Goals</td>
+                                </tr>
+                                <tr class="main_header">
+                                    <td>Monthly<br>Achived<br>Hours<br>Trending % </td>
+                                    <td>Weekly<br>Budgeted<br>HRS</td>
+                                    <td>GROSS<br>ADDS<br>Trend%<br>To Goal</td>
+                                    <td>GROSS<br>ADDS<br> Goals</td>
+                                    <td>GROSS<br>ADDS</td>
+                                    <td>GROSS<br>ADDS<br>Net<br> OFF </td>
+                                    <td>Total<br> Traffic</td>
+                                    <td>PPVGA<br>per<br>Traffic%</td>
+                                    <td>Fiber<br> Conversion</td>
+                                    <td>Broadband<br>+ Fiber<br>Net<br>OFF</td>
+                                    <td>Fiber<br>Green<br> Check</td>
+                                    <td>APO</td>
+                                    <td>CSAT</td>
+                                    <td>ProtAdv<br>&<br>HomeTech %</td>
+                                    <td>BreakEven<br> Numbers</td>
+                                    <td>$GP - With<br> Spif Trending</td>
+                                    <td>GP<br>Trending<br>%</td>
+                                    <td>Total $GP<br> Goals</td>
+                                    <td>OPS<br>Trending<br>to<br> Goals % </td>
+                                    <td>TOTAL<br>OPS<br>Goals</td>
+                                    <td>TOTAL<br> OPS</td>
+                                    <td>Upgrade<br>Trending to<br>Goals %</td>
+                                    <td>MTD<br>UPGRADES<br>Goals</td>
+                                    <td>MTD<br>UPGRADES<br>Net<br>OFF</td>
+                                    <td>T,W,C<br>Devices<br>Trend<br>to<br>Goal %</td>
+                                    <td>T,W,C<br>Devices<br>QTY<br>Goals </td>
+                                    <td>T,W,C<br>Devices<br> QTY Net<br> OFF</td>
+                                    <td>AIA<br> Business<br> Conversion</td>
+                                    <td>AIA C<br>Conversion</td>
+                                    <td>AIA<br>Green<br>Check</td>
+                                    <td>AIA B<br>Internet</td>
+                                    <td>AIA C<br>Internet</td>
+                                    <td>OPS<br>Per-<br>Traffic %</td>
+                                    <td>CRU<br>Ach<br>MTD</td>
+                                    <td>FN<br>Ach<br>MTD </td>
+                                    <td>GROSS<br>ADDS<br>Trend</td>
+                                    <td>Broadband<br>Goals </td>
+                                    <td>Broadband +<br>Fiber</td>
+                                    <td>BroadBand<br>less<br>Then<br>(300MB)</td>
+                                    <td>New<br>Fiber<br>(300MB)</td>
+                                    <td>New<br>Fiber<br> (500MB) </td>
+                                    <td>New<br>Fiber<br> (1G) </td>
+                                    <td>Fiber<br>Upgrades<br>Net<br>OFF</td>
+                                    <td>Broadband+<br>Fiber<br>Trend</td>
+                                    <td>Broadband+<br>Fiber<br>Trend% </td>
+                                    <td>Prem<br>Video<br>Goals </td>
+                                    <td>Prem<br>Video</td>
+                                    <td>Prem<br>Video<br>Net<br> OFF</td>
+                                    <td>Prem<br>Video<br>Trend % </td>
+                                    <td>Prem<br>Video<br>Trend </td>
+                                    <td>$GP Achieved -<br>With<br>Spif</td>
+                                    <td>$GP<br>per<br>BOX </td>
+                                    <td>TOTAL<br>OPS<br>Trending</td>
+                                    <td>GROSS<br>ADDS<br>$GP</td>
+                                    <td>MTD<br>UPGRADES</td>
+                                    <td>MTD<br>UPGRADES<br>$GP</td>
+                                    <td>Broad<br>Band +<br>Fiber $GP</td>
+                                    <td>Broadband<br>$GP</td>
+                                    <td>Broadband<br>Less<br>then<br>(300Mb)<br>QI<br>Spiff</td>
+                                    <td>New<br>Fiber<br>(300 MB) QI<br>Spiff</td>
+                                    <td>New<br>Fiber<br>(500 MB) QI<br>Spiff</td>
+                                    <td>New<br>Fiber<br>(1G) QI <br>Spiff</td>
+                                    <td>Prem<br>Video<br>$GP</td>
+                                    <td>Prem<br>Video<br>Spiff </td>
+                                    <td>Access $GP </td>
+                                    <td>Access $<br>Revenue</td>
+                                    <td>Access<br>Qty</td>
+                                    <td>FN<br>Ach<br>Average<br>QTD</td>
+                                    <td>FN Ach $</td>
+                                    <td>CRU<br>Ach<br>Voice</td>
+                                    <td>CRU<br>Ach<br>Average<br>QTD </td>
+                                    <td>CRU<br>Ach<br>Voice $</td>
+                                    <td>CRU<br>Ach<br>DATA $</td>
+                                    <td>T,W,C<br>Devices<br>QTY<br>Trend</td>
+                                    <td>T,W,C<br>Devices<br>GP</td>
+                                    <td>HomeTech<br>Protect</td>
+                                    <td>Total<br>Protection %</td>
+                                    <td>ProtAdv 1</td>
+                                    <td>ProtAdv 4</td>
+                                    @*<td>GROSS ADDS<br> Goals</td>
                                 <td>GROSS<br>ADDS</td>
                                 <td>GROSS<br>ADDS Net<br> OFF </td>
                                 <td>Broadband<br> +_Fiber<br> Net OFF </td>
@@ -325,9 +329,9 @@
                                 <td>GP Trending<br> %</td>
                                 <td>TOTAL OPS Goals</td>
                                 <td>CRU VGA Cnt </td>*@
-                        </tr>
-                    </thead>
-                    @*@if (records_summaryTotal != null)
+                                </tr>
+                            </thead>
+                            @*@if (records_summaryTotal != null)
                         {
                             foreach (var record2 in records_summaryTotal)
                             {
@@ -617,12 +621,12 @@
                                     <td>@(String.IsNullOrWhiteSpace(record.ProtAdv1 != null ? record.ProtAdv1.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv1)))</td>
                                     <td>@(String.IsNullOrWhiteSpace(record.ProtAdv4 != null ? record.ProtAdv4.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ProtAdv4)))</td>
                                     @*<td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsGoals)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>*@
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAdds != null ? record.GrossAdds.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAdds)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOff != null ? record.GrossAddsNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GrossAddsNetOff))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberNetOff != null ? record.BroadbandFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.BroadbandFiberNetOff)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.FiberGreenCheck != null ? record.FiberGreenCheck.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.FiberGreenCheck)))</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.GPTrendingPercentage))) %</td>
+                                <td>@(String.IsNullOrWhiteSpace(record.CRUVGACnt != null ? record.CRUVGACnt.ToString() : "") ? "0.00" : String.Format("{0:N1}", Convert.ToDouble(record.CRUVGACnt)))</td>*@
                                 </tr>
 
                             }
@@ -632,7 +636,7 @@
                 </div>
             </div>
         </div>
-    </body>
+</body>
 </html>
 <script type="text/javascript">
     function appendUserIDToURL(form) {

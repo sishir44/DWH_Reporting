@@ -1,4 +1,30 @@
-﻿/*@@media (min-width: 320px) and (max-width: 670px) {*/
+﻿
+.scroll-container {
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents content wrapping */
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.scroll-content {
+    display: flex; /* Aligns divs in a row */
+    gap: 10px; /* Adds space between divs */
+}
+
+.box {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    border-radius: 8px;
+    flex-shrink: 0; /* Prevents items from shrinking */
+}
+
+
+/*@@media (min-width: 320px) and (max-width: 670px) {*/
 @media (max-width: 320px) {
     .table-responsive {
         max-height: 64vh; /* Limits table height to 64% of viewport height */
@@ -28,6 +54,12 @@
     label {
         font-size: 14px;
         font-weight: bold;
+    }
+
+    #demoDW {
+        width: 100% !important;
+        max-height: 61vh !important;
+        overflow: auto !important;
     }
 }
 
@@ -59,6 +91,12 @@
         position: static !important;
         min-width: auto !important;
         left: auto !important;
+    }
+
+    #demoDW {
+        width: 100% !important;
+        max-height: 70vh !important;
+        overflow: auto !important;
     }
 }
 
