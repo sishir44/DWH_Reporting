@@ -89,7 +89,25 @@
     #tbl tbody td,
     #tbl thead th {
         position: static !important;
-        /*min-width: auto !important;*/
+        min-width: auto !important;
+        left: auto !important;
+    }
+
+    #demoDW {
+        width: 100% !important;
+        max-height: 55vh !important;
+        overflow: auto !important;
+    }
+}
+
+@media (min-width: 425px) and (max-width: 518px) {
+    /*body {
+            overflow: hidden !important;
+        }*/
+    #tbl tbody td,
+    #tbl thead th {
+        position: static !important;
+        min-width: auto !important;
         left: auto !important;
     }
 
