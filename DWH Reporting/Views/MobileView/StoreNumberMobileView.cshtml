@@ -41,9 +41,8 @@
 
     <title>MTD Reports</title>
     <style>
-
-        /*@@media (min-width: 320px) and (max-width: 670px) {*/
-          @@media (max-width: 320px) {
+        /*Mobile S*/
+        @@media (max-width: 320px) {
             button.btn.btn-secondary.single-line-button {
                 font-size: 8px !important;
             }
@@ -65,9 +64,9 @@
 
             .table-responsive {
                 max-height: 70vh;
-                width: 100%;
-                overflow-y: auto; /* Enables vertical scrolling */
-                overflow-x: scroll; /* Prevents horizontal scrolling */
+                /*width: 100%;
+                overflow-y: auto; 
+                overflow-x: hidden;*/
             }
 
                 #tbl tbody td,
@@ -94,14 +93,35 @@
                     font-weight: bold;
                 }
             }
+        /*Mobile M*/
+        @@media (max-width: 375px) {
+            button.btn.btn-secondary.single-line-button {
+                font-size: 8px !important;
+            }
 
-        @@media (min-width: 1024px) {
-            /*@@media (min-width: 768px) and (max-width: 1024px) {*/
-            /*body {
-            overflow: hidden !important;
-        }*/
+            button.btn.btn-secondary {
+                font-size: 8px !important;
+            }
+
+            button.btn.btn-sm.btn-danger {
+                font-size: 8px !important;
+            }
+
+            select#ddCommentDesignation {
+                font-size: 8px;
+            }
+
+            b {
+                font-size: 10px;
+            }
+
+            .col-md-6.mb-2 {
+                margin-bottom: -4.5rem !important;
+            }
+
             .table-responsive {
-                max-height: 100vh;
+                max-height: 70vh;
+                width: 100%;
                 overflow-y: auto; /* Enables vertical scrolling */
                 overflow-x: scroll; /* Prevents horizontal scrolling */
             }
@@ -112,30 +132,89 @@
                 min-width: auto !important;
                 left: auto !important;
             }
-        }
 
-        @@media (min-width: 480px) and (max-width: 768px) {
-            /*body {
-            overflow: hidden !important;
-        }*/
+            .btn-custom {
+                font-size: 12px;
+                height: 30px; /* Increase button height */
+                width: 100%; /* Make buttons full width */
+                padding: 5px 0 !important;
+            }
+
+            .col-sm-12 {
+                width: 100%;
+                display: block; /* Stack elements on small screens */
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+        /*Mobile L*/
+        @@media (max-width: 425px) {
+            button.btn.btn-secondary.single-line-button {
+                font-size: 8px !important;
+            }
+
+            button.btn.btn-secondary {
+                font-size: 8px !important;
+            }
+
+            button.btn.btn-sm.btn-danger {
+                font-size: 8px !important;
+            }
+
+            select#ddCommentDesignation {
+                font-size: 8px;
+            }
+
+            b {
+                font-size: 10px;
+            }
+
+            .col-md-6.mb-2 {
+                margin-bottom: -4.5rem !important;
+            }
+
+            .table-responsive {
+                max-height: 70vh;
+                width: 100%;
+                overflow-y: auto; /* Enables vertical scrolling */
+                overflow-x: scroll; /* Prevents horizontal scrolling */
+            }
+
             #tbl tbody td,
             #tbl thead th {
                 position: static !important;
                 min-width: auto !important;
                 left: auto !important;
             }
-        }
 
-        @@media (max-width: 479px) {
-            /*body {
-            overflow: hidden !important;
-        }*/
-            #tbl tbody td,
-            #tbl thead th {
-                position: static !important;
-                min-width: auto !important;
-                left: auto !important;
+            .btn-custom {
+                font-size: 12px;
+                height: 30px; /* Increase button height */
+                width: 100%; /* Make buttons full width */
+                padding: 5px 0 !important;
             }
+
+            .col-sm-12 {
+                width: 100%;
+                display: block; /* Stack elements on small screens */
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: bold;
+            }
+        }
+        /*TAB*/
+        @@media (max-width: 768px) {
+            
+            .table-responsive {
+                max-height: 100vh;
+                overflow-y: auto; /* Enables vertical scrolling */
+                overflow-x: scroll; /* Prevents horizontal scrolling */
+            }          
         }
 
         .optionfilter {
@@ -926,12 +1005,12 @@
             </div>
             <!-- UPDATED RPT DATE -->
             <div>
-                <div>
-                    <div id="TimeStamp" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+               
+                    <div id="TimeStamp" style="display: flex; align-items: center; background-color:black; color:white; margin-right:12px; justify-content: space-between; width: 100%;">
                         <div>
                             @if (ViewBag.ReportDate != null)
                             {
-                                <p style="margin: 0; font-size: 10px;">Date: @ViewBag.ReportDate</p>
+                                <p style="margin: 0; font-size: 8px;">Date: @ViewBag.ReportDate</p>
                             }
                             else
                             {
@@ -942,7 +1021,7 @@
                         <div>
                             @if (ViewBag.LatestTimeStamp != null)
                             {
-                                <p style="margin: 0; font-size: 10px;">Update: @ViewBag.LatestTimeStamp</p>
+                                <p style="margin: 0; font-size: 8px;">Update: @ViewBag.LatestTimeStamp</p>
                             }
                             else
                             {
@@ -983,7 +1062,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+               
             </div>
             <!-- FILTERS -->
             <div class="row mt-1">
@@ -1037,90 +1116,91 @@
                         <!-- Search TM -->
                         <div id="TMSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
                             <input type="text" id="textSearchTM" class="form-control mt-2" placeholder="Search TM" onkeyup="TMFilter()" />
-
-                            <select class="form-control" id="TM" multiple onchange="filterTMData()">
-                                @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.TMList)
+                            <div class="scroll-content">
+                                <select class="form-control" id="TM" multiple onchange="filterTMData()">
+                                    @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                                     {
-                                        <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        foreach (var item in ViewBag.TMList)
+                                        {
+                                            <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    <option disabled>No TM available</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- Search Market -->
-                        <div id="MarketSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
-                            <input type="text" id="textSearchMarket" class="form-control mt-2" placeholder="Search Market" onkeyup="MarketFilter()" />
-                            <select class="form-control" id="Market" multiple onchange="filterMarketData()">
-                                @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.MarketList)
+                                    else
                                     {
-                                        <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        <option disabled>No TM available</option>
                                     }
-                                }
-                                else
-                                {
-                                    <option disabled>No Market available</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- Search MMM -->
-                        <div id="MMMSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
-                            <input type="text" id="textSearchMULMngr" class="form-control mt-2" placeholder="Search MMM" onkeyup="mmmFilter()" />
-                            <select class="form-control" id="MULMngr" multiple onchange="filtermmmData()">
-                                @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.mmmList)
+                                </select>
+                             </div>
+                            </div>
+                            <!-- Search Market -->
+                            <div id="MarketSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                                <input type="text" id="textSearchMarket" class="form-control mt-2" placeholder="Search Market" onkeyup="MarketFilter()" />
+                                <select class="form-control" id="Market" multiple onchange="filterMarketData()">
+                                    @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
                                     {
-                                        <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        foreach (var item in ViewBag.MarketList)
+                                        {
+                                            <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    <option disabled>No MUL Manager available</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- Search Stores -->
-                        <div id="StoresSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
-                            <input type="text" id="textSearchStores" class="form-control mt-2" placeholder="Search Stores" onkeyup="StoresFilter()" />
-                            <select class="form-control" id="Stores" multiple onchange="filterStoresData()">
-                                @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.StoresList)
+                                    else
                                     {
-                                        <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        <option disabled>No Market available</option>
                                     }
-                                }
-                                else
-                                {
-                                    <option disabled>No Stores available</option>
-                                }
-                            </select>
-                        </div>
-                        <!-- Search Tiers -->
-                        <div id="TiersSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
-                            <input type="text" id="textSearchTiers" class="form-control mt-2" placeholder="Search Tiers" onkeyup="TiersFilter()" />
-                            <select class="form-control" id="Tiers" multiple onchange="filterTiersData()">
-                                @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
-                                {
-                                    foreach (var item in ViewBag.tiersList)
+                                </select>
+                            </div>
+                            <!-- Search MMM -->
+                            <div id="MMMSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                                <input type="text" id="textSearchMULMngr" class="form-control mt-2" placeholder="Search MMM" onkeyup="mmmFilter()" />
+                                <select class="form-control" id="MULMngr" multiple onchange="filtermmmData()">
+                                    @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
                                     {
-                                        <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        foreach (var item in ViewBag.mmmList)
+                                        {
+                                            <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        }
                                     }
-                                }
-                                else
-                                {
-                                    <option disabled>No Tiers available</option>
-                                }
-                            </select>
+                                    else
+                                    {
+                                        <option disabled>No MUL Manager available</option>
+                                    }
+                                </select>
+                            </div>
+                            <!-- Search Stores -->
+                            <div id="StoresSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                                <input type="text" id="textSearchStores" class="form-control mt-2" placeholder="Search Stores" onkeyup="StoresFilter()" />
+                                <select class="form-control" id="Stores" multiple onchange="filterStoresData()">
+                                    @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
+                                    {
+                                        foreach (var item in ViewBag.StoresList)
+                                        {
+                                            <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option disabled>No Stores available</option>
+                                    }
+                                </select>
+                            </div>
+                            <!-- Search Tiers -->
+                            <div id="TiersSection" class="col-lg-2 col-md-3 col-sm-6" style="display: none;">
+                                <input type="text" id="textSearchTiers" class="form-control mt-2" placeholder="Search Tiers" onkeyup="TiersFilter()" />
+                                <select class="form-control" id="Tiers" multiple onchange="filterTiersData()">
+                                    @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
+                                    {
+                                        foreach (var item in ViewBag.tiersList)
+                                        {
+                                            <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <option disabled>No Tiers available</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
-                    </div>
                 </div>
             </div>
                     <!-- DATA TBL -->

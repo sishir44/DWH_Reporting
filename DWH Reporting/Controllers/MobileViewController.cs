@@ -877,6 +877,8 @@ namespace DWH_Reporting.Controllers
                                                                                            // Subtract one day from the TimeStamp
 
                 ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+
+                
             }
             else
             {
@@ -1348,12 +1350,15 @@ namespace DWH_Reporting.Controllers
                 // Use LINQ to find the latest TimeStamp
                 var latestTimeStamp = GetFct_Summary.AsEnumerable()
                                                      .Max(row => row.Field<DateTime>("TimeStamp"));
-                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                //var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                var ReportDate = GetFct_Summary.AsEnumerable()
+                                                     .Max(row => row.Field<DateTime>("ReportDate"));
                 // Output the result
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                                                                                           // Subtract one day from the TimeStamp
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd"); // Format as needed
+                                                                                  // Subtract one day from the TimeStamp
 
-                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                //ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                ViewBag.ReportDate = ReportDate.ToString("yyyy-MM-dd");
             }
             else
             {

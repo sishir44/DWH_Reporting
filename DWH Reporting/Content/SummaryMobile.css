@@ -1,31 +1,7 @@
 ﻿
-.scroll-container {
-    width: 100%;
-    overflow-x: auto; /* Enables horizontal scrolling */
-    white-space: nowrap; /* Prevents content wrapping */
-    border: 1px solid #ddd;
-    padding: 10px;
-}
+/*Mobile S*/
+@media (max-width: 320px)  {
 
-.scroll-content {
-    display: flex; /* Aligns divs in a row */
-    gap: 10px; /* Adds space between divs */
-}
-
-.box {
-    width: 200px;
-    height: 100px;
-    background-color: lightblue;
-    text-align: center;
-    line-height: 100px;
-    font-weight: bold;
-    border-radius: 8px;
-    flex-shrink: 0; /* Prevents items from shrinking */
-}
-
-
-/*@@media (min-width: 320px) and (max-width: 670px) {*/
-@media (max-width: 320px) {
     .table-responsive {
         max-height: 64vh; /* Limits table height to 64% of viewport height */
         overflow-y: auto; /* Enables vertical scrolling */
@@ -62,14 +38,11 @@
         overflow: auto !important;
     }
 }
+/*Mobile M*/
+@media (max-width: 375px) {
 
-@media (min-width: 1024px) {
-    /*@@media (min-width: 768px) and (max-width: 1024px) {*/
-    /*body {
-            overflow: hidden !important;
-        }*/
     .table-responsive {
-        max-height: 100vh;
+        max-height: 64vh; /* Limits table height to 64% of viewport height */
         overflow-y: auto; /* Enables vertical scrolling */
         overflow-x: hidden; /* Prevents horizontal scrolling */
     }
@@ -80,12 +53,39 @@
         min-width: auto !important;
         left: auto !important;
     }
-}
 
-@media (min-width: 480px) and (max-width: 768px) {
-    /*body {
-            overflow: hidden !important;
-        }*/
+    .btn-custom {
+        font-size: 12px;
+        height: 30px; /* Increase button height */
+        width: 100%; /* Make buttons full width */
+        padding: 5px 0 !important;
+    }
+
+    .col-sm-12 {
+        width: 100%;
+        display: block; /* Stack elements on small screens */
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    #demoDW {
+        width: 100% !important;
+        max-height: 61vh !important;
+        overflow: auto !important;
+    }
+}
+/*Mobile L*/
+@media (max-width: 425px) {
+
+    .table-responsive {
+        max-height: 64vh; /* Limits table height to 64% of viewport height */
+        overflow-y: auto; /* Enables vertical scrolling */
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+    }
+
     #tbl tbody td,
     #tbl thead th {
         position: static !important;
@@ -93,32 +93,92 @@
         left: auto !important;
     }
 
+    .btn-custom {
+        font-size: 12px;
+        height: 30px; /* Increase button height */
+        width: 100%; /* Make buttons full width */
+        padding: 5px 0 !important;
+    }
+
+    .col-sm-12 {
+        width: 100%;
+        display: block; /* Stack elements on small screens */
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
+    }
+
     #demoDW {
         width: 100% !important;
-        max-height: 55vh !important;
+        max-height: 61vh !important;
         overflow: auto !important;
     }
 }
+/*TAB Screen*/
+@media (max-width: 768px) {
 
-@media (min-width: 425px) and (max-width: 518px) {
-    /*body {
-            overflow: hidden !important;
-        }*/
-    #tbl tbody td,
+    .table-responsive {
+        max-height: 64vh; /* Limits table height to 64% of viewport height */
+        overflow-y: auto; /* Enables vertical scrolling */
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+    }
+
+    /*#tbl tbody td,
     #tbl thead th {
         position: static !important;
         min-width: auto !important;
         left: auto !important;
+    }*/
+
+    /*.btn-custom {
+        font-size: 12px;
+        height: 30px; 
+        width: 100%; 
+        padding: 5px 0 !important;
+    }
+
+    .col-sm-12 {
+        width: 100%;
+        display: block;
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: bold;
     }
 
     #demoDW {
         width: 100% !important;
-        max-height: 55vh !important;
+        max-height: 61vh !important;
         overflow: auto !important;
-    }
+    }*/
 }
 
+.scroll-container {
+    width: 100%;
+    overflow-x: auto; 
+    white-space: nowrap;  /*Prevents content wrapping*/ 
+    border: 1px solid #ddd;
+    padding: 10px;
+}
 
+.scroll-content {
+    display: flex;  /*Aligns divs in a row*/ 
+    gap: 10px;  /*Adds space between divs*/ 
+}
+
+.box {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    text-align: center;
+    line-height: 100px;
+    font-weight: bold;
+    border-radius: 8px;
+    flex-shrink: 0; /* Prevents items from shrinking */
+}
 
 .optionfilter {
     background-color: #3A75D0 !important;
@@ -135,6 +195,7 @@ option.optionfilter:hover {
     cursor: pointer;
 }
 
+
 #tbl th[scope=row] {
     left: -1px;
     z-index: 1;
@@ -147,20 +208,14 @@ option.optionfilter:hover {
 
 #tbl tbody td:nth-child(1),
 #tbl tbody td:nth-child(2),
-#tbl tbody td:nth-child(3),
-#tbl tbody td:nth-child(4),
-#tbl tbody td:nth-child(5),
-#tbl tbody td:nth-child(6) {
+#tbl tbody td:nth-child(3) {
     position: sticky;
     z-index: 1;
 }
 
 #tbl thead th:nth-child(1),
 #tbl thead th:nth-child(2),
-#tbl thead th:nth-child(3),
-#tbl thead th:nth-child(4),
-#tbl thead th:nth-child(5),
-#tbl thead th:nth-child(6) {
+#tbl thead th:nth-child(3) {
     position: sticky;
     z-index: 12;
 }
@@ -182,30 +237,6 @@ option.optionfilter:hover {
     left: 130px;
     min-width: 65px !important;
 }
-
-#tbl tbody td:nth-child(4),
-#tbl thead th:nth-child(4) {
-    left: 195px;
-    min-width: 65px !important;
-}
-
-#tbl tbody td:nth-child(5),
-#tbl thead th:nth-child(5) {
-    left: 260px;
-    min-width: 65px !important;
-}
-
-
-#tbl tbody td:nth-child(6),
-#tbl thead th:nth-child(6) {
-    left: 325px;
-    min-width: 65px !important;
-}
-
-/*#tbl tbody td:nth-child(7),
-        #tbl thead th:nth-child(7) {
-            left: 420px;
-        }*/
 button.headerbtndiv {
     padding: 1px 10px;
     height: 20px !important;
@@ -596,6 +627,15 @@ tr.main_data:nth-child(odd) td {
     white-space: normal;
     word-wrap: break-word;
 }
+tr.main_data_total td {
+    font-size: 9px;
+    text-align: center;
+    color: white;
+    background-color: black;
+    border: 1px solid white;
+    white-space: normal;
+    word-wrap: break-word;
+}
 
 tr.total_data td {
     font-size: 10px;
@@ -837,8 +877,8 @@ tr.main_data_detail:nth-child(odd) td {
     margin: -1px auto 0px auto;
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+/*@media (min-width: 768px) and (max-width: 1024px) {
     row.sub-header {
         margin: 5px auto 0px auto !important;
     }
-}
+}*/

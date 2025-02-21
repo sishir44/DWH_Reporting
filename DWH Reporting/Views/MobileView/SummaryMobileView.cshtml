@@ -1034,10 +1034,10 @@
         },
         success: function (response) {
             $('#tbl tbody').find('#loadedToalRow').remove();
-            $('#tbl tbody').find('.filtered_data').remove();
+            $('#tbl tbody').find('.main_data_total').remove();
             //console.log("RESPONSE: " + response);
             var newRow = `
-                <tr class="filtered_data">
+                <tr class="main_data_total">
                 <td></td>
                 <td>Grand Total</td>
                 <td></td>
