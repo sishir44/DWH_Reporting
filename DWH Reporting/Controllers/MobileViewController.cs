@@ -63,7 +63,7 @@ namespace DWH_Reporting.Controllers
 
             string dateParam = selectedDate;
 
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam, UserID);
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam, UserID,"0");
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 

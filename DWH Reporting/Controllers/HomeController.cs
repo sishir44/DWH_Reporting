@@ -97,7 +97,7 @@ namespace DWH_Reporting.Controllers
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 
 
-                ShowStoreNumber(null, global.decrpedUserId);
+                ShowStoreNumber(null, global.decrpedUserId,"0");
 
                 return View();
 
@@ -109,11 +109,11 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumber(string selectedDate)
+        public ActionResult StoreNumber(string selectedDate, string isfinal)
         {
             try
             {
-                ShowStoreNumber(selectedDate, global.decrpedUserId);
+                ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
 
                 return View();
 
@@ -131,7 +131,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate,"1");
+                ShowStoreNumber(selectedDate,"1","0");
 
                 return View();
 
@@ -149,7 +149,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate,"1");
+                ShowStoreNumber(selectedDate,"1","0");
 
                 return View();
 
@@ -167,7 +167,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate,"1");
+                ShowStoreNumber(selectedDate,"1", "0");
 
                 return View();
 
@@ -185,7 +185,7 @@ namespace DWH_Reporting.Controllers
             try
             {
 
-                ShowStoreNumber(selectedDate,"1");
+                ShowStoreNumber(selectedDate,"1", "0");
 
                 return View();
 
@@ -253,12 +253,12 @@ namespace DWH_Reporting.Controllers
                 throw;
             }
         }
-        private void ShowStoreNumber(string selectedDate,string UserID)
+        private void ShowStoreNumber(string selectedDate,string UserID, string isfinal)
         {
 
             string dateParam = selectedDate;
 
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID);
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID,isfinal);
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
             
@@ -1344,7 +1344,7 @@ namespace DWH_Reporting.Controllers
 
            
             // Call your function with the date parameter
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,"1");
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,"1", "0");
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 
