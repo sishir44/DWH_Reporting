@@ -468,7 +468,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get Total
 
-            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam,UserID);
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam,UserID, isfinal);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)

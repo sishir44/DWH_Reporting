@@ -29,7 +29,7 @@ namespace DWH_Reporting.Controllers
                 //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 global.decrpedUserId = "1";
 
-                ShowStoreNumber(null, global.decrpedUserId);
+                ShowStoreNumber(null, global.decrpedUserId, "0");
 
                 return View();
 
@@ -42,11 +42,11 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpPost]
-        public ActionResult StoreNumberMobileView(string selectedDate)
+        public ActionResult StoreNumberMobileView(string selectedDate, string isfinal)
         {
             try
             {
-                ShowStoreNumber(selectedDate, global.decrpedUserId);
+                ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
 
                 return View();
 
@@ -58,12 +58,12 @@ namespace DWH_Reporting.Controllers
 
         }
 
-        private void ShowStoreNumber(string selectedDate, string UserID)
+        private void ShowStoreNumber(string selectedDate, string UserID, string isfinal)
         {
 
             string dateParam = selectedDate;
 
-            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam, UserID,"0");
+            DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam, UserID,isfinal);
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 
@@ -273,7 +273,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get Total
 
-            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam, UserID);
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetFct_StoreNumberTotal(dateParam, UserID, isfinal);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)
