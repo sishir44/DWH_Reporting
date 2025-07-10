@@ -1306,10 +1306,10 @@
                             </thead>
 
                             @if ((recordsFct_StoreNumberTotal != null) && (recordsFct_StoreNumberTotal.Any()))
-                            {
+                            { 
                                 foreach (var record in recordsFct_StoreNumberTotal)
-                                {
-                                    // GRAND TOTAL
+                            {
+                                // GRAND TOTAL
                                     <tr class="total_data">
                                         <td></td>
                                         <td></td>
@@ -1503,7 +1503,7 @@
 
                                     </tr>
                                 }
-
+                            
                             }
 
                             @{
@@ -5792,7 +5792,8 @@
                 isfinal: isFinalVal
             },
             success: function (res) {
-                //$('#tblDetBdy').html(res); 
+                //$("#tbl").empty();
+                //$("#tbl").html(res.data);
             },
             error: function (err) {
                 console.error("AJAX error:", err);
