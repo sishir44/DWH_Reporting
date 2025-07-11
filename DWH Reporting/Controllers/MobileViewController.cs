@@ -1107,7 +1107,7 @@ namespace DWH_Reporting.Controllers
 
                 global.decrpedUserId = "1";
 
-                ShowStoreSummary(null, global.decrpedUserId);
+                ShowStoreSummary(null, global.decrpedUserId, "0");
 
                 return View();
 
@@ -1120,12 +1120,12 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpPost]
-        public ActionResult SummaryMobileView(string selectedDate)
+        public ActionResult SummaryMobileView(string selectedDate, string isfinal)
         {
             try
             {
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                ShowStoreSummary(selectedDate, global.decrpedUserId);
+                ShowStoreSummary(selectedDate, global.decrpedUserId, isfinal);
 
                 return View();
 
@@ -1137,13 +1137,13 @@ namespace DWH_Reporting.Controllers
             }
         }
 
-        private void ShowStoreSummary(string selectedDate, string UserID)
+        private void ShowStoreSummary(string selectedDate, string UserID, string isfinal)
         {
 
             string dateParam = selectedDate;
 
             // Call your function with the date parameter
-            DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID);
+            DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID, isfinal);
 
             List<Fct_StoreSummaryAttributesModel> lisn2_lst = new List<Fct_StoreSummaryAttributesModel>();
 
@@ -1252,7 +1252,7 @@ namespace DWH_Reporting.Controllers
 
 
             ////////////////Get_Summary Total
-            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetRecords_summaryTotal(dateParam, UserID);
+            DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetRecords_summaryTotal(dateParam, UserID, isfinal);
             List<Fct_StoreSummaryAttributesModel> lisn_tot = new List<Fct_StoreSummaryAttributesModel>();
             foreach (DataRow row in Fct_StoreNumberTotal.Rows)
             {

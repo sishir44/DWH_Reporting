@@ -289,7 +289,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreSummary(string dateParam,string UserID)
+        public static DataTable GetFct_StoreSummary(string dateParam,string UserID, string isfinal)
         {
             try
             {
@@ -300,6 +300,7 @@ namespace DWH_Reporting.Models
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 // Execute stored procedure with the parameters
                 DataTable DT = objDal.Getdata(spParam);
@@ -508,7 +509,7 @@ namespace DWH_Reporting.Models
             }
         }
 
-        public static DataTable GetRecords_summaryTotal(string dateParam,string UserID)
+        public static DataTable GetRecords_summaryTotal(string dateParam,string UserID, string isfinal)
         {
             try
             {
@@ -517,6 +518,7 @@ namespace DWH_Reporting.Models
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
             }

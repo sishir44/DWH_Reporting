@@ -605,30 +605,49 @@
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         @*@{
-                            var today = DateTime.Today.ToString("yyyy-MM-dd");
-                            var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
-                        }*@
+                                var today = DateTime.Today.ToString("yyyy-MM-dd");
+                                var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+                            }*@
 
-                        <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                             @using (Html.BeginForm("Summary", "Home", FormMethod.Post))
                             {
                                 <div class="form-group">
+                                    
+                                    <!-- Hidden Inputs -->
+                                    <input type="hidden" id="isFinal" value="0" />
+                                    <input type="hidden" id="hiddenDate" name="selectedDate" />
+
+                                    <!-- Daily Date Picker (Visible initially) -->
                                     <input type="date"
                                            id="selectedDate"
-                                           name="selectedDate"
                                            class="form-control"
                                            title="Select Date"
-                                           style="margin-top:5px; background-color:#A5CFF0; font-size: 12px; font-weight: bold;height: 30px; color:#383b3f; border:black"
+                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;" 
                                            onchange="appendUserIDToURL(this.form);"
-                                           max="@yesterday" /> <!-- Disable today and future dates -->
+                                           max="@yesterday" />
+
+
+                                    <!-- Monthly Picker (Hidden initially) -->
+                                    <input type="month"
+                                           id="monthPicker"
+                                           class="form-control"
+                                           title="Select Month"
+                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
+
+
                                 </div>
                             }
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                                <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="" onclick="refresh()">
-                                    <i class="fas fa-retweet"></i>
-                                </button>
-                            
+                            <button type="submit" id="toggleBtn" class="headerbtndiv btn float-right form-control" title="EOM/MTD" onclick="toggleMtdEom()">
+                                EOM
+                            </button>
+                        </div>
+                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                            <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="" onclick="refresh()">
+                                <i class="fas fa-retweet"></i>
+                            </button>
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <button class="headerbtndiv btn float-right form-control" title="Clear Filter" id="clearfilter">
@@ -1539,7 +1558,7 @@
         });
 
         document.getElementById("GATrGoal100").value = GATrGoal100Count;
-            
+
 
         //GATrGoal >70%
         var GATrGoal90Cells = document.querySelectorAll(".csat");
@@ -1584,7 +1603,7 @@
 
         // Loop through each cell and count if it has a store name
         storeCells.forEach(function (cell) {
-          
+
             var storeName = cell.textContent.trim();
 
             // Check if the cell has a non-empty store name
@@ -1624,7 +1643,7 @@
         location.reload();
     }
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date = null, Sd = null) {
-    
+
         const baseUrl = '@Url.Content("~/")';
     var dateP = "@ViewBag.ReportDate"; // Razor value for date
     var Sd = 'Elio Portocarrero';
@@ -2036,7 +2055,7 @@
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData() {
-        
+
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('TM').selectedOptions).map(option => option.value);
         //console.log(selectedValues);
@@ -2694,7 +2713,7 @@
     }
     ////////////////Stores Hierarchy/////////////////////////
     function filterStoresData() {
-    
+
         // Get selected Tiers values from the dropdown
         var selectedValues = Array.from(document.getElementById('Stores').selectedOptions).map(option => option.value);
 
@@ -3919,4 +3938,71 @@
 
 </script>
 
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<script>
+    function getLastDayOfMonth(year, month) {
+        return new Date(year, month, 1).toISOString().split('T')[0];
+    }
+
+    function toggleMtdEom() {
+        debugger
+        const isFinal = $('#isFinal').val();
+        const newIsFinal = isFinal === "0" ? "1" : "0";
+        let datefilter = ""; // ✅ Use let
+
+        $('#isFinal').val(newIsFinal);
+
+        if (newIsFinal === "1") {
+            $('#toggleBtn').text("MTD");
+            $('#selectedDate').hide();
+            $('#monthPicker').show();
+            datefilter = $('#monthPicker').val(); // ✅ Use correct field
+        } else {
+            $('#toggleBtn').text("EOM");
+            $('#selectedDate').show();
+            $('#monthPicker').hide();
+            datefilter = $('#selectedDate').val(); // ✅ Use correct field
+        }
+        sendDateData(datefilter, newIsFinal);
+    }
+
+
+    $(document).ready(function () {
+        // Daily date picker
+        $('#selectedDate').on('change', function () {
+            const val = $(this).val();
+            $('#hiddenDate').val(val);
+            sendDateData(val, "0");
+        });
+
+        // Month picker (MM/yyyy)
+        $('#monthPicker').on('change', function () {
+            const val = $(this).val(); // Format: yyyy-MM
+            const [year, month] = val.split('-');
+            const lastDay = getLastDayOfMonth(parseInt(year), parseInt(month));
+            $('#hiddenDate').val(lastDay);
+            sendDateData(lastDay, "1");
+        });
+    });
+
+    function sendDateData(dateVal, isFinalVal) {
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Summary", "Home")',
+            data: {
+                selectedDate: dateVal,
+                isfinal: isFinalVal
+            },
+            success: function (res) {
+                //$("#tbl").empty();
+                //$("#tbl").html(res.data);
+            },
+            error: function (err) {
+                console.error("AJAX error:", err);
+                alert("Failed to load data.");
+            }
+        });
+    }
+</script>
