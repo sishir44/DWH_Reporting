@@ -113,18 +113,20 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
+                if(selectedDate == "")
+                {
+                    selectedDate = null;
+                }
+                ViewBag.isfinal = isfinal;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
-
                 return View();
-
             }
             catch (Exception ex)
             {
                 return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
             }
-
         }
-
+     
         //[Authorization]
         public ActionResult EmployeeRank(string selectedDate)
         {
@@ -241,6 +243,10 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
+                if (selectedDate == "")
+                {
+                    selectedDate = null;
+                }
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ShowStoreSummary(selectedDate, global.decrpedUserId, isfinal);
 
@@ -255,7 +261,6 @@ namespace DWH_Reporting.Controllers
         }
         private void ShowStoreNumber(string selectedDate,string UserID, string isfinal)
         {
-
             string dateParam = selectedDate;
 
             DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID,isfinal);
