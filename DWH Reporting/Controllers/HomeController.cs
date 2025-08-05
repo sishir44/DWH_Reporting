@@ -119,6 +119,14 @@ namespace DWH_Reporting.Controllers
                 }
                 ViewBag.isfinal = isfinal;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
+                if(isfinal == "1") { 
+                    // If AJAX, return the fragment
+                    if (Request.IsAjaxRequest())
+                    {
+                        return PartialView("_StoreNumber"); // that partial uses the same ViewData
+                    }
+                }
+
                 return View();
             }
             catch (Exception ex)

@@ -357,6 +357,7 @@
     <Content Include="Views\MobilyMtdUploader\StoreNumberUploader.cshtml" />
     <Content Include="Views\MobileView\StoreNumberMobileView.cshtml" />
     <Content Include="Views\MobileView\SummaryMobileView.cshtml" />
+    <Content Include="Views\Shared\_StoreNumber.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

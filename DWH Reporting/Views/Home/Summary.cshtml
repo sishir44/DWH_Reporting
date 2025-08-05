@@ -613,7 +613,7 @@
                             @using (Html.BeginForm("Summary", "Home", FormMethod.Post))
                             {
                                 <div class="form-group">
-                                    
+
                                     <!-- Hidden Inputs -->
                                     <input type="hidden" id="isFinal" value="0" />
                                     <input type="hidden" id="hiddenDate" name="selectedDate" />
@@ -623,7 +623,7 @@
                                            id="selectedDate"
                                            class="form-control"
                                            title="Select Date"
-                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;" 
+                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;"
                                            onchange="appendUserIDToURL(this.form);"
                                            max="@yesterday" />
 
@@ -1294,6 +1294,9 @@
     </body>
 
 </html>
+
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
 <script type="text/javascript">
     function appendUserIDToURL(form) {
         // Get the selected date value
@@ -1352,22 +1355,41 @@
     //}
 
     function test() {
+        $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
 
-        $("td:hidden").remove();
-        var $clonedTable = $('#tbl').clone();
-        var $clonedTable2 = $('#tbl2').clone();
-
-        $clonedTable.find('[style*="display: none"]').remove();
-        $clonedTable2.find('[style*="display: none"]').remove();
-
-        $clonedTable.table2excel({
-            filename: "SummaryReport.xls"
+        const wb = XLSX.utils.book_new();
+        const tables = [
+            { selector: "#tbl", name: "Table1" },
+            { selector: "#tbl2", name: "Table2" }
+        ];
+        tables.forEach(t => {
+            const elt = document.querySelector(t.selector);
+            if (elt) {
+                const ws = XLSX.utils.table_to_sheet(elt);
+                XLSX.utils.book_append_sheet(wb, ws, t.name);
+            }
         });
-
-        $clonedTable2.table2excel({
-            filename: "SummaryReport.xls"
-        });
+        XLSX.writeFile(wb, "SummaryReport.xlsx");
     }
+    //function test() {
+
+    //    $("td:hidden").remove();
+    //    var $clonedTable = $('#tbl').clone();
+    //    var $clonedTable2 = $('#tbl2').clone();
+
+    //    $clonedTable.find('[style*="display: none"]').remove();
+    //    $clonedTable2.find('[style*="display: none"]').remove();
+
+    //    $clonedTable.table2excel({
+    //        filename: "SummaryReport.xls"
+    //    });
+
+    //    $clonedTable2.table2excel({
+    //        filename: "SummaryReport.xls"
+    //    });
+    //}
+
+
     function takeshot() {
         //window.print();
 
@@ -3947,7 +3969,7 @@
     }
 
     function toggleMtdEom() {
-        debugger
+        
         const isFinal = $('#isFinal').val();
         const newIsFinal = isFinal === "0" ? "1" : "0";
         let datefilter = ""; // ✅ Use let

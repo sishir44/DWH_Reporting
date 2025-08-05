@@ -1,7 +1,8 @@
-﻿
+
 @{
     ViewBag.Title = "Store Number";
     Layout = null;
+    @ViewBag.isfinal;
 }
 
 @{
@@ -809,7 +810,7 @@
 
 </head>
 
-<body style="padding-top:0; background-color:#B2D6F2;">
+<body style="padding-top:0; background-color:#B2D6F2;" class="partialPage">
 
     <!-- LOADING LOGO -->
     <div id="loadingScreen">
@@ -844,30 +845,30 @@
                             <!-- Hidden Inputs -->
                             <input type="hidden" id="isFinal" value="0" />
                             <input type="hidden" id="hiddenDate" name="selectedDate" />
-
                             <!-- Daily Date Picker (Visible initially) -->
-                            <input type="date"
-                                   id="selectedDate"
-                                   class="form-control"
-                                   title="Select Date"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
-
-                            <!-- Monthly Picker (Hidden initially) -->
-                            <input type="month"
-                                   id="monthPicker"
-                                   class="form-control"
-                                   title="Select Month"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
-
-                            <!-- Toggle Button -->
-                            <button type="button"
-                                    id="toggleBtn"
-                                    class="btn btn-primary"
-                                    title="Toggle EOM/MTD"
-                                    onclick="toggleMtdEom()"
-                                    style="width: 80px; height: 25px; padding: 1px 10px; height: 20px !important; font-size: 12px; margin-top: 12px;">
-                                EOM
-                            </button>
+                            @if (ViewBag.isfinal == "1")
+                            {
+                                <input type="date"
+                                       id="selectedDate"
+                                       class="form-control"
+                                       title="Select Date" hidden
+                                       style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                                <!-- Monthly Picker (Hidden initially) -->
+                                <input type="month"
+                                       id="monthPicker"
+                                       class="form-control"
+                                       title="Select Month"
+                                       style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                                <!-- Toggle Button -->
+                                <button type="button"
+                                        id="toggleBtn"
+                                        class="btn btn-primary"
+                                        title="Toggle EOM/MTD"
+                                        onclick="toggleMtdEom()"
+                                        style="width: 80px; height: 25px; padding: 1px 10px; height: 20px !important; font-size: 12px; margin-top: 12px;">
+                                    MTD
+                                </button>
+                            }
 
                             <!-- Refresh Button -->
                             <button type="submit"
@@ -5617,11 +5618,11 @@
 @*<script>
         // JavaScript to hide the loading screen when the view has loaded
         window.addEventListener('load', function () {
-            
             document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
             document.getElementById('content').style.display = 'block'; // Show content
         });
     </script>*@
+
 <script>
     (function () {
         const minShowMs = 1000;
@@ -5795,8 +5796,8 @@
     function toggleMtdEom() {
         
         $('#tblDetBdy').empty("");
-        const isFinal = $('#isFinal').val();
-        const newIsFinal = isFinal === "0" ? "1" : "0";
+        const isFinal = "0"//$('#isFinal').val();
+        const newIsFinal = isFinal //=== "0" ? "1" : "0";
         let datefilter = "";
 
         $('#isFinal').val(newIsFinal);
