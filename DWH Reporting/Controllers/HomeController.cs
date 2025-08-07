@@ -255,8 +255,17 @@ namespace DWH_Reporting.Controllers
                 {
                     selectedDate = null;
                 }
+                ViewBag.isfinal = isfinal;
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ShowStoreSummary(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    if (Request.IsAjaxRequest())
+                    {
+                        return PartialView("_Summary"); // that partial uses the same ViewData
+                    }
+                }
 
                 return View();
 

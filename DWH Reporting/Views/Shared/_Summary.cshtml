@@ -1,7 +1,8 @@
-﻿
+
 @{
     Layout = null;
     ViewBag.Title = "Store Summary";
+    @ViewBag.isfinal;
 }
 
 @{
@@ -59,7 +60,6 @@
             align-items: center;
             z-index: 9999;
         }
-
         .btn {
             border-radius: 10px;
             background-image: linear-gradient(#0046bf54, #0046bf);
@@ -606,12 +606,10 @@
 
 </head>
 <body style="padding-top:0; background-color:#B2D6F2;">
-
-     @*LOADING LOGO*@ 
+    <!-- LOADING LOGO -->
     <div id="loadingScreen">
         <img id="loadingLogo" src="https://mis.mobilyllc.com/mobilylogin/image/mobilyloader.gif" alt="Loading Logo">
     </div>
-
     <div>
         <div id="div1" class="content" style="background-color:#B2D6F2;">
             <div class="row head">
@@ -637,33 +635,36 @@
                                     <!-- Hidden Inputs -->
                                     <input type="hidden" id="isFinal" value="0" />
                                     <input type="hidden" id="hiddenDate" name="selectedDate" />
-
-                                    <!-- Daily Date Picker (Visible initially) -->
-                                    <input type="date"
-                                           id="selectedDate"
-                                           class="form-control"
-                                           title="Select Date"
-                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;"
-                                           onchange="appendUserIDToURL(this.form);"
-                                           max="@yesterday" />
-
-
-                                    <!-- Monthly Picker (Hidden initially) -->
-                                    <input type="month"
-                                           id="monthPicker"
-                                           class="form-control"
-                                           title="Select Month"
-                                           style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
+                                    @if (ViewBag.isfinal == "1")
+                                    {
+                                        <!-- Daily Date Picker (Visible initially) -->
+                                        <input type="date"
+                                               id="selectedDate"
+                                               class="form-control"
+                                               title="Select Date" hidden
+                                               style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;"
+                                               onchange="appendUserIDToURL(this.form);"
+                                               max="@yesterday" />
 
 
+                                        <!-- Monthly Picker (Hidden initially) -->
+                                        <input type="month"
+                                               id="monthPicker"
+                                               class="form-control"
+                                               title="Select Month"
+                                               style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                                    }
                                 </div>
                             }
                         </div>
-                        <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
-                            <button type="submit" id="toggleBtn" class="headerbtndiv btn float-right form-control" title="EOM/MTD" onclick="toggleMtdEom()">
-                                EOM
-                            </button>
-                        </div>
+                        @if (ViewBag.isfinal == "1")
+                        {
+                            <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                <button type="submit" id="toggleBtn" class="headerbtndiv btn float-right form-control" title="EOM/MTD" onclick="toggleMtdEom()">
+                                    MTD
+                                </button>
+                            </div>
+                        }
                         <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
                             <button type="submit" class="headerbtndiv btn float-right form-control" title="First Load Data" id="" onclick="refresh()">
                                 <i class="fas fa-retweet"></i>
@@ -1685,128 +1686,129 @@
         location.reload();
     }
     function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, date = null, Sd = null) {
+        debugger
+    const baseUrl = '@Url.Content("~/")';
+    var dateP = @ViewBag.ReportDate"; // Razor value for date
+    var Sd = 'Elio Portocarrero';
+    var endpoint = baseUrl + "Home/GetFilteredDataSum";
+    $.ajax({
+        url: endpoint, // Your controller's action method
+        type: 'GET',
+        data: {
+            dateParam: dateP,
+            Sd: Sd,
+            TM: tmText,    // Passing TM
+            MKT: mktText,  // Passing Market
+            MMM: mmmText,  // Passing MMM
+            Stores: storesText, // Passing Stores
+            Tiers: tiersText  // Passing Tiers
+        },
+        success: function (response) {
+            debugger
+            $('#tbl tbody').find('#loadedToalRow').remove();
+            $('#tbl tbody').find('.filtered_data').remove();
+            //console.log("RESPONSE: " + response);
+            var newRow = `
+                <tr class="filtered_data">
+                <td></td>
+                <td>Grand Total</td>
+                <td></td>
+                <td></td>
+                 <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toLocaleString()}</td>
+                  <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.GrossAddsGoals || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.GrossAdds || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.GrossAddsNetOff || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.TotalTraffic || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.PPVGAPerTraffic || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.BroadbandFiberNetOff || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.FiberGreenCheck || 0)).toLocaleString()}</td>
+                  <td>$${Math.round(parseFloat(response.APO || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.ProtAdvHomeTech || 0).toFixed(1)}%</td>
+                  <td>$${Math.round(parseFloat(response.BreakEvenNumbers || 0)).toLocaleString()}</td>
+                  <td>$${Math.round(parseFloat(response.GPWithSpifTrending || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.GPTrending || 0).toFixed(1)}%</td>
+                  <td>$${Math.round(parseFloat(response.TotalGPGoals || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.OPSTrendingToGoals || 0.0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.TotalOPSGoals || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.TotalOPS || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.UpgradeTrendingToGoals || 0.0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.MTDUpgradesNetOff || 0)).toLocaleString()}</td>
 
-        const baseUrl = '@Url.Content("~/")';
-        var dateP = "@ViewBag.ReportDate"; // Razor value for date
-        var Sd = 'Elio Portocarrero';
-        var endpoint = baseUrl + "Home/GetFilteredDataSum";
-        $.ajax({
-            url: endpoint, // Your controller's action method
-            type: 'GET',
-            data: {
-                dateParam: dateP,
-                Sd: Sd,
-                TM: tmText,    // Passing TM
-                MKT: mktText,  // Passing Market
-                MMM: mmmText,  // Passing MMM
-                Stores: storesText, // Passing Stores
-                Tiers: tiersText  // Passing Tiers
-            },
-            success: function (response) {
-                    $('#tbl tbody').find('#loadedToalRow').remove();
-                    $('#tbl tbody').find('.filtered_data').remove();
-                    //console.log("RESPONSE: " + response);
-                    var newRow = `
-                    <tr class="filtered_data">
-                    <td></td>
-                    <td>Grand Total</td>
-                    <td></td>
-                    <td></td>
-                     <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(1)}%</td>
-                      <td>${parseFloat(response.WeeklyBudgetedHRS || 0).toLocaleString()}</td>
-                      <td>${parseFloat(response.GrossAddsTrendToGoal || 0).toFixed(1)}%</td>
-                      <td>${Math.round(parseFloat(response.GrossAddsGoals || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.GrossAdds || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.GrossAddsNetOff || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.TotalTraffic || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.PPVGAPerTraffic || 0).toFixed(1)}%</td>
-                      <td>${parseFloat(response.FiberConversion || 0).toFixed(1)}%</td>
-                      <td>${Math.round(parseFloat(response.BroadbandFiberNetOff || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.FiberGreenCheck || 0)).toLocaleString()}</td>
-                      <td>$${Math.round(parseFloat(response.APO || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.CSAT || 0).toFixed(1)}%</td>
-                      <td>${parseFloat(response.ProtAdvHomeTech || 0).toFixed(1)}%</td>
-                      <td>$${Math.round(parseFloat(response.BreakEvenNumbers || 0)).toLocaleString()}</td>
-                      <td>$${Math.round(parseFloat(response.GPWithSpifTrending || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.GPTrending || 0).toFixed(1)}%</td>
-                      <td>$${Math.round(parseFloat(response.TotalGPGoals || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.OPSTrendingToGoals || 0.0).toFixed(1)}%</td>
-                      <td>${Math.round(parseFloat(response.TotalOPSGoals || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.TotalOPS || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.UpgradeTrendingToGoals || 0.0).toFixed(1)}%</td>
-                      <td>${Math.round(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.MTDUpgradesNetOff || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)}%</td>
 
-                      <td>${parseFloat(response.TWDevicesTrendToGoal || 0.0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
+                  <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
+                  <td>${Math.round(parseFloat(response.AIAGreenCheck || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.AIABInternet || 0)).toLocaleString()}</td>
+                  <td>${Math.round(parseFloat(response.AIACInternet || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.OPSPerTraffic || 0.0).toFixed(1)}%</td>
+                <td>${Math.round(parseFloat(response.CRUAchMTD || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FNAchMTD || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.GrossAddsTrend || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiber || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandLessThan300MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber300MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber500MB || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.NewFiber1G || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FiberUpgradesNetOff || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.BroadbandFiberTrend || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.BroadbandFiberTrendPercentage || '').toFixed(1)}%</td>
+                <td>${Math.round(parseFloat(response.PremVideoGoals || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.PremVideo || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.PremVideoNetOff || 0)).toLocaleString()}</td>
 
-                      <td>${Math.round(parseFloat(response.TWDevicesQtyGoals || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.TWDevicesQtyNetOff || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.AIABusinessConversion || 0).toFixed(1)}%</td>
-                      <td>${parseFloat(response.AIAConsumerConversion || 0).toFixed(1)}%</td>
-                      <td>${Math.round(parseFloat(response.AIAGreenCheck || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.AIABInternet || 0)).toLocaleString()}</td>
-                      <td>${Math.round(parseFloat(response.AIACInternet || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.OPSPerTraffic || 0.0).toFixed(1)}%</td>
-                    <td>${Math.round(parseFloat(response.CRUAchMTD || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.FNAchMTD || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.GrossAddsTrend || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.BroadbandGoals || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.BroadbandFiber || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.BroadbandLessThan300MB || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.NewFiber300MB || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.NewFiber500MB || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.NewFiber1G || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.FiberUpgradesNetOff || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.BroadbandFiberTrend || 0)).toLocaleString()}</td>
-                      <td>${parseFloat(response.BroadbandFiberTrendPercentage || '').toFixed(1)}%</td>
-                    <td>${Math.round(parseFloat(response.PremVideoGoals || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.PremVideo || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.PremVideoNetOff || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.PremVideoTrendPercentage || '').toFixed(1)}%</td>
+                <td>${Math.round(parseFloat(response.PremVideoTrend || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.GPAchievedWithSpif || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.GPPerBox || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TotalOPSTrending || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.GrossAddsGP || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.MTDUpgrades || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.MTDUpgradesGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandFiberGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.BroadbandLessThan300MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber300MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber500MBQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.NewFiber1GQISpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.PremVideoGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.PremVideoSpiff || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.AccessGP || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.AccessRevenue || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.AccessQty || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.FNAchAverageQTD || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.FNAch || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.CRUAchVoice || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.CRUAchVoiceDollar || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.CRUAchData || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.TWDevicesQtyTrend || 0)).toLocaleString()}</td>
+                <td>$${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.HomeTechProtect || 0)).toLocaleString()}</td>
 
-                      <td>${parseFloat(response.PremVideoTrendPercentage || '').toFixed(1)}%</td>
-                    <td>${Math.round(parseFloat(response.PremVideoTrend || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.GPAchievedWithSpif || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.GPPerBox || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.TotalOPSTrending || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.GrossAddsGP || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.MTDUpgrades || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.MTDUpgradesGP || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.BroadbandFiberGP || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.BroadbandGP || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.BroadbandLessThan300MBQISpiff || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.NewFiber300MBQISpiff || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.NewFiber500MBQISpiff || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.NewFiber1GQISpiff || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.PremVideoGP || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.PremVideoSpiff || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.AccessGP || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.AccessRevenue || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.AccessQty || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.FNAchAverageQTD || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.FNAch || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.CRUAchVoice || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.CRUAchVoiceDollar || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.CRUAchData || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.TWDevicesQtyTrend || 0)).toLocaleString()}</td>
-                    <td>$${Math.round(parseFloat(response.TWDevicesGP || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.HomeTechProtect || 0)).toLocaleString()}</td>
+                  <td>${parseFloat(response.TotalProtectionPercentage || '').toFixed(1)}%</td>
+                 <td>${Math.round(parseFloat(response.ProtAdv1 || 0)).toLocaleString()}</td>
+                <td>${Math.round(parseFloat(response.ProtAdv4 || 0)).toLocaleString()}</td>
 
-                      <td>${parseFloat(response.TotalProtectionPercentage || '').toFixed(1)}%</td>
-                     <td>${Math.round(parseFloat(response.ProtAdv1 || 0)).toLocaleString()}</td>
-                    <td>${Math.round(parseFloat(response.ProtAdv4 || 0)).toLocaleString()}</td>
-
-                    </tr>`;
+                </tr>`;
 
 
-                    // Append the new row to the table
-                    $('#tbl tbody').prepend(newRow);
-                },
-                error: function (xhr, status, error) {
-                    console.error("Error:", error);
-                    // alert("There was an error saving the note.");
-                }
-        });
+            // Append the new row to the table
+            $('#tbl tbody').prepend(newRow);
+        },
+        error: function (xhr, status, error) {
+            console.error("Error:", error);
+            // alert("There was an error saving the note.");
+        }
+    });
 }
 
     function clearFilter() {
@@ -3993,7 +3995,6 @@
         }
 
         window.addEventListener('load', function () {
-            
             const elapsed = Date.now() - start;
             if (elapsed >= minShowMs) {
                 hideLoading();
@@ -4007,6 +4008,7 @@
     })();
 </script>
 
+
 <!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -4018,8 +4020,8 @@
     function toggleMtdEom() {
 
         $('#tblDetBdy').empty("");
-        const isFinal = $('#isFinal').val();
-        const newIsFinal = isFinal === "0" ? "1" : "0";
+        const isFinal = "0"//$('#isFinal').val();
+        const newIsFinal = isFinal //=== "0" ? "1" : "0";
         let datefilter = "";
 
         $('#isFinal').val(newIsFinal);
@@ -4098,4 +4100,6 @@
         }
     });
 }
+
+
 </script>
