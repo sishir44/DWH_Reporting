@@ -508,7 +508,7 @@
             font-size: 9px;
             padding: 3px;
             min-width: 40px;
-            max-width: 65px !important;
+            max-width: 80px !important;
             text-align: center;
         }
 
@@ -2141,7 +2141,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
                                         <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged))))%</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PPVGAPerTrafficPercentage != null ? record.PPVGAPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PPVGAPerTrafficPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TotalTraffic != null ? record.TotalTraffic.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TotalTraffic)))</td>
