@@ -3184,7 +3184,7 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers, string isfinal = "0")
+        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers, string isfinal)
         {
             //string userID = Request.QueryString["userid"];
             //userID = Session["userid"].ToString();
