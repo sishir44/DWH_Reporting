@@ -2305,7 +2305,7 @@ namespace DWH_Reporting.Controllers
                     FiberConversion = row["Fiber Conversion"].ToString(),
                     APO = row["APO"].ToString(),
                     CSAT = row["CSAT"].ToString(),
-                    //ProtAdvHomeTechPercentage = row["ProtAdv &HomeTech%"].ToString(),
+                    ProtAdvHomeTechPercentage = row["ProtAdv &HomeTech%"].ToString(),
                     BreakEvenNumbers = row["BreakEven Numbers"].ToString(),
                     GPWithSpifTrending = row["$GP - With Spif Trending"].ToString(),
                     GPTrending = MultiplyAndRoundPercentage(row["GPTrending%"]),
@@ -2327,7 +2327,7 @@ namespace DWH_Reporting.Controllers
                     OPSPerTrafficPercentage = row["OPS Per-Traffic %"].ToString(),
                     CRUAchMTD = row["CRU AchMTD"].ToString(),
                     FNAchMTD = row["FN AchMTD"].ToString(),
-                    //GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
+                    GrossAddsTrend = row["GROSSADDSTrend"].ToString(),
                     BroadbandGoals = row["BroadbandGoals"].ToString(),
                     BroadbandFiber = row["Broadband +Fiber"].ToString(),
                     BroadBandLessThan300MB = row["BroadBand lessThen (300MB)"].ToString(),
@@ -3179,14 +3179,23 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers)
+        public JsonResult GetFilteredDataSum(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers, string isfinal = "0")
         {
             //string userID = Request.QueryString["userid"];
             //userID = Session["userid"].ToString();
 
-            ////////////////Get Filter Total
+            string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
-            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, global.decrpedUserId);
+            dateParam = NullIfEmpty(dateParam);
+            Sd = NullIfEmpty(Sd);
+            TM = NullIfEmpty(TM);
+            MKT = NullIfEmpty(MKT);
+            MMM = NullIfEmpty(MMM);
+            Stores = NullIfEmpty(Stores);
+            Tiers = NullIfEmpty(Tiers);
+            isfinal = NullIfEmpty(isfinal);
+
+            DataTable FilterTotal = GP_DAL_Functions.SummaryFilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,isfinal, global.decrpedUserId);
             List<StoreSummaryAttributes> lisn_tot = new List<StoreSummaryAttributes>();
 
             foreach (DataRow row in FilterTotal.Rows)
