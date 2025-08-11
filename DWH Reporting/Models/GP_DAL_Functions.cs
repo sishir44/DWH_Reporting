@@ -335,7 +335,7 @@ namespace DWH_Reporting.Models
             }
         }
         
-        public static DataTable FilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers,string UserID)
+        public static DataTable FilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers, string isfinal,string UserID)
         {
             try
             {
@@ -351,6 +351,7 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@Store", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Store) ? null : Store);
                 spParam.SetParam("@Tiers", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tiers) ? null : Tiers);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);

@@ -2741,117 +2741,8 @@
         });
     }
     ////////////////Stores Hierarchy/////////////////////////
-    //function filterStoresData() {
-
-    //    // Get selected Tiers values from the dropdown
-    //    var selectedValues = Array.from(document.getElementById('Stores').selectedOptions).map(option => option.value);
-
-    //    // Get all rows in the table
-    //    var rows = document.querySelectorAll('#tbl tbody tr');
-
-    //    // Loop through each row and check if the Tiers column matches the selected values
-    //    rows.forEach(row => {
-    //        var StoresValue = row.getAttribute('data-store');
-
-    //        // Check if this row is the "Grand Total" row
-    //        if (row.classList.contains('total_data')) {
-    //            row.style.display = '';  // Always show the "Grand Total" row
-    //        } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
-    //            row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
-    //        } else {
-    //            row.style.display = 'none';  // Hide row if Tiers does not match
-    //        }
-    //    });
-
-    //    // Handle the search input filter for DataTables
-    //    var input = document.getElementById('textSearchStores').value.toUpperCase();
-
-    //    // Use the DataTables custom filter API
-    //    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-    //        var rowContent = data.join(' ').toUpperCase();
-
-    //        // Check if the row contains the input
-    //        var row = $('#tbl tbody tr').eq(dataIndex);
-
-    //        // Always return true for the "Grand Total" row
-    //        if (row.hasClass('total_data')) {
-    //            return true;  // Always show the "Grand Total" row
-    //        }
-
-    //        // If the row contains the input, return true to keep it visible
-    //        return rowContent.indexOf(input) > -1 || input === '';
-    //    });
-
-    //    // Redraw the table with the new search criteria
-    //    //$('#tbl').draw();
-
-    //    // Remove the custom search after use to avoid stacking filters
-    //    $.fn.dataTable.ext.search.pop();
-
-    //    //Stores
-
-    //    var tmAlreadySelected = document.getElementById('TM');
-    //    var mktAlreadySelected = document.getElementById('Market');
-    //    var storAlreadySelected = document.getElementById('Stores');
-    //    var tirAlreadySelected = document.getElementById('Tiers');
-    //    var sdAlreadySelected = document.getElementById('SD');
-
-    //    if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
-
-    //        STRfilterStoresOptions(selectedValues);
-    //        STRfilterTiersOptions(selectedValues);
-    //        STRfilterSDOptions(selectedValues);
-
-    //        storAlreadySelected.disabled = true;
-    //        $('tr.filter_data').remove();
-    //        loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText, null);
-
-    //    } else if (tmAlreadySelected.disabled) {
-
-    //        STRfilterMarketOptions(selectedValues);
-    //        STRfilterStoresOptions(selectedValues);
-    //        STRfilterTiersOptions(selectedValues);
-    //        STRfilterSDOptions(selectedValues);
-
-    //        mktAlreadySelected.disabled = true;
-    //        storAlreadySelected.disabled = true;
-    //        $('tr.filter_data').remove();
-    //        loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText, null);
-
-    //    } else if (mktAlreadySelected.disabled) {
-
-    //        STRfilterTMOptions(selectedValues);
-    //        STRfilterStoresOptions(selectedValues);
-    //        STRfilterTiersOptions(selectedValues);
-    //        STRfilterSDOptions(selectedValues);
-
-    //        tmAlreadySelected.disabled = true;
-    //        storAlreadySelected.disabled = true;
-
-    //        $('tr.filter_data').remove();
-    //        loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText,null, storAlreadySelected.innerText, null);
-    //    }
-    //    else {
-
-    //        STRfilterTMOptions(selectedValues);
-    //        STRfilterMarketOptions(selectedValues);
-    //        STRfilterStoresOptions(selectedValues);
-    //        STRfilterTiersOptions(selectedValues);
-    //        STRfilterSDOptions(selectedValues);
-
-    //        tmAlreadySelected.disabled = true;
-    //        mktAlreadySelected.disabled = true;
-    //        storAlreadySelected.disabled = true;
-
-    //        tirAlreadySelected.disabled = true;
-    //        //sdAlreadySelected.disabled = true;
-    //        $('tr.filter_data').remove();
-    //        loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, null, storAlreadySelected.innerText,null);
-    //    }
-    //}
     function filterStoresData(event) {
-        debugger;
+        
 
         // Get the Stores select element
         var storesSelect = document.getElementById('Stores');
@@ -4069,7 +3960,7 @@
         });
 
         // Fallback: if load never fires (e.g., network hang), ensure it still hides after 5s
-        setTimeout(hideLoading, 5000);
+        setTimeout(hideLoading, 2000);
     })();
 </script>
 

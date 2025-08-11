@@ -2796,12 +2796,22 @@ namespace DWH_Reporting.Controllers
 
 
         [HttpPost]
-        public JsonResult GetGTotal(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers,string UserID)
+        public JsonResult GetGTotal(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers,string isfinal, string UserID)
         {
 
             ////////////////Get Filter Total
+            string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
-            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers,UserID);
+            dateParam = NullIfEmpty(dateParam);
+            Sd = NullIfEmpty(Sd);
+            TM = NullIfEmpty(TM);
+            MKT = NullIfEmpty(MKT);
+            MMM = NullIfEmpty(MMM);
+            Stores = NullIfEmpty(Stores);
+            Tiers = NullIfEmpty(Tiers);
+            isfinal = NullIfEmpty(isfinal);
+
+            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, isfinal, UserID);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in FilterTotal.Rows)

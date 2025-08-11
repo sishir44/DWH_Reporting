@@ -970,7 +970,7 @@
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
-                        <select class="form-control selector" id="TM" multiple onchange="filterTMData()">
+                        <select class="form-control selector" id="TM" multiple onchange="filterTMData(event)">
                             @if (ViewBag.TMList != null && ViewBag.TMList.Count > 0)
                             {
                                 foreach (var item in ViewBag.TMList)
@@ -988,7 +988,7 @@
                     <!-- Search Market -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMarket" id="textSearchMarket" class="selectorinput form-control" placeholder="Search Market" onkeyup="MarketFilter()" />
-                        <select class="form-control selector" id="Market" multiple onchange="filterMarketData()">
+                        <select class="form-control selector" id="Market" multiple onchange="filterMarketData(event)">
                             @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
                             {
                                 foreach (var item in ViewBag.MarketList)
@@ -1006,7 +1006,7 @@
                     <!-- Search MUL_MktMngr -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search MMM" onkeyup="mmmFilter()" />
-                        <select class="form-control selector" id="MULMngr" multiple onchange="filtermmmData()">
+                        <select class="form-control selector" id="MULMngr" multiple onchange="filtermmmData(event)">
                             @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
                             {
                                 foreach (var item in ViewBag.mmmList)
@@ -1027,7 +1027,7 @@
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchStores" id="textSearchStores" class="selectorinput form-control" placeholder="Search Stores" onkeyup="StoresFilter()" />
-                        <select class="form-control selector" id="Stores" multiple onchange="filterStoresData()">
+                        <select class="form-control selector" id="Stores" multiple onchange="filterStoresData(event)">
                             @if (ViewBag.StoresList != null && ViewBag.StoresList.Count > 0)
                             {
                                 foreach (var item in ViewBag.StoresList)
@@ -1046,7 +1046,7 @@
                     <!-- Search Tiers -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTiers" id="textSearchTiers" class="selectorinput form-control" placeholder="Search Tiers" onkeyup="TiersFilter()" />
-                        <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData()">
+                        <select class="form-control selector" id="Tiers" multiple onchange="filterTiersData(event)">
                             @if (ViewBag.tiersList != null && ViewBag.tiersList.Count > 0)
                             {
                                 foreach (var item in ViewBag.tiersList)
@@ -1310,7 +1310,7 @@
                                 foreach (var record in recordsFct_StoreNumberTotal)
                                 {
                                     // GRAND TOTAL
-                                    <tr class="total_data">
+                                    <tr id="loadedToalRow" class="total_data">
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -3134,7 +3134,7 @@
     var x = x1 + x2;
     return x;
 };
-    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null) {
+    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, isfinal="0") {
         var dateP = "@ViewBag.ReportDate"; // Pass the Razor value as a string
         var Sd = 'Elio Portocarrero';
         //alert("Selected Date: " + dateP +
@@ -3155,17 +3155,20 @@
                 MKT: mktText, // Send MKT text or null
                 MMM: mmmText, // Send MMM text or null
                 Stores: storesText, // Send Stores text or null
-                Tiers: tiersText // Send Tiers text or null
+                Tiers: tiersText, // Send Tiers text or null
+                isfinal: isfinal // Send Tiers text or null
             },
             success: function (response) {
                 //console.log(response.Converged + "Test");
+                $('#tbl tbody').find('#loadedToalRow').remove();
+                $('#tbl tbody').find('.filtered_data').remove();
                 var newRow = `
                     <tr class="filter_data">
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td>Grand Total</td>
                         <td></td>
-                        <td>Filter Total</td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -3695,84 +3698,59 @@
         });
     }
     ////////////////TM Hierarchy/////////////////////////
-    function filterTMData() {
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('TM').selectedOptions).map(option => option.value);
-        //console.log(selectedValues);
-
-        // Get all rows in the table
+    function filterTMData(event) {
+        // Get TM select element
+        var tmSelect = document.getElementById('TM');
+        // Text of the option that was last clicked
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (tmSelect.selectedOptions.length > 0 ? tmSelect.selectedOptions[0].text : '');
+        // Get all selected values
+        var selectedValues = Array.from(tmSelect.selectedOptions).map(option => option.value);
+        // Filter rows manually
         var rows = document.querySelectorAll('#tbl tbody tr');
-
-        // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var StoresValue = row.getAttribute('data-tm');
-
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
-            }
-            if (row.classList.contains('total_dataMMM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
-            }
-            // Check if this row is the "Grand Total" row
             if (row.classList.contains('total_data')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
+                row.style.display = '';
             } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
+                row.style.display = '';
             } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
-
+                row.style.display = 'none';
             }
         });
 
-        // Handle the search input filter for DataTables
+        // Search filter input
         var input = document.getElementById('textSearchTM').value.toUpperCase();
 
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
-
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        //    $('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //TM
-
-        var tmAlreadySelected = document.getElementById('TM');
-
-        //Fill TM and Others
-
+        // Apply DataTables filter only if DataTables is loaded and initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_data')) {
+                    return true;
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
+        }
+        // Call other filter functions
         TMfilterTMOptions(selectedValues);
         TMfilterMarketOptions(selectedValues);
-        TMfiltermmmOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
-
-        tmAlreadySelected.disabled = true;
-
+        TMfilterSDOptions(selectedValues);
+        // Disable TM select and remove filter rows
+        tmSelect.disabled = true;
         $('tr.filter_data').remove();
-        loadGTotalByFilter(tmAlreadySelected.innerText);
-
+        // Pass clicked option text to function
+        if (clickedOptionText) {
+            loadGTotalByFilter(clickedOptionText);
+        }
     }
+
 
     function TMfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -4041,105 +4019,73 @@
         });
     }
     ////////////////Market Hierarchy/////////////////////////
-    function filterMarketData() {
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('Market').selectedOptions).map(option => option.value);
+    function filterMarketData(event) {
+        // Get Market select element
+        var marketSelect = document.getElementById('Market');
 
-        // Get all rows in the table
+        // Text of the option that was last clicked
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (marketSelect.selectedOptions.length > 0 ? marketSelect.selectedOptions[0].text : '');
+
+        // Get all selected values
+        var selectedValues = Array.from(marketSelect.selectedOptions).map(option => option.value);
+
+        // Filter rows manually
         var rows = document.querySelectorAll('#tbl tbody tr');
-
-        // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
-            var StoresValue = row.getAttribute('data-mkt');
-
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
-            }
-            if (row.classList.contains('total_dataMMM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
-            }
-
-            // Check if this row is the "Grand Total" row
+            var marketValue = row.getAttribute('data-mkt');
             if (row.classList.contains('total_data')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
+                row.style.display = ''; // Always show "Grand Total"
+            } else if (selectedValues.length === 0 || selectedValues.includes(marketValue)) {
+                row.style.display = '';
             } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
+                row.style.display = 'none';
             }
         });
 
-        // Handle the search input filter for DataTables
-        var input = document.getElementById('textSearchStores').value.toUpperCase();
+        // Search filter input
+        var input = document.getElementById('textSearchMarket').value.toUpperCase();
 
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
+        // Apply DataTables filter only if DataTables is loaded and initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_data')) {
+                    return true; // Always keep Grand Total
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
+        }
 
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        // $('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //Market
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmmAlreadySelected = document.getElementById('MULMngr');
-
-        if (tmAlreadySelected.disabled) {
-
+        // Update other dependent dropdowns
+        var tmSelect = document.getElementById('TM');
+        if (tmSelect.disabled) {
             MKTfilterMarketOptions(selectedValues);
-            MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
-
-
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText);
-
-        }
-        else {
-
+        } else {
             MKTfilterTMOptions(selectedValues);
             MKTfilterMarketOptions(selectedValues);
-            MKTfiltermmmOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
-
-
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-
-            $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText);
+            MKTfilterSDOptions(selectedValues);
+            tmSelect.disabled = true;
         }
 
+        // Disable Market select and remove filter rows
+        marketSelect.disabled = true;
+        $('tr.filter_data').remove();
+
+        // Pass clicked option text to totals function
+        if (clickedOptionText) {
+            loadGTotalByFilter(tmSelect.innerText, clickedOptionText);
+        }
     }
+
 
     function MKTfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -4403,118 +4349,99 @@
         });
     }
     ////////////////Market Hierarchy/////////////////////////
-    function filtermmmData() {
+    function filtermmmData(event) {
+        // Get MMM select element
+        var mmmSelect = document.getElementById('MULMngr');
 
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('MULMngr').selectedOptions).map(option => option.value);
+        // Text of the option that was last clicked
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (mmmSelect.selectedOptions.length > 0 ? mmmSelect.selectedOptions[0].text : '');
 
-        // Get all rows in the table
+        // Get all selected values
+        var selectedValues = Array.from(mmmSelect.selectedOptions).map(option => option.value);
+
+        // Filter rows manually
         var rows = document.querySelectorAll('#tbl tbody tr');
-
-        // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
             var mmmValue = row.getAttribute('data-mmm');
 
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
+            if (row.classList.contains('total_dataTM') || row.classList.contains('total_dataMMM')) {
+                row.style.display = 'none'; // Always hide TM/MMM totals
             }
-            if (row.classList.contains('total_dataMMM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
+            else if (row.classList.contains('total_data')) {
+                row.style.display = ''; // Always show "Grand Total"
             }
-            // Check if this row is the "Grand Total" row
-            if (row.classList.contains('total_data')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            } else if (selectedValues.length === 0 || selectedValues.includes(mmmValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
-            } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
+            else if (selectedValues.length === 0 || selectedValues.includes(mmmValue)) {
+                row.style.display = '';
+            }
+            else {
+                row.style.display = 'none';
             }
         });
 
-        // Handle the search input filter for DataTables
+        // Search filter input
         var input = document.getElementById('textSearchMULMngr').value.toUpperCase();
 
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
+        // Apply DataTables filter only if DataTables is loaded and initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
 
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_dataTM') || row.hasClass('total_dataMMM')) {
+                    return false; // Always hide TM/MMM totals
+                }
+                if (row.hasClass('total_data')) {
+                    return true; // Always keep Grand Total
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
+        }
 
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
+        // Update other dependent dropdowns
+        var tmSelect = document.getElementById('TM');
+        var mktSelect = document.getElementById('Market');
 
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        // $('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //mmm
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmmAlreadySelected = document.getElementById('MULMngr');
-        var storAlreadySelected = document.getElementById('Stores');
-        var tirAlreadySelected = document.getElementById('Tiers');
-
-        if (tmAlreadySelected.disabled) {
-
+        if (tmSelect.disabled) {
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
 
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
+            mktSelect.disabled = true;
+            mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, null, null);
-
-        } else if (mktAlreadySelected.disabled) {
-
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null);
+        }
+        else if (mktSelect.disabled) {
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
 
-            mmmAlreadySelected.disabled = true;
+            mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, null, null);
-
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null);
         }
         else {
-
             mmmfilterTMOptions(selectedValues);
             mmmfilterMarketOptions(selectedValues);
             mmmfiltermmmOptions(selectedValues);
             mmmfilterTiersOptions(selectedValues);
             mmmfilterStoresOptions(selectedValues);
 
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
+            tmSelect.disabled = true;
+            mktSelect.disabled = true;
+            mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(null, null, mmmAlreadySelected.innerText, null, null);
-
-
+            loadGTotalByFilter(null, null, clickedOptionText, null, null);
         }
-
     }
+
 
     function mmmfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -4784,139 +4711,99 @@
         });
     }
     ////////////////Stores Hierarchy/////////////////////////
-    function filterStoresData() {
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('Stores').selectedOptions).map(option => option.value);
+    function filterStoresData(event) {
+        
 
-        // Get all rows in the table
-        var rows = document.querySelectorAll('#tbl tbody tr');
+        // Get the Stores select element
+        var storesSelect = document.getElementById('Stores');
 
-        // Loop through each row and check if the Tiers column matches the selected values
-        rows.forEach(row => {
-            var StoresValue = row.getAttribute('data-store');
+        // Get the text of the last clicked option
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (storesSelect.selectedOptions.length > 0 ? storesSelect.selectedOptions[0].text : '');
 
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            }
-            if (row.classList.contains('total_dataMMM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
+        // All selected values
+        var selectedValues = Array.from(storesSelect.selectedOptions).map(option => option.value);
 
-            }
-            // Check if this row is the "Grand Total" row
+        // Filter table rows manually
+        document.querySelectorAll('#tbl tbody tr').forEach(row => {
+            var storeValue = row.getAttribute('data-store');
             if (row.classList.contains('total_data')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            } else if (selectedValues.length === 0 || selectedValues.includes(StoresValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
+                row.style.display = '';
+            } else if (selectedValues.length === 0 || selectedValues.includes(storeValue)) {
+                row.style.display = '';
             } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
+                row.style.display = 'none';
             }
         });
 
-        // Handle the search input filter for DataTables
+        // Search filter input
         var input = document.getElementById('textSearchStores').value.toUpperCase();
 
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
+        // Apply DataTables filter if initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_data')) {
+                    return true;
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
+        }
 
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
+        // Get all related selects
+        var tmSelect = document.getElementById('TM');
+        var marketSelect = document.getElementById('Market');
+        var tiersSelect = document.getElementById('Tiers');
+        var sdSelect = document.getElementById('SD');
 
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        //$('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-
-        //Stores
-
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmmAlreadySelected = document.getElementById('MULMngr');
-        var storAlreadySelected = document.getElementById('Stores');
-        var tirAlreadySelected = document.getElementById('Tiers');
-
-        if (mmmAlreadySelected.disabled) {
-            //console.log('mmm');
-            STRfilterTMOptions(selectedValues);
-            STRfilterMarketOptions(selectedValues);
-            STRfiltermmmOptions(selectedValues);
+        // Apply dependent filters based on disabled states
+        if (tmSelect.disabled && marketSelect.disabled) {
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-
+            //STRfilterSDOptions(selectedValues);
+            storesSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
 
-        } else if (mktAlreadySelected.disabled) {
-            //console.log('mkt');
+        } else if (tmSelect.disabled) {
+            STRfilterMarketOptions(selectedValues);
+            STRfilterStoresOptions(selectedValues);
+            STRfilterTiersOptions(selectedValues);
+            //STRfilterSDOptions(selectedValues);
+            marketSelect.disabled = true;
+            storesSelect.disabled = true;
+            $('tr.filter_data').remove();
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
+
+        } else if (marketSelect.disabled) {
             STRfilterTMOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-
-            tmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-
+            //STRfilterSDOptions(selectedValues);
+            tmSelect.disabled = true;
+            storesSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
 
-        }
-        else if (tmAlreadySelected.disabled) {
-            //console.log('TM');
-            STRfilterMarketOptions(selectedValues);
-            STRfiltermmmOptions(selectedValues);
-            STRfilterStoresOptions(selectedValues);
-            STRfilterTiersOptions(selectedValues);
-
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-
-            $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
-
-        }
-
-        else {
-            //console.log('Stores');
+        } else {
             STRfilterTMOptions(selectedValues);
             STRfilterMarketOptions(selectedValues);
-            STRfiltermmmOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-
+            //STRfilterSDOptions(selectedValues);
+            tmSelect.disabled = true;
+            marketSelect.disabled = true;
+            storesSelect.disabled = true;
+            tiersSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmAlreadySelected.innerText, mktAlreadySelected.innerText, mmmAlreadySelected.innerText, storAlreadySelected.innerText);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
         }
-
     }
+
 
     function STRfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -5181,135 +5068,103 @@
         });
     }
     ////////////////Tiers Hierarchy/////////////////////////
-    function filterTiersData() {
-        // Get selected Tiers values from the dropdown
-        var selectedValues = Array.from(document.getElementById('Tiers').selectedOptions).map(option => option.value);
+    function filterTiersData(event) {
+        // Get Tiers select element
+        var tiersSelect = document.getElementById('Tiers');
 
-        // Get all rows in the table
+        // Text of the option that was last clicked
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (tiersSelect.selectedOptions.length > 0 ? tiersSelect.selectedOptions[0].text : '');
+
+        // Get all selected values
+        var selectedValues = Array.from(tiersSelect.selectedOptions).map(option => option.value);
+
+        // Filter rows manually
         var rows = document.querySelectorAll('#tbl tbody tr');
-
-        // Loop through each row and check if the Tiers column matches the selected values
         rows.forEach(row => {
-            var TiersValue = row.getAttribute('data-tir');
-
-            if (row.classList.contains('total_dataTM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            }
-            if (row.classList.contains('total_dataMMM')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-
-            }
-            // Check if this row is the "Grand Total" row
+            var tiersValue = row.getAttribute('data-tir');
             if (row.classList.contains('total_data')) {
-                row.style.display = 'none';  // Always show the "Grand Total" row
-            } else if (selectedValues.length === 0 || selectedValues.includes(TiersValue)) {
-                row.style.display = '';  // Show row if Tiers matches or if no REGION is selected
-
+                row.style.display = ''; // Always show "Grand Total"
+            } else if (selectedValues.length === 0 || selectedValues.includes(tiersValue)) {
+                row.style.display = '';
             } else {
-                row.style.display = 'none';  // Hide row if Tiers does not match
+                row.style.display = 'none';
             }
         });
 
-        // Handle the search input filter for DataTables
+        // Search filter input
         var input = document.getElementById('textSearchTiers').value.toUpperCase();
 
-        // Use the DataTables custom filter API
-        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-            var rowContent = data.join(' ').toUpperCase();
-
-            // Check if the row contains the input
-            var row = $('#tbl tbody tr').eq(dataIndex);
-
-            if (row.hasClass('total_dataTM')) {
-                return false;  // Always show the "Grand Total" row
-            }
-
-            // Always return true for the "Grand Total" row
-            if (row.hasClass('total_data')) {
-                return true;  // Always show the "Grand Total" row
-            }
-
-            // If the row contains the input, return true to keep it visible
-            return rowContent.indexOf(input) > -1 || input === '';
-        });
-
-        // Redraw the table with the new search criteria
-        //$('#tbl').draw();
-
-        // Remove the custom search after use to avoid stacking filters
-        $.fn.dataTable.ext.search.pop();
-
-        //Hierarchy Now handle disabling and filtering the others dropdowns
-        var tmAlreadySelected = document.getElementById('TM');
-        var mktAlreadySelected = document.getElementById('Market');
-        var mmmAlreadySelected = document.getElementById('MULMngr');
-        var storAlreadySelected = document.getElementById('Stores');
-        var tirAlreadySelected = document.getElementById('Tiers');
-
-
-        if (tmAlreadySelected.disabled && mktAlreadySelected.disabled && storAlreadySelected.disabled) {
-
-            TIRfilterTiersOptions(selectedValues);
-            TIRfiltermmmOptions(selectedValues);
-
-            tirAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
+        // Apply DataTables filter only if DataTables is loaded and initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_data')) {
+                    return true;
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
         }
 
-        else if (tmAlreadySelected.disabled && mktAlreadySelected.disabled) {
+        // Handle hierarchy-based filtering
+        var tmSelect = document.getElementById('TM');
+        var mktSelect = document.getElementById('Market');
+        var storSelect = document.getElementById('Stores');
 
-
-            TIRfiltermmmOptions(selectedValues);
+        if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
+            TIRfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+            tiersSelect.disabled = true;
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
+        }
+        else if (tmSelect.disabled && mktSelect.disabled) {
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-
-
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
+            TIRfilterSDOptions(selectedValues);
+            storSelect.disabled = true;
+            tiersSelect.disabled = true;
         }
-
-        else if (tmAlreadySelected.disabled) {
-
+        else if (tmSelect.disabled) {
             TIRfilterMarketOptions(selectedValues);
-            TIRfiltermmmOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-
-
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
+            TIRfilterSDOptions(selectedValues);
+            mktSelect.disabled = true;
+            storSelect.disabled = true;
+            tiersSelect.disabled = true;
         }
-
-        else if (storAlreadySelected.disabled) {
-
+        else if (storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-
-
-            tirAlreadySelected.disabled = true;
+            TIRfilterSDOptions(selectedValues);
+            tiersSelect.disabled = true;
         }
         else {
-
             TIRfilterTMOptions(selectedValues);
             TIRfilterMarketOptions(selectedValues);
-            TIRfiltermmmOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-
-
-            tmAlreadySelected.disabled = true;
-            mktAlreadySelected.disabled = true;
-            mmmAlreadySelected.disabled = true;
-            storAlreadySelected.disabled = true;
-            tirAlreadySelected.disabled = true;
-
+            TIRfilterSDOptions(selectedValues);
+            tmSelect.disabled = true;
+            mktSelect.disabled = true;
+            storSelect.disabled = true;
+            tiersSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter('', '', '', '', tirAlreadySelected.innerText);
+            loadGTotalByFilter('', '', '', '', tiersSelect.innerText);
         }
 
+        // Remove filter rows if fully disabled
+        $('tr.filter_data').remove();
+
+        // Pass clicked option text to totals function
+        if (clickedOptionText) {
+            loadGTotalByFilter(clickedOptionText);
+        }
     }
+
 
     function TIRfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
@@ -5644,7 +5499,7 @@
         });
 
         // Fallback: if load never fires (e.g., network hang), ensure it still hides after 5s
-        setTimeout(hideLoading, 5000);
+        setTimeout(hideLoading, 2000);
     })();
 </script>
 
