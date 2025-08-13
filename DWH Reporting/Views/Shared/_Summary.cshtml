@@ -1696,7 +1696,7 @@
             iffinal: isfinal  // Passing Tiers
         },
         success: function (response) {
-            debugger
+            
             $('#tbl tbody').find('#loadedToalRow').remove();
             $('#tbl tbody').find('.filtered_data').remove();
             //console.log("RESPONSE: " + response);
@@ -3952,7 +3952,7 @@
     }
 
     function toggleMtdEom() {
-
+        
         $('#tblDetBdy').empty("");
         const isFinal = "0"//$('#isFinal').val();
         const newIsFinal = isFinal //=== "0" ? "1" : "0";
@@ -3972,7 +3972,6 @@
             datefilter = $('#selectedDate').val();
         }
         sendDateData(datefilter, newIsFinal);
-        //loadGTotalByFilter(null, null, null, null, null, datefilter, null, newIsFinal);
     }
 
 
@@ -3995,6 +3994,7 @@
     });
 
     function sendDateData(dateVal, isFinalVal) {
+
     $.ajax({
         type: "POST",
         url: '@Url.Action("Summary", "Home")',
@@ -4003,30 +4003,30 @@
             isfinal: isFinalVal
         },
         success: function (html) {
+            //// Parse returned HTML string
+            //const parser = new DOMParser();
+            //const doc = parser.parseFromString(html, 'text/html');
 
-            // Parse returned HTML string
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
+            //// Replace current body content
+            //document.body.innerHTML = doc.body.innerHTML;
 
-            // Replace current body content
-            document.body.innerHTML = doc.body.innerHTML;
+            //// Update title if provided
+            //if (doc.title) {
+            //    document.title = doc.title;
+            //}
 
-            // Update title if provided
-            if (doc.title) {
-                document.title = doc.title;
-            }
-
-            // Re-execute scripts from the response
-            doc.querySelectorAll('script').forEach(s => {
-                const newScript = document.createElement('script');
-                if (s.src) {
-                    newScript.src = s.src;
-                    newScript.async = false; // preserve execution order if needed
-                } else {
-                    newScript.textContent = s.textContent;
-                }
-                document.body.appendChild(newScript);
-            });
+            //// Re-execute scripts from the response
+            //doc.querySelectorAll('script').forEach(s => {
+            //    const newScript = document.createElement('script');
+            //    if (s.src) {
+            //        newScript.src = s.src;
+            //        newScript.async = false; // preserve execution order if needed
+            //    } else {
+            //        newScript.textContent = s.textContent;
+            //    }
+            //    document.body.appendChild(newScript);
+            //});
+            window.location.reload();
         },
         error: function (err) {
             console.error("AJAX error:", err);

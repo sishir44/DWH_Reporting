@@ -118,7 +118,31 @@ namespace DWH_Reporting.Controllers
                     selectedDate = null;
                 }
                 ViewBag.isfinal = isfinal;
+
+                if (isfinal == "1")
+                {
+                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    if (selectedDate == "" || selectedDate == null)
+                    {
+                        selectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
+                    if (DateTime.TryParse(selectedDate, out DateTime dateRangeParsed))
+                    {
+                        if (firstDayOfMonth <= dateRangeParsed)
+                        {
+                            DateTime lastDayPrevMonth = firstDayOfMonth.AddDays(-1);
+                            selectedDate = lastDayPrevMonth.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime lastDayOfMonth = new DateTime(dateRangeParsed.Year, dateRangeParsed.Month, 1).AddMonths(1).AddDays(-1);
+                            selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+                ViewBag.selectedDate = selectedDate;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
+
                 if(isfinal == "1") { 
                     // If AJAX, return the fragment
                     if (Request.IsAjaxRequest())
@@ -257,6 +281,30 @@ namespace DWH_Reporting.Controllers
                 }
                 ViewBag.isfinal = isfinal;
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+
+                if (isfinal == "1")
+                {
+                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    if (selectedDate == "" || selectedDate == null)
+                    {
+                        selectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
+                    if (DateTime.TryParse(selectedDate, out DateTime dateRangeParsed))
+                    {
+                        if (firstDayOfMonth <= dateRangeParsed)
+                        {
+                            DateTime lastDayPrevMonth = firstDayOfMonth.AddDays(-1);
+                            selectedDate = lastDayPrevMonth.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime lastDayOfMonth = new DateTime(dateRangeParsed.Year, dateRangeParsed.Month, 1).AddMonths(1).AddDays(-1);
+                            selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+                ViewBag.selectedDate = selectedDate;
+
                 ShowStoreSummary(selectedDate, global.decrpedUserId, isfinal);
 
                 if (isfinal == "1")
@@ -687,7 +735,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get TM Total
 
-            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam,UserID);
+            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam,UserID,isfinal);
             List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalTM.Rows)
@@ -885,7 +933,7 @@ namespace DWH_Reporting.Controllers
             
             ////////////////Get MMM Total
 
-            DataTable Fct_StoreNumberTotalMMM = GP_DAL_Functions.GetFct_StoreNumberTotalMMM(dateParam,UserID);
+            DataTable Fct_StoreNumberTotalMMM = GP_DAL_Functions.GetFct_StoreNumberTotalMMM(dateParam,UserID, isfinal);
             List<Fct_StoreNumberAttributesModel> lisn_totMMM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalMMM.Rows)
@@ -1709,7 +1757,7 @@ namespace DWH_Reporting.Controllers
 
             ////////////////Get TM Total
 
-            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam, "1");
+            DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTM(dateParam, "1", "0");
             List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumberTotalTM.Rows)

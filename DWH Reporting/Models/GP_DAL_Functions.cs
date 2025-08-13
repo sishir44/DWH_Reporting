@@ -451,7 +451,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreNumberTotalTM(string dateParam,string UserID)
+        public static DataTable GetFct_StoreNumberTotalTM(string dateParam,string UserID, string isfinal)
         {
             try
             {
@@ -461,6 +461,7 @@ namespace DWH_Reporting.Models
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -472,7 +473,7 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        public static DataTable GetFct_StoreNumberTotalMMM(string dateParam,string UserID)
+        public static DataTable GetFct_StoreNumberTotalMMM(string dateParam,string UserID, string isfinal)
         {
             try
             {
@@ -482,6 +483,7 @@ namespace DWH_Reporting.Models
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);

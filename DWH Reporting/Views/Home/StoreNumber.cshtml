@@ -803,9 +803,7 @@
             }
         }
     </style>
-
-
-
+    
 
 </head>
 
@@ -851,7 +849,7 @@
                                    class="form-control"
                                    title="Select Date"
                                    style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
-
+                            
                             <!-- Monthly Picker (Hidden initially) -->
                             <input type="month"
                                    id="monthPicker"
@@ -945,7 +943,7 @@
 
                             <label>100% & Above</label>
                             <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
-                                   title="100% & Above" value=""
+                                   title="100% & Above" value="0"
                                    style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -956,13 +954,13 @@
                             <label>70% & Above</label>
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="70% & Above"
-                                   value=""
+                                   value="0"
                                    style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
                             <label>Less Than 70%</label>
                             <input type="button" name="<70" id="tbeCountDisplay90" class="form-control"
                                    title="Less Than 70%"
-                                   value=""
+                                   value="0"
                                    style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -5581,61 +5579,53 @@
 <!--Highlight Trending Break Even-->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        //;
-        // Tr Break Even Calc
-        var tbeCells = document.querySelectorAll(".tbreakevenCLS");
-        var tbeCount = 0;
-        var tbeCount70 = 0;
-        var tbeCount90 = 0;
+            // Tr Break Even Calc
+            var tbeCells = document.querySelectorAll(".tbreakevenCLS");
+            var tbeCount = 0;
+            var tbeCount70 = 0;
+            var tbeCount90 = 0;
 
-        tbeCells.forEach(function (cell) {
-            var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
-            if (!isNaN(tbeValue) && tbeValue > 99) {
-                tbeCount++;
-            }
-            else if (!isNaN(tbeValue) && tbeValue > 69 && tbeValue < 100) {
-                tbeCount70++;
-            }
-            else if (!isNaN(tbeValue) && tbeValue < 70) {
-                tbeCount90++;
-            }
-        });
-        tbeCells.forEach(function (cell) {
-            // Parse the cell's text content as a float
-            var value = parseFloat(cell.textContent);
+            tbeCells.forEach(function (cell) {
+                var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
+                if (!isNaN(tbeValue) && tbeValue > 99) {
+                    tbeCount++;
+                } else if (!isNaN(tbeValue) && tbeValue > 69 && tbeValue < 100) {
+                    tbeCount70++;
+                } else if (!isNaN(tbeValue) && tbeValue < 70) {
+                    tbeCount90++;
+                }
+            });
 
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value > 99.0) {
-                cell.style.backgroundColor = "#008000";  // Set background color
-                cell.style.color = "white";  // Set text color
+            tbeCells.forEach(function (cell) {
+                var value = parseFloat(cell.textContent);
+
+                if (!isNaN(value) && value > 99.0) {
+                    cell.style.backgroundColor = "#008000";
+                    cell.style.color = "white";
+                } else if (!isNaN(value) && value < 70.0) {
+                    cell.style.backgroundColor = "#ffa500";
+                    cell.style.color = "black";
+                } else if (!isNaN(value) && value > 69.0 && value < 100.0) {
+                    cell.style.backgroundColor = "#0046BF";
+                    cell.style.color = "white";
+                }
+            });
+
+            var tbeCountDisplay = document.getElementById("tbeCountDisplay");
+            if (tbeCountDisplay) {
+                tbeCountDisplay.value = tbeCount;
             }
 
-            // Check if the value is greater than 50
-            if (!isNaN(value) && value < 70.0) {
-                cell.style.backgroundColor = "#ffa500";  // Set background color
-                cell.style.color = "black";  // Set text color
+            var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
+            if (tbeCountDisplay70) {
+                tbeCountDisplay70.value = tbeCount70;
             }
-            // Check if the value is greater than >70 <100
-            if (!isNaN(value) && value > 69.0 && value < 100.0) {
-                cell.style.backgroundColor = "#0046BF";  // Set background color
-                cell.style.color = "white";  // Set text color
+
+            var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
+            if (tbeCountDisplay90) {
+                tbeCountDisplay90.value = tbeCount90;
             }
-        });
-        var tbeCountDisplay = document.getElementById("tbeCountDisplay");
-        if (tbeCountDisplay) {
-            tbeCountDisplay.value = tbeCount;
-        }
-
-        var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
-        if (tbeCountDisplay70) {
-            tbeCountDisplay70.value = tbeCount70;
-        }
-
-        var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
-        if (tbeCountDisplay90) {
-            tbeCountDisplay90.value = tbeCount90;
-        }
-    });
+   });
 
 </script>
 
@@ -5690,45 +5680,45 @@
     });
 
     function sendDateData(dateVal, isFinalVal) {
-    $.ajax({
-        type: "POST",
-        url: '@Url.Action("StoreNumber", "Home")',
-        data: {
-            selectedDate: dateVal,
-            isfinal: isFinalVal
-        },
-        success: function (html) {
-            
-            // Parse returned HTML string
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(html, 'text/html');
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("StoreNumber", "Home")',
+            data: {
+                selectedDate: dateVal,
+                isfinal: isFinalVal
+            },
+            success: function (html) {
 
-            // Replace current body content
-            document.body.innerHTML = doc.body.innerHTML;
+                // Parse returned HTML string
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
 
-            // Update title if provided
-            if (doc.title) {
-                document.title = doc.title;
-            }
+                // Replace current body content
+                document.body.innerHTML = doc.body.innerHTML;
 
-            // Re-execute scripts from the response
-            doc.querySelectorAll('script').forEach(s => {
-                const newScript = document.createElement('script');
-                if (s.src) {
-                    newScript.src = s.src;
-                    newScript.async = false; // preserve execution order if needed
-                } else {
-                    newScript.textContent = s.textContent;
+                // Update title if provided
+                if (doc.title) {
+                    document.title = doc.title;
                 }
-                document.body.appendChild(newScript);
-            });
-        },
-        error: function (err) {
-            console.error("AJAX error:", err);
-            alert("Failed to load data.");
-        }
-    });
-}
+
+                // Re-execute scripts from the response
+                doc.querySelectorAll('script').forEach(s => {
+                    const newScript = document.createElement('script');
+                    if (s.src) {
+                        newScript.src = s.src;
+                        newScript.async = false; // preserve execution order if needed
+                    } else {
+                        newScript.textContent = s.textContent;
+                    }
+                    document.body.appendChild(newScript);
+                });
+            },
+            error: function (err) {
+                console.error("AJAX error:", err);
+                alert("Failed to load data.");
+            }
+        });
+    }
 
 
 </script>
