@@ -803,7 +803,58 @@
             }
         }
     </style>
-    
+
+    <script>
+        $(document).ready(function () {
+
+            // Tr Break Even Calc
+            var tbeCells = document.querySelectorAll(".tbreakevenCLS");
+            var tbeCount = 0;
+            var tbeCount70 = 0;
+            var tbeCount90 = 0;
+
+            tbeCells.forEach(function (cell) {
+                var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
+                if (!isNaN(tbeValue) && tbeValue > 99) {
+                    tbeCount++;
+                } else if (!isNaN(tbeValue) && tbeValue > 69 && tbeValue < 100) {
+                    tbeCount70++;
+                } else if (!isNaN(tbeValue) && tbeValue < 70) {
+                    tbeCount90++;
+                }
+            });
+
+            tbeCells.forEach(function (cell) {
+                var value = parseFloat(cell.textContent);
+
+                if (!isNaN(value) && value > 99.0) {
+                    cell.style.backgroundColor = "#008000";
+                    cell.style.color = "white";
+                } else if (!isNaN(value) && value < 70.0) {
+                    cell.style.backgroundColor = "#ffa500";
+                    cell.style.color = "black";
+                } else if (!isNaN(value) && value > 69.0 && value < 100.0) {
+                    cell.style.backgroundColor = "#0046BF";
+                    cell.style.color = "white";
+                }
+            });
+            var tbeCountDisplay = document.getElementById("tbeCountDisplay");
+            if (tbeCountDisplay) {
+                tbeCountDisplay.value = tbeCount;
+            }
+
+            var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
+            if (tbeCountDisplay70) {
+                tbeCountDisplay70.value = tbeCount70;
+            }
+
+            var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
+            if (tbeCountDisplay90) {
+                tbeCountDisplay90.value = tbeCount90;
+            }
+        });
+
+    </script>
 
 </head>
 

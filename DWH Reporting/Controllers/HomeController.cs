@@ -144,10 +144,9 @@ namespace DWH_Reporting.Controllers
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
 
                 if(isfinal == "1") { 
-                    // If AJAX, return the fragment
-                    if (Request.IsAjaxRequest())
+                    if (Request.IsAjaxRequest()) // If AJAX, return the fragment
                     {
-                        return PartialView("_StoreNumber"); // that partial uses the same ViewData
+                        return PartialView("_StoreNumber"); 
                     }
                 }
 
@@ -329,6 +328,24 @@ namespace DWH_Reporting.Controllers
             string dateParam = selectedDate;
 
             DataTable Fct_StoreNumber = GP_DAL_Functions.GetFct_StoreNumberCol2(dateParam,UserID,isfinal);
+
+            if (dateParam != null)
+            {
+                if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
+                {
+                    var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp").Date;
+                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                }
+            }
+            else
+            {
+                var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
+                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+            }
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
             
@@ -1131,22 +1148,22 @@ namespace DWH_Reporting.Controllers
 
             //For Last TimeStamp
 
-            if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
-            {
-                // Use LINQ to find the latest TimeStamp
-                var latestTimeStamp = Fct_StoreNumber.AsEnumerable()
-                                                     .Max(row => row.Field<DateTime>("TimeStamp"));
-                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                // Output the result
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                                                                                           // Subtract one day from the TimeStamp
+            //if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
+            //{
+            //    // Use LINQ to find the latest TimeStamp
+            //    var latestTimeStamp = Fct_StoreNumber.AsEnumerable()
+            //                                         .Max(row => row.Field<DateTime>("TimeStamp"));
+            //    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+            //    // Output the result
+            //    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+            //                                                                               // Subtract one day from the TimeStamp
 
-                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
-            }
-            else
-            {
-                ViewBag.LatestTimeStamp = "No data available";
-            }
+            //    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+            //}
+            //else
+            //{
+            //    ViewBag.LatestTimeStamp = "No data available";
+            //}
 
             //For Filters
 
@@ -2232,6 +2249,23 @@ namespace DWH_Reporting.Controllers
             // Call your function with the date parameter
             DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID, isfinal);
 
+            if(dateParam != null)
+            {
+                if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
+                {
+                    var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp").Date;
+                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                }
+            } else
+            {
+                var latestTimeStamp = GetFct_Summary.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
+                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+            }
+
             List<Fct_StoreSummaryAttributesModel> lisn2_lst = new List<Fct_StoreSummaryAttributesModel>();
 
             foreach (DataRow row in GetFct_Summary.Rows)
@@ -2435,25 +2469,6 @@ namespace DWH_Reporting.Controllers
             ViewData["GetRecords_summaryTotal"] = lisn_tot;
             ///ViewBag.Date = GpReport.DateTimes;
 
-            //For Last TimeStamp
-
-            if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
-            {
-                // Use LINQ to find the latest TimeStamp
-                var latestTimeStamp = GetFct_Summary.AsEnumerable()
-                                                     .Max(row => row.Field<DateTime>("TimeStamp"));
-                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                // Output the result
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                                                                                           // Subtract one day from the TimeStamp
-
-                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
-            }
-            else
-            {
-                ViewBag.LatestTimeStamp = "No data available";
-            }
-
             List<SelectListItem> sdList = new List<SelectListItem>();
             List<SelectListItem> marketList = new List<SelectListItem>();
             List<SelectListItem> mmarketList = new List<SelectListItem>();
@@ -2536,7 +2551,6 @@ namespace DWH_Reporting.Controllers
                 //    Value = roleName,
                 //    Text = roleName
                 //});
-
             }
 
             if (storesList != null && storesList.Count > 0)
@@ -2637,7 +2651,7 @@ namespace DWH_Reporting.Controllers
             //else
             //{
             //    ViewBag.RoleList = new List<SelectListItem>();
-            //}
+            //}         
         }
 
         [HttpPost]
