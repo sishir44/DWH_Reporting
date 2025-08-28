@@ -644,8 +644,8 @@
                                            class="form-control"
                                            title="Select Date"
                                            style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:40px; border:black;"
-                                           onchange="appendUserIDToURL(this.form);"
                                            max="@yesterday" />
+                                    @*onchange = "appendUserIDToURL(this.form);"*@
 
                                     <!-- Monthly Picker (Hidden initially) -->
                                     <input type="month"
@@ -3979,8 +3979,10 @@
     }
 
     $(document).ready(function () {
+        
         // Daily date picker
         $('#selectedDate').on('change', function () {
+            
             const val = $(this).val();
             $('#hiddenDate').val(val);
             sendDateData(val, "0");
@@ -3997,6 +3999,7 @@
     });
 
     function sendDateData(dateVal, isFinalVal) {
+        
         $.ajax({
             type: "POST",
             url: '@Url.Action("Summary", "Home")',

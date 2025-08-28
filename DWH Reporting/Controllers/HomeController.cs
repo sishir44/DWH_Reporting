@@ -279,7 +279,7 @@ namespace DWH_Reporting.Controllers
                     selectedDate = null;
                 }
                 ViewBag.isfinal = isfinal;
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+               // global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
 
                 if (isfinal == "1")
                 {
@@ -333,18 +333,32 @@ namespace DWH_Reporting.Controllers
             {
                 if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
                 {
+                    if(isfinal == "0") { 
                     var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp").Date;
                     var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
                     ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                     ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                    } else {
+                        DateTime parsedDate = DateTime.Parse(selectedDate);
+                        ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                        ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                    }
                 }
             }
             else
             {
+                if(isfinal == "0") { 
                 var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
                 var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
                 ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                 ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    DateTime parsedDate = DateTime.Parse(selectedDate);
+                    ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                    ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                }
             }
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
@@ -2249,21 +2263,40 @@ namespace DWH_Reporting.Controllers
             // Call your function with the date parameter
             DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID, isfinal);
 
-            if(dateParam != null)
+            if (dateParam != null)
             {
                 if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
                 {
-                    var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp").Date;
+                    if (isfinal == "0")
+                    {
+                        var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp").Date;
+                        var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                        ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                        ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        DateTime parsedDate = DateTime.Parse(selectedDate);
+                        ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                        ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                    }
+                }
+            }
+            else
+            {
+                if (isfinal == "0")
+                {
+                    var latestTimeStamp = GetFct_Summary.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
                     var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
                     ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                     ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
                 }
-            } else
-            {
-                var latestTimeStamp = GetFct_Summary.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                else
+                {
+                    DateTime parsedDate = DateTime.Parse(selectedDate);
+                    ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                    ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                }
             }
 
             List<Fct_StoreSummaryAttributesModel> lisn2_lst = new List<Fct_StoreSummaryAttributesModel>();
