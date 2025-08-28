@@ -278,7 +278,6 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
                 spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
-
                 // Execute stored procedure with the parameters
                 DataTable DT = objDal.Getdata(spParam);
                 return DT;

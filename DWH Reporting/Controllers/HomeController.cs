@@ -2371,7 +2371,6 @@ namespace DWH_Reporting.Controllers
             //ViewBag.Date = GpReport.DateTimes;
             ViewData["GetFct_Summary"] = lisn2_lst;
 
-
             ////////////////Get_Summary Total
             DataTable Fct_StoreNumberTotal = GP_DAL_Functions.GetRecords_summaryTotal(dateParam, UserID, isfinal);
             List<Fct_StoreSummaryAttributesModel> lisn_tot = new List<Fct_StoreSummaryAttributesModel>();
