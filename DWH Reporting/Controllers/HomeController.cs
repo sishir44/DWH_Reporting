@@ -2897,7 +2897,7 @@ namespace DWH_Reporting.Controllers
             string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
             dateParam = NullIfEmpty(dateParam);
-            Sd = NullIfEmpty(Sd);
+            Sd = null;//NullIfEmpty(Sd);
             TM = NullIfEmpty(TM);
             MKT = NullIfEmpty(MKT);
             MMM = NullIfEmpty(MMM);
@@ -3296,7 +3296,7 @@ namespace DWH_Reporting.Controllers
             string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
             dateParam = NullIfEmpty(dateParam);
-            Sd = NullIfEmpty(Sd);
+            Sd = null;//NullIfEmpty(Sd);
             TM = NullIfEmpty(TM);
             MKT = NullIfEmpty(MKT);
             MMM = NullIfEmpty(MMM);

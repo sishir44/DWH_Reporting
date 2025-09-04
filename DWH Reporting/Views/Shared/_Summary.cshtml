@@ -2129,13 +2129,14 @@
         TMfilterMarketOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
-        TMfilterSDOptions(selectedValues);
+        //TMfilterSDOptions(selectedValues);
         // Disable TM select and remove filter rows
         tmSelect.disabled = true;
         $('tr.filter_data').remove();
         // Pass clicked option text to function
         if (clickedOptionText) {
-            loadGTotalByFilter(clickedOptionText);
+            //loadGTotalByFilter(clickedOptionText);
+            loadGTotalByFilter(clickedOptionText, null, null, null, null);
         }
     }
 
@@ -2439,7 +2440,7 @@
             MKTfilterMarketOptions(selectedValues);
             MKTfilterTiersOptions(selectedValues);
             MKTfilterStoresOptions(selectedValues);
-            MKTfilterSDOptions(selectedValues);
+            //MKTfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
         }
 
@@ -2449,7 +2450,8 @@
 
         // Pass clicked option text to totals function
         if (clickedOptionText) {
-            loadGTotalByFilter(tmSelect.innerText, clickedOptionText);
+            //loadGTotalByFilter(tmSelect.innerText, clickedOptionText);
+            loadGTotalByFilter(tmSelect.innerText, clickedOptionText, null, null, null);
         }
     }
 
@@ -3128,14 +3130,14 @@
 
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             tiersSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
         else if (tmSelect.disabled && mktSelect.disabled) {
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             storSelect.disabled = true;
             tiersSelect.disabled = true;
         }
@@ -3143,7 +3145,7 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             mktSelect.disabled = true;
             storSelect.disabled = true;
             tiersSelect.disabled = true;
@@ -3158,7 +3160,7 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
             mktSelect.disabled = true;
             storSelect.disabled = true;
@@ -3171,9 +3173,9 @@
         $('tr.filter_data').remove();
 
         // Pass clicked option text to totals function
-        if (clickedOptionText) {
-            loadGTotalByFilter(clickedOptionText);
-        }
+        //if (clickedOptionText) {
+        //    loadGTotalByFilter(clickedOptionText);
+        //}
     }
 
     function TIRfilterMarketOptions(selectedValues) {
