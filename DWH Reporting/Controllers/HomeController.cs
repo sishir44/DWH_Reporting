@@ -3292,12 +3292,12 @@ namespace DWH_Reporting.Controllers
         {
             //string userID = Request.QueryString["userid"];
             //userID = Session["userid"].ToString();
-
             string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
             dateParam = NullIfEmpty(dateParam);
             Sd = null;//NullIfEmpty(Sd);
             TM = NullIfEmpty(TM);
+            TM = (TM == "Susu Leong\nNo TM") ? "Susu Leong" : TM;
             MKT = NullIfEmpty(MKT);
             MMM = NullIfEmpty(MMM);
             Stores = NullIfEmpty(Stores);
