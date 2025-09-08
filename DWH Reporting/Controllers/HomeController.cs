@@ -2278,8 +2278,9 @@ namespace DWH_Reporting.Controllers
                     else
                     {
                         DateTime parsedDate = DateTime.Parse(selectedDate);
-                        ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                        var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp");
+                        ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss");
                     }
                 }
             }
