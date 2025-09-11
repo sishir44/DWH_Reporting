@@ -885,9 +885,9 @@
                         var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
                     }
 
-                    @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Post, new { id = "storeForm" }))
-                    {
-                        <div class="d-flex flex-wrap align-items-start justify-content-end" style="gap: 6px;">
+                    <div class="d-flex flex-wrap align-items-start justify-content-end" style="gap: 6px;">
+                        @using (Html.BeginForm("StoreNumber", "Home", FormMethod.Post, new { id = "storeForm" }))
+                        {
 
                             <!-- Hidden Inputs -->
                             <input type="hidden" id="isFinal" value="0" />
@@ -899,53 +899,54 @@
                                    class="form-control"
                                    title="Select Date"
                                    style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
-                            
+
                             <!-- Monthly Picker (Hidden initially) -->
                             <input type="month"
                                    id="monthPicker"
                                    class="form-control"
                                    title="Select Month"
                                    style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
+                        }
 
-                            <!-- Toggle Button -->
-                            <button type="button"
-                                    id="toggleBtn"
-                                    class="btn btn-primary"
-                                    title="Toggle EOM/MTD"
-                                    onclick="toggleMtdEom()"
-                                    style="width: 80px; height: 25px; padding: 1px 10px; height: 20px !important; font-size: 12px; margin-top: 12px;">
-                                EOM
-                            </button>
+                        <!-- Toggle Button -->
+                        <button type="button"
+                                id="toggleBtn"
+                                class="btn btn-primary"
+                                title="Toggle EOM/MTD"
+                                onclick="toggleMtdEom()"
+                                style="width: 80px; height: 25px; padding: 1px 10px; height: 20px !important; font-size: 12px; margin-top: 12px;">
+                            EOM
+                        </button>
 
-                            <!-- Refresh Button -->
-                            <button type="submit"
-                                    class="headerbtndiv btn btn-secondary small-btn"
-                                    title="Refresh"
-                                    onclick="refresh()"
-                                    style="width:40px; height:30px;">
-                                <i class="fas fa-retweet"></i>
-                            </button>
+                        <!-- Refresh Button -->
+                        <button type="submit"
+                                class="headerbtndiv btn btn-secondary small-btn"
+                                title="Refresh"
+                                onclick="refresh()"
+                                style="width:40px; height:30px;">
+                            <i class="fas fa-retweet"></i>
+                        </button>
 
-                            <!-- Clear Filter Button -->
-                            <button type="button"
-                                    class="headerbtndiv btn btn-warning small-btn"
-                                    title="Clear Filter"
-                                    id="clearfilterID"
-                                    style="width:40px; height:30px;">
-                                <i class="fas fa-filter"></i>
-                            </button>
+                        <!-- Clear Filter Button -->
+                        <button type="button"
+                                class="headerbtndiv btn btn-warning small-btn"
+                                title="Clear Filter"
+                                id="clearfilterID"
+                                style="width:40px; height:30px;">
+                            <i class="fas fa-filter"></i>
+                        </button>
 
-                            <!-- Export Button -->
-                            <button type="button"
-                                    class="headerbtndiv btn btn-success small-btn"
-                                    title="Export in Excel"
-                                    onclick="test()"
-                                    style="width:40px; height:30px;">
-                                <i class="fas fa-file-excel"></i>
-                            </button>
-                        </div>
-                    }
+                        <!-- Export Button -->
+                        <button type="button"
+                                class="headerbtndiv btn btn-success small-btn"
+                                title="Export in Excel"
+                                onclick="test()"
+                                style="width:40px; height:30px;">
+                            <i class="fas fa-file-excel"></i>
+                        </button>
+                    </div>
                 </div>
+
 
             </div>
 
