@@ -1016,6 +1016,24 @@
                         </div>
                     </div>
 
+                    <!-- Search SD -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" onkeyup="SDFilter()" />
+                        <select class="form-control selector" id="SD" multiple onchange="filterSDData(event)">
+                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.SDList)
+                                {
+                                    <option class="optionfilter" style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Value">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
+                            }
+                        </select>
+                    </div>
+
                     <!-- Search TM -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchTM" id="textSearchTM" class="selectorinput form-control" placeholder="Search TM" onkeyup="TMFilter()" />
@@ -1111,23 +1129,7 @@
                     </div>
 
 
-                    <!-- Search SD -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
-                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" onkeyup="SDFilter()"/>
-                        <select class="form-control selector" id="SD" multiple onchange="filterSDData(event)">
-                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
-                            {
-                                foreach (var item in ViewBag.SDList)
-                                {
-                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Text">@item.Text</option>
-                                }
-                            }
-                            else
-                            {
-                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
-                            }
-                        </select>
-                    </div>
+
 
                 </div>
 
@@ -1618,6 +1620,7 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
+                                                        <td></td>
                                                         @*<td></td>*@
                                                         @*<td></td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage)) * 100))%</td>
@@ -1827,6 +1830,7 @@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
+                                                        <td></td>
                                                         @*<td></td>*@
                                                         @*<td></td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage)) * 100))%</td>
@@ -1990,7 +1994,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ExtraUnlMix70Per != null ? record2.ExtraUnlMix70Per.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.ExtraUnlMix70Per)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TotalNewFiber != null ? record2.TotalNewFiber.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalNewFiber)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.FiberUpgTrend != null ? record2.FiberUpgTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.FiberUpgTrend)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProt != null ? record.TotalProt.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalProt)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.TotalProt != null ? record2.TotalProt.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalProt)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TotalProtNetOFF != null ? record2.TotalProtNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalProtNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv1NetOff != null ? record2.ProtAdv1NetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv1NetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdv4NetOff != null ? record2.ProtAdv4NetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.ProtAdv4NetOff)))</td>
@@ -3815,7 +3819,7 @@
         TMfilterMarketOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
-        //TMfilterSDOptions(selectedValues);
+        TMfilterSDOptions(selectedValues);
         // Disable TM select and remove filter rows
         tmSelect.disabled = true;
         $('tr.filter_data').remove();
@@ -3825,7 +3829,56 @@
             loadGTotalByFilter(clickedOptionText, null, null, null, null,null);
         }
     }
+    function TMfilterSDOptions(selectedValues) {
+        var SDSelect = document.getElementById('SD');
+        // Clear the TM dropdown
+        SDSelect.innerHTML = '';
 
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
+
+        // Collect all unique TM values from the filtered rows
+        var availableTM = new Set();
+        filteredRows.forEach(row => {
+
+            var SDValue = row.getAttribute('data-sd');
+            if (SDValue) {
+                availableSD.add(SDValue);
+            }
+        });
+
+        // If any SD is selected, disable the TM dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            SDSelect.disabled = true;
+
+            // Populate the TM dropdown with only the TM from filtered rows
+            availableSD.forEach(SDValue => {
+                var option = document.createElement('option');
+                option.value = SDValue;
+                option.text = SDValue;
+                option.style.color = 'grey';
+                option.style.fontSize = '10px';
+                SDSelect.add(option);
+            });
+        }
+        else {
+
+            //TMSelect.disabled = false;
+
+            // Optionally, repopulate with all TM (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var SDValue = row.getAttribute('data-sd');
+                if (SDValue) {
+                    var option = document.createElement('option');
+                    option.value = SDValue;
+                    option.text = SDValue;
+                    SDValue.add(option);
+                }
+            });
+        }
+    }
 
     function TMfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -5241,6 +5294,7 @@
     }
 
     function SDFilter() {
+        
         const searchInput = document.getElementById('textSearchSD').value.toLowerCase();
         const options = document.querySelectorAll('#SD option');
 
@@ -5329,14 +5383,14 @@
             sdSelect.disabled = true;
         }
         else {
-            TIRfilterTMOptions(selectedValues);
-            TIRfilterMarketOptions(selectedValues);
-            TIRfilterStoresOptions(selectedValues);
+            //TIRfilterTMOptions(selectedValues);
+            //TIRfilterMarketOptions(selectedValues);
+            //TIRfilterStoresOptions(selectedValues);
             //TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
-            tmSelect.disabled = true;
-            mktSelect.disabled = true;
-            storSelect.disabled = true;
+            TIRfilterSDOptions(selectedValues);
+            //tmSelect.disabled = true;
+            //mktSelect.disabled = true;
+            //storSelect.disabled = true;
             sdSelect.disabled = true;
             $('tr.filter_data').remove();
             loadGTotalByFilter('', '', '', '','', sdSelect.innerText);
@@ -5550,19 +5604,19 @@
         }
     }
     function TIRfilterSDOptions(selectedValues) {
-        var sdSelect = document.getElementById('Tiers');
+        var sdSelect = document.getElementById('SD');
         // Clear the tiers dropdown
         sdSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
         var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
-            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
 
         // Collect all unique tiers values from the filtered rows
         var availableTiers = new Set();
         filteredRows.forEach(row => {
 
-            var tiersValue = row.getAttribute('data-tir');
+            var tiersValue = row.getAttribute('data-sd');
             if (tiersValue) {
                 availableTiers.add(tiersValue);
             }
@@ -5588,7 +5642,7 @@
             // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
             var allRows = document.querySelectorAll('#tbl tbody tr');
             allRows.forEach(row => {
-                var tiersValue = row.getAttribute('data-tir');
+                var tiersValue = row.getAttribute('data-sd');
                 if (tiersValue) {
                     var option = document.createElement('option');
                     option.value = tiersValue;
