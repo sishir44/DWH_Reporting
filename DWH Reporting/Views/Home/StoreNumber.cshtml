@@ -1110,6 +1110,25 @@
                         </select>
                     </div>
 
+
+                    <!-- Search SD -->
+                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                        <input type="text" name="textSearchSD" id="textSearchSD" class="selectorinput form-control" placeholder="Search SD" onkeyup="SDFilter()"/>
+                        <select class="form-control selector" id="SD" multiple onchange="filterSDData(event)">
+                            @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+                            {
+                                foreach (var item in ViewBag.SDList)
+                                {
+                                    <option style="border-radius: 6px; background-color:#3A75D0; text-align: center; color: white; margin-bottom: 5px; font-size: 10px;" value="@item.Text">@item.Text</option>
+                                }
+                            }
+                            else
+                            {
+                                <option style="font-size:12px; background-color:lightblue; color:black; border-radius: 7px;" disabled>No SD available</option>
+                            }
+                        </select>
+                    </div>
+
                 </div>
 
             </div>
@@ -1153,6 +1172,7 @@
                                     <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
                                     <th rowspan="2" style="background-color: black; color:white;">View</th>
                                     <th rowspan="2" style="background-color: black; color:white;">Market</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">SD</th>
                                     <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                     @*<th rowspan="2" style="background-color: black; color:white;">Multi Market</th>*@
                                     <th rowspan="2" style="background-color: black; color:white;">MMM</th>
@@ -1360,6 +1380,7 @@
                                 {
                                     // GRAND TOTAL
                                     <tr id="loadedToalRow" class="total_data">
+                                        <td></td>
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -2173,6 +2194,7 @@
 
                                         <!-- Hierarchy -->
                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Market   </td>
+                                        <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.SD   </td>
                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.TM      </td>
                                         @*<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMkt   </td>*@
                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMngr   </td>
@@ -3183,9 +3205,11 @@
     var x = x1 + x2;
     return x;
 };
-    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, isfinal="0") {
+    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, Sd = null, isfinal="0") {
+        
+
         var dateP = "@ViewBag.ReportDate"; // Pass the Razor value as a string
-        var Sd = 'Elio Portocarrero';
+        //var Sd = 'Elio Portocarrero';
         //alert("Selected Date: " + dateP +
         //      "\nSelected TM: " + (tmText || "null") +
         //      "\nSelected Market: " + (mktText || "null") +
@@ -3208,6 +3232,7 @@
                 isfinal: isfinal // Send Tiers text or null
             },
             success: function (response) {
+                
                 //console.log(response.Converged + "Test");
                 $('#tbl tbody').find('#loadedToalRow').remove();
                 $('#tbl tbody').find('.filtered_data').remove();
@@ -3797,7 +3822,7 @@
         // Pass clicked option text to function
         if (clickedOptionText) {
             //loadGTotalByFilter(clickedOptionText);
-            loadGTotalByFilter(clickedOptionText, null, null, null, null);
+            loadGTotalByFilter(clickedOptionText, null, null, null, null,null);
         }
     }
 
@@ -4132,7 +4157,7 @@
 
         // Pass clicked option text to totals function
         if (clickedOptionText) {
-            loadGTotalByFilter(tmSelect.innerText, clickedOptionText,null,null,null);
+            loadGTotalByFilter(tmSelect.innerText, clickedOptionText,null,null,null.null);
         }
     }
 
@@ -4464,7 +4489,7 @@
             mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null);
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null,null);
         }
         else if (mktSelect.disabled) {
             mmmfiltermmmOptions(selectedValues);
@@ -4474,7 +4499,7 @@
             mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null);
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText, clickedOptionText, null, null,null);
         }
         else {
             mmmfilterTMOptions(selectedValues);
@@ -4488,7 +4513,7 @@
             mmmSelect.disabled = true;
 
             $('tr.filter_data').remove();
-            loadGTotalByFilter(null, null, clickedOptionText, null, null);
+            loadGTotalByFilter(null, null, clickedOptionText, null, null,null);
         }
     }
 
@@ -4817,7 +4842,7 @@
             //STRfilterSDOptions(selectedValues);
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null,null);
 
         } else if (tmSelect.disabled) {
             STRfilterMarketOptions(selectedValues);
@@ -4827,7 +4852,7 @@
             marketSelect.disabled = true;
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null,null);
 
         } else if (marketSelect.disabled) {
             STRfilterTMOptions(selectedValues);
@@ -4837,7 +4862,7 @@
             tmSelect.disabled = true;
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null,null);
 
         } else {
             STRfilterTMOptions(selectedValues);
@@ -4850,7 +4875,7 @@
             storesSelect.disabled = true;
             tiersSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null);
+            loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null,null);
         }
     }
 
@@ -5167,14 +5192,14 @@
 
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             tiersSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
         else if (tmSelect.disabled && mktSelect.disabled) {
             TIRfilterStoresOptions(selectedValues);
-            TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            RfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             storSelect.disabled = true;
             tiersSelect.disabled = true;
         }
@@ -5182,14 +5207,14 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             mktSelect.disabled = true;
             storSelect.disabled = true;
             tiersSelect.disabled = true;
         }
         else if (storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             tiersSelect.disabled = true;
         }
         else {
@@ -5197,13 +5222,13 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
             mktSelect.disabled = true;
             storSelect.disabled = true;
             tiersSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter('', '', '', '', tiersSelect.innerText);
+            loadGTotalByFilter('', '', '', '', tiersSelect.innerText,null);
         }
 
         // Remove filter rows if fully disabled
@@ -5214,6 +5239,118 @@
         //    loadGTotalByFilter(null,null,null,null,clickedOptionText);
         //}
     }
+
+    function SDFilter() {
+        const searchInput = document.getElementById('textSearchSD').value.toLowerCase();
+        const options = document.querySelectorAll('#SD option');
+
+        options.forEach(option => {
+            if (option.textContent.toLowerCase().includes(searchInput)) {
+                option.style.display = ''; // Show matching options
+            } else {
+                option.style.display = 'none'; // Hide non-matching options
+            }
+        });
+    }
+
+    function filterSDData(event) {
+        
+        // Get Tiers select element
+        var sdSelect = document.getElementById('SD');
+
+        // Text of the option that was last clicked
+        var clickedOptionText = event
+            ? event.target.options[event.target.selectedIndex].text
+            : (sdSelect.selectedOptions.length > 0 ? sdSelect.selectedOptions[0].text : '');
+
+        // Get all selected values
+        var selectedValues = Array.from(sdSelect.selectedOptions).map(option => option.value);
+
+        // Filter rows manually
+        var rows = document.querySelectorAll('#tbl tbody tr');
+        rows.forEach(row => {
+            var sdValue = row.getAttribute('data-sd');
+            if (row.classList.contains('total_data')) {
+                row.style.display = ''; // Always show "Grand Total"
+            } else if (selectedValues.length === 0 || selectedValues.includes(sdValue)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Search filter input
+        var input = document.getElementById('textSearchSD').value.toUpperCase();
+
+        // Apply DataTables filter only if DataTables is loaded and initialized
+        if ($.fn.dataTable && $.fn.dataTable.isDataTable('#tbl')) {
+            $.fn.dataTable.ext.search = []; // clear old filters
+            $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+                var rowContent = data.join(' ').toUpperCase();
+                var row = $('#tbl tbody tr').eq(dataIndex);
+                if (row.hasClass('total_data')) {
+                    return true;
+                }
+                return rowContent.indexOf(input) > -1 || input === '';
+            });
+            $('#tbl').DataTable().draw();
+        }
+
+        // Handle hierarchy-based filtering
+        var tmSelect = document.getElementById('TM');
+        var mktSelect = document.getElementById('Market');
+        var storSelect = document.getElementById('Stores');
+
+        if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
+            TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
+            sdSelect.disabled = true;
+            loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
+        }
+        else if (tmSelect.disabled && mktSelect.disabled) {
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
+            storSelect.disabled = true;
+            sdSelect.disabled = true;
+        }
+        else if (tmSelect.disabled) {
+            TIRfilterMarketOptions(selectedValues);
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
+            mktSelect.disabled = true;
+            storSelect.disabled = true;
+            sdSelect.disabled = true;
+        }
+        else if (storSelect.disabled) {
+            TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
+            sdSelect.disabled = true;
+        }
+        else {
+            TIRfilterTMOptions(selectedValues);
+            TIRfilterMarketOptions(selectedValues);
+            TIRfilterStoresOptions(selectedValues);
+            //TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
+            tmSelect.disabled = true;
+            mktSelect.disabled = true;
+            storSelect.disabled = true;
+            sdSelect.disabled = true;
+            $('tr.filter_data').remove();
+            loadGTotalByFilter('', '', '', '','', sdSelect.innerText);
+        }
+
+        // Remove filter rows if fully disabled
+        $('tr.filter_data').remove();
+
+        // Pass clicked option text to totals function
+        //if (clickedOptionText) {
+        //    loadGTotalByFilter(null,null,null,null,clickedOptionText);
+        //}
+    }
+
 
 
     function TIRfilterMarketOptions(selectedValues) {
@@ -5412,6 +5549,55 @@
             });
         }
     }
+    function TIRfilterSDOptions(selectedValues) {
+        var sdSelect = document.getElementById('Tiers');
+        // Clear the tiers dropdown
+        sdSelect.innerHTML = '';
+
+        // Get all visible table rows after the SD filter
+        var filteredRows = Array.from(document.querySelectorAll('#tbl tbody tr'))
+            .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-tir')));
+
+        // Collect all unique tiers values from the filtered rows
+        var availableTiers = new Set();
+        filteredRows.forEach(row => {
+
+            var tiersValue = row.getAttribute('data-tir');
+            if (tiersValue) {
+                availableTiers.add(tiersValue);
+            }
+        });
+
+        // If any SD is selected, disable the tiers dropdown but populate with matching options
+        if (selectedValues.length > 0) {
+            //sdSelect.disabled = true;  // Keep the dropdown disabled if required
+
+            // Populate the tiers dropdown with only the tiers from filtered rows
+            availableTiers.forEach(tiersValue => {
+                var option = document.createElement('option');
+                option.value = tiersValue;
+                option.text = tiersValue;
+                option.style.color = 'grey';  // Highlight in red (optional)
+                option.style.fontSize = '10px';
+                sdSelect.add(option);
+            });
+        } else {
+            // If no SD is selected, enable the tiers dropdown and reset all options
+            //sdSelect.disabled = false;
+
+            // Optionally, repopulate with all tiers (e.g., from original ViewBag or data source)
+            var allRows = document.querySelectorAll('#tbl tbody tr');
+            allRows.forEach(row => {
+                var tiersValue = row.getAttribute('data-tir');
+                if (tiersValue) {
+                    var option = document.createElement('option');
+                    option.value = tiersValue;
+                    option.text = tiersValue;
+                    sdSelect.add(option);
+                }
+            });
+        }
+    }
     function TIRfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         //console.log(selectedValues);
@@ -5549,7 +5735,7 @@
         });
 
         // Fallback: if load never fires (e.g., network hang), ensure it still hides after 5s
-        setTimeout(hideLoading, 2000);
+        setTimeout(hideLoading, 1000);
     })();
 </script>
 

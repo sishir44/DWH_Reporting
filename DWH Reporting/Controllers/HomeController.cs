@@ -2899,7 +2899,7 @@ namespace DWH_Reporting.Controllers
             string NullIfEmpty(string value) => string.IsNullOrWhiteSpace(value) ? null : value;
 
             dateParam = NullIfEmpty(dateParam);
-            Sd = null;//NullIfEmpty(Sd);
+            Sd = NullIfEmpty(Sd);
             TM = NullIfEmpty(TM);
             MKT = NullIfEmpty(MKT);
             MMM = NullIfEmpty(MMM);
