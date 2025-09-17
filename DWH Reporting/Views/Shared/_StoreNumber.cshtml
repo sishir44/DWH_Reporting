@@ -2792,9 +2792,25 @@
     //        filename: "StoreNumberReport.xls"
     //    });
     //}
+    //function test() {
+    //    $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
+
+    //    const wb = XLSX.utils.book_new();
+    //    const tables = [
+    //        { selector: "#tbl", name: "Table1" },
+    //        { selector: "#tbl2", name: "Table2" }
+    //    ];
+    //    tables.forEach(t => {
+    //        const elt = document.querySelector(t.selector);
+    //        if (elt) {
+    //            const ws = XLSX.utils.table_to_sheet(elt);
+    //            XLSX.utils.book_append_sheet(wb, ws, t.name);
+    //        }
+    //    });
+    //    XLSX.writeFile(wb, "StoreNumberReport.xlsx");
+    //}
     function test() {
         $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
-
         const wb = XLSX.utils.book_new();
         const tables = [
             { selector: "#tbl", name: "Table1" },
@@ -2807,7 +2823,10 @@
                 XLSX.utils.book_append_sheet(wb, ws, t.name);
             }
         });
-        XLSX.writeFile(wb, "StoreNumberReport.xlsx");
+        const btn = document.getElementById("toggleBtn");
+        const isEOM = btn.innerText === "MTD";
+        const filename = isEOM ? "StoreNumberReport EOM.xlsx" : "StoreNumberReport MTD.xlsx";
+        XLSX.writeFile(wb, filename);
     }
 
 
@@ -3181,6 +3200,7 @@
                 $('#tbl tbody').find('.filtered_data').remove();
                 var newRow = `
                     <tr class="filter_data">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -5294,14 +5314,14 @@
 
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             sdSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
         else if (tmSelect.disabled && mktSelect.disabled) {
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             storSelect.disabled = true;
             sdSelect.disabled = true;
         }
@@ -5309,25 +5329,25 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             mktSelect.disabled = true;
             storSelect.disabled = true;
             sdSelect.disabled = true;
         }
         else if (storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             sdSelect.disabled = true;
         }
         else {
-            //TIRfilterTMOptions(selectedValues);
-            //TIRfilterMarketOptions(selectedValues);
-            //TIRfilterStoresOptions(selectedValues);
-            //TIRfilterTiersOptions(selectedValues);
+            TIRfilterTMOptions(selectedValues);
+            TIRfilterMarketOptions(selectedValues);
+            TIRfilterStoresOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
             TIRfilterSDOptions(selectedValues);
-            //tmSelect.disabled = true;
-            //mktSelect.disabled = true;
-            //storSelect.disabled = true;
+            tmSelect.disabled = true;
+            mktSelect.disabled = true;
+            storSelect.disabled = true;
             sdSelect.disabled = true;
             $('tr.filter_data').remove();
             loadGTotalByFilter('', '', '', '', '', sdSelect.innerText);
