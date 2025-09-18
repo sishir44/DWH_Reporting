@@ -2264,13 +2264,33 @@ namespace DWH_Reporting.Controllers
             // Call your function with the date parameter
             DataTable GetFct_Summary = GP_DAL_Functions.GetFct_StoreSummary(dateParam, UserID, isfinal);
 
-            if (dateParam != null)
+            if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
             {
-                if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
+                if (dateParam != null)
+                {
+                    if (GetFct_Summary != null && GetFct_Summary.Rows.Count > 0)
+                    {
+                        if (isfinal == "0")
+                        {
+                            var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp").Date;
+                            var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                            ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                            ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime parsedDate = DateTime.Parse(selectedDate);
+                            ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                            var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp");
+                            ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss");
+                        }
+                    }
+                }
+                else
                 {
                     if (isfinal == "0")
                     {
-                        var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp").Date;
+                        var latestTimeStamp = GetFct_Summary.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
                         var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
@@ -2278,26 +2298,9 @@ namespace DWH_Reporting.Controllers
                     else
                     {
                         DateTime parsedDate = DateTime.Parse(selectedDate);
+                        ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
-                        var latestTimeStamp = GetFct_Summary.Rows[0].Field<DateTime>("TimeStamp");
-                        ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss");
                     }
-                }
-            }
-            else
-            {
-                if (isfinal == "0")
-                {
-                    var latestTimeStamp = GetFct_Summary.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
-                }
-                else
-                {
-                    DateTime parsedDate = DateTime.Parse(selectedDate);
-                    ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
-                    ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
                 }
             }
 

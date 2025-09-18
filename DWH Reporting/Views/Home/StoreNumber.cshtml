@@ -3805,6 +3805,7 @@
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData(event) {
+        debugger
         // Get TM select element
         var tmSelect = document.getElementById('TM');
         // Text of the option that was last clicked
@@ -3847,7 +3848,7 @@
         TMfilterMarketOptions(selectedValues);
         TMfilterStoresOptions(selectedValues);
         TMfilterTiersOptions(selectedValues);
-        TMfilterSDOptions(selectedValues);
+        //TMfilterSDOptions(selectedValues);
         // Disable TM select and remove filter rows
         tmSelect.disabled = true;
         $('tr.filter_data').remove();
@@ -3858,8 +3859,9 @@
         }
     }
     function TMfilterSDOptions(selectedValues) {
+        debugger
         var SDSelect = document.getElementById('SD');
-        // Clear the TM dropdown
+        // Clear the SD dropdown
         SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
@@ -3867,7 +3869,7 @@
             .filter(row => row.style.display !== 'none' && selectedValues.includes(row.getAttribute('data-sd')));
 
         // Collect all unique TM values from the filtered rows
-        var availableTM = new Set();
+        var availableSD = new Set();
         filteredRows.forEach(row => {
 
             var SDValue = row.getAttribute('data-sd');
@@ -3909,6 +3911,7 @@
     }
 
     function TMfilterTMOptions(selectedValues) {
+        debugger
         var TMSelect = document.getElementById('TM');
         // Clear the TM dropdown
         TMSelect.innerHTML = '';
@@ -3959,6 +3962,7 @@
         }
     }
     function TMfilterMarketOptions(selectedValues) {
+        debugger
         var MarketSelect = document.getElementById('Market');
         var TMSelect = document.getElementById('TM');
         //console.log(MarketSelect);
@@ -5379,13 +5383,15 @@
         }
 
         // Handle hierarchy-based filtering
+        var sdSelect = document.getElementById('SD');
         var tmSelect = document.getElementById('TM');
         var mktSelect = document.getElementById('Market');
         var storSelect = document.getElementById('Stores');
+        var tiresSelect = document.getElementById('Tiers');
 
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            //TIRfilterSDOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
             sdSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
@@ -5411,21 +5417,21 @@
             sdSelect.disabled = true;
         }
         else {
-            TIRfilterTMOptions(selectedValues);
-            TIRfilterMarketOptions(selectedValues);
-            TIRfilterStoresOptions(selectedValues);
-            TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
-            tmSelect.disabled = true;
-            mktSelect.disabled = true;
-            storSelect.disabled = true;
+            TMfilterSDOptions(selectedValues);
+            //TMfilterTMOptions(selectedValues);
+            //TMfilterMarketOptions(selectedValues);
+            //TMfilterStoresOptions(selectedValues);
+            //TMfilterTiersOptions(selectedValues);
+            //tmSelect.disabled = true;
+            //mktSelect.disabled = true;
+            //storSelect.disabled = true;
             sdSelect.disabled = true;
             $('tr.filter_data').remove();
             loadGTotalByFilter('', '', '', '','', sdSelect.innerText);
         }
 
         // Remove filter rows if fully disabled
-        $('tr.filter_data').remove();
+        //$('tr.filter_data').remove();
 
         // Pass clicked option text to totals function
         //if (clickedOptionText) {

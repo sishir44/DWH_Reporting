@@ -1372,9 +1372,25 @@
     //    });
     //}
 
+    //function test() {
+    //    $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
+    //    const wb = XLSX.utils.book_new();
+    //    const tables = [
+    //        { selector: "#tbl", name: "Table1" },
+    //        { selector: "#tbl2", name: "Table2" }
+    //    ];
+    //    tables.forEach(t => {
+    //        const elt = document.querySelector(t.selector);
+    //        if (elt) {
+    //            const ws = XLSX.utils.table_to_sheet(elt);
+    //            XLSX.utils.book_append_sheet(wb, ws, t.name);
+    //        }
+    //    });
+    //    XLSX.writeFile(wb, "SummaryReport.xlsx");
+    //}
+
     function test() {
         $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
-
         const wb = XLSX.utils.book_new();
         const tables = [
             { selector: "#tbl", name: "Table1" },
@@ -1387,8 +1403,12 @@
                 XLSX.utils.book_append_sheet(wb, ws, t.name);
             }
         });
-        XLSX.writeFile(wb, "SummaryReport.xlsx");
+        const btn = document.getElementById("toggleBtn");
+        const isEOM = btn.innerText === "MTD";
+        const filename = isEOM ? "Summary EOM.xlsx" : "Summary MTD.xlsx";
+        XLSX.writeFile(wb, filename);
     }
+
     //function test() {
 
     //    $("td:hidden").remove();
