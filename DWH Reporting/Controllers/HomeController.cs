@@ -973,7 +973,7 @@ namespace DWH_Reporting.Controllers
                 Fct_StoreNumberAttributesModel model4 = new Fct_StoreNumberAttributesModel
                 {
                     //Market = row["Market"].ToString(),
-                    MULMngr = row["MUL_MktMngr"].ToString(),
+                    //MULMngr = row["MUL_MktMngr"].ToString(),
 
                     MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
@@ -1157,7 +1157,7 @@ namespace DWH_Reporting.Controllers
                 lisn_totMMM.Add(model4);
             }
 
-            ViewData["GetFct_StoreNumberTotalMMM"] = lisn_totMMM;
+            ViewData["GetFct_StoreNumberTotalSD"] = lisn_totMMM;
 
             ///////////////////////////////////////////////////////////////////////////////
 
