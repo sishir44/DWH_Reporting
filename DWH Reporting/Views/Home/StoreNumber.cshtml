@@ -115,8 +115,7 @@
         #tbl tbody td:nth-child(3),
         #tbl tbody td:nth-child(4),
         #tbl tbody td:nth-child(5),
-        #tbl tbody td:nth-child(6),
-        #tbl tbody td:nth-child(7) {
+        #tbl tbody td:nth-child(6){
             position: sticky;
             z-index: 1;
         }
@@ -126,8 +125,7 @@
         #tbl thead th:nth-child(3),
         #tbl thead th:nth-child(4),
         #tbl thead th:nth-child(5),
-        #tbl thead th:nth-child(6),
-        #tbl thead th:nth-child(7) {
+        #tbl thead th:nth-child(6) {
             position: sticky;
             z-index: 12;
         }
@@ -169,11 +167,11 @@
             min-width: 65px !important;
         }
 
-        #tbl tbody td:nth-child(7),
+      /*  #tbl tbody td:nth-child(7),
         #tbl thead th:nth-child(7) {
             left: 390px;
             min-width: 65px !important;
-        }
+        }*/
 
         /*#tbl tbody td:nth-child(7),
         #tbl thead th:nth-child(7) {
@@ -1079,7 +1077,7 @@
                     </div>
 
                     <!-- Search MUL_MktMngr -->
-                    <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
+                    @*<div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
                         <input type="text" name="textSearchMULMngr" id="textSearchMULMngr" class="selectorinput form-control" placeholder="Search MMM" onkeyup="mmmFilter()" />
                         <select class="form-control selector" id="MULMngr" multiple onchange="filtermmmData(event)">
                             @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
@@ -1097,7 +1095,7 @@
                                 <option class="optionfilter" style="font-size:9px; background-color:lightblue; color:black; border-radius: 6px;" disabled>No MUL Manager available</option>
                             }
                         </select>
-                    </div>
+                    </div>*@
 
                     <!-- Search Stores -->
                     <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12" style="display: inline-block; vertical-align: top;">
@@ -1185,7 +1183,7 @@
                                     <th rowspan="2" style="background-color: black; color:white;">SD</th>
                                     <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                     @*<th rowspan="2" style="background-color: black; color:white;">Multi Market</th>*@
-                                    <th rowspan="2" style="background-color: black; color:white;">MMM</th>
+                                    @*<th rowspan="2" style="background-color: black; color:white;">MMM</th>*@
                                     <th rowspan="2" style="background-color: black; color:white;">Store</th>
 
                                     <th rowspan="2" style="background-color: black; color:white;">Unique<br /> ID</th>
@@ -1396,7 +1394,7 @@
                                         <td></td>
                                         @*<td></td>*@
                                         <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
-                                        <td></td>
+                                        @*<td></td>*@
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -1621,7 +1619,7 @@
                                                         <td style="white-space: normal; word-wrap: break-word;">MMM Total</td>
                                                         <td></td>
                                                         <td style="white-space: normal; word-wrap: break-word;">@record2.MULMngr</td>
-                                                        <td></td>
+                                                        @*<td></td>*@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -1830,7 +1828,7 @@
                                                         <td></td>
                                                         <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
                                                         <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
-                                                        <td></td>
+                                                        @*<td></td>*@
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -2209,7 +2207,7 @@
                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.SD   </td>
                                         <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.TM      </td>
                                         @*<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMkt   </td>*@
-                                        <td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMngr   </td>
+                                        @*<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMngr   </td>*@
                                         <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
                                         <td>@record.UniqueID</td>
                                         <td>@record.DealerCode</td>
