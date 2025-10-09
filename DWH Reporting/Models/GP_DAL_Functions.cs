@@ -288,6 +288,30 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+
+        public static DataTable GetFct_YTDStoreNumberCol2(string dateParam, string UserID, string isfinal)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_YTDStoreNumberCol2";
+
+                // Create SPParameters object and add the date parameter
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+                // Execute stored procedure with the parameters
+                DataTable DT = objDal.Getdata(spParam);
+                return DT;
+            }
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
         public static DataTable GetFct_StoreSummary(string dateParam,string UserID, string isfinal)
         {
             try
@@ -333,7 +357,30 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
-        
+
+        public static DataTable GetFct_YTDStoreNumberTotal(string dateParam, string UserID, string isfinal)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_YTDStoreNumberTotal";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
         public static DataTable FilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers, string isfinal,string UserID)
         {
             try
@@ -472,12 +519,60 @@ namespace DWH_Reporting.Models
                 return dt;
             }
         }
+
+        public static DataTable GetFct_YTDStoreNumberTotalTM(string dateParam, string UserID, string isfinal)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_StoreNumberTotalTM";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
         public static DataTable GetFct_StoreNumberTotalMMM(string dateParam,string UserID, string isfinal)
         {
             try
             {
                 DAL objDal = new DAL();
                // objDal.ProcName = "GetFct_StoreNumberTotalMMM";
+                objDal.ProcName = "GetFct_StoreNumberTotalSD";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
+        public static DataTable GetFct_YTDStoreNumberTotalMMM(string dateParam, string UserID, string isfinal)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                // objDal.ProcName = "GetFct_StoreNumberTotalMMM";
                 objDal.ProcName = "GetFct_StoreNumberTotalSD";
 
                 SPParameters spParam = new SPParameters();

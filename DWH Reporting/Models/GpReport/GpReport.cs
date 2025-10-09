@@ -1680,8 +1680,8 @@ namespace DWH_Reporting.Models.GpReport
         public string HourlyCurrHeadCntVarHrs       { get; set; }
 
 
-//Employee
-public string EmpID { get; set; }
+        //Employee
+        public string EmpID { get; set; }
         public string Employees { get; set; }
         public string Status { get; set; }
         public string HireDate { get; set; }
