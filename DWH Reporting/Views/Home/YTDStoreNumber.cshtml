@@ -900,32 +900,32 @@
             </div>
 
             <!-- UPDATED RPT DATE -->
-            <div class="row sub-header mt-2">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-start;">
-                        <div id="TimeStamp">
-                            @if (ViewBag.ReportDate != null)
-                            {
-                                <p style="margin-bottom: 0rem; font-size: 12px; margin-left:20px;">Report Date: @ViewBag.ReportDate</p>
-                            }
-                            else
-                            {
-                                <p style="color: red;">Data not available</p>
-                            }
-                        </div>
+            <div class="row sub-header mt-2" style="color: white;">
+                @*<div class="row">*@
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-start">
+                    <div id="TimeStamp">
+                        @if (ViewBag.ReportDate != null)
+                        {
+                            <p style="margin-bottom: 0rem; font-size: 12px; margin-left:20px;">Report Date: @ViewBag.ReportDate</p>
+                        }
+                        else
+                        {
+                            <p style="color: red;">Data not available</p>
+                        }
                     </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="display: flex; color:white; justify-content: flex-end;">
-                        <div id="LastupdatedOn">
-                            @if (ViewBag.LatestTimeStamp != null)
-                            {
-                                <p style="margin-bottom: 0rem; font-size: 12px;">Update Date & Time: @ViewBag.LatestTimeStamp </p>
-                            }
-                            else
-                            {
-                                <p style="color: red;">Data not available</p>
-                            }
-                        </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 d-flex justify-content-end">
+                    <div id="LastupdatedOn">
+                        @if (ViewBag.LatestTimeStamp != null)
+                        {
+                            <p style="margin-bottom: 0rem; font-size: 12px;">Update Date & Time: @ViewBag.LatestTimeStamp </p>
+                        }
+                        else
+                        {
+                            <p style="color: red;">Data not available</p>
+                        }
                     </div>
+                    @*</div>*@
                 </div>
             </div>
 

@@ -3870,7 +3870,7 @@ namespace DWH_Reporting.Controllers
                     //New Dot Columns
                     NextUPTrendPer = row["Next UP Trend %"].ToString(),
                     PremiumPerGA = row["Premium % to GA"].ToString(),
-                    ExtraPerGA = row["Extra % to GA"].ToString(),
+                    //ExtraPerGA = row["Extra % to GA"].ToString(),
                     ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
                     TotalNewFiber = row["Total New Fiber"].ToString(),
                     FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),
