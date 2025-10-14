@@ -294,7 +294,7 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_YTDStoreNumberCol2";
+                objDal.ProcName = "GetFct_StoreNumberYTDCol2";
 
                 // Create SPParameters object and add the date parameter
                 SPParameters spParam = new SPParameters();

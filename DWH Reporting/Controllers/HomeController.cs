@@ -3681,11 +3681,14 @@ namespace DWH_Reporting.Controllers
             }
             else
             {
-                //var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
-                var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
+                {
+                    //var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
+                    var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
+                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                }
             }
 
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
@@ -3904,7 +3907,7 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel model3 = new Fct_StoreNumberAttributesModel
                 {
-                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
