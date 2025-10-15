@@ -4127,10 +4127,10 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel model4 = new Fct_StoreNumberAttributesModel
                 {
-                    Market = row["Market"].ToString(),
-                    TM = row["TM"].ToString(),
+                    Market = row["Market"] != DBNull.Value ? row["Market"].ToString() : "",
+                    TM = row["TM"] != DBNull.Value ? row["TM"].ToString() : "",
 
-                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
@@ -4290,7 +4290,7 @@ namespace DWH_Reporting.Controllers
                     //New Dot Columns
                     NextUPTrendPer = row["Next UP Trend %"].ToString(),
                     PremiumPerGA = row["Premium % to GA"].ToString(),
-                    ExtraPerGA = row["Extra % to GA"].ToString(),
+                    //ExtraPerGA = row["Extra % to GA"].ToString(),
                     ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
                     TotalNewFiber = row["Total New Fiber"].ToString(),
                     FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),
@@ -4328,7 +4328,7 @@ namespace DWH_Reporting.Controllers
                     //Market = row["Market"].ToString(),
                     MULMngr = row["sd"].ToString(),
 
-                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
@@ -4488,7 +4488,7 @@ namespace DWH_Reporting.Controllers
                     //New Dot Columns
                     NextUPTrendPer = row["Next UP Trend %"].ToString(),
                     PremiumPerGA = row["Premium % to GA"].ToString(),
-                    ExtraPerGA = row["Extra % to GA"].ToString(),
+                    //ExtraPerGA = row["Extra % to GA"].ToString(),
                     ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
                     TotalNewFiber = row["Total New Fiber"].ToString(),
                     FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),

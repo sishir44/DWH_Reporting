@@ -525,12 +525,12 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_StoreNumberTotalTM";
+                objDal.ProcName = "GetFct_YTDStoreNumberTotalTM";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
-                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
@@ -573,12 +573,12 @@ namespace DWH_Reporting.Models
             {
                 DAL objDal = new DAL();
                 // objDal.ProcName = "GetFct_StoreNumberTotalMMM";
-                objDal.ProcName = "GetFct_StoreNumberTotalSD";
+                objDal.ProcName = "GetFct_YTDStoreNumberTotalSD";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
-                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
                 DataTable DT = objDal.Getdata(spParam);
                 return objDal.Getdata(spParam);
