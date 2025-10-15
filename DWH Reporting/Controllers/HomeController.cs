@@ -3673,21 +3673,44 @@ namespace DWH_Reporting.Controllers
             {
                 if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
                 {
-                    var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
-                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1).Date;
-                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                    var dateKeyValue = Fct_StoreNumber.Rows[0]["DateKey"]?.ToString();
+                    var timeStampValue = Fct_StoreNumber.Rows[0]["TimeStamp"]?.ToString();
+                    DateTime timeStamp;
+                    DateTime.TryParse(timeStampValue, out timeStamp);
+                    DateTime reportDate;
+                    if (DateTime.TryParseExact(dateKeyValue, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out reportDate))
+                    {
+                        // Format both as MM/dd/yyyy and MM/dd/yyyy HH:mm:ss
+                        ViewBag.LatestTimeStamp = timeStamp.ToString("MM/dd/yyyy HH:mm:ss");
+                        ViewBag.ReportDate = reportDate.ToString("MM/dd/yyyy");
+                    }
+                    else
+                    {
+                        ViewBag.LatestTimeStamp = timeStamp.ToString("MM/dd/yyyy HH:mm:ss");
+                        ViewBag.ReportDate = reportDate.ToString("MM/dd/yyyy");
+                    }
                 }
             }
             else
             {
                 if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
                 {
-                    //var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                    var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
-                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                    var dateKeyValue = Fct_StoreNumber.Rows[0]["DateKey"]?.ToString();
+                    var timeStampValue = Fct_StoreNumber.Rows[0]["TimeStamp"]?.ToString();
+                    DateTime timeStamp;
+                    DateTime.TryParse(timeStampValue, out timeStamp);
+                    DateTime reportDate;
+                    if (DateTime.TryParseExact(dateKeyValue, "yyyyMMdd", null, System.Globalization.DateTimeStyles.None, out reportDate))
+                    {
+                        // Format both as MM/dd/yyyy and MM/dd/yyyy HH:mm:ss
+                        ViewBag.LatestTimeStamp = timeStamp.ToString("MM/dd/yyyy HH:mm:ss");
+                        ViewBag.ReportDate = reportDate.ToString("MM/dd/yyyy");
+                    }
+                    else
+                    {
+                        ViewBag.LatestTimeStamp = timeStamp.ToString("MM/dd/yyyy HH:mm:ss");
+                        ViewBag.ReportDate = reportDate.ToString("MM/dd/yyyy");
+                    }
                 }
             }
 
