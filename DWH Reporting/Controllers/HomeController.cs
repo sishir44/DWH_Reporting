@@ -348,17 +348,21 @@ namespace DWH_Reporting.Controllers
             }
             else
             {
-                if(isfinal == "0") { 
-                    var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-                    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-                    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
-                }
-                else
+                if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
                 {
-                    DateTime parsedDate = DateTime.Parse(selectedDate);
-                    ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
-                    ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                    if (isfinal == "0")
+                    {
+                        var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
+                        var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                        ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
+                        ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                    }
+                    else
+                    {
+                        DateTime parsedDate = DateTime.Parse(selectedDate);
+                        ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
+                        ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                    }
                 }
             }
 
