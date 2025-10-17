@@ -410,6 +410,35 @@ namespace DWH_Reporting.Models
             }
         }
 
+        public static DataTable YTDFilterTotal(string dateParam, string Sd, string Tm, string Market, string MMM, string Store, string Tiers, string isfinal, string UserID)
+        {
+            try
+            {
+                DAL objDal = new DAL();
+                objDal.ProcName = "GetFct_YTDStoreNumberTotal";
+
+                SPParameters spParam = new SPParameters();
+                spParam.SetParam("@DateParam", SqlDbType.NVarChar, dateParam);
+                spParam.SetParam("@Sd", SqlDbType.NVarChar, Sd);
+                spParam.SetParam("@Tm", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tm) ? null : Tm);
+                spParam.SetParam("@Market", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Market) ? null : Market);
+                //spParam.SetParam("@MMM", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(MMM) ? null : MMM);
+                spParam.SetParam("@Store", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Store) ? null : Store);
+                spParam.SetParam("@Tiers", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tiers) ? null : Tiers);
+                spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
+                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
+
+                DataTable DT = objDal.Getdata(spParam);
+                return objDal.Getdata(spParam);
+            }
+
+            catch (Exception ex)
+            {
+                DataTable dt = new DataTable();
+                return dt;
+            }
+        }
+
         public static DataTable EmpDet(string UniqueID, string dateParam)
         {
             try
