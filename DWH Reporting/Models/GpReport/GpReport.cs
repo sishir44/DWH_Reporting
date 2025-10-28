@@ -1699,9 +1699,59 @@ namespace DWH_Reporting.Models.GpReport
         public string PROTECTION_PACK { get; set; }
         public string PROTECTION_PACK_NetOFF { get; set; }
         public string PROTECTION_PACK_GP { get; set; }
-        
+
+        // New Store Number
+        public string CRUAchMTDChargeBack { get; set; }
+        public string CRUAchMTDNetOff { get; set; }
+        public string CRUAGP { get; set; }
+        public string FNAchMTDChargeback { get; set; }
+        public string FNAchMTDNetOff { get; set; }
+        public string FNGP { get; set; }
+        public string MTDUpgNetOffWthOutValPls { get; set; }
+        public string NextUpChrBack { get; set; }
+        public string NextUpNetOff { get; set; }
+        public string NonExtraNonPremiumActivationChargeback { get; set; }
+        public string ValuePlusActivation { get; set; }
+        public string ValuePlusActivationNetOff { get; set; }
+        public string ValuePlusActivationChargeBack { get; set; }
+        public string ValuePlusToGAPercent { get; set; }
+        public string ValuePlusActivationGP { get; set; }
+        public string DigitalActivation { get; set; }
+        public string DigitalActivationNetOff { get; set; }
+        public string DigitalActivationChargeBack { get; set; }
+        public string DigitalToGAPercent { get; set; }
+        public string DigitalActivationGP { get; set; }
+        public string DigitalUpgrade { get; set; }
+        public string DigitalUpgradeChargeBack { get; set; }
+        public string DigitalUpgradeNetOff { get; set; }
+        public string DigitalUpgradeGP { get; set; }
+        public string UpgradeValuePlus { get; set; }
+        public string AIAInternetSpiff { get; set; }
+        public string BroadbandLessThen300MBChargeBack { get; set; }
+        public string BroadbandLessThen300MBNetOff { get; set; }
+        public string NewFiber300MBChargeBack { get; set; }
+        public string NewFiber300MBNetOff { get; set; }
+        public string NewFiber500MBChargeBack { get; set; }
+        public string NewFiber500MBNetOff { get; set; }
+        public string NewFiber1GChargeBack { get; set; }
+        public string NewFiber1GNetOff { get; set; }
+        public string NewFiber { get; set; }
+        public string NewFiberChargeBack { get; set; }
+        public string NewFiberNetOff { get; set; }
+        public string ConnectDevicesQty { get; set; }
+        public string ConnectDevicesQtyChargeBack { get; set; }
+        public string ConnectDevicesQtyNetOff { get; set; }
+        public string ConnectDevicesGP { get; set; }
+        public string PrepaidWithAutopayGP { get; set; }
+        public string FeaturesRevenue { get; set; }
+        public string HomeTechProtectChargeBack { get; set; }
+        public string HomeTechProtectNetOff { get; set; }
+        public string HomeTechProtectGP { get; set; }
+
+
+        public string HomeInternet { get; set; }
     }
-    
+
     public class Fct_EmployeeNumberAttributesModel
     {
         //Hierarchy Attributes
