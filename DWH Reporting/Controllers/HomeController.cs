@@ -5473,6 +5473,7 @@ namespace DWH_Reporting.Controllers
                     NewFiber = row["New Fiber"].ToString(),
                     NewFiberChargeBack = row["New Fiber Chargeback"].ToString(),
                     NewFiberNetOff = row["New Fiber Net OFF"].ToString(),
+                    NewFiberNetGP = row["New Fiber $GP"].ToString(),
 
                     TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
                     BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
@@ -5742,6 +5743,7 @@ namespace DWH_Reporting.Controllers
                     NewFiber = row["New Fiber"].ToString(),
                     NewFiberChargeBack = row["New Fiber Chargeback"].ToString(),
                     NewFiberNetOff = row["New Fiber Net OFF"].ToString(),
+                    NewFiberNetGP = row["New Fiber $GP"].ToString(),
 
                     TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
                     BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
@@ -6017,6 +6019,7 @@ namespace DWH_Reporting.Controllers
                     NewFiber = row["New Fiber"].ToString(),
                     NewFiberChargeBack = row["New Fiber Chargeback"].ToString(),
                     NewFiberNetOff = row["New Fiber Net OFF"].ToString(),
+                    NewFiberNetGP = row["New Fiber $GP"].ToString(),
 
                     TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
                     BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
@@ -6290,6 +6293,7 @@ namespace DWH_Reporting.Controllers
                     NewFiber = row["New Fiber"].ToString(),
                     NewFiberChargeBack = row["New Fiber Chargeback"].ToString(),
                     NewFiberNetOff = row["New Fiber Net OFF"].ToString(),
+                    NewFiberNetGP = row["New Fiber $GP"].ToString(),
 
                     TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
                     BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),

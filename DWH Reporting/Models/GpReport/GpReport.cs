@@ -1716,6 +1716,7 @@ namespace DWH_Reporting.Models.GpReport
         public string ValuePlusActivationChargeBack { get; set; }
         public string ValuePlusToGAPercent { get; set; }
         public string ValuePlusActivationGP { get; set; }
+        public string NewFiberNetGP { get; set; }
         public string DigitalActivation { get; set; }
         public string DigitalActivationNetOff { get; set; }
         public string DigitalActivationChargeBack { get; set; }
