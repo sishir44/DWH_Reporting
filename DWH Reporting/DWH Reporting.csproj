@@ -363,6 +363,7 @@
     <Content Include="Views\Shared\_YTDStoreNumber.cshtml" />
     <Content Include="Views\Shared\_CommonEOMDateFormat.cshtml" />
     <Content Include="Views\Home\StoreNumberNew.cshtml" />
+    <Content Include="Views\Shared\_StoreNumberNew.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
