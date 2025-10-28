@@ -1167,7 +1167,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 232; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 233; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1348,6 +1348,7 @@
                                     <td>Fiber Upgrade  $GP</td>
                                     <td>Broadband $GP</td>
                                     <td>Broad Band + Fiber _$GP</td>
+                                    <td>Broad Band + Fiber Upgrade $GP</td>
                                     <td>Broad Band + Fiber _$GP Trending</td>
                                     <td>Turbo Feature</td>
                                     <td>Turbo Feature $GP</td>
@@ -1613,6 +1614,7 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.FiberUpgradeGP != null ? record.FiberUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberUpgradeGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -1909,6 +1911,7 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record.FiberUpgradeGP != null ? record.FiberUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberUpgradeGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -2189,6 +2192,7 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record.FiberUpgradeGP != null ? record.FiberUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberUpgradeGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -2638,6 +2642,7 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.FiberUpgradeGP != null ? record.FiberUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.FiberUpgradeGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -3116,7 +3121,7 @@
                                             <th style="background-color: black; color: white;">Projected Geographic Spif</th>
                                             <th style="background-color: black; color: white;">Prepaid $GP</th>
                                             <th style="background-color: black; color: white;">Prepaid QTY</th>
-                                            <th style="background-color: black; color: white;">Prepaid to GA</th>
+                                            <th style="background-color: black; color: white;">Prepaid Activation</th>
                                             <th style="background-color: black; color: white;">Prepaid Net OFF</th>
                                             <th style="background-color: black; color: white;">Prepaid Charge Back</th>
                                             <th style="background-color: black; color: white;">Prepaid with Autopay</th>
