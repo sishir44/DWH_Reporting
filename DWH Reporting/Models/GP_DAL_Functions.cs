@@ -487,10 +487,11 @@ namespace DWH_Reporting.Models
             try
             {
                 DAL objDal = new DAL();
-                objDal.ProcName = "GetFct_YTDStoreNumberTotal";
+                objDal.ProcName = "GetFct_StoreNumberTotalupdate";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.NVarChar, dateParam);
+                spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
                 spParam.SetParam("@Sd", SqlDbType.NVarChar, Sd);
                 spParam.SetParam("@Tm", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tm) ? null : Tm);
                 spParam.SetParam("@Market", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Market) ? null : Market);
@@ -498,9 +499,8 @@ namespace DWH_Reporting.Models
                 spParam.SetParam("@Store", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Store) ? null : Store);
                 spParam.SetParam("@Tiers", SqlDbType.NVarChar, string.IsNullOrWhiteSpace(Tiers) ? null : Tiers);
                 spParam.SetParam("@UserID", SqlDbType.VarChar, UserID);
-                //spParam.SetParam("@isfinal", SqlDbType.VarChar, isfinal);
 
-                DataTable DT = objDal.Getdata(spParam);
+                DataTable DT = objDal.Getdata(spParam); 
                 return objDal.Getdata(spParam);
             }
 

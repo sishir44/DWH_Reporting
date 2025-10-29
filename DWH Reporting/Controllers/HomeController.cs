@@ -6704,13 +6704,13 @@ namespace DWH_Reporting.Controllers
             {
                 Fct_StoreNumberAttributesModel modelFT = new Fct_StoreNumberAttributesModel
                 {
-                    MonthlyAchievedHoursTrendingPercentage = row["Monthly _Achived Hours Trending %"].ToString(),
+                    MonthlyAchievedHoursTrendingPercentage = row["Monthly Achieved Hours Trending%"].ToString(),
                     GrossAddsTrendToGoal = row["GROSS ADDS Trend% To Goal"].ToString(),
                     GrossAddsGoals = row["GROSS ADDS Goals"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
+                    Converged = row["converged%"].ToString(),
                     PPVGAPerTrafficPercentage = row["PPVGA per Traffic%"].ToString(),
                     TotalTraffic = row["Total Traffic"].ToString(),
-                    Converged = row["converged%"].ToString(),
                     FiberConversion = row["Fiber Conversion"].ToString(),
                     BroadbandFiberNetOFF = row["Broadband +_Fiber Net OFF"].ToString(),
                     FiberGreenCheck = row["Fiber Green Check"].ToString(),
@@ -6739,7 +6739,17 @@ namespace DWH_Reporting.Controllers
                     TotalOPSTrending = row["TOTAL OPS Trending"].ToString(),
                     OPSPerTrafficPercentage = row["OPS Per- Traffic %"].ToString(),
                     CRUAchMTD = row["CRU Ach MTD"].ToString(),
+
+                    CRUAchMTDChargeBack = row["CRU Ach MTD Charge Back"].ToString(),
+                    CRUAchMTDNetOff = row["CRU Ach MTD Net OFF"].ToString(),
+                    CRUAGP = row["CRU GP"].ToString(),
+
                     FNAchMTD = row["FN Ach MTD"].ToString(),
+
+                    FNAchMTDChargeback = row["FN Ach MTD Chargeback"].ToString(),
+                    FNAchMTDNetOff = row["FN Ach MTD Net OFF"].ToString(),
+                    FNGP = row["FN GP"].ToString(),
+
                     GPPerBox = row["$GP per BOX"].ToString(),
                     TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
                     GrossAdds = row["GROSS ADDS"].ToString(),
@@ -6762,10 +6772,17 @@ namespace DWH_Reporting.Controllers
                     CRUAchDATADollars = row["CRU Ach DATA $"].ToString(),
                     MTDUpgrades = row["MTD UPGRADES"].ToString(),
                     ChargeBack1 = row["Charge Back1"].ToString(),
+
+                    MTDUpgNetOffWthOutValPls = row["MTD Upgrade Netoff with out Value plus"].ToString(),
+
                     MTDUpgradesTrending = row["MTD UPGRADES_Trending"].ToString(),
                     MTDUpgradesGP = row["MTD UPGRADES $GP"].ToString(),
                     MTDUpgradesGPTrending = row["MTD UPGRADES $GP Trending"].ToString(),
                     NextUp = row["Next UP"].ToString(),
+
+                    NextUpChrBack = row["Next UP Chargeback"].ToString(),
+                    NextUpNetOff = row["Next UP Net OFF"].ToString(),
+
                     NextUpSpif = row["Next UP Spif"].ToString(),
                     PremiumActivation = row["Premium Activation"].ToString(),
                     PremiumActivationNetOFF = row["Premium Activation Net OFF"].ToString(),
@@ -6776,12 +6793,35 @@ namespace DWH_Reporting.Controllers
                     ChargeBack3 = row["Charge Back3"].ToString(),
                     ExtraActivationGP = row["Extra Activation $GP"].ToString(),
                     NonExtraNonPremiumActivation = row["Non Extra / Non Premium Activation"].ToString(),
+
+                    NonExtraNonPremiumActivationChargeback = row["Non Extra / Non Premium Activation Chargeback"].ToString(),
+
                     NonExtraNonPremiumActivationNetOFF = row["Non Extra / Non Premium Activation Net OFF"].ToString(),
                     NonExtraNonPremiumActivationGP = row["Non Extra / Non Premium Activation $GP"].ToString(),
+
+                    ValuePlusActivation = row["Value Plus Activation"].ToString(),
+                    ValuePlusActivationNetOff = row["Value Plus Activation Net OFF"].ToString(),
+                    ValuePlusActivationChargeBack = row["Value Plus Activation Charge Back"].ToString(),
+                    ValuePlusToGAPercent = row["Value plus to GA %"].ToString(),
+                    ValuePlusActivationGP = row["Value Plus Activation $GP"].ToString(),
+                    DigitalActivation = row["Digital Activation"].ToString(),
+                    DigitalActivationNetOff = row["Digital Activation Net OFF"].ToString(),
+                    DigitalActivationChargeBack = row["Digital Activation Charge Back"].ToString(),
+                    DigitalToGAPercent = row["Digital to GA %"].ToString(),
+                    DigitalActivationGP = row["Digital Activation $GP"].ToString(),
+
                     PremiumUpgrade = row["Premium Upgrade"].ToString(),
                     ChargeBack4 = row["Charge Back4"].ToString(),
                     PremiumUpgradeNetOff = row["Premium Upgrade Net Off"].ToString(),
                     PremiumUpgradeGP = row["Premium Upgrade $GP"].ToString(),
+
+                    DigitalUpgrade = row["Digital Upgrade"].ToString(),
+                    DigitalUpgradeChargeBack = row["Digital Upgrade Charge Back"].ToString(),
+                    DigitalUpgradeNetOff = row["Digital Upgrade Net OFF"].ToString(),
+                    DigitalUpgradeGP = row["Digital Upgrade GP"].ToString(),
+                    UpgradeValuePlus = row["Upgrade Value plus"].ToString(),
+
+
                     ExtraUpgrade = row["Extra Upgrade"].ToString(),
                     ChargeBack5 = row["Charge Back5"].ToString(),
                     ExtraUpgradeNetOff = row["Extra Upgrade Net Off"].ToString(),
@@ -6792,11 +6832,29 @@ namespace DWH_Reporting.Controllers
                     AIAInternetNetOff = row["AIA Internet Net Off"].ToString(),
                     AIATrending = row["AIA Trending"].ToString(),
                     AIAInternetGP = row["AIA Internet $GP"].ToString(),
-                    BroadbandGoals = row["Broadband Goals"].ToString(),
-                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(),
+
+                    AIAInternetSpiff = row["AIA Internet Spiff"].ToString(),
+
+                    BroadbandGoals = row["Broadband Goals"].ToString(), // not new
+                    BroadbandLessThen300MB = row["Broad Band less Then (300MB)"].ToString(), //not new
+
+                    BroadbandLessThen300MBChargeBack = row["Broad Band less Then (300MB) Charge Back"].ToString(),
+                    BroadbandLessThen300MBNetOff = row["Broad Band less Then (300MB) Net OFF"].ToString(),
                     NewFiber300MB = row["New Fiber (300MB)"].ToString(),
+                    NewFiber300MBChargeBack = row["New Fiber (300MB) Chargeback"].ToString(),
+                    NewFiber300MBNetOff = row["New Fiber (300MB) Net OFF"].ToString(),
                     NewFiber500MB = row["New Fiber (500MB)"].ToString(),
-                    NewFiber1G = row["New Fiber (1G)"].ToString(),
+                    NewFiber500MBChargeBack = row["New Fiber (500MB) Chargeback"].ToString(),
+                    NewFiber500MBNetOff = row["New Fiber (500MB) Net OFF"].ToString(),
+                    NewFiber1G = row["New Fiber (1G)"].ToString(), // not new
+
+                    NewFiber1GChargeBack = row["New Fiber (1G)  Chargeback"].ToString(),
+                    NewFiber1GNetOff = row["New Fiber (1G)  Net OFF"].ToString(),
+                    NewFiber = row["New Fiber"].ToString(),
+                    NewFiberChargeBack = row["New Fiber Chargeback"].ToString(),
+                    NewFiberNetOff = row["New Fiber Net OFF"].ToString(),
+                    NewFiberNetGP = row["New Fiber $GP"].ToString(),
+
                     TotalBroadbandNewFiber = row["Total Broadband + Newfiber"].ToString(),
                     BroadbandNewFiberNetOFF = row["Broadband + New fiber Net OFF"].ToString(),
                     ChargeBack7 = row["Charge Back7"].ToString(),
@@ -6812,7 +6870,8 @@ namespace DWH_Reporting.Controllers
                     NewFiber1GQISpiff = row["New Fiber (1G) QI Spiff"].ToString(),
                     FiberUpgradeGP = row["Fiber Upgrade  $GP"].ToString(),
                     BroadbandGP = row["Broadband $GP"].ToString(),
-                    //BroadbandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandFiberGP = row["Broad Band + Fiber _$GP"].ToString(),
+                    BroadbandFiberUpgGP = row["Broad Band + Fiber Upgrade $GP"].ToString(),
                     BroadbandFiberGPTrending = row["Broad Band + Fiber _$GP Trending"].ToString(),
                     TurboFeature = row["Turbo Feature"].ToString(),
                     TurboFeatureGP = row["Turbo Feature $GP"].ToString(),
@@ -6829,10 +6888,16 @@ namespace DWH_Reporting.Controllers
                     EntertainmentAch = row["Entertainment Ach"].ToString(),
                     EntertainmentTrending = row["Entertainment _Trending"].ToString(),
                     EntertainmentTrendingToGoalsPercentage = row["Entertainment Trending to Goals %"].ToString(),
-                    TWCDevicesQty = row["T#W#C Devices QTY"].ToString(),
-                    ChargeBack10 = row["Charge Back10"].ToString(),
-                    TWCDevicesQtyTrend = row["T,W,C Devices QTY Trend"].ToString(),
-                    TWCDevicesDollars = row["T,W,C Devices $"].ToString(),
+
+                    ConnectDevicesQty = row["Connect Devices Qty"].ToString(),
+                    ConnectDevicesQtyChargeBack = row["Connect Devices Qty Chargeback"].ToString(),
+                    ConnectDevicesQtyNetOff = row["Connect Devices Qty  Net OFF"].ToString(),
+                    ConnectDevicesGP = row["Connect Devices $GP"].ToString(),
+
+                    TWCDevicesQty = row["Tablet Wearable Upgrade Devices QTY"].ToString(),
+                    ChargeBack10 = row["Tablet Wearable Upgrade Devices QTY Charge Back"].ToString(),
+                    TWCDevicesQtyTrend = row["Tablet Wearable Upgrade Devices  QTY Trend"].ToString(),
+                    TWCDevicesDollars = row["Tablet Wearable Upgrade Devices QTY $GP"].ToString(),
                     ProjectedGeographicSpif = row["Projected Geographic spif"].ToString(),
                     PrepaidQty = row["Prepaid QTY"].ToString(),
                     PrepaidToGA = row["Prepaid to GA"].ToString(),
@@ -6840,6 +6905,9 @@ namespace DWH_Reporting.Controllers
                     ChargeBack11 = row["Charge Back11"].ToString(),
                     PrepaidGP = row["Prepaid $GP"].ToString(),
                     PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
+
+                    PrepaidWithAutopayGP = row["Prepaid with Autopay $GP"].ToString(),
+
                     AccessGP = row["Access $GP"].ToString(),
                     AccessQty = row["Access Qty"].ToString(),
                     AccessQtyTrending = row["Access Qty _Trending"].ToString(),
@@ -6850,6 +6918,9 @@ namespace DWH_Reporting.Controllers
                     TotalProtectionPercentage = row["Total Protection %"].ToString(),
                     ProtAdv1 = row["ProtAdv 1"].ToString(),
                     ProtAdv4 = row["ProtAdv 4"].ToString(),
+
+                    FeaturesRevenue = row["Features $Revenue"].ToString(),
+
                     FeaturesGP = row["Features $GP"].ToString(),
                     WeeklyBudgetedHRS = row["Weekly Budgeted HRS"].ToString(),
                     WeeklyEmployeeAveragePerStore = row["Weekly Employee Average Per store"].ToString(),
@@ -6859,12 +6930,18 @@ namespace DWH_Reporting.Controllers
                     MonthlyAchievedHoursTrending = row["Monthly Achived Hours Trending"].ToString(),
                     GACloseRt = row["GA Close Rt"].ToString(),
                     HomeTechProtect = row["HomeTech Protect"].ToString(),
+
+                    HomeTechProtectChargeBack = row["HomeTech Protect Charge Back"].ToString(),
+                    HomeTechProtectNetOff = row["HomeTech Protect Net OFF"].ToString(),
+                    HomeTechProtectGP = row["HomeTech Protect GP"].ToString(),
+
+                    //DateKey = row["DateKey"].ToString(),
                     //TimeStamp = row["TimeStamp"].ToString()
 
                     //New Dot Columns
                     NextUPTrendPer = row["Next UP Trend %"].ToString(),
                     PremiumPerGA = row["Premium % to GA"].ToString(),
-                    //ExtraPerGA = row["Extra % to GA"].ToString(),
+                    ExtraPerGA = row["Extra % to GA"].ToString(),
                     ExtraUnlMix70Per = row["Extra +Unl Mix (70%)"].ToString(),
                     TotalNewFiber = row["Total New Fiber"].ToString(),
                     FiberUpgTrend = row["Fiber Upgarde Trending"].ToString(),
