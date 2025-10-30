@@ -3610,180 +3610,226 @@
                         <td></td>
                         <td></td>
                         <td>${parseFloat((response.MonthlyAchievedHoursTrendingPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat(response.TotalTraffic || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.BroadbandFiberNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FiberGreenCheck || 0)).toLocaleString('en-US')}</td>
-                        <td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.CSAT || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.TrendingToBreakEven || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.TotalOPSGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.TotalOPS || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.MTDUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.TWCDevicesQtyGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.TWCDevicesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.AIABusinessConversion || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.AIAConsumerConversion || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.AIAGreenCheckConsumer || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.AIACInternet || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.AIABInternet || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.TotalOPSTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.OPSPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.CRUAchMTD || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FNAchMTD || 0)).toLocaleString('en-US')}</td>
-                        <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.GrossAdds || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.ChargeBack || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.GrossAddsGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.ARBusinessFNProgramAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FNAchAverageQTD || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.RemainingToAchieveFNAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FNAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>$${response.FNAchDollars ? parseFloat(response.FNAchDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.ARBusinessCRUProgramAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.CRUAchVoice || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.CRUAchDATA || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.RemainingToAchieveCRUAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.CRUAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>$${response.CRUAchVoiceDollars ? parseFloat(response.CRUAchVoiceDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.CRUAchDATADollars ? parseFloat(response.CRUAchDATADollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.MTDUpgrades || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack1 || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.MTDUpgradesTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.NextUp || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.NextUpSpif ? parseFloat(response.NextUpSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.PremiumActivation || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PremiumActivationNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack2 || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.PremiumActivationGP ? parseFloat(response.PremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.ExtraActivation || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ExtraActivationNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack3 || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.ExtraActivationGP ? parseFloat(response.ExtraActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.NonExtraNonPremiumActivation || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.NonExtraNonPremiumActivationNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.NonExtraNonPremiumActivationGP ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.PremiumUpgrade || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack4 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PremiumUpgradeNetOff || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.PremiumUpgradeGP ? parseFloat(response.PremiumUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.ExtraUpgrade || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack5 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ExtraUpgradeNetOff || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.ExtraUpgradeGP ? parseFloat(response.ExtraUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.AIAGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.AIAInternet || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack6 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.AIAInternetNetOff || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.AIATrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>$${parseFloat(response.AIAInternetGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.BroadbandGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.BroadbandLessThen300MB || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.NewFiber300MB || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.NewFiber500MB || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.NewFiber1G || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.TotalBroadbandNewFiber || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.BroadbandNewFiberNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack7 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FiberUpgrades || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FiberUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack8 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.BroadbandFiber || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${response.BroadbandLessThen300MBQISpiff ? parseFloat(response.BroadbandLessThen300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.NewFiber300MBQISpiff ? parseFloat(response.NewFiber300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.NewFiber500MBQISpiff ? parseFloat(response.NewFiber500MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.NewFiber1GQISpiff ? parseFloat(response.NewFiber1GQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.FiberUpgradeGP ? parseFloat(response.FiberUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.BroadbandGP ? parseFloat(response.BroadbandGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.BroadbandFiberGP ? parseFloat(response.BroadbandFiberGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.BroadbandFiberGPTrending ? parseFloat(response.BroadbandFiberGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.TurboFeature ? parseFloat(response.TurboFeature).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.TurboFeatureGP ? parseFloat(response.TurboFeatureGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.PremVideoGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PremVideo || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PremVideoNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack9 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PremVideoTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${response.PremVideoGP ? parseFloat(response.PremVideoGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.PremVideoSpiff ? parseFloat(response.PremVideoSpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.PremVideoGPTrending ? parseFloat(response.PremVideoGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.EntertainmentGoals || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.EntertainmentAch || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.EntertainmentTrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.EntertainmentTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.TWCDevicesQty || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack10 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.TWCDevicesQtyTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>$${response.TWCDevicesDollars ? parseFloat(response.TWCDevicesDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.ProjectedGeographicSpif ? parseFloat(response.ProjectedGeographicSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.PrepaidQty || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PrepaidToGA || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.PrepaidNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack11 || 0)).toLocaleString('en-US')}</td>
-                        <td>$${response.PrepaidGP ? parseFloat(response.PrepaidGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${(parseFloat(response.PrepaidWithAutopay || 0)).toLocaleString('en-US')}</td>
-                        <td>$${parseFloat(response.AccessGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.AccessQty || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.AccessQtyTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.AccessRevenue || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.FeaturesQty || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.FeaturesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ChargeBack12 || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat((response.TotalProtectionPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.ProtAdv1 || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.ProtAdv4 || 0)).toLocaleString('en-US')}</td>
-                        <td>$${parseFloat(response.FeaturesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.WeeklyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.WeeklyEmployeeAveragePerStore || 0).toFixed(0)).toLocaleString('en-US')}</td>
-                        <td>${(parseFloat(response.MonthlyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.MonthlyAchievedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat((response.GACloseRt || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.HomeTechProtect || 0)).toLocaleString('en-US')}</td>
-
-                        <td>${parseFloat((response.NextUPTrendPer || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.PremiumPerGA || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.ExtraPerGA || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat((response.ExtraUnlMix70Per || 0) * 100).toFixed(1)}%</td>
-                        <td>${parseFloat(response.TotalNewFiber || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.FiberUpgTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.TotalProt || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.TotalProtNetOFF || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.ProtAdv1NetOff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.ProtAdv4NetOff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.PrepQTYTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.AccessRevTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.WeeklyAchivedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.BudgEmp || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.FullTimeHourlyHeadCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.PartTimeHourlyHeadCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.TotalHourlyCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.HourlyHeadCntsVar || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${parseFloat(response.HourlyCurrHeadCntVarHrs || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-
+<td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.PPVGAPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat(response.TotalTraffic || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.FiberConversion || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.BroadbandFiberNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FiberGreenCheck || 0)).toLocaleString('en-US')}</td>
+<td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.CSAT || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
+<td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.TrendingToBreakEven || 0) * 100).toFixed(1)}%</td>
+<td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
+<td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.TotalOPSGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.TotalOPS || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.MTDUpgradesGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.MTDUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.TWCDevicesQtyGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.TWCDevicesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.AIABusinessConversion || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.AIAConsumerConversion || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.AIAGreenCheckConsumer || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.AIACInternet || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.AIABInternet || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat(response.TotalOPSTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.OPSPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.CRUAchMTD || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchMTDChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchMTDNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAGP || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNAchMTD || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNAchMTDChargeback || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNAchMTDNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNGP || 0)).toLocaleString('en-US')}</td>
+<td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.GrossAdds || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.ChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat(response.GrossAddsTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.GrossAddsGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.ARBusinessFNProgramAverageQ2Target || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNAchAverageQTD || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.RemainingToAchieveFNAverageQ2Target || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FNAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>$${response.FNAchDollars ? parseFloat(response.FNAchDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.ARBusinessCRUProgramAverageQ2Target || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchVoice || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchDATA || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.RemainingToAchieveCRUAverageQ2Target || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.CRUAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>$${response.CRUAchVoiceDollars ? parseFloat(response.CRUAchVoiceDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.CRUAchDATADollars ? parseFloat(response.CRUAchDATADollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.MTDUpgrades || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack1 || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat(response.MTDUpgNetOffWthOutValPls || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.MTDUpgradesTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.NextUp || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NextUpChrBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NextUpNetOff || 0)).toLocaleString('en-US')}</td>
+<td>$${response.NextUpSpif ? parseFloat(response.NextUpSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.PremiumActivation || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PremiumActivationNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack2 || 0)).toLocaleString('en-US')}</td>
+<td>$${response.PremiumActivationGP ? parseFloat(response.PremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.ExtraActivation || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ExtraActivationNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack3 || 0)).toLocaleString('en-US')}</td>
+<td>$${response.ExtraActivationGP ? parseFloat(response.ExtraActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.NonExtraNonPremiumActivation || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NonExtraNonPremiumActivationChargeback || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NonExtraNonPremiumActivationNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>$${response.NonExtraNonPremiumActivationGP ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ValuePlusActivation ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ValuePlusActivationNetOff ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ValuePlusActivationChargeBack ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ValuePlusToGAPercent ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ValuePlusActivationGP ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalActivation ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalActivationNetOff ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalActivationChargeBack ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalToGAPercent ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalActivationGP ? parseFloat(response.NonExtraNonPremiumActivationGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.PremiumUpgrade || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack4 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PremiumUpgradeNetOff || 0)).toLocaleString('en-US')}</td>
+<td>$${response.PremiumUpgradeGP ? parseFloat(response.PremiumUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalUpgrade ? parseFloat(response.DigitalUpgrade).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalUpgradeChargeBack ? parseFloat(response.DigitalUpgradeChargeBack).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalUpgradeNetOff ? parseFloat(response.DigitalUpgradeNetOff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.DigitalUpgradeGP ? parseFloat(response.DigitalUpgradeNetOff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.UpgradeValuePlus ? parseFloat(response.UpgradeValuePlus).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.ExtraUpgrade || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack5 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ExtraUpgradeNetOff || 0)).toLocaleString('en-US')}</td>
+<td>$${response.ExtraUpgradeGP ? parseFloat(response.ExtraUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.AIAGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.AIAInternet || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack6 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.AIAInternetNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.AIATrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>$${parseFloat(response.AIAInternetGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.AIAInternetSpiff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.BroadbandGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandLessThen300MB || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandLessThen300MBChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandLessThen300MBNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber300MB || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber300MBChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber300MBNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber500MB || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber500MBChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber500MBNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber1G || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber1GChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber1GNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiber || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiberChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiberNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.NewFiberNetGP || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.TotalBroadbandNewFiber || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandNewFiberNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack7 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FiberUpgrades || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FiberUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack8 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandFiber || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.BroadbandLessThen300MBQISpiff || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>$${response.NewFiber300MBQISpiff ? parseFloat(response.NewFiber300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.NewFiber500MBQISpiff ? parseFloat(response.NewFiber500MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.NewFiber1GQISpiff ? parseFloat(response.NewFiber1GQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.FiberUpgradeGP ? parseFloat(response.FiberUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.BroadbandGP ? parseFloat(response.BroadbandGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.BroadbandFiberGP ? parseFloat(response.BroadbandFiberGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.BroadbandFiberUpgGP ? parseFloat(response.BroadbandFiberUpgGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.BroadbandFiberGPTrending ? parseFloat(response.BroadbandFiberGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.TurboFeature ? parseFloat(response.TurboFeature).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.TurboFeatureGP ? parseFloat(response.TurboFeatureGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.PremVideoGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PremVideo || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PremVideoNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack9 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PremVideoTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
+<td>$${response.PremVideoGP ? parseFloat(response.PremVideoGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.PremVideoSpiff ? parseFloat(response.PremVideoSpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.PremVideoGPTrending ? parseFloat(response.PremVideoGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.EntertainmentGoals || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.EntertainmentAch || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.EntertainmentTrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.EntertainmentTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.ConnectDevicesQty || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ConnectDevicesQtyChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ConnectDevicesQtyNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ConnectDevicesGP || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.TWCDevicesQty || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack10 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.TWCDevicesQtyTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>$${response.TWCDevicesDollars ? parseFloat(response.TWCDevicesDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>$${response.ProjectedGeographicSpif ? parseFloat(response.ProjectedGeographicSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.PrepaidQty || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PrepaidToGA || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PrepaidNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack11 || 0)).toLocaleString('en-US')}</td>
+<td>$${response.PrepaidGP ? parseFloat(response.PrepaidGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+<td>${(parseFloat(response.PrepaidWithAutopay || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.PrepaidWithAutopayGP || 0)).toLocaleString('en-US')}</td>
+<td>$${parseFloat(response.AccessGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.AccessQty || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat(response.AccessQtyTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.AccessRevenue || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.FeaturesQty || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.FeaturesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ChargeBack12 || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.TotalProtectionPercentage || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.ProtAdv1 || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.ProtAdv4 || 0)).toLocaleString('en-US')}</td>
+<td>$${parseFloat(response.FeaturesRevenue || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>$${parseFloat(response.FeaturesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${(parseFloat(response.WeeklyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.WeeklyEmployeeAveragePerStore || 0).toFixed(0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.MonthlyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat(response.MonthlyAchievedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat((response.GACloseRt || 0) * 100).toFixed(1)}%</td>
+<td>${(parseFloat(response.HomeTechProtect || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.HomeTechProtectChargeBack || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.HomeTechProtectNetOff || 0)).toLocaleString('en-US')}</td>
+<td>${(parseFloat(response.HomeTechProtectGP || 0)).toLocaleString('en-US')}</td>
+<td>${parseFloat((response.NextUPTrendPer || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.PremiumPerGA || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.ExtraPerGA || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat((response.ExtraUnlMix70Per || 0) * 100).toFixed(1)}%</td>
+<td>${parseFloat(response.TotalNewFiber || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.FiberUpgTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.TotalProt || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.TotalProtNetOFF || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.ProtAdv1NetOff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.ProtAdv4NetOff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.PrepQTYTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.AccessRevTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.WeeklyAchivedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.BudgEmp || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.FullTimeHourlyHeadCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.PartTimeHourlyHeadCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.TotalHourlyCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.HourlyHeadCntsVar || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+<td>${parseFloat(response.HourlyCurrHeadCntVarHrs || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                     </tr>
                 `;
 
