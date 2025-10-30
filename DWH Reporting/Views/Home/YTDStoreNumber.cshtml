@@ -2827,9 +2827,9 @@
                 XLSX.utils.book_append_sheet(wb, ws, t.name);
             }
         });
-        const btn = document.getElementById("toggleBtn");
-        const isEOM = btn.innerText === "MTD";
-        const filename = isEOM ? "StoreNumberReport EOM.xlsx" : "StoreNumberReport MTD.xlsx";
+        //const btn = document.getElementById("toggleBtn");
+        //const isEOM = btn.innerText === "MTD";
+        const filename = "YTDStoreNumberReport.xlsx";
         XLSX.writeFile(wb, filename);
     }
 
@@ -3448,7 +3448,7 @@
         document.getElementById('Tiers').selectedIndex = -1;
         document.getElementById('Stores').selectedIndex = -1;
         document.getElementById('Market').selectedIndex = -1;
-        document.getElementById('MULMngr').selectedIndex = -1;
+        document.getElementById('SD').selectedIndex = -1;
         document.getElementById('TM').selectedIndex = -1;
 
         const textSearchInputTM = document.getElementById('textSearchTM');
@@ -3600,7 +3600,7 @@
         MARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
     }
     function resetmmmDropdown() {
-        var mmMARKETSelect = document.getElementById('MULMngr');
+        var mmMARKETSelect = document.getElementById('SD');
         mmMARKETSelect.innerHTML = '';  // Clear all existing options
 
         if (mmmList.length > 0) {
