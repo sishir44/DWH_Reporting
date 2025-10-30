@@ -5857,11 +5857,7 @@ namespace DWH_Reporting.Controllers
 
             ViewData["GetFct_StoreNumberTotalNew"] = lisn_tot;
 
-            ///////////////////////////////////////////////////////////////////////////////
-
-
             ////////////////Get TM Total
-
             DataTable Fct_StoreNumberTotalTM = GP_DAL_Functions.GetFct_StoreNumberTotalTMNew(dateParam, UserID, isfinal);
             List<Fct_StoreNumberAttributesModel> lisn_totTM = new List<Fct_StoreNumberAttributesModel>();
 
@@ -6408,24 +6404,6 @@ namespace DWH_Reporting.Controllers
 
             ViewData["GetFct_StoreNumberTotalSDNew"] = lisn_totMMM;
 
-            ///////////////////////////////////////////////////////////////////////////////
-            //For Last TimeStamp
-            //if (Fct_StoreNumber != null && Fct_StoreNumber.Rows.Count > 0)
-            //{
-            //    // Use LINQ to find the latest TimeStamp
-            //    var latestTimeStamp = Fct_StoreNumber.AsEnumerable()
-            //                                         .Max(row => row.Field<DateTime>("TimeStamp"));
-            //    var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
-            //    // Output the result
-            //    ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
-            //                                                                               // Subtract one day from the TimeStamp
-            //    ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
-            //}
-            //else
-            //{
-            //    ViewBag.LatestTimeStamp = "No data available";
-            //}
-
             //For Filters
             List<SelectListItem> vpList = new List<SelectListItem>();
             List<SelectListItem> regionList = new List<SelectListItem>();
@@ -6544,32 +6522,6 @@ namespace DWH_Reporting.Controllers
                 //    Text = roleName
                 //});
             }
-
-            ////Unique record working in list
-            //if (vpList != null && vpList.Count > 0)
-            //{
-            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-            //    var distinctVPList = vpList.GroupBy(x => x.Value)
-            //                               .Select(g => g.First()) // Or group by x.Text if needed
-            //                               .ToList();
-            //    ViewBag.VPList = distinctVPList;
-            //}
-            //else
-            //{
-            //    ViewBag.VPList = new List<SelectListItem>();
-            //}
-            //if (regionList != null && regionList.Count > 0)
-            //{
-            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-            //    var distinctRegionList = regionList.GroupBy(x => x.Value)
-            //                               .Select(g => g.First()) // Or group by x.Text if needed
-            //                               .ToList();
-            //    ViewBag.RegionList = distinctRegionList;
-            //}
-            //else
-            //{
-            //    ViewBag.RegionList = new List<SelectListItem>();
-            //}
             if (sdList != null && sdList.Count > 0)
             {
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
@@ -6654,30 +6606,6 @@ namespace DWH_Reporting.Controllers
             {
                 ViewBag.TMList = new List<SelectListItem>();
             }
-            //if (rsmList != null && rsmList.Count > 0)
-            //{
-            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-            //    var distinctRSMList = rsmList.GroupBy(x => x.Value)
-            //                               .Select(g => g.First()) // Or group by x.Text if needed
-            //                               .ToList();
-            //    ViewBag.RSMList = distinctRSMList;
-            //}
-            //else
-            //{
-            //    ViewBag.RSMList = new List<SelectListItem>();
-            //}
-            //if (roleList != null && roleList.Count > 0)
-            //{
-            //    // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
-            //    var distinctRoleList = roleList.GroupBy(x => x.Value)
-            //                               .Select(g => g.First()) // Or group by x.Text if needed
-            //                               .ToList();
-            //    ViewBag.RoleList = distinctRoleList;
-            //}
-            //else
-            //{
-            //    ViewBag.RoleList = new List<SelectListItem>();
-            //}
         }
 
         [HttpPost]
