@@ -25,6 +25,7 @@
     <link rel="shortcut icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
 
     @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -3439,7 +3440,8 @@
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
-        $('tr.filter_data').remove();
+        //$('tr.filter_data').remove();
+        $('#tbl').load(window.location.href + ' #tbl');
         // Clear the selected options in all the dropdowns
         document.getElementById('Tiers').selectedIndex = -1;
         document.getElementById('Stores').selectedIndex = -1;
@@ -3458,6 +3460,10 @@
         const textSearchInputMULMngr = document.getElementById('textSearchMULMngr');
         if (textSearchInputMULMngr) {
             textSearchInputMULMngr.value = '';
+        }
+        const textSearchInputSD = document.getElementById('textSearchSD');
+        if (textSearchInputSD) {
+            textSearchInputSD.value = '';
         }
         const textSearchInputStores = document.getElementById('textSearchStores');
         if (textSearchInputStores) {
@@ -3480,11 +3486,11 @@
 
         ////////////////////////////////
         // Restore the all dropdown to its original state
-        resetTIERSDropdown();
-        resetStoresDropdown();
-        resetMarketDropdown();
-        resetmmmDropdown();
+        resetSdDropdown();
         resetTMDropdown();
+        resetMarketDropdown();
+        resetStoresDropdown();
+        resetTIERSDropdown();
 
         // Use the DataTables custom filter API to clear any search
         $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
@@ -3636,6 +3642,47 @@
 
         mmMARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
     }
+
+    function resetSdDropdown() {
+        var mmMARKETSelect = document.getElementById('SD');
+        mmMARKETSelect.innerHTML = '';  // Clear all existing options
+
+        if (SDList.length > 0) {
+            // Repopulate mmMARKET dropdown with the options from mmMarketList array
+            SDList.forEach(function (item) {
+                var option = document.createElement('option');
+                option.value = item.Value;
+                option.text = item.Text;
+                // Apply custom styles to the option
+                option.style.backgroundColor = '#3A75D0';
+                option.style.color = 'white';
+                option.style.borderRadius = '6px';
+                option.style.marginBottom = '5px';
+                option.style.fontSize = '10px';
+                option.style.textAlign = 'center';
+                option.classList.add('optionfilter');
+                mmMARKETSelect.add(option);
+            });
+        } else {
+            // Add a "No mmMARKET available" option if necessary
+            var noOption = document.createElement('option');
+            noOption.disabled = true;
+            noOption.text = 'No Multi Market Manager available';
+
+            // Apply custom styles to the "No mmMARKET" option
+            noOption.style.backgroundColor = 'lightblue';
+            noOption.style.color = 'black';
+            noOption.style.borderRadius = '7px';
+            noOption.style.padding = '5px 0';
+            noOption.style.marginBottom = '8px';
+            nooption.style.fontSize = '12px';
+
+            mmMARKETSelect.add(noOption);
+        }
+
+        mmMARKETSelect.disabled = false;  // Ensure MARKET dropdown is enabled after clearing filters
+    }
+
     function resetStoresDropdown() {
         var STORESSelect = document.getElementById('Stores');
         STORESSelect.innerHTML = '';  // Clear all existing options
@@ -5696,6 +5743,14 @@
         </text>
     }
 
+    var SDList = [];
+
+@if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+{
+    <text>
+SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
+    </text>
+}
 
     var mmmList = [];
 
@@ -5879,9 +5934,6 @@
    });
 
 </script>
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     function getLastDayOfMonth(year, month) {

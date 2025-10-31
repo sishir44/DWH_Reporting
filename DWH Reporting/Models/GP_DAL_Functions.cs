@@ -695,7 +695,7 @@ namespace DWH_Reporting.Models
             {
                 DAL objDal = new DAL();
                 // objDal.ProcName = "GetFct_StoreNumberTotalMMM";
-                objDal.ProcName = "GetFct_StoreNumberTotalupdatesd";
+                objDal.ProcName = "GetFct_StoreNumberTotalupdateSD";
 
                 SPParameters spParam = new SPParameters();
                 spParam.SetParam("@DateParam", SqlDbType.DateTime, dateParam);
