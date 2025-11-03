@@ -3294,7 +3294,8 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    HomeInternet = row["Home Internet"].ToString()
 
                 };
             }
