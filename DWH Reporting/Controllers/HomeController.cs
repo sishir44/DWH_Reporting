@@ -5526,7 +5526,6 @@ namespace DWH_Reporting.Controllers
                     ChargeBack11 = row["Charge Back11"].ToString(),
                     PrepaidGP = row["Prepaid $GP"].ToString(),
                     PrepaidWithAutopay = row["Prepaid with Autopay"].ToString(),
-
                     PrepaidWithAutopayGP = row["Prepaid with Autopay $GP"].ToString(),
 
                     AccessGP = row["Access $GP"].ToString(),
