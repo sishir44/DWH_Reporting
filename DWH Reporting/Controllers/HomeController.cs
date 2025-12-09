@@ -84,23 +84,16 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-
                 //userID = Request.QueryString["userid"]; ;
                 //string name;
                 //name = Session["username"].ToString();
                 //userID = Session["userid"].ToString();
                 //Common.recorderror("Sessionuserid", userID, "", "0");
                 //Common.recorderror("Sessionuname", name, "", "0");
-
                 global.userID = Request.QueryString["userid"];
-
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                
-
                 ShowStoreNumber(null, global.decrpedUserId,"0");
-
                 return View();
-
             }
             catch (Exception ex)
             {
