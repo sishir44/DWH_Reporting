@@ -929,14 +929,14 @@
                                    id="selectedDate"
                                    class="form-control"
                                    title="Select Date"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                                   style="width: 140px; background-color: #A5CFF0; font-size: 12px; font-weight: bold; color: #383b3f; height: 30px; border: black; display: none;" />
 
                             <!-- Monthly Picker (Hidden initially) -->
                             <input type="month"
                                    id="monthPicker"
                                    class="form-control"
                                    title="Select Month"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
+                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
                         }
 
                         <!-- Toggle Button -->
@@ -6046,10 +6046,9 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
     }
 
     function toggleMtdEom() {
-
         $('#tblDetBdy').empty("");
-        const isFinal = $('#isFinal').val();
-        const newIsFinal = isFinal === "0" ? "1" : "0";
+        const isFinal = "0";//$('#isFinal').val();
+        const newIsFinal = isFinal //=== "0" ? "1" : "0";
         let datefilter = "";
 
         $('#isFinal').val(newIsFinal);
