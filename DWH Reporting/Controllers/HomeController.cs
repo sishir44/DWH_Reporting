@@ -5266,7 +5266,8 @@ namespace DWH_Reporting.Controllers
                     if (isfinal == "0")
                     {
                         var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
-                        var adjustedTimeStamp = latestTimeStamp.AddDays(-1).Date;
+                        //var adjustedTimeStamp = latestTimeStamp.AddDays(-1).Date;
+                        var adjustedTimeStamp = DateTime.ParseExact(Fct_StoreNumber.Rows[0]["DateKey"].ToString(), "yyyyMMdd", null);
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
                     }
@@ -5286,7 +5287,8 @@ namespace DWH_Reporting.Controllers
                     if (isfinal == "0")
                     {
                         var latestTimeStamp = Fct_StoreNumber.AsEnumerable().Max(row => row.Field<DateTime>("TimeStamp"));
-                        var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                        //var adjustedTimeStamp = latestTimeStamp.AddDays(-1);
+                        var adjustedTimeStamp = Fct_StoreNumber.AsEnumerable().Where(row => row["DateKey"] != DBNull.Value).Max(row => DateTime.ParseExact(row["DateKey"].ToString(), "yyyyMMdd", null));
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
                     }
