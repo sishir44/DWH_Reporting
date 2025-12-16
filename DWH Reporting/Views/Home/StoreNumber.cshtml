@@ -6097,6 +6097,12 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
             },
             success: function (html) {
 
+                if (html.redirect === true) {
+                    window.location.href = html.url;
+                    return;
+                }
+
+
                 // Parse returned HTML string
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(html, 'text/html');

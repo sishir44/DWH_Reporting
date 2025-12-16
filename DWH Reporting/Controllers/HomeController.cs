@@ -80,7 +80,7 @@ namespace DWH_Reporting.Controllers
         }
 
        //[Authorization]
-        public ActionResult StoreNumber()
+        public ActionResult StoreNumber(string selectedDate)
         {
             try
             {
@@ -92,7 +92,8 @@ namespace DWH_Reporting.Controllers
                 //Common.recorderror("Sessionuname", name, "", "0");
                 global.userID = Request.QueryString["userid"];
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                ShowStoreNumber(null, global.decrpedUserId,"0");
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumber(selectedDate, global.decrpedUserId,"0");
                 return View();
             }
             catch (Exception ex)
@@ -106,7 +107,27 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                if(selectedDate == "")
+                if (!string.IsNullOrEmpty(selectedDate))
+                {
+                    DateTime selDate = DateTime.Parse(selectedDate);
+                    DateTime compareDate = new DateTime(2025, 12, 01);
+
+                    if (selDate >= compareDate)
+                    {
+                        string dateParam = selDate.ToString("yyyy-MM-dd");
+                        if (Request.IsAjaxRequest())
+                        {
+                            return Json(new
+                            {
+                                redirect = true,
+                                url = Url.Action("StoreNumberNew", "Home", new { selectedDate = dateParam })
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        return RedirectToAction("StoreNumberNew", "Home", new { selectedDate = dateParam });
+                    }
+                }
+
+                if (selectedDate == "")
                 {
                     selectedDate = null;
                 }
@@ -4772,7 +4793,6 @@ namespace DWH_Reporting.Controllers
                 ViewBag.TMList = new List<SelectListItem>();
             }
         }
-
         [HttpPost]
         public JsonResult YTDFilterGrandTotal(string dateParam, string Sd, string TM, string MKT, string MMM, string Stores, string Tiers, string isfinal, string UserID)
         {
@@ -5174,24 +5194,14 @@ namespace DWH_Reporting.Controllers
         //==================== End YTD Report ====================
 
         //==================== Start New Store Number Report ====================
-        public ActionResult StoreNumberNew()
+        public ActionResult StoreNumberNew(string selectedDate)
         {
             try
             {
-
-                //userID = Request.QueryString["userid"]; ;
-                //string name;
-                //name = Session["username"].ToString();
-                //userID = Session["userid"].ToString();
-                //Common.recorderror("Sessionuserid", userID, "", "0");
-                //Common.recorderror("Sessionuname", name, "", "0");
-
                 global.userID = Request.QueryString["userid"];
-
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-
-
-                ShowStoreNumberNew(null, global.decrpedUserId, "0");
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
 
                 return View();
 
@@ -5207,6 +5217,22 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
+                DateTime selDate = DateTime.Parse(selectedDate);
+                DateTime compareDate = new DateTime(2025, 12, 01);
+                if (selDate < compareDate)
+                {
+                    string dateParam = selDate.ToString("yyyy-MM-dd");
+                    if (Request.IsAjaxRequest())
+                    {
+                        return Json(new
+                        {
+                            redirect = true,
+                            url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
+                        }, JsonRequestBehavior.AllowGet);
+                    }
+                    return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
+                }
+
                 if (selectedDate == "")
                 {
                     selectedDate = null;
