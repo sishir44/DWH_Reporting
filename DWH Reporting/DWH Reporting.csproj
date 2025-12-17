@@ -342,7 +342,7 @@
     <Content Include="Views\Home\StoreNo.cshtml" />
     <Content Include="Views\Home\EmpNo.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\StoreNumber.cshtml" />
+    <Content Include="Views\Home\StoreNumberOld.cshtml" />
     <Content Include="Views\Home\EmployeeNumber.cshtml" />
     <Content Include="Views\Home\TrendingCommission.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -357,13 +357,13 @@
     <Content Include="Views\MobilyMtdUploader\StoreNumberUploader.cshtml" />
     <Content Include="Views\MobileView\StoreNumberMobileView.cshtml" />
     <Content Include="Views\MobileView\SummaryMobileView.cshtml" />
-    <Content Include="Views\Shared\_StoreNumber.cshtml" />
+    <Content Include="Views\Shared\_StoreNumberOld.cshtml" />
     <Content Include="Views\Shared\_Summary.cshtml" />
     <Content Include="Views\Home\YTDStoreNumber.cshtml" />
     <Content Include="Views\Shared\_YTDStoreNumber.cshtml" />
     <Content Include="Views\Shared\_CommonEOMDateFormat.cshtml" />
-    <Content Include="Views\Home\StoreNumberNew.cshtml" />
-    <Content Include="Views\Shared\_StoreNumberNew.cshtml" />
+    <Content Include="Views\Home\StoreNumber.cshtml" />
+    <Content Include="Views\Shared\_StoreNumber.cshtml" />
     <Content Include="Views\Shared\_StoreNumberM.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
