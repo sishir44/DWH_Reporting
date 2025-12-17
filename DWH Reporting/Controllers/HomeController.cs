@@ -80,7 +80,7 @@ namespace DWH_Reporting.Controllers
         }
 
        //[Authorization]
-        public ActionResult StoreNumber(string selectedDate)
+        public ActionResult StoreNumberOld(string selectedDate)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumber(string selectedDate, string isfinal)
+        public ActionResult StoreNumberOld(string selectedDate, string isfinal)
         {
             try
             {
@@ -120,10 +120,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumberNew", "Home", new { selectedDate = dateParam })
+                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumberNew", "Home", new { selectedDate = dateParam });
+                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
                     }
                 }
 
@@ -160,7 +160,7 @@ namespace DWH_Reporting.Controllers
                 if(isfinal == "1") { 
                     if (Request.IsAjaxRequest()) // If AJAX, return the fragment
                     {
-                        return PartialView("_StoreNumber"); 
+                        return PartialView("_StoreNumberOld"); 
                     }
                 }
 
@@ -5194,7 +5194,7 @@ namespace DWH_Reporting.Controllers
         //==================== End YTD Report ====================
 
         //==================== Start New Store Number Report ====================
-        public ActionResult StoreNumberNew(string selectedDate)
+        public ActionResult StoreNumber(string selectedDate)
         {
             try
             {
@@ -5213,7 +5213,7 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumberNew(string selectedDate, string isfinal)
+        public ActionResult StoreNumber(string selectedDate, string isfinal)
         {
             try
             {
@@ -5227,10 +5227,10 @@ namespace DWH_Reporting.Controllers
                         return Json(new
                         {
                             redirect = true,
-                            url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
+                            url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
                         }, JsonRequestBehavior.AllowGet);
                     }
-                    return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
+                    return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
                 }
 
                 if (selectedDate == "")
@@ -5267,7 +5267,7 @@ namespace DWH_Reporting.Controllers
                 {
                     if (Request.IsAjaxRequest()) // If AJAX, return the fragment
                     {
-                        return PartialView("_StoreNumberNew");
+                        return PartialView("_StoreNumber");
                     }
                 }
 
