@@ -110,7 +110,7 @@ namespace DWH_Reporting.Controllers
                 if (!string.IsNullOrEmpty(selectedDate))
                 {
                     DateTime selDate = DateTime.Parse(selectedDate);
-                    DateTime compareDate = new DateTime(2025, 12, 01);
+                    DateTime compareDate = new DateTime(2026, 02, 01);
 
                     if (selDate >= compareDate)
                     {
@@ -5194,16 +5194,19 @@ namespace DWH_Reporting.Controllers
         //==================== End YTD Report ====================
 
         //==================== Start New Store Number Report ====================
+        [HttpGet]
         public ActionResult StoreNumber(string selectedDate)
         {
             try
             {
-                global.userID = Request.QueryString["userid"];
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                ViewBag.selectedDate = selectedDate;
-                ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
+                return RedirectToAction("StoreNumberOld");
 
-                return View();
+                //global.userID = Request.QueryString["userid"];
+                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                //ViewBag.selectedDate = selectedDate;
+                //ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
+
+                //return View();
 
             }
             catch (Exception ex)
