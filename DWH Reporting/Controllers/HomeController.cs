@@ -107,25 +107,25 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(selectedDate))
-                {
-                    DateTime selDate = DateTime.Parse(selectedDate);
-                    DateTime compareDate = new DateTime(2026, 02, 01);
+                //if (!string.IsNullOrEmpty(selectedDate))
+                //{
+                //    DateTime selDate = DateTime.Parse(selectedDate);
+                //    DateTime compareDate = new DateTime(2026, 02, 01);
 
-                    if (selDate >= compareDate)
-                    {
-                        string dateParam = selDate.ToString("yyyy-MM-dd");
-                        if (Request.IsAjaxRequest())
-                        {
-                            return Json(new
-                            {
-                                redirect = true,
-                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
-                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
-                    }
-                }
+                //    if (selDate >= compareDate)
+                //    {
+                //        string dateParam = selDate.ToString("yyyy-MM-dd");
+                //        if (Request.IsAjaxRequest())
+                //        {
+                //            return Json(new
+                //            {
+                //                redirect = true,
+                //                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
+                //            }, JsonRequestBehavior.AllowGet);
+                //        }
+                //        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
+                //    }
+                //}
 
                 if (selectedDate == "")
                 {
