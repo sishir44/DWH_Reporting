@@ -7214,24 +7214,24 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                if (!string.IsNullOrEmpty(selectedDate))
-                {
-                    DateTime selDate = DateTime.Parse(selectedDate);
-                    DateTime compareDate = new DateTime(2025, 12, 01);
-                    if (selDate < compareDate)
-                    {
-                        string dateParam = selDate.ToString("yyyy-MM-dd");
-                        if (Request.IsAjaxRequest())
-                        {
-                            return Json(new
-                            {
-                                redirect = true,
-                                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
-                            }, JsonRequestBehavior.AllowGet);
-                        }
-                        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
-                    }
-                }
+                //if (!string.IsNullOrEmpty(selectedDate))
+                //{
+                //    DateTime selDate = DateTime.Parse(selectedDate);
+                //    DateTime compareDate = new DateTime(2025, 12, 01);
+                //    if (selDate < compareDate)
+                //    {
+                //        string dateParam = selDate.ToString("yyyy-MM-dd");
+                //        if (Request.IsAjaxRequest())
+                //        {
+                //            return Json(new
+                //            {
+                //                redirect = true,
+                //                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
+                //            }, JsonRequestBehavior.AllowGet);
+                //        }
+                //        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
+                //    }
+                //}
 
                 if (selectedDate == "")
                 {
@@ -7267,7 +7267,7 @@ namespace DWH_Reporting.Controllers
                 {
                     if (Request.IsAjaxRequest()) // If AJAX, return the fragment
                     {
-                        return PartialView("_StoreNumber");
+                        return PartialView("_StoreNumberNew");
                     }
                 }
 
