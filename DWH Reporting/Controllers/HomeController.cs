@@ -5215,6 +5215,7 @@ namespace DWH_Reporting.Controllers
             }
 
         }
+        
         [HttpPost]
         public ActionResult StoreNumber(string selectedDate, string isfinal)
         {
@@ -7188,5 +7189,96 @@ namespace DWH_Reporting.Controllers
             }
             return Json(result);
         }
+
+        // Store Number New Testing Purpose Start
+        public ActionResult StoreNumberNew(string selectedDate)
+        {
+            try
+            {
+                global.userID = Request.QueryString["userid"];
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
+
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+
+        }
+        [HttpPost]
+        public ActionResult StoreNumberNew(string selectedDate, string isfinal)
+        {
+            try
+            {
+                if (!string.IsNullOrEmpty(selectedDate))
+                {
+                    DateTime selDate = DateTime.Parse(selectedDate);
+                    DateTime compareDate = new DateTime(2025, 12, 01);
+                    if (selDate < compareDate)
+                    {
+                        string dateParam = selDate.ToString("yyyy-MM-dd");
+                        if (Request.IsAjaxRequest())
+                        {
+                            return Json(new
+                            {
+                                redirect = true,
+                                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
+                    }
+                }
+
+                if (selectedDate == "")
+                {
+                    selectedDate = null;
+                }
+                ViewBag.isfinal = isfinal;
+
+                if (isfinal == "1")
+                {
+                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    if (selectedDate == "" || selectedDate == null)
+                    {
+                        selectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
+                    if (DateTime.TryParse(selectedDate, out DateTime dateRangeParsed))
+                    {
+                        if (firstDayOfMonth <= dateRangeParsed)
+                        {
+                            DateTime lastDayPrevMonth = firstDayOfMonth.AddDays(-1);
+                            selectedDate = lastDayPrevMonth.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime lastDayOfMonth = new DateTime(dateRangeParsed.Year, dateRangeParsed.Month, 1).AddMonths(1).AddDays(-1);
+                            selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    if (Request.IsAjaxRequest()) // If AJAX, return the fragment
+                    {
+                        return PartialView("_StoreNumber");
+                    }
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+        }
+        // Store Number New Testing Purpose End
+
     }
 }

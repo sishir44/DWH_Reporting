@@ -365,6 +365,8 @@
     <Content Include="Views\Home\StoreNumber.cshtml" />
     <Content Include="Views\Shared\_StoreNumber.cshtml" />
     <Content Include="Views\Shared\_StoreNumberM.cshtml" />
+    <Content Include="Views\Home\StoreNumberNew.cshtml" />
+    <Content Include="Views\Shared\_StoreNumberNew.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
