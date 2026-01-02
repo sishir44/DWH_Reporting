@@ -3542,8 +3542,9 @@
 <script>
 
     function refresh() {
-        location.reload();
+        window.location.href = '../Home/StoreNumber';
     }
+
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
         //$('tr.filter_data').remove();
@@ -3889,7 +3890,7 @@
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData(event) {
-        debugger
+        
         // Get TM select element
         var tmSelect = document.getElementById('TM');
         // Text of the option that was last clicked
@@ -3943,7 +3944,7 @@
         }
     }
     function TMfilterSDOptions(selectedValues) {
-        debugger
+        
         var SDSelect = document.getElementById('SD');
         // Clear the SD dropdown
         SDSelect.innerHTML = '';
@@ -3995,7 +3996,7 @@
     }
 
     function TMfilterTMOptions(selectedValues) {
-        debugger
+        
         var TMSelect = document.getElementById('TM');
         // Clear the TM dropdown
         TMSelect.innerHTML = '';
@@ -4046,7 +4047,7 @@
         }
     }
     function TMfilterMarketOptions(selectedValues) {
-        debugger
+        
         var MarketSelect = document.getElementById('Market');
         var TMSelect = document.getElementById('TM');
         //console.log(MarketSelect);
