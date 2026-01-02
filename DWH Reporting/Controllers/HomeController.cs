@@ -107,25 +107,25 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                //if (!string.IsNullOrEmpty(selectedDate))
-                //{
-                //    DateTime selDate = DateTime.Parse(selectedDate);
-                //    DateTime compareDate = new DateTime(2026, 02, 01);
+                if (!string.IsNullOrEmpty(selectedDate))
+                {
+                    DateTime selDate = DateTime.Parse(selectedDate);
+                    DateTime compareDate = new DateTime(2026, 01, 01);
 
-                //    if (selDate >= compareDate)
-                //    {
-                //        string dateParam = selDate.ToString("yyyy-MM-dd");
-                //        if (Request.IsAjaxRequest())
-                //        {
-                //            return Json(new
-                //            {
-                //                redirect = true,
-                //                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
-                //            }, JsonRequestBehavior.AllowGet);
-                //        }
-                //        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
-                //    }
-                //}
+                    if (selDate >= compareDate)
+                    {
+                        string dateParam = selDate.ToString("yyyy-MM-dd");
+                        if (Request.IsAjaxRequest())
+                        {
+                            return Json(new
+                            {
+                                redirect = true,
+                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
+                    }
+                }
 
                 if (selectedDate == "")
                 {
@@ -5199,14 +5199,14 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                return RedirectToAction("StoreNumberOld");
+                //return RedirectToAction("StoreNumberOld");
 
-                //global.userID = Request.QueryString["userid"];
-                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                //ViewBag.selectedDate = selectedDate;
-                //ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
+                global.userID = Request.QueryString["userid"];
+                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
 
-                //return View();
+                return View();
 
             }
             catch (Exception ex)
@@ -5224,7 +5224,7 @@ namespace DWH_Reporting.Controllers
                 if (!string.IsNullOrEmpty(selectedDate))
                 {
                     DateTime selDate = DateTime.Parse(selectedDate);
-                    DateTime compareDate = new DateTime(2025, 12, 01);
+                    DateTime compareDate = new DateTime(2026, 01, 01);
                     if (selDate < compareDate)
                     {
                         string dateParam = selDate.ToString("yyyy-MM-dd");
@@ -7214,25 +7214,6 @@ namespace DWH_Reporting.Controllers
         {
             try
             {
-                //if (!string.IsNullOrEmpty(selectedDate))
-                //{
-                //    DateTime selDate = DateTime.Parse(selectedDate);
-                //    DateTime compareDate = new DateTime(2025, 12, 01);
-                //    if (selDate < compareDate)
-                //    {
-                //        string dateParam = selDate.ToString("yyyy-MM-dd");
-                //        if (Request.IsAjaxRequest())
-                //        {
-                //            return Json(new
-                //            {
-                //                redirect = true,
-                //                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
-                //            }, JsonRequestBehavior.AllowGet);
-                //        }
-                //        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
-                //    }
-                //}
-
                 if (selectedDate == "")
                 {
                     selectedDate = null;
