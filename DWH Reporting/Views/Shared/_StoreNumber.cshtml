@@ -1107,7 +1107,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 178; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 176; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1290,7 +1290,7 @@
                                     <td>New Fiber $GP</td>
 
                                     <td>Broadband + New Fiber $GP</td>
-                                    <td>Broad Band + Fiber Upgrade $GP</td>
+                                    @*<td>Broad Band + Fiber Upgrade $GP</td>*@
                                     <td>Broad Band + Fiber _$GP Trending</td>
                                     <td>Turbo Feature</td>
                                     <td>Turbo Feature $GP</td>
@@ -1300,7 +1300,7 @@
                                     <!--<td>Prem Video Charge Back</td>-->
                                     <td>Prem Video Trend</td>
                                     <td>Prem Video Trend %</td>
-                                    <td>Prem Video $GP</td>
+                                    @*<td>Prem Video $GP</td>*@
                                     <td>Prem Video Spiff</td>
                                     <td>Prem Video $GP Trending</td>
                                     <td>Entertainment Goals</td>
@@ -1549,7 +1549,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetGP != null ? record.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetGP)))</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
+                                        @*<td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>*@
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -1559,7 +1559,7 @@
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.ChargeBack9 != null ? record.ChargeBack9.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack9)))</td>-->
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrend != null ? record.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoTrend)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PremVideoTrendPercentage)) * 100))%</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGP)))</td>
+                                        @*<td>$@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGP)))</td>*@
                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoSpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGPTrending != null ? record.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.EntertainmentGoals != null ? record.EntertainmentGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.EntertainmentGoals)))</td>
@@ -1841,7 +1841,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetGP != null ? record2.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetGP)))</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGP != null ? record2.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGP)))</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberUpgGP != null ? record2.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberUpgGP)))</td>
+                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberUpgGP != null ? record2.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberUpgGP)))</td>*@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGPTrending != null ? record2.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TurboFeature != null ? record2.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TurboFeatureGP != null ? record2.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeatureGP)))</td>
@@ -1851,7 +1851,7 @@
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.ChargeBack9 != null ? record2.ChargeBack9.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.ChargeBack9)))</td>-->
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrend != null ? record2.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoTrend)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PremVideoTrendPercentage)) * 100))%</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGP != null ? record2.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGP)))</td>
+                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGP != null ? record2.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGP)))</td>*@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoSpiff != null ? record2.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoSpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGPTrending != null ? record2.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentGoals != null ? record2.EntertainmentGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.EntertainmentGoals)))</td>
@@ -2116,7 +2116,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetGP != null ? record2.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetGP)))</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGP != null ? record2.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGP)))</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberUpgGP != null ? record2.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberUpgGP)))</td>
+                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberUpgGP != null ? record2.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberUpgGP)))</td>*@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGPTrending != null ? record2.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TurboFeature != null ? record2.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TurboFeatureGP != null ? record2.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeatureGP)))</td>
@@ -2126,7 +2126,7 @@
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.ChargeBack9 != null ? record2.ChargeBack9.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.ChargeBack9)))</td>-->
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrend != null ? record2.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoTrend)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PremVideoTrendPercentage)) * 100))%</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGP != null ? record2.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGP)))</td>
+                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGP != null ? record2.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGP)))</td>*@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoSpiff != null ? record2.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoSpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PremVideoGPTrending != null ? record2.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.EntertainmentGoals != null ? record2.EntertainmentGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.EntertainmentGoals)))</td>
@@ -2560,7 +2560,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetGP != null ? record.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetGP)))</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>
+                                        @*<td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberUpgGP != null ? record.BroadbandFiberUpgGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberUpgGP)))</td>*@
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -2570,7 +2570,7 @@
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.ChargeBack9 != null ? record.ChargeBack9.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.ChargeBack9)))</td>-->
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrend != null ? record.PremVideoTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoTrend)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PremVideoTrendPercentage)) * 100))%</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGP)))</td>
+                                        @*<td>$@(String.IsNullOrWhiteSpace(record.PremVideoGP != null ? record.PremVideoGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGP)))</td>*@
                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoSpiff != null ? record.PremVideoSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoSpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.PremVideoGPTrending != null ? record.PremVideoGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.EntertainmentGoals != null ? record.EntertainmentGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.EntertainmentGoals)))</td>
@@ -3423,7 +3423,7 @@
                         '<td>' + addCommaswithRound(Testdata[i].PremVideo) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].PremVideoNetOFF) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].ChargeBack8) + '</td>' +
-                        '<td>' + addCommaswithRound(Testdata[i].PremVideoGP) + '</td>' +
+                        //'<td>' + addCommaswithRound(Testdata[i].PremVideoGP) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].PremVideoSpiff) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].TWCDevicesQty) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].TWCDevicesQtyNetOFF) + '</td>' +
@@ -3630,7 +3630,7 @@
                         <td>$${response.BroadbandGP ? parseFloat(response.BroadbandGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${(parseFloat(response.NewFiberNetGP || 0)).toLocaleString('en-US')}</td>
                         <td>$${response.BroadbandFiberGP ? parseFloat(response.BroadbandFiberGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>$${response.BroadbandFiberUpgGP ? parseFloat(response.BroadbandFiberUpgGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        
                         <td>$${response.BroadbandFiberGPTrending ? parseFloat(response.BroadbandFiberGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.TurboFeature ? parseFloat(response.TurboFeature).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.TurboFeatureGP ? parseFloat(response.TurboFeatureGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
@@ -3638,7 +3638,7 @@
                         <td>${(parseFloat(response.PremVideoNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PremVideoTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
-                        <td>$${response.PremVideoGP ? parseFloat(response.PremVideoGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        
                         <td>$${response.PremVideoSpiff ? parseFloat(response.PremVideoSpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.PremVideoGPTrending ? parseFloat(response.PremVideoGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${(parseFloat(response.EntertainmentGoals || 0)).toLocaleString('en-US')}</td>
