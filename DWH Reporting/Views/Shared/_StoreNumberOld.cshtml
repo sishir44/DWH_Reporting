@@ -2184,8 +2184,8 @@
 
                                         <!-- Data SP SN -->
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage)) * 100))%</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
-                                        <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
+                                        <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
+                                        <td >@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
 
@@ -6019,7 +6019,11 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
             isfinal: isFinalVal
         },
         success: function (html) {
-
+            if (html.redirect === true && html.url) {
+                //window.location.href = html.url;   
+                window.location.href = "../Home/StoreNumber";
+                return false;
+            }
             // Parse returned HTML string
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');

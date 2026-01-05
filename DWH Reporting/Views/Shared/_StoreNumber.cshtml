@@ -1393,7 +1393,7 @@
                                         <td></td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrendingPercentage != null ? record.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.MonthlyAchievedHoursTrendingPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
-                                        <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
 
@@ -1959,8 +1959,8 @@
                                                         @*<td></td>*@
                                                         @*<td></td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHoursTrendingPercentage != null ? record2.MonthlyAchievedHoursTrendingPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.MonthlyAchievedHoursTrendingPercentage)) * 100))%</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
-                                                        <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsGoals)).ToString())</td>
+                                                        <td class="gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsGoals)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsNetOFF)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
 
@@ -6279,6 +6279,7 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
 
         // Month picker (MM/yyyy)
         $('#monthPicker').on('change', function () {
+    
             const val = $(this).val(); // Format: yyyy-MM
             const [year, month] = val.split('-');
             const lastDay = getLastDayOfMonth(parseInt(year), parseInt(month));
@@ -6288,7 +6289,7 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
     });
 
     function sendDateData(dateVal, isFinalVal) {
-    $.ajax({
+        $.ajax({
         type: "POST",
         url: '@Url.Action("StoreNumber", "Home")',
         data: {
@@ -6296,7 +6297,11 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
             isfinal: isFinalVal
         },
         success: function (html) {
-
+            if (html.redirect === true && html.url) {
+                //window.location.href = html.url;   
+                window.location.href = "../Home/StoreNumberOld"; 
+                return false;
+            }
             // Parse returned HTML string
             const parser = new DOMParser();
             const doc = parser.parseFromString(html, 'text/html');
