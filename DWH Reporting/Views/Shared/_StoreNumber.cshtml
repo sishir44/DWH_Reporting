@@ -25,6 +25,7 @@
     <link rel="shortcut icon" href="https://mis.mobilyllc.com/mobilylogin/mobicon.png">
 
     @*<script src="https://code.jquery.com/jquery-3.5.1.js"></script>*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
@@ -731,11 +732,32 @@
             min-width: 65px !important;
         }
 
+        #tblDetails tbody td:nth-child(6),
+        #tblDetails thead th:nth-child(6) {
+            left: 325px;
+            min-width: 65px !important;
+        }
+
+        #tblDetails tbody td:nth-child(7),
+        #tblDetails thead th:nth-child(7) {
+            left: 390px;
+            min-width: 65px !important;
+        }
+
+        #tblDetails tbody td:nth-child(8),
+        #tblDetails thead th:nth-child(8) {
+            left: 455px;
+            min-width: 65px !important;
+        }
+
         #tblDetails tbody td:nth-child(1),
         #tblDetails tbody td:nth-child(2),
         #tblDetails tbody td:nth-child(3),
         #tblDetails tbody td:nth-child(4),
-        #tblDetails tbody td:nth-child(5) {
+        #tblDetails tbody td:nth-child(5),
+        #tblDetails tbody td:nth-child(6),
+        #tblDetails tbody td:nth-child(7),
+        #tblDetails tbody td:nth-child(8) {
             position: sticky;
             z-index: 1;
         }
@@ -744,7 +766,10 @@
         #tblDetails thead th:nth-child(2),
         #tblDetails thead th:nth-child(3),
         #tblDetails thead th:nth-child(4),
-        #tblDetails thead th:nth-child(5) {
+        #tblDetails thead th:nth-child(5),
+        #tblDetails thead th:nth-child(6),
+        #tblDetails thead th:nth-child(7),
+        #tblDetails thead th:nth-child(8) {
             position: sticky;
             z-index: 12;
         }
@@ -3346,9 +3371,9 @@
                         '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].Store + '</td>' +
                         '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].Market + '</td>' +
                         '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].TM + '</td>' +
-                        '<td>' + Testdata[i].MULMngr + '</td>' +
-                        '<td>' + Testdata[i].EmpID + '</td>' +
-                        '<td>' + Testdata[i].Employees + '</td>' +
+                        '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].MULMngr + '</td>' +
+                        '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].EmpID + '</td>' +
+                        '<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">' + Testdata[i].Employees + '</td>' +
                         '<td>' + Testdata[i].Role + '</td>' +
                         '<td>' + Testdata[i].Status + '</td>' +
                         '<td>' + Testdata[i].HireDate + '</td>' +
@@ -6238,7 +6263,6 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
 </script>
 
 <!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     function getLastDayOfMonth(year, month) {
