@@ -870,7 +870,7 @@
                             <input type="hidden" id="isFinal" value="0" />
                             <input type="hidden" id="hiddenDate" name="selectedDate" />
                             <!-- Daily Date Picker (Visible initially) -->
-                            if(ViewBag.isfinal == "1")
+                            if (ViewBag.isfinal == "1")
                             {
                                 <input type="date"
                                        id="selectedDate"
@@ -885,6 +885,7 @@
                                        style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
                             }
                         }
+
                         <!-- Toggle Button -->
                         <button type="button"
                                 id="toggleBtn"
@@ -6020,8 +6021,8 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
         },
         success: function (html) {
             if (html.redirect === true && html.url) {
-                //window.location.href = html.url;   
-                window.location.href = "../Home/StoreNumber";
+                window.location.href = html.url;   
+                //window.location.href = "../Home/StoreNumber";
                 return false;
             }
             // Parse returned HTML string

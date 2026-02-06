@@ -3761,7 +3761,8 @@
 <script>
 
     function refresh() {
-        location.reload();
+        //location.reload();
+        window.location.href = '../Home/StoreNumber';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
@@ -6320,10 +6321,10 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
             selectedDate: dateVal,
             isfinal: isFinalVal
         },
-        success: function (html) {
+            success: function (html) {
             if (html.redirect === true && html.url) {
-                //window.location.href = html.url;   
-                window.location.href = "../Home/StoreNumberOld"; 
+                window.location.href = html.url; 
+                //window.location.href = "../Home/StoreNumberOld"; 
                 return false;
             }
             // Parse returned HTML string

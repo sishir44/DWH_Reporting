@@ -80,7 +80,7 @@ namespace DWH_Reporting.Controllers
         }
 
        //[Authorization]
-        public ActionResult StoreNumberOld(string selectedDate)
+        public ActionResult StoreNumberOld(string selectedDate, string isfinal)
         {
             try
             {
@@ -93,7 +93,13 @@ namespace DWH_Reporting.Controllers
                 global.userID = Request.QueryString["userid"];
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ViewBag.selectedDate = selectedDate;
-                ShowStoreNumber(selectedDate, global.decrpedUserId,"0");
+                ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    return PartialView("_StoreNumberOld");
+                }
+
                 return View();
             }
             catch (Exception ex)
@@ -103,7 +109,7 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumberOld(string selectedDate, string isfinal)
+        public ActionResult StoreNumberOld(string selectedDate, string isfinal, string optionalParam)
         {
             try
             {
@@ -120,10 +126,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam })
+                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam, isfinal=isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam });
+                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam, isfinal = isfinal });
                     }
                 }
 
@@ -353,11 +359,13 @@ namespace DWH_Reporting.Controllers
                         var adjustedTimeStamp = DateTime.ParseExact(Fct_StoreNumber.Rows[0]["DateKey"].ToString(), "yyyyMMdd", null);
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     } else {
                         DateTime parsedDate = DateTime.Parse(selectedDate);
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
                         var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss");
+                        ViewBag.isfinal = isfinal;
                     }
                 }
             }
@@ -372,12 +380,14 @@ namespace DWH_Reporting.Controllers
                         var adjustedTimeStamp = Fct_StoreNumber.AsEnumerable().Where(row => row["DateKey"] != DBNull.Value).Max(row => DateTime.ParseExact(row["DateKey"].ToString(), "yyyyMMdd", null));
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); 
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     }
                     else
                     {
                         DateTime parsedDate = DateTime.Parse(selectedDate);
                         ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     }
                 }
             }
@@ -5195,7 +5205,7 @@ namespace DWH_Reporting.Controllers
 
         //==================== Start New Store Number Report ====================
         [HttpGet]
-        public ActionResult StoreNumber(string selectedDate)
+        public ActionResult StoreNumber(string selectedDate, string isfinal= "0")
         {
             try
             {
@@ -5204,8 +5214,11 @@ namespace DWH_Reporting.Controllers
                 global.userID = Request.QueryString["userid"];
                 global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ViewBag.selectedDate = selectedDate;
-                ShowStoreNumberNew(selectedDate, global.decrpedUserId, "0");
-
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
+                if (isfinal == "1")
+                {
+                    return PartialView("_StoreNumber");
+                }
                 return View();
 
             }
@@ -5217,7 +5230,7 @@ namespace DWH_Reporting.Controllers
         }
         
         [HttpPost]
-        public ActionResult StoreNumber(string selectedDate, string isfinal)
+        public ActionResult StoreNumber(string selectedDate, string isfinal, string optionalParam)
         {
             try
             {
@@ -5233,10 +5246,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam })
+                                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam, isfinal = isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam });
+                        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam, isfinal = isfinal });
                     }
                 }
 
@@ -5303,6 +5316,7 @@ namespace DWH_Reporting.Controllers
                         var adjustedTimeStamp = DateTime.ParseExact(Fct_StoreNumber.Rows[0]["DateKey"].ToString(), "yyyyMMdd", null);
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     }
                     else
                     {
@@ -5310,6 +5324,7 @@ namespace DWH_Reporting.Controllers
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
                         var latestTimeStamp = Fct_StoreNumber.Rows[0].Field<DateTime>("TimeStamp");
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss");
+                        ViewBag.isfinal = isfinal;
                     }
                 }
             }
@@ -5324,16 +5339,18 @@ namespace DWH_Reporting.Controllers
                         var adjustedTimeStamp = Fct_StoreNumber.AsEnumerable().Where(row => row["DateKey"] != DBNull.Value).Max(row => DateTime.ParseExact(row["DateKey"].ToString(), "yyyyMMdd", null));
                         ViewBag.LatestTimeStamp = latestTimeStamp.ToString("yyyy-MM-dd HH:mm:ss"); // Format as needed
                         ViewBag.ReportDate = adjustedTimeStamp.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     }
                     else
                     {
                         DateTime parsedDate = DateTime.Parse(selectedDate);
                         ViewBag.LatestTimeStamp = parsedDate.ToString("yyyy-MM-dd HH:mm:ss");
                         ViewBag.ReportDate = parsedDate.ToString("yyyy-MM-dd");
+                        ViewBag.isfinal = isfinal;
                     }
                 }
             }
-
+            ViewBag.isfinal = isfinal;
             List<Fct_StoreNumberAttributesModel> lisn2_lst = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in Fct_StoreNumber.Rows)
