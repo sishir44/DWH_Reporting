@@ -1198,7 +1198,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 174; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 173; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1349,7 +1349,7 @@
                                     <td>CRU Ach DATA</td>
                                     <td>CRU Ach Average QTD</td>
                                     <td>Remaining to Achive CRU Average Q2 target</td>
-                                    <td>GROSS ADDS Trend</td>
+                                    @*<td>GROSS ADDS Trend</td>*@
                                     <td>CRU Ach Trend</td>
                                     <td>CRU Ach Voice $</td>
                                     <td>CRU Ach DATA $</td>
@@ -1613,7 +1613,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchDATA != null ? record.CRUAchDATA.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchDATA)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchAverageQTD != null ? record.CRUAchAverageQTD.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchAverageQTD)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.RemainingToAchieveCRUAverageQ2Target != null ? record.RemainingToAchieveCRUAverageQ2Target.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.RemainingToAchieveCRUAverageQ2Target)).ToString())</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>
+                                        @*<td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>*@
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchTrend != null ? record.CRUAchTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchTrend)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.CRUAchVoiceDollars != null ? record.CRUAchVoiceDollars.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.CRUAchVoiceDollars)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.CRUAchDATADollars != null ? record.CRUAchDATADollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.CRUAchDATADollars)))</td>
@@ -1898,7 +1898,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchDATA != null ? record2.CRUAchDATA.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchDATA)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchAverageQTD != null ? record2.CRUAchAverageQTD.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchAverageQTD)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.RemainingToAchieveCRUAverageQ2Target != null ? record2.RemainingToAchieveCRUAverageQ2Target.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.RemainingToAchieveCRUAverageQ2Target)).ToString())</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>
+                                                        @*<td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchTrend != null ? record2.CRUAchTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchTrend)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.CRUAchVoiceDollars != null ? record2.CRUAchVoiceDollars.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.CRUAchVoiceDollars)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.CRUAchDATADollars != null ? record2.CRUAchDATADollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.CRUAchDATADollars)))</td>
@@ -2167,7 +2167,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchDATA != null ? record2.CRUAchDATA.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchDATA)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchAverageQTD != null ? record2.CRUAchAverageQTD.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchAverageQTD)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.RemainingToAchieveCRUAverageQ2Target != null ? record2.RemainingToAchieveCRUAverageQ2Target.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.RemainingToAchieveCRUAverageQ2Target)).ToString())</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>
+                                                        @*<td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchTrend != null ? record2.CRUAchTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchTrend)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.CRUAchVoiceDollars != null ? record2.CRUAchVoiceDollars.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.CRUAchVoiceDollars)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.CRUAchDATADollars != null ? record2.CRUAchDATADollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.CRUAchDATADollars)))</td>
@@ -2605,7 +2605,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchDATA != null ? record.CRUAchDATA.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchDATA)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchAverageQTD != null ? record.CRUAchAverageQTD.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchAverageQTD)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.RemainingToAchieveCRUAverageQ2Target != null ? record.RemainingToAchieveCRUAverageQ2Target.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.RemainingToAchieveCRUAverageQ2Target)).ToString())</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>
+                                       @* <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>*@
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchTrend != null ? record.CRUAchTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchTrend)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.CRUAchVoiceDollars != null ? record.CRUAchVoiceDollars.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.CRUAchVoiceDollars)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.CRUAchDATADollars != null ? record.CRUAchDATADollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.CRUAchDATADollars)))</td>
@@ -3716,7 +3716,7 @@
                         <td>${(parseFloat(response.CRUAchDATA || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.RemainingToAchieveCRUAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-                        <td>${parseFloat(response.GrossAddsTrend || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        
                         <td>${(parseFloat(response.CRUAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
                         <td>$${response.CRUAchVoiceDollars ? parseFloat(response.CRUAchVoiceDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.CRUAchDATADollars ? parseFloat(response.CRUAchDATADollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
