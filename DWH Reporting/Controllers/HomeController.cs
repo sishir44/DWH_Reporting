@@ -5624,7 +5624,10 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    AIATrendingPer = row["AIA Trending %"].ToString(),
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString()
+
                 };
 
                 lisn2_lst.Add(model);
@@ -5687,7 +5690,8 @@ namespace DWH_Reporting.Controllers
                     FNAchMTDChargeback = row["FN Ach MTD Chargeback"].ToString(),
                     FNAchMTDNetOff = row["FN Ach MTD Net OFF"].ToString(),
                     FNGP = row["FN GP"].ToString(),
-
+                    AIATrendingPer = row["AIA Trending %"].ToString(),
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
                     GPPerBox = row["$GP per BOX"].ToString(),
                     TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
                     GrossAdds = row["GROSS ADDS"].ToString(),
@@ -5960,6 +5964,9 @@ namespace DWH_Reporting.Controllers
                     FNAchMTDChargeback = row["FN Ach MTD Chargeback"].ToString(),
                     FNAchMTDNetOff = row["FN Ach MTD Net OFF"].ToString(),
                     FNGP = row["FN GP"].ToString(),
+
+                    AIATrendingPer = row["AIA Trending %"].ToString(),
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
 
                     GPPerBox = row["$GP per BOX"].ToString(),
                     TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
@@ -6268,6 +6275,9 @@ namespace DWH_Reporting.Controllers
 
                     NextUpChrBack = row["Next UP Chargeback"].ToString(),
                     NextUpNetOff = row["Next UP Net OFF"].ToString(),
+
+                    AIATrendingPer = row["AIA Trending %"].ToString(),
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
 
                     NextUpSpif = row["Next UP Spif"].ToString(),
                     PremiumActivation = row["Premium Activation"].ToString(),

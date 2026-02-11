@@ -1749,9 +1749,11 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeTechProtectChargeBack { get; set; }
         public string HomeTechProtectNetOff { get; set; }
         public string HomeTechProtectGP { get; set; }
-
-
         public string HomeInternet { get; set; }
+        public string AIATrendingPer { get; set; }
+        public string AIAInternetDolGpTrending { get; set; }
+
+
     }
 
     public class Fct_EmployeeNumberAttributesModel

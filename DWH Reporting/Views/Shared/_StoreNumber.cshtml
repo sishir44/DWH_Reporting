@@ -1132,7 +1132,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 173; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 178; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1167,9 +1167,11 @@
                                 <!-- CALC COL HEAD-->
                                 @*Modified Columns: start*@
                                 <tr class="main_header">
+                                <td>VGA Trend % To Goal</td>
                                     <td>Upgrade Trending to Goals %</td>
                                     <td>T,W,C Devices Trend to Goal %</td>
                                     <td>Broadband + Fiber Trend%</td>
+                                <td>AIA Trending %</td>
                                     <td>Prem Video Trend %</td>
                                     <td>converged%</td>
                                     <td>CSAT</td>
@@ -1209,13 +1211,16 @@
                                     <td>Prepaid $GP</td>
                                     <td>Prepaid with Autopay</td>
                                     <td>Prepaid with Autopay $GP</td>
+                                <td>Broadband + Fiber Goals</td>
                                     <td>Broadband + New fiber Net OFF</td>
                                     <td>Broadband +_Fiber _Trend</td>
+                                <td>Broadband + New Fiber $GP</td>
                                     <td>Broad Band + Fiber _$GP Trending</td>
                                     <td>AIA Goals</td>
                                     <td>AIA Internet Net Off</td>
                                     <td>AIA Trending</td>
                                     <td>AIA Internet $GP</td>
+                                <td>AIA Internet $GP Trending</td>
                                     <td>Prem Video Goals</td>
                                     <td>Prem Video Net OFF</td>
                                     <td>Prem Video Trend</td>
@@ -1426,9 +1431,11 @@
                                         <td></td>
                                         @*Modified Column: Start*@
 
+                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AIATrendingPer != null ? record.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AIATrendingPer)) * 100))%</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PremVideoTrendPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
@@ -1467,17 +1474,19 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepQTYTrend != null ? record.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepQTYTrend)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidGP)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopayGP != null ? record.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopayGP)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewFiberNetOFF != null ? record.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewFiberNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
-                                        @*<td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>*@
+                                        <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAGoals != null ? record.AIAGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIATrending != null ? record.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIATrending)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetGP != null ? record.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetDolGpTrending != null ? record.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetDolGpTrending)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoGoals != null ? record.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
@@ -1711,9 +1720,11 @@
                                                         @*<td></td>*@
                                                         @*Modified Column: Start*@
 
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.AIATrendingPer != null ? record2.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIATrendingPer)) * 100))%</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PremVideoTrendPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
@@ -1752,17 +1763,20 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepQTYTrend != null ? record2.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepQTYTrend)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PrepaidGP != null ? record2.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidGP)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopayGP != null ? record2.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopayGP)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
                                                         @*<td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewfiberGP != null ? record2.BroadbandNewfiberGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewfiberGP)))</td>*@
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGP != null ? record2.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGPTrending != null ? record2.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAGoals != null ? record2.AIAGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGoals)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAInternetNetOff != null ? record2.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIATrending != null ? record2.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIATrending)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetGP != null ? record2.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetDolGpTrending != null ? record2.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetDolGpTrending)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGoals != null ? record2.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGoals)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoNetOFF != null ? record2.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoNetOFF)))</td>
@@ -1980,9 +1994,11 @@
                                                         @*<td></td>*@
                                                         @*Modified Column: Start*@
 
+                            <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.AIATrendingPer != null ? record2.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIATrendingPer)) * 100))%</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PremVideoTrendPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
@@ -2021,17 +2037,20 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepQTYTrend != null ? record2.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepQTYTrend)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PrepaidGP != null ? record2.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidGP)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopayGP != null ? record2.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopayGP)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
                                                         @*<td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewfiberGP != null ? record2.BroadbandNewfiberGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewfiberGP)))</td>*@
+                            <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGP != null ? record2.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandFiberGPTrending != null ? record2.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberGPTrending)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAGoals != null ? record2.AIAGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGoals)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAInternetNetOff != null ? record2.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIATrending != null ? record2.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIATrending)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetGP != null ? record2.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetGP)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetDolGpTrending != null ? record2.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetDolGpTrending)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGoals != null ? record2.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGoals)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoNetOFF != null ? record2.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoNetOFF)))</td>
@@ -2418,9 +2437,11 @@
                                         <!-- Data SP SN -->
                                         @*Modified Column: Start*@
 
+                            <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.AIATrendingPer != null ? record.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AIATrendingPer)) * 100))%</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PremVideoTrendPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
@@ -2459,17 +2480,20 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepQTYTrend != null ? record.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepQTYTrend)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidGP)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopayGP != null ? record.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopayGP)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewFiberNetOFF != null ? record.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewFiberNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
                                         @*<td>@(String.IsNullOrWhiteSpace(record.BroadbandNewfiberGP != null ? record.BroadbandNewfiberGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewfiberGP)))</td>*@
+                            <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGP != null ? record.BroadbandFiberGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandFiberGPTrending != null ? record.BroadbandFiberGPTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberGPTrending)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAGoals != null ? record.AIAGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIATrending != null ? record.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIATrending)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetGP != null ? record.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetGP)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetDolGpTrending != null ? record.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetDolGpTrending)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoGoals != null ? record.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
@@ -3028,7 +3052,7 @@
                                             <th style="background-color: black; color: white;">New fiber (500 MB) QI Spiff</th>
                                             <th style="background-color: black; color: white;">New fiber (1G) QI Spiff</th>
                                             <th style="background-color: black; color: white;">Fiber Upgrades GP</th>
-                                            <th style="background-color: black; color: white;">Broadband + New fiber $GP</th>
+                                            @*<th style="background-color: black; color: white;">Broadband + New fiber $GP</th>*@
                                             <th style="background-color: black; color: white;">Broadband +Fiber $GP</th>
                                             <th style="background-color: black; color: white;">Turbo Feature</th>
                                             <th style="background-color: black; color: white;">Turbo Feature $GP</th>
@@ -3529,9 +3553,11 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
+                        <td>${parseFloat((response.AIATrendingPer || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.PremVideoTrendPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.Converged || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.CSAT || 0) * 100).toFixed(1)}%</td>
@@ -3571,13 +3597,16 @@
                         <td>$${response.PrepaidGP ? parseFloat(response.PrepaidGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${(parseFloat(response.PrepaidWithAutopay || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PrepaidWithAutopayGP || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.BroadbandGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.BroadbandNewFiberNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.BroadbandFiberTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
+                        <td>$${response.BroadbandFiberGP ? parseFloat(response.BroadbandFiberGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.BroadbandFiberGPTrending ? parseFloat(response.BroadbandFiberGPTrending).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${(parseFloat(response.AIAGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIAInternetNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIATrending || 0).toFixed(0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.AIAInternetGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>$${parseFloat(response.AIAInternetDolGpTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${(parseFloat(response.PremVideoGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PremVideoNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PremVideoTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
