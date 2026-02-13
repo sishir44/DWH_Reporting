@@ -1,4 +1,4 @@
-﻿
+
 @{
     ViewBag.Title = "Store Number New";
     Layout = null;
@@ -29,6 +29,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://mis.mobilyllc.com/MobilyGpStatus/Content/Css/bootstrap.min.css" rel="stylesheet" />
@@ -37,6 +39,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
     @*<script src="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css"></script>*@
     <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
@@ -168,17 +171,6 @@
             left: 325px;
             min-width: 65px !important;
         }
-
-        /*#tbl tbody td:nth-child(10),
-        #tbl thead th:nth-child(10) {
-            min-width: 70px !important;
-        }*/
-
-        /*  #tbl tbody td:nth-child(7),
-        #tbl thead th:nth-child(7) {
-            left: 390px;
-            min-width: 65px !important;
-        }*/
 
         /*#tbl tbody td:nth-child(7),
         #tbl thead th:nth-child(7) {
@@ -840,61 +832,9 @@
         }
     </style>
 
-    <script>
-        $(document).ready(function () {
-
-            // Tr Break Even Calc
-            var tbeCells = document.querySelectorAll(".tbreakevenCLS");
-            var tbeCount = 0;
-            var tbeCount70 = 0;
-            var tbeCount90 = 0;
-
-            tbeCells.forEach(function (cell) {
-                var tbeValue = parseFloat(cell.textContent.replace('%', '').trim());
-                if (!isNaN(tbeValue) && tbeValue > 99) {
-                    tbeCount++;
-                } else if (!isNaN(tbeValue) && tbeValue > 69 && tbeValue < 100) {
-                    tbeCount70++;
-                } else if (!isNaN(tbeValue) && tbeValue < 70) {
-                    tbeCount90++;
-                }
-            });
-
-            tbeCells.forEach(function (cell) {
-                var value = parseFloat(cell.textContent);
-
-                if (!isNaN(value) && value > 99.0) {
-                    cell.style.backgroundColor = "#008000";
-                    cell.style.color = "white";
-                } else if (!isNaN(value) && value < 70.0) {
-                    cell.style.backgroundColor = "#ffa500";
-                    cell.style.color = "black";
-                } else if (!isNaN(value) && value > 69.0 && value < 100.0) {
-                    cell.style.backgroundColor = "#0046BF";
-                    cell.style.color = "white";
-                }
-            });
-            var tbeCountDisplay = document.getElementById("tbeCountDisplay");
-            if (tbeCountDisplay) {
-                tbeCountDisplay.value = tbeCount;
-            }
-
-            var tbeCountDisplay70 = document.getElementById("tbeCountDisplay70");
-            if (tbeCountDisplay70) {
-                tbeCountDisplay70.value = tbeCount70;
-            }
-
-            var tbeCountDisplay90 = document.getElementById("tbeCountDisplay90");
-            if (tbeCountDisplay90) {
-                tbeCountDisplay90.value = tbeCount90;
-            }
-        });
-
-    </script>
-
 </head>
 
-<body style="padding-top:0; background-color:#B2D6F2;">
+<body style="padding-top:0; background-color:#B2D6F2;" class="partialPage">
 
     <!-- LOADING LOGO -->
     <div id="loadingScreen">
@@ -910,7 +850,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <h3 style="margin-top:10px; margin-left:50px; font-weight:800; font-size:16px;" class="title">
-                            | MTD @ViewBag.Title
+                            | EOM @ViewBag.Title
                         </h3>
                     </div>
                 </div>
@@ -929,22 +869,22 @@
                             <!-- Hidden Inputs -->
                             <input type="hidden" id="isFinal" value="0" />
                             <input type="hidden" id="hiddenDate" name="selectedDate" />
-
                             <!-- Daily Date Picker (Visible initially) -->
-                            <input type="date"
-                                   id="selectedDate"
-                                   class="form-control"
-                                   title="Select Date"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
-
-                            <!-- Monthly Picker (Hidden initially) -->
-                            <input type="month"
-                                   id="monthPicker"
-                                   class="form-control"
-                                   title="Select Month"
-                                   style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black; display:none;" />
+                            if (ViewBag.isfinal == "1")
+                            {
+                                <input type="date"
+                                       id="selectedDate"
+                                       class="form-control"
+                                       title="Select Date" hidden
+                                       style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                                <!-- Monthly Picker (Hidden initially) -->
+                                <input type="month"
+                                       id="monthPicker"
+                                       class="form-control"
+                                       title="Select Month"
+                                       style="width:140px; background-color:#A5CFF0; font-size:12px; font-weight:bold; color:#383b3f; height:30px; border:black;" />
+                            }
                         }
-
                         <!-- Toggle Button -->
                         <button type="button"
                                 id="toggleBtn"
@@ -952,9 +892,8 @@
                                 title="Toggle EOM/MTD"
                                 onclick="toggleMtdEom()"
                                 style="width: 80px; height: 25px; padding: 1px 10px; height: 20px !important; font-size: 12px; margin-top: 12px;">
-                            EOM
+                            MTD
                         </button>
-
                         <!-- Refresh Button -->
                         <button type="submit"
                                 class="headerbtndiv btn btn-secondary small-btn"
@@ -983,8 +922,6 @@
                         </button>
                     </div>
                 </div>
-
-
             </div>
 
             <!-- UPDATED RPT DATE -->
@@ -1031,7 +968,7 @@
 
                             <label>100% & Above</label>
                             <input type="button" name=">100" id="tbeCountDisplay" class="form-control"
-                                   title="100% & Above" value="0"
+                                   title="100% & Above" value=""
                                    style="background-color: green;  color:white; font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -1042,13 +979,13 @@
                             <label>70% & Above</label>
                             <input type="button" name=">70" id="tbeCountDisplay70" class="form-control"
                                    title="70% & Above"
-                                   value="0"
+                                   value=""
                                    style="background-color: #0046BF; color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
 
                             <label>Less Than 70%</label>
                             <input type="button" name="<70" id="tbeCountDisplay90" class="form-control"
                                    title="Less Than 70%"
-                                   value="0"
+                                   value=""
                                    style="background-color: orange;  color:white;font-size: 10px; height: 20px; margin-bottom: 10px;padding: 0px 0 !important;" />
                         </div>
                     </div>
@@ -1165,9 +1102,6 @@
                         </select>
                     </div>
 
-
-
-
                 </div>
 
             </div>
@@ -1179,7 +1113,9 @@
                     <div id="myDiv">
                         <table id="tbl" style="border-collapse: collapse; white-space:nowrap;">
                             <thead>
+
                                 @functions {
+
                                     // Helper method to convert number to corresponding alphabet(s)
                                     public static string GetAlphabetFromNumber(int number)
                                     {
@@ -1221,14 +1157,14 @@
                                 <tr class="spanned_header">
 
                                     <!-- 5 Freeze COL -->
-                                    <th rowspan="2" style="background-color: black; color: white; ">Self Note</th>
-                                    <th rowspan="2" style="background-color: black; color: white;">View</th>
-                                    <th rowspan="2" style="background-color: black; color: white;">Market</th>
-                                    <th rowspan="2" style="background-color: black; color: white;">SD</th>
-                                    <th rowspan="2" style="background-color: black; color: white; ">TM</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">View</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">Market</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">SD</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">TM</th>
                                     @*<th rowspan="2" style="background-color: black; color:white;">Multi Market</th>*@
                                     @*<th rowspan="2" style="background-color: black; color:white;">MMM</th>*@
-                                    <th rowspan="2" style="background-color: black; color: white; ">Store</th>
+                                    <th rowspan="2" style="background-color: black; color:white;">Store</th>
 
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">Unique<br /> ID</th>
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">Dealer<br />  Code</th>
@@ -1408,15 +1344,15 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>Entertainment _Trending</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Entertainment Trending to Goals %</td>
 
-                                <td style="background-color: #C6D9F1; color:black;">GA Close Rt</td>
-                                <td style="background-color: #C6D9F1; color:black;">HomeTech Protect Net OFF</td>
-                                <td style="background-color: #C6D9F1; color:black;">HomeTech Protect GP</td>
-                                <td style="background-color: #C6D9F1; color:black;">Total New Fiber</td>
-                                <td style="background-color: #C6D9F1; color:black;">Fiber Upgarde Trending</td>
-                                <td style="background-color: #C6D9F1; color:black;">Total Protection</td>
-                                <td style="background-color: #C6D9F1; color:black;">Total Protection Net OFF </td>
-                                <td style="background-color: #C6D9F1; color:black;">ProtAdv 1 Net Off</td>
-                                <td style="background-color: #C6D9F1; color:black;">ProtAdv 4 Net Off</td>
+                                <td style="background-color: #C6D9F1; color: black;">GA Close Rt</td>
+                                <td style="background-color: #C6D9F1; color: black;">HomeTech Protect Net OFF</td>
+                                <td style="background-color: #C6D9F1; color: black;">HomeTech Protect GP</td>
+                                <td style="background-color: #C6D9F1; color: black; ">Total New Fiber</td>
+                                <td style="background-color: #C6D9F1; color: black;">Fiber Upgarde Trending</td>
+                                <td style="background-color: #C6D9F1; color: black;">Total Protection</td>
+                                <td style="background-color: #C6D9F1; color: black;">Total Protection Net OFF </td>
+                                <td style="background-color: #C6D9F1; color: black;">ProtAdv 1 Net Off</td>
+                                <td style="background-color: #C6D9F1; color: black;">ProtAdv 4 Net Off</td>
 
                                 <td style="background-color: #C6D9F1; color:black;" td>Budgeted Empolyees</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Full Time Hourly Head Count</td>
@@ -1425,76 +1361,76 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>Hourly Head Counts Variance</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Hourly Current Head Count Variance Hours</td>
 
-                                @*Modified Columns: end*@
+                                    @*Modified Columns: end*@
 
-                                @*Remaining Cols: start
-            <td>Fiber Upgrade  $GP</td>
-            <td>Broadband Goals</td>
-            <td>Next UP Trend %</td>
-        Remaining Cols: End*@
+                                    @*Remaining Cols: start
+                <td>Fiber Upgrade  $GP</td>
+                <td>Broadband Goals</td>
+                <td>Next UP Trend %</td>
+            Remaining Cols: End*@
 
-                                @*Old Columns: start*@
-                                <!--<td>CRU Ach MTD</td>-->
-                                <!--<td>CRU Ach MTD Charge Back</td>-->
-                                <!--<td>FN Ach MTD</td>-->
-                                <!--<td>FN Ach MTD Chargeback</td>-->
-                                <!--<td>GROSS ADDS</td>-->
-                                <!--<td>Gross Adds Charge Back</td>-->
-                                <!--<td>MTD UPGRADES</td>-->
-                                <!--<td>MTD UPGRADES Charge Back</td>-->
-                                <!--<td>MTD Upgrade Netoff with out Value plus</td>-->
-                                <!--<td>Next UP</td>-->
-                                <!--<td>Next UP Chargeback</td>-->
-                                <!--<td>Premium Activation</td>-->
-                                <!--<td>Premium Activation Charge Back</td>-->
-                                <!--<td>Extra Activation</td>-->
-                                <!--<td>Extra Activation Charge Back</td>-->
-                                <!--<td>Non Extra / Non Premium Activation</td>-->
-                                <!--<td>Non Extra / Non Premium Activation Chargeback</td>-->
-                                <!--<td>Value Plus Activation</td>-->
-                                <!--<td>Value Plus Activation Charge Back</td>-->
-                                <!--<td>Digital Activation</td>-->
-                                <!--<td>Digital Activation Charge Back</td>-->
-                                <!--<td>Digital Upgrade</td>-->
-                                <!--<td>Digital Upgrade Charge Back</td>-->
-                                <!--<td>Upgrade Value plus</td>-->
-                                <!--<td>AIA Internet</td>-->
-                                <!--<td>AIA Internet Charge Back</td>-->
-                                <!--<td>Broad Band less Then (300MB)</td>-->
-                                <!--<td>Broad Band less Then (300MB) Charge Back</td>-->
-                                <!--<td>New Fiber (300MB)</td>-->
-                                <!--<td>New Fiber (300MB) Chargeback</td>-->
-                                <!--<td>New Fiber (500MB)</td>-->
-                                <!--<td>New Fiber (500MB) Chargeback</td>-->
-                                <!--<td>New Fiber (1G)</td>-->
-                                <!--<td>New Fiber (1G)  Chargeback</td>-->
-                                <!--<td>New Fiber</td>-->
-                                <!--<td>New Fiber Chargeback</td>-->
-                                <!--<td>Total Broadband + Newfiber</td>-->
-                                <!--<td>Fiber Upgrades</td>-->
-                                <!--<td>Fiber Upgrades Charge Back</td>-->
-                                @*<td>Broad Band + Fiber Upgrade $GP</td>*@
-                                <!--<td>Prem Video</td>-->
-                                <!--<td>Prem Video Charge Back</td>-->
-                                @*<td>Prem Video Spiff</td>*@
-                                <!--<td>Connect Devices Qty</td>-->
-                                <!--<td>Connect Devices Qty Chargeback</td>-->
-                                <!--<td>Tablet Wearable Upgrade Devices QTY</td>-->
-                                <!--<td>Tablet Wearable Upgrade Devices QTY Charge Back</td>-->
-                                <!--<td>Prepaid QTY</td>-->
-                                <!--<td>Prepaid Activation</td>-->
-                                <!--<td>Prepaid to GA Chargeback</td>-->
-                                <!--<td>Features QTY</td>-->
-                                <!--<td>Features QTY Charge Back</td>-->
-                                <!--<td>ProtAdv 1</td>-->
-                                <!--<td>ProtAdv 4</td>-->
-                                <!--<td>Features $GP</td>-->
-                                @*<td>Training Hours</td>*@
-                                <!--<td>HomeTech Protect</td>-->
-                                <!--<td>HomeTech Protect Charge Back</td>-->
-                                @*<td>DateKey</td>*@
-                                @*Old Columns: End*@
-                            </tr>
+                                    @*Old Columns: start*@
+                                    <!--<td>CRU Ach MTD</td>-->
+                                    <!--<td>CRU Ach MTD Charge Back</td>-->
+                                    <!--<td>FN Ach MTD</td>-->
+                                    <!--<td>FN Ach MTD Chargeback</td>-->
+                                    <!--<td>GROSS ADDS</td>-->
+                                    <!--<td>Gross Adds Charge Back</td>-->
+                                    <!--<td>MTD UPGRADES</td>-->
+                                    <!--<td>MTD UPGRADES Charge Back</td>-->
+                                    <!--<td>MTD Upgrade Netoff with out Value plus</td>-->
+                                    <!--<td>Next UP</td>-->
+                                    <!--<td>Next UP Chargeback</td>-->
+                                    <!--<td>Premium Activation</td>-->
+                                    <!--<td>Premium Activation Charge Back</td>-->
+                                    <!--<td>Extra Activation</td>-->
+                                    <!--<td>Extra Activation Charge Back</td>-->
+                                    <!--<td>Non Extra / Non Premium Activation</td>-->
+                                    <!--<td>Non Extra / Non Premium Activation Chargeback</td>-->
+                                    <!--<td>Value Plus Activation</td>-->
+                                    <!--<td>Value Plus Activation Charge Back</td>-->
+                                    <!--<td>Digital Activation</td>-->
+                                    <!--<td>Digital Activation Charge Back</td>-->
+                                    <!--<td>Digital Upgrade</td>-->
+                                    <!--<td>Digital Upgrade Charge Back</td>-->
+                                    <!--<td>Upgrade Value plus</td>-->
+                                    <!--<td>AIA Internet</td>-->
+                                    <!--<td>AIA Internet Charge Back</td>-->
+                                    <!--<td>Broad Band less Then (300MB)</td>-->
+                                    <!--<td>Broad Band less Then (300MB) Charge Back</td>-->
+                                    <!--<td>New Fiber (300MB)</td>-->
+                                    <!--<td>New Fiber (300MB) Chargeback</td>-->
+                                    <!--<td>New Fiber (500MB)</td>-->
+                                    <!--<td>New Fiber (500MB) Chargeback</td>-->
+                                    <!--<td>New Fiber (1G)</td>-->
+                                    <!--<td>New Fiber (1G)  Chargeback</td>-->
+                                    <!--<td>New Fiber</td>-->
+                                    <!--<td>New Fiber Chargeback</td>-->
+                                    <!--<td>Total Broadband + Newfiber</td>-->
+                                    <!--<td>Fiber Upgrades</td>-->
+                                    <!--<td>Fiber Upgrades Charge Back</td>-->
+                                    @*<td>Broad Band + Fiber Upgrade $GP</td>*@
+                                    <!--<td>Prem Video</td>-->
+                                    <!--<td>Prem Video Charge Back</td>-->
+                                    @*<td>Prem Video Spiff</td>*@
+                                    <!--<td>Connect Devices Qty</td>-->
+                                    <!--<td>Connect Devices Qty Chargeback</td>-->
+                                    <!--<td>Tablet Wearable Upgrade Devices QTY</td>-->
+                                    <!--<td>Tablet Wearable Upgrade Devices QTY Charge Back</td>-->
+                                    <!--<td>Prepaid QTY</td>-->
+                                    <!--<td>Prepaid Activation</td>-->
+                                    <!--<td>Prepaid to GA Chargeback</td>-->
+                                    <!--<td>Features QTY</td>-->
+                                    <!--<td>Features QTY Charge Back</td>-->
+                                    <!--<td>ProtAdv 1</td>-->
+                                    <!--<td>ProtAdv 4</td>-->
+                                    <!--<td>Features $GP</td>-->
+                                    @*<td>Training Hours</td>*@
+                                    <!--<td>HomeTech Protect</td>-->
+                                    <!--<td>HomeTech Protect Charge Back</td>-->
+                                    @*<td>DateKey</td>*@
+                                    @*Old Columns: End*@
+                                </tr>
 
                             </thead>
 
@@ -1507,10 +1443,10 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        @*<td></td>*@
                                         <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
                                         <td></td>
                                         @*<td></td>*@
+                                        @*<td></td>*@
                                         <td></td>
                                         <td></td>
                                         <td></td>
@@ -1519,7 +1455,6 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
                                         @*Modified Column: Start*@
 
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
@@ -2090,11 +2025,11 @@
                                                         @*<td></td>*@
                                                         @*Modified Column: Start*@
 
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrendToGoal != null ? record2.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GrossAddsTrendToGoal)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.AIATrendingPer != null ? record2.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIATrendingPer)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.AIATrendingPer != null ? record2.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIATrendingPer)) * 100))%</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoTrendPercentage != null ? record2.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.PremVideoTrendPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.Converged != null ? record2.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.Converged)) * 100))%</td>
@@ -2142,9 +2077,9 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepQTYTrend != null ? record2.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepQTYTrend)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.PrepaidGP != null ? record2.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidGP)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopay != null ? record2.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopay)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidWithAutopayGP != null ? record2.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidWithAutopayGP)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrend != null ? record2.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandFiberTrend)))</td>
@@ -2154,7 +2089,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAInternetNetOff != null ? record2.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIATrending != null ? record2.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIATrending)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetGP != null ? record2.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetGP)))</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetDolGpTrending != null ? record2.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetDolGpTrending)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetDolGpTrending != null ? record2.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetDolGpTrending)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoGoals != null ? record2.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoGoals)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PremVideoNetOFF != null ? record2.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.PremVideoNetOFF)))</td>
@@ -2535,11 +2470,11 @@
                                         <!-- Data SP SN -->
                                         @*Modified Column: Start*@
 
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrendToGoal != null ? record.GrossAddsTrendToGoal.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GrossAddsTrendToGoal)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.AIATrendingPer != null ? record.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AIATrendingPer)) * 100))%</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.AIATrendingPer != null ? record.AIATrendingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AIATrendingPer)) * 100))%</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoTrendPercentage != null ? record.PremVideoTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.PremVideoTrendPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.Converged != null ? record.Converged.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.Converged)) * 100))%</td>
@@ -2587,9 +2522,9 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepQTYTrend != null ? record.PrepQTYTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepQTYTrend)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.PrepaidGP != null ? record.PrepaidGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidGP)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopay != null ? record.PrepaidWithAutopay.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopay)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidWithAutopayGP != null ? record.PrepaidWithAutopayGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidWithAutopayGP)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewFiberNetOFF != null ? record.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewFiberNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrend != null ? record.BroadbandFiberTrend.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandFiberTrend)))</td>
@@ -2599,7 +2534,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAInternetNetOff != null ? record.AIAInternetNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIATrending != null ? record.AIATrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIATrending)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetGP != null ? record.AIAInternetGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetGP)))</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetDolGpTrending != null ? record.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetDolGpTrending)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetDolGpTrending != null ? record.AIAInternetDolGpTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetDolGpTrending)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoGoals != null ? record.PremVideoGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PremVideoNetOFF != null ? record.PremVideoNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.PremVideoNetOFF)))</td>
@@ -2777,7 +2712,7 @@
                                         @*Hide Column: End*@
                                     </tr>
                                 }
-                             }
+                            }
 
                         </table>
 
@@ -3250,7 +3185,6 @@
     //    });
     //    XLSX.writeFile(wb, "StoreNumberReport.xlsx");
     //}
-
     function test() {
         $("#tbl, #tbl2").find("td:hidden, th:hidden, [style*='display: none']").remove();
         const wb = XLSX.utils.book_new();
@@ -3270,6 +3204,7 @@
         const filename = isEOM ? "NewStoreNumberReport EOM.xlsx" : "NewStoreNumberReport MTD.xlsx";
         XLSX.writeFile(wb, filename);
     }
+
 
 
     function printTable() {
@@ -3344,7 +3279,7 @@
         resetEmployeeDD();
 
         $.ajax({
-            //url: '../Home/SaveUniqueIDToSession', // Route to save UniqueID in session
+            //url: '../MobileView/SaveUniqueIDToSession', // Route to save UniqueID in session
             url:'@Url.Action("SaveUniqueIDToSession", "MobileView")',
             type: 'POST',
             data: {
@@ -3426,7 +3361,7 @@
 
         // AJAX call to insert or update note
         $.ajax({
-            //url: '../Home/AddOrUpdateNote', // Adjust to your controller path
+            //url: '../MobileView/AddOrUpdateNote', // Adjust to your controller path
             url:'@Url.Action("AddOrUpdateNote", "MobileView")',
             type: 'POST',
             data: {
@@ -3611,9 +3546,7 @@
     var x = x1 + x2;
     return x;
 };
-    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, Sd = null, isfinal="0") {
-
-
+    function loadGTotalByFilter(tmText = null, mktText = null, mmmText = null, storesText = null, tiersText = null, Sd = null, isfinal="1") {
         var dateP = "@ViewBag.ReportDate"; // Pass the Razor value as a string
         //var Sd = 'Elio Portocarrero';
         //alert("Selected Date: " + dateP +
@@ -3624,7 +3557,7 @@
         //      "\nSelected Tiers: " + (tiersText || "null"));
 
         $.ajax({
-            //url: '../Home/GetGTotal',
+            //url: '../MobileView/GetGTotal',
             url:'@Url.Action("FilterGrandTotalNew", "MobileView")',
             type: 'POST',
             data: {
@@ -3638,7 +3571,6 @@
                 isfinal: isfinal // Send Tiers text or null
             },
             success: function (response) {
-
                 //console.log(response.Converged + "Test");
                 $('#tbl tbody').find('#loadedToalRow').remove();
                 $('#tbl tbody').find('.filtered_data').remove();
@@ -3656,7 +3588,6 @@
                         <td></td>
                         <td></td>
                         <td></td>
-
                         <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
@@ -3786,7 +3717,7 @@
                         <td>${(parseFloat(response.CRUAchDATA || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.CRUAchAverageQTD || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.RemainingToAchieveCRUAverageQ2Target || 0)).toLocaleString('en-US')}</td>
-
+                        
                         <td>${(parseFloat(response.CRUAchTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
                         <td>$${response.CRUAchVoiceDollars ? parseFloat(response.CRUAchVoiceDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.CRUAchDATADollars ? parseFloat(response.CRUAchDATADollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
@@ -3826,10 +3757,6 @@
                         <td>${parseFloat(response.TotalHourlyCount || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.HourlyHeadCntsVar || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.HourlyCurrHeadCntVarHrs || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                    
-
-
-
                     </tr>
                 `;
 
@@ -3878,7 +3805,8 @@
 <script>
 
     function refresh() {
-        location.reload();
+        //location.reload();
+        window.location.href = '../MobileView/StoreNumberMobileView';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
@@ -4225,7 +4153,6 @@
     }
     ////////////////TM Hierarchy/////////////////////////
     function filterTMData(event) {
-       
         // Get TM select element
         var tmSelect = document.getElementById('TM');
         // Text of the option that was last clicked
@@ -4278,10 +4205,10 @@
             loadGTotalByFilter(clickedOptionText, null, null, null, null, null);
         }
     }
+
     function TMfilterSDOptions(selectedValues) {
-        debugger
         var SDSelect = document.getElementById('SD');
-        // Clear the SD dropdown
+        // Clear the TM dropdown
         SDSelect.innerHTML = '';
 
         // Get all visible table rows after the SD filter
@@ -4331,7 +4258,6 @@
     }
 
     function TMfilterTMOptions(selectedValues) {
-        debugger
         var TMSelect = document.getElementById('TM');
         // Clear the TM dropdown
         TMSelect.innerHTML = '';
@@ -4382,7 +4308,6 @@
         }
     }
     function TMfilterMarketOptions(selectedValues) {
-        debugger
         var MarketSelect = document.getElementById('Market');
         var TMSelect = document.getElementById('TM');
         //console.log(MarketSelect);
@@ -4662,10 +4587,9 @@
 
         // Pass clicked option text to totals function
         if (clickedOptionText) {
-            loadGTotalByFilter(tmSelect.innerText, clickedOptionText, null, null, null);
+            loadGTotalByFilter(tmSelect.innerText, clickedOptionText, null, null, null, null);
         }
     }
-
 
     function MKTfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
@@ -5022,7 +4946,6 @@
         }
     }
 
-
     function mmmfilterTMOptions(selectedValues) {
         var TMSelect = document.getElementById('TM');
         // Clear the TM dropdown
@@ -5344,7 +5267,7 @@
         if (tmSelect.disabled && marketSelect.disabled) {
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            //STRfilterSDOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
             loadGTotalByFilter(tmSelect.innerText, marketSelect.innerText, null, clickedOptionText, null, null);
@@ -5353,7 +5276,7 @@
             STRfilterMarketOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            //STRfilterSDOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
             marketSelect.disabled = true;
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
@@ -5363,7 +5286,7 @@
             STRfilterTMOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            //STRfilterSDOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
             storesSelect.disabled = true;
             $('tr.filter_data').remove();
@@ -5374,7 +5297,7 @@
             STRfilterMarketOptions(selectedValues);
             STRfilterStoresOptions(selectedValues);
             STRfilterTiersOptions(selectedValues);
-            //STRfilterSDOptions(selectedValues);
+            STRfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
             marketSelect.disabled = true;
             storesSelect.disabled = true;
@@ -5697,14 +5620,14 @@
 
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             tiersSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
         else if (tmSelect.disabled && mktSelect.disabled) {
             TIRfilterStoresOptions(selectedValues);
-            RfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            TIRfilterTiersOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             storSelect.disabled = true;
             tiersSelect.disabled = true;
         }
@@ -5712,7 +5635,7 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             mktSelect.disabled = true;
             storSelect.disabled = true;
             tiersSelect.disabled = true;
@@ -5727,13 +5650,13 @@
             TIRfilterMarketOptions(selectedValues);
             TIRfilterStoresOptions(selectedValues);
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             tmSelect.disabled = true;
             mktSelect.disabled = true;
             storSelect.disabled = true;
             tiersSelect.disabled = true;
             $('tr.filter_data').remove();
-            loadGTotalByFilter('', '', '', '', tiersSelect.innerText, null);
+            loadGTotalByFilter('', '', '', '', tiersSelect.innerText, '');
         }
 
         // Remove filter rows if fully disabled
@@ -5741,12 +5664,11 @@
 
         // Pass clicked option text to totals function
         //if (clickedOptionText) {
-        //    loadGTotalByFilter(null,null,null,null,clickedOptionText);
+        //    loadGTotalByFilter(clickedOptionText);
         //}
     }
 
     function SDFilter() {
-
         const searchInput = document.getElementById('textSearchSD').value.toLowerCase();
         const options = document.querySelectorAll('#SD option');
 
@@ -5809,9 +5731,10 @@
         var storSelect = document.getElementById('Stores');
         var tiresSelect = document.getElementById('Tiers');
 
+
         if (tmSelect.disabled && mktSelect.disabled && storSelect.disabled) {
             TIRfilterTiersOptions(selectedValues);
-            TIRfilterSDOptions(selectedValues);
+            //TIRfilterSDOptions(selectedValues);
             sdSelect.disabled = true;
             loadGTotalByFilter(tmSelect.innerText, mktSelect.innerText);
         }
@@ -5837,11 +5760,11 @@
             sdSelect.disabled = true;
         }
         else {
-            TMfilterSDOptions(selectedValues);
-            //TMfilterTMOptions(selectedValues);
-            //TMfilterMarketOptions(selectedValues);
-            //TMfilterStoresOptions(selectedValues);
-            //TMfilterTiersOptions(selectedValues);
+            TIRfilterSDOptions(selectedValues);
+            //TIRfilterTMOptions(selectedValues);
+            //TIRfilterMarketOptions(selectedValues);
+            //TIRfilterStoresOptions(selectedValues);
+            //TIRfilterTiersOptions(selectedValues);
             //tmSelect.disabled = true;
             //mktSelect.disabled = true;
             //storSelect.disabled = true;
@@ -5858,8 +5781,6 @@
         //    loadGTotalByFilter(null,null,null,null,clickedOptionText);
         //}
     }
-
-
 
     function TIRfilterMarketOptions(selectedValues) {
         var MarketSelect = document.getElementById('Market');
@@ -6057,6 +5978,7 @@
             });
         }
     }
+
     function TIRfilterSDOptions(selectedValues) {
         var sdSelect = document.getElementById('SD');
         // Clear the tiers dropdown
@@ -6106,6 +6028,7 @@
             });
         }
     }
+
     function TIRfilterStoresOptions(selectedValues) {
         var StoresSelect = document.getElementById('Stores');
         //console.log(selectedValues);
@@ -6187,28 +6110,28 @@
     @if (ViewBag.MarketList != null && ViewBag.MarketList.Count > 0)
     {
         <text>
-        mktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MarketList));
+    mktList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.MarketList));
         </text>
     }
 
+        var SDList = [];
 
-    var SDList = [];
+@if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+{
+    <text>
+SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
+    </text>
+}
 
-    @if (ViewBag.SDList != null && ViewBag.SDList.Count > 0)
+
+    var mmmList = [];
+
+    @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
     {
         <text>
-    SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
+        mmmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.mmmList));
         </text>
     }
-
-       var mmmList = [];
-
-   @if (ViewBag.mmmList != null && ViewBag.mmmList.Count > 0)
-   {
-       <text>
-       mmmList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.mmmList));
-       </text>
-   }
 
     var tmList = [];
 
@@ -6225,11 +6148,11 @@
 @*<script>
         // JavaScript to hide the loading screen when the view has loaded
         window.addEventListener('load', function () {
-
             document.getElementById('loadingScreen').style.display = 'none'; // Hide loading screen
             document.getElementById('content').style.display = 'block'; // Show content
         });
     </script>*@
+
 <script>
     (function () {
         const minShowMs = 1000;
@@ -6333,7 +6256,8 @@
 
 <!--Highlight Trending Break Even-->
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    $(document).ready(function () {
+
         // Tr Break Even Calc
         var tbeCells = document.querySelectorAll(".tbreakevenCLS");
         var tbeCount = 0;
@@ -6365,7 +6289,6 @@
                 cell.style.color = "white";
             }
         });
-
         var tbeCountDisplay = document.getElementById("tbeCountDisplay");
         if (tbeCountDisplay) {
             tbeCountDisplay.value = tbeCount;
@@ -6386,16 +6309,16 @@
 
 <!-- jQuery -->
 
-
 <script>
     function getLastDayOfMonth(year, month) {
         return new Date(year, month, 1).toISOString().split('T')[0];
     }
 
     function toggleMtdEom() {
+
         $('#tblDetBdy').empty("");
-        const isFinal = $('#isFinal').val();
-        const newIsFinal = isFinal === "0" ? "1" : "0";
+        const isFinal = "0"//$('#isFinal').val();
+        const newIsFinal = isFinal //=== "0" ? "1" : "0";
         let datefilter = "";
 
         $('#isFinal').val(newIsFinal);
@@ -6425,6 +6348,7 @@
 
         // Month picker (MM/yyyy)
         $('#monthPicker').on('change', function () {
+    
             const val = $(this).val(); // Format: yyyy-MM
             const [year, month] = val.split('-');
             const lastDay = getLastDayOfMonth(parseInt(year), parseInt(month));
@@ -6435,49 +6359,48 @@
 
     function sendDateData(dateVal, isFinalVal) {
         $.ajax({
-            type: "POST",
-            url: '@Url.Action("StoreNumberMobileView", "MobileView")',
-            data: {
-                selectedDate: dateVal,
-                isfinal: isFinalVal
-            },
+        type: "POST",
+        url: '@Url.Action("StoreNumberMobileView", "MobileView")',
+        data: {
+            selectedDate: dateVal,
+            isfinal: isFinalVal
+        },
             success: function (html) {
-
-                if (html.redirect === true) {
-                    window.location.href = html.url;
-                    return;
-                }
-
-                // Parse returned HTML string
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-
-                // Replace current body content
-                document.body.innerHTML = doc.body.innerHTML;
-
-                // Update title if provided
-                if (doc.title) {
-                    document.title = doc.title;
-                }
-
-                // Re-execute scripts from the response
-                doc.querySelectorAll('script').forEach(s => {
-                    const newScript = document.createElement('script');
-                    if (s.src) {
-                        newScript.src = s.src;
-                        newScript.async = false; // preserve execution order if needed
-                    } else {
-                        newScript.textContent = s.textContent;
-                    }
-                    document.body.appendChild(newScript);
-                });
-            },
-            error: function (err) {
-                console.error("AJAX error:", err);
-                alert("Failed to load data.");
+            if (html.redirect === true && html.url) {
+                window.location.href = html.url; 
+                //window.location.href = "../MobileView/StoreNumberMobileViewOld";
+                return false;
             }
-        });
-    }
+            // Parse returned HTML string
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+
+            // Replace current body content
+            document.body.innerHTML = doc.body.innerHTML;
+
+            // Update title if provided
+            if (doc.title) {
+                document.title = doc.title;
+            }
+
+            // Re-execute scripts from the response
+            doc.querySelectorAll('script').forEach(s => {
+                const newScript = document.createElement('script');
+                if (s.src) {
+                    newScript.src = s.src;
+                    newScript.async = false; // preserve execution order if needed
+                } else {
+                    newScript.textContent = s.textContent;
+                }
+                document.body.appendChild(newScript);
+            });
+        },
+        error: function (err) {
+            console.error("AJAX error:", err);
+            alert("Failed to load data.");
+        }
+    });
+}
 
 
 </script>
