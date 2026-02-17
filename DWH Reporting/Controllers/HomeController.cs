@@ -80,7 +80,7 @@ namespace DWH_Reporting.Controllers
         }
 
        //[Authorization]
-        public ActionResult StoreNumberOld(string selectedDate, string isfinal)
+        public ActionResult StoreNumberOld( string selectedDate, string userId, string isfinal)
         {
             try
             {
@@ -90,8 +90,10 @@ namespace DWH_Reporting.Controllers
                 //userID = Session["userid"].ToString();
                 //Common.recorderror("Sessionuserid", userID, "", "0");
                 //Common.recorderror("Sessionuname", name, "", "0");
-                global.userID = Request.QueryString["userid"];
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                
+                //global.userID = Request.QueryString["userid"];
+                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+              
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
 
@@ -109,8 +111,10 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumberOld(string selectedDate, string isfinal, string optionalParam)
+        public ActionResult StoreNumberOld(string selectedDate, string userId, string isfinal, string optionalParam)
         {
+            //global.userID = Request.QueryString["userid"];
+            //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
             try
             {
                 if (!string.IsNullOrEmpty(selectedDate))
@@ -126,10 +130,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumber", "Home", new { selectedDate = dateParam, isfinal=isfinal })
+                                url = Url.Action("StoreNumber", "Home", new {  selectedDate = dateParam, userId = global.userID, isfinal =isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam, isfinal = isfinal });
+                        return RedirectToAction("StoreNumber", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
                     }
                 }
 
@@ -2945,7 +2949,7 @@ namespace DWH_Reporting.Controllers
             Tiers = NullIfEmpty(Tiers);
             isfinal = NullIfEmpty(isfinal);
 
-            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, isfinal, UserID);
+            DataTable FilterTotal = GP_DAL_Functions.FilterTotal(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, isfinal, global.decrpedUserId);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in FilterTotal.Rows)
@@ -5205,14 +5209,16 @@ namespace DWH_Reporting.Controllers
 
         //==================== Start New Store Number Report ====================
         [HttpGet]
-        public ActionResult StoreNumber(string selectedDate, string isfinal= "0")
+        public ActionResult StoreNumber(string selectedDate, string userId, string isfinal= "0")
         {
             try
             {
-                //return RedirectToAction("StoreNumberOld");
-
-                global.userID = Request.QueryString["userid"];
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                if(global.fromAction == false)
+                {
+                    global.userID = Request.QueryString["userid"];
+                    global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                    global.fromAction = true;
+                }
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
                 if (isfinal == "1")
@@ -5230,8 +5236,11 @@ namespace DWH_Reporting.Controllers
         }
         
         [HttpPost]
-        public ActionResult StoreNumber(string selectedDate, string isfinal, string optionalParam)
+        public ActionResult StoreNumber(string selectedDate, string userId, string isfinal, string optionalParam)
         {
+            //global.userID = Request.QueryString["userid"];
+            //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+            
             try
             {
                 if (!string.IsNullOrEmpty(selectedDate))
@@ -5246,10 +5255,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam, isfinal = isfinal })
+                                url = Url.Action("StoreNumberOld", "Home", new {  selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam, isfinal = isfinal });
+                        return RedirectToAction("StoreNumberOld", "Home", new {  selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
                     }
                 }
 
@@ -6682,7 +6691,7 @@ namespace DWH_Reporting.Controllers
             Tiers = NullIfEmpty(Tiers);
             isfinal = NullIfEmpty(isfinal);
 
-            DataTable FilterTotal = GP_DAL_Functions.FilterTotalNew(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, isfinal, UserID);
+            DataTable FilterTotal = GP_DAL_Functions.FilterTotalNew(dateParam, Sd, TM, MKT, MMM, Stores, Tiers, isfinal, global.decrpedUserId);
             List<Fct_StoreNumberAttributesModel> lisn_tot = new List<Fct_StoreNumberAttributesModel>();
 
             foreach (DataRow row in FilterTotal.Rows)
