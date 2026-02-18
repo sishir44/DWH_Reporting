@@ -2526,10 +2526,10 @@
                                         <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
                                         <td>@record.UniqueID</td>
                                         <td>@record.DealerCode</td>
+                                        <td>@record.HITStore</td>
                                         <td>@record.Tiers</td>
                                         <td style="white-space: normal; word-wrap: break-word;">@record.RSMSRSM</td>
                                         <td>@record.Role</td>
-                                        <td>@record.HITStore</td>
                                         @*<td style=" white-space: normal; word-wrap: break-word;">@record.SD</td>*@
 
                                         <!-- Data SP SN -->
@@ -3878,7 +3878,9 @@
 <script>
 
     function refresh() {
+        debugger
         var currentUrl = new URL(window.location.href);
+        //var currentUrl = window.location.href;
         var userid = currentUrl.searchParams.get("userid");
         window.location.href = '../Home/StoreNumber?userid=' + userid + '&isrefresh=1';
     }
