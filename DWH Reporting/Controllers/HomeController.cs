@@ -6,6 +6,7 @@ using DWH_Reporting.Models.GpReport;
 using DWH_Reporting.Models;
 using System.Linq;
 using DWH_Reporting.Helpers;
+using System.Web;
 
 namespace DWH_Reporting.Controllers
 {
@@ -5209,15 +5210,20 @@ namespace DWH_Reporting.Controllers
 
         //==================== Start New Store Number Report ====================
         [HttpGet]
-        public ActionResult StoreNumber(string selectedDate, string userId, string isfinal= "0")
+        public ActionResult StoreNumber(string selectedDate, string userid, string isfinal= "0", string isrefresh="0")
         {
             try
             {
-                if(global.fromAction == false)
+                // Prevent browser cache
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetNoStore();
+                Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+
+                if (sessionMgr.FromAction == false && selectedDate == null && (isrefresh == "0"))
                 {
                     global.userID = Request.QueryString["userid"];
                     global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                    global.fromAction = true;
+                    sessionMgr.FromAction = true;
                 }
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
@@ -5236,7 +5242,7 @@ namespace DWH_Reporting.Controllers
         }
         
         [HttpPost]
-        public ActionResult StoreNumber(string selectedDate, string userId, string isfinal, string optionalParam)
+        public ActionResult StoreNumber(string selectedDate, string userId, string isfinal, string isrefresh, string optionalParam)
         {
             //global.userID = Request.QueryString["userid"];
             //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);

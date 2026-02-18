@@ -3806,7 +3806,10 @@
 
     function refresh() {
         //location.reload();
-        window.location.href = '../Home/StoreNumber';
+        //window.location.href = '../Home/StoreNumber';
+        var currentUrl = new URL(window.location.href);
+        var userid = currentUrl.searchParams.get("userid");
+        window.location.href = '../Home/StoreNumber?userid=' + userid + '&isrefresh=1';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {

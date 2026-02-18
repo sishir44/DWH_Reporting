@@ -198,6 +198,7 @@
     <Compile Include="Models\GpReport\GpReport.cs" />
     <Compile Include="Models\GP_DAL_Functions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sessionMgr.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\css\AdminLTE.min.css" />
