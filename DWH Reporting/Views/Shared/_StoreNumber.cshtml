@@ -1188,12 +1188,12 @@
                                 <td style="background-color: #00ADEF; color:white;">Broadband + Fiber Trend%</td>
                                 <td style="background-color: #00ADEF; color:white;">AIA Trending %</td>
                                 <td style="background-color: #00ADEF; color:white;">Prem Video Trend %</td>
-                                <td style="background-color: #00ADEF; color:white;">converged%</td>
-                                <td style="background-color: #00ADEF; color:white;">CSAT</td>
+                                <td style="background-color: #00ADEF; color:white;">converged (17%)</td>
+                                <td style="background-color: #00ADEF; color:white;">CSAT (90%)</td>
 
-                                <td style="background-color: #FDBB87; color: black;">ProtAdv & HomeTech (60%)</td>
-                                <td style="background-color: #FDBB87; color: black;">Extra +Unl Mix (75%)</td>
-                                <td style="background-color: #FDBB87; color: black;">Next UP(80%)</td>
+                                <td style="background-color: #FDBB87; color: black;">ProtAdv & HomeTech (70%)</td>
+                                <td style="background-color: #FDBB87; color: black;">Extra +Unl Mix (78%)</td>
+                                <td style="background-color: #FDBB87; color: black;">Next UP(82%)</td>
 
                                 <td style="background-color: #C6D9F1; color:black;">APO</td>
                                 <td style="background-color: #C6D9F1; color:black;">Total $GP Goals</td>
@@ -1468,7 +1468,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.CSAT)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.ExtraUnlMix70Per != null ? record.ExtraUnlMix70Per.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ExtraUnlMix70Per)) * 100))%</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.NextUp)).ToString())</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.NextUp)).ToString())%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
@@ -1760,7 +1760,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.CSAT)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.ProtAdvHomeTechPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ExtraUnlMix70Per != null ? record2.ExtraUnlMix70Per.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.ExtraUnlMix70Per)) * 100))%</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.NextUp != null ? record2.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.NextUp)).ToString())</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.NextUp != null ? record2.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.NextUp)).ToString())%</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.APO)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPAchievedWithSpif != null ? record2.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPAchievedWithSpif)))</td>
@@ -2036,7 +2036,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CSAT != null ? record2.CSAT.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.CSAT)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ProtAdvHomeTechPercentage != null ? record2.ProtAdvHomeTechPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.ProtAdvHomeTechPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.ExtraUnlMix70Per != null ? record2.ExtraUnlMix70Per.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.ExtraUnlMix70Per)) * 100))%</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.NextUp != null ? record2.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.NextUp)).ToString())</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.NextUp != null ? record2.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.NextUp)).ToString())%</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.APO)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPAchievedWithSpif != null ? record2.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPAchievedWithSpif)))</td>
@@ -2481,7 +2481,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.CSAT != null ? record.CSAT.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.CSAT)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.ProtAdvHomeTechPercentage != null ? record.ProtAdvHomeTechPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.ProtAdvHomeTechPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.ExtraUnlMix70Per != null ? record.ExtraUnlMix70Per.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.ExtraUnlMix70Per)) * 100))%</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.NextUp)).ToString())</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.NextUp != null ? record.NextUp.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.NextUp)).ToString())%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPAchievedWithSpif != null ? record.TotalGPAchievedWithSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPAchievedWithSpif)))</td>
@@ -3598,7 +3598,7 @@
                         <td>${parseFloat((response.CSAT || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.ExtraUnlMix70Per || 0) * 100).toFixed(1)}%</td>
-                        <td>${(parseFloat(response.NextUp || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.NextUp || 0)).toLocaleString('en-US')}%</td>
                         <td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
