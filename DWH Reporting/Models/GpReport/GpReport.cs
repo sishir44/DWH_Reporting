@@ -1752,6 +1752,7 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeInternet { get; set; }
         public string AIATrendingPer { get; set; }
         public string AIAInternetDolGpTrending { get; set; }
+        public string QuantumFiberNetOff { get; set; }
 
 
     }

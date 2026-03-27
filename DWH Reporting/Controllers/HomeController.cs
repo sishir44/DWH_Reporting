@@ -5641,7 +5641,8 @@ namespace DWH_Reporting.Controllers
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     AIATrendingPer = row["AIA Trending %"].ToString(),
-                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString()
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
 
                 };
 
@@ -5914,7 +5915,9 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
+
                 };
 
                 lisn_tot.Add(model3);
@@ -6190,7 +6193,8 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
                 };
 
                 lisn_totTM.Add(model4);
@@ -6468,7 +6472,8 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
                 };
 
                 lisn_totMMM.Add(model4);
