@@ -5642,7 +5642,8 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     AIATrendingPer = row["AIA Trending %"].ToString(),
                     AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
-                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
 
                 };
 
@@ -5916,7 +5917,8 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
 
                 };
 
@@ -6473,7 +6475,8 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
                 };
 
                 lisn_totMMM.Add(model4);

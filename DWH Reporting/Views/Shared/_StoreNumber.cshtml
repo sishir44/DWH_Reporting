@@ -1132,7 +1132,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 178; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 179; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1269,12 +1269,14 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>Digital to GA %</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Digital Upgrade Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Digital Upgrade GP</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>Quantum Fiber NetOff</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Broad Band less Then (300MB) Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (300MB) Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (500MB) Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (1G) Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber $GP</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>Quantum Fiber QI </td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA C Internet</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA B Internet</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA Internet Spiff</td>
@@ -1336,7 +1338,7 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (300 MB) QI Spiff</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (500 MB) QI Spiff</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>New Fiber (1G) QI Spiff</td>
-                                <td style="background-color: #C6D9F1; color:black;" td>Quantum Fiber NetOff</td>
+
                                 <td style="background-color: #C6D9F1; color:black;" td>Broadband $GP</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Turbo Feature</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Turbo Feature $GP</td>
@@ -1545,12 +1547,16 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.DigitalToGAPercent != null ? record.DigitalToGAPercent.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalToGAPercent)*100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.DigitalUpgradeNetOff != null ? record.DigitalUpgradeNetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalUpgradeNetOff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.DigitalUpgradeGP != null ? record.DigitalUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalUpgradeGP)))</td>
+
+                                        <td>@(String.IsNullOrWhiteSpace(record.QuantumFiberNetOff != null ? record.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberNetOff)))</td>
+
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MBNetOff != null ? record.BroadbandLessThen300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MBNetOff != null ? record.NewFiber300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MBNetOff != null ? record.NewFiber500MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber500MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber1GNetOff != null ? record.NewFiber1GNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber1GNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetOff != null ? record.NewFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetGP != null ? record.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.QuantumFiberQI != null ? record.QuantumFiberQI.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberQI)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIACInternet)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIABInternet)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetSpiff != null ? record.AIAInternetSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetSpiff)))</td>
@@ -1609,7 +1615,6 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber300MBQISpiff != null ? record.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MBQISpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber500MBQISpiff != null ? record.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber500MBQISpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber1GQISpiff != null ? record.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber1GQISpiff)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.QuantumFiberNetOff != null ? record.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberNetOff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -1838,12 +1843,16 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.DigitalToGAPercent != null ? record2.DigitalToGAPercent.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalToGAPercent)*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.DigitalUpgradeNetOff != null ? record2.DigitalUpgradeNetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalUpgradeNetOff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.DigitalUpgradeGP != null ? record2.DigitalUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalUpgradeGP)))</td>
+
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.QuantumFiberNetOff != null ? record2.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberNetOff)))</td>
+
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBNetOff != null ? record2.BroadbandLessThen300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MBNetOff != null ? record2.NewFiber300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber500MBNetOff != null ? record2.NewFiber500MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber500MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber1GNetOff != null ? record2.NewFiber1GNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber1GNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetOff != null ? record2.NewFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetGP != null ? record2.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.QuantumFiberQI != null ? record2.QuantumFiberQI.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberQI)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIACInternet != null ? record2.AIACInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIACInternet)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIABInternet != null ? record2.AIABInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIABInternet)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetSpiff != null ? record2.AIAInternetSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetSpiff)))</td>
@@ -1902,7 +1911,6 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber300MBQISpiff != null ? record2.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MBQISpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber500MBQISpiff != null ? record2.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber500MBQISpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber1GQISpiff != null ? record2.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber1GQISpiff)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.QuantumFiberNetOff != null ? record2.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberNetOff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandGP != null ? record2.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGP)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TurboFeature != null ? record2.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TurboFeatureGP != null ? record2.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeatureGP)))</td>
@@ -2115,12 +2123,14 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.DigitalToGAPercent != null ? record2.DigitalToGAPercent.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalToGAPercent)*100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.DigitalUpgradeNetOff != null ? record2.DigitalUpgradeNetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalUpgradeNetOff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.DigitalUpgradeGP != null ? record2.DigitalUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.DigitalUpgradeGP)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.QuantumFiberNetOff != null ? record2.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBNetOff != null ? record2.BroadbandLessThen300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MBNetOff != null ? record2.NewFiber300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber500MBNetOff != null ? record2.NewFiber500MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber500MBNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiber1GNetOff != null ? record2.NewFiber1GNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber1GNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetOff != null ? record2.NewFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetOff)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.NewFiberNetGP != null ? record2.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiberNetGP)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record2.QuantumFiberQI != null ? record2.QuantumFiberQI.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberQI)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIACInternet != null ? record2.AIACInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIACInternet)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIABInternet != null ? record2.AIABInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIABInternet)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AIAInternetSpiff != null ? record2.AIAInternetSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AIAInternetSpiff)))</td>
@@ -2179,7 +2189,6 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber300MBQISpiff != null ? record2.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MBQISpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber500MBQISpiff != null ? record2.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber500MBQISpiff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.NewFiber1GQISpiff != null ? record2.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber1GQISpiff)))</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.QuantumFiberNetOff != null ? record2.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.QuantumFiberNetOff)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.BroadbandGP != null ? record2.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGP)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TurboFeature != null ? record2.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeature)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TurboFeatureGP != null ? record2.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TurboFeatureGP)))</td>
@@ -2381,7 +2390,6 @@
                                         data-modalNF300QI="@record.NewFiber300MBQISpiff"
                                         data-modalNF500QI="@record.NewFiber500MBQISpiff"
                                         data-modalNF1GQI="@record.NewFiber1GQISpiff"
-                                        data-modalNF1GQI="@record.QuantumFiberNetOff"
                                         data-modalFUpgGP="@record.FiberUpgradeGP"
                                         data-modalBBGP="@record.BroadbandGP"
                                         data-modalBBFGP="@record.BroadbandFiberGP"
@@ -2562,12 +2570,14 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.DigitalToGAPercent != null ? record.DigitalToGAPercent.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalToGAPercent)*100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.DigitalUpgradeNetOff != null ? record.DigitalUpgradeNetOff.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalUpgradeNetOff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.DigitalUpgradeGP != null ? record.DigitalUpgradeGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.DigitalUpgradeGP)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.QuantumFiberNetOff != null ? record.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MBNetOff != null ? record.BroadbandLessThen300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber300MBNetOff != null ? record.NewFiber300MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber500MBNetOff != null ? record.NewFiber500MBNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber500MBNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiber1GNetOff != null ? record.NewFiber1GNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber1GNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetOff != null ? record.NewFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetOff)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.NewFiberNetGP != null ? record.NewFiberNetGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiberNetGP)))</td>
+                            <td>$@(String.IsNullOrWhiteSpace(record.QuantumFiberQI != null ? record.QuantumFiberQI.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberQI)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIACInternet != null ? record.AIACInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIACInternet)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIABInternet != null ? record.AIABInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIABInternet)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AIAInternetSpiff != null ? record.AIAInternetSpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AIAInternetSpiff)))</td>
@@ -2626,7 +2636,6 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber300MBQISpiff != null ? record.NewFiber300MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MBQISpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber500MBQISpiff != null ? record.NewFiber500MBQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber500MBQISpiff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.NewFiber1GQISpiff != null ? record.NewFiber1GQISpiff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber1GQISpiff)))</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.QuantumFiberNetOff != null ? record.QuantumFiberNetOff.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.QuantumFiberNetOff)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.BroadbandGP != null ? record.BroadbandGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGP)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TurboFeature != null ? record.TurboFeature.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeature)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TurboFeatureGP != null ? record.TurboFeatureGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TurboFeatureGP)))</td>
@@ -3488,7 +3497,7 @@
                         '<td>' + addCommaswithRound(Testdata[i].NewFiber300MBQISpiff) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].NewFiber500MBQISpiff) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].NewFiber1GQISpiff) + '</td>' +
-                        '<td>' + addCommaswithRound(Testdata[i].QuantumFiberNetOff) + '</td>' +
+                        
                         '<td>' + addCommaswithRound(Testdata[i].FiberUpgradeGP) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].BroadbandNewFiberGP) + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberGP) + '</td>' +
@@ -3678,12 +3687,14 @@
                         <td>${response.DigitalToGAPercent ? parseFloat(response.DigitalToGAPercent * 100).toFixed(1).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.DigitalUpgradeNetOff ? parseFloat(response.DigitalUpgradeNetOff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.DigitalUpgradeGP ? parseFloat(response.DigitalUpgradeGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                         <td>${response.QuantumFiberNetOff ? parseFloat(response.QuantumFiberNetOff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${(parseFloat(response.BroadbandLessThen300MBNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.NewFiber300MBNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.NewFiber500MBNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.NewFiber1GNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.NewFiberNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.NewFiberNetGP || 0)).toLocaleString('en-US')}</td>
+                        <td>$${(parseFloat(response.QuantumFiberQI || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIACInternet || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AIABInternet || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.AIAInternetSpiff || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
@@ -3742,7 +3753,7 @@
                         <td>$${response.NewFiber300MBQISpiff ? parseFloat(response.NewFiber300MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.NewFiber500MBQISpiff ? parseFloat(response.NewFiber500MBQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.NewFiber1GQISpiff ? parseFloat(response.NewFiber1GQISpiff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
-                        <td>${response.QuantumFiberNetOff ? parseFloat(response.QuantumFiberNetOff).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                       
                         <td>$${response.BroadbandGP ? parseFloat(response.BroadbandGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.TurboFeature ? parseFloat(response.TurboFeature).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>${response.TurboFeatureGP ? parseFloat(response.TurboFeatureGP).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
