@@ -2818,7 +2818,7 @@ namespace DWH_Reporting.Controllers
                     GPGOAL = row["GP GOAL ($)"].ToString(),
                     TotalGPAchievedWithSpif = row["Total $GP Achieved - With Spif"].ToString(),
                     Trending = row["Trending ($)"].ToString(),
-                    TrendingPer = row["Trending % "].ToString(),
+                    TrendingPer = row["Trending%"].ToString(),
                     CSAT = row["CSAT"].ToString(),
                     GrossAdds = row["GROSS ADDS"].ToString(),
                     GrossAddsNetOFF = row["GROSS ADDS Net OFF"].ToString(),
@@ -2912,6 +2912,8 @@ namespace DWH_Reporting.Controllers
                     CommissionBucketMTD = row["Commission Bucket MTD(5th Nov' 24)"].ToString(),
                     EOMCommissionTrendingBucket = row["Nov’24 EOM Commission Trending Bucket"].ToString(),
                     EffectiveRate = row["Effective Rate"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
                     //ProtAdv & HomeTech % DREAM(Wk 1 to 7)    
                     //DREAM(Wk 8 to 14)   DREAM(Wk 15 to 21)  
                     //DREAM(Wk 22 to 28)  DREAM(Wk 29 to 31)  
