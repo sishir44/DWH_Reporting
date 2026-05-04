@@ -858,8 +858,13 @@
                 <!-- Controls Section -->
                 <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                     @{
-                        var today = DateTime.Today.ToString("yyyy-MM-dd");
-                        var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+                        //var today = DateTime.Today.ToString("yyyy-MM-dd");
+                        //var yesterday = DateTime.Today.AddDays(-1).ToString("yyyy-MM-dd");
+                        var tz = TimeZoneInfo.FindSystemTimeZoneById("Central Standard Time");
+                        var ct = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, tz).Date;
+
+                        var today = ct.ToString("yyyy-MM-dd");
+                        var yesterday = ct.AddDays(-1).ToString("yyyy-MM-dd");
                     }
 
                     <div class="d-flex flex-wrap align-items-start justify-content-end" style="gap: 6px;">
@@ -6337,7 +6342,7 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
 
 <script>
     function getLastDayOfMonth(year, month) {
-        return new Date(year, month, 1).toISOString().split('T')[0];
+        return new Date(year, month, 0).toISOString().split('T')[0];
     }
 
     function toggleMtdEom() {

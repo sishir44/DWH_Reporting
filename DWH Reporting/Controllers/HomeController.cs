@@ -5296,7 +5296,7 @@ namespace DWH_Reporting.Controllers
                             selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
                         }
                     }
-                }
+                }            
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
 
