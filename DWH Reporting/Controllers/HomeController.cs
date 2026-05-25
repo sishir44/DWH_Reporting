@@ -5645,7 +5645,10 @@ namespace DWH_Reporting.Controllers
                     AIATrendingPer = row["AIA Trending %"].ToString(),
                     AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
                     QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
-                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
 
                 };
 
@@ -5920,7 +5923,10 @@ namespace DWH_Reporting.Controllers
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
-                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
 
                 };
 
@@ -6198,7 +6204,10 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString()
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                 };
 
                 lisn_totTM.Add(model4);
@@ -6478,7 +6487,10 @@ namespace DWH_Reporting.Controllers
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
-                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                 };
 
                 lisn_totMMM.Add(model4);

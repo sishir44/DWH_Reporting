@@ -1754,7 +1754,9 @@ namespace DWH_Reporting.Models.GpReport
         public string AIAInternetDolGpTrending { get; set; }
         public string QuantumFiberNetOff { get; set; }
         public string QuantumFiberQI { get; set; }
-
+        public string EliteActivationNetOFF { get; set; }
+        public string EliteActivationChargeBack { get; set; }
+        public string EliteActivationDollarGP { get; set; }
 
     }
 
