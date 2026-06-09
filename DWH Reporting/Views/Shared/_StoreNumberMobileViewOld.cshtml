@@ -3465,7 +3465,9 @@
 <script>
 
     function refresh() {
-        window.location.href = '../MobileView/StoreNumberMobileView';
+        var currentUrl = new URL(window.location.href);
+        var userid = currentUrl.searchParams.get("userId");
+        window.location.href = '../MobileView/StoreNumberMobileView?userid=' + userid + '&isrefresh=1';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
     function clearFilter() {
@@ -5966,7 +5968,7 @@ SDList = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.SDList));
 
 <script>
     function getLastDayOfMonth(year, month) {
-        return new Date(year, month, 1).toISOString().split('T')[0];
+        return new Date(year, month, 0).toISOString().split('T')[0];
     }
 
     function toggleMtdEom() {

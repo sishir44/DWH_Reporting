@@ -1434,10 +1434,10 @@
                                 @*Modified Columns: end*@
 
                                 @*Remaining Cols: start
-            <td>Fiber Upgrade  $GP</td>
-            <td>Broadband Goals</td>
-            <td>Next UP Trend %</td>
-        Remaining Cols: End*@
+                                <td>Fiber Upgrade  $GP</td>
+                                <td>Broadband Goals</td>
+                                <td>Next UP Trend %</td>
+                                Remaining Cols: End*@
 
                                 @*Old Columns: start*@
                                 <!--<td>CRU Ach MTD</td>-->
@@ -3933,10 +3933,9 @@
 <script>
 
     function refresh() {
-        
         var currentUrl = new URL(window.location.href);
         //var currentUrl = window.location.href;
-        var userid = currentUrl.searchParams.get("userid");
+        var userid = currentUrl.searchParams.get("userId");
         window.location.href = '../Home/StoreNumber?userid=' + userid + '&isrefresh=1';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);

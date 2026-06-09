@@ -3543,7 +3543,7 @@
 
     function refresh() {
         var currentUrl = new URL(window.location.href);
-        var userid = currentUrl.searchParams.get("userid");
+        var userid = currentUrl.searchParams.get("userId");
         window.location.href = '../Home/StoreNumber?userid=' + userid + '&isrefresh=1';
     }
 

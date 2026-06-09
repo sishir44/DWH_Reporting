@@ -6,6 +6,7 @@ using DWH_Reporting.Models.GpReport;
 using DWH_Reporting.Models;
 using System.Linq;
 using DWH_Reporting.Helpers;
+using System.Web;
 
 namespace DWH_Reporting.Controllers
 {
@@ -17,16 +18,22 @@ namespace DWH_Reporting.Controllers
             return View();
         }
 
-        public ActionResult StoreNumberMobileView(string selectedDate, string isfinal = "0")
+        [HttpGet]
+        public ActionResult StoreNumberMobileView(string selectedDate, string userid, string isfinal = "0", string isrefresh = "0")
         {
             try
             {
-                //string userid = "2";
-                //ShowStoreNumber(null, userid);
-                //global.userID = Request.QueryString["userid"];
-                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
-                global.userID = Request.QueryString["userid"];
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                // Prevent browser cache
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetNoStore();
+                Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+
+                if (sessionMgr.FromAction == false && selectedDate == null && (isrefresh == "0"))
+                {
+                    global.userID = Request.QueryString["userid"];
+                    global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                    sessionMgr.FromAction = true;
+                }
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal); //ShowStoreNumberNew
                 if (isfinal == "1")
@@ -43,7 +50,7 @@ namespace DWH_Reporting.Controllers
         }
 
         [HttpPost]
-        public ActionResult StoreNumberMobileView(string selectedDate, string isfinal, string optionalParam)
+        public ActionResult StoreNumberMobileView(string selectedDate, string userId, string isfinal, string isrefresh, string optionalParam)
         {
             try
             {
@@ -60,10 +67,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumberMobileViewOld", "MobileView", new { selectedDate = dateParam, isfinal = isfinal })
+                                url = Url.Action("StoreNumberMobileViewOld", "MobileView", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumberMobileViewOld", "MobileView", new { selectedDate = dateParam, isfinal = isfinal });
+                        return RedirectToAction("StoreNumberMobileViewOld", "MobileView", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
                     }
                 }
 
@@ -114,12 +121,12 @@ namespace DWH_Reporting.Controllers
 
         }
 
-        public ActionResult StoreNumberMobileViewOld(string selectedDate, string isfinal)
+        public ActionResult StoreNumberMobileViewOld(string selectedDate, string userId, string isfinal)
         {
             try
             {
-                global.userID = Request.QueryString["userid"];
-                global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                //global.userID = Request.QueryString["userid"];
+                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
                 ViewBag.selectedDate = selectedDate;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
                 if (isfinal == "1")
@@ -135,7 +142,7 @@ namespace DWH_Reporting.Controllers
 
         }
         [HttpPost]
-        public ActionResult StoreNumberMobileViewOld(string selectedDate, string isfinal, string optionalParam)
+        public ActionResult StoreNumberMobileViewOld(string selectedDate, string userId, string isfinal, string optionalParam)
         {
             try
             {
@@ -151,10 +158,10 @@ namespace DWH_Reporting.Controllers
                             return Json(new
                             {
                                 redirect = true,
-                                url = Url.Action("StoreNumberMobileView", "MobileView", new { selectedDate = dateParam, isfinal = isfinal })
+                                url = Url.Action("StoreNumberMobileView", "MobileView", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
                             }, JsonRequestBehavior.AllowGet);
                         }
-                        return RedirectToAction("StoreNumberMobileView", "MobileView", new { selectedDate = dateParam, isfinal = isfinal });
+                        return RedirectToAction("StoreNumberMobileView", "MobileView", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
                     }
                 }
 
@@ -2724,8 +2731,12 @@ namespace DWH_Reporting.Controllers
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     AIATrendingPer = row["AIA Trending %"].ToString(),
-                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString()
-
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString()
                 };
 
                 lisn2_lst.Add(model);
@@ -2997,7 +3008,12 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString()
                 };
 
                 lisn_tot.Add(model3);
@@ -3273,7 +3289,11 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString()
                 };
 
                 lisn_totTM.Add(model4);
@@ -3551,7 +3571,12 @@ namespace DWH_Reporting.Controllers
                     PartTimeHourlyHeadCount = row["Part Time Hourly Head Count"].ToString(),
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
-                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString()
+                    HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString()
                 };
 
                 lisn_totMMM.Add(model4);
