@@ -3467,7 +3467,7 @@
     function refresh() {
         //window.location.href = '../Home/StoreNumber';
         var currentUrl = new URL(window.location.href);
-        var userid = currentUrl.searchParams.get("userId");
+        var userid = currentUrl.searchParams.get("userId") || currentUrl.searchParams.get("userid");;
         window.location.href = '../Home/StoreNumber?userid=' + userid + '&isrefresh=1';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);

@@ -3862,7 +3862,7 @@
 
     function refresh() {
         var currentUrl = new URL(window.location.href);
-        var userid = currentUrl.searchParams.get("userId");
+        var userid = currentUrl.searchParams.get("userId") || currentUrl.searchParams.get("userid");;
         window.location.href = '../MobileView/StoreNumberMobileView?userid=' + userid + '&isrefresh=1';
     }
     document.getElementById('clearfilterID').addEventListener('click', clearFilter);
