@@ -1758,6 +1758,19 @@ namespace DWH_Reporting.Models.GpReport
         public string EliteActivationChargeBack { get; set; }
         public string EliteActivationDollarGP { get; set; }
 
+        /* Newly added column*/
+        public string CRUGPChargebackGP { get; set; }
+        public string FNChargebackGP { get; set; }
+        public string EliteActivationChargebackGP { get; set; }
+        public string ChargebackGP { get; set; }
+        public string ExtraActivationChargebackGP { get; set; }
+        public string NonExtraNonPremiumActivationChargebackGP { get; set; }
+        public string ValuePlusActivationChargebackGP { get; set; }
+        public string AIAInternetChargebackGP { get; set; }
+        public string NewFiber300MBQISpiffChargeGP { get; set; }
+        public string NewFiber500MBQISpiffChargebackGP { get; set; }
+        public string NewFiber1GQISpiffChargebackGP { get; set; }
+
     }
 
     public class Fct_EmployeeNumberAttributesModel

@@ -7,6 +7,8 @@ using DWH_Reporting.Models;
 using System.Linq;
 using DWH_Reporting.Helpers;
 using System.Web;
+using dotless.Core.Parser.Tree;
+using dotless.Core.Parser;
 
 namespace DWH_Reporting.Controllers
 {
@@ -5650,6 +5652,20 @@ namespace DWH_Reporting.Controllers
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
 
+                    CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
+                    FNChargebackGP = row["FN Chargeback GP"].ToString(),
+                    EliteActivationChargebackGP = row["Elite Activation Chargeback $GP"].ToString(),
+                    ChargebackGP = row["Chargeback GP"].ToString(),
+                    ExtraActivationChargebackGP = row["Extra Activation Chargeback $GP"].ToString(),
+                    NonExtraNonPremiumActivationChargebackGP = row["Non Extra / Non Premium Activation Chargeback $GP"].ToString(),
+                    ValuePlusActivationChargebackGP = row["Value Plus Activation Chargeback $GP"].ToString(),
+                    AIAInternetChargebackGP = row["AIA Internet Chargeback $GP"].ToString(),
+                    NewFiber300MBQISpiffChargeGP = row["New Fiber (300 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber500MBQISpiffChargebackGP = row["New Fiber (500 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber1GQISpiffChargebackGP = row["New Fiber (1G) QI Spiff Chargeback GP"].ToString(),
+
+
+
                 };
 
                 lisn2_lst.Add(model);
@@ -5927,6 +5943,18 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
+
+                    CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
+                    FNChargebackGP = row["FN Chargeback GP"].ToString(),
+                    EliteActivationChargebackGP = row["Elite Activation Chargeback $GP"].ToString(),
+                    ChargebackGP = row["Chargeback GP"].ToString(),
+                    ExtraActivationChargebackGP = row["Extra Activation Chargeback $GP"].ToString(),
+                    NonExtraNonPremiumActivationChargebackGP = row["Non Extra / Non Premium Activation Chargeback $GP"].ToString(),
+                    ValuePlusActivationChargebackGP = row["Value Plus Activation Chargeback $GP"].ToString(),
+                    AIAInternetChargebackGP = row["AIA Internet Chargeback $GP"].ToString(),
+                    NewFiber300MBQISpiffChargeGP = row["New Fiber (300 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber500MBQISpiffChargebackGP = row["New Fiber (500 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber1GQISpiffChargebackGP = row["New Fiber (1G) QI Spiff Chargeback GP"].ToString(),
 
                 };
 
@@ -6208,6 +6236,18 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
+
+                    CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
+                    FNChargebackGP = row["FN Chargeback GP"].ToString(),
+                    EliteActivationChargebackGP = row["Elite Activation Chargeback $GP"].ToString(),
+                    ChargebackGP = row["Chargeback GP"].ToString(),
+                    ExtraActivationChargebackGP = row["Extra Activation Chargeback $GP"].ToString(),
+                    NonExtraNonPremiumActivationChargebackGP = row["Non Extra / Non Premium Activation Chargeback $GP"].ToString(),
+                    ValuePlusActivationChargebackGP = row["Value Plus Activation Chargeback $GP"].ToString(),
+                    AIAInternetChargebackGP = row["AIA Internet Chargeback $GP"].ToString(),
+                    NewFiber300MBQISpiffChargeGP = row["New Fiber (300 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber500MBQISpiffChargebackGP = row["New Fiber (500 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber1GQISpiffChargebackGP = row["New Fiber (1G) QI Spiff Chargeback GP"].ToString(),
                 };
 
                 lisn_totTM.Add(model4);
@@ -6491,6 +6531,18 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
+
+                    CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
+                    FNChargebackGP = row["FN Chargeback GP"].ToString(),
+                    EliteActivationChargebackGP = row["Elite Activation Chargeback $GP"].ToString(),
+                    ChargebackGP = row["Chargeback GP"].ToString(),
+                    ExtraActivationChargebackGP = row["Extra Activation Chargeback $GP"].ToString(),
+                    NonExtraNonPremiumActivationChargebackGP = row["Non Extra / Non Premium Activation Chargeback $GP"].ToString(),
+                    ValuePlusActivationChargebackGP = row["Value Plus Activation Chargeback $GP"].ToString(),
+                    AIAInternetChargebackGP = row["AIA Internet Chargeback $GP"].ToString(),
+                    NewFiber300MBQISpiffChargeGP = row["New Fiber (300 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber500MBQISpiffChargebackGP = row["New Fiber (500 MB) QI Spiff Chargeback GP"].ToString(),
+                    NewFiber1GQISpiffChargebackGP = row["New Fiber (1G) QI Spiff Chargeback GP"].ToString(),
                 };
 
                 lisn_totMMM.Add(model4);
