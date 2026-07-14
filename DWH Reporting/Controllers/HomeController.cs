@@ -6673,6 +6673,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctSDList = sdList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.SDList = distinctSDList;
             }
@@ -6685,6 +6686,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distincttiersList = tiersList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.tiersList = distincttiersList;
             }
@@ -6697,6 +6699,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctStoresList = storesList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.StoresList = distinctStoresList;
             }
@@ -6709,6 +6712,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctMarketList = marketList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.MarketList = distinctMarketList;
             }
@@ -6721,6 +6725,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctmMarketList = mmarketList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.mMarketList = distinctmMarketList;
             }
@@ -6733,6 +6738,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctmmmList = mmmList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.mmmList = distinctmmmList;
             }
@@ -6745,6 +6751,7 @@ namespace DWH_Reporting.Controllers
                 // Ensure distinct items by grouping by the 'Value' property (or 'Text' if necessary)
                 var distinctTMList = tmList.GroupBy(x => x.Value)
                                            .Select(g => g.First()) // Or group by x.Text if needed
+                                           .OrderBy(x => x.Value)
                                            .ToList();
                 ViewBag.TMList = distinctTMList;
             }
