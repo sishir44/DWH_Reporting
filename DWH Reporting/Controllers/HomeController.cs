@@ -5651,7 +5651,7 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
-                    Total_GP_Achieved_Without_Spif = row["Total $GP Achieved - Without Spif"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -5944,7 +5944,7 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
-                    Total_GP_Achieved_Without_Spif = row["Total $GP Achieved - Without Spif"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6238,7 +6238,7 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
-                    Total_GP_Achieved_Without_Spif = row["Total $GP Achieved - Without Spif"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6534,7 +6534,7 @@ namespace DWH_Reporting.Controllers
                     EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
-                    Total_GP_Achieved_Without_Spif = row["Total $GP Achieved - Without Spif"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
