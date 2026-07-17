@@ -1770,6 +1770,9 @@ namespace DWH_Reporting.Models.GpReport
         public string NewFiber300MBQISpiffChargeGP { get; set; }
         public string NewFiber500MBQISpiffChargebackGP { get; set; }
         public string NewFiber1GQISpiffChargebackGP { get; set; }
+        public string Total_GP_Achieved_Without_Spif { get; set; }
+
+
 
     }
 
