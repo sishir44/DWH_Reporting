@@ -5318,6 +5318,111 @@ namespace DWH_Reporting.Controllers
             }
         }
 
+        [HttpGet]
+        public ActionResult DirectorStoreNumber(string selectedDate, string userid, string isfinal = "0", string isrefresh = "0")
+        {
+            try
+            {
+                // Prevent browser cache
+                Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.Cache.SetNoStore();
+                Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+
+                if (sessionMgr.FromAction == false && selectedDate == null && (isrefresh == "0"))
+                {
+                    global.userID = Request.QueryString["userid"];
+                    global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+                    sessionMgr.FromAction = true;
+                }
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
+                if (isfinal == "1")
+                {
+                    return PartialView("_DirectorStoreNumber");
+                }
+                return View();
+
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+
+        }
+
+        [HttpPost]
+        public ActionResult DirectorStoreNumber(string selectedDate, string userId, string isfinal, string isrefresh, string optionalParam)
+        {
+            //global.userID = Request.QueryString["userid"];
+            //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+
+            try
+            {
+                //if (!string.IsNullOrEmpty(selectedDate))
+                //{
+                //    DateTime selDate = DateTime.Parse(selectedDate);
+                //    DateTime compareDate = new DateTime(2026, 01, 01);
+                //    if (selDate < compareDate)
+                //    {
+                //        string dateParam = selDate.ToString("yyyy-MM-dd");
+                //        if (Request.IsAjaxRequest())
+                //        {
+                //            return Json(new
+                //            {
+                //                redirect = true,
+                //                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
+                //            }, JsonRequestBehavior.AllowGet);
+                //        }
+                //        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
+                //    }
+                //}
+
+                if (selectedDate == "")
+                {
+                    selectedDate = null;
+                }
+                ViewBag.isfinal = isfinal;
+
+                if (isfinal == "1")
+                {
+                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    if (selectedDate == "" || selectedDate == null)
+                    {
+                        selectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
+                    if (DateTime.TryParse(selectedDate, out DateTime dateRangeParsed))
+                    {
+                        if (firstDayOfMonth <= dateRangeParsed)
+                        {
+                            DateTime lastDayPrevMonth = firstDayOfMonth.AddDays(-1);
+                            selectedDate = lastDayPrevMonth.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime lastDayOfMonth = new DateTime(dateRangeParsed.Year, dateRangeParsed.Month, 1).AddMonths(1).AddDays(-1);
+                            selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumberNew(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    if (Request.IsAjaxRequest()) // If AJAX, return the fragment
+                    {
+                        return PartialView("_DirectorStoreNumber");
+                    }
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+        }
+
         private void ShowStoreNumberNew(string selectedDate, string UserID, string isfinal)
         {
             string dateParam = selectedDate;
@@ -5653,6 +5758,14 @@ namespace DWH_Reporting.Controllers
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                     Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
 
+                    GPTrending2025=row["2025 GP Trending"].ToString(),
+                    GPTrending2024=row["2024 GP Trending"].ToString(),
+                    GPTrending2023=row["2023 GP Trending"].ToString(),
+                    GPTrending2022=row["2022 GP Trending"].ToString(),
+                    GPTrending2021=row["2021 GP Trending"].ToString(),
+
+
+
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
                     //EliteActivationChargebackGP = row["Elite Activation Chargeback $GP"].ToString(),
@@ -5945,6 +6058,12 @@ namespace DWH_Reporting.Controllers
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                     Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6239,6 +6358,12 @@ namespace DWH_Reporting.Controllers
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                     Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6535,6 +6660,12 @@ namespace DWH_Reporting.Controllers
                     EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
                     EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
                     Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),

@@ -1772,7 +1772,11 @@ namespace DWH_Reporting.Models.GpReport
         public string NewFiber1GQISpiffChargebackGP { get; set; }
         public string Total_GP_Achieved_Without_Spif { get; set; }
 
-
+        public string GPTrending2025 { get; set; }
+        public string GPTrending2024 { get; set; }
+        public string GPTrending2023 { get; set; }
+        public string GPTrending2022 { get; set; }
+        public string GPTrending2021 { get; set; }
 
     }
 

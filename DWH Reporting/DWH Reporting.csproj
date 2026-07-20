@@ -370,6 +370,8 @@
     <Content Include="Views\MobileView\StoreNumberMobileView.cshtml" />
     <Content Include="Views\Shared\_StoreNumberMobileView.cshtml" />
     <Content Include="Views\Shared\_StoreNumberMobileViewOld.cshtml" />
+    <Content Include="Views\Home\DirectorStoreNumber.cshtml" />
+    <Content Include="Views\Shared\_DirectorStoreNumber.cshtml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
