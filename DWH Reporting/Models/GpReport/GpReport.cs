@@ -1778,6 +1778,12 @@ namespace DWH_Reporting.Models.GpReport
         public string GPTrending2022 { get; set; }
         public string GPTrending2021 { get; set; }
 
+        public string GPAchieved2025 { get; set; }
+        public string GPAchieved2024 { get; set; }
+        public string GPAchieved2023 { get; set; }
+        public string GPAchieved2022 { get; set; }
+        public string GPAchieved2021 { get; set; }
+
     }
 
     public class Fct_EmployeeNumberAttributesModel

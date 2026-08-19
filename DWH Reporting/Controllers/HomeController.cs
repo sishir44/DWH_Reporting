@@ -5763,6 +5763,11 @@ namespace DWH_Reporting.Controllers
                     GPTrending2023=row["2023 GP Trending"].ToString(),
                     GPTrending2022=row["2022 GP Trending"].ToString(),
                     GPTrending2021=row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
 
 
 
@@ -6064,6 +6069,11 @@ namespace DWH_Reporting.Controllers
                     GPTrending2023 = row["2023 GP Trending"].ToString(),
                     GPTrending2022 = row["2022 GP Trending"].ToString(),
                     GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6364,6 +6374,11 @@ namespace DWH_Reporting.Controllers
                     GPTrending2023 = row["2023 GP Trending"].ToString(),
                     GPTrending2022 = row["2022 GP Trending"].ToString(),
                     GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6666,6 +6681,11 @@ namespace DWH_Reporting.Controllers
                     GPTrending2023 = row["2023 GP Trending"].ToString(),
                     GPTrending2022 = row["2022 GP Trending"].ToString(),
                     GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
