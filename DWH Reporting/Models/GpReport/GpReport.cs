@@ -1783,6 +1783,7 @@ namespace DWH_Reporting.Models.GpReport
         public string GPAchieved2023 { get; set; }
         public string GPAchieved2022 { get; set; }
         public string GPAchieved2021 { get; set; }
+        public string PrepaidSpiff { get; set; }
 
     }
 
