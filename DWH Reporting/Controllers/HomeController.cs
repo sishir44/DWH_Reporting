@@ -5769,6 +5769,7 @@ namespace DWH_Reporting.Controllers
                     GPAchieved2022 = row["2022 GP Achieved"].ToString(),
                     GPAchieved2021 = row["2021 GP Achieved"].ToString(),
                     PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
 
 
 
@@ -6076,6 +6077,7 @@ namespace DWH_Reporting.Controllers
                     GPAchieved2022 = row["2022 GP Achieved"].ToString(),
                     GPAchieved2021 = row["2021 GP Achieved"].ToString(),
                     PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6382,6 +6384,7 @@ namespace DWH_Reporting.Controllers
                     GPAchieved2022 = row["2022 GP Achieved"].ToString(),
                     GPAchieved2021 = row["2021 GP Achieved"].ToString(),
                     PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6690,6 +6693,7 @@ namespace DWH_Reporting.Controllers
                     GPAchieved2022 = row["2022 GP Achieved"].ToString(),
                     GPAchieved2021 = row["2021 GP Achieved"].ToString(),
                     PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),

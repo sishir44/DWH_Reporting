@@ -1135,7 +1135,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 184; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 185; i++) // Loop from 1 to 164
                                      {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                      }
@@ -1300,6 +1300,7 @@
                                     <td style="background-color: #C6D9F1; color:black;" td>Tablet Wearable Upgrade Devices QTY Trend</td>
                                     <td style="background-color: #C6D9F1; color:black;" td>Tablet Wearable Upgrade Devices QTY $GP</td>
                                     <td style="background-color: #C6D9F1; color:black;" td>Projected Geographic spif</td>
+                                    <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Goals</td>
                                     <td style="background-color: #C6D9F1; color:black;" td>Access Qty</td>
                                     <td style="background-color: #C6D9F1; color:black;" td>Access $GP</td>
                                     <td style="background-color: #C6D9F1; color:black;" td>Access Qty _Trending</td>
@@ -1591,6 +1592,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyTrend != null ? record.TWCDevicesQtyTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWCDevicesQtyTrend)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TWCDevicesDollars != null ? record.TWCDevicesDollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TWCDevicesDollars)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPGoals != null ? record.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AccessoryGPGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessQty)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessGP)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessQtyTrending != null ? record.AccessQtyTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessQtyTrending)))</td>
@@ -1899,6 +1901,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyTrend != null ? record2.TWCDevicesQtyTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TWCDevicesQtyTrend)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TWCDevicesDollars != null ? record2.TWCDevicesDollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TWCDevicesDollars)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.ProjectedGeographicSpif != null ? record2.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProjectedGeographicSpif)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.AccessoryGPGoals != null ? record2.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessoryGPGoals)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AccessQty != null ? record2.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessQty)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AccessGP != null ? record2.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessGP)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AccessQtyTrending != null ? record2.AccessQtyTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessQtyTrending)))</td>
@@ -2191,6 +2194,7 @@
                                                     <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyTrend != null ? record2.TWCDevicesQtyTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.TWCDevicesQtyTrend)))</td>
                                                     <td>$@(String.IsNullOrWhiteSpace(record2.TWCDevicesDollars != null ? record2.TWCDevicesDollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TWCDevicesDollars)))</td>
                                                     <td>$@(String.IsNullOrWhiteSpace(record2.ProjectedGeographicSpif != null ? record2.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.ProjectedGeographicSpif)))</td>
+                                                    <td>@(String.IsNullOrWhiteSpace(record2.AccessoryGPGoals != null ? record2.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessoryGPGoals)))</td>
                                                     <td>@(String.IsNullOrWhiteSpace(record2.AccessQty != null ? record2.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessQty)))</td>
                                                     <td>$@(String.IsNullOrWhiteSpace(record2.AccessGP != null ? record2.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessGP)))</td>
                                                     <td>@(String.IsNullOrWhiteSpace(record2.AccessQtyTrending != null ? record2.AccessQtyTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessQtyTrending)))</td>
@@ -2481,6 +2485,7 @@
                                         data-modalPGP="@record.PrepaidGP"
                                         data-modalPAuto="@record.PrepaidWithAutopay"
                                         data-modalAGP="@record.AccessGP"
+                                        data-modalAGPG="@record.AccessoryGPGoals"
                                         data-modalAQTY="@record.AccessQty"
                                         data-modalAQTYTr="@record.AccessQtyTrending"
                                         data-modalAR="@record.AccessRevenue"
@@ -2657,6 +2662,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyTrend != null ? record.TWCDevicesQtyTrend.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.TWCDevicesQtyTrend)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.TWCDevicesDollars != null ? record.TWCDevicesDollars.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TWCDevicesDollars)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.ProjectedGeographicSpif != null ? record.ProjectedGeographicSpif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.ProjectedGeographicSpif)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPGoals != null ? record.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AccessoryGPGoals)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessQty != null ? record.AccessQty.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessQty)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessGP)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessQtyTrending != null ? record.AccessQtyTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessQtyTrending)))</td>
@@ -3795,6 +3801,7 @@
                         <td>${(parseFloat(response.TWCDevicesQtyTrend || 0).toFixed(0)).toLocaleString('en-US')}</td>
                         <td>$${response.TWCDevicesDollars ? parseFloat(response.TWCDevicesDollars).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
                         <td>$${response.ProjectedGeographicSpif ? parseFloat(response.ProjectedGeographicSpif).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",") : ''}</td>
+                        <td>${(parseFloat(response.AccessoryGPGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.AccessQty || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.AccessGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.AccessQtyTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
