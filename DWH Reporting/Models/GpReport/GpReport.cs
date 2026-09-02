@@ -1785,6 +1785,8 @@ namespace DWH_Reporting.Models.GpReport
         public string GPAchieved2021 { get; set; }
         public string PrepaidSpiff { get; set; }
         public string AccessoryGPGoals { get; set; }
+        public string AccGpTreding { get; set; }
+        public string AccGpTredingPer { get; set; }
 
     }
 

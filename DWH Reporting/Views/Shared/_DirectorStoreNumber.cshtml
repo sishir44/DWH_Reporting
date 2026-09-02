@@ -1137,7 +1137,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 195; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 197; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1204,6 +1204,8 @@
                                 <td style="background-color: #C6D9F1; color:black;">APO ($30)</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Goals</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Access $GP Ach</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Trending</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Trending %</td>
                                 <td style="background-color: #C6D9F1; color:black;">Total $GP Goals</td>
                                 <th style="background-color: black; color: white;">Total $GP With Spif without Chargeback</th>
                                 <td style="background-color: #C6D9F1; color:black;">Total $GP Achieved - With Spif</td>
@@ -1510,6 +1512,8 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPGoals != null ? record.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AccessoryGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.AccGpTreding != null ? record.AccGpTreding.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccGpTreding)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AccGpTredingPer != null ? record.AccGpTredingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AccGpTredingPer)) * 100))%</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.Total_GP_Achieved_Without_Spif != null ? record.Total_GP_Achieved_Without_Spif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.Total_GP_Achieved_Without_Spif)))</td>
@@ -1840,6 +1844,8 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.APO)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AccessoryGPGoals != null ? record2.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessoryGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AccessGP != null ? record2.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.AccGpTreding != null ? record2.AccGpTreding.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccGpTreding)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.AccGpTredingPer != null ? record2.AccGpTredingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AccGpTredingPer)) * 100))%</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.Total_GP_Achieved_Without_Spif != null ? record2.Total_GP_Achieved_Without_Spif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.Total_GP_Achieved_Without_Spif)))</td>
@@ -2152,6 +2158,8 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.APO != null ? record2.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.APO)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AccessoryGPGoals != null ? record2.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessoryGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.AccessGP != null ? record2.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccessGP)))</td>
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.AccGpTreding != null ? record2.AccGpTreding.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.AccGpTreding)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.AccGpTredingPer != null ? record2.AccGpTredingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.AccGpTredingPer)) * 100))%</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.TotalGPGoals != null ? record2.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.TotalGPGoals)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.Total_GP_Achieved_Without_Spif != null ? record2.Total_GP_Achieved_Without_Spif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.Total_GP_Achieved_Without_Spif)))</td>
@@ -2649,6 +2657,8 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.APO != null ? record.APO.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.APO)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AccessoryGPGoals != null ? record.AccessoryGPGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.AccessoryGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.AccessGP != null ? record.AccessGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccessGP)))</td>
+                                        <td>$@(String.IsNullOrWhiteSpace(record.AccGpTreding != null ? record.AccGpTreding.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.AccGpTreding)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AccGpTredingPer != null ? record.AccGpTredingPer.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.AccGpTredingPer)) * 100))%</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.TotalGPGoals != null ? record.TotalGPGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.TotalGPGoals)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.Total_GP_Achieved_Without_Spif != null ? record.Total_GP_Achieved_Without_Spif.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.Total_GP_Achieved_Without_Spif)))</td>
@@ -3817,6 +3827,8 @@
                         <td>$${parseFloat(response.APO || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${(parseFloat(response.AccessoryGPGoals || 0)).toLocaleString('en-US')}</td>
                         <td>$${parseFloat(response.AccessGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>$${parseFloat(response.AccGpTreding || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>${parseFloat((response.AccGpTredingPer || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.TotalGPGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.Total_GP_Achieved_Without_Spif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.TotalGPAchievedWithSpif || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
