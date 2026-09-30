@@ -7212,7 +7212,28 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
 
                     AIATrendingPer = row["AIA Trending %"].ToString(),
-                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString()
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
+                    AccGpTreding = row["Accessory GP trending"].ToString(),
+                    AccGpTredingPer = row["Accessory GP trending %"].ToString(),
 
                 };
 
@@ -7484,7 +7505,29 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
 
                     AIATrendingPer = row["AIA Trending %"].ToString(),
-                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString()
+                    AIAInternetDolGpTrending = row["AIA Internet $GP Trending"].ToString(),
+
+                    QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+                    EliteActivationNetOFF = row["Elite Activation Net OFF"].ToString(),
+                    EliteActivationChargeBack = row["Elite Activation Charge Back"].ToString(),
+                    EliteActivationDollarGP = row["Elite Activation $GP"].ToString(),
+                    Total_GP_Achieved_Without_Spif = row["Total $GP With Spif without CB"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    PrepaidSpiff = row["Prepaid Spiff"].ToString(),
+                    AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
+                    AccGpTreding = row["Accessory GP trending"].ToString(),
+                    AccGpTredingPer = row["Accessory GP trending %"].ToString(),
                 };
             }
             return Json(result);
