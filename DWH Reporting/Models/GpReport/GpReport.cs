@@ -1659,6 +1659,27 @@ namespace DWH_Reporting.Models.GpReport
         public string EOMCommissionTrendingBucket { get; set; }
         public string EffectiveRate { get; set; }
 
+        // View Menu additional column added
+        public string PremiumProducts { get; set; }
+        public string PremiumProductsAchived { get; set; }
+        public string PremiumProductsTrending { get; set; }
+        public string PremiumTrendingToGoals { get; set; }
+        public string GROSSADDSTrending { get; set; }
+        public string GROSSADDSTrendingToPremium { get; set; }
+        public string PremiumExtraToOpps { get; set; }
+        public string NextUPToOpps { get; set; }
+        public string UpgradeTrending { get; set; }
+        public string TWCDDevicesQTYTrending { get; set; }
+        public string TWCDDevicesTrendToGoal { get; set; }
+        public string BroadbandTrending { get; set; }
+        public string FiberUpgradeTrending { get; set; }
+        public string BroadbandFiberTrending { get; set; }
+        public string PremVideoTrending { get; set; }
+        public string TotalProtection { get; set; }
+        public string GATrendingToGoals { get; set; }
+        public string AccessRevenueTrending { get; set; }
+        public string HomeInternet { get; set; }
+
         //New Dot Report
         public string NextUPTrendPer                             { get; set; }
         public string PremiumPerGA                              { get; set; }
@@ -1749,7 +1770,6 @@ namespace DWH_Reporting.Models.GpReport
         public string HomeTechProtectChargeBack { get; set; }
         public string HomeTechProtectNetOff { get; set; }
         public string HomeTechProtectGP { get; set; }
-        public string HomeInternet { get; set; }
         public string AIATrendingPer { get; set; }
         public string AIAInternetDolGpTrending { get; set; }
         public string QuantumFiberNetOff { get; set; }

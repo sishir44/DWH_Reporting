@@ -2845,6 +2845,27 @@
                                             <th style="background-color: black; color: white;">EOM Commission Trending Bucket</th>
                                             <th style="background-color: black; color: white;">Effective Rate</th>
 
+                                            <th style="background-color: black; color: white;">Premium Products</th>
+                                            <th style="background-color: black; color: white;">Premium Products Achived</th>
+                                            <th style="background-color: black; color: white;">Premium Products Trending</th>
+                                            <th style="background-color: black; color: white;">Premium Trending to Goals %</th>
+                                            <th style="background-color: black; color: white;">GROSS ADDS Trending</th>
+                                            <th style="background-color: black; color: white;">GROSS ADDS Trending % To Premium</th>
+                                            <th style="background-color: black; color: white;">Premium+Extra % to Opps</th>
+                                            <th style="background-color: black; color: white;">Next UP % to Opps</th>
+                                            <th style="background-color: black; color: white;">Upgrade Trending</th>
+                                            <th style="background-color: black; color: white;">T,W,C Devices QTY Trending</th>
+                                            <th style="background-color: black; color: white;">T,W,C Devices Trend to Goal %</th>
+                                            <th style="background-color: black; color: white;">Broadband Trending</th>
+                                            <th style="background-color: black; color: white;">Fiber Upgrade Trending</th>
+                                            <th style="background-color: black; color: white;">Broadband + Fiber Trending</th>
+                                            <th style="background-color: black; color: white;">Entertainment Ach</th>
+                                            <th style="background-color: black; color: white;">Prem Video Trending</th>
+                                            <th style="background-color: black; color: white;">Total Protection %</th>
+                                            <th style="background-color: black; color: white;">GA Trending to Goals %</th>
+                                            <th style="background-color: black; color: white;">Access Revenue Trending</th>
+                                            <th style="background-color: black; color: white;">Home Internet</th>
+
                                         </tr>
                                     </thead>
                                     <tbody id="tblDetBdy"></tbody>
@@ -3241,6 +3262,28 @@
                         '<td>' + addCommaswithRound(Testdata[i].CommissionBucketMTD)   + '</td>' +
                         '<td>' + addCommaswithRound(Testdata[i].EOMCommissionTrendingBucket) + '</td>' +
                         '<td>' + (isNaN(Testdata[i].EffectiveRate) ? Testdata[i].EffectiveRate : addCommaswithRound(Testdata[i].EffectiveRate)) + '</td>' +
+
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumProducts) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumProductsAchived) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumProductsTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumTrendingToGoals) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GROSSADDSTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GROSSADDSTrendingToPremium) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremiumExtraToOpps) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].NextUPToOpps) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].UpgradeTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TWCDDevicesQTYTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TWCDDevicesTrendToGoal) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].FiberUpgradeTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].BroadbandFiberTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].EntertainmentAch) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].PremVideoTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].TotalProtection) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].GATrendingToGoals) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].AccessRevenueTrending) + '</td>' +
+                        '<td>' + addCommaswithRound(Testdata[i].HomeInternet) + '</td>' +
+
                         '</tr>';
                 }
                 $('#tblDetBdy').empty().append(html);

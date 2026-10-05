@@ -2915,7 +2915,28 @@ namespace DWH_Reporting.Controllers
                     EOMCommissionTrendingBucket = row["Nov’24 EOM Commission Trending Bucket"].ToString(),
                     EffectiveRate = row["Effective Rate"].ToString(),
                     QuantumFiberNetOff = row["Quantum Fiber Netoff"].ToString(),
-                    QuantumFiberQI = row["Quantum FIber QI"].ToString()
+                    QuantumFiberQI = row["Quantum FIber QI"].ToString(),
+
+                    PremiumProducts = row["Premium Products"].ToString(),
+                    PremiumProductsAchived = row["Premium Products Achived"].ToString(),
+                    PremiumProductsTrending = row["Premium Products Trending"].ToString(),
+                    PremiumTrendingToGoals = row["Premium Trending to Goals %"].ToString(),
+                    GROSSADDSTrending = row["GROSS ADDS Trending"].ToString(),
+                    GROSSADDSTrendingToPremium = row["GROSS ADDS Trending % To Premium"].ToString(),
+                    PremiumExtraToOpps = row["Premium+Extra  % to Opps"].ToString(),
+                    NextUPToOpps = row["Next UP % to Opps"].ToString(),
+                    UpgradeTrending = row["Upgrade Trending"].ToString(),
+                    TWCDDevicesQTYTrending = row["T,W,C Devices QTY Trending"].ToString(),
+                    TWCDDevicesTrendToGoal = row["T,W,C Devices Trend to Goal %"].ToString(),
+                    BroadbandTrending = row["Broadband Trending"].ToString(),
+                    FiberUpgradeTrending = row["Fiber Upgrade Trending"].ToString(),
+                    BroadbandFiberTrending = row["Broadband + Fiber Trending"].ToString(),
+                    EntertainmentAch = row["Entertainment Ach"].ToString(),
+                    PremVideoTrending = row["Prem Video Trending"].ToString(),
+                    TotalProtection = row["Total Protection %"].ToString(),
+                    GATrendingToGoals = row["GA Trending to Goals %"].ToString(),
+                    AccessRevenueTrending = row["Access Revenue Trending"].ToString(),
+                    HomeInternet = row["Home Internet"].ToString()
                     //ProtAdv & HomeTech % DREAM(Wk 1 to 7)    
                     //DREAM(Wk 8 to 14)   DREAM(Wk 15 to 21)  
                     //DREAM(Wk 22 to 28)  DREAM(Wk 29 to 31)  
