@@ -119,8 +119,7 @@
         #tbl tbody td:nth-child(2),
         #tbl tbody td:nth-child(3),
         #tbl tbody td:nth-child(4),
-        #tbl tbody td:nth-child(5),
-        #tbl tbody td:nth-child(6) {
+        #tbl tbody td:nth-child(5) {
             position: sticky;
             z-index: 1;
         }
@@ -129,8 +128,7 @@
         #tbl thead th:nth-child(2),
         #tbl thead th:nth-child(3),
         #tbl thead th:nth-child(4),
-        #tbl thead th:nth-child(5),
-        #tbl thead th:nth-child(6) {
+        #tbl thead th:nth-child(5) {
             position: sticky;
             z-index: 12;
         }
@@ -166,11 +164,11 @@
         }
 
 
-        #tbl tbody td:nth-child(6),
+        /*#tbl tbody td:nth-child(6),
         #tbl thead th:nth-child(6) {
             left: 325px;
             min-width: 65px !important;
-        }
+        }*/
 
         /*#tbl tbody td:nth-child(7),
         #tbl thead th:nth-child(7) {
@@ -1137,7 +1135,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 197; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 196; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1162,7 +1160,7 @@
                                 <tr class="spanned_header">
 
                                     <!-- 5 Freeze COL -->
-                                    <th rowspan="2" style="background-color: black; color:white;">Self Note</th>
+                                    @*<th rowspan="2" style="background-color: black; color:white;">Self Note</th>*@
                                     <th rowspan="2" style="background-color: black; color:white;">View</th>
                                     <th rowspan="2" style="background-color: black; color:white;">Market</th>
                                     <th rowspan="2" style="background-color: black; color:white;">SD</th>
@@ -1172,7 +1170,7 @@
                                     <th rowspan="2" style="background-color: black; color:white;">Store</th>
 
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">Unique<br /> ID</th>
-                                    <th rowspan="2" style="background-color: #2F5E9C; color:white;">Dealer<br />  Code</th>
+                                    
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">HIT<br />  Store</th>
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">Tiers</th>
                                     <th rowspan="2" style="background-color: #2F5E9C; color:white;">Store Contact</th>
@@ -1211,7 +1209,7 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Trending</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Accessory GP Trending %</td>
                                 <td style="background-color: #C6D9F1; color:black;">Total $GP Goals</td>
-                                <th style="background-color: black; color: white;">Total $GP With Spif without Chargeback</th>
+                                <th style="background-color: #C6D9F1; color:black; ">Total $GP With Spif without Chargeback</th>
                                 <td style="background-color: #C6D9F1; color:black;">Total $GP Achieved - With Spif</td>
                                 <td style="background-color: #C6D9F1; color:black;">$GP - With Spif Trending</td>
                                 <td style="background-color: #C6D9F1; color:black;">GP Trending %</td>
@@ -1258,6 +1256,7 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>MTD UPGRADES_Trending</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>MTD UPGRADES $GP</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>MTD UPGRADES $GP Trending</td>
+                                <th rowspan="2" style="background-color: #2F5E9C; color:white;">Dealer<br />  Code</th>
                                 <td style="background-color: #C6D9F1; color:black;" td>T,W,C Devices QTY Goals</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>T,W,C Devices QTY Net OFF</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>Prepaid Net OFF</td>
@@ -1481,14 +1480,14 @@
                                 {
                                     // GRAND TOTAL
                                     <tr id="loadedToalRow" class="total_data">
-                                        <td></td>
+                                        @*<td></td>*@
                                         <td></td>
                                         <td></td>
                                         <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
                                         <td></td>
                                         @*<td></td>*@
                                         @*<td></td>*@
-                                        <td></td>
+                                        
                                         <td></td>
                                         <td></td>
                                         @*<td></td>*@
@@ -1570,6 +1569,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesTrending != null ? record.MTDUpgradesTrending.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.MTDUpgradesTrending)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.MTDUpgradesGP != null ? record.MTDUpgradesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.MTDUpgradesGPTrending != null ? record.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesGPTrending)))</td>
+                                        <td></td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyGoals)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyNetOFF != null ? record.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyNetOFF)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
@@ -1813,13 +1813,12 @@
                                                 {
                                                     //TM wise total each market
                                                     <tr id="totMMM" class="total_dataMMM">
-                                                        <td></td>
+                                                        @*<td></td>*@
                                                         <td></td>
                                                         <td style="white-space: normal; word-wrap: break-word;">SD Total</td>
                                                         <td style="white-space: normal; word-wrap: break-word;">@record2.MULMngr</td>
                                                         <td></td>
                                                         @*<td></td>*@
-                                                        <td></td>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -1902,6 +1901,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesTrending != null ? record2.MTDUpgradesTrending.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.MTDUpgradesTrending)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGP != null ? record2.MTDUpgradesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGPTrending != null ? record2.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGPTrending)))</td>
+                                                        <td></td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyGoals != null ? record2.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyGoals)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyNetOFF != null ? record2.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyNetOFF)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
@@ -2127,13 +2127,13 @@
                                                 {
                                                     //TM wise total each market
                         <tr id="totTM" class="total_dataTM">
-                            <td></td>
+                            @*<td></td>*@
                             <td></td>
                             @*<td></td>*@
                             <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                             <td></td>
                             <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
-                            <td></td>
+                            
                             <td></td>
                             <td></td>
                             <td></td>
@@ -2216,6 +2216,7 @@
                             <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesTrending != null ? record2.MTDUpgradesTrending.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.MTDUpgradesTrending)).ToString())</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGP != null ? record2.MTDUpgradesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGP)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGPTrending != null ? record2.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGPTrending)))</td>
+                            <td></td>
                             <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyGoals != null ? record2.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyGoals)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyNetOFF != null ? record2.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyNetOFF)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
@@ -2622,7 +2623,7 @@
                             data-modalOPS="@record.TotalOPS">
 
                             <!-- ADD/VIEW BTN -->
-                            <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey','@record.TM','@record.SD','@record.MULMngr','@record.RSMSRSM')" id="btnaddnote" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>
+                            @*<td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="loadNoteData('@record.UniqueID','@record.DealerCode','@record.DateKey','@record.TM','@record.SD','@record.MULMngr','@record.RSMSRSM')" id="btnaddnote" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#employeeModal" data-uniqueid="@record.UniqueID">Add</button></td>*@
                             <td style="background-color: black; color: white; font-weight:bold;"><button type="button" onclick="MTDStoreEmployeeView('@record.UniqueID')" id="btndataview" class="btn btn-white tblbtn btn-sm" data-toggle="modal" data-target="#dataview" data-uniqueid="@record.UniqueID" data-tm="@record.TM">View</button></td>
 
                             <!-- Hierarchy -->
@@ -2633,7 +2634,7 @@
                             @*<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMngr   </td>*@
                             <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
                             <td>@record.UniqueID</td>
-                            <td>@record.DealerCode</td>
+                            
                             <td>@record.HITStore</td>
                             <td>@record.Tiers</td>
                             <td style="white-space: normal; word-wrap: break-word;">@record.RSMSRSM</td>
@@ -2715,6 +2716,7 @@
                             <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesTrending != null ? record.MTDUpgradesTrending.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.MTDUpgradesTrending)).ToString())</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.MTDUpgradesGP != null ? record.MTDUpgradesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesGP)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.MTDUpgradesGPTrending != null ? record.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesGPTrending)))</td>
+                            <td>@record.DealerCode</td>
                             <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyGoals != null ? record.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyGoals)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesQtyNetOFF != null ? record.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.TWCDevicesQtyNetOFF)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record.PrepaidNetOFF != null ? record.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.PrepaidNetOFF)))</td>
@@ -3855,8 +3857,6 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
-                        <td></td>
                         <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
@@ -3919,6 +3919,7 @@
                         <td>${parseFloat(response.MTDUpgradesTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.MTDUpgradesGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.MTDUpgradesGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td></td>
                         <td>${(parseFloat(response.TWCDevicesQtyGoals || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.TWCDevicesQtyNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.PrepaidNetOFF || 0)).toLocaleString('en-US')}</td>
