@@ -1189,6 +1189,7 @@
                                 <td style="background-color: #00ADEF; color:white;">Upgrade Trending to Goals %</td>
                                 <td style="background-color: #00ADEF; color:white;">T,W,C Devices Trend to Goal %</td>
                                 <td style="background-color: #b7dc9f; color: black;" td>Broadband + Fiber Goals</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS Net OFF</td>
                                 <td style="background-color: #b7dc9f; color: black;" td>Broadband + New fiber Net OFF</td>
                                 <td style="background-color: #b7dc9f; color: black;">Broadband + Fiber Trend%</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA Goals</td>
@@ -1246,7 +1247,7 @@
                                 <td style="background-color: #C6D9F1; color: black;">OPS Per- Traffic, Close rate %</td>
 
                                 <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS Goals</td>
-                                <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS Net OFF</td>
+
                                 <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS Trend</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS $GP</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>GROSS ADDS $GP Trending</td>
@@ -1487,7 +1488,7 @@
                                         <td></td>
                                         @*<td></td>*@
                                         @*<td></td>*@
-                                        
+
                                         <td></td>
                                         <td></td>
                                         @*<td></td>*@
@@ -1501,6 +1502,8 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
+
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewFiberNetOFF != null ? record.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewFiberNetOFF)))</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
@@ -1559,7 +1562,6 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSTrendingToGoalsPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSPerTrafficPercentage)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
-                                        <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GrossAddsGP != null ? record.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsGP)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GrossAddsGPTrending != null ? record.GrossAddsGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsGPTrending)))</td>
@@ -1833,6 +1835,8 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsNetOFF)).ToString())</td>
+
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
@@ -1891,7 +1895,6 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.OPSTrendingToGoalsPercentage != null ? record2.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.OPSTrendingToGoalsPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.OPSPerTrafficPercentage != null ? record2.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.OPSPerTrafficPercentage)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsGoals)).ToString())</td>
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsNetOFF)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GrossAddsGP != null ? record2.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GrossAddsGPTrending != null ? record2.GrossAddsGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsGPTrending)))</td>
@@ -2133,7 +2136,7 @@
                             <td style="white-space: normal; word-wrap: break-word;">@record2.TM</td>
                             <td></td>
                             <td style="white-space: normal; word-wrap: break-word;">TM Total</td>
-                            
+
                             <td></td>
                             <td></td>
                             <td></td>
@@ -2148,6 +2151,8 @@
                             <td>@(String.IsNullOrWhiteSpace(record2.UpgradeTrendingToGoalsPercentage != null ? record2.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesTrendToGoalPercentage != null ? record2.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsNetOFF)).ToString())</td>
+
                             <td>@(String.IsNullOrWhiteSpace(record2.BroadbandNewFiberNetOFF != null ? record2.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandNewFiberNetOFF)))</td>
 
                             <td>@(String.IsNullOrWhiteSpace(record2.BroadbandFiberTrendPercentage != null ? record2.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.BroadbandFiberTrendPercentage)) * 100))%</td>
@@ -2206,7 +2211,6 @@
                             <td>@(String.IsNullOrWhiteSpace(record2.OPSTrendingToGoalsPercentage != null ? record2.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.OPSTrendingToGoalsPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.OPSPerTrafficPercentage != null ? record2.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.OPSPerTrafficPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsGoals != null ? record2.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsGoals)).ToString())</td>
-                            <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsNetOFF)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsTrend != null ? record2.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.GrossAddsTrend)).ToString())</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.GrossAddsGP != null ? record2.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsGP)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.GrossAddsGPTrending != null ? record2.GrossAddsGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsGPTrending)))</td>
@@ -2634,7 +2638,7 @@
                             @*<td style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.MULMngr   </td>*@
                             <td class="stores" style="background-color: black; color: white; font-weight:bold;  white-space: normal; word-wrap: break-word;">@record.Store </td>
                             <td>@record.UniqueID</td>
-                            
+
                             <td>@record.HITStore</td>
                             <td>@record.Tiers</td>
                             <td style="white-space: normal; word-wrap: break-word;">@record.RSMSRSM</td>
@@ -2648,6 +2652,8 @@
                             <td>@(String.IsNullOrWhiteSpace(record.UpgradeTrendingToGoalsPercentage != null ? record.UpgradeTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.UpgradeTrendingToGoalsPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.TWCDevicesTrendToGoalPercentage != null ? record.TWCDevicesTrendToGoalPercentage.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.TWCDevicesTrendToGoalPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
+
                             <td>@(String.IsNullOrWhiteSpace(record.BroadbandNewFiberNetOFF != null ? record.BroadbandNewFiberNetOFF.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandNewFiberNetOFF)))</td>
 
                             <td>@(String.IsNullOrWhiteSpace(record.BroadbandFiberTrendPercentage != null ? record.BroadbandFiberTrendPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.BroadbandFiberTrendPercentage)) * 100))%</td>
@@ -2706,7 +2712,6 @@
                             <td>@(String.IsNullOrWhiteSpace(record.OPSTrendingToGoalsPercentage != null ? record.OPSTrendingToGoalsPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSTrendingToGoalsPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.OPSPerTrafficPercentage != null ? record.OPSPerTrafficPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.OPSPerTrafficPercentage)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsGoals != null ? record.GrossAddsGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsGoals)).ToString())</td>
-                            <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsNetOFF)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsTrend != null ? record.GrossAddsTrend.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.GrossAddsTrend)).ToString())</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.GrossAddsGP != null ? record.GrossAddsGP.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsGP)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.GrossAddsGPTrending != null ? record.GrossAddsGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsGPTrending)))</td>
@@ -3861,6 +3866,7 @@
                         <td>${parseFloat((response.UpgradeTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.TWCDevicesTrendToGoalPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.BroadbandGoals || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.BroadbandNewFiberNetOFF || 0)).toLocaleString('en-US')}</td>	
                         <td>${parseFloat((response.BroadbandFiberTrendPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.AIAGoals || 0)).toLocaleString('en-US')}</td>
@@ -3909,7 +3915,7 @@
                         <td>${parseFloat((response.OPSTrendingToGoalsPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.OPSPerTrafficPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat(response.GrossAddsGoals || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>${(parseFloat(response.GrossAddsNetOFF || 0)).toLocaleString('en-US')}</td>
+                        
                         <td>${parseFloat((response.GrossAddsTrendToGoal || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.GrossAddsGP || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.GrossAddsGPTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
