@@ -5798,9 +5798,9 @@ namespace DWH_Reporting.Controllers
                     //PPVGACount = row["PPVGA Count"].ToString(),
                     //PPVGACloseRates = row["PPVGA Close rates"].ToString(),
                     //UpgradesCount = row["Upgrades Count"].ToString(),
-                    //UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
-                    //BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
-                    //BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
 
 
 
@@ -6116,9 +6116,9 @@ namespace DWH_Reporting.Controllers
                     //PPVGACount = row["PPVGA Count"].ToString(),
                     //PPVGACloseRates = row["PPVGA Close rates"].ToString(),
                     //UpgradesCount = row["Upgrades Count"].ToString(),
-                    //UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
-                    //BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
-                    //BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
 
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
@@ -6433,9 +6433,9 @@ namespace DWH_Reporting.Controllers
                     //PPVGACount = row["PPVGA Count"].ToString(),
                     //PPVGACloseRates = row["PPVGA Close rates"].ToString(),
                     //UpgradesCount = row["Upgrades Count"].ToString(),
-                    //UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
-                    //BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
-                    //BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
 
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
@@ -6752,9 +6752,9 @@ namespace DWH_Reporting.Controllers
                     //PPVGACount = row["PPVGA Count"].ToString(),
                     //PPVGACloseRates = row["PPVGA Close rates"].ToString(),
                     //UpgradesCount = row["Upgrades Count"].ToString(),
-                    //UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
-                    //BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
-                    //BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
 
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),

@@ -112,7 +112,7 @@
         }
 
         #tbl tbody td:nth-child(10) {
-            min-width: 70px !important;
+            min-width: 40px !important;
         }
 
         #tbl tbody td:nth-child(1),
@@ -1135,7 +1135,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 199; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 202; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1188,6 +1188,9 @@
                                 <td style="background-color: #b7dc9f; color: black;" td> PPVGA Close Rates </td>
 
                                 <td style="background-color: #FDBB87; color: black; " td> Upgrades Count </td>
+                                <td style="background-color: #FDBB87; color: black; " td> Upgrades Close rates </td>
+                                <td style="background-color: #FDBB87; color: black; " td> BB + Fiber AIA Count </td>
+                                <td style="background-color: #FDBB87; color: black; " td> Broadband + Fiber AIA Close rate </td>
                                 @*<td style="background-color: #FDBB87; color: black; " td> Upgrades Close rates  </td>
 
         <td style="background-color: #b7dc9f; color: black;" td> BB+Fiber AIA Count  </td>
@@ -1521,6 +1524,10 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                                        
+                                        <td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_CloseRate != null ? record.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_CloseRate)))</td>
 
                                         @*<td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))</td>*@
                                         @*<td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>*@
@@ -1878,6 +1885,10 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesNetOFF != null ? record2.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesNetOFF)))</td>
+                                                        
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.UpgradesCloseRates != null ? record2.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.UpgradesCloseRates)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_Count != null ? record2.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_Count)))</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_CloseRate != null ? record2.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_CloseRate)))</td>
 
                                                         @*<td>@(String.IsNullOrWhiteSpace(record2.UpgradesCloseRates != null ? record2.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.UpgradesCloseRates)))</td>
         <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_Count != null ? record2.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_Count)))</td>
@@ -2214,6 +2225,9 @@
                             <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesNetOFF != null ? record2.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesNetOFF)))</td>
 
+                            <td>@(String.IsNullOrWhiteSpace(record2.UpgradesCloseRates != null ? record2.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.UpgradesCloseRates)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_Count != null ? record2.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_Count)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_CloseRate != null ? record2.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_CloseRate)))</td>
                             @*<td>@(String.IsNullOrWhiteSpace(record2.UpgradesCloseRates != null ? record2.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.UpgradesCloseRates)))</td>
         <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_Count != null ? record2.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_Count)))</td>
         <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_CloseRate != null ? record2.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_CloseRate)))</td>*@
@@ -2734,6 +2748,10 @@
                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
+                            
+                            <td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_CloseRate != null ? record.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_CloseRate)))</td>
 
                             @*<td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))</td>
         <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>
@@ -3970,6 +3988,9 @@
                         <td>${parseFloat((response.GACloseRt || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.MTDUpgradesNetOFF || 0)).toLocaleString('en-US')}</td>
 
+                        <td>${(parseFloat(response.UpgradesCloseRates || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.BBFiberAIA_Count || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.BBFiberAIA_CloseRate || 0)).toLocaleString('en-US')}</td>
 
                         <td>${parseFloat((response.ProtAdvHomeTechPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.ExtraUnlMix70Per || 0) * 100).toFixed(1)}%</td>
