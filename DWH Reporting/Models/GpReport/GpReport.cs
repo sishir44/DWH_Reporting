@@ -1808,6 +1808,15 @@ namespace DWH_Reporting.Models.GpReport
         public string AccGpTreding { get; set; }
         public string AccGpTredingPer { get; set; }
 
+
+        // New Column for Director report
+        public string PPVGACount { get; set; }
+        public string PPVGACloseRates { get; set; }
+        public string UpgradesCount { get; set; }
+        public string UpgradesCloseRates { get; set; }
+        public string BBFiberAIA_Count { get; set; }
+        public string BBFiberAIA_CloseRate { get; set; }
+
     }
 
     public class Fct_EmployeeNumberAttributesModel
