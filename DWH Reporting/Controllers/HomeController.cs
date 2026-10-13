@@ -5801,6 +5801,7 @@ namespace DWH_Reporting.Controllers
                     UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
                     BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
                     BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
 
 
 
@@ -6119,7 +6120,7 @@ namespace DWH_Reporting.Controllers
                     UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
                     BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
                     BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
-
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6436,7 +6437,7 @@ namespace DWH_Reporting.Controllers
                     UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
                     BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
                     BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
-
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -6755,7 +6756,7 @@ namespace DWH_Reporting.Controllers
                     UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
                     BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
                     BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
-
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
 
                     //CRUGPChargebackGP = row["CRU GP Chargeback GP$"].ToString(),
                     //FNChargebackGP = row["FN Chargeback GP"].ToString(),
@@ -7288,6 +7289,10 @@ namespace DWH_Reporting.Controllers
                     AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
                     AccGpTreding = row["Accessory GP trending"].ToString(),
                     AccGpTredingPer = row["Accessory GP trending %"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
 
                 };
 
@@ -7582,6 +7587,10 @@ namespace DWH_Reporting.Controllers
                     AccessoryGPGoals = row["Accessory GP Goals"].ToString(),
                     AccGpTreding = row["Accessory GP trending"].ToString(),
                     AccGpTredingPer = row["Accessory GP trending %"].ToString(),
+                    UpgradesCloseRates = row["Upgrades Close rates"].ToString(),
+                    BBFiberAIA_Count = row["BB + Fiber AIA Count"].ToString(),
+                    BBFiberAIA_CloseRate = row["Broadband + Fiber AIA Close rate"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
                 };
             }
             return Json(result);

@@ -112,6 +112,10 @@
             min-width: 40px !important;
         }
 
+        #tbl tbody td:nth-child(27) {
+            min-width: 60px !important;
+        }
+
         #tbl tbody td:nth-child(1),
         #tbl tbody td:nth-child(2),
         #tbl tbody td:nth-child(3),
@@ -840,6 +844,31 @@
 
     <script>
         $(document).ready(function () {
+            var tbeCells = document.querySelectorAll(".GPTrendingVSlastYearCLS");
+            tbeCells.forEach(function (cell) {
+                var value = parseFloat(cell.textContent.replace('%', '').trim());
+
+                if (!isNaN(value) && value > 0) {
+                    cell.style.backgroundColor = "#008000"; // Green
+                    cell.style.color = "white";
+                    cell.innerHTML = "&#9650; " + cell.innerHTML;
+                } else if (!isNaN(value) && value == 0) {
+                    cell.style.backgroundColor = "#FFA500"; // Yellow - Neutral
+                    cell.style.color = "black";
+                    //cell.innerHTML = "&#8212; " + cell.innerHTML; // Neutral dash
+                }
+                else {
+                    cell.style.backgroundColor = "#FF0000"; // Red
+                    cell.style.color = "white";
+                    cell.innerHTML = "&#9660; " + cell.innerHTML;
+                }
+            });
+        });
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
 
             // Tr Break Even Calc
             var tbeCells = document.querySelectorAll(".tbreakevenCLS");
@@ -889,6 +918,8 @@
         });
 
     </script>
+
+
 
 </head>
 
@@ -1194,7 +1225,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 202; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 203; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1251,8 +1282,8 @@
                                 <td style="background-color: #b7dc9f; color: black; " td> Broadband + Fiber AIA Close rate </td>
                                 @*<td style="background-color: #FDBB87; color: black; " td> Upgrades Close rates  </td>
 
-                                <td style="background-color: #b7dc9f; color: black;" td> BB+Fiber AIA Count  </td>
-                                <td style="background-color: #b7dc9f; color: black;" td> BB+Fiber AIA Close rate  </td>*@
+        <td style="background-color: #b7dc9f; color: black;" td> BB+Fiber AIA Count  </td>
+        <td style="background-color: #b7dc9f; color: black;" td> BB+Fiber AIA Close rate  </td>*@
 
 
 
@@ -1269,16 +1300,17 @@
                                 <td style="background-color: #00ADEF; color: black; ">$GP - With Spif Trending</td>
                                 <td style="background-color: #C6D9F1; color: black; ">GP Trending %</td>
 
-                                <td style="background-color: #C6D9F1; color: black; ">2025 GP Achieved</td>
-                                <td style="background-color: #C6D9F1; color: black; ">2024 GP Achieved</td>
-                                <td style="background-color: #C6D9F1; color: black; ">2023 GP Achieved</td>
-                                <td style="background-color: #C6D9F1; color: black; ">2022 GP Achieved</td>
-                                <td style="background-color: #C6D9F1; color: black; ">2021 GP Achieved</td>
-                                <td style="background-color: #8FCFFA; color:black;">2025 GP Trending</td>
-                                <td style="background-color: #8FCFFA; color:black;">2024 GP Trending</td>
-                                <td style="background-color: #8FCFFA; color:black;">2023 GP Trending</td>
-                                <td style="background-color: #8FCFFA; color:black;">2022 GP Trending</td>
-                                <td style="background-color: #8FCFFA; color:black;">2021 GP Trending</td>
+                                <td style="background-color: #8FCFFA; color: black; ">2025 GP Achieved</td>
+                                <td style="background-color: blue; color: white; ">GP Trend 2026 VS Last Year</td>
+                                <td style="background-color: #8FCFFA; color: black; ">2024 GP Achieved</td>
+                                <td style="background-color: #8FCFFA; color: black; ">2023 GP Achieved</td>
+                                <td style="background-color: #8FCFFA; color: black; ">2022 GP Achieved</td>
+                                <td style="background-color: #8FCFFA; color: black; ">2021 GP Achieved</td>
+                                <td style="background-color: #C6D9F1; color: black;">2025 GP Trending</td>
+                                <td style="background-color: #C6D9F1; color: black;">2024 GP Trending</td>
+                                <td style="background-color: #C6D9F1; color: black;">2023 GP Trending</td>
+                                <td style="background-color: #C6D9F1; color: black;">2022 GP Trending</td>
+                                <td style="background-color: #C6D9F1; color: black;">2021 GP Trending</td>
 
                                 <td style="background-color: #00ADEF; color: black;">$GP per BOX</td>
                                 <td style="background-color: #00ADEF; color: black;">BreakEven Numbers</td>
@@ -1307,7 +1339,7 @@
 
                                 <td style="background-color: #00ADEF; color:white;">Prem Video Trend %</td>
                                 <td style="background-color: #00ADEF; color:white;">converged (17%)</td>
-                                
+
 
                                 <td style="background-color: #C6D9F1; color: black;">Monthly Budgeted HRS</td>
                                 <td style="background-color: #C6D9F1; color: black; ">Monthly Achived HRS</td>
@@ -1583,7 +1615,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
-                                        
+
                                         <td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_CloseRate != null ? record.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_CloseRate)))%</td>
@@ -1609,6 +1641,8 @@
                                         <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage)) * 100))%</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2025 != null ? record.GPAchieved2025.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2025)))</td>
+                                        <td class="GPTrendingVSlastYearCLS">@(String.IsNullOrWhiteSpace(record.GPTrendingVSlastYear != null ? record.GPTrendingVSlastYear.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingVSlastYear))))%</td>
+
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2024 != null ? record.GPAchieved2024.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2024)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2023 != null ? record.GPAchieved2023.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2023)))</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2022 != null ? record.GPAchieved2022.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2022)))</td>
@@ -1948,7 +1982,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GrossAddsNetOFF != null ? record2.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.GrossAddsNetOFF)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.GACloseRt != null ? record2.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GACloseRt)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesNetOFF != null ? record2.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesNetOFF)))</td>
-                                                        
+
                                                         <td>@(String.IsNullOrWhiteSpace(record2.UpgradesCloseRates != null ? record2.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.UpgradesCloseRates)))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_Count != null ? record2.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_Count)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.BBFiberAIA_CloseRate != null ? record2.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BBFiberAIA_CloseRate)))%</td>
@@ -1973,6 +2007,8 @@
                                                         <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingPercentage)) * 100))%</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2025 != null ? record2.GPAchieved2025.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2025)))</td>
+                                                        <td class="GPTrendingVSlastYearCLS">@(String.IsNullOrWhiteSpace(record2.GPTrendingVSlastYear != null ? record2.GPTrendingVSlastYear.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingVSlastYear))))%</td>
+
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2024 != null ? record2.GPAchieved2024.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2024)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2023 != null ? record2.GPAchieved2023.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2023)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2022 != null ? record2.GPAchieved2022.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2022)))</td>
@@ -2043,7 +2079,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MTDUpgradesTrending != null ? record2.MTDUpgradesTrending.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.MTDUpgradesTrending)).ToString())</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGP != null ? record2.MTDUpgradesGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGP)))</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.MTDUpgradesGPTrending != null ? record2.MTDUpgradesGPTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MTDUpgradesGPTrending)))</td>
-                                                        
+
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyGoals != null ? record2.TWCDevicesQtyGoals.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyGoals)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TWCDevicesQtyNetOFF != null ? record2.TWCDevicesQtyNetOFF.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.TWCDevicesQtyNetOFF)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.PrepaidNetOFF != null ? record2.PrepaidNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.PrepaidNetOFF)))</td>
@@ -2318,6 +2354,8 @@
                             <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingPercentage)) * 100))%</td>
 
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2025 != null ? record2.GPAchieved2025.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2025)))</td>
+                            <td class="GPTrendingVSlastYearCLS">@(String.IsNullOrWhiteSpace(record2.GPTrendingVSlastYear != null ? record2.GPTrendingVSlastYear.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingVSlastYear))))%</td>
+
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2024 != null ? record2.GPAchieved2024.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2024)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2023 != null ? record2.GPAchieved2023.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2023)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPAchieved2022 != null ? record2.GPAchieved2022.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPAchieved2022)))</td>
@@ -2820,7 +2858,7 @@
                             <td>@(String.IsNullOrWhiteSpace(record.GrossAddsNetOFF != null ? record.GrossAddsNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.GrossAddsNetOFF)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.GACloseRt != null ? record.GACloseRt.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GACloseRt)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.MTDUpgradesNetOFF != null ? record.MTDUpgradesNetOFF.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MTDUpgradesNetOFF)))</td>
-                            
+
                             <td>@(String.IsNullOrWhiteSpace(record.UpgradesCloseRates != null ? record.UpgradesCloseRates.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.UpgradesCloseRates)))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_Count != null ? record.BBFiberAIA_Count.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_Count)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.BBFiberAIA_CloseRate != null ? record.BBFiberAIA_CloseRate.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BBFiberAIA_CloseRate)))%</td>
@@ -2845,6 +2883,8 @@
                             <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage)) * 100))%</td>
 
                             <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2025 != null ? record.GPAchieved2025.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2025)))</td>
+                            <td class="GPTrendingVSlastYearCLS">@(String.IsNullOrWhiteSpace(record.GPTrendingVSlastYear != null ? record.GPTrendingVSlastYear.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingVSlastYear))))%</td>
+
                             <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2024 != null ? record.GPAchieved2024.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2024)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2023 != null ? record.GPAchieved2023.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2023)))</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.GPAchieved2022 != null ? record.GPAchieved2022.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPAchieved2022)))</td>
@@ -4084,6 +4124,7 @@
                         <td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
                        
                         <td>$${parseFloat(response.GPAchieved2025 || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        <td>${parseFloat((response.GPTrendingVSlastYear || 0)).toFixed(1)}%</td>
                         <td>$${parseFloat(response.GPAchieved2024 || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.GPAchieved2023 || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>$${parseFloat(response.GPAchieved2022 || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>

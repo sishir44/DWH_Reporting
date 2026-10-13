@@ -1816,6 +1816,7 @@ namespace DWH_Reporting.Models.GpReport
         public string UpgradesCloseRates { get; set; }
         public string BBFiberAIA_Count { get; set; }
         public string BBFiberAIA_CloseRate { get; set; }
+        public string GPTrendingVSlastYear { get; set; }
 
     }
 
