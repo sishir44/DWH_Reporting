@@ -98,6 +98,7 @@ namespace DWH_Reporting.Controllers
                 //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
               
                 ViewBag.selectedDate = selectedDate;
+                ViewBag.isfinal = isfinal;
                 ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
 
                 if (isfinal == "1")
