@@ -1932,8 +1932,9 @@
                             {
                                 // Sort records by Market
                                 var sortedRecords = recordsFct_StoreNumber
-                                .OrderBy(record => record.MULMngr) // Sort true before false
-                                .ThenBy(record => record.Market);          // Sort by Market next
+                                .OrderBy(record => record.SD)      // SD first (MULMngr is an old column, no longer used)
+                                .ThenBy(record => string.Equals(record.Market, "Tucson", StringComparison.OrdinalIgnoreCase) ? "Arizona" : record.Market) // Market A-Z, with Tucson sorted beside Arizona
+                                .ThenBy(record => string.Equals(record.Market, "Tucson", StringComparison.OrdinalIgnoreCase) ? 1 : 0);                     // Arizona first, then Tucson
 
                                 //var sortedRecords = recordsFct_StoreNumber.OrderBy(record => record.MULMngr && record=>record.Market);
 
