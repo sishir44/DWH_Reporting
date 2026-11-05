@@ -599,7 +599,19 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    HomeInternet = row["Home Internet"].ToString()
+                    HomeInternet = row["Home Internet"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
                 };
 
                 lisn2_lst.Add(model);
@@ -794,7 +806,19 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    HomeInternet = row["Home Internet"].ToString()
+                    HomeInternet = row["Home Internet"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
                 };
                 
                 lisn_tot.Add(model3);
@@ -995,7 +1019,19 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    HomeInternet = row["Home Internet"].ToString()
+                    HomeInternet = row["Home Internet"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
                 };
 
                 lisn_totTM.Add(model4);
@@ -1194,7 +1230,19 @@ namespace DWH_Reporting.Controllers
                     TotalHourlyCount = row["Total Hourly Count (Full time+Part time/2)"].ToString(),
                     HourlyHeadCntsVar = row["Hourly Head Counts Variance"].ToString(),
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
-                    HomeInternet = row["Home Internet"].ToString()
+                    HomeInternet = row["Home Internet"].ToString(),
+
+                    GPTrending2025 = row["2025 GP Trending"].ToString(),
+                    GPTrending2024 = row["2024 GP Trending"].ToString(),
+                    GPTrending2023 = row["2023 GP Trending"].ToString(),
+                    GPTrending2022 = row["2022 GP Trending"].ToString(),
+                    GPTrending2021 = row["2021 GP Trending"].ToString(),
+                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
+                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
+                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
+                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
+                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
+                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
                 };
 
                 lisn_totMMM.Add(model4);
@@ -5340,6 +5388,110 @@ namespace DWH_Reporting.Controllers
             }
         }
 
+        public ActionResult DirectorStoreNumberOld(string selectedDate, string userId, string isfinal)
+        {
+            try
+            {
+                //userID = Request.QueryString["userid"]; ;
+                //string name;
+                //name = Session["username"].ToString();
+                //userID = Session["userid"].ToString();
+                //Common.recorderror("Sessionuserid", userID, "", "0");
+                //Common.recorderror("Sessionuname", name, "", "0");
+
+                //global.userID = Request.QueryString["userid"];
+                //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+
+                ViewBag.selectedDate = selectedDate;
+                ViewBag.isfinal = isfinal;
+                ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    return PartialView("_DirectorStoreNumberOld");
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+
+        }
+        [HttpPost]
+        public ActionResult DirectorStoreNumberOld(string selectedDate, string userId, string isfinal, string optionalParam)
+        {
+            //global.userID = Request.QueryString["userid"];
+            //global.decrpedUserId = EncryptionHelper.Decrypt(global.userID);
+            try
+            {
+                if (!string.IsNullOrEmpty(selectedDate))
+                {
+                    DateTime selDate = DateTime.Parse(selectedDate);
+                    DateTime compareDate = new DateTime(2026, 01, 01);
+
+                    if (selDate >= compareDate)
+                    {
+                        string dateParam = selDate.ToString("yyyy-MM-dd");
+                        if (Request.IsAjaxRequest())
+                        {
+                            return Json(new
+                            {
+                                redirect = true,
+                                url = Url.Action("DirectorStoreNumber", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        return RedirectToAction("DirectorStoreNumber", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
+                    }
+                }
+
+                if (selectedDate == "")
+                {
+                    selectedDate = null;
+                }
+                ViewBag.isfinal = isfinal;
+
+                if (isfinal == "1")
+                {
+                    DateTime firstDayOfMonth = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                    if (selectedDate == "" || selectedDate == null)
+                    {
+                        selectedDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    }
+                    if (DateTime.TryParse(selectedDate, out DateTime dateRangeParsed))
+                    {
+                        if (firstDayOfMonth <= dateRangeParsed)
+                        {
+                            DateTime lastDayPrevMonth = firstDayOfMonth.AddDays(-1);
+                            selectedDate = lastDayPrevMonth.ToString("yyyy-MM-dd");
+                        }
+                        else
+                        {
+                            DateTime lastDayOfMonth = new DateTime(dateRangeParsed.Year, dateRangeParsed.Month, 1).AddMonths(1).AddDays(-1);
+                            selectedDate = lastDayOfMonth.ToString("yyyy-MM-dd");
+                        }
+                    }
+                }
+                ViewBag.selectedDate = selectedDate;
+                ShowStoreNumber(selectedDate, global.decrpedUserId, isfinal);
+
+                if (isfinal == "1")
+                {
+                    if (Request.IsAjaxRequest()) // If AJAX, return the fragment
+                    {
+                        return PartialView("_DirectorStoreNumberOld");
+                    }
+                }
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return Content(ex.Message + "\n\n" + ex.StackTrace + "\nReport is being uploaded. Please try again in few minutes");
+            }
+        }
+
         [HttpGet]
         public ActionResult DirectorStoreNumber(string selectedDate, string userid, string isfinal = "0", string isrefresh = "0")
         {
@@ -5380,24 +5532,24 @@ namespace DWH_Reporting.Controllers
 
             try
             {
-                //if (!string.IsNullOrEmpty(selectedDate))
-                //{
-                //    DateTime selDate = DateTime.Parse(selectedDate);
-                //    DateTime compareDate = new DateTime(2026, 01, 01);
-                //    if (selDate < compareDate)
-                //    {
-                //        string dateParam = selDate.ToString("yyyy-MM-dd");
-                //        if (Request.IsAjaxRequest())
-                //        {
-                //            return Json(new
-                //            {
-                //                redirect = true,
-                //                url = Url.Action("StoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
-                //            }, JsonRequestBehavior.AllowGet);
-                //        }
-                //        return RedirectToAction("StoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
-                //    }
-                //}
+                if (!string.IsNullOrEmpty(selectedDate))
+                {
+                    DateTime selDate = DateTime.Parse(selectedDate);
+                    DateTime compareDate = new DateTime(2026, 01, 01);
+                    if (selDate < compareDate)
+                    {
+                        string dateParam = selDate.ToString("yyyy-MM-dd");
+                        if (Request.IsAjaxRequest())
+                        {
+                            return Json(new
+                            {
+                                redirect = true,
+                                url = Url.Action("DirectorStoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal })
+                            }, JsonRequestBehavior.AllowGet);
+                        }
+                        return RedirectToAction("DirectorStoreNumberOld", "Home", new { selectedDate = dateParam, userId = global.userID, isfinal = isfinal });
+                    }
+                }
 
                 if (selectedDate == "")
                 {
