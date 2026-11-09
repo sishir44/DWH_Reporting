@@ -1196,7 +1196,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 187; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 186; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1279,7 +1279,7 @@
                                 <td style="background-color: #C6D9F1; color:black;">$GP - With Spif Trending</td>
                                 <td style="background-color: #C6D9F1; color:black;">GP Trending %</td>
                                 <td style="background-color: #C6D9F1; color:black;">$GP per BOX</td>
-                                <td style="background-color: #C6D9F1; color:black;">BreakEven Numbers</td>
+                                @*<td style="background-color: #C6D9F1; color:black;">BreakEven Numbers</td>*@
                                 <td style="background-color: #C6D9F1; color:black;">Trending to BreakEven %</td>
 
                                 <td style="background-color: #2F5E9C; color:white;">Monthly Budgeted HRS</td>
@@ -1580,7 +1580,7 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                                         <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage)) * 100))%</td>
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
-                                        <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                                        @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
                                         <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
 
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyBudgetedHRS != null ? record.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyBudgetedHRS)))</td>
@@ -1903,7 +1903,7 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPWithSpifTrending != null ? record2.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPWithSpifTrending)))</td>
                                                         <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingPercentage)) * 100))%</td>
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
-                                                        <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
+                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
@@ -2210,7 +2210,7 @@
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPWithSpifTrending != null ? record2.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPWithSpifTrending)))</td>
                             <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record2.GPTrendingPercentage != null ? record2.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.GPTrendingPercentage)) * 100))%</td>
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
-                            <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
+                            @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
                             <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
 
                             <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
@@ -2694,7 +2694,7 @@
                             <td>$@(String.IsNullOrWhiteSpace(record.GPWithSpifTrending != null ? record.GPWithSpifTrending.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPWithSpifTrending)))</td>
                             <td class="tbreakevenCLS gross-adds-goals">@(String.IsNullOrWhiteSpace(record.GPTrendingPercentage != null ? record.GPTrendingPercentage.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.GPTrendingPercentage)) * 100))%</td>
                             <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
-                            <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
+                            @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
                             <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
 
                             <td>@(String.IsNullOrWhiteSpace(record.MonthlyBudgetedHRS != null ? record.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyBudgetedHRS)))</td>
@@ -3893,7 +3893,7 @@
                         <td>$${parseFloat(response.GPWithSpifTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.GPTrendingPercentage || 0) * 100).toFixed(1)}%</td>
                         <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
+                        
                         <td>${parseFloat((response.TrendingToBreakEven || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.MonthlyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat(response.MonthlyAchievedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
