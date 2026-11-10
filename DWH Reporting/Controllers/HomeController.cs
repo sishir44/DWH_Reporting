@@ -601,17 +601,7 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     HomeInternet = row["Home Internet"].ToString(),
 
-                    GPTrending2025 = row["2025 GP Trending"].ToString(),
-                    GPTrending2024 = row["2024 GP Trending"].ToString(),
-                    GPTrending2023 = row["2023 GP Trending"].ToString(),
-                    GPTrending2022 = row["2022 GP Trending"].ToString(),
-                    GPTrending2021 = row["2021 GP Trending"].ToString(),
-                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
-                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
-                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
-                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
-                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
-                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
+                    
                 };
 
                 lisn2_lst.Add(model);
@@ -808,17 +798,7 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     HomeInternet = row["Home Internet"].ToString(),
 
-                    GPTrending2025 = row["2025 GP Trending"].ToString(),
-                    GPTrending2024 = row["2024 GP Trending"].ToString(),
-                    GPTrending2023 = row["2023 GP Trending"].ToString(),
-                    GPTrending2022 = row["2022 GP Trending"].ToString(),
-                    GPTrending2021 = row["2021 GP Trending"].ToString(),
-                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
-                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
-                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
-                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
-                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
-                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
+                    
                 };
                 
                 lisn_tot.Add(model3);
@@ -1021,17 +1001,7 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     HomeInternet = row["Home Internet"].ToString(),
 
-                    GPTrending2025 = row["2025 GP Trending"].ToString(),
-                    GPTrending2024 = row["2024 GP Trending"].ToString(),
-                    GPTrending2023 = row["2023 GP Trending"].ToString(),
-                    GPTrending2022 = row["2022 GP Trending"].ToString(),
-                    GPTrending2021 = row["2021 GP Trending"].ToString(),
-                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
-                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
-                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
-                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
-                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
-                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
+                    
                 };
 
                 lisn_totTM.Add(model4);
@@ -1232,17 +1202,7 @@ namespace DWH_Reporting.Controllers
                     HourlyCurrHeadCntVarHrs = row["Hourly Current Head Count Variance Hours"].ToString(),
                     HomeInternet = row["Home Internet"].ToString(),
 
-                    GPTrending2025 = row["2025 GP Trending"].ToString(),
-                    GPTrending2024 = row["2024 GP Trending"].ToString(),
-                    GPTrending2023 = row["2023 GP Trending"].ToString(),
-                    GPTrending2022 = row["2022 GP Trending"].ToString(),
-                    GPTrending2021 = row["2021 GP Trending"].ToString(),
-                    GPAchieved2025 = row["2025 GP Achieved"].ToString(),
-                    GPAchieved2024 = row["2024 GP Achieved"].ToString(),
-                    GPAchieved2023 = row["2023 GP Achieved"].ToString(),
-                    GPAchieved2022 = row["2022 GP Achieved"].ToString(),
-                    GPAchieved2021 = row["2021 GP Achieved"].ToString(),
-                    GPTrendingVSlastYear = row["GP Trend 2026 VS Last Year"].ToString(),
+                    
                 };
 
                 lisn_totMMM.Add(model4);
