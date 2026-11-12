@@ -1217,7 +1217,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 203; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 204; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1446,6 +1446,7 @@
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA Business Conversion</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA Consumer Conversion</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>AIA Green Check Consumer</td>
+                                <td style="background-color: #C6D9F1; color:black;" td>AIA Green Check Business</td>
                                 <td style="background-color: #C6D9F1; color:black;" td>CRU Ach MTD Net OFF</td>
                                 @*<td style="background-color: #C6D9F1; color:black;" td> CRU GP Chargeback GP$ </td>*@
                                 <td style="background-color: #C6D9F1; color:black;" td>CRU GP</td>
@@ -1788,6 +1789,7 @@
                                         <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIABusinessConversion)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIAConsumerConversion)) * 100))%</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.AIAGreenCheckConsumer != null ? record.AIAGreenCheckConsumer.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGreenCheckConsumer)).ToString())</td>
+                                        <td>@(String.IsNullOrWhiteSpace(record.AIAGreenChkBusiness != null ? record.AIAGreenChkBusiness.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGreenChkBusiness)).ToString())</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTDNetOff != null ? record.CRUAchMTDNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchMTDNetOff)).ToString())</td>
                                         @*<td>$@(String.IsNullOrWhiteSpace(record.CRUGPChargebackGP != null ? record.CRUGPChargebackGP.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.CRUGPChargebackGP)))</td>*@
                                         <td>$@(String.IsNullOrWhiteSpace(record.CRUAGP != null ? record.CRUAGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAGP)).ToString())</td>
@@ -2150,6 +2152,7 @@
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIABusinessConversion != null ? record2.AIABusinessConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIABusinessConversion)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAConsumerConversion != null ? record2.AIAConsumerConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIAConsumerConversion)) * 100))%</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.AIAGreenCheckConsumer != null ? record2.AIAGreenCheckConsumer.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGreenCheckConsumer)).ToString())</td>
+                                                        <td>@(String.IsNullOrWhiteSpace(record2.AIAGreenChkBusiness != null ? record2.AIAGreenChkBusiness.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGreenChkBusiness)).ToString())</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.CRUAchMTDNetOff != null ? record2.CRUAchMTDNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchMTDNetOff)).ToString())</td>
                                                         @*<td>$@(String.IsNullOrWhiteSpace(record2.CRUGPChargebackGP != null ? record2.CRUGPChargebackGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUGPChargebackGP)).ToString())</td>*@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.CRUAGP != null ? record2.CRUAGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAGP)).ToString())</td>
@@ -2491,6 +2494,7 @@
                             <td>@(String.IsNullOrWhiteSpace(record2.AIABusinessConversion != null ? record2.AIABusinessConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIABusinessConversion)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.AIAConsumerConversion != null ? record2.AIAConsumerConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record2.AIAConsumerConversion)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.AIAGreenCheckConsumer != null ? record2.AIAGreenCheckConsumer.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGreenCheckConsumer)).ToString())</td>
+                            <td>@(String.IsNullOrWhiteSpace(record2.AIAGreenChkBusiness != null ? record2.AIAGreenChkBusiness.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAGreenChkBusiness)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.CRUAchMTDNetOff != null ? record2.CRUAchMTDNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAchMTDNetOff)).ToString())</td>
                             @*<td>$@(String.IsNullOrWhiteSpace(record2.CRUGPChargebackGP != null ? record2.CRUGPChargebackGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUGPChargebackGP)).ToString())</td>*@
                             <td>$@(String.IsNullOrWhiteSpace(record2.CRUAGP != null ? record2.CRUAGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.CRUAGP)).ToString())</td>
@@ -3017,6 +3021,7 @@
                             <td>@(String.IsNullOrWhiteSpace(record.AIABusinessConversion != null ? record.AIABusinessConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIABusinessConversion)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.AIAConsumerConversion != null ? record.AIAConsumerConversion.ToString() : "") ? "0.0" : String.Format("{0:N1}", (Convert.ToDouble(record.AIAConsumerConversion)) * 100))%</td>
                             <td>@(String.IsNullOrWhiteSpace(record.AIAGreenCheckConsumer != null ? record.AIAGreenCheckConsumer.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGreenCheckConsumer)).ToString())</td>
+                            <td>@(String.IsNullOrWhiteSpace(record.AIAGreenChkBusiness != null ? record.AIAGreenChkBusiness.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAGreenChkBusiness)).ToString())</td>
                             <td>@(String.IsNullOrWhiteSpace(record.CRUAchMTDNetOff != null ? record.CRUAchMTDNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAchMTDNetOff)).ToString())</td>
                             @*<td>$@(String.IsNullOrWhiteSpace(record.CRUGPChargebackGP != null ? record.CRUGPChargebackGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUGPChargebackGP)).ToString())</td>*@
                             <td>$@(String.IsNullOrWhiteSpace(record.CRUAGP != null ? record.CRUAGP.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.CRUAGP)).ToString())</td>
@@ -4237,6 +4242,7 @@
                         <td>${parseFloat((response.AIABusinessConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${parseFloat((response.AIAConsumerConversion || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.AIAGreenCheckConsumer || 0)).toLocaleString('en-US')}</td>
+                        <td>${(parseFloat(response.AIAGreenChkBusiness || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.CRUAchMTDNetOff || 0)).toLocaleString('en-US')}</td>
                         <td>$${(parseFloat(response.CRUAGP || 0)).toLocaleString('en-US')}</td>
                         <td>${(parseFloat(response.FNAchMTDNetOff || 0)).toLocaleString('en-US')}</td>

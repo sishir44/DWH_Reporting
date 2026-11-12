@@ -1818,6 +1818,8 @@ namespace DWH_Reporting.Models.GpReport
         public string BBFiberAIA_CloseRate { get; set; }
         public string GPTrendingVSlastYear { get; set; }
 
+        public string AIAGreenChkBusiness { get; set; }
+
     }
 
     public class Fct_EmployeeNumberAttributesModel
