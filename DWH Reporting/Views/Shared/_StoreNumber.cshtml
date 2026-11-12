@@ -1212,7 +1212,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 197; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 196; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                      }
@@ -1307,7 +1307,7 @@
 
                                 <td style="background-color: #C6D9F1; color:black;">$GP per BOX</td>
                                 @*<td style="background-color: #C6D9F1; color:black;">BreakEven Numbers</td>*@
-                                <td style="background-color: #C6D9F1; color:black;">Trending to BreakEven %</td>
+                                @*<td style="background-color: #C6D9F1; color:black;">Trending to BreakEven %</td>*@
 
                                 <td style="background-color: #2F5E9C; color:white;">Monthly Budgeted HRS</td>
                                 <td style="background-color: #2F5E9C; color:white;">Monthly Achived HRS</td>
@@ -1555,9 +1555,9 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        @*<td></td>*@
                                         <td style="white-space: normal; word-wrap: break-word;">Grand Total</td>
                                         <td></td>
-                                        @*<td></td>*@
                                         @*<td></td>*@
                                         <td></td>
                                         <td></td>
@@ -1618,7 +1618,8 @@
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
                                         @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
-                                        <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
+                                        @*<td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>*@
+
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyBudgetedHRS != null ? record.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyBudgetedHRS)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHRS != null ? record.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHRS)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrending != null ? record.MonthlyAchievedHoursTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHoursTrending)))</td>
@@ -1816,6 +1817,7 @@
                                         @*<td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.PremiumUpgradeNetOff)).ToString())</td>*@
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAInternet)).ToString())</td>-->
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.ChargeBack6 != null ? record.ChargeBack6.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.ChargeBack6)).ToString())</td>-->
+                                        @*<td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>*@
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MB != null ? record.BroadbandLessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MB)))</td>-->
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MBChargeBack != null ? record.BroadbandLessThen300MBChargeBack.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MBChargeBack)))</td>-->
                                         <!--<td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MB)))</td>-->
@@ -1952,7 +1954,7 @@
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
                                                         @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
-                                                        <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
+                                                        @*<td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>*@
 
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHRS != null ? record2.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHRS)))</td>
@@ -2148,6 +2150,7 @@
                                                         @*<td>@(String.IsNullOrWhiteSpace(record2.PremiumUpgradeNetOff != null ? record2.PremiumUpgradeNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.PremiumUpgradeNetOff)).ToString())</td>*@
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.AIAInternet != null ? record2.AIAInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAInternet)).ToString())</td>-->
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.ChargeBack6 != null ? record2.ChargeBack6.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.ChargeBack6)).ToString())</td>-->
+                                                        @*<td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>*@
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MB != null ? record2.BroadbandLessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MB)))</td>-->
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBChargeBack != null ? record2.BroadbandLessThen300MBChargeBack.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MBChargeBack)))</td>-->
                                                         <!--<td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MB != null ? record2.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MB)))</td>-->
@@ -2269,7 +2272,7 @@
 
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
                             @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
-                            <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
+                            @*<td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>*@
 
                             <td>@(String.IsNullOrWhiteSpace(record2.MonthlyBudgetedHRS != null ? record2.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyBudgetedHRS)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.MonthlyAchievedHRS != null ? record2.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.MonthlyAchievedHRS)))</td>
@@ -2463,6 +2466,7 @@
                             @*<td>@(String.IsNullOrWhiteSpace(record2.PremiumUpgradeNetOff != null ? record2.PremiumUpgradeNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.PremiumUpgradeNetOff)).ToString())</td>*@
                             <!--<td>@(String.IsNullOrWhiteSpace(record2.AIAInternet != null ? record2.AIAInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.AIAInternet)).ToString())</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record2.ChargeBack6 != null ? record2.ChargeBack6.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record2.ChargeBack6)).ToString())</td>-->
+                            @*<td>@(String.IsNullOrWhiteSpace(record2.BroadbandGoals != null ? record2.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandGoals)))</td>*@
                             <!--<td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MB != null ? record2.BroadbandLessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MB)))</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record2.BroadbandLessThen300MBChargeBack != null ? record2.BroadbandLessThen300MBChargeBack.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record2.BroadbandLessThen300MBChargeBack)))</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record2.NewFiber300MB != null ? record2.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.NewFiber300MB)))</td>-->
@@ -2758,7 +2762,8 @@
 
                             <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
                             @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
-                            <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
+                            @*<td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>*@
+
                             <td>@(String.IsNullOrWhiteSpace(record.MonthlyBudgetedHRS != null ? record.MonthlyBudgetedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyBudgetedHRS)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHRS != null ? record.MonthlyAchievedHRS.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHRS)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.MonthlyAchievedHoursTrending != null ? record.MonthlyAchievedHoursTrending.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.MonthlyAchievedHoursTrending)))</td>
@@ -2953,6 +2958,7 @@
                             @*<td>@(String.IsNullOrWhiteSpace(record.PremiumUpgradeNetOff != null ? record.PremiumUpgradeNetOff.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.PremiumUpgradeNetOff)).ToString())</td>*@
                             <!--<td>@(String.IsNullOrWhiteSpace(record.AIAInternet != null ? record.AIAInternet.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.AIAInternet)).ToString())</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record.ChargeBack6 != null ? record.ChargeBack6.ToString() : "") ? "0" : Convert.ToInt32(Convert.ToDouble(record.ChargeBack6)).ToString())</td>-->
+                            @*<td>@(String.IsNullOrWhiteSpace(record.BroadbandGoals != null ? record.BroadbandGoals.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandGoals)))</td>*@
                             <!--<td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MB != null ? record.BroadbandLessThen300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MB)))</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record.BroadbandLessThen300MBChargeBack != null ? record.BroadbandLessThen300MBChargeBack.ToString() : "") ? "0" : String.Format("{0:N0}", Convert.ToDouble(record.BroadbandLessThen300MBChargeBack)))</td>-->
                             <!--<td>@(String.IsNullOrWhiteSpace(record.NewFiber300MB != null ? record.NewFiber300MB.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.NewFiber300MB)))</td>-->
@@ -3960,7 +3966,6 @@
 
                         <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         
-                        <td>${parseFloat((response.TrendingToBreakEven || 0) * 100).toFixed(1)}%</td>
                         <td>${(parseFloat(response.MonthlyBudgetedHRS || 0)).toLocaleString('en-US')}</td>
                         <td>${parseFloat(response.MonthlyAchievedHRS || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat(response.MonthlyAchievedHoursTrending || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>

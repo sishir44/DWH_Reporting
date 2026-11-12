@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "MTD - New Director Report";
+    ViewBag.Title = "MTD - Director Report";
     Layout = null;
 }
 
@@ -939,7 +939,7 @@
                 <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
                     <div class="row">
                         <h3 style="margin-top:10px; margin-left:50px; font-weight:800; font-size:16px;" class="title">
-                            @ViewBag.Title
+                            | @ViewBag.Title
                         </h3>
                     </div>
                 </div>
@@ -1225,7 +1225,7 @@
 
                                 <!-- SHOW ALPHA HEAD ABOVE COL -->
                                 <tr class="numbered_header">
-                                    @for (int i = 1; i <= 202; i++) // Loop from 1 to 164
+                                    @for (int i = 1; i <= 203; i++) // Loop from 1 to 164
                                     {
                                         <th style="font-size:8px; background-color: lightgray; color:black; text-align:center;">@GetAlphabetFromNumber(i)</th>
                                     }
@@ -1313,7 +1313,7 @@
                                 <td style="background-color: #C6D9F1; color: black;">2021 GP Trending</td>
 
                                 <td style="background-color: #00ADEF; color: black;">$GP per BOX</td>
-                                @*<td style="background-color: #00ADEF; color: black;">BreakEven Numbers</td>*@
+                                <td style="background-color: #00ADEF; color: black;">BreakEven Numbers</td>
                                 <td style="background-color: #00ADEF; color: black;">Trending to BreakEven %</td>
 
                                 <td style="background-color: #00ADEF; color:black;">VGA Trend % To Goal</td>
@@ -1654,7 +1654,7 @@
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPTrending2021 != null ? record.GPTrending2021.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPTrending2021)))</td>
 
                                         <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
-                                        @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
+                                        <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
                                         <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
 
 
@@ -2021,7 +2021,7 @@
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPTrending2021 != null ? record2.GPTrending2021.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPTrending2021)))</td>
 
                                                         <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
-                                                        @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
+                                                        <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
                                                         <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
 
 
@@ -2368,7 +2368,7 @@
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPTrending2021 != null ? record2.GPTrending2021.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPTrending2021)))</td>
 
                             <td>$@(String.IsNullOrWhiteSpace(record2.GPPerBox != null ? record2.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.GPPerBox)))</td>
-                            @*<td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>*@
+                            <td>$@(String.IsNullOrWhiteSpace(record2.BreakEvenNumbers != null ? record2.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record2.BreakEvenNumbers)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record2.TrendingToBreakEven != null ? record2.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record2.TrendingToBreakEven)) * 100))%</td>
 
 
@@ -2898,7 +2898,7 @@
 
 
                             <td>$@(String.IsNullOrWhiteSpace(record.GPPerBox != null ? record.GPPerBox.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.GPPerBox)))</td>
-                            @*<td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>*@
+                            <td>$@(String.IsNullOrWhiteSpace(record.BreakEvenNumbers != null ? record.BreakEvenNumbers.ToString() : "") ? "0.00" : String.Format("{0:N0}", Convert.ToDouble(record.BreakEvenNumbers)))</td>
                             <td>@(String.IsNullOrWhiteSpace(record.TrendingToBreakEven != null ? record.TrendingToBreakEven.ToString() : "") ? "0.00" : String.Format("{0:N1}", (Convert.ToDouble(record.TrendingToBreakEven)) * 100))%</td>
 
 
@@ -4137,7 +4137,7 @@
                         <td>$${parseFloat(response.GPTrending2021 || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                        
                         <td>$${parseFloat(response.GPPerBox || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
-                        
+                        <td>$${parseFloat(response.BreakEvenNumbers || 0).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                         <td>${parseFloat((response.TrendingToBreakEven || 0) * 100).toFixed(1)}%</td>
                        
 
